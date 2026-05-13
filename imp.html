@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Resources Section</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Base Reset & Smooth Font Setup */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #0f172a; /* Deep elegant dark background */
+            color: #f8fafc;
+            padding: 40px 20px;
+        }
+
+        /* Container Styling */
+        .resources-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        /* Grid Layout for Categories */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        /* Category Card Styling (Glassmorphism Effect) */
+        .category-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .category-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #f1f5f9;
+        }
+
+        .category-title i {
+            font-size: 1.6rem;
+            color: #38bdf8;
+        }
+
+        /* Links Styling */
+        .links-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .link-item a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .link-item a:hover {
+            background: linear-gradient(135deg, #38bdf8, #6366f1);
+            color: #ffffff;
+            padding-left: 25px; /* Smooth slide-right effect on text */
+        }
+
+        .link-item a i.arrow-icon {
+            font-size: 0.8rem;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .link-item a:hover i.arrow-icon {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .section-header h2 { font-size: 2rem; }
+            .category-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="resources-section">
+        <div class="section-header">
+            <h2><i class="fa-solid fa-graduation-cap"></i> Digital Learning Hub</h2>
+            <p>Essential educational portals and portals for School & College Students</p>
+        </div>
+
+        <div class="category-grid">
+            
+            <div class="category-card">
+                <div class="category-title">
+                    <i class="fa-solid fa-book-open"></i>
+                    <h3>School Section (Std 6-12)</h3>
+                </div>
+                <ul class="links-list">
+                    <li class="link-item">
+                        <a href="https://diksha.gov.in/" target="_blank">
+                            <span>DIKSHA Portal (E-Learning)</span>
+                            <i class="fa-solid fa-arrow-right arrow-icon"></i>
+                        </a>
+                    </li>
+                    <li class="link-item">
+                        <a href="https://ncert.nic.in/textbook.php" target="_blank">
+                            <span>NCERT Digital Textbooks</span>
+                            <i class="fa-solid fa-arrow-right arrow-icon"></i>
+                        </a>
+                    </li>
+                    <li class="link-item">
+                        <a href="https://gsebeservice.com/" target="_blank">
+                            <span>GSEB Academic Portal</span>
+                            <i class="fa-solid fa-arrow-right arrow-icon"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="category-card">
+                <div class="category-title">
+                    <i class="fa-solid fa-university"></i>
+                    <h3>Higher Education</h3>
+                </div>
+                <ul class="links-list">
+                    <li class="link-item">
+                        <a href="https://swayam.gov.in/" target="_blank">
+                            <span>SWAYAM (Free Online Courses)</span>
+                            <i class="fa-solid fa-arrow-right arrow-icon"></i>
+                        </a>
+                    </li>
+                    <li class="link-item">
+                        <a href="https://www.ndl.gov.in/" target="_blank">
+                            <span>National Digital Library (NDL)</span>
+                            <i class="fa-solid fa-arrow-right arrow-icon"></i>
+                        </a>
+                    </li>
+                    <li class="link-item">
+                        <a href="https://www.ugc.gov.in/" target="_blank">
+                            <span>UGC Official Portal</span>
+                            <i class="fa-solid fa-arrow-right arrow-icon"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="category-card">
+                <div class="category-title">
+                    <i class="fa-solid fa-id-card"></i>
+                    <h3>Scholarships & Welfare</h3>
+                </div>
+                <ul class="links-list">
+                    <li class="link-item">
+                        <a href="https://www.digitalgujarat.gov.in/" target="_blank">
+                            <span>Digital Gujarat Portal</span>
+                            <i class="fa-solid fa-arrow-right arrow-icon"></i>
+                        </a>
+                    </li>
+                    <li class="link-item">
+                        <a href="https://scholarships.gov.in/" target="_blank">
+                            <span>National Scholarship Portal (NSP)</span>
+                            <i class="fa-solid fa-arrow-right arrow-icon"></i>
+                        </a>
+                    </li>
+                    <li class="link-item">
+                        <a href="https://apaar.education.gov.in/" target="_blank">
+                            <span>APAAR / DigiLocker Edu</span>
+                            <i class="fa-solid fa-arrow-right arrow-icon"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+</html>
