@@ -3,218 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEP 2020 Key Details | રાષ્ટ્રીય શિક્ષણ નીતિ ૨૦૨૦</title>
+    <title>The Evolution of Mathematics & NEP 2020</title>
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
         body {
-            background-color: #f4f6f9;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
+            color: #333;
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f9;
         }
-
-        /* GitHub Style Navigation Bar */
-        .navbar {
-            background-color: #1a202c;
-            padding: 15px 20px;
+        /* Top Left Profile Styling */
+        .top-profile {
             display: flex;
-            justify-content: center;
-            gap: 25px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .navbar a {
-            color: #edf2f7;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: color 0.2s;
-        }
-
-        .navbar a:hover {
-            color: #63b3ed;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        h1 {
-            text-align: center;
-            color: #1a365d;
-            margin-bottom: 10px;
-        }
-
-        h2 {
-            text-align: center;
-            color: #2b6cb0;
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            font-weight: normal;
-        }
-
-        /* Two Column Layout */
-        .split-section {
-            display: flex;
-            gap: 40px;
-        }
-
-        .column {
-            flex: 1;
-            padding: 10px;
-        }
-
-        .column-english {
-            border-right: 2px solid #e2e8f0;
-            padding-right: 30px;
-        }
-
-        .lang-title {
-            font-size: 1.8rem;
-            color: #2c5282;
-            border-bottom: 3px solid #4299e1;
-            padding-bottom: 8px;
+            align-items: center;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
         }
-
-        .section-block {
-            margin-bottom: 25px;
+        .mini-photo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #2980b9;
+            margin-right: 15px;
         }
-
-        h3 {
-            color: #2d3748;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
+        .profile-text {
+            display: flex;
+            flex-direction: column;
         }
-
-        ul {
-            margin-left: 20px;
-            margin-bottom: 15px;
+        .user-name {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #2c3e50;
         }
-
-        li {
-            margin-bottom: 8px;
+        .user-degree {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            font-style: italic;
         }
-
-        .highlight {
-            background-color: #ebf8ff;
+        header {
+            text-align: center;
+            padding: 40px 0;
+            background: #2c3e50;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #2980b9;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .flex-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .text-content {
+            flex: 2;
+            min-width: 300px;
+        }
+        .image-container {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 3px solid #ddd;
+        }
+        .formula {
+            background: #eee;
             padding: 10px;
-            border-left: 4px solid #3182ce;
-            border-radius: 0 4px 4px 0;
-            margin-bottom: 15px;
+            display: block;
+            text-align: center;
+            font-family: "Courier New", Courier, monospace;
+            font-weight: bold;
+            margin: 10px 0;
         }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .split-section {
-                flex-direction: column;
-                gap: 20px;
-            }
-            .column-english {
-                border-right: none;
-                border-bottom: 2px solid #e2e8f0;
-                padding-right: 0;
-                padding-bottom: 30px;
-            }
+        /* NEP Layout Additions */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        th {
+            background-color: #2980b9;
+            color: white;
+        }
+        .lang-split {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+        .lang-box {
+            background: #fdfdfd;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+        .lang-title {
+            font-weight: bold;
+            color: #2c3e50;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
 
-<nav class="navbar">
-    <a href="../index.html">🏠 Home</a>
-    <a href="#" style="color: #63b3ed;">📘 NEP 2020 (Current)</a>
-    <a href="../previous-uploads/">📚 Previous Uploads</a>
-</nav>
-
-<div class="container">
-    <h1>National Education Policy (NEP) 2020</h1>
-    <h2>રાષ્ટ્રીય શિક્ષણ નીતિ (NEP) ૨૦૨૦</h2>
-    
-    <div class="split-section">
-        
-        <div class="column column-english">
-            <h2 class="lang-title">English Details</h2>
-            
-            <div class="section-block">
-                <h3>Who Must Learn About NEP 2020?</h3>
-                <p>This policy fundamentally changes India's education structure. It is vital for:</p>
-                <ul>
-                    <li><strong>Teachers & School Leaders:</strong> To adapt to new pedagogical methods.</li>
-                    <li><strong>Students & Parents:</strong> To understand new exam patterns and stream choices.</li>
-                    <li><strong>College Faculty & Administrators:</strong> To implement flexible multi-entry/exit degrees.</li>
-                </ul>
-            </div>
-
-            <div class="section-block">
-                <h3>Most Important Topics</h3>
-                <div class="highlight">
-                    <strong>1. The 5+3+3+4 Structure:</strong><br>
-                    Replaces the old 10+2 system. Covers ages 3 to 18 (Foundational, Preparatory, Middle, and Secondary stages).
-                </div>
-                <div class="highlight">
-                    <strong>2. Multidisciplinary Education:</strong><br>
-                    No rigid separation between Arts, Commerce, and Science streams in high school.
-                </div>
-                <div class="highlight">
-                    <strong>3. Higher Education Flexibility:</strong><br>
-                    4-year undergraduate degrees with multiple entry and exit options.
-                </div>
-                <div class="highlight">
-                    <strong>4. Regional Language:</strong><br>
-                    Medium of instruction up to Grade 5 should preferably be the mother tongue.
-                </div>
-            </div>
+    <div class="top-profile">
+        <img src="your-photo.jpg" alt="Profile Photo" class="mini-photo">
+        <div class="profile-text">
+            <h2 class="user-name">Your Name Here</h2>
+            <p class="user-degree">B.Sc. Mathematics</p>
         </div>
-
-        <div class="column">
-            <h2 class="lang-title">ગુજરાતી વિગતો</h2>
-            
-            <div class="section-block">
-                <h3>NEP 2020 વિશે કોણે જાણવું જ જોઈએ?</h3>
-                <p>આ નીતિ ભારતના શિક્ષણ માળખામાં મોટો બદલાવ લાવે છે. આ આના માટે ખૂબ જ મહત્વપૂર્ણ છે:</p>
-                <ul>
-                    <li><strong>શિક્ષકો અને શાળાના સંચાલકો:</strong> શિક્ષણની નવી પદ્ધતિઓ અપનાવવા માટે.</li>
-                    <li><strong>વિદ્યાર્થીઓ અને વાલીઓ:</strong> પરીક્ષાની નવી પદ્ધતિ અને વિષયોની પસંદગી સમજવા માટે.</li>
-                    <li><strong>કોલેજના અધ્યાપકો અને વહીવટકર્તાઓ:</strong> મલ્ટિ-એન્ટ્રી/એક્ઝિટ ડિગ્રીનો અમલ કરવા માટે.</li>
-                </ul>
-            </div>
-
-            <div class="section-block">
-                <h3>સૌથી મહત્વપૂર્ણ વિષયો (Topics)</h3>
-                <div class="highlight">
-                    <strong>1. 5+3+3+4 માળખું:</strong><br>
-                    જૂની 10+2 પદ્ધતિને બદલે હવે ૩ થી ૧૮ વર્ષના બાળકો માટે નવું માળખું.
-                </div>
-                <div class="highlight">
-                    <strong>2. બહુવિધ વિષય પસંદગી:</strong><br>
-                    હાઇસ્કૂલમાં આર્ટસ, કોમર્સ અને સાયન્સ પ્રવાહો વચ્ચે કોઈ કડક ભેદભાવ રહેશે નહીં.
-                </div>
-                <div class="highlight">
-                    <strong>3. ઉચ્ચ શિક્ષણમાં ફ્લેક્સિબિલિટી:</strong><br>
-                    મલ્ટિપલ એન્ટ્રી અને એક્ઝિટ ઓપ્શન સાથે ૪ વર્ષની અંડરગ્રેજ્યુએટ ડિગ્રી.
-                </div>
-                <div class="highlight">
-                    <strong>4. પ્રાદેશિક ભાષા / માતૃભાષા:</strong><br>
-                    ધોરણ ૫ સુધી શિક્ષણનું માધ્યમ માતૃભાષા અથવા સ્થાનિક ભાષા રાખવા પર ભાર.
-                </div>
-            </div>
-        </div>
-
     </div>
-</div>
+
+    <header>
+        <h1>The Evolution of Mathematics</h1>
+        <p>From Ancient Tally Marks to Modern Systems & Educational Policies</p>
+    </header>
+
+    <section>
+        <h2>1. Ancient Foundations (Egypt & Babylonia)</h2>
+        <div class="flex-container">
+            <div class="text-content">
+                <p>Mathematics began as a practical tool for commerce and agriculture. The Egyptians used geometry to redraw boundaries after the Nile flooded, while the Babylonians developed a <strong>base-60 system</strong> that we still use today to measure time (60 seconds, 60 minutes).</p>
+            </div>
+            <div class="image-container">
+                <img src="babylonian_tablet.jpg" alt="Babylonian Mathematics">
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>2. The Greek Influence</h2>
+        <div class="flex-container">
+            <div class="image-container">
+                <img src="pythagoras.jpg" alt="Pythagoras Illustration">
+            </div>
+            <div class="text-content">
+                <p>The Greeks moved math from "practicality" to "logic." Euclid’s <em>Elements</em> became the standard textbook for 2,000 years. Perhaps the most famous contribution is the <strong>Pythagorean Theorem</strong>:</p>
+                <div class="formula">\[ a^2 + b^2 = c^2 \]</div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>3. The Golden Age of India and the Middle East</h2>
+        <div class="flex-container">
+            <div class="text-content">
+                <p>During the Middle Ages, Indian mathematicians like <strong>Aryabhata</strong> and <strong>Brahmagupta</strong> formalized the concept of <strong>Zero</strong>. Later, Persian mathematician Al-Khwarizmi wrote the book that gave us the word "Algebra."</p>
+                <div class="formula">\[ e^{i\pi} + 1 = 0 \]</div>
+            </div>
+            <div class="image-container">
+                <img src="zero_history.jpg" alt="Indian Numerals">
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>4. National Education Policy (NEP) 2020 Overview</h2>
+        
+        <div class="lang-split">
+            <div class="lang-box">
+                <div class="lang-title">English Medium Details</div>
+                <p>The NEP 2020 replaces the 34-year-old National Policy on Education (1986). It is designed to change the framework of education by shifting the structure from a rigid 10+2 system to a highly adaptive <strong>5+3+3+4 framework</strong> based on cognitive development milestones.</p>
+                <ul>
+                    <li><strong>Foundational Stage (5 Years):</strong> Ages 3-8 (Pre-school to Class 2)</li>
+                    <li><strong>Preparatory Stage (3 Years):</strong> Ages 8-11 (Classes 3-5)</li>
+                    <li><strong>Middle Stage (3 Years):</strong> Ages 11-14 (Classes 6-8)</li>
+                    <li><strong>Secondary Stage (4 Years):</strong> Ages 14-18 (Classes 9-12)</li>
+                </ul>
+            </div>
+
+            <div class="lang-box">
+                <div class="lang-title">ગુજરાતી માધ્યમ વિગતો (Gujarati)</div>
+                <p>NEP 2020 એ ૩૪ વર્ષ જૂની રાષ્ટ્રીય શિક્ષણ નીતિ (1986) નું સ્થાન લીધું છે. આ નીતિ દ્વારા શિક્ષણના માળખાને જૂની 10+2 પદ્ધતિમાંથી બદલીને બાળકના માનસિક વિકાસ આધારીત <strong>5+3+3+4 માળખામાં</strong> રૂપાંતરિત કરવામાં આવ્યું છે.</p>
+                <ul>
+                    <li><strong>પાયાનું સ્ટેજ (૫ વર્ષ):</strong> ઉંમર ૩-૮ વર્ષ (બાલમંદિર થી ધોરણ ૨)</li>
+                    <li><strong>પ્રારંભિક સ્ટેજ (૩ વર્ષ):</strong> ઉંમર ૮-૧૧ વર્ષ (ધોરણ ૩ થી ૫)</li>
+                    <li><strong>મધ્યમ સ્ટેજ (૩ વર્ષ):</strong> ઉંમર ૧૧-૧૪ વર્ષ (ધોરણ ૬ થી ૮)</li>
+                    <li><strong>માધ્યમિક સ્ટેજ (૪ વર્ષ):</strong> ઉંમર ૧૪-૧૮ વર્ષ (ધોરણ ૯ થી ૧૨)</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>The 5+3+3+4 Curricular Shift</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Stage (સ્ટેજ)</th>
+                    <th>Classes (ધોરણ)</th>
+                    <th>English Curricular Focus</th>
+                    <th>ગુજરાતી શૈક્ષણિક ફોકસ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Foundational</strong></td>
+                    <td>Pre-school to 2</td>
+                    <td>Play-based & activity-based learning.</td>
+                    <td>રમત-ગમત અને પ્રવૃત્તિ આધારિત શિક્ષણ.</td>
+                </tr>
+                <tr>
+                    <td><strong>Preparatory</strong></td>
+                    <td>3 to 5</td>
+                    <td>Light text-books, interactive learning.</td>
+                    <td>પ્રારંભિક પુસ્તકો અને ઇન્ટરેક્ટિવ ક્લાસરૂમ.</td>
+                </tr>
+                <tr>
+                    <td><strong>Middle</strong></td>
+                    <td>6 to 8</td>
+                    <td>Subject sciences, math, & coding skills.</td>
+                    <td>વિષય આધારિત વિજ્ઞાન, ગણિત અને કોડિંગ.</td>
+                </tr>
+                <tr>
+                    <td><strong>Secondary</strong></td>
+                    <td>9 to 12</td>
+                    <td>Multidisciplinary choice, critical thinking.</td>
+                    <td>બહુવિધ વિષય પસંદગી અને ગહન ચિંતન.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section style="background: #2c3e50; color: white; padding: 40px 20px; text-align: center; margin-top: 50px; border-radius: 8px;">
+        <h3 style="color: #3498db; margin-top: 0;">Explore External Pages</h3>
+        <div style="margin: 20px 0;">
+            <a href="books.html" style="color: white; margin: 0 15px; text-decoration: none; font-weight: bold;">NCERT Books Library</a>
+            <a href="about.html" style="color: white; margin: 0 15px; text-decoration: none; font-weight: bold;">About & CV</a>
+        </div>
+        <p style="font-size: 0.8em; color: #bdc3c7;">© 2026 Mathematics History & Policy Project</p>
+    </section>
 
 </body>
 </html>
