@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>National Education Policy (NEP) 2020</title>
+    <style>
+        :root {
+            --primary-color: #ff9933;
+            --secondary-color: #138808;
+            --dark-blue: #000080;
+            --light-bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Header Styling */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #ffffff, var(--secondary-color));
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-bottom: 5px solid var(--dark-blue);
+        }
+
+        header h1 {
+            color: var(--dark-blue);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #444;
+            font-weight: 600;
+        }
+
+        /* Language Toggle Buttons */
+        .lang-controls {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .btn {
+            background-color: var(--dark-blue);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            margin: 0 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            background-color: var(--primary-color);
+        }
+
+        /* Main Dual Layout Frame */
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px 50px 20px;
+        }
+
+        /* Columns styling */
+        .lang-column {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            border-top: 5px solid var(--dark-blue);
+        }
+
+        .lang-column:hover {
+            transform: translateY(-5px);
+        }
+
+        .english-col { border-top-color: var(--primary-color); }
+        .gujarati-col { border-top-color: var(--secondary-color); }
+
+        h2 {
+            color: var(--dark-blue);
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        /* Feature Cards inside columns */
+        .nep-card {
+            background: #fdfdfd;
+            border-left: 4px solid var(--dark-blue);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .english-col .nep-card { border-left-color: var(--primary-color); }
+        .gujarati-col .nep-card { border-left-color: var(--secondary-color); }
+
+        .nep-card h3 {
+            margin-bottom: 8px;
+            color: #222;
+            font-size: 1.2rem;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--dark-blue);
+            color: white;
+            margin-top: 40px;
+        }
+
+        /* Responsive Design for Mobile Devices */
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>National Education Policy (NEP) 2020</h1>
+        <p>राष्ट्रीय શિક્ષણ નીતિ ૨૦૨૦ - Transforming India's Education Landscape</p>
+    </header>
+
+    <div class="lang-controls">
+        <button class="btn" onclick="scrollToSection('english')">Read in English</button>
+        <button class="btn" onclick="scrollToSection('gujarati')">ગુજરાતીમાં વાંચો</button>
+    </div>
+
+    <main class="container">
+        
+        <section class="lang-column english-col" id="english">
+            <h2>NEP 2020 - English Details</h2>
+            
+            <div class="nep-card">
+                <h3>1. New Pedagogical Structure</h3>
+                <p>The old 10+2 school system is completely replaced by a new <strong>5+3+3+4</strong> structure:</p>
+                <ul>
+                    <li><strong>Foundational Stage (5 Years):</strong> Ages 3 to 8 (Anganwadi/Pre-school + Class 1 & 2). Focuses on play-based learning.</li>
+                    <li>
+                        <strong>Preparatory Stage (3 Years):</strong> Ages 8 to 11 (Classes 3 to 5). Focuses on light textbooks and interactive classroom learning.</li>
+                    <li><strong>Middle Stage (3 Years):</strong> Ages 11 to 14 (Classes 6 to 8). Introduction to critical sciences, humanities, and coding.</li>
+                    <li><strong>Secondary Stage (4 Years):</strong> Ages 14 to 18 (Classes 9 to 12). Multi-disciplinary study with deep critical thinking and flexibility in choosing subjects.</li>
+                </ul>
+            </div>
+
+            <div class="nep-card">
+                <h3>2. Higher Education & Flexibility</h3>
+                <p>Major reforms in college and university education include:</p>
+                <ul>
+                    <li><strong>Multiple Entry and Exit:</strong> Students can leave a degree course and re-enter later without losing credits. (1 year = Certificate, 2 years = Advanced Diploma, 3 years = Bachelor Degree, 4 years = Multidisciplinary Bachelor's Degree).</li>
+                    <li><strong>Academic Bank of Credits (ABC):</strong> A digital repository to securely store academic credits earned from different HEIs.</li>
+                    <li>Discontinuation of M.Phil programmes.</li>
+                </ul>
+            </div>
+
+            <div class="nep-card">
+                <h3>3. Other Key Highlights</h3>
+                <ul>
+                    <li><strong>Mother Tongue:</strong> Wherever possible, the medium of instruction until at least Grade 5 (preferably Grade 8) will be the home language/mother tongue.</li>
+                    <li><strong>No Rigid Separation:</strong> No strict divisions between Arts, Sciences, or Commerce academic streams, or between curricular and extra-curricular activities.</li>
+                    <li><strong>GDP Target:</strong> Government aims to increase public investment in education to reach 6% of GDP.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="lang-column gujarati-col" id="gujarati">
+            <h2>NEP 2020 - ગુજરાતી વિગતો</h2>
+            
+            <div class="nep-card">
+                <h3>૧. નવું શૈક્ષણિક માળખું</h3>
+                <p>જૂની ૧૦+૨ શાળા પ્રણાલીને સંપૂર્ણપણે બદલીને નવી <strong>5+3+3+4</strong> શૈક્ષણિક પ્રણાલી અમલમાં મૂકવામાં આવી છે:</p>
+                <ul>
+                    <li><strong>પાયાનું સ્ટેજ (૫ વર્ષ):</strong> ૩ થી ૮ વર્ષની ઉંમર (આંગણવાડી/પ્રી-સ્કૂલ + ધોરણ ૧ અને ૨). રમત-ગમત આધારિત શિક્ષણ પર ભાર.</li>
+                    <li><strong>પ્રારંભિક સ્ટેજ (૩ વર્ષ):</strong> ૮ થી ૧૧ વર્ષની ઉંમર (ધોરણ ૩ થી ૫). હળવા પાઠ્યપુસ્તકો અને ઇન્ટરેક્ટિવ ક્લાસરૂમ લર્નિંગ.</li>
+                    <li><strong>મધ્યમ સ્ટેજ (૩ વર્ષ):</strong> ૧૧ થી ૧૪ વર્ષની ઉંમર (ધોરણ ૬ થી ૮). વિજ્ઞાન, ગણિત, કળા અને કોડિંગ (કોમ્પ્યુટર પ્રોગ્રામિંગ) ની શરૂઆત.</li>
+                    <li><strong>માધ્યમિક સ્ટેજ (૪ વર્ષ):</strong> ૧૪ થી ૧૮ વર્ષની ઉંમર (ધોરણ ૯ થી ૧૨). વિષયો પસંદ કરવાની સ્વતંત્રતા સાથે ઊંડાણપૂર્વકનું શિક્ષણ.</li>
+                </ul>
+            </div>
+
+            <div class="nep-card">
+                <h3>૨. ઉચ્ચ શિક્ષણ અને લવચીકતા</h3>
+                <p>કોલેજ અને યુનિવર્સિટી શિક્ષણમાં મોટા સુધારાઓ કરવામાં આવ્યા છે:</p>
+                <ul>
+                    <li><strong>મલ્ટીપલ એન્ટ્રી અને એક્ઝિટ:</strong> વિદ્યાર્થીઓ કોઈપણ વર્ષે કોલેજ છોડી શકે છે અને ક્રેડિટ ગુમાવ્યા વિના ફરી પાછા આવી શકે છે. (૧ વર્ષ = સર્ટિફિકેટ, ૨ વર્ષ = ડિપ્લોમા, ૩ વર્ષ = બેચલર ડિગ્રી, ૪ વર્ષ = રિસર્ચ સાથે ડિગ્રી).</li>
+                    <li><strong>એકેડેમિક બેંક ઓફ ક્રેડિટ્સ (ABC):</strong> ડિજિટલ લોકર જ્યાં વિદ્યાર્થીઓના ભણતરના પોઇન્ટ્સ/ક્રેડિટ્સ સુરક્ષિત જમા રહેશે.</li>
+                    <li>M.Phil (એમ.ફિલ) નો અભ્યાસક્રમ હવે નાબૂદ કરવામાં આવ્યો છે.</li>
+                </ul>
+            </div>
+
+            <div class="nep-card">
+                <h3>૩. અન્ય મુખ્ય હાઇલાઇટ્સ</h3>
+                <ul>
+                    <li><strong>માતૃભાષામાં શિક્ષણ:</strong> ધોરણ ૫ (અને શક્ય હોય ત્યાં સુધી ધોરણ ૮) સુધી શિક્ષણનું માધ્યમ માતૃભાષા અથવા પ્રાદેશિક ભાષા રાખવા પર ભાર મૂકવામાં આવ્યો છે.</li>
+                    <li><strong>પ્રવાહોની કોઈ કડક મર્યાદા નહીં:</strong> આર્ટસ, સાયન્સ કે કોમર્સ વચ્ચે કોઈ કડક ભેદભાવ રહેશે નહીં. વિદ્યાર્થી સાયન્સ સાથે મ્યુઝિક પણ ભણી શકશે.</li>
+                    <li><strong>જીડીપી (GDP) લક્ષ્યાંક:</strong> શિક્ષણ ક્ષેત્રે સરકારી રોકાણ વધારીને જીડીપીના ૬% સુધી કરવાનો લક્ષ્યાંક છે.</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 NEP 2020 Portal | Designed for Dynamic Web Portals</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for the control buttons
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
