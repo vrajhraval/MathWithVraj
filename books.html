@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematics Library - NCERT Books</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: #333; max-width: 1000px; margin: 0 auto; padding: 20px; background: #f4f7f6; }
+        header { background: #2c3e50; color: white; padding: 30px; text-align: center; border-radius: 8px; margin-bottom: 20px; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: #2980b9; text-decoration: none; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #2980b9; color: white; }
+        tr:hover { background: #f9f9f9; }
+        .btn { padding: 8px 15px; border-radius: 4px; text-decoration: none; font-size: 0.9em; font-weight: bold; display: inline-block; }
+        .btn-en { background: #27ae60; color: white; }
+        .btn-gu { background: #e67e22; color: white; }
+        .btn:hover { opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-link">← Back to Home</a>
+
+    <header>
+        <h1>NCERT Mathematics Library</h1>
+        <p>Class 1 to 12 - English & Gujarati Medium</p>
+    </header>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Class</th>
+                <th>Subject</th>
+                <th>English Medium</th>
+                <th>Gujarati Medium</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- We will list Class 1 to 12 -->
+            <script>
+                const classes = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th"];
+                const tbody = document.querySelector('tbody');
+                
+                classes.forEach((cls, index) => {
+                    const row = `<tr>
+                        <td><strong>Class ${cls}</strong></td>
+                        <td>Mathematics</td>
+                        <td><a href="https://ncert.nic.in/textbook.php" target="_blank" class="btn btn-en">Download EN</a></td>
+                        <td><a href="https://ncert.nic.in/textbook.php" target="_blank" class="btn btn-gu">Download GUJ</a></td>
+                    </tr>`;
+                    tbody.innerHTML += row;
+                });
+            </script>
+        </tbody>
+    </table>
+
+    <div style="margin-top: 30px; padding: 20px; background: #fff; border-radius: 8px;">
+        <h3>How to find your specific book:</h3>
+        <p>Clicking the buttons above will take you to the official NCERT portal. Select your <strong>Class</strong>, then select <strong>Mathematics</strong>. For Gujarati Medium, look for the title in Gujarati script.</p>
+    </div>
+
+</body>
+</html>
