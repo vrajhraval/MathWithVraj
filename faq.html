@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegant Interior Design FAQ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+
+    <style>
+        /* Styling Variables */
+        :root {
+            --bg-color: #fcfbfa;       /* Cream/Alabaster */
+            --text-main: #2b2b2b;      /* Dark Charcoal */
+            --text-muted: #6e6e6e);     /* Soft Stone Gray */
+            --accent-color: #8c7863;   /* Warm Taupe/Earth */
+            --border-color: #e5e2dd;   /* Clean subtle line */
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* FAQ Section Wrapper */
+        .faq-section {
+            max-width: 900px;
+            margin: 100px auto;
+            padding: 0 24px;
+        }
+
+        /* Section Header styling */
+        .faq-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .faq-header h2 {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            font-weight: 400;
+            margin: 0 0 15px 0;
+            letter-spacing: -0.01em;
+        }
+
+        .faq-header p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        /* Minimalist Accordion Container */
+        .faq-container {
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* HTML5 Details & Summary Reset */
+        details {
+            border-bottom: 1px solid var(--border-color);
+            padding: 24px 0;
+            cursor: pointer;
+        }
+
+        summary {
+            list-style: none; /* Hide default browser arrow */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: var(--text-main);
+            user-select: none;
+        }
+
+        /* Custom Elegant Plus (+) Icon */
+        summary::after {
+            content: '+';
+            font-family: var(--font-sans);
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--accent-color);
+            transition: transform 0.4s ease;
+        }
+
+        /* When the item is open, rotate the plus to look like a close sign */
+        details[open] summary::after {
+            transform: rotate(45deg);
+        }
+
+        /* Content Text Box */
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        /* Animate content entry when opened */
+        details[open] .faq-content {
+            max-height: 200px; /* Adjust if your text is very long */
+            opacity: 1;
+            margin-top: 16px;
+        }
+
+        .faq-content p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            font-weight: 300;
+            margin: 0;
+            padding-right: 40px;
+        }
+
+        /* Remove default arrow in Chrome/Safari */
+        summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="faq-section">
+        
+        <div class="faq-header">
+            <h2>Frequently Asked Questions</h2>
+            <p>Everything you need to know about our design philosophy and process.</p>
+        </div>
+
+        <div class="faq-container">
+
+            <details>
+                <summary>What inspires your interior aesthetics?</summary>
+                <div class="faq-content">
+                    <p>Our inspiration comes from architectural minimalism, natural textures, and the interplay of light and shadow. We believe in creating spaces that feel grounded, organic, and timeless.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>Can I customize the color palettes used?</summary>
+                <div class="faq-content">
+                    <p>Absolutely. Every project is a collaboration. While we specialize in warm, earthy, and muted tones, we tailor the exact palette to fit your specific vision and the mood of the environment.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>How long does a typical project take?</summary>
+                <div class="faq-content">
+                    <p>Timeline depends heavily on scope. Initial concepts are usually ready within 2 weeks, while full execution ranges anywhere from 4 to 12 weeks to ensure every detail is meticulously crafted.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>Do you offer digital design consultations?</summary>
+                <div class="faq-content">
+                    <p>Yes, we offer completely remote digital consultations. We provide curated mood boards, layout directions, and material concepts that you can easily execute yourself.</p>
+                </div>
+            </details>
+
+        </div>
+    </section>
+
+</body>
+</html>
