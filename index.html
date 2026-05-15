@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Math Universe Premium</title>
+<title>Math Universe | Vraj H Raval</title>
 
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -15,7 +15,6 @@
 <style>
 
 /* ===== GLOBAL ===== */
-
 *{
 margin:0;
 padding:0;
@@ -29,7 +28,7 @@ color:white;
 overflow-x:hidden;
 }
 
-/* ===== NAV ===== */
+/* ===== NAVBAR (WITH YOUR OLD PAGES INCLUDED) ===== */
 
 nav{
 display:flex;
@@ -45,16 +44,16 @@ border-bottom:1px solid rgba(255,255,255,0.1);
 }
 
 nav h1{
-font-size:26px;
 color:#38bdf8;
-letter-spacing:1px;
+font-size:26px;
 }
 
 nav a{
 color:white;
 text-decoration:none;
-margin-left:20px;
+margin-left:18px;
 transition:0.3s;
+font-size:14px;
 }
 
 nav a:hover{
@@ -69,91 +68,66 @@ text-align:center;
 }
 
 .hero h2{
-font-size:62px;
+font-size:60px;
 color:#38bdf8;
-text-shadow:0 0 25px rgba(56,189,248,0.4);
+text-shadow:0 0 20px rgba(56,189,248,0.3);
 }
 
 .hero p{
-margin-top:20px;
-font-size:20px;
+margin-top:15px;
 opacity:0.85;
+font-size:18px;
 }
 
-/* ===== GORGEOUS PROFILE (UPDATED) ===== */
+/* ===== GORGEOUS PROFILE (FIXED) ===== */
 
 .profile{
 display:flex;
 align-items:center;
+gap:18px;
 justify-content:center;
-margin-top:40px;
-gap:20px;
+
+margin:40px auto;
 
 background:rgba(255,255,255,0.07);
-backdrop-filter:blur(15px);
+backdrop-filter:blur(14px);
 
 padding:20px 30px;
 border-radius:25px;
 
 width:fit-content;
-margin-left:auto;
-margin-right:auto;
 
 border:1px solid rgba(56,189,248,0.4);
 
-box-shadow:
-0 0 25px rgba(56,189,248,0.15),
-inset 0 0 10px rgba(255,255,255,0.05);
+box-shadow:0 0 25px rgba(56,189,248,0.15);
 
 transition:0.4s;
 }
 
 .profile:hover{
 transform:scale(1.05);
-box-shadow:
-0 0 35px rgba(56,189,248,0.35);
+box-shadow:0 0 35px rgba(56,189,248,0.35);
 }
 
 .profile img{
 width:85px;
 height:85px;
 border-radius:50%;
-object-fit:cover;
-
 border:3px solid #38bdf8;
-
-box-shadow:0 0 20px rgba(56,189,248,0.5);
+object-fit:cover;
+box-shadow:0 0 15px rgba(56,189,248,0.5);
 }
 
 .profile h3{
-font-size:22px;
-color:white;
+margin:0;
 }
 
 .profile p{
-font-size:14px;
+font-size:13px;
 opacity:0.8;
 }
 
-/* ===== BUTTON ===== */
-
-.btn{
-display:inline-block;
-margin-top:30px;
-padding:14px 30px;
-background:#38bdf8;
-color:#000;
-border-radius:12px;
-text-decoration:none;
-font-weight:bold;
-transition:0.3s;
-}
-
-.btn:hover{
-transform:scale(1.08);
-}
-
-/* ===== SECTION ===== */
+/* ===== SECTIONS ===== */
 
 section{
 padding:80px 8%;
@@ -165,21 +139,21 @@ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:20px;
 }
 
-/* ===== SUBJECT ===== */
+/* ===== SUBJECTS ===== */
 
 .subject{
-padding:25px;
 background:rgba(255,255,255,0.06);
+padding:25px;
 border-radius:15px;
-cursor:pointer;
 text-align:center;
+cursor:pointer;
 transition:0.3s;
 }
 
 .subject:hover{
-transform:scale(1.05);
 background:#38bdf8;
 color:black;
+transform:scale(1.05);
 }
 
 /* ===== PANEL ===== */
@@ -196,9 +170,9 @@ border-radius:15px;
 display:block;
 }
 
-/* ===== INPUT ===== */
+/* ===== GRAPH ===== */
 
-input{
+input,button{
 width:100%;
 padding:12px;
 border-radius:10px;
@@ -207,16 +181,12 @@ margin-top:10px;
 }
 
 button{
-padding:12px 20px;
-border:none;
 background:#38bdf8;
-color:black;
-border-radius:10px;
-margin-top:10px;
 cursor:pointer;
+font-weight:bold;
 }
 
-/* ===== QUIZ ===== */
+/* ===== QUIZ UI FIXED (GREEN/RED PERFECT) ===== */
 
 .quiz{
 background:rgba(255,255,255,0.05);
@@ -226,14 +196,25 @@ border-radius:15px;
 
 .option{
 margin-top:10px;
-padding:10px;
+padding:12px;
 background:rgba(255,255,255,0.08);
 border-radius:10px;
 cursor:pointer;
+transition:0.3s;
 }
 
 .option:hover{
-background:rgba(56,189,248,0.3);
+background:rgba(56,189,248,0.2);
+}
+
+.correct{
+background:#22c55e !important;
+color:white;
+}
+
+.wrong{
+background:#ef4444 !important;
+color:white;
 }
 
 /* ===== FOOTER ===== */
@@ -241,7 +222,7 @@ background:rgba(56,189,248,0.3);
 footer{
 text-align:center;
 padding:40px;
-opacity:0.7;
+opacity:0.8;
 }
 
 </style>
@@ -249,34 +230,38 @@ opacity:0.7;
 
 <body>
 
+<!-- NAVBAR (RESTORED YOUR FULL SITE LINKS) -->
 <nav>
 <h1>Math Universe</h1>
+
 <div>
-<a href="#subjects">Subjects</a>
-<a href="#graph">Graph</a>
-<a href="#quiz">Quiz</a>
+<a href="#">Home</a>
+<a href="books.html">Books</a>
+<a href="about.html">About</a>
+<a href="nep.html">NEP 2020</a>
+<a href="imp.html">Important Links</a>
+<a href="faq.html">FAQ</a>
 </div>
+
 </nav>
 
 <!-- HERO -->
-
 <div class="hero">
 <h2>Mathematics Universe</h2>
-<p>Explore Algebra, Calculus, Geometry & AI-based learning system</p>
+<p>Learn Algebra, Calculus, Geometry + Graphs + Quizzes + AI learning system</p>
 </div>
 
-<!-- ✨ GORGEOUS PROFILE UPDATED -->
+<!-- PROFILE (GORGEOUS FIXED) -->
 <div class="profile">
 <img src="vraj.jpeg">
 <div>
 <h3>Vraj H Raval</h3>
-<p>Mathematics Educator | Problem Solver | Learner</p>
+<p>B.Sc | M.Sc | B.Ed Mathematics Educator</p>
 </div>
 </div>
 
 <!-- SUBJECTS -->
-
-<section id="subjects">
+<section>
 
 <h2>Subjects</h2>
 
@@ -291,29 +276,32 @@ opacity:0.7;
 
 <div id="algebra" class="panel">
 <h3>Algebra</h3>
-<a href="https://openstax.org/details/books/elementary-algebra" target="_blank">Download Free Book</a>
+<p>Study equations and variables.</p>
+<a href="https://openstax.org/details/books/elementary-algebra" target="_blank">Download Book</a>
 </div>
 
 <div id="geometry" class="panel">
 <h3>Geometry</h3>
-<a href="https://openstax.org/details/books/geometry" target="_blank">Download Free Book</a>
+<p>Study shapes and space.</p>
+<a href="https://openstax.org/details/books/geometry" target="_blank">Download Book</a>
 </div>
 
 <div id="calculus" class="panel">
 <h3>Calculus</h3>
-<a href="https://openstax.org/details/books/calculus-volume-1" target="_blank">Download Free Book</a>
+<p>Study change and motion.</p>
+<a href="https://openstax.org/details/books/calculus-volume-1" target="_blank">Download Book</a>
 </div>
 
 <div id="stats" class="panel">
 <h3>Statistics</h3>
-<a href="https://openstax.org/details/books/introductory-statistics" target="_blank">Download Free Book</a>
+<p>Study data and probability.</p>
+<a href="https://openstax.org/details/books/introductory-statistics" target="_blank">Download Book</a>
 </div>
 
 </section>
 
 <!-- GRAPH -->
-
-<section id="graph">
+<section>
 
 <h2>Graph Generator</h2>
 
@@ -324,35 +312,36 @@ opacity:0.7;
 
 </section>
 
-<!-- QUIZ -->
+<!-- QUIZ (FIXED GREEN/RED UI) -->
+<section>
 
-<section id="quiz">
-
-<h2>Auto Quiz</h2>
+<h2>Quiz Section</h2>
 
 <div class="quiz">
 
 <p id="q"></p>
-
 <div id="options"></div>
 
-<button onclick="newQ()">Next</button>
+<button onclick="newQ()">Next Question</button>
 
 </div>
 
 </section>
 
+<!-- FOOTER -->
 <footer>
-© 2026 Math Universe
+© 2026 Math Universe | All Pages Included (Books | NEP | FAQ | About | Important)
 </footer>
 
 <script>
 
+/* SUBJECT */
 function openPanel(id){
 document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
 document.getElementById(id).classList.add('active');
 }
 
+/* GRAPH */
 function draw(){
 let expr=document.getElementById("eq").value;
 
@@ -370,23 +359,52 @@ x:x,y:y,type:"scatter"
 }]);
 }
 
+/* QUIZ SYSTEM (FIXED COLOR LOGIC) */
+
 let questions=[
-{q:"x² derivative?",a:"2x",o:["x","2x","x²","1"]},
-{q:"Integral of 1?",a:"x",o:["x","1","0","x²"]},
-{q:"sin(0)?",a:"0",o:["1","0","-1","π"]}
+{
+q:"Derivative of x²?",
+a:"2x",
+o:["x","2x","x²","4x"]
+},
+{
+q:"Integral of 1 dx?",
+a:"x",
+o:["x","1","0","x²"]
+},
+{
+q:"sin(0)?",
+a:"0",
+o:["1","0","-1","π"]
+}
 ];
 
 function newQ(){
+
 let q=questions[Math.floor(Math.random()*questions.length)];
 
 document.getElementById("q").innerText=q.q;
 
 let html="";
+
 q.o.forEach(o=>{
-html+=`<div class='option' onclick="alert('${o===q.a?'Correct':'Wrong'}')">${o}</div>`;
+html+=`<div class='option' onclick="check(this,'${o}','${q.a}')">${o}</div>`;
 });
 
 document.getElementById("options").innerHTML=html;
+
+}
+
+function check(el,selected,answer){
+
+if(selected===answer){
+el.classList.add("correct");
+}else{
+el.classList.add("wrong");
+}
+
+setTimeout(()=>newQ(),1000);
+
 }
 
 newQ();
