@@ -5,146 +5,122 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Math Universe Pro+</title>
+<title>Mathematics Learning Platform</title>
 
-<!-- Math Rendering -->
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-<!-- Graph -->
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
-<!-- Math Engine -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
-
-<!-- Font -->
-<link href="https://fonts.googleapis.com/css2?family=STIX+Two+Math&display=swap" rel="stylesheet">
 
 <style>
 
-/* ===== GLOBAL ===== */
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+/* ===== CLEAN LIGHT THEME ===== */
 
 body{
-font-family:'Segoe UI',sans-serif;
-background: radial-gradient(circle at top,#0f172a,#020617);
-color:white;
-overflow-x:hidden;
-}
-
-/* Math font */
-.MathJax{
-font-family:'STIX Two Math', serif !important;
+margin:0;
+font-family:Segoe UI;
+background:#f5f7fb;
+color:#222;
 }
 
 /* NAV */
 nav{
 display:flex;
 justify-content:space-between;
-align-items:center;
 padding:15px 8%;
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(12px);
+background:white;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
 position:sticky;
 top:0;
-z-index:999;
 }
 
 nav h1{
-color:#38bdf8;
+color:#2563eb;
 }
 
 nav a{
-color:white;
 margin-left:15px;
 text-decoration:none;
+color:#333;
 }
 
 nav a:hover{
-color:#38bdf8;
+color:#2563eb;
 }
 
 /* HERO */
 .hero{
 text-align:center;
-padding:90px 8%;
+padding:60px 8%;
+background:linear-gradient(120deg,#e0f2fe,#ffffff);
 }
 
 .hero h2{
-font-size:55px;
-color:#38bdf8;
-}
-
-.hero p{
-opacity:0.8;
+font-size:48px;
+color:#2563eb;
 }
 
 /* PROFILE */
 .profile{
 display:flex;
 align-items:center;
-gap:15px;
 justify-content:center;
-margin:30px auto;
-background:rgba(255,255,255,0.06);
-padding:18px 25px;
-border-radius:20px;
+gap:15px;
+margin:25px auto;
+background:white;
+padding:15px 20px;
 width:fit-content;
-border:1px solid rgba(56,189,248,0.4);
+border-radius:15px;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
 }
 
 .profile img{
-width:80px;
-height:80px;
+width:70px;
+height:70px;
 border-radius:50%;
-border:2px solid #38bdf8;
+border:2px solid #2563eb;
 }
 
 /* SECTIONS */
 section{
-padding:70px 8%;
+padding:50px 8%;
 }
 
 h2{
-color:#38bdf8;
-margin-bottom:15px;
+color:#2563eb;
 }
 
-/* GRID */
+/* SUBJECTS */
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
 gap:15px;
 }
 
-/* SUBJECT */
 .subject{
-background:rgba(255,255,255,0.06);
+background:white;
 padding:20px;
-border-radius:15px;
+border-radius:12px;
 text-align:center;
 cursor:pointer;
+box-shadow:0 2px 8px rgba(0,0,0,0.08);
 transition:0.3s;
 }
 
 .subject:hover{
-background:#38bdf8;
-color:black;
 transform:scale(1.05);
+background:#2563eb;
+color:white;
 }
 
 /* PANEL */
 .panel{
 display:none;
-margin-top:15px;
 padding:15px;
-background:rgba(255,255,255,0.07);
-border-radius:15px;
+margin-top:10px;
+background:white;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
 
 .panel.active{
@@ -154,41 +130,47 @@ display:block;
 /* INPUT */
 input,button{
 width:100%;
-padding:12px;
-border-radius:10px;
-border:none;
+padding:10px;
 margin-top:10px;
+border-radius:8px;
+border:1px solid #ccc;
 }
 
 button{
-background:#38bdf8;
+background:#2563eb;
+color:white;
 cursor:pointer;
-font-weight:bold;
 }
 
 /* QUIZ */
 .quiz{
-background:rgba(255,255,255,0.05);
+background:white;
 padding:20px;
-border-radius:15px;
+border-radius:12px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
 
 .option{
 margin-top:10px;
-padding:12px;
-border-radius:10px;
-background:rgba(255,255,255,0.08);
+padding:10px;
+background:#f1f5f9;
+border-radius:8px;
 cursor:pointer;
 }
 
-.correct{background:#22c55e !important;}
-.wrong{background:#ef4444 !important;}
+.correct{background:#22c55e;color:white;}
+.wrong{background:#ef4444;color:white;}
+
+/* GRAPH */
+#plot{
+margin-top:20px;
+}
 
 /* FOOTER */
 footer{
 text-align:center;
-padding:40px;
-opacity:0.8;
+padding:30px;
+color:#666;
 }
 
 </style>
@@ -196,91 +178,73 @@ opacity:0.8;
 
 <body>
 
-<!-- NAV -->
 <nav>
-<h1>Math Universe Pro+</h1>
+<h1>Math Learning Platform</h1>
 <div>
+<a href="#">Home</a>
 <a href="books.html">Books</a>
 <a href="about.html">About</a>
 <a href="nep.html">NEP</a>
-<a href="imp.html">Important</a>
 <a href="faq.html">FAQ</a>
 </div>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
-<h2>Advanced Mathematics Platform</h2>
-<p>AI Tutor • Graphs • Quizzes • Games • Learning System</p>
+<h2>Learn Mathematics Easily</h2>
+<p>Graph • Quiz • Books • Concepts</p>
 </div>
 
-<!-- PROFILE -->
 <div class="profile">
 <img src="vraj.jpeg">
 <div>
 <h3>Vraj H Raval</h3>
-<p>Math Educator | AI Learning Builder</p>
+<p>Mathematics Educator</p>
 </div>
 </div>
 
 <!-- SUBJECTS -->
 <section>
+
 <h2>Subjects</h2>
 
 <div class="grid">
 
-<div class="subject" onclick="openPanel('algebra')">Algebra</div>
-<div class="subject" onclick="openPanel('geometry')">Geometry</div>
-<div class="subject" onclick="openPanel('calculus')">Calculus</div>
-<div class="subject" onclick="openPanel('stats')">Statistics</div>
+<div class="subject" onclick="toggle('algebra')">Algebra</div>
+<div class="subject" onclick="toggle('geometry')">Geometry</div>
+<div class="subject" onclick="toggle('calculus')">Calculus</div>
 
 </div>
 
 <div id="algebra" class="panel">
-<h3>Algebra</h3>
-<a href="https://openstax.org/details/books/elementary-algebra">Free Book</a>
+<p>Study equations, variables, expressions.</p>
 </div>
 
 <div id="geometry" class="panel">
-<h3>Geometry</h3>
-<a href="https://openstax.org/details/books/geometry">Free Book</a>
+<p>Study shapes and angles.</p>
 </div>
 
 <div id="calculus" class="panel">
-<h3>Calculus</h3>
-<a href="https://openstax.org/details/books/calculus-volume-1">Free Book</a>
-</div>
-
-<div id="stats" class="panel">
-<h3>Statistics</h3>
-<a href="https://openstax.org/details/books/introductory-statistics">Free Book</a>
+<p>Study derivatives and integrals.</p>
 </div>
 
 </section>
 
 <!-- GRAPH -->
 <section>
-<h2>Graph Visualizer</h2>
 
-<input id="eq" placeholder="Enter function: x^2, sin(x), cos(x)">
+<h2>Graph Generator</h2>
+
+<input id="eq" placeholder="Enter: x^2, sin(x), cos(x)">
 <button onclick="draw()">Generate Graph</button>
 
 <div id="plot"></div>
-</section>
 
-<!-- AI MATH SOLVER -->
-<section>
-<h2>AI Math Solver</h2>
-
-<input id="problem" placeholder="Example: derivative of x^2">
-<button onclick="solve()">Solve</button>
-
-<p id="answer"></p>
 </section>
 
 <!-- QUIZ -->
 <section>
-<h2>Quiz System (Score Included)</h2>
+
+<h2>Quiz</h2>
 
 <div class="quiz">
 
@@ -289,37 +253,32 @@ opacity:0.8;
 
 <p>Score: <span id="score">0</span></p>
 
-<button onclick="nextQ()">Next Question</button>
+<button onclick="newQ()">Next</button>
 
 </div>
-</section>
 
-<!-- GAME -->
-<section>
-<h2>Math Game (Quick Challenge)</h2>
-
-<p id="gameQ"></p>
-<input id="gameA" placeholder="Answer">
-<button onclick="checkGame()">Submit</button>
-
-<p id="gameRes"></p>
 </section>
 
 <footer>
-© 2026 Math Universe Pro+
+© 2026 Mathematics Learning Platform
 </footer>
 
 <script>
 
-/* PANEL */
-function openPanel(id){
+/* SUBJECT */
+function toggle(id){
 document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
 document.getElementById(id).classList.add('active');
 }
 
 /* GRAPH FIXED */
 function draw(){
+
 let expr=document.getElementById("eq").value;
+
+expr = expr.replace(/sinx/g,"sin(x)")
+           .replace(/cosx/g,"cos(x)")
+           .replace(/tanx/g,"tan(x)");
 
 let x=[],y=[];
 
@@ -332,39 +291,22 @@ y.push(math.evaluate(expr,{x:i}));
 
 Plotly.newPlot("plot",[{
 x:x,y:y,type:"scatter",
-line:{color:"#38bdf8"}
+line:{color:"#2563eb"}
 }]);
+
 }
 
-/* AI SOLVER (BASIC LOGIC) */
-function solve(){
-let p=document.getElementById("problem").value.toLowerCase();
-let ans="Sorry, I can only solve basic patterns.";
+/* QUIZ FIXED */
+let score=0;
 
-if(p.includes("derivative of x^2")){
-ans="Answer: 2x";
-}
-if(p.includes("integral of 1")){
-ans="Answer: x + C";
-}
-if(p.includes("sin 0")){
-ans="Answer: 0";
-}
-
-document.getElementById("answer").innerText=ans;
-}
-
-/* QUIZ SYSTEM */
 let questions=[
-{q:"Derivative of x²?",a:"2x",o:["x","2x","x²","4x"]},
-{q:"sin(0)?",a:"0",o:["1","0","-1","π"]},
-{q:"cos(0)?",a:"1",o:["0","1","2","-1"]},
+{q:"Derivative of x²?",a:"2x",o:["x","2x","x²","3x"]},
+{q:"sin(0)?",a:"0",o:["1","0","-1","2"]},
+{q:"cos(0)?",a:"1",o:["0","1","-1","2"]},
 {q:"Integral of 1?",a:"x",o:["x","1","0","x²"]}
 ];
 
-let score=0;
-
-function nextQ(){
+function newQ(){
 
 let q=questions[Math.floor(Math.random()*questions.length)];
 
@@ -373,14 +315,14 @@ document.getElementById("q").innerText=q.q;
 let html="";
 
 q.o.forEach(o=>{
-html+=`<div class='option' onclick="checkQ(this,'${o}','${q.a}')">${o}</div>`;
+html+=`<div class='option' onclick="check(this,'${o}','${q.a}')">${o}</div>`;
 });
 
 document.getElementById("options").innerHTML=html;
 
 }
 
-function checkQ(el,sel,ans){
+function check(el,sel,ans){
 
 if(sel===ans){
 el.classList.add("correct");
@@ -391,36 +333,11 @@ el.classList.add("wrong");
 
 document.getElementById("score").innerText=score;
 
-setTimeout(()=>nextQ(),800);
+setTimeout(()=>newQ(),700);
 
 }
 
-nextQ();
-
-/* GAME */
-let gAns;
-
-function loadGame(){
-let a=Math.floor(Math.random()*10);
-let b=Math.floor(Math.random()*10);
-gAns=a+b;
-
-document.getElementById("gameQ").innerText=`${a} + ${b} = ?`;
-}
-
-function checkGame(){
-let val=document.getElementById("gameA").value;
-
-if(parseInt(val)==gAns){
-document.getElementById("gameRes").innerText="Correct!";
-}else{
-document.getElementById("gameRes").innerText="Wrong!";
-}
-
-loadGame();
-}
-
-loadGame();
+newQ();
 
 </script>
 
