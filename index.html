@@ -2,70 +2,58 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Mathematics Universe | Vraj H Raval</title>
+<title>Math Universe Premium</title>
 
-<!-- MathJax -->
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script async
-src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-<!-- Plotly Graph -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
-<!-- Math.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
 
 <style>
 
-/* GLOBAL */
+/* ===== GLOBAL ===== */
 
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-}
-
-html{
-scroll-behavior:smooth;
+font-family:Segoe UI;
 }
 
 body{
-font-family:'Segoe UI',sans-serif;
-background:linear-gradient(to bottom right,#eef5ff,#ffffff);
-color:#222;
-line-height:1.7;
+background: radial-gradient(circle at top,#0f172a,#020617);
+color:white;
 overflow-x:hidden;
 }
 
-/* NAVBAR */
+/* ===== NAV ===== */
 
 nav{
-position:sticky;
-top:0;
-z-index:999;
-background:#020617;
-padding:18px 7%;
 display:flex;
 justify-content:space-between;
 align-items:center;
-box-shadow:0 2px 15px rgba(0,0,0,0.2);
+padding:18px 8%;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(12px);
+position:sticky;
+top:0;
+z-index:999;
+border-bottom:1px solid rgba(255,255,255,0.1);
 }
 
-.logo{
-font-size:28px;
-font-weight:bold;
-color:white;
+nav h1{
+font-size:26px;
+color:#38bdf8;
+letter-spacing:1px;
 }
 
 nav a{
 color:white;
 text-decoration:none;
-margin-left:25px;
-font-weight:600;
+margin-left:20px;
 transition:0.3s;
 }
 
@@ -73,922 +61,335 @@ nav a:hover{
 color:#38bdf8;
 }
 
-/* HERO */
+/* ===== HERO ===== */
 
 .hero{
-min-height:100vh;
-background:
-linear-gradient(rgba(2,6,23,0.85),rgba(30,41,59,0.85)),
-url('calc.png');
-background-size:cover;
-background-position:center;
-display:flex;
-align-items:center;
-justify-content:center;
+padding:110px 8%;
 text-align:center;
-padding:40px;
-color:white;
 }
 
-.hero-content{
-max-width:900px;
-}
-
-.hero h1{
-font-size:70px;
-margin-bottom:20px;
+.hero h2{
+font-size:62px;
+color:#38bdf8;
+text-shadow:0 0 25px rgba(56,189,248,0.4);
 }
 
 .hero p{
-font-size:24px;
-margin-bottom:35px;
+margin-top:20px;
+font-size:20px;
+opacity:0.85;
 }
 
-.hero-btn{
+/* ===== GORGEOUS PROFILE (UPDATED) ===== */
+
+.profile{
+display:flex;
+align-items:center;
+justify-content:center;
+margin-top:40px;
+gap:20px;
+
+background:rgba(255,255,255,0.07);
+backdrop-filter:blur(15px);
+
+padding:20px 30px;
+border-radius:25px;
+
+width:fit-content;
+margin-left:auto;
+margin-right:auto;
+
+border:1px solid rgba(56,189,248,0.4);
+
+box-shadow:
+0 0 25px rgba(56,189,248,0.15),
+inset 0 0 10px rgba(255,255,255,0.05);
+
+transition:0.4s;
+}
+
+.profile:hover{
+transform:scale(1.05);
+box-shadow:
+0 0 35px rgba(56,189,248,0.35);
+}
+
+.profile img{
+width:85px;
+height:85px;
+border-radius:50%;
+object-fit:cover;
+
+border:3px solid #38bdf8;
+
+box-shadow:0 0 20px rgba(56,189,248,0.5);
+}
+
+.profile h3{
+font-size:22px;
+color:white;
+}
+
+.profile p{
+font-size:14px;
+opacity:0.8;
+}
+
+/* ===== BUTTON ===== */
+
+.btn{
 display:inline-block;
-padding:16px 35px;
-background:#facc15;
-color:#111;
-font-weight:bold;
+margin-top:30px;
+padding:14px 30px;
+background:#38bdf8;
+color:#000;
 border-radius:12px;
 text-decoration:none;
+font-weight:bold;
 transition:0.3s;
 }
 
-.hero-btn:hover{
+.btn:hover{
 transform:scale(1.08);
 }
 
-/* PROFILE */
-
-.top-profile{
-display:flex;
-align-items:center;
-gap:15px;
-background:white;
-width:fit-content;
-padding:15px 20px;
-border-radius:20px;
-margin:40px auto;
-box-shadow:0 5px 20px rgba(0,0,0,0.1);
-}
-
-.mini-photo{
-width:75px;
-height:75px;
-border-radius:50%;
-object-fit:cover;
-border:3px solid #2563eb;
-}
-
-.user-name{
-color:#1e3a8a;
-}
-
-.user-degree{
-color:#555;
-}
-
-/* SECTION */
+/* ===== SECTION ===== */
 
 section{
 padding:80px 8%;
 }
 
-.content-box{
-background:white;
-padding:50px;
-border-radius:25px;
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
-margin-bottom:50px;
-}
-
-/* FLEX */
-
-.flex{
-display:flex;
-align-items:center;
-gap:40px;
-flex-wrap:wrap;
-}
-
-.text{
-flex:1;
-min-width:300px;
-}
-
-.image{
-flex:1;
-min-width:250px;
-text-align:center;
-}
-
-.image img{
-max-width:100%;
-border-radius:20px;
-box-shadow:0 5px 20px rgba(0,0,0,0.15);
-}
-
-/* TITLES */
-
-h2{
-font-size:38px;
-color:#1e3a8a;
-margin-bottom:25px;
-}
-
-h3{
-margin-bottom:15px;
-}
-
-/* FEATURES */
-
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
-margin-top:40px;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
 }
 
-.card{
-background:white;
-padding:30px;
-border-radius:20px;
-box-shadow:0 5px 20px rgba(0,0,0,0.08);
-transition:0.4s;
-}
+/* ===== SUBJECT ===== */
 
-.card:hover{
-transform:translateY(-10px);
-}
-
-/* SUBJECTS */
-
-.subject-card{
-background:#0f172a;
-color:white;
-padding:30px;
-border-radius:20px;
+.subject{
+padding:25px;
+background:rgba(255,255,255,0.06);
+border-radius:15px;
 cursor:pointer;
+text-align:center;
 transition:0.3s;
-text-align:center;
 }
 
-.subject-card:hover{
-background:#2563eb;
+.subject:hover{
 transform:scale(1.05);
+background:#38bdf8;
+color:black;
 }
 
-/* FORMULA */
+/* ===== PANEL ===== */
 
-.formula-box{
-background:linear-gradient(135deg,#dbeafe,#eff6ff);
-padding:30px;
-border-left:7px solid #2563eb;
-border-radius:18px;
-margin-top:25px;
-font-size:24px;
-text-align:center;
-font-weight:bold;
-}
-
-/* SUBJECT DETAILS */
-
-.subject-panel{
+.panel{
 display:none;
-background:white;
-padding:40px;
-border-radius:20px;
-margin-top:30px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
+margin-top:20px;
+padding:20px;
+background:rgba(255,255,255,0.07);
+border-radius:15px;
 }
 
-.subject-panel.active{
+.panel.active{
 display:block;
 }
 
-.book-btn{
-display:inline-block;
-margin-top:15px;
-padding:12px 25px;
-background:#2563eb;
-color:white;
-text-decoration:none;
-border-radius:10px;
-}
+/* ===== INPUT ===== */
 
-/* GRAPH */
-
-.graph-section{
-background:white;
-padding:50px;
-border-radius:25px;
-box-shadow:0 5px 20px rgba(0,0,0,0.08);
-}
-
-.graph-input{
+input{
 width:100%;
-padding:15px;
-font-size:18px;
-border-radius:10px;
-border:1px solid #ccc;
-margin-top:20px;
-}
-
-.graph-btn{
-margin-top:20px;
-padding:12px 25px;
-background:#020617;
-color:white;
-border:none;
-border-radius:10px;
-cursor:pointer;
-}
-
-#graph{
-margin-top:30px;
-height:500px;
-}
-
-/* QUIZ */
-
-.quiz-box{
-background:white;
-padding:40px;
-border-radius:20px;
-box-shadow:0 5px 20px rgba(0,0,0,0.08);
-}
-
-.quiz-question{
-font-size:22px;
-margin-bottom:20px;
-}
-
-.quiz-option{
-display:block;
-margin:12px 0;
 padding:12px;
-background:#eef5ff;
 border-radius:10px;
-cursor:pointer;
-}
-
-.quiz-option:hover{
-background:#dbeafe;
-}
-
-/* AI SECTION */
-
-.ai-box{
-background:linear-gradient(135deg,#1e293b,#0f172a);
-color:white;
-padding:50px;
-border-radius:25px;
-text-align:center;
-}
-
-.ai-input{
-width:100%;
-padding:15px;
 border:none;
-border-radius:10px;
-margin-top:20px;
-font-size:18px;
+margin-top:10px;
 }
 
-.ai-btn{
-margin-top:20px;
-padding:12px 25px;
+button{
+padding:12px 20px;
 border:none;
 background:#38bdf8;
-color:#111;
-font-weight:bold;
+color:black;
 border-radius:10px;
+margin-top:10px;
 cursor:pointer;
 }
 
-.ai-output{
-margin-top:25px;
-background:white;
-color:#111;
+/* ===== QUIZ ===== */
+
+.quiz{
+background:rgba(255,255,255,0.05);
 padding:25px;
 border-radius:15px;
 }
 
-/* QUOTE */
-
-.quote{
-background:#020617;
-color:white;
-padding:80px 40px;
-border-radius:25px;
-text-align:center;
-font-size:30px;
-font-style:italic;
+.option{
+margin-top:10px;
+padding:10px;
+background:rgba(255,255,255,0.08);
+border-radius:10px;
+cursor:pointer;
 }
 
-/* FOOTER */
+.option:hover{
+background:rgba(56,189,248,0.3);
+}
+
+/* ===== FOOTER ===== */
 
 footer{
-background:#020617;
-color:white;
-padding:60px 20px;
 text-align:center;
-margin-top:70px;
-}
-
-footer a{
-color:#38bdf8;
-margin:0 10px;
-text-decoration:none;
-}
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-.hero h1{
-font-size:45px;
-}
-
-.hero p{
-font-size:18px;
-}
-
-nav{
-flex-direction:column;
-gap:15px;
-}
-
+padding:40px;
+opacity:0.7;
 }
 
 </style>
-
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-
 <nav>
-
-<div class="logo">Math Universe</div>
-
+<h1>Math Universe</h1>
 <div>
-<a href="#">Home</a>
-<a href="#">History</a>
-<a href="#">Graphs</a>
-<a href="#">Books</a>
-<a href="#">Quiz</a>
+<a href="#subjects">Subjects</a>
+<a href="#graph">Graph</a>
+<a href="#quiz">Quiz</a>
 </div>
-
 </nav>
 
 <!-- HERO -->
 
-<section class="hero">
-
-<div class="hero-content">
-
-<h1>Welcome to Mathematics Universe</h1>
-
-<p>
-Explore formulas, calculus, algebra,
-geometry, AI mathematics, quizzes,
-graphs, and interactive learning.
-</p>
-
-<a href="#history" class="hero-btn">
-Start Learning
-</a>
-
+<div class="hero">
+<h2>Mathematics Universe</h2>
+<p>Explore Algebra, Calculus, Geometry & AI-based learning system</p>
 </div>
 
-</section>
-
-<!-- PROFILE -->
-
-<div class="top-profile">
-
-<img src="vraj.jpeg" class="mini-photo">
-
+<!-- ✨ GORGEOUS PROFILE UPDATED -->
+<div class="profile">
+<img src="vraj.jpeg">
 <div>
-<h2 class="user-name">VRAJ H RAVAL</h2>
-<p class="user-degree">
-B.Sc, M.Sc, B.Ed in Mathematics
-</p>
+<h3>Vraj H Raval</h3>
+<p>Mathematics Educator | Problem Solver | Learner</p>
 </div>
-
 </div>
-
-<!-- FEATURES -->
-
-<section>
-
-<h2>Why Mathematics Matters</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>Pure Mathematics</h3>
-<p>Study algebra, topology, logic, and number theory.</p>
-</div>
-
-<div class="card">
-<h3>Applied Mathematics</h3>
-<p>Used in AI, science, engineering, and finance.</p>
-</div>
-
-<div class="card">
-<h3>Visual Mathematics</h3>
-<p>Understand concepts with interactive graphs.</p>
-</div>
-
-</div>
-
-</section>
-
-<!-- HISTORY -->
-
-<section id="history" class="content-box">
-
-<h2>Ancient Foundations</h2>
-
-<div class="flex">
-
-<div class="text">
-<p>
-Mathematics began with ancient civilizations
-like Egypt and Babylonia.
-</p>
-</div>
-
-<div class="image">
-<img src="bab.jpg">
-</div>
-
-</div>
-
-</section>
-
-<!-- PYTHAGORAS -->
-
-<section class="content-box">
-
-<h2>The Greek Influence</h2>
-
-<div class="flex">
-
-<div class="image">
-<img src="pytha.jfif">
-</div>
-
-<div class="text">
-
-<p>
-Pythagoras introduced one of the most famous theorems.
-</p>
-
-<div class="formula-box">
-
-\[
-a^2+b^2=c^2
-\]
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- INDIA -->
-
-<section class="content-box">
-
-<h2>India & Algebra</h2>
-
-<div class="flex">
-
-<div class="text">
-
-<p>
-Indian mathematicians formalized zero and place value systems.
-</p>
-
-<div class="formula-box">
-
-\[
-0,1,2,3,4,5,6,7,8,9
-\]
-
-</div>
-
-</div>
-
-<div class="image">
-<img src="num.png">
-</div>
-
-</div>
-
-</section>
 
 <!-- SUBJECTS -->
 
-<section>
+<section id="subjects">
 
-<h2>Interactive Mathematics Subjects</h2>
+<h2>Subjects</h2>
 
 <div class="grid">
 
-<div class="subject-card" onclick="showSubject('algebra')">
-Algebra
-</div>
-
-<div class="subject-card" onclick="showSubject('geometry')">
-Geometry
-</div>
-
-<div class="subject-card" onclick="showSubject('calculus')">
-Calculus
-</div>
-
-<div class="subject-card" onclick="showSubject('statistics')">
-Statistics
-</div>
+<div class="subject" onclick="openPanel('algebra')">Algebra</div>
+<div class="subject" onclick="openPanel('geometry')">Geometry</div>
+<div class="subject" onclick="openPanel('calculus')">Calculus</div>
+<div class="subject" onclick="openPanel('stats')">Statistics</div>
 
 </div>
 
-<!-- ALGEBRA -->
-
-<div class="subject-panel" id="algebra">
-
-<h2>Algebra</h2>
-
-<p>
-Algebra studies equations, functions, variables, and structures.
-</p>
-
-<h3>Best Books</h3>
-
-<ul>
-<li>Hall & Knight</li>
-<li>Linear Algebra — Gilbert Strang</li>
-<li>Abstract Algebra — Dummit & Foote</li>
-</ul>
-
-<a href="books/algebra.pdf" class="book-btn" download>
-Download Algebra Notes
-</a>
-
+<div id="algebra" class="panel">
+<h3>Algebra</h3>
+<a href="https://openstax.org/details/books/elementary-algebra" target="_blank">Download Free Book</a>
 </div>
 
-<!-- GEOMETRY -->
-
-<div class="subject-panel" id="geometry">
-
-<h2>Geometry</h2>
-
-<p>
-Geometry studies shapes, spaces, dimensions, and vectors.
-</p>
-
-<h3>Best Books</h3>
-
-<ul>
-<li>Euclid's Elements</li>
-<li>S.L. Loney</li>
-<li>Kreyszig Geometry</li>
-</ul>
-
-<a href="books/geometry.pdf" class="book-btn" download>
-Download Geometry Notes
-</a>
-
+<div id="geometry" class="panel">
+<h3>Geometry</h3>
+<a href="https://openstax.org/details/books/geometry" target="_blank">Download Free Book</a>
 </div>
 
-<!-- CALCULUS -->
-
-<div class="subject-panel" id="calculus">
-
-<h2>Calculus</h2>
-
-<p>
-Calculus studies motion, derivatives, and integration.
-</p>
-
-<h3>Best Books</h3>
-
-<ul>
-<li>James Stewart</li>
-<li>Thomas Calculus</li>
-<li>Apostol Calculus</li>
-</ul>
-
-<a href="books/calculus.pdf" class="book-btn" download>
-Download Calculus Notes
-</a>
-
+<div id="calculus" class="panel">
+<h3>Calculus</h3>
+<a href="https://openstax.org/details/books/calculus-volume-1" target="_blank">Download Free Book</a>
 </div>
 
-<!-- STATISTICS -->
-
-<div class="subject-panel" id="statistics">
-
-<h2>Statistics</h2>
-
-<p>
-Statistics analyzes and visualizes data patterns.
-</p>
-
-<h3>Best Books</h3>
-
-<ul>
-<li>Sheldon Ross</li>
-<li>Casella & Berger</li>
-<li>The Art of Statistics</li>
-</ul>
-
-<a href="books/statistics.pdf" class="book-btn" download>
-Download Statistics Notes
-</a>
-
+<div id="stats" class="panel">
+<h3>Statistics</h3>
+<a href="https://openstax.org/details/books/introductory-statistics" target="_blank">Download Free Book</a>
 </div>
 
 </section>
 
 <!-- GRAPH -->
 
-<section class="graph-section">
+<section id="graph">
 
-<h2>Function Graph Visualizer</h2>
+<h2>Graph Generator</h2>
 
-<p>
-Type functions like:
-x^2, sin(x), cos(x), x+1
-</p>
+<input id="eq" placeholder="Enter function like x^2 or sin(x)">
+<button onclick="draw()">Generate Graph</button>
 
-<input
-type="text"
-id="functionInput"
-class="graph-input"
-placeholder="Enter function like x^2 or sin(x)"
->
-
-<button class="graph-btn" onclick="drawGraph()">
-Plot Graph
-</button>
-
-<div id="graph"></div>
+<div id="plot"></div>
 
 </section>
 
 <!-- QUIZ -->
 
-<section>
+<section id="quiz">
 
-<div class="quiz-box">
+<h2>Auto Quiz</h2>
 
-<h2>Quick Mathematics Quiz</h2>
+<div class="quiz">
 
-<p class="quiz-question">
-What is derivative of \(x^2\)?
-</p>
+<p id="q"></p>
 
-<div class="quiz-option" onclick="checkAnswer(this,true)">
-2x
-</div>
+<div id="options"></div>
 
-<div class="quiz-option" onclick="checkAnswer(this,false)">
-x
-</div>
-
-<div class="quiz-option" onclick="checkAnswer(this,false)">
-x²
-</div>
-
-<div class="quiz-option" onclick="checkAnswer(this,false)">
-4x
-</div>
+<button onclick="newQ()">Next</button>
 
 </div>
 
 </section>
-
-<!-- AI SECTION -->
-
-<section>
-
-<div class="ai-box">
-
-<h2>AI Theorem & Puzzle Assistant</h2>
-
-<p>
-Ask any mathematics theorem, puzzle,
-or concept explanation.
-</p>
-
-<input
-type="text"
-id="aiInput"
-class="ai-input"
-placeholder="Example: Explain Pythagorean Theorem"
->
-
-<button class="ai-btn" onclick="generateAIResponse()">
-Ask AI
-</button>
-
-<div class="ai-output" id="aiOutput">
-
-AI answer will appear here.
-
-</div>
-
-</div>
-
-</section>
-
-<!-- FORMULAS -->
-
-<section>
-
-<h2>Legendary Formulas</h2>
-
-<div class="formula-box">
-
-\[
-e^{i\pi}+1=0
-\]
-
-</div>
-
-<div class="formula-box">
-
-\[
-x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}
-\]
-
-</div>
-
-</section>
-
-<!-- QUOTE -->
-
-<section>
-
-<div class="quote">
-
-“Mathematics is the language of the universe.”
-
-</div>
-
-</section>
-
-<!-- FOOTER -->
 
 <footer>
-
-<h2>Mathematics Universe</h2>
-
-<p>
-Created by Vraj H Raval
-</p>
-
-<div style="margin-top:20px;">
-
-<a href="books.html">Books</a>
-<a href="about.html">About</a>
-<a href="faq.html">FAQ</a>
-<a href="nep.html">NEP 2020</a>
-
-</div>
-
-<p style="margin-top:25px;">
-© 2026 Mathematics Universe
-</p>
-
+© 2026 Math Universe
 </footer>
-
-<!-- JAVASCRIPT -->
 
 <script>
 
-function showSubject(id){
+function openPanel(id){
+document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+}
 
-const panels=document.querySelectorAll('.subject-panel');
+function draw(){
+let expr=document.getElementById("eq").value;
 
-panels.forEach(panel=>{
-panel.classList.remove('active');
+let x=[],y=[];
+
+for(let i=-10;i<=10;i+=0.2){
+try{
+x.push(i);
+y.push(math.evaluate(expr,{x:i}));
+}catch(e){}
+}
+
+Plotly.newPlot("plot",[{
+x:x,y:y,type:"scatter"
+}]);
+}
+
+let questions=[
+{q:"x² derivative?",a:"2x",o:["x","2x","x²","1"]},
+{q:"Integral of 1?",a:"x",o:["x","1","0","x²"]},
+{q:"sin(0)?",a:"0",o:["1","0","-1","π"]}
+];
+
+function newQ(){
+let q=questions[Math.floor(Math.random()*questions.length)];
+
+document.getElementById("q").innerText=q.q;
+
+let html="";
+q.o.forEach(o=>{
+html+=`<div class='option' onclick="alert('${o===q.a?'Correct':'Wrong'}')">${o}</div>`;
 });
 
-document.getElementById(id).classList.add('active');
-
+document.getElementById("options").innerHTML=html;
 }
 
-function drawGraph(){
-
-const expr=document.getElementById('functionInput').value;
-
-let xValues=[];
-let yValues=[];
-
-for(let x=-10;x<=10;x+=0.1){
-
-try{
-
-const y=math.evaluate(expr,{x:x});
-
-xValues.push(x);
-yValues.push(y);
-
-}catch(err){
-
-alert("Invalid Function");
-return;
-
-}
-
-}
-
-const trace={
-
-x:xValues,
-y:yValues,
-mode:'lines',
-type:'scatter',
-line:{
-color:'#2563eb',
-width:3
-}
-
-};
-
-const layout={
-
-title:'Function Graph',
-xaxis:{title:'x'},
-yaxis:{title:'y'}
-
-};
-
-Plotly.newPlot('graph',[trace],layout);
-
-}
-
-function checkAnswer(element,isCorrect){
-
-if(isCorrect){
-
-element.style.background='green';
-alert("Correct Answer!");
-
-}else{
-
-element.style.background='red';
-alert("Wrong Answer!");
-
-}
-
-}
-
-function generateAIResponse(){
-
-const input=document.getElementById('aiInput').value;
-
-const output=document.getElementById('aiOutput');
-
-if(input.toLowerCase().includes('pythagorean')){
-
-output.innerHTML=
-"The Pythagorean Theorem states that in a right triangle: a²+b²=c²";
-
-}
-
-else if(input.toLowerCase().includes('derivative')){
-
-output.innerHTML=
-"A derivative measures the rate of change of a function.";
-
-}
-
-else if(input.toLowerCase().includes('integration')){
-
-output.innerHTML=
-"Integration calculates area under curves.";
-
-}
-
-else{
-
-output.innerHTML=
-"Interesting mathematics question! More AI features coming soon.";
-
-}
-
-}
+newQ();
 
 </script>
 
