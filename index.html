@@ -8,6 +8,10 @@
     <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Zoom & Pan Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.2.0/chartjs-plugin-zoom.min.js"></script>
+    
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
@@ -66,13 +70,14 @@
         .quiz-btn:hover { background: #e67e22; color: white; }
         #quiz-feedback { text-align: center; font-size: 0.9rem; margin-top: 10px; font-weight: bold; }
 
-        /* GRAPH SECTION (MOVE TO BOTTOM) */
+        /* GRAPH SECTION (BOTTOM) */
         .graph-area { margin-top: 40px; border-top: 4px solid #2980b9; padding-top: 30px; }
         .graph-input-group { margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
         input[type="text"] { padding: 12px; flex: 1; border: 2px solid #ddd; border-radius: 5px; font-size: 1rem; }
         .btn { background: #2980b9; color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .reset-btn { background: #95a5a6; color: white; padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px; font-size: 0.8rem; }
         
-        #mathChart { background: #fff; border: 1px solid #ccc; border-radius: 8px; }
+        #mathChart { background: #fff; border: 1px solid #ccc; border-radius: 8px; cursor: crosshair; }
 
         @media (max-width: 950px) {
             .quiz-container { position: relative; width: auto; margin: 100px 0 20px 0; right: 0; top: 0; }
@@ -119,15 +124,16 @@
 <!-- GRAPH SECTION AT BOTTOM -->
 <section class="graph-area" id="graphing-tool">
     <h2>Interactive Cartesian Plane</h2>
-    <p>Visualize equations instantly. Type like: <code>x^2</code>, <code>sin(x)</code>, <code>2x+3</code>, <code>abs(x)</code></p>
+    <p>Scroll to <strong>Zoom</strong>, Click & Drag to <strong>Pan</strong>. Type like: <code>x^2</code>, <code>sin(x)</code>, <code>abs(x)</code></p>
     <div class="graph-input-group">
         <span style="font-size: 1.5rem; font-weight: bold;">f(x) = </span>
         <input type="text" id="equation-input" placeholder="e.g. sin(x)" value="sin(x)">
         <button class="btn" onclick="plotGraph()">Generate Graph</button>
     </div>
-    <div style="position: relative; height:400px; width:100%;">
+    <div style="position: relative; height:450px; width:100%;">
         <canvas id="mathChart"></canvas>
     </div>
+    <button class="reset-btn" onclick="resetZoom()">Reset View</button>
 </section>
 
 <section style="background: #2c3e50; color: white; padding: 40px 20px; text-align: center;">
@@ -145,7 +151,7 @@
     let currentAns = "";
 
     function generateAdvancedQuiz() {
-        const types = ['trig', 'calculus', 'coord', 'log'];
+        const types = ['trig', 'calculus', 'coord', 'log', 'geometry'];
         const type = types[Math.floor(Math.random() * types.length)];
         const qElem = document.getElementById('quiz-question');
         const optElem = document.getElementById('quiz-options');
@@ -156,29 +162,33 @@
         let options = [];
 
         if (type === 'trig') {
-            const angles = { '30^\\circ': '1/2', '45^\\circ': '1/\\sqrt{2}', '60^\\circ': '\\sqrt{3}/2' };
-            let ang = Object.keys(angles)[Math.floor(Math.random()*3)];
+            const vals = { '30^\\circ': '1/2', '45^\\circ': '1/\\sqrt{2}', '60^\\circ': '\\sqrt{3}/2', '90^\\circ': '1' };
+            let ang = Object.keys(vals)[Math.floor(Math.random()*4)];
             qElem.innerHTML = `Value of \\( \\sin(${ang}) \\)?`;
-            currentAns = angles[ang];
-            options = [currentAns, '1', '0', '\\sqrt{3}'];
+            currentAns = vals[ang];
+            options = [currentAns, '0', '1/\\sqrt{3}', '\\sqrt{3}'];
         } 
         else if (type === 'calculus') {
-            let n = Math.floor(Math.random() * 4) + 2;
+            let n = Math.floor(Math.random() * 5) + 2;
             qElem.innerHTML = `Derivative of \\( x^{${n}} \\)?`;
             currentAns = `${n}x^{${n-1}}`;
-            options = [currentAns, `x^{${n-1}}`, `${n}x^{${n}}`, `${n+1}x^{${n}}` ];
+            options = [currentAns, `x^{${n-1}}`, `${n}x^{${n}}`, `${n-1}x^{${n}}` ];
+        }
+        else if (type === 'geometry') {
+            let r = Math.floor(Math.random() * 7) + 1;
+            qElem.innerHTML = `Area of circle with radius ${r}?`;
+            currentAns = `${r*r}\\pi`;
+            options = [currentAns, `${2*r}\\pi`, `${r}\\pi`, `${r*r*r}\\pi`];
         }
         else if (type === 'coord') {
-            let x = Math.floor(Math.random()*5);
-            qElem.innerHTML = `Distance of point (${x}, 4) from Origin?`;
-            let dist = Math.sqrt(x*x + 16).toFixed(2);
-            currentAns = dist;
-            options = [currentAns, (dist-1).toFixed(2), (dist+2).toFixed(2), "5.00"];
+            qElem.innerHTML = `Slope of line passing through (0,0) and (2,4)?`;
+            currentAns = "2";
+            options = ["2", "0.5", "4", "-2"];
         }
         else {
-            qElem.innerHTML = `Value of \\( \\log_{10}(1000) \\)?`;
+            qElem.innerHTML = `Evaluate \\( \\log_{2}(8) \\)?`;
             currentAns = "3";
-            options = ["3", "2", "10", "1"];
+            options = ["3", "4", "2", "8"];
         }
 
         options.sort(() => Math.random() - 0.5);
@@ -199,16 +209,17 @@
         if (window.MathJax) MathJax.typesetPromise();
     }
 
-    /* --- PLANE-STYLE GRAPHING --- */
+    /* --- PLANE-STYLE GRAPHING WITH ZOOM/PAN --- */
     let myChart;
+    
     function plotGraph() {
         const input = document.getElementById('equation-input').value;
         const dataPoints = [];
 
         try {
             const expr = math.compile(input);
-            // Calculate points for a smooth plane view
-            for (let x = -10; x <= 10; x += 0.1) {
+            // Higher resolution for smoother zooming
+            for (let x = -50; x <= 50; x += 0.05) {
                 let y = expr.evaluate({x: x});
                 if (typeof y === 'number' && isFinite(y)) {
                     dataPoints.push({x: x, y: y});
@@ -217,18 +228,19 @@
 
             if (myChart) myChart.destroy();
             const ctx = document.getElementById('mathChart').getContext('2d');
+            
             myChart = new Chart(ctx, {
                 type: 'scatter',
                 data: {
                     datasets: [{
-                        label: 'f(x)',
+                        label: 'f(x) = ' + input,
                         data: dataPoints,
                         showLine: true,
                         borderColor: '#2980b9',
                         borderWidth: 2,
                         pointRadius: 0,
                         fill: false,
-                        tension: 0.4
+                        tension: 0.2
                     }]
                 },
                 options: {
@@ -237,23 +249,40 @@
                     scales: {
                         x: {
                             type: 'linear',
-                            position: 'center', // This creates the "Plane" look
+                            position: 'center',
                             min: -10, max: 10,
-                            grid: { color: '#ccc' },
-                            title: { display: true, text: 'X Axis' }
+                            grid: { color: '#ddd' }
                         },
                         y: {
                             type: 'linear',
-                            position: 'center', // X and Y cross in the middle
+                            position: 'center',
                             min: -10, max: 10,
-                            grid: { color: '#ccc' },
-                            title: { display: true, text: 'Y Axis' }
+                            grid: { color: '#ddd' }
+                        }
+                    },
+                    plugins: {
+                        zoom: {
+                            pan: {
+                                enabled: true,
+                                mode: 'xy',
+                            },
+                            zoom: {
+                                wheel: { enabled: true },
+                                pinch: { enabled: true },
+                                mode: 'xy',
+                            }
                         }
                     }
                 }
             });
         } catch (e) {
-            alert("Error in equation! Example: x^2 or sin(x)");
+            alert("Error in math syntax! Examples: x^2, sin(x), sqrt(x)");
+        }
+    }
+
+    function resetZoom() {
+        if (myChart) {
+            myChart.resetZoom();
         }
     }
 
