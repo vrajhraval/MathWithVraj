@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vraj H Raval | Portfolio Website</title>
+    <!-- Graphing Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -21,6 +26,7 @@
             color: white;
             border-radius: 8px;
             margin-bottom: 30px;
+            margin-top: 80px; 
         }
         section {
             background: white;
@@ -70,77 +76,101 @@
             font-size: 0.9em;
             color: #777;
         }
+
+        /* Profile Styles */
+        .top-profile {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 0 0 15px 0;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .mini-photo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #2980b9;
+            margin-right: 15px;
+        }
+        .user-name { margin: 0; font-size: 1.1rem; color: #2c3e50; }
+        .user-degree { margin: 0; font-size: 0.85rem; color: #7f8c8d; font-style: italic; }
+
+        /* QUIZ SECTION (UPPER RIGHT) */
+        .quiz-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 250px;
+            background: #fff;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: -2px 2px 10px rgba(0,0,0,0.1);
+            z-index: 1001;
+            border: 2px solid #e67e22;
+        }
+        .quiz-container h3 { margin-top: 0; font-size: 1rem; color: #e67e22; text-align: center; }
+        #quiz-question { font-weight: bold; font-size: 1.1rem; text-align: center; margin-bottom: 10px; }
+        .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+        .quiz-btn { 
+            padding: 8px; border: 1px solid #ddd; background: #f9f9f9; 
+            cursor: pointer; border-radius: 4px; transition: 0.2s; 
+        }
+        .quiz-btn:hover { background: #e67e22; color: white; }
+        #quiz-feedback { text-align: center; font-size: 0.9rem; margin-top: 8px; font-weight: bold; }
+
+        /* GRAPH SECTION */
+        .graph-input-group { margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+        input[type="text"] { padding: 10px; flex: 1; border: 1px solid #ddd; border-radius: 5px; }
+        .btn { background: #e67e22; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        canvas { background: #fff; border-radius: 8px; margin-top: 15px; }
+
+        @media (max-width: 768px) {
+            .quiz-container { position: relative; width: auto; margin-top: 100px; right: 0; top: 0; }
+        }
     </style>
-    <style>
-    .section-padding { padding: 60px 5%; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 30px; }
-    .card { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s; }
-    .card:hover { transform: translateY(-10px); }
-    .table-container { overflow-x: auto; margin-top: 30px; }
-    table { width: 100%; border-collapse: collapse; background: white; }
-    th, td { padding: 15px; text-align: left; border-bottom: 1px solid #ddd; }
-    th { background-color: #f8f9fa; }
-    .btn { background: #e67e22; color: white; padding: 12px 25px; border: none; border-radius: 5px; text-decoration: none; display: inline-block; cursor: pointer; }
-</style>
 </head>
 <body>
 
 <!-- Top Left Profile Section -->
 <div class="top-profile">
-    <!-- Replace 'your-photo.jpg' with your actual filename on GitHub -->
     <img src="vraj.jpeg" alt="Profile Photo" class="mini-photo">
-    <div class="vraj.jpeg">
+    <div class="profile-text">
         <h2 class="user-name">VRAJ H RAVAL</h2>
         <p class="user-degree">B.Sc, M.Sc, B.Ed in Mathematics </p>
     </div>
 </div>
 
-<style>
-    .top-profile {
-        display: flex;
-        align-items: center;
-        padding: 15px;
-        position: absolute; /* Keeps it in the corner */
-        top: 0;
-        left: 0;
-        background: rgba(255, 255, 255, 0.9);
-        border-radius: 0 0 15px 0;
-        box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-        z-index: 1000;
-    }
-    .mini-photo {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 2px solid #2980b9;
-        margin-right: 15px;
-    }
-    .profile-text {
-        display: flex;
-        flex-direction: column;
-    }
-    .user-name {
-        margin: 0;
-        font-size: 1.1rem;
-        color: #2c3e50;
-    }
-    .user-degree {
-        margin: 0;
-        font-size: 0.85rem;
-        color: #7f8c8d;
-        font-style: italic;
-    }
-    /* Moves the rest of your content down so it doesn't overlap */
-    header {
-        margin-top: 80px; 
-    }
-</style>
-  
+<!-- Math Quiz Section (Upper Right) -->
+<div class="quiz-container">
+    <h3>Math Quiz Challenge</h3>
+    <div id="quiz-question">Loading...</div>
+    <div class="quiz-options" id="quiz-options"></div>
+    <div id="quiz-feedback"></div>
+    <button onclick="generateQuiz()" style="width:100%; margin-top:10px; border:none; background:none; color:#2980b9; cursor:pointer; font-size:0.8rem;">Generate New</button>
+</div>
+
 <header>
     <h1>The Evolution of Mathematics</h1>
     <p>From Ancient Tally Marks to Modern Calculus</p>
 </header>
+
+<!-- Graph Section -->
+<section id="graphing-tool">
+    <h2>Interactive Graph Generator</h2>
+    <p>Enter a function of <strong>x</strong> to visualize it (e.g., <code>x * x</code> or <code>Math.sin(x)</code>):</p>
+    <div class="graph-input-group">
+        <span style="font-size: 1.2rem;">y = </span>
+        <input type="text" id="equation-input" placeholder="e.g. x * x" value="x * x">
+        <button class="btn" onclick="plotGraph()">Generate Graph</button>
+    </div>
+    <canvas id="mathChart" width="400" height="200"></canvas>
+</section>
 
 <section>
     <h2>1. Ancient Foundations (Egypt & Babylonia)</h2>
@@ -149,33 +179,24 @@
             <p>Mathematics began as a practical tool for commerce and agriculture. The Egyptians used geometry to redraw boundaries after the Nile flooded, while the Babylonians developed a <strong>base-60 system</strong> that we still use today to measure time (60 seconds, 60 minutes).</p>
         </div>
         <div class="image-container">
-            <!-- Replace the URL below with a photo of a Rhind Papyrus or Clay Tablet -->
             <img src="bab.jpg" alt="Babylonian Mathematics">
         </div>
     </div>
 </section>
-    
-<head>
-    <!-- ... your other head tags ... -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
 
 <section>
     <h2>2. The Greek Influence</h2>
     <div class="flex-container">
         <div class="image-container">
-            <!-- Ensure this file name matches exactly what you uploaded to GitHub -->
             <img src="pytha.jfif" alt="Pythagoras Illustration">
         </div>
         <div class="text-content">
             <p>Perhaps the most famous contribution is the <strong>Pythagorean Theorem</strong>:</p>
-            <!-- MathJax will now turn this into a beautiful equation -->
             <div class="formula">\[ a^2 + b^2 = c^2 \]</div>
         </div>
     </div>
 </section>
-    
+
 <section>
     <h2>3. The Golden Age of India and the Middle East</h2>
     <div class="flex-container">
@@ -184,7 +205,6 @@
             <p>Without the Hindu-Arabic numeral system ($0, 1, 2, 3...$), modern science would be impossible.</p>
         </div>
         <div class="image-container">
-            <!-- Replace the URL below with a photo of Arabic Algebra manuscript -->
             <img src="num.png" alt="Indian Numerals">
         </div>
     </div>
@@ -194,7 +214,6 @@
     <h2>4. The Scientific Revolution</h2>
     <div class="flex-container">
         <div class="image-container">
-            <!-- Replace the URL below with a photo of Isaac Newton or Leibniz -->
             <img src="calc.png" alt="Calculus Foundations">
         </div>
         <div class="text-content">
@@ -211,7 +230,6 @@
 <section style="background: #2c3e50; color: white; padding: 40px 20px; text-align: center; margin-top: 50px;">
     <h3 style="color: #3498db;">Explore More</h3>
     <div style="margin: 20px 0;">
-        <!-- Make sure these filenames match your uploaded files exactly -->
         <a href="books.html" style="color: white; margin: 0 15px; text-decoration: none; font-weight: bold;">NCERT Books</a>
         <a href="about.html" style="color: white; margin: 0 15px; text-decoration: none; font-weight: bold;">About & CV</a>
         <a href="nep.html" style="color: white; margin: 0 15px; text-decoration: none; font-weight: bold;">NEP 2020</a>
@@ -220,8 +238,101 @@
     </div>
     <p style="font-size: 0.8em; color: #bdc3c7;">© 2026 Mathematics History Project</p>
 </section>
-<head>
-    <!-- ... your other head tags ... -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
+
+<script>
+    /* --- QUIZ LOGIC --- */
+    let currentAnswer = 0;
+
+    function generateQuiz() {
+        const num1 = Math.floor(Math.random() * 12) + 1;
+        const num2 = Math.floor(Math.random() * 12) + 1;
+        const ops = ['+', '-', '*'];
+        const op = ops[Math.floor(Math.random() * ops.length)];
+        
+        currentAnswer = eval(`${num1} ${op} ${num2}`);
+        document.getElementById('quiz-question').innerText = `${num1} ${op === '*' ? '×' : op} ${num2} = ?`;
+        
+        let options = [currentAnswer];
+        while(options.length < 4) {
+            let wrong = currentAnswer + (Math.floor(Math.random() * 10) - 5);
+            if(!options.includes(wrong)) options.push(wrong);
+        }
+        options.sort(() => Math.random() - 0.5);
+
+        const optionsContainer = document.getElementById('quiz-options');
+        optionsContainer.innerHTML = '';
+        document.getElementById('quiz-feedback').innerText = '';
+
+        options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'quiz-btn';
+            btn.innerText = opt;
+            btn.onclick = () => checkAnswer(opt);
+            optionsContainer.appendChild(btn);
+        });
+    }
+
+    function checkAnswer(selected) {
+        const feedback = document.getElementById('quiz-feedback');
+        if(selected === currentAnswer) {
+            feedback.innerText = "Correct! 🎉";
+            feedback.style.color = "green";
+            setTimeout(generateQuiz, 1500);
+        } else {
+            feedback.innerText = "Try again! ❌";
+            feedback.style.color = "red";
+        }
+    }
+
+    /* --- GRAPH LOGIC --- */
+    let myChart;
+    function plotGraph() {
+        const equation = document.getElementById('equation-input').value;
+        const xValues = [];
+        const yValues = [];
+
+        try {
+            for (let x = -10; x <= 10; x += 0.5) {
+                xValues.push(x);
+                // Simple safety check and evaluation
+                const scope = { x: x };
+                const result = eval(equation.replace(/x/g, `(${x})`));
+                yValues.push(result);
+            }
+
+            if (myChart) myChart.destroy();
+
+            const ctx = document.getElementById('mathChart').getContext('2d');
+            myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        label: 'y = ' + equation,
+                        data: yValues,
+                        borderColor: '#2980b9',
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: { title: { display: true, text: 'X Axis' } },
+                        y: { title: { display: true, text: 'Y Axis' } }
+                    }
+                }
+            });
+        } catch (e) {
+            alert("Invalid Equation! Please use standard JavaScript math syntax (e.g., x * x).");
+        }
+    }
+
+    // Initialize
+    generateQuiz();
+    plotGraph();
+</script>
+
+</body>
+</html>
