@@ -1,296 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Vraj H Raval | Mathematics History Site</title>
-
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
-
-<style>
-
-/* ===== BASE ===== */
-body{
-font-family:Segoe UI;
-margin:0;
-padding:0;
-background:#f4f4f9;
-color:#333;
-max-width:1000px;
-margin:auto;
-}
-
-/* HEADER */
-header{
-text-align:center;
-padding:40px;
-background:#2c3e50;
-color:white;
-border-radius:10px;
-margin-top:80px;
-}
-
-/* SECTION */
-section{
-background:white;
-padding:25px;
-margin:20px 0;
-border-radius:10px;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
-}
-
-h2{
-color:#2980b9;
-}
-
-/* PROFILE */
-.top-profile{
-display:flex;
-align-items:center;
-gap:15px;
-position:fixed;
-top:10px;
-left:10px;
-background:white;
-padding:10px;
-border-radius:10px;
-box-shadow:0 2px 8px rgba(0,0,0,0.2);
-z-index:999;
-}
-
-.top-profile img{
-width:60px;
-height:60px;
-border-radius:50%;
-border:2px solid #2980b9;
-}
-
-/* LINKS */
-a{
-color:#2980b9;
-text-decoration:none;
-}
-
-/* GRID */
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:15px;
-}
-
-.card{
-padding:15px;
-background:#f9f9f9;
-border-radius:10px;
-cursor:pointer;
-}
-
-/* GRAPH */
-input,button{
-width:100%;
-padding:10px;
-margin-top:10px;
-border-radius:8px;
-border:1px solid #ccc;
-}
-
-button{
-background:#2980b9;
-color:white;
-cursor:pointer;
-}
-
-/* QUIZ */
-.option{
-padding:10px;
-margin-top:8px;
-background:#eee;
-border-radius:8px;
-cursor:pointer;
-}
-
-.correct{background:#2ecc71;color:white;}
-.wrong{background:#e74c3c;color:white;}
-
-footer{
-text-align:center;
-padding:30px;
-color:#777;
-}
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vraj H Raval | Portfolio Website</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        header {
+            text-align: center;
+            padding: 40px 0;
+            background: #2c3e50;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #2980b9;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .flex-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .text-content {
+            flex: 2;
+            min-width: 300px;
+        }
+        .image-container {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 3px solid #ddd;
+        }
+        .formula {
+            background: #eee;
+            padding: 10px;
+            display: block;
+            text-align: center;
+            font-family: "Courier New", Courier, monospace;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+    <style>
+    .section-padding { padding: 60px 5%; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 30px; }
+    .card { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s; }
+    .card:hover { transform: translateY(-10px); }
+    .table-container { overflow-x: auto; margin-top: 30px; }
+    table { width: 100%; border-collapse: collapse; background: white; }
+    th, td { padding: 15px; text-align: left; border-bottom: 1px solid #ddd; }
+    th { background-color: #f8f9fa; }
+    .btn { background: #e67e22; color: white; padding: 12px 25px; border: none; border-radius: 5px; text-decoration: none; display: inline-block; cursor: pointer; }
 </style>
 </head>
-
 <body>
 
-<!-- PROFILE -->
+<!-- Top Left Profile Section -->
 <div class="top-profile">
-<img src="vraj.jpeg">
-<div>
-<strong>VRAJ H RAVAL</strong><br>
-<small>Mathematics Educator</small>
-</div>
+    <!-- Replace 'your-photo.jpg' with your actual filename on GitHub -->
+    <img src="vraj.jpeg" alt="Profile Photo" class="mini-photo">
+    <div class="vraj.jpeg">
+        <h2 class="user-name">VRAJ H RAVAL</h2>
+        <p class="user-degree">B.Sc, M.Sc, B.Ed in Mathematics </p>
+    </div>
 </div>
 
-<!-- HEADER -->
+<style>
+    .top-profile {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        position: absolute; /* Keeps it in the corner */
+        top: 0;
+        left: 0;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 0 0 15px 0;
+        box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+    .mini-photo {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #2980b9;
+        margin-right: 15px;
+    }
+    .profile-text {
+        display: flex;
+        flex-direction: column;
+    }
+    .user-name {
+        margin: 0;
+        font-size: 1.1rem;
+        color: #2c3e50;
+    }
+    .user-degree {
+        margin: 0;
+        font-size: 0.85rem;
+        color: #7f8c8d;
+        font-style: italic;
+    }
+    /* Moves the rest of your content down so it doesn't overlap */
+    header {
+        margin-top: 80px; 
+    }
+</style>
+  
 <header>
-<h1>The Evolution of Mathematics</h1>
-<p>From Ancient Numbers to Modern Calculus</p>
+    <h1>The Evolution of Mathematics</h1>
+    <p>From Ancient Tally Marks to Modern Calculus</p>
 </header>
 
-<!-- HISTORY SECTION -->
 <section>
-<h2>History of Mathematics</h2>
+    <h2>1. Ancient Foundations (Egypt & Babylonia)</h2>
+    <div class="flex-container">
+        <div class="text-content">
+            <p>Mathematics began as a practical tool for commerce and agriculture. The Egyptians used geometry to redraw boundaries after the Nile flooded, while the Babylonians developed a <strong>base-60 system</strong> that we still use today to measure time (60 seconds, 60 minutes).</p>
+        </div>
+        <div class="image-container">
+            <!-- Replace the URL below with a photo of a Rhind Papyrus or Clay Tablet -->
+            <img src="bab.jpg" alt="Babylonian Mathematics">
+        </div>
+    </div>
+</section>
+    
+<head>
+    <!-- ... your other head tags ... -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
 
-<p>
-Mathematics began in ancient civilizations like Egypt and Babylon.
-They developed number systems and geometry for trade and construction.
-</p>
-
-<p>
-Greek mathematicians like Pythagoras introduced fundamental theorems:
-</p>
-
-<p>Formula:</p>
-<p>\( a^2 + b^2 = c^2 \)</p>
-
+<section>
+    <h2>2. The Greek Influence</h2>
+    <div class="flex-container">
+        <div class="image-container">
+            <!-- Ensure this file name matches exactly what you uploaded to GitHub -->
+            <img src="pytha.jfif" alt="Pythagoras Illustration">
+        </div>
+        <div class="text-content">
+            <p>Perhaps the most famous contribution is the <strong>Pythagorean Theorem</strong>:</p>
+            <!-- MathJax will now turn this into a beautiful equation -->
+            <div class="formula">\[ a^2 + b^2 = c^2 \]</div>
+        </div>
+    </div>
+</section>
+    
+<section>
+    <h2>3. The Golden Age of India and the Middle East</h2>
+    <div class="flex-container">
+        <div class="text-content">
+            <p>During the Middle Ages, Indian mathematicians like <strong>Aryabhata</strong> and <strong>Brahmagupta</strong> formalized the concept of <strong>Zero</strong>. Later, Persian mathematician Al-Khwarizmi wrote the book that gave us the word "Algebra."</p>
+            <p>Without the Hindu-Arabic numeral system ($0, 1, 2, 3...$), modern science would be impossible.</p>
+        </div>
+        <div class="image-container">
+            <!-- Replace the URL below with a photo of Arabic Algebra manuscript -->
+            <img src="num.png" alt="Indian Numerals">
+        </div>
+    </div>
 </section>
 
-<!-- SUBJECT BOOKS -->
 <section>
-<h2>Subject Books (Free Resources)</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>Algebra</h3>
-<a href="https://openstax.org/details/books/elementary-algebra" target="_blank">Download</a>
-</div>
-
-<div class="card">
-<h3>Geometry</h3>
-<a href="https://openstax.org/details/books/geometry" target="_blank">Download</a>
-</div>
-
-<div class="card">
-<h3>Calculus</h3>
-<a href="https://openstax.org/details/books/calculus-volume-1" target="_blank">Download</a>
-</div>
-
-</div>
-
-</section>
-
-<!-- GRAPH -->
-<section>
-<h2>Graph Tool</h2>
-
-<input id="eq" placeholder="Enter: x^2, sin(x), cos(x)">
-<button onclick="draw()">Generate Graph</button>
-
-<div id="plot"></div>
-</section>
-
-<!-- QUIZ -->
-<section>
-<h2>Math Quiz</h2>
-
-<p id="q"></p>
-<div id="options"></div>
-
-<p>Score: <span id="score">0</span></p>
-
-<button onclick="nextQ()">Next Question</button>
-</section>
-
-<!-- LINKS -->
-<section>
-<h2>Important Links</h2>
-<a href="nep.html">NEP 2020</a><br>
-<a href="books.html">Books</a><br>
-<a href="faq.html">FAQ</a><br>
-<a href="about.html">About</a>
+    <h2>4. The Scientific Revolution</h2>
+    <div class="flex-container">
+        <div class="image-container">
+            <!-- Replace the URL below with a photo of Isaac Newton or Leibniz -->
+            <img src="calc.png" alt="Calculus Foundations">
+        </div>
+        <div class="text-content">
+            <p>In the 17th century, <strong>Isaac Newton</strong> and <strong>Gottfried Wilhelm Leibniz</strong> independently developed <strong>Calculus</strong>. This allowed us to calculate the motion of planets, the flow of fluids, and the complexities of change over time.</p>
+        </div>
+    </div>
 </section>
 
 <footer>
-© 2026 Mathematics History Project
+    <p>Created for the Math History Project | Hosted on GitHub</p>
 </footer>
 
-<script>
-
-/* GRAPH FIXED */
-function draw(){
-
-let expr=document.getElementById("eq").value;
-
-expr = expr.replace(/sinx/g,"sin(x)")
-           .replace(/cosx/g,"cos(x)")
-           .replace(/tanx/g,"tan(x)");
-
-let x=[],y=[];
-
-for(let i=-10;i<=10;i+=0.2){
-try{
-x.push(i);
-y.push(math.evaluate(expr,{x:i}));
-}catch(e){}
-}
-
-Plotly.newPlot("plot",[{
-x:x,y:y,type:"scatter",
-line:{color:"#2980b9"}
-}]);
-
-}
-
-/* QUIZ FIXED */
-let score=0;
-
-let questions=[
-{q:"Derivative of x²?",a:"2x",o:["x","2x","x²","3x"]},
-{q:"sin(0)?",a:"0",o:["1","0","-1","2"]},
-{q:"cos(0)?",a:"1",o:["0","1","2","-1"]},
-{q:"Integral of 1?",a:"x",o:["x","1","0","x²"]}
-];
-
-function nextQ(){
-
-let q=questions[Math.floor(Math.random()*questions.length)];
-
-document.getElementById("q").innerText=q.q;
-
-let html="";
-
-q.o.forEach(o=>{
-html+=`<div class='option' onclick="check(this,'${o}','${q.a}')">${o}</div>`;
-});
-
-document.getElementById("options").innerHTML=html;
-
-}
-
-function check(el,sel,ans){
-
-if(sel===ans){
-el.classList.add("correct");
-score++;
-}else{
-el.classList.add("wrong");
-}
-
-document.getElementById("score").innerText=score;
-
-setTimeout(()=>nextQ(),800);
-
-}
-
-nextQ();
-
-</script>
-
-</body>
-</html>
+<!-- Footer Navigation Section -->
+<section style="background: #2c3e50; color: white; padding: 40px 20px; text-align: center; margin-top: 50px;">
+    <h3 style="color: #3498db;">Explore More</h3>
+    <div style="margin: 20px 0;">
+        <!-- Make sure these filenames match your uploaded files exactly -->
+        <a href="books.html" style="color: white; margin: 0 15px; text-decoration: none; font-weight: bold;">NCERT Books</a>
+        <a href="about.html" style="color: white; margin: 0 15px; text-decoration: none; font-weight: bold;">About & CV</a>
+        <a href="nep.html" style="color: white; margin: 0 15px; text-decoration: none; font-weight: bold;">NEP 2020</a>
+        <a href="imp.html" style="color: white; margin: 0 15px; text-decoration: none; font-weight: bold;">IMPORTANT LINKS</a>
+        <a href="faq.html" style="color: white; margin: 0 15px; text-decoration: none; font-weight: bold;">FAQ</a>
+    </div>
+    <p style="font-size: 0.8em; color: #bdc3c7;">© 2026 Mathematics History Project</p>
+</section>
+<head>
+    <!-- ... your other head tags ... -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
