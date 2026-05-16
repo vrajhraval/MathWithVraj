@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Higher Mathematics Repository</title>
+    <title>Academic Repository of Higher Mathematics</title>
     <style>
         :root {
-            --primary: #2c3e50;
-            --accent: #2980b9;
-            --light: #f4f7f6;
-            --dark: #1a252f;
+            --primary: #1e293b;
+            --accent: #0284c7;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --text-main: #334155;
+            --card-border: #e2e8f0;
         }
 
         body {
@@ -18,71 +20,68 @@
             margin: 0;
             padding: 0;
             background-color: var(--light);
-            color: #333;
+            color: var(--text-main);
         }
 
         header {
-            background: linear-gradient(135deg, var(--primary), var(--dark));
+            background: linear-gradient(135deg, var(--dark), var(--primary));
             color: white;
-            padding: 40px 20px;
+            padding: 50px 20px;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         header h1 {
             margin: 0;
-            font-size: 2.5rem;
-            letter-spacing: 1px;
+            font-size: 2.6rem;
+            letter-spacing: 0.5px;
         }
 
         header p {
-            margin: 10px 0 0 0;
-            opacity: 0.9;
-            font-size: 1.1rem;
+            margin: 12px 0 0 0;
+            opacity: 0.85;
+            font-size: 1.15rem;
         }
 
         .container {
-            max-width: 1100px;
-            margin: 30px auto;
+            max-width: 1200px;
+            margin: 40px auto;
             padding: 0 20px;
         }
 
-        /* Subject Card Styles */
+        /* Subject Card Framework */
         .subject-card {
             background: white;
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 35px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-radius: 14px;
+            padding: 35px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+            border: 1px solid var(--card-border);
             border-left: 6px solid var(--accent);
-            transition: transform 0.2s;
-        }
-
-        .subject-card:hover {
-            transform: translateY(-2px);
         }
 
         .subject-title {
-            color: var(--primary);
-            font-size: 1.8rem;
+            color: var(--dark);
+            font-size: 1.9rem;
             margin-top: 0;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
+            margin-bottom: 22px;
+            border-bottom: 2px solid var(--card-border);
+            padding-bottom: 12px;
+            font-weight: 700;
         }
 
         .meta-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin-bottom: 25px;
         }
 
         .meta-section {
-            background: #fdfdfd;
-            border: 1px solid #eef2f5;
-            padding: 15px;
-            border-radius: 8px;
+            background: #fafafa;
+            border: 1px solid #f1f5f9;
+            padding: 18px;
+            border-radius: 10px;
         }
 
         .meta-section h3 {
@@ -90,28 +89,31 @@
             color: var(--accent);
             font-size: 1.1rem;
             border-left: 3px solid var(--accent);
-            padding-left: 8px;
+            padding-left: 10px;
+            margin-bottom: 12px;
         }
 
         .meta-section p {
             font-size: 0.95rem;
             margin-bottom: 0;
-            color: #555;
+            color: #475569;
+            text-align: justify;
         }
 
-        /* Books Section */
+        /* Reference Text Section */
         .books-section {
-            background: #f8fafc;
-            border: 1px dashed #cbd5e1;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 15px;
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 22px;
+            border-radius: 10px;
+            margin-top: 20px;
         }
 
         .books-section h3 {
             margin-top: 0;
-            color: var(--primary);
+            color: var(--dark);
             font-size: 1.2rem;
+            margin-bottom: 15px;
         }
 
         .book-list {
@@ -124,8 +126,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #e2e8f0;
+            padding: 12px 0;
+            border-bottom: 1px solid #cbd5e1;
         }
 
         .book-item:last-child {
@@ -133,43 +135,36 @@
         }
 
         .book-info {
-            font-size: 0.95rem;
+            font-size: 0.98rem;
+            color: #1e293b;
         }
 
         .book-title {
             font-weight: bold;
-            color: #2c3e50;
+            color: #0f172a;
         }
 
         .book-author {
-            color: #64748b;
+            color: #475569;
             font-style: italic;
         }
 
-        .pdf-btn {
-            background-color: #27ae60;
-            color: white;
-            text-decoration: none;
-            padding: 6px 14px;
+        .search-hint {
+            font-size: 0.8rem;
+            background: #e2e8f0;
+            color: #475569;
+            padding: 4px 10px;
             border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            transition: background 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .pdf-btn:hover {
-            background-color: #219653;
+            font-weight: 600;
+            user-select: all;
         }
 
         footer {
             text-align: center;
-            padding: 30px;
+            padding: 40px;
             background-color: var(--dark);
-            color: white;
-            margin-top: 60px;
+            color: #94a3b8;
+            margin-top: 80px;
             font-size: 0.95rem;
         }
     </style>
@@ -177,8 +172,8 @@
 <body>
 
 <header>
-    <h1>Higher Mathematics Reference Hub</h1>
-    <p>A Comprehensive Guide to Advanced Disciplines, Real-World Applications, and Free Academic Literatures</p>
+    <h1>The Higher Mathematics Reference Directory</h1>
+    <p>A Curated Compendium of Domains, Structural Applications, and Standard Text Literature Meta-Data</p>
 </header>
 
 <div class="container">
@@ -186,41 +181,34 @@
     <!-- 1. ABSTRACT ALGEBRA -->
     <div class="subject-card">
         <div class="subject-title">1. Abstract Algebra</div>
-        
         <div class="meta-section" style="margin-bottom: 20px;">
             <h3>Introduction</h3>
-            <p>Abstract Algebra is the study of algebraic structures such as groups, rings, fields, modules, vector spaces, and algebras. Instead of working with specific numbers, it abstracts operational principles down to basic axioms to study symmetry, structure, and operational invariance across arbitrary sets.</p>
+            <p>Abstract Algebra explores generalized algebraic systems including groups, rings, fields, modules, and vector spaces. Moving beyond arithmetic routines with fixed numbers, it constructs axiomatic guidelines to observe deep operational symmetry and systemic equivalence behaviors.</p>
         </div>
-
         <div class="meta-grid">
             <div class="meta-section">
                 <h3>Real-Life Usage</h3>
-                <p>Crucial to public-key cryptography (RSA, Elliptic Curve Cryptography), coding theory used in modern telecommunications, and checking structural error detection across data pipelines.</p>
+                <p>Forms the backbone of asymmetric cryptography protocols, network error-correcting codes, and structural signal tracking logic.</p>
             </div>
             <div class="meta-section">
                 <h3>Future & Scope</h3>
-                <p>Essential to the evolution of Quantum Computing (Group representations), post-quantum cryptography schema design, and analyzing crystallographic configurations in materials science.</p>
+                <p>Vital for the growth of Quantum Computing simulators, topological data architecture layout, and lattice-based data encryption systems.</p>
             </div>
             <div class="meta-section">
                 <h3>Value of the Subject</h3>
-                <p>Trains structural mathematical thinking. It forms the indispensable linguistic framework required to navigate advanced physics, arithmetic geometry, and data security infrastructure.</p>
+                <p>Trains high-level structural optimization paths. It provides the essential algebraic dialect used to handle modern multi-dimensional spaces.</p>
             </div>
         </div>
-
         <div class="books-section">
-            <h3>Recommended Reference Texts</h3>
+            <h3>Standard Academic Literature (Search to Access)</h3>
             <ul class="book-list">
                 <li class="book-item">
-                    <div class="book-info">
-                        <span class="book-title">Abstract Algebra (3rd Edition)</span> - <span class="book-author">David S. Dummit, Richard M. Foote</span>
-                    </div>
-                    <a href="https://archive.org/details/abstract-algebra-3rd-edition" target="_blank" class="pdf-btn">📖 Read/Download Free</a>
+                    <div class="book-info"><span class="book-title">Abstract Algebra</span> – <span class="book-author">David S. Dummit, Richard M. Foote</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
                 </li>
                 <li class="book-item">
-                    <div class="book-info">
-                        <span class="book-title">Contemporary Abstract Algebra</span> - <span class="book-author">Joseph A. Gallian</span>
-                    </div>
-                    <a href="https://archive.org/details/contemporary-abstract-algebra" target="_blank" class="pdf-btn">📖 Read/Download Free</a>
+                    <div class="book-info"><span class="book-title">Contemporary Abstract Algebra</span> – <span class="book-author">Joseph A. Gallian</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
                 </li>
             </ul>
         </div>
@@ -229,41 +217,34 @@
     <!-- 2. REAL ANALYSIS -->
     <div class="subject-card">
         <div class="subject-title">2. Real Analysis</div>
-        
         <div class="meta-section" style="margin-bottom: 20px;">
             <h3>Introduction</h3>
-            <p>Real Analysis is the rigorous formulation of calculus. It systematically evaluates behavior involving real numbers, sequences, series, limits, continuity, differentiation, and Riemann/Lebesgue integration theory. It explicitly proves why standard calculus operations function without collapse.</p>
+            <p>Real Analysis establishes the mathematical foundation of calculus. It systematically examines continuous behavior, sequences, series, limits, multi-variable derivatives, Riemann metrics, and Lebesgue integration schemas to provide absolute analytical validity.</p>
         </div>
-
         <div class="meta-grid">
             <div class="meta-section">
                 <h3>Real-Life Usage</h3>
-                <p>Underpins algorithmic finance trading systems, stock risk modeling via stochastic processes, signal processing metrics, and complex structural physics calculations.</p>
+                <p>Directly models quantitative finance portfolios, stochastic system tracks, physical fluid boundary equations, and statistical probability rules.</p>
             </div>
             <div class="meta-section">
                 <h3>Future & Scope</h3>
-                <p>Massive application pipelines in Machine Learning optimization validation, statistical convergence modeling in Big Data architectures, and refining continuous-variable dynamic AI neural nets.</p>
+                <p>Important for verification formulas in algorithmic Machine Learning, convex data processing loops, and deep-layer neural net convergence metrics.</p>
             </div>
             <div class="meta-section">
                 <h3>Value of the Subject</h3>
-                <p>Supplies the foundational validation framework for every field relying on continuity and measurement, converting heuristic calculations into absolute logical proofs.</p>
+                <p>Converts intuitive continuous processes into rigorous, bulletproof proofs, making it indispensable for any deep field involving continuous changes.</p>
             </div>
         </div>
-
         <div class="books-section">
-            <h3>Recommended Reference Texts</h3>
+            <h3>Standard Academic Literature (Search to Access)</h3>
             <ul class="book-list">
                 <li class="book-item">
-                    <div class="book-info">
-                        <span class="book-title">Principles of Mathematical Analysis</span> - <span class="book-author">Walter Rudin</span>
-                    </div>
-                    <a href="https://archive.org/details/math_analysis_books/Principles%20of%20Mathematical%20Analysis%20-%20W.%20Rudin_text.pdf" target="_blank" class="pdf-btn">📖 Read/Download Free</a>
+                    <div class="book-info"><span class="book-title">Principles of Mathematical Analysis</span> – <span class="book-author">Walter Rudin</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
                 </li>
                 <li class="book-item">
-                    <div class="book-info">
-                        <span class="book-title">Understanding Analysis</span> - <span class="book-author">Stephen Abbott</span>
-                    </div>
-                    <a href="https://archive.org/details/understanding-analysis-stephen-abbott" target="_blank" class="pdf-btn">📖 Read/Download Free</a>
+                    <div class="book-info"><span class="book-title">Understanding Analysis</span> – <span class="book-author">Stephen Abbott</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
                 </li>
             </ul>
         </div>
@@ -272,41 +253,34 @@
     <!-- 3. COMPLEX ANALYSIS -->
     <div class="subject-card">
         <div class="subject-title">3. Complex Analysis</div>
-        
         <div class="meta-section" style="margin-bottom: 20px;">
             <h3>Introduction</h3>
-            <p>Complex Analysis investigates functions mapping complex numbers to complex numbers. It focuses fundamentally on holomorphic (analytic) functions, complex integration, residue calculus, and conformal mappings. Holomorphic functions possess properties far more rigid and elegant than standard real functions.</p>
+            <p>Complex Analysis investigates the calculus of functions involving complex numbers. It centers on holomorphic (analytic) expressions, path integration properties, residue theorems, and conformal mapping techniques where differentiability implies infinity smoothness.</p>
         </div>
-
         <div class="meta-grid">
             <div class="meta-section">
                 <h3>Real-Life Usage</h3>
-                <p>Critical in electrical engineering for impedance modeling, fluid dynamics modeling, aerospace wing aerodynamic flow analytics, and digital signal processing transformation loops.</p>
+                <p>Used widely in aerospace engineering wing profiles, thermodynamic path matrices, electrical circuit impedance analysis, and wave optics equations.</p>
             </div>
             <div class="meta-section">
                 <h3>Future & Scope</h3>
-                <p>Crucial to analytic number theory solutions (including the Riemann Hypothesis exploration), quantum field theory calculations, and advanced modern cosmological modeling patterns.</p>
+                <p>Essential for analytic solutions to Prime Number configurations, advanced Quantum Mechanics state analytics, and string theory fields.</p>
             </div>
             <div class="meta-section">
                 <h3>Value of the Subject</h3>
-                <p>Resolves previously unworkable real-variable integration problems effortlessly through path integrals and residues, proving complex domains reflect systemic mathematical harmony.</p>
+                <p>Resolves previously impossible real-variable definitive integration limits effortlessly, revealing clean harmonic balances within complex coordinate tracks.</p>
             </div>
         </div>
-
         <div class="books-section">
-            <h3>Recommended Reference Texts</h3>
+            <h3>Standard Academic Literature (Search to Access)</h3>
             <ul class="book-list">
                 <li class="book-item">
-                    <div class="book-info">
-                        <span class="book-title">Complex Analysis</span> - <span class="book-author">Lars Ahlfors</span>
-                    </div>
-                    <a href="https://archive.org/details/ahlfors-complex-analysis" target="_blank" class="pdf-btn">📖 Read/Download Free</a>
+                    <div class="book-info"><span class="book-title">Complex Analysis</span> – <span class="book-author">Lars Ahlfors</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
                 </li>
                 <li class="book-item">
-                    <div class="book-info">
-                        <span class="book-title">Visual Complex Analysis</span> - <span class="book-author">Tristan Needham</span>
-                    </div>
-                    <a href="https://archive.org/details/visual-complex-analysis-needham" target="_blank" class="pdf-btn">📖 Read/Download Free</a>
+                    <div class="book-info"><span class="book-title">Visual Complex Analysis</span> – <span class="book-author">Tristan Needham</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
                 </li>
             </ul>
         </div>
@@ -315,41 +289,34 @@
     <!-- 4. TOPOLOGY -->
     <div class="subject-card">
         <div class="subject-title">4. Topology</div>
-        
         <div class="meta-section" style="margin-bottom: 20px;">
             <h3>Introduction</h3>
-            <p>Often referred to as "rubber-sheet geometry," Topology is the study of properties preserved under continuous deformations such as stretching, twisting, and crumpling, but without tearing or gluing. It redefines continuity using open sets to evaluate space structures qualitatively.</p>
+            <p>Topology investigates spatial attributes that remain completely invariant under seamless deformations like stretching, twisting, or bending—without tearing or merging points. It builds a generalized baseline for closeness using structural open sets.</p>
         </div>
-
         <div class="meta-grid">
             <div class="meta-section">
                 <h3>Real-Life Usage</h3>
-                <p>Powers Topological Data Analysis (TDA) to discover hidden geometric groupings inside massive multi-dimensional clouds, robotics pathing design, and network routing configurations.</p>
+                <p>Powers Topological Data Analysis (TDA) to map shapes within high-dimensional sensor readings, network layout logic, and robot route safety design.</p>
             </div>
             <div class="meta-section">
                 <h3>Future & Scope</h3>
-                <p>Foundational to topological quantum matter discoveries, understanding structural protein-folding variations in biochemistry, and cosmological space-time structural mechanics models.</p>
+                <p>Crucial to developments in topological insulator physics, advanced molecular biology DNA link metrics, and quantum computing error correction.</p>
             </div>
             <div class="meta-section">
                 <h3>Value of the Subject</h3>
-                <p>Provides the ultimate generalized framework for space and convergence analysis, liberating structural exploration from rigid distance-dependent coordinate constraints.</p>
+                <p>Offers the most generalized system to explore continuity and space, freeing mathematical analysis from strict metric distance dependencies.</p>
             </div>
         </div>
-
         <div class="books-section">
-            <h3>Recommended Reference Texts</h3>
+            <h3>Standard Academic Literature (Search to Access)</h3>
             <ul class="book-list">
                 <li class="book-item">
-                    <div class="book-info">
-                        <span class="book-title">Topology (2nd Edition)</span> - <span class="book-author">James Munkres</span>
-                    </div>
-                    <a href="https://archive.org/details/MunkresJ.Topology2e" target="_blank" class="pdf-btn">📖 Read/Download Free</a>
+                    <div class="book-info"><span class="book-title">Topology</span> – <span class="book-author">James Munkres</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
                 </li>
                 <li class="book-item">
-                    <div class="book-info">
-                        <span class="book-title">Algebraic Topology</span> - <span class="book-author">Allen Hatcher</span>
-                    </div>
-                    <a href="https://archive.org/details/algebraic-topology-by-allen-hatcher" target="_blank" class="pdf-btn">📖 Read/Download Free</a>
+                    <div class="book-info"><span class="book-title">Algebraic Topology</span> – <span class="book-author">Allen Hatcher</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
                 </li>
             </ul>
         </div>
@@ -358,41 +325,34 @@
     <!-- 5. DIFFERENTIAL EQUATIONS -->
     <div class="subject-card">
         <div class="subject-title">5. Differential Equations & Dynamical Systems</div>
-        
         <div class="meta-section" style="margin-bottom: 20px;">
             <h3>Introduction</h3>
-            <p>This discipline involves equations that connect unknown functions to their derivatives. It provides the core mathematical machinery used to represent change over time or space, moving from basic ordinary forms (ODEs) to complex multi-variable partial differential equations (PDEs).</p>
+            <p>This discipline focuses on formulas linking variable target operations directly to their spatial or temporal rates of change. It moves from single-input ODE expressions into complicated multi-dimensional Partial Differential Equations (PDEs).</p>
         </div>
-
         <div class="meta-grid">
             <div class="meta-section">
                 <h3>Real-Life Usage</h3>
-                <p>The machinery behind weather forecasting algorithms, celestial mechanics trajectories, epidemic spread tracking models (SIR models), and structural civil engineering physics.</p>
+                <p>Drives macro weather prediction grids, biological epidemic growth mapping (SIR frameworks), structural bridge safety physics, and acoustic waveforms.</p>
             </div>
             <div class="meta-section">
                 <h3>Future & Scope</h3>
-                <p>Underpins neural network configurations (Neural ODEs), macroeconomic equilibrium automation testing, climate change trend tracking pipelines, and autonomous system controls engineering.</p>
+                <p>Directly powers continuous Neural ODEs in artificial intelligence, precise global climate trend tracking, and autonomous spacecraft navigation pathing.</p>
             </div>
             <div class="meta-section">
                 <h3>Value of the Subject</h3>
-                <p>Serves as the vital mathematical link translating observed continuous physical phenomena directly into predictable, programmable, and simulation-ready numeric values.</p>
+                <p>Provides the primary language used to map physical realities into quantifiable dynamic calculus values that computers can simulate.</p>
             </div>
         </div>
-
         <div class="books-section">
-            <h3>Recommended Reference Texts</h3>
+            <h3>Standard Academic Literature (Search to Access)</h3>
             <ul class="book-list">
                 <li class="book-item">
-                    <div class="book-info">
-                        <span class="book-title">Partial Differential Equations</span> - <span class="book-author">Lawrence C. Evans</span>
-                    </div>
-                    <a href="https://archive.org/details/partial-differential-equations-lawrence-c.-evans" target="_blank" class="pdf-btn">📖 Read/Download Free</a>
+                    <div class="book-info"><span class="book-title">Partial Differential Equations</span> – <span class="book-author">Lawrence C. Evans</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
                 </li>
                 <li class="book-item">
-                    <div class="book-info">
-                        <span class="book-title">Differential Equations, Dynamical Systems, and Chaos</span> - <span class="book-author">Hirsch, Smale, Devaney</span>
-                    </div>
-                    <a href="https://archive.org/details/differentialequationsdynamicalsystems" target="_blank" class="pdf-btn">📖 Read/Download Free</a>
+                    <div class="book-info"><span class="book-title">Differential Equations, Dynamical Systems, and an Introduction to Chaos</span> – <span class="book-author">Morris Hirsch, Stephen Smale, Robert Devaney</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
                 </li>
             </ul>
         </div>
@@ -401,41 +361,322 @@
     <!-- 6. DISCRETE MATHEMATICS -->
     <div class="subject-card">
         <div class="subject-title">6. Discrete Mathematics & Graph Theory</div>
-        
         <div class="meta-section" style="margin-bottom: 20px;">
             <h3>Introduction</h3>
-            <p>Discrete Mathematics studies structures that are fundamentally countable, distinct, and separated rather than continuous. It encompasses combinatorics, graph theory, logic, set theory, and recurrences, forming the structural bedrock of computation logic.</p>
+            <p>Discrete Mathematics details operational systems built on distinct, separated values rather than smooth continuous intervals. It ranges across formal propositional logic arrays, combinatorics, set relations, and relational graph paths.</p>
         </div>
-
         <div class="meta-grid">
             <div class="meta-section">
                 <h3>Real-Life Usage</h3>
-                <p>Directly runs computer network routing protocols, database engine construction, social network graph analytics, optimization algorithms, and logic compilers.</p>
+                <p>Operates internet routing path algorithms, database SQL query indexing engines, and resource optimization allocation passes.</p>
             </div>
             <div class="meta-section">
                 <h3>Future & Scope</h3>
-                <p>Critical to developments in decentralized ledgers (Blockchain technology architectures), network security scalability proofs, AI logic trees, and combinatorial bioinformatics optimization.</p>
+                <p>Essential to decentralized consensus models (Blockchain systems), complex social network path mining, and zero-knowledge data verification schemes.</p>
             </div>
             <div class="meta-section">
                 <h3>Value of the Subject</h3>
-                <p>Acts as the bridge transforming theoretical conceptual logic into discrete, actionable binary runtime workflows within computer architecture frameworks.</p>
+                <p>Acts as the bridge transforming theoretical logic workflows directly into binary computer processing architectures.</p>
             </div>
         </div>
-
         <div class="books-section">
-            <h3>Recommended Reference Texts</h3>
+            <h3>Standard Academic Literature (Search to Access)</h3>
             <ul class="book-list">
                 <li class="book-item">
-                    <div class="book-info">
-                        <span class="book-title">Discrete Mathematics and Its Applications</span> - <span class="book-author">Kenneth H. Rosen</span>
-                    </div>
-                    <a href="https://archive.org/stream/Begin_Dm/dm_djvu.txt" target="_blank" class="pdf-btn">📖 Read/Download Free</a>
+                    <div class="book-info"><span class="book-title">Discrete Mathematics and Its Applications</span> – <span class="book-author">Kenneth H. Rosen</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
                 </li>
                 <li class="book-item">
-                    <div class="book-info">
-                        <span class="book-title">Introduction to Graph Theory (2nd Edition)</span> - <span class="book-author">Douglas B. West</span>
-                    </div>
-                    <a href="https://archive.org/details/introduction-to-graph-theory-douglas-b.-west" target="_blank" class="pdf-btn">📖 Read/Download Free</a>
+                    <div class="book-info"><span class="book-title">Introduction to Graph Theory</span> – <span class="book-author">Douglas B. West</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 7. NUMBER THEORY & CRYPTOGRAPHY -->
+    <div class="subject-card">
+        <div class="subject-title">7. Number Theory & Cryptography</div>
+        <div class="meta-section" style="margin-bottom: 20px;">
+            <h3>Introduction</h3>
+            <p>Number Theory explores the fundamental qualities of integers, focusing heavily on prime distribution, modular congruences, and arithmetic properties. Cryptography applies these discrete properties to construct complex data security systems.</p>
+        </div>
+        <div class="meta-grid">
+            <div class="meta-section">
+                <h3>Real-Life Usage</h3>
+                <p>Secures global banking communications, web data streams (SSL/TLS), online payments, and encrypted message applications via RSA and Diffie-Hellman.</p>
+            </div>
+            <div class="meta-section">
+                <h3>Future & Scope</h3>
+                <p>Heavily focused on Post-Quantum Cryptography (PQC), fully homomorphic encryption systems, and quantum-resistant network architectures.</p>
+            </div>
+            <div class="meta-section">
+                <h3>Value of the Subject</h3>
+                <p>Transforms pure arithmetic properties once considered entirely theoretical into the primary shield protecting global digital infrastructure.</p>
+            </div>
+        </div>
+        <div class="books-section">
+            <h3>Standard Academic Literature (Search to Access)</h3>
+            <ul class="book-list">
+                <li class="book-item">
+                    <div class="book-info"><span class="book-title">An Introduction to the Theory of Numbers</span> – <span class="book-author">G.H. Hardy, E.M. Wright</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
+                </li>
+                <li class="book-item">
+                    <div class="book-info"><span class="book-title">Introduction to Modern Cryptography</span> – <span class="book-author">Jonathan Katz, Yehuda Lindell</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 8. OPERATOR THEORY -->
+    <div class="subject-card">
+        <div class="subject-title">8. Operator Theory</div>
+        <div class="meta-section" style="margin-bottom: 20px;">
+            <h3>Introduction</h3>
+            <p>Operator Theory centers on the structural characteristics of linear transformations acting between vector spaces, especially infinite-dimensional spaces like Hilbert and Banach systems. It treats operators as generalized points in complex functional spaces.</p>
+        </div>
+        <div class="meta-grid">
+            <div class="meta-section">
+                <h3>Real-Life Usage</h3>
+                <p>Provides the structural mathematics used in signal filter tuning matrices, mechanical vibration analyses, and continuous system controls.</p>
+            </div>
+            <div class="meta-section">
+                <h3>Future & Scope</h3>
+                <p>Crucial to developments in Quantum Information Theory, matrix calculation engines for AI networks, and advanced random matrix systems.</p>
+            </div>
+            <div class="meta-section">
+                <h3>Value of the Subject</h3>
+                <p>Generalizes linear algebra transformations to handle infinite-variable setups, creating a unified framework for solving complex continuous problems.</p>
+            </div>
+        </div>
+        <div class="books-section">
+            <h3>Standard Academic Literature (Search to Access)</h3>
+            <ul class="book-list">
+                <li class="book-item">
+                    <div class="book-info"><span class="book-title">A Course in Operator Theory</span> – <span class="book-author">John B. Conway</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
+                </li>
+                <li class="book-item">
+                    <div class="book-info"><span class="book-title">Perturbation Theory for Linear Operators</span> – <span class="book-author">Tosio Kato</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 9. BANACH ALGEBRA -->
+    <div class="subject-card">
+        <div class="subject-title">9. Banach Algebra</div>
+        <div class="meta-section" style="margin-bottom: 20px;">
+            <h3>Introduction</h3>
+            <p>A Banach Algebra combines structural topology with algebraic operations. It is an associative algebra over complex numbers that forms a complete normed vector space, satisfying the submultiplicative inequality property $\|xy\| \leq \|x\|\|y\|$. </p>
+        </div>
+        <div class="meta-grid">
+            <div class="meta-section">
+                <h3>Real-Life Usage</h3>
+                <p>Underpins multi-frequency signal analysis, harmonic sound engineering transformations, and systemic data feedback models.</p>
+            </div>
+            <div class="meta-section">
+                <h3>Future & Scope</h3>
+                <p>Essential for non-commutative geometry projects, advanced quantum statistical modeling, and ongoing updates to operator network formulations.</p>
+            </div>
+            <div class="meta-section">
+                <h3>Value of the Subject</h3>
+                <p>Blends geometric distance properties cleanly with multi-variable multiplication rules, paving the way for deep spectral classification theories.</p>
+            </div>
+        </div>
+        <div class="books-section">
+            <h3>Standard Academic Literature (Search to Access)</h3>
+            <ul class="book-list">
+                <li class="book-item">
+                    <div class="book-info"><span class="book-title">Banach Algebra Techniques in Operator Theory</span> – <span class="book-author">Ronald G. Douglas</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
+                </li>
+                <li class="book-item">
+                    <div class="book-info"><span class="book-title">Banach Algebras and the General Theory of *-Algebras</span> – <span class="book-author">Theodore W. Palmer</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 10. GROUP THEORY -->
+    <div class="subject-card">
+        <div class="subject-title">10. Group Theory</div>
+        <div class="meta-section" style="margin-bottom: 20px;">
+            <h3>Introduction</h3>
+            <p>Group Theory maps out structural symmetry abstractly. A group is an axiomatic mathematical system containing a single binary operation that links set items together under associativity, identity, and inverse rules.</p>
+        </div>
+        <div class="meta-grid">
+            <div class="meta-section">
+                <h3>Real-Life Usage</h3>
+                <p>Deciphers crystal pattern structures in chemistry, molecular structural configurations, and three-dimensional image transformations.</p>
+            </div>
+            <div class="meta-section">
+                <h3>Future & Scope</h3>
+                <p>Central to modern gauge theories in High-Energy Particle Physics, Lie Group robotics tracking systems, and automated generative design tools.</p>
+            </div>
+            <div class="meta-section">
+                <h3>Value of the Subject</h3>
+                <p>Acts as the universal mathematical tool to classify and utilize symmetry, transforming obscure spatial properties into clear operational matrices.</p>
+            </div>
+        </div>
+        <div class="books-section">
+            <h3>Standard Academic Literature (Search to Access)</h3>
+            <ul class="book-list">
+                <li class="book-item">
+                    <div class="book-info"><span class="book-title">A Course in the Theory of Groups</span> – <span class="book-author">Derek J.S. Robinson</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
+                </li>
+                <li class="book-item">
+                    <div class="book-info"><span class="book-title">Topics in Algebra</span> – <span class="book-author">I.N. Herstein</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 11. APPROXIMATION THEORY -->
+    <div class="subject-card">
+        <div class="subject-title">11. Approximation Theory</div>
+        <div class="meta-section" style="margin-bottom: 20px;">
+            <h3>Introduction</h3>
+            <p>Approximation Theory focuses on how complicated analytical functions can be effectively matched using simpler, customizable alternatives like polynomials, rational functions, or wavelets, while tracking exact bound limits.</p>
+        </div>
+        <div class="meta-grid">
+            <div class="meta-section">
+                <h3>Real-Life Usage</h3>
+                <p>Powers calculator function processors (e.g., computing sin/cos steps via Taylor/Chebyshev), rendering graphic curves, and video compression pipelines.</p>
+            </div>
+            <div class="meta-section">
+                <h3>Future & Scope</h3>
+                <p>Essential for optimizing neural network parameters, high-speed graphics calculation pipelines, and deep numerical modeling engines.</p>
+            </div>
+            <div class="meta-section">
+                <h3>Value of the Subject</h3>
+                <p>Bridges pure infinite math with practical digital computing limitations, finding optimal balances between processing speed and tracking precision.</p>
+            </div>
+        </div>
+        <div class="books-section">
+            <h3>Standard Academic Literature (Search to Access)</h3>
+            <ul class="book-list">
+                <li class="book-item">
+                    <div class="book-info"><span class="book-title">Approximation Theory and Methods</span> – <span class="book-author">M.J.D. Powell</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
+                </li>
+                <li class="book-item">
+                    <div class="book-info"><span class="book-title">An Introduction to the Approximation of Functions</span> – <span class="book-author">Theodore J. Rivlin</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 12. MATHEMATICAL METHODS -->
+    <div class="subject-card">
+        <div class="subject-title">12. Mathematical Methods</div>
+        <div class="meta-section" style="margin-bottom: 20px;">
+            <h3>Introduction</h3>
+            <p>Mathematical Methods compiles powerful operational frameworks—such as Fourier transforms, Laplace transforms, Green’s equations, and matrix variations—to resolve complex physical system configurations.</p>
+        </div>
+        <div class="meta-grid">
+            <div class="meta-section">
+                <h3>Real-Life Usage</h3>
+                <p>Used to resolve complex engineering thermal transfers, seismic sensor track mappings, structural vibrations, and raw telemetry streams.</p>
+            </div>
+            <div class="meta-section">
+                <h3>Future & Scope</h3>
+                <p>Crucial for building stable simulation frameworks for autonomous vehicles, plasma physics modeling, and large-scale industrial design automations.</p>
+            </div>
+            <div class="meta-section">
+                <h3>Value of the Subject</h3>
+                <p>Acts as the practical toolkit that translates advanced theoretical formulas directly into usable engineering and physical sciences methodologies.</p>
+            </div>
+        </div>
+        <div class="books-section">
+            <h3>Standard Academic Literature (Search to Access)</h3>
+            <ul class="book-list">
+                <li class="book-item">
+                    <div class="book-info"><span class="book-title">Mathematical Methods for Physicists</span> – <span class="book-author">George B. Arfken, Hans J. Weber</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
+                </li>
+                <li class="book-item">
+                    <div class="book-info"><span class="book-title">Advanced Mathematical Methods for Scientists and Engineers</span> – <span class="book-author">Carl M. Bender, Steven A. Orszag</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 13. DIFFERENTIAL GEOMETRY -->
+    <div class="subject-card">
+        <div class="subject-title">13. Differential Geometry</div>
+        <div class="meta-section" style="margin-bottom: 20px;">
+            <h3>Introduction</h3>
+            <p>Differential Geometry uses calculus techniques to analyze curves, surfaces, and multi-dimensional manifolds. It measures localized spatial changes like geometric curvature without relying on a surrounding flat frame.</p>
+        </div>
+        <div class="meta-grid">
+            <div class="meta-section">
+                <h3>Real-Life Usage</h3>
+                <p>Directly runs GPS satellite clock corrections, geographic mapping tools, 3D computer animation engines, and mechanical engine pathways.</p>
+            </div>
+            <div class="meta-section">
+                <h3>Future & Scope</h3>
+                <p>Foundational for Einstein's General Relativity universe models, advanced computer vision tracking fields, and data manifold classification systems.</p>
+            </div>
+            <div class="meta-section">
+                <h3>Value of the Subject</h3>
+                <p>Teaches how to perform exact calculus transformations directly on curved shapes and spaces, paving the way for modern global physics models.</p>
+            </div>
+        </div>
+        <div class="books-section">
+            <h3>Standard Academic Literature (Search to Access)</h3>
+            <ul class="book-list">
+                <li class="book-item">
+                    <div class="book-info"><span class="book-title">Differential Geometry of Curves and Surfaces</span> – <span class="book-author">Manfredo P. do Carmo</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
+                </li>
+                <li class="book-item">
+                    <div class="book-info"><span class="book-title">Introduction to Smooth Manifolds</span> – <span class="book-author">John M. Lee</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 14. FUNCTIONAL ANALYSIS -->
+    <div class="subject-card">
+        <div class="subject-title">14. Functional Analysis</div>
+        <div class="meta-section" style="margin-bottom: 20px;">
+            <h3>Introduction</h3>
+            <p>Functional Analysis studies infinite-dimensional vector spaces equipped with topological distance limits. It focuses primarily on mapping continuous operations across deep Banach and Hilbert functional systems.</p>
+        </div>
+        <div class="meta-grid">
+            <div class="meta-section">
+                <h3>Real-Life Usage</h3>
+                <p>Resolves complex physical step predictions, image processing compressions, control loop calibrations, and advanced probability matrices.</p>
+            </div>
+            <div class="meta-section">
+                <h3>Future & Scope</h3>
+                <p>Crucial to validating deep neural network convergence, algorithmic data extraction models, and continuous quantum field computations.</p>
+            </div>
+            <div class="meta-section">
+                <h3>Value of the Subject</h3>
+                <p>Unifies differential systems, matrix functions, and series metrics into one single geometric framework, delivering exceptional problem-solving capacity.</p>
+            </div>
+        </div>
+        <div class="books-section">
+            <h3>Standard Academic Literature (Search to Access)</h3>
+            <ul class="book-list">
+                <li class="book-item">
+                    <div class="book-info"><span class="book-title">Introductory Functional Analysis with Applications</span> – <span class="book-author">Erwin Kreyszig</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
+                </li>
+                <li class="book-item">
+                    <div class="book-info"><span class="book-title">Functional Analysis</span> – <span class="book-author">Walter Rudin</span></div>
+                    <span class="search-hint">Copy Title to Search</span>
                 </li>
             </ul>
         </div>
@@ -444,7 +685,7 @@
 </div>
 
 <footer>
-    <p>Curated Educational Academic Database • Free Open-Access Archive Resources</p>
+    <p>Academic Curriculum Matrix Directory • Structured for Open-Access Engine Queries</p>
 </footer>
 
 </body>
