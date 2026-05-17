@@ -141,15 +141,15 @@
             <img src="pytha.jfif" alt="Pythagoras">
             <div style="flex:1;">
                 <p>From the geometric proofs of Pythagoras to the invention of <strong>Zero</strong> in India, these civilizations laid the groundwork for all modern technology and science.</p>
-                <p style="background:#f9f9f9; padding:10px; border-left:4px solid var(--accent);">\[ a^2 + b^2 = c^2 \]</p>
+                <p style="background:#f9f9f9; padding:10px; border-left:4px solid var(--accent);">$$ a^2 + b^2 = c^2 $$</p>
             </div>
         </div>
     </section>
 
-    <!-- FORMULA REFERENCE LIBRARY -->
+    <!-- FORMULA REFERENCE LIBRARY (Strictly formatted LaTeX block closures) -->
     <section>
         <h2>3. Quick Formula Reference Library</h2>
-        <p>Core algebraic and geometric rules formatted cleanly using structural LaTeX layout models.</p>
+        <p>Core algebraic and geometric rules formatted cleanly using structured LaTeX layout models.</p>
         <div class="formula-grid">
             <div class="formula-card">
                 <h3>Algebraic Identities</h3>
@@ -158,25 +158,25 @@
             </div>
             <div class="formula-card">
                 <h3>Quadratic Formula</h3>
-                <p>For $ ax^2 + bx + c = 0 $:</p>
+                <p>For standard form expression $ ax^2 + bx + c = 0 $:</p>
                 <div>$$ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$</div>
             </div>
             <div class="formula-card">
                 <h3>Coordinate Geometry</h3>
-                <p>Distance Formula:</p>
+                <p>Distance between two points:</p>
                 <div>$$ d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} $$</div>
             </div>
         </div>
     </section>
 
-    <!-- INTERACTIVE STEP-BY-STEP SOLVER -->
+    <!-- INTERACTIVE STEP-BY-STEP SOLVER (Cleaned up inline variables mapping) -->
     <section>
         <h2>4. Interactive Step-by-Step Solver</h2>
-        <p>Input quadratic coefficients to see operations translated down using structured mathematical proofs.</p>
+        <p>Input your coefficients into the fields below to calculate structural solution equations:</p>
         <div class="solver-ui">
-            <input type="number" id="solve-a" value="1"> $ \cdot x^2 \ + $
-            <input type="number" id="solve-b" value="-5"> $ \cdot x \ + $
-            <input type="number" id="solve-c" value="6"> $ = 0 $
+            <input type="number" id="solve-a" value="1"> <span> $x^2 \ + $ </span>
+            <input type="number" id="solve-b" value="-5"> <span> $x \ + $ </span>
+            <input type="number" id="solve-c" value="6"> <span> $ = 0$ </span>
             <button class="solver-btn" onclick="solveQuadratic()">Compute Steps</button>
         </div>
         <div class="solver-steps" id="solver-steps-output"></div>
@@ -231,7 +231,6 @@
     /* --- CHART LOGIC WITH ENVIRONMENT CHECK --- */
     let myChart;
     function plotGraph() {
-        // Fallback catch if CDN has not completed loading on Github Pages environment yet
         if (typeof math === 'undefined' || typeof Chart === 'undefined') {
             console.warn("MathJS/ChartJS libraries are compiling over network. Standby...");
             return;
@@ -289,7 +288,7 @@
         }
     }
 
-    /* --- LATEX SOLVER SCRIPT --- */
+    /* --- RIGOROUS MATHEMATICAL SOLUTIONS GENERATOR (LaTeX compliant) --- */
     function solveQuadratic() {
         const a = parseFloat(document.getElementById('solve-a').value);
         const b = parseFloat(document.getElementById('solve-b').value);
@@ -297,26 +296,27 @@
         const outputDiv = document.getElementById('solver-steps-output');
         
         if (isNaN(a) || isNaN(b) || isNaN(c) || a === 0) {
-            outputDiv.innerHTML = "<p style='color:var(--danger);'>Error: 'a' cannot equal 0. Please supply a valid quadratic form.</p>";
+            outputDiv.innerHTML = "<p style='color:var(--danger);'>Error: Coefficient value for $a$ cannot equal $0$. Please check your inputs.</p>";
             outputDiv.style.display = "block";
+            if (window.MathJax) MathJax.typesetPromise([outputDiv]);
             return;
         }
 
         const disc = (b * b) - (4 * a * c);
-        let html = `<h3>Proof Derivation Stack:</h3>`;
+        let html = `<h3>Mathematical Proof Derivation Steps:</h3>`;
         
         html += `<div class="step-item">
-                    <strong>Step 1: Compute Discriminant ($D$)</strong>
+                    <strong>Step 1: Compute the discriminant structural identity ($D$)</strong>
                     $$ D = b^2 - 4ac $$
-                    $$ D = (${b})^2 - 4(${a})(${c}) $$
+                    $$ D = (${b})^2 - 4 \\cdot (${a}) \\cdot (${c}) $$
                     $$ D = ${b*b} - ${4*a*c} = ${disc} $$
                  </div>`;
 
         if (disc < 0) {
             html += `<div class="step-item">
-                        <strong>Step 2: Roots Assessment</strong>
-                        Since $D < 0$, the roots are complex conjugate pairs:
-                        $$ x = \frac{-(${b}) \pm i\sqrt{${Math.abs(disc)}}}{2(${a})} $$
+                        <strong>Step 2: Real roots verification criteria check</strong>
+                        Since $D < 0$, real solutions do not exist over the real numbers domain. The values fall into the complex conjugate pairs set:
+                        $$ x = \frac{-(${b}) \pm i\\sqrt{${Math.abs(disc)}}}{2 \\cdot (${a})} $$
                      </div>`;
         } else {
             const sqrtD = Math.sqrt(disc);
@@ -324,14 +324,14 @@
             const r2 = (-b - sqrtD) / (2 * a);
             
             html += `<div class="step-item">
-                        <strong>Step 2: Apply Quadratic Formulation</strong>
+                        <strong>Step 2: Substitute values inside the master quadratic theorem formula</strong>
                         $$ x = \frac{-b \pm \sqrt{D}}{2a} $$
-                        $$ x = \frac{-(${b}) \pm \sqrt{${disc}}}{2(${a})} $$
+                        $$ x = \frac{-(${b}) \pm \sqrt{${disc}}}{2 \\cdot (${a})} $$
                         $$ x = \frac{${-b} \pm ${sqrtD.toFixed(3)}}{${2*a}} $$
                      </div>`;
             
             html += `<div class="step-item">
-                        <strong>Step 3: Resolve Radical Extremes</strong>
+                        <strong>Step 3: Resolve equations independently for positive and negative radical operations</strong>
                         $$ x_1 = \frac{${-b} + ${sqrtD.toFixed(3)}}{${2*a}} = ${r1.toFixed(3)} $$
                         $$ x_2 = \frac{${-b} - ${sqrtD.toFixed(3)}}{${2*a}} = ${r2.toFixed(3)} $$
                      </div>`;
@@ -434,7 +434,7 @@
 
     // App Initialization
     window.onload = function() {
-        setTimeout(plotGraph, 300); // Small buffer time for asset checks on live servers
+        setTimeout(plotGraph, 300); 
         renderCurrentQuiz();
     };
 </script>
