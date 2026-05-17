@@ -3,38 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Logic & Puzzles</title>
+    <title>Math Logic & Puzzles | ગણિત કોયડા</title>
     <!-- Google Fonts for Modern Typography -->
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #0f172a;
-            --card-bg: #1e293b;
+            --bg-dark: #0b0f19;
+            --card-bg: #131c2e;
             --text-light: #f8fafc;
             --text-muted: #94a3b8;
             --accent-blue: #38bdf8;
-            --accent-purple: #a855f7;
+            --accent-purple: #c084fc;
             --accent-green: #4ade80;
+            --accent-orange: #fb923c;
         }
 
         body {
             background-color: var(--bg-dark);
             color: var(--text-light);
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', 'Noto Sans Gujarati', sans-serif;
             margin: 0;
             padding: 40px 20px;
             display: flex;
             justify-content: center;
         }
 
-        .puzzle-section {
-            max-width: 1100px;
+        .puzzle-container {
+            max-width: 1200px;
             width: 100%;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 50px;
         }
 
         .section-header h2 {
@@ -46,37 +47,59 @@
             -webkit-text-fill-color: transparent;
         }
 
+        .section-header .gujarati-title {
+            font-family: 'Noto Sans Gujarati', sans-serif;
+            font-size: 1.8rem;
+            color: var(--accent-purple);
+            margin-top: 5px;
+            display: block;
+        }
+
         .section-header p {
             color: var(--text-muted);
             font-size: 1.1rem;
         }
 
+        /* Score Tracker Style */
+        .score-tracker {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+        #score { color: var(--accent-green); font-size: 1.5rem; }
+
         .puzzle-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 30px;
         }
 
         .puzzle-card {
             background-color: var(--card-bg);
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
         .puzzle-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: var(--accent-blue);
+            box-shadow: 0 15px 35px rgba(56, 189, 248, 0.1);
         }
 
         .badge {
             align-self: flex-start;
-            padding: 4px 12px;
+            padding: 5px 14px;
             border-radius: 50px;
             font-size: 0.75rem;
             font-weight: 600;
@@ -86,26 +109,37 @@
         }
 
         .badge-logic { background: rgba(56, 189, 248, 0.15); color: var(--accent-blue); }
-        .badge-geometry { background: rgba(168, 85, 247, 0.15); color: var(--accent-purple); }
+        .badge-geometry { background: rgba(192, 132, 252, 0.15); color: var(--accent-purple); }
         .badge-infinity { background: rgba(74, 222, 128, 0.15); color: var(--accent-green); }
+        .badge-algebra { background: rgba(251, 146, 60, 0.15); color: var(--accent-orange); }
 
         .puzzle-card h3 {
             font-size: 1.4rem;
-            margin: 0 0 15px 0;
+            margin: 0 0 5px 0;
+            color: #ffffff;
         }
 
-        .puzzle-card p {
+        .gujarati-text {
+            font-family: 'Noto Sans Gujarati', sans-serif;
+            color: #e2e8f0;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .english-text {
             color: var(--text-muted);
             font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 25px;
+            line-height: 1.5;
         }
 
         .interactive-area {
-            background: rgba(15, 23, 42, 0.6);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
+            background: rgba(11, 15, 25, 0.7);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 25px;
         }
 
         .interactive-area label {
@@ -113,34 +147,39 @@
             font-size: 0.85rem;
             color: var(--text-muted);
             margin-bottom: 8px;
+            font-weight: 600;
         }
 
         .interactive-area input {
             width: 100%;
-            padding: 10px;
-            background: var(--bg-dark);
+            padding: 12px;
+            background: #0b0f19;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
+            border-radius: 8px;
             color: white;
             box-sizing: border-box;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            text-align: center;
         }
 
         .interactive-area input:focus {
             outline: none;
             border-color: var(--accent-blue);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
         }
 
         .btn-check {
             background: transparent;
             border: 1px solid var(--accent-blue);
             color: var(--accent-blue);
-            padding: 10px 20px;
+            padding: 12px 20px;
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
             width: 100%;
+            margin-top: 15px;
             transition: all 0.2s ease;
+            font-size: 1rem;
         }
 
         .btn-check:hover {
@@ -149,86 +188,133 @@
         }
 
         .feedback {
-            margin-top: 10px;
-            font-size: 0.85rem;
+            margin-top: 12px;
+            font-size: 0.9rem;
             font-weight: 600;
-            min-height: 20px;
+            min-height: 24px;
+            line-height: 1.4;
         }
     </style>
 </head>
 <body>
 
-<section class="puzzle-section">
+<div class="puzzle-container">
     <div class="section-header">
         <h2>The Thinker's Playground</h2>
-        <p>Test your mathematical intuition against these classic cerebral challenges.</p>
+        <span class="gujarati-title">વિચારોની રમતગમત: ગણિત કોયડા</span>
+        <p>Test your mathematical intuition. / તમારી ગાણિતિક બુદ્ધિની કસોટી કરો.</p>
+    </div>
+
+    <!-- Live Interactive Score Tracker -->
+    <div class="score-tracker">
+        Your Score / તમારો સ્કોર: <span id="score">0</span> / 4
     </div>
 
     <div class="puzzle-grid">
         <!-- Puzzle 1 -->
         <div class="puzzle-card">
             <div>
-                <span class="badge badge-logic">Pure Logic</span>
+                <span class="badge badge-logic">Logic | તર્કશાસ્ત્ર</span>
                 <h3>The False Coin Dilemma</h3>
-                <p>You have 9 identical-looking coins. One is counterfeit and weighs slightly less than the others. What is the minimum number of weighings needed on a balance scale to find it?</p>
+                <p class="english-text">You have 9 identical coins. One is counterfeit and weighs slightly less. What is the minimum number of weighings needed on a balance scale to find it?</p>
+                <p class="gujarati-text">તમારી પાસે એકસરખા દેખાતા 9 સિક્કા છે. તેમાંથી એક નકલી છે અને તેનું વજન થોડું ઓછું છે. ત્રાજવાનો ઉપયોગ કરીને તેને શોધવા માટે ઓછામાં ઓછું કેટલી વાર વજન કરવું પડે?</p>
             </div>
             <div>
                 <div class="interactive-area">
-                    <label for="ans1">Your Answer (Number):</label>
-                    <input type="number" id="ans1" placeholder="Enter integer">
+                    <label for="ans1">Your Answer / તમારો જવાબ:</label>
+                    <input type="number" id="ans1" placeholder="??">
                     <div id="feed1" class="feedback"></div>
+                    <button class="btn-check" onclick="checkAnswer('ans1', '2', 'feed1')">Check Answer / જવાબ તપાસો</button>
                 </div>
-                <button class="btn-check" onclick="checkAnswer('ans1', '2', 'feed1', 'Correct! Divide into 3 groups of 3. One weigh isolates the heavy group, the second isolates the coin.')">Submit Answer</button>
             </div>
         </div>
 
         <!-- Puzzle 2 -->
         <div class="puzzle-card">
             <div>
-                <span class="badge badge-geometry">Visual Geometry</span>
+                <span class="badge badge-geometry">Geometry | ભૂમિતિ</span>
                 <h3>The Infinite Square Path</h3>
-                <p>Imagine a square of area 1. You cut it in half. You cut that half in half, and repeat infinitely. If you sum all the infinitely small pieces together, what total area do you get?</p>
+                <p class="english-text">Imagine a square of area 1. You cut it in half. You cut that half in half, and repeat infinitely. If you sum all pieces together, what total area do you get?</p>
+                <p class="gujarati-text">1 ક્ષેત્રફળવાળો એક ચોરસ વિચારો. તમે તેને બરાબર અડધો કાપો છો. પછી તે અડધા ભાગને ફરી અડધો કરો છો, અને આવું અનંત સુધી ચાલુ રાખો છો. જો આ બધા ટુકડાઓ ભેગા કરીએ, તો કુલ કેટલું ક્ષેત્રફળ મળશે?</p>
             </div>
             <div>
                 <div class="interactive-area">
-                    <label for="ans2">Your Answer:</label>
-                    <input type="number" id="ans2" placeholder="Enter integer">
+                    <label for="ans2">Your Answer / તમારો જવાબ:</label>
+                    <input type="number" id="ans2" placeholder="??">
                     <div id="feed2" class="feedback"></div>
+                    <button class="btn-check" onclick="checkAnswer('ans2', '1', 'feed2')">Check Answer / જવાબ તપાસો</button>
                 </div>
-                <button class="btn-check" onclick="checkAnswer('ans2', '1', 'feed2', 'Brilliant! The sum of 1/2 + 1/4 + 1/8... converging infinitely will perfectly equal 1.')">Submit Answer</button>
             </div>
         </div>
 
         <!-- Puzzle 3 -->
         <div class="puzzle-card">
             <div>
-                <span class="badge badge-infinity">Probability</span>
+                <span class="badge badge-infinity">Patterns | પેટર્ન</span>
                 <h3>The Rice Grain Paradox</h3>
-                <p>A chessboard starts with 1 grain of rice on the first square, 2 on the second, 4 on the third, doubling each time. How many grains are on the 7th square?</p>
+                <p class="english-text">A chessboard starts with 1 grain of rice on the 1st square, 2 on the 2nd, 4 on the 3rd, doubling each time. How many grains are on the 7th square?</p>
+                <p class="gujarati-text">એક ચેસબોર્ડના પહેલા ખાનામાં ચોખાનો 1 દાણો, બીજા ખાનામાં 2, ત્રીજામાં 4 એમ દર વખતે બમણા દાણા મૂકવામાં આવે છે. તો 7મા ખાનામાં કેટલા દાણા હશે?</p>
             </div>
             <div>
                 <div class="interactive-area">
-                    <label for="ans3">Your Answer:</label>
-                    <input type="number" id="ans3" placeholder="Enter integer">
+                    <label for="ans3">Your Answer / તમારો જવાબ:</label>
+                    <input type="number" id="ans3" placeholder="??">
                     <div id="feed3" class="feedback"></div>
+                    <button class="btn-check" onclick="checkAnswer('ans3', '64', 'feed3')">Check Answer / જવાબ તપાસો</button>
                 </div>
-                <button class="btn-check" onclick="checkAnswer('ans3', '64', 'feed3', 'Spot on! The formula is 2^(n-1). For the 7th square, 2^6 equals 64 grains.')">Submit Answer</button>
+            </div>
+        </div>
+
+        <!-- Puzzle 4 (Broader Addition) -->
+        <div class="puzzle-card">
+            <div>
+                <span class="badge badge-algebra">Algebra | બીજગણિત</span>
+                <h3>The Sibling Count</h3>
+                <p class="english-text">In a family, a boy has as many sisters as brothers. However, his sister has twice as many brothers as sisters. How many brothers are in this family?</p>
+                <p class="gujarati-text">એક પરિવારમાં, એક છોકરાને જેટલી બહેનો છે એટલા જ ભાઈઓ છે. પરંતુ, તેની બહેનને તેના કરતા બમણા ભાઈઓ છે. તો આ પરિવારમાં કુલ કેટલા ભાઈઓ હશે?</p>
+            </div>
+            <div>
+                <div class="interactive-area">
+                    <label for="ans4">Your Answer / તમારો જવાબ:</label>
+                    <input type="number" id="ans4" placeholder="??">
+                    <div id="feed4" class="feedback"></div>
+                    <button class="btn-check" onclick="checkAnswer('ans4', '4', 'feed4')">Check Answer / જવાબ તપાસો</button>
+                </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 
 <script>
-    function checkAnswer(inputId, correctAnswer, feedbackId, successMsg) {
+    // Set up tracking for unique completed questions
+    const solvedQuestions = {};
+    let totalScore = 0;
+
+    // Detailed multilingual success explanations
+    const solutions = {
+        'ans1': "Correct! / સાચો જવાબ! (3-3-3 ના ત્રણ ગ્રુપ બનાવો. પ્રથમ વજનથી નકલી સિક્કાવાળું ગ્રુપ અલગ થશે અને બીજા વજનથી સિક્કો મળી જશે.)",
+        'ans2': "Brilliant! / અદભુત! (1/2 + 1/4 + 1/8... નો અનંત સરવાળો હંમેશા મૂળ ચોરસ એટલે કે 1 બરાબર જ થાય.)",
+        'ans3': "Spot on! / ઉત્તમ! (નિયમ મુજબ 2^(n-1) થાય. એટલે કે 7મા ખાના માટે 2^6 = 64 દાણા થાય.)",
+        'ans4': "Genius! / અસાધારણ! (પરિવારમાં 4 ભાઈઓ અને 3 બહેનો છે. છોકરા માટે 3 ભાઈ અને 3 બહેન; બહેન માટે 4 ભાઈ અને 2 બહેન થાય.)"
+    };
+
+    function checkAnswer(inputId, correctAnswer, feedbackId) {
         const userInput = document.getElementById(inputId).value.trim();
         const feedbackEl = document.getElementById(feedbackId);
         
         if (userInput === correctAnswer) {
             feedbackEl.style.color = "var(--accent-green)";
-            feedbackEl.innerText = successMsg;
+            feedbackEl.innerText = solutions[inputId];
+            
+            // Score counter update logic
+            if (!solvedQuestions[inputId]) {
+                solvedQuestions[inputId] = true;
+                totalScore++;
+                document.getElementById('score').innerText = totalScore;
+            }
         } else {
             feedbackEl.style.color = "#ef4444";
-            feedbackEl.innerText = "Not quite! Re-evaluate your logic and try again.";
+            feedbackEl.innerText = "Try again! / ફરી પ્રયત્ન કરો! તમારા તર્કની ફરીથી ચકાસણી કરો.";
         }
     }
 </script>
