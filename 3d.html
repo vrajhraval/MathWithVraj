@@ -4,8 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Advanced 3D Math Explorer</title>
+<title>Advanced 3D Math Explorer (Fixed)</title>
 
+<!-- ✅ FIXED MATHJAX CONFIG -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)'], ['$', '$']],
+    displayMath: [['\\[','\\]']]
+  }
+};
+</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <style>
@@ -99,9 +108,6 @@ select{
 <option value="hyperboloid">Hyperboloid</option>
 <option value="ellipsoid">Ellipsoid</option>
 
-<option value="elliptic_paraboloid">Elliptic Paraboloid</option>
-<option value="hyperbolic_paraboloid">Hyperbolic Paraboloid</option>
-
 </select>
 
 <div class="counter">
@@ -170,39 +176,42 @@ dodecahedron:0x66ff00,
 
 paraboloid:0xff5500,
 hyperboloid:0xaa00ff,
-ellipsoid:0x00ccff,
-
-elliptic_paraboloid:0x00ffcc,
-hyperbolic_paraboloid:0xff0066
+ellipsoid:0x00ccff
 };
 
-/* INFO DATA */
+/* INFO (FIXED - NO \[ \]) */
 
 const info={
 
-cube:["Cube","\\[V=a^3\\]","\\[x=y=z\\]","8 vertices, 12 edges"],
-cuboid:["Cuboid","\\[V=lbh\\]","\\[x,y,z\\]","Rectangular prism"],
+cube:["Cube","V=a^3","x=y=z","8 vertices, 12 edges"],
 
-sphere:["Sphere","\\[V=\\frac{4}{3}\\pi r^3\\]","\\[x^2+y^2+z^2=r^2\\]","Perfect symmetry"],
+cuboid:["Cuboid","V=lbh","x,y,z axes","Rectangular prism"],
 
-cone:["Cone","\\[V=\\frac{1}{3}\\pi r^2 h\\]","\\[x^2+y^2=z^2\\]","1 vertex"],
+sphere:["Sphere","V=4/3 π r^3","x^2+y^2+z^2=r^2","Perfect symmetry"],
 
-cylinder:["Cylinder","\\[V=\\pi r^2 h\\]","\\[x^2+y^2=r^2\\]","2 circular bases"],
+cone:["Cone","V=1/3 π r^2 h","x^2+y^2=z^2","1 vertex"],
 
-torus:["Torus","\\[V=2\\pi^2 R r^2\\]","Toroidal equation","Donut shape"],
+cylinder:["Cylinder","V=π r^2 h","x^2+y^2=r^2","2 circular bases"],
 
-paraboloid:["Paraboloid","\\[z=x^2+y^2\\]","\\[y=x^2\\]","3D parabola"],
+torus:["Torus","V=2π^2 R r^2","Toroidal equation","Donut shape"],
 
-hyperboloid:["Hyperboloid","\\[x^2+y^2-z^2=1\\]","Hyperbola rotation","Cooling towers"],
+tetrahedron:["Tetrahedron","V=a^3/(6√2)","Platonic solid","4 faces"],
 
-ellipsoid:["Ellipsoid","\\[\\frac{x^2}{a^2}+\\frac{y^2}{b^2}+\\frac{z^2}{c^2}=1\\]","Ellipse extension","Earth shape"],
+octahedron:["Octahedron","V=√2/3 a^3","Symmetric solid","8 faces"],
 
-elliptic_paraboloid:["Elliptic Paraboloid","\\[z=\\frac{x^2}{a^2}+\\frac{y^2}{b^2}\\]","Parabolic bowl","Satellite dish"],
+icosahedron:["Icosahedron","V=5(3+√5)/12 a^3","Regular polyhedron","20 faces"],
 
-hyperbolic_paraboloid:["Hyperbolic Paraboloid","\\[z=\\frac{x^2}{a^2}-\\frac{y^2}{b^2}\\]","Saddle surface","Architecture"]
+dodecahedron:["Dodecahedron","V=(15+7√5)/4 a^3","Pentagon faces","12 faces"],
+
+paraboloid:["Paraboloid","z=x^2+y^2","y=x^2","3D parabola"],
+
+hyperboloid:["Hyperboloid","x^2+y^2-z^2=1","Hyperbola rotation","Cooling towers"],
+
+ellipsoid:["Ellipsoid","x^2/a^2+y^2/b^2+z^2/c^2=1","Ellipse extension","Earth shape"]
+
 };
 
-/* CREATE SHAPE */
+/* CREATE */
 
 function create(type){
 
@@ -214,32 +223,17 @@ switch(type){
 
 case "cube":geo=new THREE.BoxGeometry(2,2,2);break;
 case "cuboid":geo=new THREE.BoxGeometry(2.5,1.5,1);break;
-
 case "sphere":geo=new THREE.SphereGeometry(1.5,16,16);break;
-
 case "cone":geo=new THREE.ConeGeometry(1.5,3,16);break;
-
 case "cylinder":geo=new THREE.CylinderGeometry(1.2,1.2,3,16);break;
-
 case "torus":geo=new THREE.TorusGeometry(1.5,0.5,16,32);break;
-
 case "tetrahedron":geo=new THREE.TetrahedronGeometry(2);break;
-
 case "octahedron":geo=new THREE.OctahedronGeometry(2);break;
-
 case "icosahedron":geo=new THREE.IcosahedronGeometry(2);break;
-
 case "dodecahedron":geo=new THREE.DodecahedronGeometry(2);break;
-
 case "paraboloid":geo=new THREE.CylinderGeometry(0,2,4,32);break;
-
 case "hyperboloid":geo=new THREE.TorusKnotGeometry(1,0.4,64,16);break;
-
 case "ellipsoid":geo=new THREE.SphereGeometry(1.5,16,16);geo.scale(1.5,1,0.8);break;
-
-case "elliptic_paraboloid":geo=new THREE.CylinderGeometry(0,2,4,32);break;
-
-case "hyperbolic_paraboloid":geo=new THREE.TorusKnotGeometry(1,0.3,64,16);break;
 
 }
 
@@ -267,13 +261,7 @@ const p=geo.attributes.position;
 const pts=[];
 
 for(let i=0;i<p.count;i++){
-
-pts.push(new THREE.Vector3(
-p.getX(i),
-p.getY(i),
-p.getZ(i)
-));
-
+pts.push(new THREE.Vector3(p.getX(i),p.getY(i),p.getZ(i)));
 }
 
 group.add(new THREE.Points(
@@ -292,19 +280,15 @@ const d=info[type];
 
 document.getElementById("infoBox").innerHTML=`
 <div class="card">
-<b>${d[0]}</b><br><br>
+<b>${type.toUpperCase()}</b><br><br>
 
-Formula:<br>
-\\[${d[1]}\\]<br><br>
-
-Cartesian Equation:<br>
-\\[${d[2]}\\]<br><br>
-
-${d[3]}
+Formula: ${d[1]}<br>
+Equation: ${d[2]}<br>
+Info: ${d[3]}
 </div>
 `;
 
-MathJax.typesetPromise();
+setTimeout(()=>MathJax.typesetPromise(),50);
 
 }
 
