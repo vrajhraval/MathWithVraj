@@ -7,69 +7,141 @@
 
 <style>
 
-body{
+*{
     margin:0;
-    overflow:hidden;
-    background:#050816;
-    font-family:Arial, sans-serif;
-    color:white;
+    padding:0;
+    box-sizing:border-box;
 }
+
+body{
+    overflow:hidden;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#dbeafe,#f0f9ff,#ffffff);
+    color:#1e293b;
+}
+
+/* LEFT PANEL */
 
 #panel{
     position:absolute;
-    top:10px;
-    left:10px;
-    width:340px;
+    top:15px;
+    left:15px;
+    width:360px;
     max-height:95vh;
     overflow:auto;
-    background:rgba(0,0,0,0.75);
-    padding:20px;
-    border-radius:15px;
+
+    background:rgba(255,255,255,0.75);
+    backdrop-filter:blur(12px);
+
+    border-radius:20px;
+    padding:22px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.12);
+
     z-index:100;
-    backdrop-filter:blur(10px);
 }
 
 h1{
-    margin-top:0;
-    color:#4fc3f7;
+    color:#2563eb;
+    margin-bottom:10px;
+    font-size:30px;
 }
+
+.subtitle{
+    color:#475569;
+    line-height:1.6;
+    margin-bottom:18px;
+}
+
+/* SELECT */
 
 select{
     width:100%;
-    padding:12px;
-    margin-top:10px;
+    padding:14px;
     border:none;
-    border-radius:10px;
-    background:#13203d;
-    color:white;
+    border-radius:14px;
+
+    background:#eff6ff;
+    color:#1e3a8a;
+
     font-size:16px;
+    font-weight:bold;
+
+    outline:none;
+
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
 }
+
+/* INFO SECTION */
 
 .info{
     margin-top:20px;
-    line-height:1.7;
 }
 
-.formula{
-    margin-top:10px;
-    background:#111c36;
-    padding:12px;
-    border-radius:10px;
-    color:#ffd54f;
-    font-weight:bold;
+.info h2{
+    color:#0f172a;
+    margin-bottom:10px;
+}
+
+.desc{
+    line-height:1.7;
+    color:#334155;
+    margin-bottom:14px;
+}
+
+/* FORMULA CARDS */
+
+.card{
+    background:#f8fafc;
+    border-left:5px solid #3b82f6;
+
+    padding:14px;
+    border-radius:12px;
+
+    margin-top:12px;
+
+    box-shadow:0 4px 10px rgba(0,0,0,0.06);
+}
+
+.card strong{
+    color:#2563eb;
 }
 
 .level{
-    margin-top:10px;
     display:inline-block;
-    background:#0077ff;
-    padding:6px 12px;
+
+    margin-top:15px;
+
+    background:#2563eb;
+    color:white;
+
+    padding:7px 14px;
+
     border-radius:30px;
+
     font-size:13px;
+    font-weight:bold;
 }
 
-canvas{
-    display:block;
+.tip{
+    margin-top:18px;
+    padding:12px;
+    background:#ecfeff;
+    border-radius:12px;
+    color:#155e75;
+    line-height:1.6;
+}
+
+/* SCROLLBAR */
+
+#panel::-webkit-scrollbar{
+    width:8px;
+}
+
+#panel::-webkit-scrollbar-thumb{
+    background:#93c5fd;
+    border-radius:20px;
 }
 
 </style>
@@ -78,11 +150,16 @@ canvas{
 
 <div id="panel">
 
-    <h1>📐 Math Shapes Explorer</h1>
+    <h1>📐 3D Math Explorer</h1>
+
+    <p class="subtitle">
+        Explore important mathematical 3D shapes from school geometry
+        to advanced university-level mathematics interactively.
+    </p>
 
     <select id="shapeSelect">
 
-        <optgroup label="Basic Shapes">
+        <optgroup label="Basic Geometry">
             <option value="cube">Cube</option>
             <option value="sphere">Sphere</option>
             <option value="cone">Cone</option>
@@ -97,7 +174,7 @@ canvas{
             <option value="dodecahedron">Dodecahedron</option>
         </optgroup>
 
-        <optgroup label="Higher Mathematics">
+        <optgroup label="Advanced Mathematics">
             <option value="paraboloid">Paraboloid</option>
             <option value="hyperboloid">Hyperboloid</option>
             <option value="ellipsoid">Ellipsoid</option>
@@ -116,8 +193,17 @@ canvas{
 
 <script>
 
+/* =========================
+   SCENE
+========================= */
+
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x050816);
+
+scene.background = new THREE.Color(0xe0f2fe);
+
+/* =========================
+   CAMERA
+========================= */
 
 const camera = new THREE.PerspectiveCamera(
     70,
@@ -128,145 +214,212 @@ const camera = new THREE.PerspectiveCamera(
 
 camera.position.set(0,2,6);
 
-const renderer = new THREE.WebGLRenderer({antialias:true});
+/* =========================
+   RENDERER
+========================= */
+
+const renderer = new THREE.WebGLRenderer({
+    antialias:true
+});
+
 renderer.setSize(window.innerWidth,window.innerHeight);
+
 document.body.appendChild(renderer.domElement);
 
-const controls = new THREE.OrbitControls(camera,renderer.domElement);
+/* =========================
+   CONTROLS
+========================= */
+
+const controls = new THREE.OrbitControls(
+    camera,
+    renderer.domElement
+);
 
 controls.enableDamping = true;
 
-const light1 = new THREE.PointLight(0xffffff,2);
-light1.position.set(5,5,5);
-scene.add(light1);
+/* =========================
+   LIGHTS
+========================= */
 
-const light2 = new THREE.AmbientLight(0xffffff,0.7);
-scene.add(light2);
+const ambientLight = new THREE.AmbientLight(0xffffff,1.2);
+scene.add(ambientLight);
 
-const grid = new THREE.GridHelper(30,30);
+const dirLight = new THREE.DirectionalLight(0xffffff,1.5);
+
+dirLight.position.set(5,5,5);
+
+scene.add(dirLight);
+
+/* =========================
+   GRID
+========================= */
+
+const grid = new THREE.GridHelper(
+    30,
+    30,
+    0x94a3b8,
+    0xcbd5e1
+);
+
 scene.add(grid);
 
-const material = new THREE.MeshNormalMaterial({
-    wireframe:false
+/* =========================
+   MATERIAL
+========================= */
+
+const material = new THREE.MeshPhongMaterial({
+
+    color:0x60a5fa,
+    shininess:120,
+
+    transparent:true,
+    opacity:0.95
+
 });
 
-let currentShape;
+/* =========================
+   SHAPE INFO
+========================= */
 
 const infoData = {
 
 cube:{
 title:"Cube",
-desc:"A cube has 6 equal square faces.",
+desc:"A cube is one of the most important 3D shapes in geometry. All edges are equal, and every face is a square.",
 formula:"Volume = a³",
-eq:"Cartesian: x,y,z bounded equally",
+eq:"Cartesian Idea: Equal dimensions along x, y and z axes",
+extra:"A cube has 6 faces, 12 edges and 8 vertices.",
 level:"School Geometry"
 },
 
 sphere:{
 title:"Sphere",
-desc:"Perfect round 3D object.",
-formula:"Volume = 4/3 πr³",
+desc:"A sphere is a perfectly round 3D object where every point on the surface is equally distant from the center.",
+formula:"Volume = (4/3)πr³",
 eq:"x² + y² + z² = r²",
+extra:"Planets, balls and bubbles are examples of spheres.",
 level:"School Geometry"
 },
 
 cone:{
 title:"Cone",
-desc:"Circular base with one apex.",
-formula:"Volume = 1/3 πr²h",
-eq:"x² + y² = z²",
-level:"Middle School"
+desc:"A cone has one circular base and one apex point connected by a curved surface.",
+formula:"Volume = (1/3)πr²h",
+eq:"Cone Relation: x² + y² = z²",
+extra:"Ice cream cones and volcanoes are cone-shaped objects.",
+level:"Middle School Geometry"
 },
 
 cylinder:{
 title:"Cylinder",
-desc:"Two circular bases connected.",
+desc:"A cylinder contains two parallel circular bases connected by a curved surface.",
 formula:"Volume = πr²h",
 eq:"x² + y² = r²",
-level:"School Geometry"
+extra:"Pipes and cans are common cylindrical shapes.",
+level:"Basic Solid Geometry"
 },
 
 torus:{
 title:"Torus",
-desc:"Donut shaped surface.",
-formula:"Advanced Topology Shape",
-eq:"(R − √(x²+y²))² + z² = r²",
+desc:"A torus is a donut-shaped surface studied in topology and advanced geometry.",
+formula:"Complex Surface Geometry",
+eq:"(R−√(x²+y²))² + z² = r²",
+extra:"Magnetic fields and topology studies use toroidal structures.",
 level:"Higher Mathematics"
 },
 
 tetrahedron:{
 title:"Tetrahedron",
-desc:"4 triangular faces.",
+desc:"A tetrahedron is the simplest polyhedron made from 4 triangular faces.",
 formula:"Volume = a³ / (6√2)",
-eq:"Polyhedron",
+eq:"Polyhedral Geometry",
+extra:"It is one of the five Platonic solids.",
 level:"Advanced Geometry"
 },
 
 octahedron:{
 title:"Octahedron",
-desc:"8 triangular faces.",
+desc:"An octahedron contains 8 triangular faces and high symmetry.",
 formula:"Volume = (√2/3)a³",
-eq:"Polyhedron",
-level:"Advanced Geometry"
+eq:"Polyhedral Geometry",
+extra:"Used in chemistry and crystal structures.",
+level:"Higher Geometry"
 },
 
 icosahedron:{
 title:"Icosahedron",
-desc:"20 triangular faces.",
-formula:"Complex Polyhedral Formula",
-eq:"Polyhedron",
-level:"Higher Geometry"
+desc:"An icosahedron has 20 triangular faces and appears in advanced geometry and molecular science.",
+formula:"Advanced Polyhedron Formula",
+eq:"Regular Polyhedron",
+extra:"Frequently used in 3D modeling and mathematics.",
+level:"University Geometry"
 },
 
 dodecahedron:{
 title:"Dodecahedron",
-desc:"12 pentagonal faces.",
-formula:"Advanced Polyhedron Formula",
-eq:"Polyhedron",
+desc:"A dodecahedron contains 12 pentagonal faces.",
+formula:"Complex Polyhedral Formula",
+eq:"Regular Polyhedron",
+extra:"One of the famous Platonic solids.",
 level:"Higher Geometry"
 },
 
 paraboloid:{
 title:"Paraboloid",
-desc:"3D parabola surface.",
+desc:"A paraboloid is a 3D surface formed by rotating a parabola.",
 formula:"z = x² + y²",
-eq:"Parabola: y = x²",
-level:"Calculus & Analytical Geometry"
+eq:"Parabola Equation: y = x²",
+extra:"Satellite dishes and telescopes use paraboloid structures.",
+level:"Analytical Geometry"
 },
 
 hyperboloid:{
 title:"Hyperboloid",
-desc:"Hyperbola based 3D surface.",
-formula:"x² + y² - z² = 1",
-eq:"Hyperbola: x²/a² - y²/b² = 1",
+desc:"A hyperboloid is a curved surface generated from hyperbolas.",
+formula:"x² + y² − z² = 1",
+eq:"Hyperbola: x²/a² − y²/b² = 1",
+extra:"Cooling towers often use hyperboloid geometry.",
 level:"Higher Mathematics"
 },
 
 ellipsoid:{
 title:"Ellipsoid",
-desc:"Stretched sphere.",
+desc:"An ellipsoid is a stretched or compressed sphere.",
 formula:"x²/a² + y²/b² + z²/c² = 1",
 eq:"Ellipse: x²/a² + y²/b² = 1",
+extra:"Earth approximately has an ellipsoidal shape.",
 level:"Analytical Geometry"
 },
 
 mobius:{
 title:"Mobius Strip",
-desc:"Surface with one side only.",
-formula:"Topology Surface",
-eq:"Non-orientable geometry",
-level:"University Mathematics"
+desc:"A Möbius strip has only one continuous surface and one edge.",
+formula:"Topological Surface",
+eq:"Non-orientable Geometry",
+extra:"Walking on the strip returns you to the starting point upside-down.",
+level:"Topology"
 },
 
 knot:{
 title:"Torus Knot",
-desc:"Advanced topological knot.",
+desc:"A torus knot is studied in topology and knot theory.",
 formula:"Parametric Equations",
-eq:"Topology & Knot Theory",
-level:"Higher Studies"
+eq:"Advanced Topology",
+extra:"Used in advanced physics and mathematics research.",
+level:"University Mathematics"
 }
 
 };
+
+/* =========================
+   CURRENT SHAPE
+========================= */
+
+let currentShape;
+
+/* =========================
+   CREATE SHAPE
+========================= */
 
 function createShape(type){
 
@@ -319,7 +472,6 @@ function createShape(type){
             break;
 
         case "hyperboloid":
-            geometry = new THREE.HyperboloidGeometry;
             geometry = new THREE.TorusKnotGeometry(1,0.4,128,32);
             break;
 
@@ -337,12 +489,19 @@ function createShape(type){
             break;
     }
 
-    currentShape = new THREE.Mesh(geometry,material);
+    currentShape = new THREE.Mesh(
+        geometry,
+        material
+    );
 
     scene.add(currentShape);
 
     updateInfo(type);
 }
+
+/* =========================
+   UPDATE INFO
+========================= */
 
 function updateInfo(type){
 
@@ -352,30 +511,54 @@ function updateInfo(type){
 
         <h2>${d.title}</h2>
 
-        <p>${d.desc}</p>
+        <p class="desc">${d.desc}</p>
 
-        <div class="formula">
+        <div class="card">
+            <strong>Formula:</strong><br>
             ${d.formula}
         </div>
 
-        <div class="formula">
+        <div class="card">
+            <strong>Equation:</strong><br>
             ${d.eq}
+        </div>
+
+        <div class="card">
+            <strong>Interesting Fact:</strong><br>
+            ${d.extra}
         </div>
 
         <div class="level">
             ${d.level}
         </div>
 
+        <div class="tip">
+            💡 Drag the mouse to rotate the shape and use the mouse wheel to zoom in/out.
+        </div>
+
     `;
 }
 
+/* =========================
+   INITIAL SHAPE
+========================= */
+
 createShape("cube");
 
-document.getElementById("shapeSelect").addEventListener("change",function(e){
+/* =========================
+   SELECT EVENT
+========================= */
+
+document.getElementById("shapeSelect")
+.addEventListener("change",function(e){
 
     createShape(e.target.value);
 
 });
+
+/* =========================
+   ANIMATION
+========================= */
 
 function animate(){
 
@@ -388,13 +571,21 @@ function animate(){
 
 animate();
 
+/* =========================
+   RESPONSIVE
+========================= */
+
 window.addEventListener("resize",function(){
 
-    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.aspect =
+        window.innerWidth/window.innerHeight;
 
     camera.updateProjectionMatrix();
 
-    renderer.setSize(window.innerWidth,window.innerHeight);
+    renderer.setSize(
+        window.innerWidth,
+        window.innerHeight
+    );
 
 });
 
