@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Logic & Puzzles</title>
+    <!-- Google Fonts for Modern Typography -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-blue: #38bdf8;
+            --accent-purple: #a855f7;
+            --accent-green: #4ade80;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .puzzle-section {
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .puzzle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .puzzle-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .puzzle-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
+        }
+
+        .badge {
+            align-self: flex-start;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .badge-logic { background: rgba(56, 189, 248, 0.15); color: var(--accent-blue); }
+        .badge-geometry { background: rgba(168, 85, 247, 0.15); color: var(--accent-purple); }
+        .badge-infinity { background: rgba(74, 222, 128, 0.15); color: var(--accent-green); }
+
+        .puzzle-card h3 {
+            font-size: 1.4rem;
+            margin: 0 0 15px 0;
+        }
+
+        .puzzle-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .interactive-area {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .interactive-area label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .interactive-area input {
+            width: 100%;
+            padding: 10px;
+            background: var(--bg-dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            color: white;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        .interactive-area input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        .btn-check {
+            background: transparent;
+            border: 1px solid var(--accent-blue);
+            color: var(--accent-blue);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+
+        .btn-check:hover {
+            background: var(--accent-blue);
+            color: var(--bg-dark);
+        }
+
+        .feedback {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            min-height: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<section class="puzzle-section">
+    <div class="section-header">
+        <h2>The Thinker's Playground</h2>
+        <p>Test your mathematical intuition against these classic cerebral challenges.</p>
+    </div>
+
+    <div class="puzzle-grid">
+        <!-- Puzzle 1 -->
+        <div class="puzzle-card">
+            <div>
+                <span class="badge badge-logic">Pure Logic</span>
+                <h3>The False Coin Dilemma</h3>
+                <p>You have 9 identical-looking coins. One is counterfeit and weighs slightly less than the others. What is the minimum number of weighings needed on a balance scale to find it?</p>
+            </div>
+            <div>
+                <div class="interactive-area">
+                    <label for="ans1">Your Answer (Number):</label>
+                    <input type="number" id="ans1" placeholder="Enter integer">
+                    <div id="feed1" class="feedback"></div>
+                </div>
+                <button class="btn-check" onclick="checkAnswer('ans1', '2', 'feed1', 'Correct! Divide into 3 groups of 3. One weigh isolates the heavy group, the second isolates the coin.')">Submit Answer</button>
+            </div>
+        </div>
+
+        <!-- Puzzle 2 -->
+        <div class="puzzle-card">
+            <div>
+                <span class="badge badge-geometry">Visual Geometry</span>
+                <h3>The Infinite Square Path</h3>
+                <p>Imagine a square of area 1. You cut it in half. You cut that half in half, and repeat infinitely. If you sum all the infinitely small pieces together, what total area do you get?</p>
+            </div>
+            <div>
+                <div class="interactive-area">
+                    <label for="ans2">Your Answer:</label>
+                    <input type="number" id="ans2" placeholder="Enter integer">
+                    <div id="feed2" class="feedback"></div>
+                </div>
+                <button class="btn-check" onclick="checkAnswer('ans2', '1', 'feed2', 'Brilliant! The sum of 1/2 + 1/4 + 1/8... converging infinitely will perfectly equal 1.')">Submit Answer</button>
+            </div>
+        </div>
+
+        <!-- Puzzle 3 -->
+        <div class="puzzle-card">
+            <div>
+                <span class="badge badge-infinity">Probability</span>
+                <h3>The Rice Grain Paradox</h3>
+                <p>A chessboard starts with 1 grain of rice on the first square, 2 on the second, 4 on the third, doubling each time. How many grains are on the 7th square?</p>
+            </div>
+            <div>
+                <div class="interactive-area">
+                    <label for="ans3">Your Answer:</label>
+                    <input type="number" id="ans3" placeholder="Enter integer">
+                    <div id="feed3" class="feedback"></div>
+                </div>
+                <button class="btn-check" onclick="checkAnswer('ans3', '64', 'feed3', 'Spot on! The formula is 2^(n-1). For the 7th square, 2^6 equals 64 grains.')">Submit Answer</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function checkAnswer(inputId, correctAnswer, feedbackId, successMsg) {
+        const userInput = document.getElementById(inputId).value.trim();
+        const feedbackEl = document.getElementById(feedbackId);
+        
+        if (userInput === correctAnswer) {
+            feedbackEl.style.color = "var(--accent-green)";
+            feedbackEl.innerText = successMsg;
+        } else {
+            feedbackEl.style.color = "#ef4444";
+            feedbackEl.innerText = "Not quite! Re-evaluate your logic and try again.";
+        }
+    }
+</script>
+
+</body>
+</html>
