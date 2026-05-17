@@ -4,723 +4,357 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>3D Mathematics Explorer</title>
+<title>Ultimate 3D Math Explorer</title>
 
-<!-- MathJax for LaTeX -->
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
     overflow:hidden;
-    font-family:Arial, sans-serif;
-    background:#f1f5f9;
-    color:#111827;
+    font-family:Arial;
+    background:#050816;
+    color:white;
 }
 
 /* PANEL */
 
 #panel{
-
     position:absolute;
-
     top:15px;
-
     left:15px;
-
-    width:380px;
-
+    width:390px;
     max-height:95vh;
-
     overflow:auto;
-
-    background:white;
-
-    border-radius:22px;
-
-    padding:24px;
-
-    box-shadow:0 10px 40px rgba(0,0,0,0.12);
-
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(12px);
+    border-radius:18px;
+    padding:20px;
     z-index:100;
 }
 
 h1{
-
-    color:#1d4ed8;
-
-    margin-bottom:12px;
-
-    font-size:30px;
+    color:#4fc3f7;
+    margin-bottom:10px;
 }
-
-.subtitle{
-
-    color:#475569;
-
-    line-height:1.7;
-
-    margin-bottom:18px;
-}
-
-/* SELECT */
 
 select{
-
     width:100%;
-
-    padding:14px;
-
+    padding:12px;
     border:none;
-
-    border-radius:14px;
-
-    background:#dbeafe;
-
-    color:#1e3a8a;
-
+    border-radius:10px;
+    background:#111b3d;
+    color:white;
     font-size:16px;
+}
 
+/* COUNTER */
+
+.counter{
+    margin-top:10px;
+    display:flex;
+    justify-content:space-between;
+    color:#ffd54f;
     font-weight:bold;
-
-    outline:none;
 }
 
 /* INFO */
 
 .info{
-
-    margin-top:20px;
-}
-
-.info h2{
-
-    color:#111827;
-
-    margin-bottom:10px;
-}
-
-.desc{
-
-    line-height:1.7;
-
-    color:#374151;
-
-    margin-bottom:16px;
-}
-
-/* CARDS */
-
-.card{
-
-    background:#f8fafc;
-
-    border-left:6px solid #2563eb;
-
-    padding:14px;
-
-    border-radius:12px;
-
-    margin-top:14px;
-}
-
-.card strong{
-
-    color:#1d4ed8;
-}
-
-.level{
-
-    display:inline-block;
-
-    margin-top:16px;
-
-    background:#1d4ed8;
-
-    color:white;
-
-    padding:8px 15px;
-
-    border-radius:30px;
-
-    font-size:13px;
-
-    font-weight:bold;
-}
-
-.tip{
-
-    margin-top:16px;
-
-    background:#ecfeff;
-
-    padding:12px;
-
-    border-radius:12px;
-
-    color:#0f766e;
-
+    margin-top:15px;
     line-height:1.6;
 }
 
-/* MATH STYLE */
-
-.math{
-
-    margin-top:8px;
-
-    font-size:17px;
-
-    color:#111827;
-}
-
-/* SCROLLBAR */
-
-#panel::-webkit-scrollbar{
-    width:8px;
-}
-
-#panel::-webkit-scrollbar-thumb{
-    background:#93c5fd;
-    border-radius:20px;
+.card{
+    margin-top:12px;
+    padding:12px;
+    background:rgba(255,255,255,0.07);
+    border-left:4px solid #4fc3f7;
+    border-radius:10px;
 }
 
 </style>
 </head>
+
 <body>
 
 <div id="panel">
 
-    <h1>📐 3D Math Explorer</h1>
+<h1>📐 Ultimate 3D Math Explorer</h1>
 
-    <p class="subtitle">
-        Interactive mathematical learning platform with 3D geometry,
-        formulas, Cartesian equations and advanced mathematical surfaces.
-    </p>
+<select id="shapeSelect">
 
-    <select id="shapeSelect">
+<optgroup label="Basic Geometry">
+<option value="cube">Cube</option>
+<option value="sphere">Sphere</option>
+<option value="cone">Cone</option>
+<option value="cylinder">Cylinder</option>
+<option value="torus">Torus</option>
+</optgroup>
 
-        <optgroup label="Basic Geometry">
-            <option value="cube">Cube</option>
-            <option value="sphere">Sphere</option>
-            <option value="cone">Cone</option>
-            <option value="cylinder">Cylinder</option>
-            <option value="torus">Torus</option>
-        </optgroup>
+<optgroup label="Platonic Solids">
+<option value="tetrahedron">Tetrahedron</option>
+<option value="octahedron">Octahedron</option>
+<option value="icosahedron">Icosahedron</option>
+<option value="dodecahedron">Dodecahedron</option>
+</optgroup>
 
-        <optgroup label="Platonic Solids">
-            <option value="tetrahedron">Tetrahedron</option>
-            <option value="octahedron">Octahedron</option>
-            <option value="icosahedron">Icosahedron</option>
-            <option value="dodecahedron">Dodecahedron</option>
-        </optgroup>
+</select>
 
-        <optgroup label="Higher Mathematics">
-            <option value="paraboloid">Paraboloid</option>
-            <option value="hyperboloid">Hyperboloid</option>
-            <option value="ellipsoid">Ellipsoid</option>
-            <option value="mobius">Mobius Strip</option>
-            <option value="knot">Torus Knot</option>
-        </optgroup>
+<div class="counter">
+<span id="vCount">Vertices: 0</span>
+<span id="eCount">Edges: 0</span>
+</div>
 
-    </select>
-
-    <div class="info" id="infoBox"></div>
+<div id="infoBox" class="info"></div>
 
 </div>
 
-<!-- THREE JS -->
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
 <script>
 
-/* =========================
-   SCENE
-========================= */
+/* ================= SCENE ================= */
 
 const scene = new THREE.Scene();
-
 scene.background = new THREE.Color(0x050816);
 
-/* =========================
-   CAMERA
-========================= */
+/* ================= CAMERA ================= */
 
-const camera = new THREE.PerspectiveCamera(
-
-    70,
-
-    window.innerWidth/window.innerHeight,
-
-    0.1,
-
-    1000
-
-);
-
+const camera = new THREE.PerspectiveCamera(70,window.innerWidth/window.innerHeight,0.1,1000);
 camera.position.set(0,2,6);
 
-/* =========================
-   RENDERER
-========================= */
+/* ================= RENDERER ================= */
 
-const renderer = new THREE.WebGLRenderer({
-
-    antialias:true
-
-});
-
-renderer.setSize(
-
-    window.innerWidth,
-
-    window.innerHeight
-
-);
-
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(window.innerWidth,window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-/* =========================
-   CONTROLS
-========================= */
+/* ================= CONTROLS ================= */
 
-const controls = new THREE.OrbitControls(
-
-    camera,
-
-    renderer.domElement
-
-);
-
+const controls = new THREE.OrbitControls(camera,renderer.domElement);
 controls.enableDamping = true;
 
-/* =========================
-   LIGHTS
-========================= */
+/* ================= LIGHT ================= */
 
-const ambientLight = new THREE.AmbientLight(
+scene.add(new THREE.AmbientLight(0xffffff,1.2));
+const light = new THREE.DirectionalLight(0xffffff,1.5);
+light.position.set(5,5,5);
+scene.add(light);
 
-    0xffffff,
+/* ================= GROUP ================= */
 
-    1.4
+let group = new THREE.Group();
+scene.add(group);
 
-);
+function clearGroup(){
+group.clear();
+}
 
-scene.add(ambientLight);
+/* ================= COLORS ================= */
 
-const directionalLight = new THREE.DirectionalLight(
+const colors={
+cube:0xff0000,
+sphere:0x00ffff,
+cone:0xff8800,
+cylinder:0x8000ff,
+torus:0xff1493,
+tetrahedron:0x00ff66,
+octahedron:0x0066ff,
+icosahedron:0xffff00,
+dodecahedron:0x66ff00
+};
 
-    0xffffff,
-
-    1.6
-
-);
-
-directionalLight.position.set(5,5,5);
-
-scene.add(directionalLight);
-
-/* =========================
-   GRID
-========================= */
-
-const grid = new THREE.GridHelper(
-
-    30,
-
-    30,
-
-    0x64748b,
-
-    0xcbd5e1
-
-);
-
-scene.add(grid);
-
-/* =========================
-   SHAPE INFO
-========================= */
+/* ================= INFO (FULL + LATEX) ================= */
 
 const infoData = {
 
 cube:{
 title:"Cube",
-desc:"A cube is a regular 3D solid with equal edges and square faces.",
 formula:"\\[V = a^3\\]",
-equation:"\\[x = y = z\\]",
-steps:"\\[V = a \\times a \\times a\\]",
-extra:"A cube has 6 faces, 12 edges and 8 vertices.",
-level:"School Geometry"
+eq:"\\[x=y=z\\]",
+extra:"6 faces, 12 edges, 8 vertices"
 },
 
 sphere:{
 title:"Sphere",
-desc:"A sphere is a perfectly round geometric object in 3D space.",
 formula:"\\[V = \\frac{4}{3}\\pi r^3\\]",
-equation:"\\[x^2 + y^2 + z^2 = r^2\\]",
-steps:"\\[A = 4\\pi r^2\\]",
-extra:"Every point on the sphere surface is equally distant from the center.",
-level:"School Geometry"
+eq:"\\[x^2+y^2+z^2=r^2\\]",
+extra:"Perfect symmetric 3D shape"
 },
 
 cone:{
 title:"Cone",
-desc:"A cone has a circular base connected to one apex point.",
 formula:"\\[V = \\frac{1}{3}\\pi r^2 h\\]",
-equation:"\\[x^2 + y^2 = z^2\\]",
-steps:"\\[l = \\sqrt{r^2 + h^2}\\]",
-extra:"Cones are important in optics and engineering.",
-level:"Middle School Geometry"
+eq:"\\[x^2+y^2=z^2\\]",
+extra:"Has 1 vertex and circular base"
 },
 
 cylinder:{
 title:"Cylinder",
-desc:"A cylinder contains two parallel circular bases.",
 formula:"\\[V = \\pi r^2 h\\]",
-equation:"\\[x^2 + y^2 = r^2\\]",
-steps:"\\[A = 2\\pi rh + 2\\pi r^2\\]",
-extra:"Cylinders are common in mechanical structures.",
-level:"Basic Geometry"
+eq:"\\[x^2+y^2=r^2\\]",
+extra:"Two circular bases"
 },
 
 torus:{
 title:"Torus",
-desc:"A torus is a donut-shaped surface studied in topology.",
-formula:"\\[V = 2\\pi^2 Rr^2\\]",
-equation:"\\[(R-\\sqrt{x^2+y^2})^2+z^2=r^2\\]",
-steps:"\\[A = 4\\pi^2 Rr\\]",
-extra:"Toroidal shapes appear in magnetic field systems.",
-level:"Higher Mathematics"
+formula:"\\[V = 2\\pi^2 R r^2\\]",
+eq:"\\[(R-\\sqrt{x^2+y^2})^2+z^2=r^2\\]",
+extra:"Donut shaped geometry"
 },
 
 tetrahedron:{
 title:"Tetrahedron",
-desc:"A tetrahedron is the simplest polyhedron with 4 triangular faces.",
 formula:"\\[V = \\frac{a^3}{6\\sqrt{2}}\\]",
-equation:"\\[\\text{Regular Polyhedron}\\]",
-steps:"\\[A = \\sqrt{3}a^2\\]",
-extra:"One of the five Platonic solids.",
-level:"Advanced Geometry"
+eq:"Platonic Solid",
+extra:"4 triangular faces"
 },
 
 octahedron:{
 title:"Octahedron",
-desc:"An octahedron contains 8 triangular faces.",
 formula:"\\[V = \\frac{\\sqrt{2}}{3}a^3\\]",
-equation:"\\[|x|+|y|+|z|=a\\]",
-steps:"\\[A = 2\\sqrt{3}a^2\\]",
-extra:"Used in crystallography and chemistry.",
-level:"Higher Geometry"
+eq:"Symmetric solid",
+extra:"8 triangular faces"
 },
 
 icosahedron:{
 title:"Icosahedron",
-desc:"An icosahedron contains 20 equilateral triangular faces.",
 formula:"\\[V = \\frac{5(3+\\sqrt5)}{12}a^3\\]",
-equation:"\\[\\text{Platonic Solid}\\]",
-steps:"\\[A = 5\\sqrt3 a^2\\]",
-extra:"Important in advanced geometry.",
-level:"University Geometry"
+eq:"Regular polyhedron",
+extra:"20 triangular faces"
 },
 
 dodecahedron:{
 title:"Dodecahedron",
-desc:"A dodecahedron contains 12 pentagonal faces.",
 formula:"\\[V = \\frac{15+7\\sqrt5}{4}a^3\\]",
-equation:"\\[\\text{Regular Polyhedron}\\]",
-steps:"\\[A = 3\\sqrt{25+10\\sqrt5}a^2\\]",
-extra:"A famous Platonic solid.",
-level:"Higher Geometry"
-},
-
-paraboloid:{
-title:"Paraboloid",
-desc:"A paraboloid is formed by rotating a parabola.",
-formula:"\\[z = x^2 + y^2\\]",
-equation:"\\[y = x^2\\]",
-steps:"\\[\\text{3D extension of parabola}\\]",
-extra:"Used in satellite dishes and mirrors.",
-level:"Analytical Geometry"
-},
-
-hyperboloid:{
-title:"Hyperboloid",
-desc:"A hyperboloid is generated from hyperbolas.",
-formula:"\\[x^2+y^2-z^2=1\\]",
-equation:"\\[\\frac{x^2}{a^2}-\\frac{y^2}{b^2}=1\\]",
-steps:"\\[\\text{Hyperbola rotated in 3D}\\]",
-extra:"Cooling towers often use this geometry.",
-level:"Higher Mathematics"
-},
-
-ellipsoid:{
-title:"Ellipsoid",
-desc:"An ellipsoid is a stretched sphere.",
-formula:"\\[\\frac{x^2}{a^2}+\\frac{y^2}{b^2}+\\frac{z^2}{c^2}=1\\]",
-equation:"\\[\\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1\\]",
-steps:"\\[\\text{3D ellipse}\\]",
-extra:"Earth approximately resembles an ellipsoid.",
-level:"Analytical Geometry"
-},
-
-mobius:{
-title:"Mobius Strip",
-desc:"A Möbius strip has only one side and one edge.",
-formula:"\\[\\text{Topological Surface}\\]",
-equation:"\\[\\text{Non-orientable Geometry}\\]",
-steps:"\\[\\text{One continuous surface}\\]",
-extra:"A fascinating object in topology.",
-level:"Topology"
-},
-
-knot:{
-title:"Torus Knot",
-desc:"A torus knot is studied in knot theory and topology.",
-formula:"\\[x(t), y(t), z(t)\\]",
-equation:"\\[\\text{Parametric Equations}\\]",
-steps:"\\[\\text{Advanced Mathematical Curves}\\]",
-extra:"Used in physics and advanced mathematics.",
-level:"University Mathematics"
+eq:"Pentagon faces",
+extra:"12 faces total"
 }
 
 };
 
-/* =========================
-   CURRENT SHAPE
-========================= */
+/* ================= CREATE SHAPE ================= */
 
-let currentShape;
-
-/* =========================
-   CREATE SHAPE
-========================= */
+let current;
 
 function createShape(type){
 
-    if(currentShape){
+clearGroup();
 
-        scene.remove(currentShape);
+let geometry;
 
-    }
+/* shapes */
 
-    let geometry;
+switch(type){
 
-    switch(type){
+case "cube":geometry=new THREE.BoxGeometry(2,2,2);break;
+case "sphere":geometry=new THREE.SphereGeometry(1.5,16,16);break;
+case "cone":geometry=new THREE.ConeGeometry(1.5,3,16);break;
+case "cylinder":geometry=new THREE.CylinderGeometry(1.2,1.2,3,16);break;
+case "torus":geometry=new THREE.TorusGeometry(1.5,0.5,16,32);break;
+case "tetrahedron":geometry=new THREE.TetrahedronGeometry(2);break;
+case "octahedron":geometry=new THREE.OctahedronGeometry(2);break;
+case "icosahedron":geometry=new THREE.IcosahedronGeometry(2);break;
+case "dodecahedron":geometry=new THREE.DodecahedronGeometry(2);break;
 
-        case "cube":
-            geometry = new THREE.BoxGeometry(2,2,2);
-            break;
-
-        case "sphere":
-            geometry = new THREE.SphereGeometry(1.5,64,64);
-            break;
-
-        case "cone":
-            geometry = new THREE.ConeGeometry(1.5,3,64);
-            break;
-
-        case "cylinder":
-            geometry = new THREE.CylinderGeometry(1.2,1.2,3,64);
-            break;
-
-        case "torus":
-            geometry = new THREE.TorusGeometry(1.5,0.5,32,100);
-            break;
-
-        case "tetrahedron":
-            geometry = new THREE.TetrahedronGeometry(2);
-            break;
-
-        case "octahedron":
-            geometry = new THREE.OctahedronGeometry(2);
-            break;
-
-        case "icosahedron":
-            geometry = new THREE.IcosahedronGeometry(2);
-            break;
-
-        case "dodecahedron":
-            geometry = new THREE.DodecahedronGeometry(2);
-            break;
-
-        case "paraboloid":
-            geometry = new THREE.CylinderGeometry(0,2,4,64,64,true);
-            break;
-
-        case "hyperboloid":
-            geometry = new THREE.TorusKnotGeometry(1,0.4,128,32);
-            break;
-
-        case "ellipsoid":
-            geometry = new THREE.SphereGeometry(1.5,64,64);
-            geometry.scale(1.5,1,0.8);
-            break;
-
-        case "mobius":
-            geometry = new THREE.TorusKnotGeometry(1,0.25,128,16);
-            break;
-
-        case "knot":
-            geometry = new THREE.TorusKnotGeometry(1,0.3,200,32);
-            break;
-    }
-
-    /* BRIGHT COLORS */
-
-    const colors = {
-
-        cube:0xff0000,
-        sphere:0x00ffff,
-        cone:0xff8800,
-        cylinder:0x8000ff,
-        torus:0xff1493,
-        tetrahedron:0x00ff66,
-        octahedron:0x0066ff,
-        icosahedron:0xffff00,
-        dodecahedron:0x66ff00,
-        paraboloid:0xff5500,
-        hyperboloid:0xaa00ff,
-        ellipsoid:0x00ccff,
-        mobius:0xff0055,
-        knot:0x0044ff
-
-    };
-
-    const shapeMaterial = new THREE.MeshPhongMaterial({
-
-        color:colors[type],
-
-        shininess:250,
-
-        emissive:0x111111,
-
-        specular:0xffffff
-
-    });
-
-    currentShape = new THREE.Mesh(
-
-        geometry,
-
-        shapeMaterial
-
-    );
-
-    scene.add(currentShape);
-
-    updateInfo(type);
 }
 
-/* =========================
-   UPDATE INFO
-========================= */
+/* SOLID */
 
-function updateInfo(type){
+const mesh=new THREE.Mesh(
+geometry,
+new THREE.MeshPhongMaterial({
+color:colors[type]||0xffffff,
+shininess:200
+})
+);
 
-    const d = infoData[type];
+group.add(mesh);
 
-    document.getElementById("infoBox").innerHTML = `
+/* EDGES */
 
-        <h2>${d.title}</h2>
+const edges=new THREE.EdgesGeometry(geometry);
 
-        <p class="desc">${d.desc}</p>
+group.add(new THREE.LineSegments(
+edges,
+new THREE.LineBasicMaterial({color:0xffffff})
+));
 
-        <div class="card">
-            <strong>Volume / Formula</strong>
-            <div class="math">${d.formula}</div>
-        </div>
+/* VERTICES */
 
-        <div class="card">
-            <strong>Cartesian Equation</strong>
-            <div class="math">${d.equation}</div>
-        </div>
+const pos=geometry.attributes.position;
+const pts=[];
 
-        <div class="card">
-            <strong>Mathematical Steps</strong>
-            <div class="math">${d.steps}</div>
-        </div>
-
-        <div class="card">
-            <strong>Interesting Fact</strong><br>
-            ${d.extra}
-        </div>
-
-        <div class="level">
-            ${d.level}
-        </div>
-
-        <div class="tip">
-            💡 Drag to rotate the object and scroll to zoom.
-        </div>
-
-    `;
-
-    MathJax.typesetPromise();
+for(let i=0;i<pos.count;i++){
+pts.push(new THREE.Vector3(
+pos.getX(i),
+pos.getY(i),
+pos.getZ(i)
+));
 }
 
-/* =========================
-   INITIAL SHAPE
-========================= */
+group.add(new THREE.Points(
+new THREE.BufferGeometry().setFromPoints(pts),
+new THREE.PointsMaterial({
+color:0xffd700,
+size:0.08
+})
+));
+
+/* COUNTERS */
+
+document.getElementById("vCount").innerText="Vertices: "+pos.count;
+document.getElementById("eCount").innerText="Edges: "+edges.attributes.position.count/2;
+
+/* INFO */
+
+const d=infoData[type];
+
+document.getElementById("infoBox").innerHTML=`
+<div class="card">
+<b>${d.title}</b><br><br>
+
+Formula:<br>
+\\[${d.formula}\\]<br><br>
+
+Equation:<br>
+\\[${d.eq}\\]<br><br>
+
+${d.extra}
+</div>
+`;
+
+MathJax.typesetPromise();
+
+}
+
+/* INIT */
 
 createShape("cube");
 
-/* =========================
-   SELECT EVENT
-========================= */
-
-document.getElementById("shapeSelect")
-
-.addEventListener("change",function(e){
-
-    createShape(e.target.value);
-
+document.getElementById("shapeSelect").addEventListener("change",(e)=>{
+createShape(e.target.value);
 });
 
-/* =========================
-   ANIMATION
-========================= */
+/* LOOP */
 
 function animate(){
-
-    requestAnimationFrame(animate);
-
-    controls.update();
-
-    renderer.render(scene,camera);
+requestAnimationFrame(animate);
+controls.update();
+renderer.render(scene,camera);
 }
-
 animate();
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* RESIZE */
 
-window.addEventListener("resize",function(){
-
-    camera.aspect =
-
-        window.innerWidth/window.innerHeight;
-
-    camera.updateProjectionMatrix();
-
-    renderer.setSize(
-
-        window.innerWidth,
-
-        window.innerHeight
-
-    );
-
+window.addEventListener("resize",()=>{
+camera.aspect=window.innerWidth/window.innerHeight;
+camera.updateProjectionMatrix();
+renderer.setSize(window.innerWidth,window.innerHeight);
 });
 
 </script>
