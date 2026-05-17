@@ -51,7 +51,7 @@
             position: absolute;
             top: 20px;
             left: 20px;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
             padding: 1.5rem;
             border-radius: 12px;
@@ -108,17 +108,36 @@
             font-size: 0.85rem;
             pointer-events: none;
             text-align: center;
+            z-index: 10;
         }
 
         #canvas-container {
             flex: 1;
             width: 100%;
             height: 100%;
+            background: #f1f5f9;
+        }
+
+        /* Error message styling if libraries fail to load */
+        #error-msg {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid #fca5a5;
+            text-align: center;
+            z-index: 100;
         }
     </style>
-    <!-- Include Three.js and OrbitControls via CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    
+    <!-- Using unpkg CDN which is highly reliable for GitHub Pages -->
+    <script src="https://unpkg.com/three@0.128.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 </head>
 <body>
 
@@ -128,134 +147,141 @@
     </header>
 
     <main>
+        <div id="error-msg">
+            <h2>⚠️ 3D Engine Failed to Load</h2>
+            <p>If you are viewing this locally, try uploading it to GitHub Pages first, or open it using a local live server extension.</p>
+        </div>
+
         <div id="controls">
             <h3>Select a Shape</h3>
             <div class="btn-group">
-                <button class="active" onclick="switchShape('cube')">Cube (Hexahedron)</button>
-                <button onclick="switchShape('sphere')">Sphere</button>
-                <button onclick="switchShape('cylinder')">Cylinder</button>
-                <button onclick="switchShape('cone')">Cone</button>
-                <button onclick="switchShape('pyramid')">Pyramid (Tetrahedron)</button>
-                <button onclick="switchShape('torus')">Torus (Donut)</button>
+                <button class="active" onclick="switchShape('cube', event)">Cube (Hexahedron)</button>
+                <button onclick="switchShape('sphere', event)">Sphere</button>
+                <button onclick="switchShape('cylinder', event)">Cylinder</button>
+                <button onclick="switchShape('cone', event)">Cone</button>
+                <button onclick="switchShape('pyramid', event)">Pyramid</button>
+                <button onclick="switchShape('torus', event)">Torus (Donut)</button>
             </div>
         </div>
 
-        <div id="instructions">🖱️ Left Click + Drag to Rotate | 📜 Scroll to Zoom | 🖱️ Right Click + Drag to Pan</div>
+        <div id="instructions">🖱️ Left Click + Drag to Rotate | 📜 Scroll to Zoom</div>
         <div id="canvas-container"></div>
     </main>
 
     <script>
-        // --- Three.js Setup ---
-        const container = document.getElementById('canvas-container');
-        const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0xf8fafc); // Matches --light CSS variable
+        // Check if Three.js loaded correctly
+        if (typeof THREE === 'undefined') {
+            document.getElementById('error-msg').style.display = 'block';
+        } else {
+            init3DSpace();
+        }
 
-        // Camera
-        const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-        camera.position.set(0, 5, 8);
+        let scene, camera, renderer, controls, currentMesh;
 
-        // Renderer
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        renderer.setPixelRatio(window.devicePixelRatio);
-        container.appendChild(renderer.domElement);
+        function init3DSpace() {
+            const container = document.getElementById('canvas-container');
+            
+            // 1. Scene Setup
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0xf8fafc);
 
-        // Controls (Allows moving around with mouse)
-        const controls = new THREE.OrbitControls(camera, renderer.domElement);
-        controls.enableDamping = true;
-        controls.dampingFactor = 0.05;
+            // 2. Camera Setup
+            camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.set(3, 4, 6);
 
-        // --- Lighting ---
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-        scene.add(ambientLight);
+            // 3. Renderer Setup
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
 
-        const dirLight1 = new THREE.DirectionalLight(0xffffff, 0.8);
-        dirLight1.position.set(5, 10, 7);
-        scene.add(dirLight1);
+            // 4. Mouse Controls Setup
+            if (THREE.OrbitControls) {
+                controls = new THREE.OrbitControls(camera, renderer.domElement);
+                controls.enableDamping = true;
+                controls.dampingFactor = 0.05;
+            }
 
-        const dirLight2 = new THREE.DirectionalLight(0x4f46e5, 0.3); // Subtle blue tint light
-        dirLight2.position.set(-5, -5, -5);
-        scene.add(dirLight2);
+            // 5. Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+            scene.add(ambientLight);
 
-        // Grid & Axes Helpers for Math context
-        const gridHelper = new THREE.GridHelper(10, 10, 0x4f46e5, 0xcbd5e1);
-        gridHelper.position.y = -2;
-        scene.add(gridHelper);
+            const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            dirLight.position.set(5, 10, 7);
+            scene.add(dirLight);
 
-        // --- Shapes Definition ---
-        let currentMesh;
+            // Add a math grid floor
+            const gridHelper = new THREE.GridHelper(12, 12, 0x4f46e5, 0xcbd5e1);
+            gridHelper.position.y = -2;
+            scene.add(gridHelper);
 
-        // Materials setup (Wireframe + Solid to see depth clearly)
-        const material = new THREE.MeshStandardMaterial({ 
-            color: 0x4f46e5, 
-            roughness: 0.4,
-            metalness: 0.1,
-            side: THREE.DoubleSide
-        });
-        
-        const wireframeMaterial = new THREE.MeshBasicMaterial({ 
-            color: 0xffffff, 
-            wireframe: true,
-            transparent: true,
-            opacity: 0.3
-        });
+            // 6. Generate the Geometries
+            const materials = [
+                new THREE.MeshStandardMaterial({ color: 0x4f46e5, roughness: 0.4, metalness: 0.1, side: THREE.DoubleSide }),
+                new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.25 })
+            ];
 
-        // Dictionary of Geometries
-        const geometries = {
-            cube: new THREE.BoxGeometry(2, 2, 2),
-            sphere: new THREE.SphereGeometry(1.5, 32, 32),
-            cylinder: new THREE.CylinderGeometry(1, 1, 2.5, 32),
-            cone: new THREE.ConeGeometry(1.2, 2.5, 32),
-            pyramid: new THREE.ConeGeometry(1.5, 2.5, 4), // 4 sides cone = pyramid
-            torus: new THREE.TorusGeometry(1, 0.4, 16, 100)
-        };
+            window.geometries = {
+                cube: new THREE.BoxGeometry(2, 2, 2),
+                sphere: new THREE.SphereGeometry(1.4, 32, 32),
+                cylinder: new THREE.CylinderGeometry(1, 1, 2.5, 32),
+                cone: new THREE.ConeGeometry(1.2, 2.5, 32),
+                pyramid: new THREE.ConeGeometry(1.5, 2.5, 4),
+                torus: new THREE.TorusGeometry(1, 0.35, 16, 100)
+            };
 
-        // Function to load/change shapes
-        function switchShape(shapeName) {
-            // Remove old shape if it exists
+            window.materials = materials;
+
+            // Load initial shape
+            loadMesh('cube');
+
+            // 7. Animation/Render Loop
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                // If the user isn't dragging, slowly rotate the shape automatically
+                if (currentMesh && (!controls || !controls.state == -1)) {
+                    currentMesh.rotation.y += 0.005;
+                }
+
+                if (controls) controls.update();
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            // 8. Handle Window Resize
+            window.addEventListener('resize', () => {
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            });
+        }
+
+        // Function to build and switch meshes
+        function loadMesh(shapeName) {
             if (currentMesh) scene.remove(currentMesh);
 
-            // Create combined mesh (Solid shape + wireframe overlay for mathematical clarity)
             const group = new THREE.Group();
-            const mainMesh = new THREE.Mesh(geometries[shapeName], material);
-            const wireMesh = new THREE.Mesh(geometries[shapeName], wireframeMaterial);
+            const solidMesh = new THREE.Mesh(window.geometries[shapeName], window.materials[0]);
+            const wireMesh = new THREE.Mesh(window.geometries[shapeName], window.materials[1]);
             
-            group.add(mainMesh);
+            group.add(solidMesh);
             group.add(wireMesh);
             
             currentMesh = group;
             scene.add(currentMesh);
+        }
 
-            // Update Active Class on Buttons
+        // Button Click Handler
+        function switchShape(shapeName, event) {
+            loadMesh(shapeName);
+
+            // Fix the active UI button states
             const buttons = document.querySelectorAll('.btn-group button');
             buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-        }
-
-        // Initialize with Cube
-        switchShape('cube');
-
-        // --- Animation Loop ---
-        function animate() {
-            requestAnimationFrame(animate);
-
-            // Slowly rotate the shape on its own when not being dragged
-            if (currentMesh && !controls.state == -1) {
-                currentMesh.rotation.y += 0.005;
+            if(event) {
+                event.target.classList.add('active');
             }
-
-            controls.update();
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        // --- Handle Window Resize ---
-        window.addEventListener('resize', onWindowResize, false);
-
-        function onWindowResize() {
-            camera.aspect = container.clientWidth / container.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(container.clientWidth, container.clientHeight);
         }
     </script>
 </body>
