@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Ultimate 3D Math Explorer</title>
+<title>Advanced 3D Math Explorer</title>
 
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
@@ -25,54 +25,51 @@ body{
     position:absolute;
     top:15px;
     left:15px;
-    width:390px;
+    width:400px;
     max-height:95vh;
     overflow:auto;
     background:rgba(255,255,255,0.08);
     backdrop-filter:blur(12px);
     border-radius:18px;
-    padding:20px;
-    z-index:100;
+    padding:18px;
+    z-index:10;
 }
 
 h1{
+    font-size:22px;
     color:#4fc3f7;
     margin-bottom:10px;
 }
 
 select{
     width:100%;
-    padding:12px;
-    border:none;
-    border-radius:10px;
+    padding:10px;
+    border-radius:8px;
     background:#111b3d;
     color:white;
-    font-size:16px;
+    border:none;
+    margin-bottom:10px;
 }
 
-/* COUNTER */
+/* COUNTERS */
 
 .counter{
-    margin-top:10px;
     display:flex;
     justify-content:space-between;
     color:#ffd54f;
     font-weight:bold;
+    margin-bottom:10px;
 }
 
 /* INFO */
 
-.info{
-    margin-top:15px;
-    line-height:1.6;
-}
-
 .card{
-    margin-top:12px;
-    padding:12px;
-    background:rgba(255,255,255,0.07);
+    margin-top:10px;
+    padding:10px;
+    background:rgba(255,255,255,0.06);
     border-left:4px solid #4fc3f7;
-    border-radius:10px;
+    border-radius:8px;
+    line-height:1.6;
 }
 
 </style>
@@ -82,24 +79,28 @@ select{
 
 <div id="panel">
 
-<h1>📐 Ultimate 3D Math Explorer</h1>
+<h1>📐 Advanced 3D Math Explorer</h1>
 
 <select id="shapeSelect">
 
-<optgroup label="Basic Geometry">
 <option value="cube">Cube</option>
+<option value="cuboid">Cuboid</option>
 <option value="sphere">Sphere</option>
 <option value="cone">Cone</option>
 <option value="cylinder">Cylinder</option>
 <option value="torus">Torus</option>
-</optgroup>
 
-<optgroup label="Platonic Solids">
 <option value="tetrahedron">Tetrahedron</option>
 <option value="octahedron">Octahedron</option>
 <option value="icosahedron">Icosahedron</option>
 <option value="dodecahedron">Dodecahedron</option>
-</optgroup>
+
+<option value="paraboloid">Paraboloid</option>
+<option value="hyperboloid">Hyperboloid</option>
+<option value="ellipsoid">Ellipsoid</option>
+
+<option value="elliptic_paraboloid">Elliptic Paraboloid</option>
+<option value="hyperbolic_paraboloid">Hyperbolic Paraboloid</option>
 
 </select>
 
@@ -108,7 +109,7 @@ select{
 <span id="eCount">Edges: 0</span>
 </div>
 
-<div id="infoBox" class="info"></div>
+<div id="infoBox"></div>
 
 </div>
 
@@ -119,212 +120,187 @@ select{
 
 /* ================= SCENE ================= */
 
-const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x050816);
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0x050816);
 
-/* ================= CAMERA ================= */
+/* CAMERA */
 
-const camera = new THREE.PerspectiveCamera(70,window.innerWidth/window.innerHeight,0.1,1000);
+const camera=new THREE.PerspectiveCamera(70,innerWidth/innerHeight,0.1,1000);
 camera.position.set(0,2,6);
 
-/* ================= RENDERER ================= */
+/* RENDERER */
 
-const renderer = new THREE.WebGLRenderer({antialias:true});
-renderer.setSize(window.innerWidth,window.innerHeight);
+const renderer=new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(innerWidth,innerHeight);
 document.body.appendChild(renderer.domElement);
 
-/* ================= CONTROLS ================= */
+/* CONTROLS */
 
-const controls = new THREE.OrbitControls(camera,renderer.domElement);
-controls.enableDamping = true;
+const controls=new THREE.OrbitControls(camera,renderer.domElement);
+controls.enableDamping=true;
 
-/* ================= LIGHT ================= */
+/* LIGHT */
 
 scene.add(new THREE.AmbientLight(0xffffff,1.2));
-const light = new THREE.DirectionalLight(0xffffff,1.5);
+const light=new THREE.DirectionalLight(0xffffff,1.5);
 light.position.set(5,5,5);
 scene.add(light);
 
-/* ================= GROUP ================= */
+/* GROUP */
 
-let group = new THREE.Group();
+let group=new THREE.Group();
 scene.add(group);
 
-function clearGroup(){
-group.clear();
-}
+function clearGroup(){group.clear();}
 
-/* ================= COLORS ================= */
+/* COLORS */
 
 const colors={
 cube:0xff0000,
+cuboid:0xff6b00,
 sphere:0x00ffff,
-cone:0xff8800,
-cylinder:0x8000ff,
+cone:0xffaa00,
+cylinder:0xaa00ff,
 torus:0xff1493,
+
 tetrahedron:0x00ff66,
 octahedron:0x0066ff,
 icosahedron:0xffff00,
-dodecahedron:0x66ff00
+dodecahedron:0x66ff00,
+
+paraboloid:0xff5500,
+hyperboloid:0xaa00ff,
+ellipsoid:0x00ccff,
+
+elliptic_paraboloid:0x00ffcc,
+hyperbolic_paraboloid:0xff0066
 };
 
-/* ================= INFO (FULL + LATEX) ================= */
+/* INFO DATA */
 
-const infoData = {
+const info={
 
-cube:{
-title:"Cube",
-formula:"\\[V = a^3\\]",
-eq:"\\[x=y=z\\]",
-extra:"6 faces, 12 edges, 8 vertices"
-},
+cube:["Cube","\\[V=a^3\\]","\\[x=y=z\\]","8 vertices, 12 edges"],
+cuboid:["Cuboid","\\[V=lbh\\]","\\[x,y,z\\]","Rectangular prism"],
 
-sphere:{
-title:"Sphere",
-formula:"\\[V = \\frac{4}{3}\\pi r^3\\]",
-eq:"\\[x^2+y^2+z^2=r^2\\]",
-extra:"Perfect symmetric 3D shape"
-},
+sphere:["Sphere","\\[V=\\frac{4}{3}\\pi r^3\\]","\\[x^2+y^2+z^2=r^2\\]","Perfect symmetry"],
 
-cone:{
-title:"Cone",
-formula:"\\[V = \\frac{1}{3}\\pi r^2 h\\]",
-eq:"\\[x^2+y^2=z^2\\]",
-extra:"Has 1 vertex and circular base"
-},
+cone:["Cone","\\[V=\\frac{1}{3}\\pi r^2 h\\]","\\[x^2+y^2=z^2\\]","1 vertex"],
 
-cylinder:{
-title:"Cylinder",
-formula:"\\[V = \\pi r^2 h\\]",
-eq:"\\[x^2+y^2=r^2\\]",
-extra:"Two circular bases"
-},
+cylinder:["Cylinder","\\[V=\\pi r^2 h\\]","\\[x^2+y^2=r^2\\]","2 circular bases"],
 
-torus:{
-title:"Torus",
-formula:"\\[V = 2\\pi^2 R r^2\\]",
-eq:"\\[(R-\\sqrt{x^2+y^2})^2+z^2=r^2\\]",
-extra:"Donut shaped geometry"
-},
+torus:["Torus","\\[V=2\\pi^2 R r^2\\]","Toroidal equation","Donut shape"],
 
-tetrahedron:{
-title:"Tetrahedron",
-formula:"\\[V = \\frac{a^3}{6\\sqrt{2}}\\]",
-eq:"Platonic Solid",
-extra:"4 triangular faces"
-},
+paraboloid:["Paraboloid","\\[z=x^2+y^2\\]","\\[y=x^2\\]","3D parabola"],
 
-octahedron:{
-title:"Octahedron",
-formula:"\\[V = \\frac{\\sqrt{2}}{3}a^3\\]",
-eq:"Symmetric solid",
-extra:"8 triangular faces"
-},
+hyperboloid:["Hyperboloid","\\[x^2+y^2-z^2=1\\]","Hyperbola rotation","Cooling towers"],
 
-icosahedron:{
-title:"Icosahedron",
-formula:"\\[V = \\frac{5(3+\\sqrt5)}{12}a^3\\]",
-eq:"Regular polyhedron",
-extra:"20 triangular faces"
-},
+ellipsoid:["Ellipsoid","\\[\\frac{x^2}{a^2}+\\frac{y^2}{b^2}+\\frac{z^2}{c^2}=1\\]","Ellipse extension","Earth shape"],
 
-dodecahedron:{
-title:"Dodecahedron",
-formula:"\\[V = \\frac{15+7\\sqrt5}{4}a^3\\]",
-eq:"Pentagon faces",
-extra:"12 faces total"
-}
+elliptic_paraboloid:["Elliptic Paraboloid","\\[z=\\frac{x^2}{a^2}+\\frac{y^2}{b^2}\\]","Parabolic bowl","Satellite dish"],
 
+hyperbolic_paraboloid:["Hyperbolic Paraboloid","\\[z=\\frac{x^2}{a^2}-\\frac{y^2}{b^2}\\]","Saddle surface","Architecture"]
 };
 
-/* ================= CREATE SHAPE ================= */
+/* CREATE SHAPE */
 
-let current;
-
-function createShape(type){
+function create(type){
 
 clearGroup();
 
-let geometry;
-
-/* shapes */
+let geo;
 
 switch(type){
 
-case "cube":geometry=new THREE.BoxGeometry(2,2,2);break;
-case "sphere":geometry=new THREE.SphereGeometry(1.5,16,16);break;
-case "cone":geometry=new THREE.ConeGeometry(1.5,3,16);break;
-case "cylinder":geometry=new THREE.CylinderGeometry(1.2,1.2,3,16);break;
-case "torus":geometry=new THREE.TorusGeometry(1.5,0.5,16,32);break;
-case "tetrahedron":geometry=new THREE.TetrahedronGeometry(2);break;
-case "octahedron":geometry=new THREE.OctahedronGeometry(2);break;
-case "icosahedron":geometry=new THREE.IcosahedronGeometry(2);break;
-case "dodecahedron":geometry=new THREE.DodecahedronGeometry(2);break;
+case "cube":geo=new THREE.BoxGeometry(2,2,2);break;
+case "cuboid":geo=new THREE.BoxGeometry(2.5,1.5,1);break;
+
+case "sphere":geo=new THREE.SphereGeometry(1.5,16,16);break;
+
+case "cone":geo=new THREE.ConeGeometry(1.5,3,16);break;
+
+case "cylinder":geo=new THREE.CylinderGeometry(1.2,1.2,3,16);break;
+
+case "torus":geo=new THREE.TorusGeometry(1.5,0.5,16,32);break;
+
+case "tetrahedron":geo=new THREE.TetrahedronGeometry(2);break;
+
+case "octahedron":geo=new THREE.OctahedronGeometry(2);break;
+
+case "icosahedron":geo=new THREE.IcosahedronGeometry(2);break;
+
+case "dodecahedron":geo=new THREE.DodecahedronGeometry(2);break;
+
+case "paraboloid":geo=new THREE.CylinderGeometry(0,2,4,32);break;
+
+case "hyperboloid":geo=new THREE.TorusKnotGeometry(1,0.4,64,16);break;
+
+case "ellipsoid":geo=new THREE.SphereGeometry(1.5,16,16);geo.scale(1.5,1,0.8);break;
+
+case "elliptic_paraboloid":geo=new THREE.CylinderGeometry(0,2,4,32);break;
+
+case "hyperbolic_paraboloid":geo=new THREE.TorusKnotGeometry(1,0.3,64,16);break;
 
 }
 
 /* SOLID */
 
 const mesh=new THREE.Mesh(
-geometry,
-new THREE.MeshPhongMaterial({
-color:colors[type]||0xffffff,
-shininess:200
-})
+geo,
+new THREE.MeshPhongMaterial({color:colors[type],shininess:200})
 );
 
 group.add(mesh);
 
 /* EDGES */
 
-const edges=new THREE.EdgesGeometry(geometry);
-
-group.add(new THREE.LineSegments(
-edges,
+const edges=new THREE.LineSegments(
+new THREE.EdgesGeometry(geo),
 new THREE.LineBasicMaterial({color:0xffffff})
-));
+);
+
+group.add(edges);
 
 /* VERTICES */
 
-const pos=geometry.attributes.position;
+const p=geo.attributes.position;
 const pts=[];
 
-for(let i=0;i<pos.count;i++){
+for(let i=0;i<p.count;i++){
+
 pts.push(new THREE.Vector3(
-pos.getX(i),
-pos.getY(i),
-pos.getZ(i)
+p.getX(i),
+p.getY(i),
+p.getZ(i)
 ));
+
 }
 
 group.add(new THREE.Points(
 new THREE.BufferGeometry().setFromPoints(pts),
-new THREE.PointsMaterial({
-color:0xffd700,
-size:0.08
-})
+new THREE.PointsMaterial({color:0xffd700,size:0.08})
 ));
 
 /* COUNTERS */
 
-document.getElementById("vCount").innerText="Vertices: "+pos.count;
-document.getElementById("eCount").innerText="Edges: "+edges.attributes.position.count/2;
+document.getElementById("vCount").innerText="Vertices: "+p.count;
+document.getElementById("eCount").innerText="Edges: "+edges.geometry.attributes.position.count/2;
 
 /* INFO */
 
-const d=infoData[type];
+const d=info[type];
 
 document.getElementById("infoBox").innerHTML=`
 <div class="card">
-<b>${d.title}</b><br><br>
+<b>${d[0]}</b><br><br>
 
 Formula:<br>
-\\[${d.formula}\\]<br><br>
+\\[${d[1]}\\]<br><br>
 
-Equation:<br>
-\\[${d.eq}\\]<br><br>
+Cartesian Equation:<br>
+\\[${d[2]}\\]<br><br>
 
-${d.extra}
+${d[3]}
 </div>
 `;
 
@@ -334,10 +310,10 @@ MathJax.typesetPromise();
 
 /* INIT */
 
-createShape("cube");
+create("cube");
 
 document.getElementById("shapeSelect").addEventListener("change",(e)=>{
-createShape(e.target.value);
+create(e.target.value);
 });
 
 /* LOOP */
@@ -352,9 +328,9 @@ animate();
 /* RESIZE */
 
 window.addEventListener("resize",()=>{
-camera.aspect=window.innerWidth/window.innerHeight;
+camera.aspect=innerWidth/innerHeight;
 camera.updateProjectionMatrix();
-renderer.setSize(window.innerWidth,window.innerHeight);
+renderer.setSize(innerWidth,innerHeight);
 });
 
 </script>
