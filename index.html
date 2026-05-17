@@ -1,752 +1,827 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vraj H Raval | Mathematics Education</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vraj H Raval | Mathematics Education</title>
 
-<!-- Math.js -->
-<script src="https://cdn.jsdelivr.net/npm/mathjs@11/lib/browser/math.js"></script>
+    <!-- Math.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjs@11/lib/browser/math.js"></script>
 
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<!-- Hammer.js -->
-<script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
+    <!-- Hammer.js -->
+    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
 
-<!-- Chart Zoom Plugin -->
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
+    <!-- Chart Zoom Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
 
-<!-- MathJax -->
-<script>
-window.MathJax = {
-    tex: {
-        inlineMath: [['\\(', '\\)'], ['$', '$']],
-        displayMath: [['$$', '$$']]
-    },
-    svg: {
-        fontCache: 'global'
-    }
-};
-</script>
+    <!-- MathJax Config -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
 
-<script async
-src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <!-- MathJax -->
+    <script
+        id="MathJax-script"
+        async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
 
-<style>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #2980b9;
+            --light: #f4f7f6;
+            --success: #27ae60;
+            --danger: #c0392b;
+        }
 
-:root{
-    --primary:#2c3e50;
-    --accent:#2980b9;
-    --light:#f4f7f6;
-    --success:#27ae60;
-    --danger:#c0392b;
-}
+        * {
+            box-sizing: border-box;
+        }
 
-*{
-    box-sizing:border-box;
-}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light);
+            color: #333;
+            line-height: 1.6;
+        }
 
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:var(--light);
-    color:#333;
-}
+        .MathJax {
+            font-size: 1.1em !important;
+        }
 
-header{
-    background:linear-gradient(135deg,#2c3e50,#2980b9);
-    color:white;
-    text-align:center;
-    padding:60px 20px;
-}
+        /* Header Top */
+        .header-top {
+            background: white;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
-.container{
-    max-width:1000px;
-    margin:auto;
-    padding:20px;
-}
+        .profile {
+            display: flex;
+            align-items: center;
+        }
 
-section{
-    background:white;
-    padding:30px;
-    margin-bottom:25px;
-    border-radius:12px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.05);
-}
+        .profile img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            margin-right: 15px;
+            object-fit: cover;
+        }
 
-h2{
-    color:var(--accent);
-}
+        header {
+            text-align: center;
+            padding: 70px 20px;
+            background: linear-gradient(135deg, #2c3e50, #2980b9);
+            color: white;
+            margin-bottom: 30px;
+        }
 
-.flex{
-    display:flex;
-    gap:20px;
-    flex-wrap:wrap;
-    align-items:center;
-}
+        header h1 {
+            margin-bottom: 10px;
+            font-size: 2.8rem;
+        }
 
-.flex img{
-    max-width:300px;
-    width:100%;
-    border-radius:10px;
-}
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+        }
 
-.formula-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-}
+        section {
+            background: white;
+            padding: 35px;
+            margin-bottom: 25px;
+            border-radius: 14px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
 
-.formula-card{
-    background:#fafafa;
-    padding:20px;
-    border-left:4px solid var(--accent);
-    border-radius:8px;
-}
+        h2 {
+            color: var(--accent);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
 
-.quiz-container{
-    background:#fafafa;
-    padding:25px;
-    border-radius:10px;
-}
+        .flex {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
 
-.quiz-options{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
-    margin-top:20px;
-}
+        .flex img {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
 
-.quiz-btn{
-    padding:15px;
-    border:2px solid #ddd;
-    border-radius:8px;
-    background:white;
-    cursor:pointer;
-    transition:0.3s;
-}
+        /* Formula Grid */
+        .formula-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
 
-.quiz-btn:hover{
-    border-color:var(--accent);
-}
+        .formula-card {
+            background: #fdfdfd;
+            border-left: 4px solid var(--accent);
+            padding: 20px;
+            border-radius: 8px;
+        }
 
-.quiz-feedback{
-    margin-top:20px;
-    padding:15px;
-    border-radius:8px;
-    display:none;
-}
+        /* Links */
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
 
-.next-btn{
-    margin-top:15px;
-    padding:12px 20px;
-    background:var(--primary);
-    color:white;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    display:none;
-}
+        .link-card {
+            background: white;
+            color: var(--primary);
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            border: 2px solid var(--accent);
+            transition: 0.3s;
+        }
 
-.solver-ui{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    align-items:center;
-}
+        .link-card:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-3px);
+        }
 
-.solver-ui input{
-    width:80px;
-    padding:10px;
-    text-align:center;
-}
+        /* Solver */
+        .solver-ui {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-top: 20px;
+        }
 
-.solver-btn{
-    padding:12px 20px;
-    border:none;
-    background:var(--accent);
-    color:white;
-    border-radius:8px;
-    cursor:pointer;
-}
+        .solver-ui input {
+            width: 80px;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 1rem;
+        }
 
-.solver-steps{
-    margin-top:20px;
-    background:#f8f9fa;
-    padding:20px;
-    border-left:4px solid var(--accent);
-    display:none;
-}
+        .solver-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
 
-.graph-section{
-    background:#1a1a2e;
-    color:white;
-    padding:40px;
-    border-radius:20px;
-}
+        .solver-steps {
+            background: #f8f9fa;
+            border-left: 5px solid var(--accent);
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 6px;
+            display: none;
+        }
 
-.graph-ui{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-bottom:20px;
-}
+        .step-item {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #ddd;
+        }
 
-.graph-ui input{
-    flex:1;
-    min-width:250px;
-    padding:12px;
-}
+        .step-item:last-child {
+            border-bottom: none;
+        }
 
-.plot-btn{
-    padding:12px 25px;
-    border:none;
-    background:#e94560;
-    color:white;
-    border-radius:8px;
-    cursor:pointer;
-}
+        /* Quiz */
+        .quiz-container {
+            background: #fafafa;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #eef2f5;
+        }
 
-.chart-container{
-    background:white;
-    height:450px;
-    border-radius:10px;
-    padding:10px;
-}
+        .quiz-question-box {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
 
-footer{
-    text-align:center;
-    padding:20px;
-    background:#111;
-    color:white;
-}
+        .quiz-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
 
-@media(max-width:768px){
+        .quiz-btn {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
 
-.quiz-options{
-    grid-template-columns:1fr;
-}
+        .quiz-btn:hover {
+            border-color: var(--accent);
+            background: #f7faff;
+        }
 
-}
+        .quiz-feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            display: none;
+        }
 
-</style>
+        .next-quiz-btn {
+            margin-top: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: none;
+        }
+
+        /* Graph Section */
+        .graph-section {
+            background: #1a1a2e;
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 40px;
+        }
+
+        .graph-ui {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .graph-ui input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .plot-btn {
+            background: #e94560;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 10px;
+            height: 450px;
+            padding: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #111;
+            color: white;
+            margin-top: 40px;
+        }
+
+        @media(max-width: 768px) {
+            .quiz-options {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
+<div class="header-top">
+    <div class="profile">
+        <img src="vraj.jpeg" alt="Vraj">
+        <div>
+            <h2 style="margin:0;">VRAJ H RAVAL</h2>
+            <p style="margin:0; color:#666;">B.Sc, M.Sc, B.Ed (Mathematics)</p>
+        </div>
+    </div>
+
+    <div style="font-weight:bold; color:var(--accent);">
+        STD 9–12 Education Hub
+    </div>
+</div>
+
 <header>
-<h1>The Evolution of Mathematics</h1>
-<p>Journey through the history of numbers and logic</p>
+    <h1>The Evolution of Mathematics</h1>
+    <p>Journey through the history of logic and numbers</p>
 </header>
 
 <div class="container">
 
-<section>
+    <section>
+        <h2>1. Ancient Foundations</h2>
 
-<h2>Ancient Foundations</h2>
+        <div class="flex">
+            <div style="flex:1;">
+                <p>
+                    The Babylonians and Egyptians used mathematics for taxation,
+                    astronomy, engineering, and architecture.
+                </p>
+            </div>
 
-<div class="flex">
+            <img src="bab.jpg" alt="Ancient Mathematics">
+        </div>
+    </section>
 
-<div style="flex:1;">
-<p>
-The Babylonians and Egyptians used mathematics for architecture,
-astronomy and trade systems.
-</p>
-</div>
+    <section>
+        <h2>2. Greek & Indian Contributions</h2>
 
-<img src="bab.jpg" alt="Math">
+        <div class="flex">
+            <img src="pytha.jfif" alt="Pythagoras">
 
-</div>
+            <div style="flex:1;">
+                <p>
+                    From the geometric proofs of Pythagoras to the invention
+                    of <strong>Zero</strong> in India, these civilizations laid
+                    the foundation of modern mathematics.
+                </p>
 
-</section>
+                <div style="background:#f9f9f9; padding:15px; border-left:4px solid var(--accent);">
+                    $$
+                    a^2+b^2=c^2
+                    $$
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section>
+    <section>
+        <h2>3. Quick Formula Reference Library</h2>
 
-<h2>Greek & Indian Contributions</h2>
+        <div class="formula-grid">
 
-<div class="flex">
+            <div class="formula-card">
+                <h3>Algebraic Identities</h3>
 
-<img src="pytha.jfif" alt="Pythagoras">
+                $$
+                (a+b)^2=a^2+2ab+b^2
+                $$
 
-<div style="flex:1;">
+                $$
+                (a-b)^2=a^2-2ab+b^2
+                $$
+            </div>
 
-<p>
-Pythagoras and Indian mathematicians transformed mathematics forever.
-</p>
+            <div class="formula-card">
+                <h3>Quadratic Formula</h3>
 
-$$
-a^2+b^2=c^2
-$$
+                <p>
+                    For:
+                    \(ax^2+bx+c=0\)
+                </p>
 
-</div>
+                $$
+                x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}
+                $$
+            </div>
 
-</div>
+            <div class="formula-card">
+                <h3>Distance Formula</h3>
 
-</section>
+                $$
+                d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}
+                $$
+            </div>
 
-<section>
+        </div>
+    </section>
 
-<h2>Formula Library</h2>
+    <section>
+        <h2>4. Interactive Quadratic Solver</h2>
 
-<div class="formula-grid">
+        <div class="solver-ui">
 
-<div class="formula-card">
+            <input type="number" id="solve-a" value="1">
 
-<h3>Algebra</h3>
+            <span>\(x^2+\)</span>
 
-$$
-(a+b)^2=a^2+2ab+b^2
-$$
+            <input type="number" id="solve-b" value="-5">
 
-$$
-(a-b)^2=a^2-2ab+b^2
-$$
+            <span>\(x+\)</span>
 
-</div>
+            <input type="number" id="solve-c" value="6">
 
-<div class="formula-card">
+            <span>\(=0\)</span>
 
-<h3>Quadratic Formula</h3>
+            <button class="solver-btn" onclick="solveQuadratic()">
+                Solve
+            </button>
+        </div>
 
-$$
-x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}
-$$
+        <div class="solver-steps" id="solver-steps-output"></div>
+    </section>
 
-</div>
+    <section>
+        <h2>5. Interactive Practice Center</h2>
 
-<div class="formula-card">
+        <div class="quiz-container">
 
-<h3>Distance Formula</h3>
+            <div class="quiz-question-box" id="quiz-question"></div>
 
-$$
-d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}
-$$
+            <div class="quiz-options" id="quiz-options-box"></div>
 
-</div>
+            <div class="quiz-feedback" id="quiz-feedback-box"></div>
 
-</div>
+            <button class="next-quiz-btn" id="next-quiz-btn" onclick="loadNextQuestion()">
+                Next Question →
+            </button>
 
-</section>
+        </div>
+    </section>
 
-<section>
+    <section>
+        <h2>6. Important Links</h2>
 
-<h2>Quadratic Equation Solver</h2>
+        <div class="links-grid">
+            <a href="books.html" class="link-card">NCERT Books</a>
+            <a href="nep.html" class="link-card">NEP 2020</a>
+            <a href="imp.html" class="link-card">Important Links</a>
+            <a href="about.html" class="link-card">About Me</a>
+            <a href="higher.html" class="link-card">Higher Studies</a>
+        </div>
+    </section>
 
-<div class="solver-ui">
+    <div class="graph-section">
 
-<input type="number" id="a" value="1">
+        <h2 style="color:#e94560; border:none;">
+            Interactive Cartesian Plane
+        </h2>
 
-<span>\(x^2+\)</span>
+        <p>
+            Visualize mathematical functions in real time.
+        </p>
 
-<input type="number" id="b" value="-5">
+        <div class="graph-ui">
 
-<span>\(x+\)</span>
+            <span style="font-size:1.5rem;">f(x)=</span>
 
-<input type="number" id="c" value="6">
+            <input
+                type="text"
+                id="eq-input"
+                value="sin(x) * x"
+                placeholder="e.g. x^2, cos(x), sqrt(x)"
+            >
 
-<span>\(=0\)</span>
+            <button class="plot-btn" onclick="plotGraph()">
+                Generate Graph
+            </button>
+        </div>
 
-<button class="solver-btn" onclick="solveQuadratic()">
-Solve
-</button>
+        <div class="chart-container">
+            <canvas id="mathChart"></canvas>
+        </div>
 
-</div>
+        <button
+            onclick="resetZoomView()"
+            style="margin-top:15px; background:transparent; color:white; border:1px solid #444; padding:8px 15px; border-radius:5px; cursor:pointer;"
+        >
+            Reset View
+        </button>
 
-<div class="solver-steps" id="solution"></div>
-
-</section>
-
-<section>
-
-<h2>Interactive Quiz</h2>
-
-<div class="quiz-container">
-
-<div id="quiz-question"></div>
-
-<div class="quiz-options" id="quiz-options"></div>
-
-<div class="quiz-feedback" id="quiz-feedback"></div>
-
-<button class="next-btn" id="next-btn" onclick="nextQuestion()">
-Next Question
-</button>
-
-</div>
-
-</section>
-
-<div class="graph-section">
-
-<h2>Graph Plotter</h2>
-
-<div class="graph-ui">
-
-<input type="text" id="equation" value="sin(x)*x">
-
-<button class="plot-btn" onclick="plotGraph()">
-Plot Graph
-</button>
-
-</div>
-
-<div class="chart-container">
-<canvas id="chart"></canvas>
-</div>
-
-</div>
-
+    </div>
 </div>
 
 <footer>
-© 2026 Vraj H Raval | Mathematics Education
+    © 2026 Mathematics History Project | Vraj H Raval | Anand, Gujarat
 </footer>
 
 <script>
+    let myChart;
 
-let chart;
+    function plotGraph() {
 
-/* GRAPH */
+        const input = document.getElementById('eq-input').value;
+        const points = [];
 
-function plotGraph(){
+        try {
 
-const equation=document.getElementById("equation").value;
+            const expr = math.compile(input);
 
-const points=[];
+            for (let x = -50; x <= 50; x += 0.05) {
 
-try{
+                let y = expr.evaluate({ x: x });
 
-const expr=math.compile(equation);
+                if (typeof y === 'number' && isFinite(y)) {
+                    points.push({ x: x, y: y });
+                }
+            }
 
-for(let x=-50;x<=50;x+=0.1){
+            if (myChart) {
+                myChart.destroy();
+            }
 
-let y=expr.evaluate({x:x});
+            const ctx = document.getElementById('mathChart').getContext('2d');
 
-if(isFinite(y)){
+            myChart = new Chart(ctx, {
+                type: 'scatter',
 
-points.push({x:x,y:y});
+                data: {
+                    datasets: [{
+                        label: 'f(x)',
+                        data: points,
+                        showLine: true,
+                        borderColor: '#e94560',
+                        borderWidth: 2,
+                        pointRadius: 0
+                    }]
+                },
 
-}
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
 
-}
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            min: -10,
+                            max: 10
+                        },
 
-if(chart){
+                        y: {
+                            min: -10,
+                            max: 10
+                        }
+                    },
 
-chart.destroy();
+                    plugins: {
+                        zoom: {
+                            pan: {
+                                enabled: true,
+                                mode: 'xy'
+                            },
 
-}
+                            zoom: {
+                                wheel: {
+                                    enabled: true
+                                },
 
-const ctx=document.getElementById("chart").getContext("2d");
+                                pinch: {
+                                    enabled: true
+                                },
 
-chart=new Chart(ctx,{
+                                mode: 'xy'
+                            }
+                        }
+                    }
+                }
+            });
 
-type:"scatter",
+        } catch (err) {
 
-data:{
-datasets:[{
-label:"f(x)",
-data:points,
-showLine:true,
-borderColor:"#e94560",
-pointRadius:0
-}]
-},
+            alert("Invalid mathematical expression.");
+        }
+    }
 
-options:{
-responsive:true,
-maintainAspectRatio:false,
+    function resetZoomView() {
 
-plugins:{
-zoom:{
-pan:{
-enabled:true,
-mode:"xy"
-},
-zoom:{
-wheel:{
-enabled:true
-},
-pinch:{
-enabled:true
-},
-mode:"xy"
-}
-}
-}
-}
+        if (myChart) {
+            myChart.resetZoom();
+        }
+    }
 
-});
+    function solveQuadratic() {
 
-}catch(e){
+        const a = parseFloat(document.getElementById('solve-a').value);
+        const b = parseFloat(document.getElementById('solve-b').value);
+        const c = parseFloat(document.getElementById('solve-c').value);
 
-alert("Invalid equation");
+        const outputDiv = document.getElementById('solver-steps-output');
 
-}
+        if (a === 0) {
 
-}
+            outputDiv.innerHTML =
+                "<p style='color:red;'>Coefficient a cannot be zero.</p>";
 
-/* SOLVER */
+            outputDiv.style.display = "block";
 
-function solveQuadratic(){
+            return;
+        }
 
-const a=parseFloat(document.getElementById("a").value);
-const b=parseFloat(document.getElementById("b").value);
-const c=parseFloat(document.getElementById("c").value);
+        const D = b * b - 4 * a * c;
 
-const output=document.getElementById("solution");
+        let html = `
+            <h3>Solution Steps</h3>
 
-if(a===0){
+            <div class="step-item">
+                $$
+                D=b^2-4ac
+                $$
 
-output.innerHTML="a cannot be zero";
-output.style.display="block";
-return;
+                $$
+                D=(${b})^2-4(${a})(${c})
+                $$
 
-}
+                $$
+                D=${D}
+                $$
+            </div>
+        `;
 
-const D=b*b-4*a*c;
+        if (D < 0) {
 
-let html=`
+            html += `
+                <div class="step-item">
+                    No real roots exist because:
+                    $$
+                    D<0
+                    $$
+                </div>
+            `;
 
-<h3>Steps</h3>
+        } else {
 
-$$
-D=b^2-4ac
-$$
+            const root1 = (-b + Math.sqrt(D)) / (2 * a);
+            const root2 = (-b - Math.sqrt(D)) / (2 * a);
 
-$$
-D=${D}
-$$
+            html += `
+                <div class="step-item">
 
-`;
+                    $$
+                    x=\\frac{-b\\pm\\sqrt{D}}{2a}
+                    $$
 
-if(D<0){
+                    $$
+                    x_1=${root1.toFixed(3)}
+                    $$
 
-html+=`
+                    $$
+                    x_2=${root2.toFixed(3)}
+                    $$
 
-$$
-No\\ real\\ roots
-$$
+                </div>
+            `;
+        }
 
-`;
+        outputDiv.innerHTML = html;
+        outputDiv.style.display = "block";
 
-}else{
+        MathJax.typesetPromise([outputDiv]);
+    }
 
-const x1=(-b+Math.sqrt(D))/(2*a);
-const x2=(-b-Math.sqrt(D))/(2*a);
+    const quizDatabase = [
+        {
+            question:
+                "Evaluate: \\(\\int_0^2 3x^2 \\, dx\\)",
 
-html+=`
+            options: ["4", "6", "8", "12"],
 
-$$
-x_1=${x1.toFixed(2)}
-$$
+            correct: 2,
 
-$$
-x_2=${x2.toFixed(2)}
-$$
+            explanation:
+                "$$\\int 3x^2dx=x^3$$ $$[x^3]_0^2=8$$"
+        },
 
-`;
+        {
+            question:
+                "Solve: \\(\\log_2(x)+\\log_2(x-2)=3\\)",
 
-}
+            options: ["2", "4", "-2", "8"],
 
-output.innerHTML=html;
+            correct: 1,
 
-output.style.display="block";
+            explanation:
+                "$$x(x-2)=8$$ $$x^2-2x-8=0$$ $$x=4$$"
+        }
+    ];
 
-if(window.MathJax){
+    let currentQuestionIndex = 0;
 
-MathJax.typesetPromise([output]);
+    function renderCurrentQuiz() {
 
-}
+        const quiz = quizDatabase[currentQuestionIndex];
 
-}
+        document.getElementById('quiz-question').innerHTML =
+            `<strong>Question:</strong> ${quiz.question}`;
 
-/* QUIZ */
+        const optionsBox =
+            document.getElementById('quiz-options-box');
 
-const quizData=[
+        optionsBox.innerHTML = "";
 
-{
-question:"What is \\(2+2\\)?",
-options:["2","3","4","5"],
-correct:2,
-explanation:"$$2+2=4$$"
-},
+        quiz.options.forEach((opt, idx) => {
 
-{
-question:"Solve \\(5x=20\\)",
-options:["2","3","4","5"],
-correct:2,
-explanation:"$$x=4$$"
-},
+            const btn = document.createElement('button');
 
-{
-question:"Evaluate \\(3^2\\)",
-options:["6","9","12","15"],
-correct:1,
-explanation:"$$3^2=9$$"
-},
+            btn.className = 'quiz-btn';
 
-{
-question:"Find \\(\\sqrt{81}\\)",
-options:["7","8","9","10"],
-correct:2,
-explanation:"$$\\sqrt{81}=9$$"
-},
+            btn.innerHTML = opt;
 
-{
-question:"Derivative of \\(x^2\\)",
-options:["x","2x","x^2","1"],
-correct:1,
-explanation:"$$\\frac{d}{dx}(x^2)=2x$$"
-},
+            btn.onclick = () => evaluateQuizSelection(idx);
 
-{
-question:"Evaluate \\(10\\times10\\)",
-options:["50","100","150","200"],
-correct:1,
-explanation:"$$10\\times10=100$$"
-},
+            optionsBox.appendChild(btn);
+        });
 
-{
-question:"Solve \\(x+5=11\\)",
-options:["4","5","6","7"],
-correct:2,
-explanation:"$$x=6$$"
-},
+        document.getElementById('quiz-feedback-box').style.display = "none";
+        document.getElementById('next-quiz-btn').style.display = "none";
 
-{
-question:"Evaluate \\(50\\%\\ of\\ 200\\)",
-options:["50","100","150","200"],
-correct:1,
-explanation:"$$0.5\\times200=100$$"
-},
+        MathJax.typesetPromise();
+    }
 
-{
-question:"Evaluate \\(12\\times12\\)",
-options:["124","144","154","164"],
-correct:1,
-explanation:"$$12\\times12=144$$"
-},
+    function evaluateQuizSelection(selectedIndex) {
 
-{
-question:"Find derivative of \\(\\sin x\\)",
-options:["\\(\\cos x\\)","\\(\\sin x\\)","\\(-\\sin x\\)","\\(-\\cos x\\)"],
-correct:0,
-explanation:"$$\\frac{d}{dx}(\\sin x)=\\cos x$$"
-},
+        const quiz = quizDatabase[currentQuestionIndex];
 
-{
-question:"Evaluate \\(2^5\\)",
-options:["16","32","64","128"],
-correct:1,
-explanation:"$$2^5=32$$"
-},
+        const feedbackBox =
+            document.getElementById('quiz-feedback-box');
 
-{
-question:"Solve \\(2x-6=10\\)",
-options:["6","7","8","9"],
-correct:2,
-explanation:"$$2x=16$$ $$x=8$$"
-}
+        if (selectedIndex === quiz.correct) {
 
-];
+            feedbackBox.style.background = "#d4edda";
+            feedbackBox.style.color = "green";
 
-let current=0;
+            feedbackBox.innerHTML =
+                `<strong>Correct!</strong><br>${quiz.explanation}`;
 
-function loadQuiz(){
+        } else {
 
-const q=quizData[current];
+            feedbackBox.style.background = "#f8d7da";
+            feedbackBox.style.color = "red";
 
-document.getElementById("quiz-question").innerHTML=
-`<h3>Question ${current+1}</h3>${q.question}`;
+            feedbackBox.innerHTML =
+                `<strong>Incorrect!</strong><br>${quiz.explanation}`;
+        }
 
-const options=document.getElementById("quiz-options");
+        feedbackBox.style.display = "block";
 
-options.innerHTML="";
+        document.getElementById('next-quiz-btn').style.display = "inline-block";
 
-q.options.forEach((option,index)=>{
+        MathJax.typesetPromise([feedbackBox]);
+    }
 
-const btn=document.createElement("button");
+    function loadNextQuestion() {
 
-btn.className="quiz-btn";
+        currentQuestionIndex =
+            (currentQuestionIndex + 1) % quizDatabase.length;
 
-btn.innerHTML=option;
+        renderCurrentQuiz();
+    }
 
-btn.onclick=()=>checkAnswer(index);
+    window.onload = function () {
 
-options.appendChild(btn);
+        setTimeout(plotGraph, 300);
 
-});
+        renderCurrentQuiz();
 
-document.getElementById("quiz-feedback").style.display="none";
-
-document.getElementById("next-btn").style.display="none";
-
-if(window.MathJax){
-
-MathJax.typesetPromise();
-
-}
-
-}
-
-function checkAnswer(index){
-
-const q=quizData[current];
-
-const feedback=document.getElementById("quiz-feedback");
-
-if(index===q.correct){
-
-feedback.style.background="#d4edda";
-
-feedback.innerHTML=
-`<strong>Correct!</strong><br>${q.explanation}`;
-
-}else{
-
-feedback.style.background="#f8d7da";
-
-feedback.innerHTML=
-`<strong>Wrong!</strong><br>${q.explanation}`;
-
-}
-
-feedback.style.display="block";
-
-document.getElementById("next-btn").style.display="inline-block";
-
-if(window.MathJax){
-
-MathJax.typesetPromise([feedback]);
-
-}
-
-}
-
-function nextQuestion(){
-
-current++;
-
-if(current>=quizData.length){
-
-current=0;
-
-}
-
-loadQuiz();
-
-}
-
-/* START */
-
-window.onload=function(){
-
-plotGraph();
-
-loadQuiz();
-
-};
-
+        if (window.MathJax) {
+            MathJax.typeset();
+        }
+    };
 </script>
 
 </body>
