@@ -3,7 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>3D Mathematics Explorer</title>
+
+<!-- MathJax for LaTeX -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <style>
 
@@ -16,46 +20,53 @@
 body{
     overflow:hidden;
     font-family:Arial, sans-serif;
-    background:linear-gradient(135deg,#dbeafe,#f0f9ff,#ffffff);
-    color:#1e293b;
+    background:#f1f5f9;
+    color:#111827;
 }
 
-/* SIDE PANEL */
+/* PANEL */
 
 #panel{
 
     position:absolute;
+
     top:15px;
+
     left:15px;
 
-    width:360px;
+    width:380px;
+
     max-height:95vh;
 
     overflow:auto;
 
-    background:rgba(255,255,255,0.8);
+    background:white;
 
-    backdrop-filter:blur(12px);
+    border-radius:22px;
 
-    border-radius:20px;
+    padding:24px;
 
-    padding:22px;
-
-    box-shadow:0 10px 30px rgba(0,0,0,0.12);
+    box-shadow:0 10px 40px rgba(0,0,0,0.12);
 
     z-index:100;
 }
 
 h1{
-    color:#2563eb;
+
+    color:#1d4ed8;
+
     margin-bottom:12px;
+
     font-size:30px;
 }
 
 .subtitle{
+
     color:#475569;
-    line-height:1.6;
-    margin-bottom:20px;
+
+    line-height:1.7;
+
+    margin-bottom:18px;
 }
 
 /* SELECT */
@@ -70,7 +81,7 @@ select{
 
     border-radius:14px;
 
-    background:#eff6ff;
+    background:#dbeafe;
 
     color:#1e3a8a;
 
@@ -79,25 +90,29 @@ select{
     font-weight:bold;
 
     outline:none;
-
-    box-shadow:0 4px 10px rgba(0,0,0,0.08);
 }
 
-/* INFO SECTION */
+/* INFO */
 
 .info{
+
     margin-top:20px;
 }
 
 .info h2{
-    color:#0f172a;
+
+    color:#111827;
+
     margin-bottom:10px;
 }
 
 .desc{
+
     line-height:1.7;
-    color:#334155;
-    margin-bottom:14px;
+
+    color:#374151;
+
+    margin-bottom:16px;
 }
 
 /* CARDS */
@@ -106,32 +121,31 @@ select{
 
     background:#f8fafc;
 
-    border-left:5px solid #3b82f6;
+    border-left:6px solid #2563eb;
 
     padding:14px;
 
     border-radius:12px;
 
-    margin-top:12px;
-
-    box-shadow:0 4px 10px rgba(0,0,0,0.06);
+    margin-top:14px;
 }
 
 .card strong{
-    color:#2563eb;
+
+    color:#1d4ed8;
 }
 
 .level{
 
     display:inline-block;
 
-    margin-top:15px;
+    margin-top:16px;
 
-    background:#2563eb;
+    background:#1d4ed8;
 
     color:white;
 
-    padding:7px 14px;
+    padding:8px 15px;
 
     border-radius:30px;
 
@@ -142,17 +156,28 @@ select{
 
 .tip{
 
-    margin-top:18px;
-
-    padding:12px;
+    margin-top:16px;
 
     background:#ecfeff;
 
+    padding:12px;
+
     border-radius:12px;
 
-    color:#155e75;
+    color:#0f766e;
 
     line-height:1.6;
+}
+
+/* MATH STYLE */
+
+.math{
+
+    margin-top:8px;
+
+    font-size:17px;
+
+    color:#111827;
 }
 
 /* SCROLLBAR */
@@ -175,7 +200,8 @@ select{
     <h1>📐 3D Math Explorer</h1>
 
     <p class="subtitle">
-        Learn mathematics visually with interactive 3D shapes from school level to higher mathematics.
+        Interactive mathematical learning platform with 3D geometry,
+        formulas, Cartesian equations and advanced mathematical surfaces.
     </p>
 
     <select id="shapeSelect">
@@ -223,7 +249,7 @@ select{
 
 const scene = new THREE.Scene();
 
-scene.background = new THREE.Color(0xe0f2fe);
+scene.background = new THREE.Color(0xe2e8f0);
 
 /* =========================
    CAMERA
@@ -285,7 +311,7 @@ const ambientLight = new THREE.AmbientLight(
 
     0xffffff,
 
-    1.2
+    1.4
 
 );
 
@@ -295,7 +321,7 @@ const directionalLight = new THREE.DirectionalLight(
 
     0xffffff,
 
-    1.5
+    1.6
 
 );
 
@@ -313,7 +339,7 @@ const grid = new THREE.GridHelper(
 
     30,
 
-    0x94a3b8,
+    0x64748b,
 
     0xcbd5e1
 
@@ -329,108 +355,120 @@ const infoData = {
 
 cube:{
 title:"Cube",
-desc:"A cube is a 3D solid where all edges are equal and every face is a square.",
-formula:"Volume = a³",
-eq:"Equal dimensions along x, y and z axes",
+desc:"A cube is a regular 3D solid with equal edges and square faces.",
+formula:"\\[V = a^3\\]",
+equation:"\\[x = y = z\\]",
+steps:"\\[V = a \\times a \\times a\\]",
 extra:"A cube has 6 faces, 12 edges and 8 vertices.",
 level:"School Geometry"
 },
 
 sphere:{
 title:"Sphere",
-desc:"A sphere is a perfectly round object where all surface points are equally distant from the center.",
-formula:"Volume = (4/3)πr³",
-eq:"x² + y² + z² = r²",
-extra:"Earth, balls and bubbles resemble spherical shapes.",
+desc:"A sphere is a perfectly round geometric object in 3D space.",
+formula:"\\[V = \\frac{4}{3}\\pi r^3\\]",
+equation:"\\[x^2 + y^2 + z^2 = r^2\\]",
+steps:"\\[A = 4\\pi r^2\\]",
+extra:"Every point on the sphere surface is equally distant from the center.",
 level:"School Geometry"
 },
 
 cone:{
 title:"Cone",
-desc:"A cone has one circular base connected to a single apex point.",
-formula:"Volume = (1/3)πr²h",
-eq:"x² + y² = z²",
-extra:"Cones are used in optics, architecture and engineering.",
+desc:"A cone has a circular base connected to one apex point.",
+formula:"\\[V = \\frac{1}{3}\\pi r^2 h\\]",
+equation:"\\[x^2 + y^2 = z^2\\]",
+steps:"\\[l = \\sqrt{r^2 + h^2}\\]",
+extra:"Cones are important in optics and engineering.",
 level:"Middle School Geometry"
 },
 
 cylinder:{
 title:"Cylinder",
-desc:"A cylinder has two parallel circular bases connected by a curved surface.",
-formula:"Volume = πr²h",
-eq:"x² + y² = r²",
-extra:"Pipes and cans are cylindrical objects.",
+desc:"A cylinder contains two parallel circular bases.",
+formula:"\\[V = \\pi r^2 h\\]",
+equation:"\\[x^2 + y^2 = r^2\\]",
+steps:"\\[A = 2\\pi rh + 2\\pi r^2\\]",
+extra:"Cylinders are common in mechanical structures.",
 level:"Basic Geometry"
 },
 
 torus:{
 title:"Torus",
-desc:"A torus is a donut-shaped surface important in topology.",
-formula:"Advanced Surface Geometry",
-eq:"(R−√(x²+y²))² + z² = r²",
-extra:"Magnetic fields often form toroidal patterns.",
+desc:"A torus is a donut-shaped surface studied in topology.",
+formula:"\\[V = 2\\pi^2 Rr^2\\]",
+equation:"\\[(R-\\sqrt{x^2+y^2})^2+z^2=r^2\\]",
+steps:"\\[A = 4\\pi^2 Rr\\]",
+extra:"Toroidal shapes appear in magnetic field systems.",
 level:"Higher Mathematics"
 },
 
 tetrahedron:{
 title:"Tetrahedron",
-desc:"A tetrahedron contains 4 triangular faces.",
-formula:"Volume = a³/(6√2)",
-eq:"Polyhedral Geometry",
-extra:"It is one of the five Platonic solids.",
+desc:"A tetrahedron is the simplest polyhedron with 4 triangular faces.",
+formula:"\\[V = \\frac{a^3}{6\\sqrt{2}}\\]",
+equation:"\\[\\text{Regular Polyhedron}\\]",
+steps:"\\[A = \\sqrt{3}a^2\\]",
+extra:"One of the five Platonic solids.",
 level:"Advanced Geometry"
 },
 
 octahedron:{
 title:"Octahedron",
-desc:"An octahedron contains 8 triangular faces with high symmetry.",
-formula:"Volume = (√2/3)a³",
-eq:"Polyhedral Geometry",
-extra:"Used in chemistry and crystal structures.",
+desc:"An octahedron contains 8 triangular faces.",
+formula:"\\[V = \\frac{\\sqrt{2}}{3}a^3\\]",
+equation:"\\[|x|+|y|+|z|=a\\]",
+steps:"\\[A = 2\\sqrt{3}a^2\\]",
+extra:"Used in crystallography and chemistry.",
 level:"Higher Geometry"
 },
 
 icosahedron:{
 title:"Icosahedron",
-desc:"An icosahedron contains 20 triangular faces.",
-formula:"Complex Polyhedron Formula",
-eq:"Regular Polyhedron",
-extra:"Important in mathematics and 3D modeling.",
+desc:"An icosahedron contains 20 equilateral triangular faces.",
+formula:"\\[V = \\frac{5(3+\\sqrt5)}{12}a^3\\]",
+equation:"\\[\\text{Platonic Solid}\\]",
+steps:"\\[A = 5\\sqrt3 a^2\\]",
+extra:"Important in advanced geometry.",
 level:"University Geometry"
 },
 
 dodecahedron:{
 title:"Dodecahedron",
 desc:"A dodecahedron contains 12 pentagonal faces.",
-formula:"Advanced Polyhedral Formula",
-eq:"Regular Polyhedron",
-extra:"One of the famous Platonic solids.",
+formula:"\\[V = \\frac{15+7\\sqrt5}{4}a^3\\]",
+equation:"\\[\\text{Regular Polyhedron}\\]",
+steps:"\\[A = 3\\sqrt{25+10\\sqrt5}a^2\\]",
+extra:"A famous Platonic solid.",
 level:"Higher Geometry"
 },
 
 paraboloid:{
 title:"Paraboloid",
-desc:"A paraboloid is formed when a parabola rotates in 3D space.",
-formula:"z = x² + y²",
-eq:"Parabola Equation: y = x²",
-extra:"Satellite dishes use paraboloid geometry.",
+desc:"A paraboloid is formed by rotating a parabola.",
+formula:"\\[z = x^2 + y^2\\]",
+equation:"\\[y = x^2\\]",
+steps:"\\[\\text{3D extension of parabola}\\]",
+extra:"Used in satellite dishes and mirrors.",
 level:"Analytical Geometry"
 },
 
 hyperboloid:{
 title:"Hyperboloid",
-desc:"A hyperboloid is generated from hyperbolas in three dimensions.",
-formula:"x² + y² − z² = 1",
-eq:"x²/a² − y²/b² = 1",
-extra:"Cooling towers use hyperboloid structures.",
+desc:"A hyperboloid is generated from hyperbolas.",
+formula:"\\[x^2+y^2-z^2=1\\]",
+equation:"\\[\\frac{x^2}{a^2}-\\frac{y^2}{b^2}=1\\]",
+steps:"\\[\\text{Hyperbola rotated in 3D}\\]",
+extra:"Cooling towers often use this geometry.",
 level:"Higher Mathematics"
 },
 
 ellipsoid:{
 title:"Ellipsoid",
-desc:"An ellipsoid is a stretched or compressed sphere.",
-formula:"x²/a² + y²/b² + z²/c² = 1",
-eq:"Ellipse: x²/a² + y²/b² = 1",
+desc:"An ellipsoid is a stretched sphere.",
+formula:"\\[\\frac{x^2}{a^2}+\\frac{y^2}{b^2}+\\frac{z^2}{c^2}=1\\]",
+equation:"\\[\\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1\\]",
+steps:"\\[\\text{3D ellipse}\\]",
 extra:"Earth approximately resembles an ellipsoid.",
 level:"Analytical Geometry"
 },
@@ -438,18 +476,20 @@ level:"Analytical Geometry"
 mobius:{
 title:"Mobius Strip",
 desc:"A Möbius strip has only one side and one edge.",
-formula:"Topological Surface",
-eq:"Non-orientable Geometry",
-extra:"Walking along it returns you upside-down.",
+formula:"\\[\\text{Topological Surface}\\]",
+equation:"\\[\\text{Non-orientable Geometry}\\]",
+steps:"\\[\\text{One continuous surface}\\]",
+extra:"A fascinating object in topology.",
 level:"Topology"
 },
 
 knot:{
 title:"Torus Knot",
-desc:"A torus knot is studied in topology and knot theory.",
-formula:"Parametric Equations",
-eq:"Advanced Topology",
-extra:"Used in advanced mathematics and physics.",
+desc:"A torus knot is studied in knot theory and topology.",
+formula:"\\[x(t), y(t), z(t)\\]",
+equation:"\\[\\text{Parametric Equations}\\]",
+steps:"\\[\\text{Advanced Mathematical Curves}\\]",
+extra:"Used in physics and advanced mathematics.",
 level:"University Mathematics"
 }
 
@@ -535,34 +575,34 @@ function createShape(type){
             break;
     }
 
-    /* =========================
-       COLORS
-    ========================= */
+    /* BRIGHT COLORS */
 
     const colors = {
 
-        cube:0xff6b6b,
-        sphere:0x4ecdc4,
-        cone:0xffa94d,
-        cylinder:0x845ef7,
-        torus:0xf06595,
-        tetrahedron:0x20c997,
-        octahedron:0x339af0,
-        icosahedron:0xffd43b,
-        dodecahedron:0x94d82d,
-        paraboloid:0xff922b,
-        hyperboloid:0xbe4bdb,
-        ellipsoid:0x22b8cf,
-        mobius:0xfa5252,
-        knot:0x5c7cfa
+        cube:0xff0000,
+        sphere:0x00ffff,
+        cone:0xff8800,
+        cylinder:0x8000ff,
+        torus:0xff1493,
+        tetrahedron:0x00ff66,
+        octahedron:0x0066ff,
+        icosahedron:0xffff00,
+        dodecahedron:0x66ff00,
+        paraboloid:0xff5500,
+        hyperboloid:0xaa00ff,
+        ellipsoid:0x00ccff,
+        mobius:0xff0055,
+        knot:0x0044ff
 
     };
 
     const shapeMaterial = new THREE.MeshPhongMaterial({
 
-        color:colors[type] || 0xffffff,
+        color:colors[type],
 
-        shininess:180,
+        shininess:250,
+
+        emissive:0x111111,
 
         specular:0xffffff
 
@@ -596,17 +636,22 @@ function updateInfo(type){
         <p class="desc">${d.desc}</p>
 
         <div class="card">
-            <strong>Formula:</strong><br>
-            ${d.formula}
+            <strong>Volume / Formula</strong>
+            <div class="math">${d.formula}</div>
         </div>
 
         <div class="card">
-            <strong>Equation:</strong><br>
-            ${d.eq}
+            <strong>Cartesian Equation</strong>
+            <div class="math">${d.equation}</div>
         </div>
 
         <div class="card">
-            <strong>Interesting Fact:</strong><br>
+            <strong>Mathematical Steps</strong>
+            <div class="math">${d.steps}</div>
+        </div>
+
+        <div class="card">
+            <strong>Interesting Fact</strong><br>
             ${d.extra}
         </div>
 
@@ -615,10 +660,12 @@ function updateInfo(type){
         </div>
 
         <div class="tip">
-            💡 Drag to rotate the shape and use mouse wheel to zoom.
+            💡 Drag to rotate the object and scroll to zoom.
         </div>
 
     `;
+
+    MathJax.typesetPromise();
 }
 
 /* =========================
@@ -628,7 +675,7 @@ function updateInfo(type){
 createShape("cube");
 
 /* =========================
-   SHAPE SELECT
+   SELECT EVENT
 ========================= */
 
 document.getElementById("shapeSelect")
