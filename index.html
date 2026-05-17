@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vraj H Raval | Mathematics Education</title>
     
-    <!-- Libraries -->
-    <script src="https://cloudflare.com"></script>
+    <!-- Robust Production Libraries (Fixed CDN paths for GitHub compatibility) -->
     <script src="https://jsdelivr.net"></script>
-    <script src="https://cloudflare.com"></script>
+    <script src="https://jsdelivr.net"></script>
+    <script src="https://jsdelivr.net"></script>
     <script src="https://jsdelivr.net"></script>
     
     <!-- Robust MathJax Configuration for Dynamic Rendering -->
@@ -87,7 +87,7 @@
 
         /* Step Solver UI */
         .solver-ui { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; align-items: center; font-size: 1.2rem; }
-        .solver-ui input { padding: 10px; border: 2px solid #ddd; border-radius: 6px; font-size: 1.1rem; width: 70px; text-align: center; }
+        .solver-ui input { padding: 10px; border: 2px solid #ddd; border-radius: 6px; font-size: 1.1rem; width: 70px; text-align: center; color: #333; }
         .solver-btn { background: var(--accent); color: white; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 1rem; }
         .solver-steps { background: #f8f9fa; border-left: 5px solid var(--accent); padding: 20px; margin-top: 20px; border-radius: 4px; display: none; }
         .step-item { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed #ddd; }
@@ -141,12 +141,12 @@
             <img src="pytha.jfif" alt="Pythagoras">
             <div style="flex:1;">
                 <p>From the geometric proofs of Pythagoras to the invention of <strong>Zero</strong> in India, these civilizations laid the groundwork for all modern technology and science.</p>
-                <p style="background:#f9f9f9; padding:10px; border-left:4px solid var(--accent);">\[ a^2 + b^2 = c^2 \ ]</p>
+                <p style="background:#f9f9f9; padding:10px; border-left:4px solid var(--accent);">\[ a^2 + b^2 = c^2 \]</p>
             </div>
         </div>
     </section>
 
-    <!-- FORMULA REFERENCE LIBRARY (Fixed Delimiters) -->
+    <!-- FORMULA REFERENCE LIBRARY -->
     <section>
         <h2>3. Quick Formula Reference Library</h2>
         <p>Core algebraic and geometric rules formatted cleanly using structural LaTeX layout models.</p>
@@ -169,7 +169,7 @@
         </div>
     </section>
 
-    <!-- INTERACTIVE STEP-BY-STEP SOLVER (Outputs Pure LaTeX Math Expressions) -->
+    <!-- INTERACTIVE STEP-BY-STEP SOLVER -->
     <section>
         <h2>4. Interactive Step-by-Step Solver</h2>
         <p>Input quadratic coefficients to see operations translated down using structured mathematical proofs.</p>
@@ -182,7 +182,7 @@
         <div class="solver-steps" id="solver-steps-output"></div>
     </section>
 
-    <!-- IMPROVED PRACTICE CENTER (Dynamic Questions with Multi-line Math Explanations) -->
+    <!-- IMPROVED PRACTICE CENTER -->
     <section>
         <h2>5. Interactive Practice Center</h2>
         <div class="quiz-container">
@@ -228,9 +228,15 @@
 </footer>
 
 <script>
-    /* --- PRESERVED CHART LOGIC --- */
+    /* --- CHART LOGIC WITH ENVIRONMENT CHECK --- */
     let myChart;
     function plotGraph() {
+        // Fallback catch if CDN has not completed loading on Github Pages environment yet
+        if (typeof math === 'undefined' || typeof Chart === 'undefined') {
+            console.warn("MathJS/ChartJS libraries are compiling over network. Standby...");
+            return;
+        }
+
         const input = document.getElementById('eq-input').value;
         const pts = [];
         try {
@@ -283,7 +289,7 @@
         }
     }
 
-    /* --- RIGOROUS PURE LATEX SOLVER SCRIPT --- */
+    /* --- LATEX SOLVER SCRIPT --- */
     function solveQuadratic() {
         const a = parseFloat(document.getElementById('solve-a').value);
         const b = parseFloat(document.getElementById('solve-b').value);
@@ -299,7 +305,6 @@
         const disc = (b * b) - (4 * a * c);
         let html = `<h3>Proof Derivation Stack:</h3>`;
         
-        // Step 1
         html += `<div class="step-item">
                     <strong>Step 1: Compute Discriminant ($D$)</strong>
                     $$ D = b^2 - 4ac $$
@@ -307,7 +312,6 @@
                     $$ D = ${b*b} - ${4*a*c} = ${disc} $$
                  </div>`;
 
-        // Step 2 & 3
         if (disc < 0) {
             html += `<div class="step-item">
                         <strong>Step 2: Roots Assessment</strong>
@@ -336,13 +340,12 @@
         outputDiv.innerHTML = html;
         outputDiv.style.display = "block";
         
-        // Enforce immediate MathJax processing 
         if (window.MathJax && window.MathJax.typesetPromise) {
             MathJax.typesetPromise([outputDiv]);
         }
     }
 
-    /* --- ENGINE FOR DYNAMIC UPGRADED QUIZZES --- */
+    /* --- QUIZ SYSTEM --- */
     const quizDatabase = [
         {
             question: "Evaluate the definite integral limit constraint: $\\int_{0}^{2} 3x^2 \\, dx$",
@@ -410,7 +413,7 @@
         } else {
             optionButtons[selectedIndex].style.background = "#f8d7da";
             optionButtons[selectedIndex].style.borderColor = "var(--danger)";
-            optionButtons[quiz.correct].style.background = "#d4edda"; // Highlight correct choice
+            optionButtons[quiz.correct].style.background = "#d4edda";
             feedbackBox.style.background = "#f8d7da";
             feedbackBox.style.color = "var(--danger)";
             feedbackBox.innerHTML = `<strong>Incorrect Evaluation!</strong><br>${quiz.explanation}`;
@@ -429,9 +432,9 @@
         renderCurrentQuiz();
     }
 
-    // App Boot Execution
+    // App Initialization
     window.onload = function() {
-        plotGraph();
+        setTimeout(plotGraph, 300); // Small buffer time for asset checks on live servers
         renderCurrentQuiz();
     };
 </script>
