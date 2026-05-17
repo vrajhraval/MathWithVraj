@@ -4,8 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Advanced 3D Math Explorer</title>
+<title>Advanced 3D Math Explorer (Stable Final)</title>
 
+<!-- ✅ FIXED MATHJAX LOAD ORDER -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    displayMath: [['\\[','\\]']]
+  }
+};
+</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <style>
@@ -19,49 +28,37 @@ body{
     color:white;
 }
 
-/* PANEL */
-
 #panel{
     position:absolute;
     top:15px;
     left:15px;
-    width:400px;
+    width:380px;
     max-height:95vh;
     overflow:auto;
     background:rgba(255,255,255,0.08);
-    backdrop-filter:blur(12px);
-    border-radius:18px;
-    padding:18px;
-    z-index:10;
+    backdrop-filter:blur(10px);
+    border-radius:14px;
+    padding:14px;
 }
 
-h1{
-    font-size:22px;
-    color:#4fc3f7;
-    margin-bottom:10px;
-}
+h1{color:#4fc3f7;font-size:20px;}
 
 select{
     width:100%;
     padding:10px;
-    border-radius:8px;
+    margin:10px 0;
     background:#111b3d;
     color:white;
     border:none;
-    margin-bottom:10px;
+    border-radius:8px;
 }
-
-/* COUNTERS */
 
 .counter{
     display:flex;
     justify-content:space-between;
     color:#ffd54f;
     font-weight:bold;
-    margin-bottom:10px;
 }
-
-/* INFO */
 
 .card{
     margin-top:10px;
@@ -79,29 +76,19 @@ select{
 
 <div id="panel">
 
-<h1>📐 Advanced 3D Math Explorer</h1>
+<h1>📐 Stable 3D Math Explorer</h1>
 
 <select id="shapeSelect">
-
 <option value="cube">Cube</option>
 <option value="cuboid">Cuboid</option>
 <option value="sphere">Sphere</option>
 <option value="cone">Cone</option>
 <option value="cylinder">Cylinder</option>
 <option value="torus">Torus</option>
-
 <option value="tetrahedron">Tetrahedron</option>
 <option value="octahedron">Octahedron</option>
 <option value="icosahedron">Icosahedron</option>
 <option value="dodecahedron">Dodecahedron</option>
-
-<option value="paraboloid">Paraboloid</option>
-<option value="hyperboloid">Hyperboloid</option>
-<option value="ellipsoid">Ellipsoid</option>
-
-<option value="elliptic_paraboloid">Elliptic Paraboloid</option>
-<option value="hyperbolic_paraboloid">Hyperbolic Paraboloid</option>
-
 </select>
 
 <div class="counter">
@@ -118,70 +105,53 @@ select{
 
 <script>
 
-/* ================= SCENE ================= */
+/* ================= SAFE SCENE ================= */
 
 const scene=new THREE.Scene();
 scene.background=new THREE.Color(0x050816);
 
-/* CAMERA */
-
 const camera=new THREE.PerspectiveCamera(70,innerWidth/innerHeight,0.1,1000);
 camera.position.set(0,2,6);
-
-/* RENDERER */
 
 const renderer=new THREE.WebGLRenderer({antialias:true});
 renderer.setSize(innerWidth,innerHeight);
 document.body.appendChild(renderer.domElement);
 
-/* CONTROLS */
-
 const controls=new THREE.OrbitControls(camera,renderer.domElement);
 controls.enableDamping=true;
-
-/* LIGHT */
 
 scene.add(new THREE.AmbientLight(0xffffff,1.2));
 const light=new THREE.DirectionalLight(0xffffff,1.5);
 light.position.set(5,5,5);
 scene.add(light);
 
-/* GROUP */
-
 let group=new THREE.Group();
 scene.add(group);
 
-function clearGroup(){group.clear();}
+function clear(){group.clear();}
 
 /* COLORS */
 
 const colors={
-cube:0xff0000,
-cuboid:0xff6b00,
-sphere:0x00ffff,
-cone:0xffaa00,
-cylinder:0xaa00ff,
-torus:0xff1493,
-
-tetrahedron:0x00ff66,
-octahedron:0x0066ff,
-icosahedron:0xffff00,
-dodecahedron:0x66ff00,
-
-paraboloid:0xff5500,
-hyperboloid:0xaa00ff,
-ellipsoid:0x00ccff,
-
-elliptic_paraboloid:0x00ffcc,
-hyperbolic_paraboloid:0xff0066
+cube:0xff3b30,
+cuboid:0xff9500,
+sphere:0x00d2ff,
+cone:0xffcc00,
+cylinder:0xaf52de,
+torus:0xff2d55,
+tetrahedron:0x30d158,
+octahedron:0x0a84ff,
+icosahedron:0xffd60a,
+dodecahedron:0x32d74b
 };
 
-/* INFO DATA */
+/* CLEAN MATH (CORRECT THEORY ONLY) */
 
 const info={
 
 cube:["Cube","\\[V=a^3\\]","\\[x=y=z\\]","8 vertices, 12 edges"],
-cuboid:["Cuboid","\\[V=lbh\\]","\\[x,y,z\\]","Rectangular prism"],
+
+cuboid:["Cuboid","\\[V=lbh\\]","\\[(x,y,z)\\]","Rectangular prism"],
 
 sphere:["Sphere","\\[V=\\frac{4}{3}\\pi r^3\\]","\\[x^2+y^2+z^2=r^2\\]","Perfect symmetry"],
 
@@ -189,24 +159,23 @@ cone:["Cone","\\[V=\\frac{1}{3}\\pi r^2 h\\]","\\[x^2+y^2=z^2\\]","1 vertex"],
 
 cylinder:["Cylinder","\\[V=\\pi r^2 h\\]","\\[x^2+y^2=r^2\\]","2 circular bases"],
 
-torus:["Torus","\\[V=2\\pi^2 R r^2\\]","Toroidal equation","Donut shape"],
+torus:["Torus","\\[V=2\\pi^2 R r^2\\]","\\[(R-\\sqrt{x^2+y^2})^2+z^2=r^2\\]","Donut shape"],
 
-paraboloid:["Paraboloid","\\[z=x^2+y^2\\]","\\[y=x^2\\]","3D parabola"],
+tetrahedron:["Tetrahedron","\\[V=\\frac{a^3}{6\\sqrt2}\\]","Polyhedron","4 faces"],
 
-hyperboloid:["Hyperboloid","\\[x^2+y^2-z^2=1\\]","Hyperbola rotation","Cooling towers"],
+octahedron:["Octahedron","\\[V=\\frac{\\sqrt2}{3}a^3\\]","Symmetric solid","8 faces"],
 
-ellipsoid:["Ellipsoid","\\[\\frac{x^2}{a^2}+\\frac{y^2}{b^2}+\\frac{z^2}{c^2}=1\\]","Ellipse extension","Earth shape"],
+icosahedron:["Icosahedron","\\[V=\\frac{5(3+\\sqrt5)}{12}a^3\\]","Regular solid","20 faces"],
 
-elliptic_paraboloid:["Elliptic Paraboloid","\\[z=\\frac{x^2}{a^2}+\\frac{y^2}{b^2}\\]","Parabolic bowl","Satellite dish"],
+dodecahedron:["Dodecahedron","\\[V=\\frac{15+7\\sqrt5}{4}a^3\\]","Pentagon faces","12 faces"]
 
-hyperbolic_paraboloid:["Hyperbolic Paraboloid","\\[z=\\frac{x^2}{a^2}-\\frac{y^2}{b^2}\\]","Saddle surface","Architecture"]
 };
 
-/* CREATE SHAPE */
+/* SAFE GEOMETRIES ONLY */
 
 function create(type){
 
-clearGroup();
+clear();
 
 let geo;
 
@@ -214,43 +183,23 @@ switch(type){
 
 case "cube":geo=new THREE.BoxGeometry(2,2,2);break;
 case "cuboid":geo=new THREE.BoxGeometry(2.5,1.5,1);break;
-
 case "sphere":geo=new THREE.SphereGeometry(1.5,16,16);break;
-
 case "cone":geo=new THREE.ConeGeometry(1.5,3,16);break;
-
 case "cylinder":geo=new THREE.CylinderGeometry(1.2,1.2,3,16);break;
-
 case "torus":geo=new THREE.TorusGeometry(1.5,0.5,16,32);break;
-
 case "tetrahedron":geo=new THREE.TetrahedronGeometry(2);break;
-
 case "octahedron":geo=new THREE.OctahedronGeometry(2);break;
-
 case "icosahedron":geo=new THREE.IcosahedronGeometry(2);break;
-
 case "dodecahedron":geo=new THREE.DodecahedronGeometry(2);break;
-
-case "paraboloid":geo=new THREE.CylinderGeometry(0,2,4,32);break;
-
-case "hyperboloid":geo=new THREE.TorusKnotGeometry(1,0.4,64,16);break;
-
-case "ellipsoid":geo=new THREE.SphereGeometry(1.5,16,16);geo.scale(1.5,1,0.8);break;
-
-case "elliptic_paraboloid":geo=new THREE.CylinderGeometry(0,2,4,32);break;
-
-case "hyperbolic_paraboloid":geo=new THREE.TorusKnotGeometry(1,0.3,64,16);break;
 
 }
 
-/* SOLID */
+/* SHAPE */
 
-const mesh=new THREE.Mesh(
+group.add(new THREE.Mesh(
 geo,
-new THREE.MeshPhongMaterial({color:colors[type],shininess:200})
-);
-
-group.add(mesh);
+new THREE.MeshPhongMaterial({color:colors[type],shininess:150})
+));
 
 /* EDGES */
 
@@ -267,31 +216,24 @@ const p=geo.attributes.position;
 const pts=[];
 
 for(let i=0;i<p.count;i++){
-
-pts.push(new THREE.Vector3(
-p.getX(i),
-p.getY(i),
-p.getZ(i)
-));
-
+pts.push(new THREE.Vector3(p.getX(i),p.getY(i),p.getZ(i)));
 }
 
 group.add(new THREE.Points(
 new THREE.BufferGeometry().setFromPoints(pts),
-new THREE.PointsMaterial({color:0xffd700,size:0.08})
+new THREE.PointsMaterial({color:0xffd700,size:0.07})
 ));
 
-/* COUNTERS */
+/* UI */
 
 document.getElementById("vCount").innerText="Vertices: "+p.count;
 document.getElementById("eCount").innerText="Edges: "+edges.geometry.attributes.position.count/2;
-
-/* INFO */
 
 const d=info[type];
 
 document.getElementById("infoBox").innerHTML=`
 <div class="card">
+
 <b>${d[0]}</b><br><br>
 
 Formula:<br>
@@ -301,10 +243,16 @@ Cartesian Equation:<br>
 \\[${d[2]}\\]<br><br>
 
 ${d[3]}
+
 </div>
 `;
 
+/* SAFE MATHJAX CALL */
+setTimeout(()=>{
+if(window.MathJax?.typesetPromise){
 MathJax.typesetPromise();
+}
+},100);
 
 }
 
