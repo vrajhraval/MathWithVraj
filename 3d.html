@@ -1,137 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>3D Mathematics Shapes Explorer</title>
-
-<!-- Three.js -->
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/controls/OrbitControls.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Math Shapes Explorer</title>
 
 <style>
-    *{
-        margin:0;
-        padding:0;
-        box-sizing:border-box;
-        font-family:Arial, Helvetica, sans-serif;
-    }
-
     body{
+        margin:0;
         overflow:hidden;
         background:#050816;
+        font-family:Arial, sans-serif;
         color:white;
     }
 
-    #container{
-        width:100vw;
-        height:100vh;
-    }
-
-    .panel{
+    #ui{
         position:absolute;
         top:15px;
         left:15px;
         width:320px;
-        background:rgba(10,15,35,0.9);
+        background:rgba(0,0,0,0.7);
         padding:20px;
-        border-radius:18px;
-        backdrop-filter: blur(10px);
-        border:1px solid rgba(255,255,255,0.1);
-        z-index:10;
-        max-height:95vh;
-        overflow:auto;
+        border-radius:15px;
+        z-index:100;
+        backdrop-filter:blur(10px);
     }
 
-    .panel h1{
-        font-size:24px;
-        margin-bottom:10px;
+    h1{
+        margin-top:0;
         color:#4fc3f7;
     }
 
-    .panel p{
-        font-size:14px;
-        line-height:1.6;
-        margin-bottom:15px;
-        color:#ddd;
+    select, button{
+        width:100%;
+        margin-top:10px;
+        padding:12px;
+        border:none;
+        border-radius:10px;
+        font-size:16px;
     }
 
     select{
-        width:100%;
-        padding:12px;
-        border:none;
-        border-radius:10px;
-        margin-bottom:15px;
-        background:#111b3d;
+        background:#13203d;
         color:white;
-        font-size:15px;
-    }
-
-    .info{
-        margin-top:10px;
-        padding:15px;
-        background:#101935;
-        border-radius:12px;
-        line-height:1.7;
-    }
-
-    .info h2{
-        color:#ffd54f;
-        margin-bottom:10px;
-    }
-
-    .badge{
-        display:inline-block;
-        padding:6px 12px;
-        border-radius:30px;
-        background:#1e88e5;
-        margin-top:10px;
-        font-size:13px;
-    }
-
-    .footer{
-        margin-top:15px;
-        font-size:12px;
-        color:#aaa;
-    }
-
-    canvas{
-        display:block;
-    }
-
-    .controls{
-        margin-top:15px;
     }
 
     button{
-        width:100%;
-        padding:12px;
-        border:none;
-        border-radius:10px;
-        margin-top:10px;
         background:linear-gradient(45deg,#00c6ff,#0072ff);
         color:white;
-        font-weight:bold;
         cursor:pointer;
-        transition:0.3s;
+        font-weight:bold;
     }
 
     button:hover{
-        transform:scale(1.03);
+        opacity:0.9;
+    }
+
+    #info{
+        margin-top:15px;
+        line-height:1.6;
+        color:#ddd;
     }
 </style>
 </head>
 <body>
 
-<div class="panel">
-    <h1>📐 3D Mathematics Shapes</h1>
+<div id="ui">
+    <h1>📐 3D Shapes</h1>
 
-    <p>
-        Explore important 3D mathematical shapes from school level to advanced geometry.
-        Rotate, zoom and learn interactively.
-    </p>
-
-    <select id="shapeSelector">
+    <select id="shapeSelect">
         <option value="cube">Cube</option>
         <option value="sphere">Sphere</option>
         <option value="cone">Cone</option>
@@ -144,234 +81,162 @@
         <option value="knot">Torus Knot</option>
     </select>
 
-    <div class="controls">
-        <button onclick="toggleRotation()">⏯ Toggle Rotation</button>
-        <button onclick="wireframeMode()">🔲 Toggle Wireframe</button>
-    </div>
+    <button onclick="toggleRotation()">Toggle Rotation</button>
+    <button onclick="toggleWireframe()">Toggle Wireframe</button>
 
-    <div class="info" id="shapeInfo">
-        <h2>Cube</h2>
-        <p>
-            A cube has 6 square faces, 12 edges and 8 vertices.
-        </p>
-        <div class="badge">School Level Geometry</div>
-    </div>
-
-    <div class="footer">
-        Made for GitHub Pages • Interactive Mathematics Learning
+    <div id="info">
+        Interactive mathematical 3D geometry explorer.
+        Rotate using mouse drag and zoom using scroll wheel.
     </div>
 </div>
 
-<div id="container"></div>
+<script type="module">
 
-<script>
-    const container = document.getElementById("container");
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
 
-    // Scene
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x050816);
+import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
 
-    // Camera
-    const camera = new THREE.PerspectiveCamera(
-        60,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        1000
-    );
-    camera.position.set(0, 2, 6);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x050816);
 
-    // Renderer
-    const renderer = new THREE.WebGLRenderer({ antialias:true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    container.appendChild(renderer.domElement);
+const camera = new THREE.PerspectiveCamera(
+    60,
+    window.innerWidth/window.innerHeight,
+    0.1,
+    1000
+);
 
-    // Controls
-    const controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
+camera.position.set(0,2,5);
 
-    // Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-    scene.add(ambientLight);
+const renderer = new THREE.WebGLRenderer({
+    antialias:true
+});
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
-    directionalLight.position.set(5,5,5);
-    scene.add(directionalLight);
+renderer.setSize(window.innerWidth,window.innerHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
 
-    // Grid
-    const grid = new THREE.GridHelper(20,20,0x444444,0x222222);
-    scene.add(grid);
+document.body.appendChild(renderer.domElement);
 
-    // Shape Data
-    const shapeDescriptions = {
-        cube: {
-            title:"Cube",
-            text:"A cube has 6 square faces, 12 edges and 8 vertices.",
-            level:"School Level Geometry"
-        },
-        sphere: {
-            title:"Sphere",
-            text:"A sphere is a perfectly round 3D object where every point is equally distant from the center.",
-            level:"Basic Geometry"
-        },
-        cone: {
-            title:"Cone",
-            text:"A cone has one circular base and a single apex.",
-            level:"Middle School Geometry"
-        },
-        cylinder: {
-            title:"Cylinder",
-            text:"A cylinder has two parallel circular bases connected by a curved surface.",
-            level:"Basic Solid Geometry"
-        },
-        torus: {
-            title:"Torus",
-            text:"A torus looks like a donut shape and is studied in topology and advanced geometry.",
-            level:"Higher Mathematics"
-        },
-        tetrahedron: {
-            title:"Tetrahedron",
-            text:"A tetrahedron is a pyramid with 4 triangular faces.",
-            level:"Polyhedra Geometry"
-        },
-        octahedron: {
-            title:"Octahedron",
-            text:"An octahedron has 8 triangular faces.",
-            level:"Advanced Geometry"
-        },
-        icosahedron: {
-            title:"Icosahedron",
-            text:"An icosahedron has 20 triangular faces.",
-            level:"Higher Geometry"
-        },
-        dodecahedron: {
-            title:"Dodecahedron",
-            text:"A dodecahedron has 12 pentagonal faces.",
-            level:"Platonic Solids"
-        },
-        knot: {
-            title:"Torus Knot",
-            text:"A torus knot is studied in topology and higher dimensional mathematics.",
-            level:"University Mathematics"
-        }
-    };
+const controls = new OrbitControls(camera,renderer.domElement);
+controls.enableDamping = true;
 
-    let material = new THREE.MeshStandardMaterial({
-        color:0x4fc3f7,
-        metalness:0.3,
-        roughness:0.2
-    });
+const ambientLight = new THREE.AmbientLight(0xffffff,1.2);
+scene.add(ambientLight);
 
-    let currentShape;
-    let rotating = true;
-    let wireframe = false;
+const directionalLight = new THREE.DirectionalLight(0xffffff,2);
+directionalLight.position.set(5,5,5);
+scene.add(directionalLight);
 
-    function createShape(type){
+const pointLight = new THREE.PointLight(0x4fc3f7,2);
+pointLight.position.set(-5,5,5);
+scene.add(pointLight);
 
-        if(currentShape){
-            scene.remove(currentShape);
-        }
+const grid = new THREE.GridHelper(20,20,0x444444,0x222222);
+scene.add(grid);
 
-        let geometry;
+let material = new THREE.MeshPhongMaterial({
+    color:0x4fc3f7,
+    shininess:100
+});
 
-        switch(type){
+let shape;
+let rotating = true;
+let wireframe = false;
 
-            case "cube":
-                geometry = new THREE.BoxGeometry(2,2,2);
-                break;
+function createShape(type){
 
-            case "sphere":
-                geometry = new THREE.SphereGeometry(1.5,64,64);
-                break;
-
-            case "cone":
-                geometry = new THREE.ConeGeometry(1.5,3,64);
-                break;
-
-            case "cylinder":
-                geometry = new THREE.CylinderGeometry(1.2,1.2,3,64);
-                break;
-
-            case "torus":
-                geometry = new THREE.TorusGeometry(1.5,0.5,32,100);
-                break;
-
-            case "tetrahedron":
-                geometry = new THREE.TetrahedronGeometry(2);
-                break;
-
-            case "octahedron":
-                geometry = new THREE.OctahedronGeometry(2);
-                break;
-
-            case "icosahedron":
-                geometry = new THREE.IcosahedronGeometry(2);
-                break;
-
-            case "dodecahedron":
-                geometry = new THREE.DodecahedronGeometry(2);
-                break;
-
-            case "knot":
-                geometry = new THREE.TorusKnotGeometry(1,0.3,128,32);
-                break;
-        }
-
-        currentShape = new THREE.Mesh(geometry, material);
-        scene.add(currentShape);
-
-        updateInfo(type);
+    if(shape){
+        scene.remove(shape);
     }
 
-    function updateInfo(type){
-        const data = shapeDescriptions[type];
+    let geometry;
 
-        document.getElementById("shapeInfo").innerHTML = `
-            <h2>${data.title}</h2>
-            <p>${data.text}</p>
-            <div class="badge">${data.level}</div>
-        `;
+    switch(type){
+
+        case "cube":
+            geometry = new THREE.BoxGeometry(2,2,2);
+            break;
+
+        case "sphere":
+            geometry = new THREE.SphereGeometry(1.5,64,64);
+            break;
+
+        case "cone":
+            geometry = new THREE.ConeGeometry(1.5,3,64);
+            break;
+
+        case "cylinder":
+            geometry = new THREE.CylinderGeometry(1.2,1.2,3,64);
+            break;
+
+        case "torus":
+            geometry = new THREE.TorusGeometry(1.5,0.5,32,100);
+            break;
+
+        case "tetrahedron":
+            geometry = new THREE.TetrahedronGeometry(2);
+            break;
+
+        case "octahedron":
+            geometry = new THREE.OctahedronGeometry(2);
+            break;
+
+        case "icosahedron":
+            geometry = new THREE.IcosahedronGeometry(2);
+            break;
+
+        case "dodecahedron":
+            geometry = new THREE.DodecahedronGeometry(2);
+            break;
+
+        case "knot":
+            geometry = new THREE.TorusKnotGeometry(1,0.3,128,32);
+            break;
     }
 
-    // Initial Shape
-    createShape("cube");
+    shape = new THREE.Mesh(geometry,material);
+    scene.add(shape);
+}
 
-    // Shape Selector
-    document.getElementById("shapeSelector").addEventListener("change",(e)=>{
-        createShape(e.target.value);
-    });
+createShape("cube");
 
-    // Rotation Toggle
-    function toggleRotation(){
-        rotating = !rotating;
+document.getElementById("shapeSelect").addEventListener("change",(e)=>{
+    createShape(e.target.value);
+});
+
+window.toggleRotation = function(){
+    rotating = !rotating;
+}
+
+window.toggleWireframe = function(){
+    wireframe = !wireframe;
+    material.wireframe = wireframe;
+}
+
+function animate(){
+
+    requestAnimationFrame(animate);
+
+    if(shape && rotating){
+        shape.rotation.x += 0.005;
+        shape.rotation.y += 0.01;
     }
 
-    // Wireframe Toggle
-    function wireframeMode(){
-        wireframe = !wireframe;
-        material.wireframe = wireframe;
-    }
+    controls.update();
+    renderer.render(scene,camera);
+}
 
-    // Animation
-    function animate(){
-        requestAnimationFrame(animate);
+animate();
 
-        if(currentShape && rotating){
-            currentShape.rotation.y += 0.01;
-            currentShape.rotation.x += 0.005;
-        }
+window.addEventListener("resize",()=>{
 
-        controls.update();
-        renderer.render(scene,camera);
-    }
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
 
-    animate();
+    renderer.setSize(window.innerWidth,window.innerHeight);
 
-    // Resize
-    window.addEventListener("resize",()=>{
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    });
+});
+
 </script>
 
 </body>
