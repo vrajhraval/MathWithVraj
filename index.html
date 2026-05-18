@@ -45,6 +45,31 @@
             --light: #f4f7f6;
             --success: #27ae60;
             --danger: #c0392b;
+            --header-bg: white;
+            --text-color: #333;
+            --card-bg: white;
+            --sub-text: #666;
+            --border-color: #eee;
+            --formula-card-bg: #fdfdfd;
+            --quiz-container-bg: #fafafa;
+            --quiz-btn-bg: white;
+            --quiz-btn-hover: #f7faff;
+        }
+
+        /* Dark Mode Target Overwrite */
+        body.dark-mode-active {
+            --primary: #1a252f;
+            --accent: #3498db;
+            --light: #121212;
+            --header-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --card-bg: #1e1e1e;
+            --sub-text: #b0b0b0;
+            --border-color: #333;
+            --formula-card-bg: #1a1a1a;
+            --quiz-container-bg: #1a1a1a;
+            --quiz-btn-bg: #2d2d2d;
+            --quiz-btn-hover: #3d3d3d;
         }
 
         * {
@@ -56,8 +81,9 @@
             margin: 0;
             padding: 0;
             background-color: var(--light);
-            color: #333;
+            color: var(--text-color);
             line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .MathJax {
@@ -66,7 +92,7 @@
 
         /* Header Top */
         .header-top {
-            background: white;
+            background: var(--header-bg);
             padding: 15px 5%;
             display: flex;
             justify-content: space-between;
@@ -77,6 +103,7 @@
             z-index: 1000;
             flex-wrap: wrap;
             gap: 10px;
+            transition: background-color 0.3s ease;
         }
 
         .profile {
@@ -113,16 +140,17 @@
         }
 
         section {
-            background: white;
+            background: var(--card-bg);
             padding: 35px;
             margin-bottom: 25px;
             border-radius: 14px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: background-color 0.3s ease;
         }
 
         h2 {
             color: var(--accent);
-            border-bottom: 2px solid #eee;
+            border-bottom: 2px solid var(--border-color);
             padding-bottom: 10px;
             margin-top: 0;
         }
@@ -150,10 +178,14 @@
         }
 
         .formula-card {
-            background: #fdfdfd;
+            background: var(--formula-card-bg);
             border-left: 4px solid var(--accent);
             padding: 20px;
             border-radius: 8px;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         /* Links */
@@ -165,8 +197,8 @@
         }
 
         .link-card {
-            background: white;
-            color: var(--primary);
+            background: var(--card-bg);
+            color: var(--text-color);
             padding: 15px;
             text-align: center;
             text-decoration: none;
@@ -194,7 +226,9 @@
         .solver-ui input {
             width: 80px;
             padding: 10px;
-            border: 2px solid #ddd;
+            border: 2px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-color);
             border-radius: 6px;
             text-align: center;
             font-size: 1rem;
@@ -211,18 +245,21 @@
         }
 
         .solver-steps {
-            background: #f8f9fa;
+            background: var(--formula-card-bg);
             border-left: 5px solid var(--accent);
             padding: 20px;
             margin-top: 20px;
             border-radius: 6px;
             display: none;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .step-item {
             margin-bottom: 20px;
             padding-bottom: 15px;
-            border-bottom: 1px dashed #ddd;
+            border-bottom: 1px dashed var(--border-color);
         }
 
         .step-item:last-child {
@@ -231,10 +268,11 @@
 
         /* Quiz */
         .quiz-container {
-            background: #fafafa;
+            background: var(--quiz-container-bg);
             padding: 25px;
             border-radius: 8px;
-            border: 1px solid #eef2f5;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .quiz-question-box {
@@ -249,8 +287,9 @@
         }
 
         .quiz-btn {
-            background: white;
-            border: 2px solid #ddd;
+            background: var(--quiz-btn-bg);
+            border: 2px solid var(--border-color);
+            color: var(--text-color);
             padding: 15px;
             border-radius: 6px;
             cursor: pointer;
@@ -259,7 +298,7 @@
 
         .quiz-btn:hover {
             border-color: var(--accent);
-            background: #f7faff;
+            background: var(--quiz-btn-hover);
         }
 
         .quiz-feedback {
@@ -271,7 +310,7 @@
 
         .next-quiz-btn {
             margin-top: 15px;
-            background: var(--primary);
+            background: var(--accent);
             color: white;
             border: none;
             padding: 10px 20px;
@@ -289,6 +328,10 @@
             margin-top: 40px;
         }
 
+        .graph-section h2 {
+            border: none !important;
+        }
+
         .graph-ui {
             display: flex;
             gap: 10px;
@@ -303,6 +346,8 @@
             border-radius: 8px;
             border: none;
             font-size: 1rem;
+            background: white;
+            color: #333;
         }
 
         .plot-btn {
@@ -339,16 +384,45 @@
                 font-size: 2rem;
             }
         }
+
+        /* Dark Mode Button Layout Styles */
+        .dark-mode-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            padding: 14px;
+            font-size: 22px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s ease, background-color 0.3s ease, border-color 0.3s ease;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+        }
+
+        .dark-mode-btn:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
+
+<!-- Floating Theme Button Hook -->
+<button id="dark-mode-toggle" class="dark-mode-btn" aria-label="Toggle Dark Mode">🌙</button>
 
 <div class="header-top">
     <div class="profile">
         <img src="vraj.jpeg" alt="Vraj">
         <div>
-            <h2 style="margin:0;">VRAJ H RAVAL</h2>
-            <p style="margin:0; color:#666;">B.Sc, M.Sc, B.Ed (Mathematics)</p>
+            <h2 style="margin:0; border: none; padding: 0;">VRAJ H RAVAL</h2>
+            <p id="profile-subtext" style="margin:0; color: var(--sub-text); transition: color 0.3s;">B.Sc, M.Sc, B.Ed (Mathematics)</p>
         </div>
     </div>
 
@@ -371,7 +445,7 @@
             <div style="flex:1;">
                 <p>
                     The Babylonians and Egyptians used mathematics for taxation,
-                    astronomy, engineering, and architecture.
+                    astonomy, engineering, and architecture.
                 </p>
             </div>
 
@@ -392,7 +466,7 @@
                     the foundation of modern mathematics.
                 </p>
 
-                <div style="background:#f9f9f9; padding:15px; border-left:4px solid var(--accent);">
+                <div style="background: var(--formula-card-bg); padding:15px; border-left:4px solid var(--accent); border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); border-radius: 4px; transition: background-color 0.3s, border-color 0.3s;">
                     $$
                     a^2+b^2=c^2
                     $$
@@ -501,7 +575,7 @@
 
     <div class="graph-section">
 
-        <h2 style="color:#e94560; border:none;">
+        <h2 style="color:#e94560;">
             Interactive Cartesian Plane
         </h2>
 
@@ -813,6 +887,26 @@
 
         renderCurrentQuiz();
     }
+
+    // Interactive Dark Mode Script Logic
+    const toggleBtn = document.getElementById('dark-mode-toggle');
+    const bodyElement = document.body;
+
+    if (localStorage.getItem('theme') === 'dark') {
+        bodyElement.classList.add('dark-mode-active');
+        toggleBtn.textContent = '☀️';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        bodyElement.classList.toggle('dark-mode-active');
+        if (bodyElement.classList.contains('dark-mode-active')) {
+            localStorage.setItem('theme', 'dark');
+            toggleBtn.textContent = '☀️';
+        } else {
+            localStorage.setItem('theme', 'light');
+            toggleBtn.textContent = '🌙';
+        }
+    });
 
     window.onload = function () {
 
