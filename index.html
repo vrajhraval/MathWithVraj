@@ -49,27 +49,27 @@
             --text-color: #333;
             --card-bg: white;
             --sub-text: #666;
-            --border-color: #eee;
+            --border-color: #ddd;
             --formula-card-bg: #fdfdfd;
             --quiz-container-bg: #fafafa;
             --quiz-btn-bg: white;
             --quiz-btn-hover: #f7faff;
         }
 
-        /* Dark Mode Target Overwrite */
+        /* Improved Premium Dark Mode Palette */
         body.dark-mode-active {
-            --primary: #1a252f;
+            --primary: #0f172a;
             --accent: #3498db;
-            --light: #121212;
-            --header-bg: #1e1e1e;
-            --text-color: #e0e0e0;
-            --card-bg: #1e1e1e;
-            --sub-text: #b0b0b0;
-            --border-color: #333;
-            --formula-card-bg: #1a1a1a;
-            --quiz-container-bg: #1a1a1a;
-            --quiz-btn-bg: #2d2d2d;
-            --quiz-btn-hover: #3d3d3d;
+            --light: #0f172a;
+            --header-bg: #1e293b;
+            --text-color: #cbd5e1;
+            --card-bg: #1e293b;
+            --sub-text: #94a3b8;
+            --border-color: #475569;
+            --formula-card-bg: #111827;
+            --quiz-container-bg: #111827;
+            --quiz-btn-bg: #1e293b;
+            --quiz-btn-hover: #334155;
         }
 
         * {
@@ -84,6 +84,12 @@
             color: var(--text-color);
             line-height: 1.6;
             transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Forces MathJax colors to respect dark mode dynamically */
+        body.dark-mode-active svg {
+            color: var(--text-color) !important;
+            fill: var(--text-color) !important;
         }
 
         .MathJax {
@@ -103,7 +109,7 @@
             z-index: 1000;
             flex-wrap: wrap;
             gap: 10px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, box-shadow 0.3s;
         }
 
         .profile {
@@ -145,7 +151,7 @@
             margin-bottom: 25px;
             border-radius: 14px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         h2 {
@@ -153,6 +159,7 @@
             border-bottom: 2px solid var(--border-color);
             padding-bottom: 10px;
             margin-top: 0;
+            transition: border-color 0.3s ease;
         }
 
         .flex {
@@ -227,11 +234,12 @@
             width: 80px;
             padding: 10px;
             border: 2px solid var(--border-color);
-            background: var(--card-bg);
+            background: var(--formula-card-bg);
             color: var(--text-color);
             border-radius: 6px;
             text-align: center;
             font-size: 1rem;
+            transition: border-color 0.3s, background-color 0.3s, color 0.3s;
         }
 
         .solver-btn {
@@ -254,6 +262,7 @@
             border-top: 1px solid var(--border-color);
             border-right: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.3s, border-color 0.3s;
         }
 
         .step-item {
@@ -266,7 +275,7 @@
             border-bottom: none;
         }
 
-        /* Quiz */
+        /* Quiz Container with Restored Border */
         .quiz-container {
             background: var(--quiz-container-bg);
             padding: 25px;
@@ -293,7 +302,7 @@
             padding: 15px;
             border-radius: 6px;
             cursor: pointer;
-            transition: 0.2s;
+            transition: background-color 0.2s, border-color 0.2s, color 0.2s;
         }
 
         .quiz-btn:hover {
@@ -385,14 +394,14 @@
             }
         }
 
-        /* Dark Mode Button Layout Styles */
+        /* Floating Dark Mode Button layout configuration */
         .dark-mode-btn {
             position: fixed;
             bottom: 25px;
             right: 25px;
             padding: 14px;
             font-size: 22px;
-            background-color: var(--card-bg);
+            background-color: var(--header-bg);
             color: var(--text-color);
             border: 2px solid var(--accent);
             border-radius: 50%;
@@ -445,7 +454,7 @@
             <div style="flex:1;">
                 <p>
                     The Babylonians and Egyptians used mathematics for taxation,
-                    astonomy, engineering, and architecture.
+                    astronomy, engineering, and architecture.
                 </p>
             </div>
 
@@ -888,7 +897,7 @@
         renderCurrentQuiz();
     }
 
-    // Interactive Dark Mode Script Logic
+    // Active Engine Toggle Script Setup
     const toggleBtn = document.getElementById('dark-mode-toggle');
     const bodyElement = document.body;
 
