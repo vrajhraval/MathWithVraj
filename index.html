@@ -128,7 +128,6 @@
             gap: 20px;
             align-items: center;
             margin-left: auto;
-            margin-right: 25px;
         }
 
         .top-navbar a {
@@ -159,12 +158,6 @@
 
         .top-navbar a:hover::after {
             width: 100%;
-        }
-
-        .hub-tag {
-            font-weight: bold; 
-            color: var(--accent);
-            white-space: nowrap;
         }
 
         header {
@@ -234,32 +227,6 @@
             border-right: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
             transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-
-        /* Links */
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .link-card {
-            background: var(--card-bg);
-            color: var(--text-color);
-            padding: 15px;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            border: 2px solid var(--accent);
-            transition: 0.3s;
-        }
-
-        .link-card:hover {
-            background: var(--accent);
-            color: white;
-            transform: translateY(-3px);
         }
 
         /* Solver */
@@ -434,7 +401,6 @@
             }
             .top-navbar {
                 margin-left: 0;
-                margin-right: 0;
                 flex-wrap: wrap;
                 gap: 12px;
             }
@@ -495,10 +461,6 @@
         <a href="puzz.html">Puzzle</a>
         <a href="3d.html">3D</a>
     </nav>
-
-    <div class="hub-tag">
-        STD 9–12 Education Hub
-    </div>
 </div>
 
 <header>
@@ -629,20 +591,6 @@
         </div>
     </section>
 
-    <section>
-        <h2>6. Important Links</h2>
-
-        <div class="links-grid">
-            <a href="books.html" class="link-card">NCERT Books</a>
-            <a href="nep.html" class="link-card">NEP 2020</a>
-            <a href="imp.html" class="link-card">Important Links</a>
-            <a href="about.html" class="link-card">About Me</a>
-            <a href="higher.html" class="link-card">Higher Studies</a>
-            <a href="puzz.html" class="link-card">Puzzle</a>
-            <a href="3d.html" class="link-card">3D</a>
-        </div>
-    </section>
-
     <div class="graph-section">
 
         <h2 style="color:#e94560;">
@@ -714,7 +662,6 @@
 
             const ctx = document.getElementById('mathChart').getContext('2d');
             
-            // Layout color styles configured exactly for the graph background container
             const labelColor = '#ffffff'; 
             const horizontalGridSettings = 'rgba(255, 255, 255, 0.12)'; 
 
@@ -980,7 +927,6 @@
         renderCurrentQuiz();
     }
 
-    // Active Engine Toggle Script Setup
     const toggleBtn = document.getElementById('dark-mode-toggle');
     const bodyElement = document.body;
 
