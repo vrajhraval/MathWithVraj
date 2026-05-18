@@ -652,6 +652,11 @@
             }
 
             const ctx = document.getElementById('mathChart').getContext('2d');
+            
+            // Fixed colors configuration for the dark canvas background
+            const textColor = '#ffffff'; 
+            const gridColor = 'rgba(255, 255, 255, 0.15)'; 
+            const zeroLineColor = '#e94560'; 
 
             myChart = new Chart(ctx, {
                 type: 'scatter',
@@ -662,7 +667,7 @@
                         data: points,
                         showLine: true,
                         borderColor: '#e94560',
-                        borderWidth: 2,
+                        borderWidth: 2.5,
                         pointRadius: 0
                     }]
                 },
@@ -675,16 +680,45 @@
                         x: {
                             type: 'linear',
                             min: -10,
-                            max: 10
+                            max: 10,
+                            grid: {
+                                color: gridColor,
+                                borderColor: textColor,
+                                zeroLineColor: zeroLineColor,
+                                zeroLineWidth: 2
+                            },
+                            ticks: {
+                                color: textColor,
+                                font: {
+                                    weight: 'bold'
+                                }
+                            }
                         },
 
                         y: {
                             min: -10,
-                            max: 10
+                            max: 10,
+                            grid: {
+                                color: gridColor,
+                                borderColor: textColor,
+                                zeroLineColor: zeroLineColor,
+                                zeroLineWidth: 2
+                            },
+                            ticks: {
+                                color: textColor,
+                                font: {
+                                    weight: 'bold'
+                                }
+                            }
                         }
                     },
 
                     plugins: {
+                        legend: {
+                            labels: {
+                                color: textColor
+                            }
+                        },
                         zoom: {
                             pan: {
                                 enabled: true,
