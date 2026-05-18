@@ -370,10 +370,11 @@
         }
 
         .chart-container {
-            background: white;
+            background: #1a1a2e;
             border-radius: 10px;
             height: 450px;
             padding: 10px;
+            border: 1px solid #333;
         }
 
         footer {
@@ -497,7 +498,7 @@
                 $$
 
                 $$
-                (a-b)^2=a^2-2ab+b^2
+                (a-b)^2=a-2ab+b^2
                 $$
             </div>
 
@@ -653,14 +654,12 @@
 
             const ctx = document.getElementById('mathChart').getContext('2d');
             
-            // Fixed colors configuration for the dark canvas background
-            const textColor = '#ffffff'; 
-            const gridColor = 'rgba(255, 255, 255, 0.15)'; 
-            const zeroLineColor = '#e94560'; 
+            // Layout color styles configured exactly for the graph background container
+            const labelColor = '#ffffff'; 
+            const horizontalGridSettings = 'rgba(255, 255, 255, 0.12)'; 
 
             myChart = new Chart(ctx, {
                 type: 'scatter',
-
                 data: {
                     datasets: [{
                         label: 'f(x)',
@@ -671,52 +670,47 @@
                         pointRadius: 0
                     }]
                 },
-
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-
                     scales: {
                         x: {
                             type: 'linear',
                             min: -10,
                             max: 10,
                             grid: {
-                                color: gridColor,
-                                borderColor: textColor,
-                                zeroLineColor: zeroLineColor,
-                                zeroLineWidth: 2
+                                color: horizontalGridSettings,
+                                borderColor: labelColor,
+                                tickColor: labelColor
                             },
                             ticks: {
-                                color: textColor,
+                                color: labelColor,
                                 font: {
                                     weight: 'bold'
                                 }
                             }
                         },
-
                         y: {
+                            type: 'linear',
                             min: -10,
                             max: 10,
                             grid: {
-                                color: gridColor,
-                                borderColor: textColor,
-                                zeroLineColor: zeroLineColor,
-                                zeroLineWidth: 2
+                                color: horizontalGridSettings,
+                                borderColor: labelColor,
+                                tickColor: labelColor
                             },
                             ticks: {
-                                color: textColor,
+                                color: labelColor,
                                 font: {
                                     weight: 'bold'
                                 }
                             }
                         }
                     },
-
                     plugins: {
                         legend: {
                             labels: {
-                                color: textColor
+                                color: labelColor
                             }
                         },
                         zoom: {
@@ -724,16 +718,13 @@
                                 enabled: true,
                                 mode: 'xy'
                             },
-
                             zoom: {
                                 wheel: {
                                     enabled: true
                                 },
-
                                 pinch: {
                                     enabled: true
                                 },
-
                                 mode: 'xy'
                             }
                         }
@@ -742,13 +733,11 @@
             });
 
         } catch (err) {
-
             alert("Invalid mathematical expression.");
         }
     }
 
     function resetZoomView() {
-
         if (myChart) {
             myChart.resetZoom();
         }
