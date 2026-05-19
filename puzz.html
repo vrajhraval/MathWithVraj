@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Math Logic & Puzzles | ગણિત કોયડા</title>
     <!-- Google Fonts for Modern Typography -->
-    <link href="https://googleapis.com" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+Gujarati:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-dark: #0b0f19;
@@ -16,6 +18,7 @@
             --accent-purple: #c084fc;
             --accent-green: #4ade80;
             --accent-orange: #fb923c;
+            --accent-pink: #f472b6;
         }
 
         body {
@@ -58,6 +61,94 @@
         .section-header p {
             color: var(--text-muted);
             font-size: 1.1rem;
+        }
+
+        /* --- MAGIC LAB STYLES --- */
+        .magic-lab-container {
+            background: linear-gradient(135deg, #1e1b4b, #0f172a);
+            border-radius: 24px;
+            padding: 35px;
+            margin-bottom: 50px;
+            border: 2px solid rgba(192, 132, 252, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(192, 132, 252, 0.1);
+        }
+
+        .magic-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-top: 0;
+            background: linear-gradient(to right, var(--accent-pink), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .magic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 25px;
+        }
+
+        .magic-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Mind Reader Grid styling */
+        .matrix-display {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+            max-height: 180px;
+            overflow-y: auto;
+            background: #090d16;
+            padding: 10px;
+            border-radius: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 0.85rem;
+            margin: 15px 0;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .matrix-item {
+            color: var(--text-muted);
+        }
+        .matrix-item span {
+            color: var(--accent-blue);
+            font-weight: bold;
+        }
+
+        .crystal-ball {
+            width: 70px;
+            height: 70px;
+            background: radial-gradient(circle at 30% 30%, #c084fc, #1e1b4b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 15px 0;
+            box-shadow: 0 0 20px rgba(192, 132, 252, 0.6);
+            transition: all 0.5s ease;
+        }
+
+        /* Geometry Canvas */
+        #fractalCanvas {
+            background: #090d16;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            max-width: 100%;
+        }
+
+        .slider-control {
+            width: 100%;
+            margin-top: 10px;
         }
 
         /* Score Tracker Style */
@@ -205,6 +296,40 @@
         <p>Test your mathematical intuition. / તમારી ગાણિતિક બુદ્ધિની કસોટી કરો.</p>
     </div>
 
+    <!-- NEW CONTENT: THE MATH MAGIC LAB -->
+    <div class="magic-lab-container">
+        <h3 class="magic-title">✨ Math Magic Lab | ગણિતનો જાદુ ✨</h3>
+        <p style="text-align: center; color: var(--text-muted); margin-top: -5px;">Experience the beauty of math before diving into puzzles!</p>
+        
+        <div class="magic-grid">
+            <!-- Magic Tool 1: Math Mind Reader -->
+            <div class="magic-box">
+                <span class="badge badge-logic">Magic | જાદુ</span>
+                <h4 style="margin: 0; color: #fff;">The Mind Reader Matrix</h4>
+                <p class="english-text" style="font-size:0.85rem; margin: 8px 0;">Think of any 2-digit number (e.g. 54). Add the digits (5+4=9). Subtract it from your original number (54-9=45). Find your final number's symbol below, focus on it, then press the Crystal Ball!</p>
+                <p class="gujarati-text" style="font-size:0.8rem; margin: 8px 0; padding-top:8px;">કોઈપણ બે અંકની સંખ્યા ધારો (દા.ત. 54). તેના બંને અંકોનો સરવાળો કરો (5+4=9). મૂળ સંખ્યામાંથી તે બાદ કરો (54-9=45). નીચેના કોષ્ટકમાં તમારા જવાબ સામેનો સિમ્બોલ યાદ રાખીને ક્રિસ્ટલ બોલ દબાવો!</p>
+                
+                <div class="matrix-display" id="matrixGrid"></div>
+                
+                <div class="crystal-ball" id="crystalBall" onclick="readMind()">🔮</div>
+                <button class="btn-check" style="border-color: var(--accent-purple); color: var(--accent-purple);" onclick="resetMatrix()">Shuffle Matrix / નવું બદલો</button>
+            </div>
+
+            <!-- Magic Tool 2: Fractal Tree Interactive -->
+            <div class="magic-box">
+                <span class="badge badge-geometry">Infinity | ભૌમિતિક સુંદરતા</span>
+                <h4 style="margin: 0; color: #fff;">The Tree of Infinity (Fractals)</h4>
+                <p class="english-text" style="font-size:0.85rem; margin: 8px 0;">This infinite patterns structure is drawn entirely using math equations. Slide to change the angle and watch how order creates beauty!</p>
+                <p class="gujarati-text" style="font-size:0.8rem; margin: 8px 0; padding-top:8px;">આ આકૃતિ સંપૂર્ણપણે ગણિતના સમીકરણો આધારિત બનેલી છે. એન્ગલ બદલવા માટે સ્લાઇડર ફેરવો અને જુઓ ગણિતનો ચમત્કાર!</p>
+                
+                <canvas id="fractalCanvas" width="280" height="200"></canvas>
+                
+                <label for="angleSlider" style="color: var(--accent-blue); font-size: 0.85rem;">Branch Angle / ડાળીઓનો ખૂણો</label>
+                <input type="range" id="angleSlider" class="slider-control" min="10" max="80" value="30">
+            </div>
+        </div>
+    </div>
+
     <!-- Live Interactive Score Tracker -->
     <div class="score-tracker">
         Your Score / તમારો સ્કોર: <span id="score">0</span> / 4
@@ -265,7 +390,7 @@
             </div>
         </div>
 
-        <!-- Puzzle 4 (Broader Addition) -->
+        <!-- Puzzle 4 -->
         <div class="puzzle-card">
             <div>
                 <span class="badge badge-algebra">Algebra | બીજગણિત</span>
@@ -286,11 +411,10 @@
 </div>
 
 <script>
-    // Set up tracking for unique completed questions
+    // --- PUZZLE LOGIC TRACKING ---
     const solvedQuestions = {};
     let totalScore = 0;
 
-    // Detailed multilingual success explanations
     const solutions = {
         'ans1': "Correct! / સાચો જવાબ! (3-3-3 ના ત્રણ ગ્રુપ બનાવો. પ્રથમ વજનથી નકલી સિક્કાવાળું ગ્રુપ અલગ થશે અને બીજા વજનથી સિક્કો મળી જશે.)",
         'ans2': "Brilliant! / અદભુત! (1/2 + 1/4 + 1/8... નો અનંત સરવાળો હંમેશા મૂળ ચોરસ એટલે કે 1 બરાબર જ થાય.)",
@@ -306,7 +430,6 @@
             feedbackEl.style.color = "var(--accent-green)";
             feedbackEl.innerText = solutions[inputId];
             
-            // Score counter update logic
             if (!solvedQuestions[inputId]) {
                 solvedQuestions[inputId] = true;
                 totalScore++;
@@ -317,6 +440,84 @@
             feedbackEl.innerText = "Try again! / ફરી પ્રયત્ન કરો! તમારા તર્કની ફરીથી ચકાસણી કરો.";
         }
     }
+
+    // --- MATH MAGIC LAB INTERACTION SCRIPT ---
+    
+    // 1. Mind Reader System
+    const symbols = ['Δ', 'Ω', '★', '⚙', '♦', '♣', '♠', '♥', '✖', '✪', '✦', '☀️'];
+    let specialSymbol = '';
+
+    function resetMatrix() {
+        const grid = document.getElementById('matrixGrid');
+        grid.innerHTML = '';
+        document.getElementById('crystalBall').innerText = '🔮';
+        
+        // Pick a random primary symbol for multiples of 9
+        specialSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+        
+        for (let i = 1; i <= 99; i++) {
+            let sym = symbols[Math.floor(Math.random() * symbols.length)];
+            // Algebraic certainty property: Any 2 digit number minus its digit sum results in a multiple of 9
+            if (i % 9 === 0) {
+                sym = specialSymbol;
+            }
+            
+            const item = document.createElement('div');
+            item.className = 'matrix-item';
+            item.innerHTML = `<span>${i}</span>:${sym}`;
+            grid.appendChild(item);
+        }
+    }
+
+    function readMind() {
+        const ball = document.getElementById('crystalBall');
+        ball.innerText = '⌛';
+        setTimeout(() => {
+            ball.innerText = specialSymbol;
+        }, 1000);
+    }
+
+    // 2. Interactive Fractal Tree System
+    const canvas = document.getElementById('fractalCanvas');
+    const ctx = canvas.getContext('2d');
+    const slider = document.getElementById('angleSlider');
+
+    function drawTree(startX, startY, len, angle, branchWidth) {
+        ctx.beginPath();
+        ctx.save();
+        ctx.strokeStyle = `hsl(${len + 140}, 80%, 65%)`;
+        ctx.lineWidth = branchWidth;
+        ctx.translate(startX, startY);
+        ctx.rotate(angle * Math.PI / 180);
+        ctx.moveTo(0, 0);
+        ctx.lineTo(0, -len);
+        ctx.stroke();
+
+        if (len < 10) {
+            ctx.restore();
+            return;
+        }
+
+        const currentSliderVal = parseInt(slider.value);
+        
+        // Recursion formulas generating the fractal branch geometry
+        drawTree(0, -len, len * 0.75, currentSliderVal, branchWidth * 0.7);
+        drawTree(0, -len, len * 0.75, -currentSliderVal, branchWidth * 0.7);
+
+        ctx.restore();
+    }
+
+    function updateFractal() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Core baseline setup for the tree stem
+        drawTree(canvas.width / 2, canvas.height - 10, 50, 0, 6);
+    }
+
+    slider.addEventListener('input', updateFractal);
+
+    // Run Initializations
+    resetMatrix();
+    updateFractal();
 </script>
 
 </body>
