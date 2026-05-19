@@ -3,521 +3,642 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Logic & Puzzles | ગણિત કોયડા</title>
-    <!-- Google Fonts for Modern Typography -->
+    <title>The Grand Math Odyssey | ગણિત બ્રહ્માંડ</title>
+    <!-- Google Fonts for High-End Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+Gujarati:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Plus+Jakarta+Sans:wght@400;500;700&family=Noto+Sans+Gujarati:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --bg-dark: #0b0f19;
-            --card-bg: #131c2e;
-            --text-light: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent-blue: #38bdf8;
-            --accent-purple: #c084fc;
-            --accent-green: #4ade80;
-            --accent-orange: #fb923c;
-            --accent-pink: #f472b6;
+            --bg-deep: #05070f;
+            --bg-cosmic: #0b0f19;
+            --card-glass: rgba(19, 28, 46, 0.7);
+            --border-glow: rgba(56, 189, 248, 0.2);
+            --text-pure: #ffffff;
+            --text-glow: #f1f5f9;
+            --text-muted: #64748b;
+            
+            /* Neon Accents */
+            --neon-blue: #38bdf8;
+            --neon-purple: #a855f7;
+            --neon-pink: #ec4899;
+            --neon-green: #22c55e;
+            --neon-orange: #f97316;
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            font-family: 'Inter', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-deep);
+            background-image: 
+                radial-gradient(at 10% 10%, rgba(168, 85, 247, 0.1) 0px, transparent 50%),
+                radial-gradient(at 90% 90%, rgba(56, 189, 248, 0.1) 0px, transparent 50%);
+            color: var(--text-glow);
+            font-family: 'Plus Jakarta Sans', 'Noto Sans Gujarati', sans-serif;
             margin: 0;
-            padding: 40px 20px;
+            padding: 60px 20px;
             display: flex;
             justify-content: center;
         }
 
-        .puzzle-container {
-            max-width: 1200px;
+        .odyssey-container {
+            max-width: 1400px;
             width: 100%;
         }
 
-        .section-header {
+        /* Hero Header Section */
+        .hero-header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 70px;
+            position: relative;
         }
 
-        .section-header h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, var(--accent-blue), var(--accent-purple));
+        .hero-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 4rem;
+            margin: 0;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 50px rgba(168, 85, 247, 0.2);
         }
 
-        .section-header .gujarati-title {
+        .hero-header .gujarati-hero {
             font-family: 'Noto Sans Gujarati', sans-serif;
-            font-size: 1.8rem;
-            color: var(--accent-purple);
-            margin-top: 5px;
+            font-size: 2.2rem;
+            color: var(--neon-blue);
             display: block;
+            margin-top: 10px;
+            font-weight: 700;
         }
 
-        .section-header p {
+        .hero-header p {
             color: var(--text-muted);
-            font-size: 1.1rem;
+            font-size: 1.2.rem;
+            max-width: 700px;
+            margin: 20px auto 0 auto;
+            line-height: 1.6;
         }
 
-        /* --- MAGIC LAB STYLES --- */
-        .magic-lab-container {
-            background: linear-gradient(135deg, #1e1b4b, #0f172a);
-            border-radius: 24px;
-            padding: 35px;
-            margin-bottom: 50px;
-            border: 2px solid rgba(192, 132, 252, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(192, 132, 252, 0.1);
-        }
-
-        .magic-title {
-            text-align: center;
+        /* Global Layout Grid Layout */
+        .section-title {
+            font-family: 'Cinzel', serif;
             font-size: 2rem;
-            margin-top: 0;
-            background: linear-gradient(to right, var(--accent-pink), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 10px;
         }
+        .section-title span { color: var(--neon-pink); }
 
-        .magic-grid {
+        /* --- THE MAGIC LAB (EXPANDED BROAD SECTION) --- */
+        .magic-universe {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 25px;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            margin-bottom: 80px;
         }
 
-        .magic-box {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        @media (max-width: 1024px) {
+            .magic-universe { grid-template-columns: 1fr; }
+        }
+
+        .cosmic-card {
+            background: var(--card-glass);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glow);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cosmic-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+        }
+
+        /* Mind Reader Matrix Styling */
+        .matrix-container {
+            background: rgba(0,0,0,0.4);
             border-radius: 16px;
-            padding: 25px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .matrix-scroll-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            max-height: 220px;
+            overflow-y: scroll;
+            padding-right: 10px;
+        }
+
+        /* Custom Scrollbar for matrix */
+        .matrix-scroll-grid::-webkit-scrollbar { width: 6px; }
+        .matrix-scroll-grid::-webkit-scrollbar-thumb { background: var(--neon-purple); border-radius: 10px; }
+
+        .matrix-node {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-align: center;
+            background: rgba(255,255,255,0.02);
+            padding: 6px 0;
+            border-radius: 6px;
+        }
+        .matrix-node strong { color: var(--neon-blue); }
+
+        .crystal-sphere {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, #c084fc, #3b0764);
+            border-radius: 50%;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .crystal-sphere:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 0 50px rgba(168, 85, 247, 0.9);
+        }
+
+        /* Chaos Canvas Area */
+        .canvas-frame {
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 20px;
         }
 
-        /* Mind Reader Grid styling */
-        .matrix-display {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 6px;
-            max-height: 180px;
-            overflow-y: auto;
-            background: #090d16;
-            padding: 10px;
-            border-radius: 8px;
-            width: 100%;
-            box-sizing: border-box;
-            font-size: 0.85rem;
-            margin: 15px 0;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        .matrix-item {
-            color: var(--text-muted);
-        }
-        .matrix-item span {
-            color: var(--accent-blue);
-            font-weight: bold;
-        }
-
-        .crystal-ball {
-            width: 70px;
-            height: 70px;
-            background: radial-gradient(circle at 30% 30%, #c084fc, #1e1b4b);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin: 15px 0;
-            box-shadow: 0 0 20px rgba(192, 132, 252, 0.6);
-            transition: all 0.5s ease;
-        }
-
-        /* Geometry Canvas */
-        #fractalCanvas {
-            background: #090d16;
+        #chaosCanvas {
+            background: #060913;
             border-radius: 12px;
-            margin-bottom: 15px;
+            border: 1px solid rgba(255,255,255,0.05);
             max-width: 100%;
         }
 
-        .slider-control {
+        .control-panel {
             width: 100%;
-            margin-top: 10px;
+            margin-top: 20px;
+        }
+        .control-panel label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--neon-blue);
+            margin-bottom: 5px;
         }
 
-        /* Score Tracker Style */
-        .score-tracker {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 12px;
+        .custom-slider {
+            width: 100%;
+            -webkit-appearance: none;
+            background: rgba(255,255,255,0.1);
+            height: 6px;
+            border-radius: 5px;
+            outline: none;
+        }
+        .custom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--neon-pink);
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        /* --- THOUGHT PROVOKING PHILOSOPHY CAROUSEL --- */
+        .philosophy-banner {
+            background: linear-gradient(90deg, #1e1b4b, #311042);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 60px;
+            border: 1px solid rgba(236, 72, 153, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        .philosophy-icon { font-size: 3rem; }
+        .philosophy-text h4 { margin: 0 0 5px 0; font-size: 1.3rem; color: var(--neon-orange); }
+
+        /* --- PUZZLE ARENA LAYOUT --- */
+        .score-board {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 20px;
             text-align: center;
-            font-size: 1.2rem;
-            margin-bottom: 40px;
+            font-size: 1.4rem;
             font-weight: bold;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
         }
-        #score { color: var(--accent-green); font-size: 1.5rem; }
+        #score { color: var(--neon-green); font-size: 1.8rem; text-shadow: 0 0 10px rgba(34, 197, 94, 0.4); }
 
-        .puzzle-grid {
+        .puzzle-matrix {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 30px;
         }
 
-        .puzzle-card {
-            background-color: var(--card-bg);
+        .puzzle-deck-card {
+            background: var(--card-glass);
             border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            transition: all 0.3s ease;
+            padding: 35px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        .puzzle-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent-blue);
-            box-shadow: 0 15px 35px rgba(56, 189, 248, 0.1);
+        .puzzle-deck-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--neon-blue);
+            box-shadow: 0 30px 60px rgba(56, 189, 248, 0.15);
         }
 
-        .badge {
+        .category-badge {
             align-self: flex-start;
-            padding: 5px 14px;
+            padding: 6px 16px;
             border-radius: 50px;
             font-size: 0.75rem;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
+            letter-spacing: 1.5px;
+            margin-bottom: 25px;
+        }
+        .bg-logic { background: rgba(56, 189, 248, 0.15); color: var(--neon-blue); }
+        .bg-geometry { background: rgba(168, 85, 247, 0.15); color: var(--neon-purple); }
+        .bg-infinity { background: rgba(34, 197, 94, 0.15); color: var(--neon-green); }
+        .bg-algebra { background: rgba(249, 73, 22, 0.15); color: var(--neon-orange); }
+
+        .puzzle-deck-card h3 {
+            font-size: 1.5rem;
+            margin: 0 0 10px 0;
+            color: var(--text-pure);
         }
 
-        .badge-logic { background: rgba(56, 189, 248, 0.15); color: var(--accent-blue); }
-        .badge-geometry { background: rgba(192, 132, 252, 0.15); color: var(--accent-purple); }
-        .badge-infinity { background: rgba(74, 222, 128, 0.15); color: var(--accent-green); }
-        .badge-algebra { background: rgba(251, 146, 60, 0.15); color: var(--accent-orange); }
-
-        .puzzle-card h3 {
-            font-size: 1.4rem;
-            margin: 0 0 5px 0;
-            color: #ffffff;
-        }
-
-        .gujarati-text {
-            font-family: 'Noto Sans Gujarati', sans-serif;
-            color: #e2e8f0;
+        .eng-desc {
+            color: #94a3b8;
             font-size: 1rem;
             line-height: 1.6;
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px dashed rgba(255, 255, 255, 0.1);
         }
 
-        .english-text {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.5;
+        .guj-desc {
+            font-family: 'Noto Sans Gujarati', sans-serif;
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.08);
         }
 
-        .interactive-area {
-            background: rgba(11, 15, 25, 0.7);
-            border-radius: 12px;
+        .input-wrapper {
+            background: rgba(5, 7, 15, 0.8);
+            border-radius: 14px;
             padding: 20px;
-            margin-top: 25px;
+            margin-top: 30px;
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
-        .interactive-area label {
+        .input-wrapper label {
             display: block;
             font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 8px;
+            color: #94a3b8;
+            margin-bottom: 10px;
             font-weight: 600;
+            text-transform: uppercase;
         }
 
-        .interactive-area input {
+        .input-wrapper input {
             width: 100%;
-            padding: 12px;
-            background: #0b0f19;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
+            padding: 14px;
+            background: #05070f;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
             color: white;
             box-sizing: border-box;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             text-align: center;
+            transition: all 0.3s ease;
         }
 
-        .interactive-area input:focus {
+        .input-wrapper input:focus {
             outline: none;
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
         }
 
-        .btn-check {
+        .action-btn {
             background: transparent;
-            border: 1px solid var(--accent-blue);
-            color: var(--accent-blue);
-            padding: 12px 20px;
-            border-radius: 8px;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 14px 24px;
+            border-radius: 10px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
             width: 100%;
             margin-top: 15px;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .btn-check:hover {
-            background: var(--accent-blue);
-            color: var(--bg-dark);
+        .action-btn:hover {
+            background: var(--neon-blue);
+            color: var(--bg-deep);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
         }
 
-        .feedback {
-            margin-top: 12px;
-            font-size: 0.9rem;
+        .feedback-line {
+            margin-top: 15px;
+            font-size: 0.95rem;
             font-weight: 600;
             min-height: 24px;
-            line-height: 1.4;
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
 
-<div class="puzzle-container">
-    <div class="section-header">
-        <h2>The Thinker's Playground</h2>
-        <span class="gujarati-title">વિચારોની રમતગમત: ગણિત કોયડા</span>
-        <p>Test your mathematical intuition. / તમારી ગાણિતિક બુદ્ધિની કસોટી કરો.</p>
+<div class="odyssey-container">
+    
+    <!-- Big Bold Header Block -->
+    <div class="hero-header">
+        <h1>The Grand Math Odyssey</h1>
+        <span class="gujarati-hero">મહાન ગણિત બ્રહ્માંડ સફર</span>
+        <p>Mathematics is not about numbers, equations, or algorithms: it is about understanding. Explore the magic, play with chaos, and conquer logic puzzles below!</p>
     </div>
 
-    <!-- NEW CONTENT: THE MATH MAGIC LAB -->
-    <div class="magic-lab-container">
-        <h3 class="magic-title">✨ Math Magic Lab | ગણિતનો જાદુ ✨</h3>
-        <p style="text-align: center; color: var(--text-muted); margin-top: -5px;">Experience the beauty of math before diving into puzzles!</p>
+    <!-- 1. BROAD THINKING EXPANDED SECTION: THE MAGIC REALM -->
+    <h2 class="section-title"><span>01.</span> The Interactive Reality Lab / પ્રયોગશાળા</h2>
+    <div class="magic-universe">
         
-        <div class="magic-grid">
-            <!-- Magic Tool 1: Math Mind Reader -->
-            <div class="magic-box">
-                <span class="badge badge-logic">Magic | જાદુ</span>
-                <h4 style="margin: 0; color: #fff;">The Mind Reader Matrix</h4>
-                <p class="english-text" style="font-size:0.85rem; margin: 8px 0;">Think of any 2-digit number (e.g. 54). Add the digits (5+4=9). Subtract it from your original number (54-9=45). Find your final number's symbol below, focus on it, then press the Crystal Ball!</p>
-                <p class="gujarati-text" style="font-size:0.8rem; margin: 8px 0; padding-top:8px;">કોઈપણ બે અંકની સંખ્યા ધારો (દા.ત. 54). તેના બંને અંકોનો સરવાળો કરો (5+4=9). મૂળ સંખ્યામાંથી તે બાદ કરો (54-9=45). નીચેના કોષ્ટકમાં તમારા જવાબ સામેનો સિમ્બોલ યાદ રાખીને ક્રિસ્ટલ બોલ દબાવો!</p>
-                
-                <div class="matrix-display" id="matrixGrid"></div>
-                
-                <div class="crystal-ball" id="crystalBall" onclick="readMind()">🔮</div>
-                <button class="btn-check" style="border-color: var(--accent-purple); color: var(--accent-purple);" onclick="resetMatrix()">Shuffle Matrix / નવું બદલો</button>
+        <!-- Module A: Extended Mind Reader -->
+        <div class="cosmic-card">
+            <div>
+                <span class="category-badge bg-logic">Algebra Magic | અંકગણિત જાદુ</span>
+                <h3>The Ramanujan Mind Matrix</h3>
+                <p class="eng-desc">Think of any 2-digit number (e.g., 84). Add its digits together ($8+4=12$). Subtract that sum from your initial choice ($84-12=72$). Find your calculated number inside our matrix array, memorize its celestial symbol, then tap the Crystal Sphere!</p>
+                <p class="guj-desc">કોઈપણ ૨-અંકની સંખ્યા વિચારો (દા.ત. 84). તેના અંકોનો સરવાળો કરો ($8+4=12$). મૂળ સંખ્યામાંથી તે બાદ કરો ($84-12=72$). નીચેના કોષ્ટકમાં તમારા જવાબની સામેનો સિમ્બોલ મનમાં બરાબર યાદ રાખીને જાદુઈ સ્ફિયર પર ક્લિક કરો!</p>
+            </div>
+            
+            <div class="matrix-container">
+                <div class="matrix-scroll-grid" id="matrixDeck"></div>
             </div>
 
-            <!-- Magic Tool 2: Fractal Tree Interactive -->
-            <div class="magic-box">
-                <span class="badge badge-geometry">Infinity | ભૌમિતિક સુંદરતા</span>
-                <h4 style="margin: 0; color: #fff;">The Tree of Infinity (Fractals)</h4>
-                <p class="english-text" style="font-size:0.85rem; margin: 8px 0;">This infinite patterns structure is drawn entirely using math equations. Slide to change the angle and watch how order creates beauty!</p>
-                <p class="gujarati-text" style="font-size:0.8rem; margin: 8px 0; padding-top:8px;">આ આકૃતિ સંપૂર્ણપણે ગણિતના સમીકરણો આધારિત બનેલી છે. એન્ગલ બદલવા માટે સ્લાઇડર ફેરવો અને જુઓ ગણિતનો ચમત્કાર!</p>
-                
-                <canvas id="fractalCanvas" width="280" height="200"></canvas>
-                
-                <label for="angleSlider" style="color: var(--accent-blue); font-size: 0.85rem;">Branch Angle / ડાળીઓનો ખૂણો</label>
-                <input type="range" id="angleSlider" class="slider-control" min="10" max="80" value="30">
+            <div style="text-align: center;">
+                <div class="crystal-sphere" id="cosmicBall" onclick="revealMindReader()">🔮</div>
+                <button class="action-btn" style="border-color: var(--neon-purple); color: var(--neon-purple);" onclick="generateMatrixDeck()">Regenerate Matrix Array / નવું નક્ષત્ર ગોઠવો</button>
+            </div>
+        </div>
+
+        <!-- Module B: Dynamic Chaos / Fractal Canvas Simulator -->
+        <div class="cosmic-card">
+            <div>
+                <span class="category-badge bg-geometry">Chaos & Order | ભૂમિતિ અને અનંત</span>
+                <h3>The Geometric Tree of Infinity</h3>
+                <p class="eng-desc">This structure is painted entirely by triggering simple recursive calculations. Change the parameters below to witness how static algebraic rules morph directly into organic structures found across nature.</p>
+                <p class="guj-desc">આ આકૃતિ સંપૂર્ણપણે ગણિતના રિકર્સિવ સૂત્રો આધારિત બનેલી છે. ડાળીઓનો ખૂણો બદલીને જુઓ કે કેવી રીતે ગણિતના અફર નિયમો કુદરતની જીવંત સુંદરતામાં પરિવર્તિત થાય છે.</p>
+            </div>
+
+            <div class="canvas-frame">
+                <canvas id="chaosCanvas" width="400" height="260"></canvas>
+            </div>
+
+            <div class="control-panel">
+                <div style="margin-bottom:15px;">
+                    <label><span>Branch Angle / ડાળીઓનો ખૂણો:</span> <span id="angleVal" style="color:var(--neon-pink)">35°</span></label>
+                    <input type="range" id="branchAngle" class="custom-slider" min="15" max="75" value="35">
+                </div>
+                <div>
+                    <label><span>Growth Decay / લંબાઈ ઘટાડો:</span> <span id="ratioVal" style="color:var(--neon-pink)">0.72</span></label>
+                    <input type="range" id="growthRatio" class="custom-slider" min="55" max="80" value="72">
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Live Interactive Score Tracker -->
-    <div class="score-tracker">
-        Your Score / તમારો સ્કોર: <span id="score">0</span> / 4
+    <!-- 2. DEEP INTELLECTUAL BANNER SECTION -->
+    <div class="philosophy-banner">
+        <div class="philosophy-icon">🧠</div>
+        <div class="philosophy-text">
+            <h4>Thought-Provoking Paradox / વિચારવા જેવું:</h4>
+            <p class="eng-desc" style="color: #fff; margin:0; font-size:0.95rem;">Did you know? If you could fold a single standard sheet of paper perfectly 42 times, its total thickness would reach all the way to the <strong>Moon</strong>! This is the breathtaking power of exponential growth ($2^{42}$)—the very math governing our cosmos.</p>
+        </div>
     </div>
 
-    <div class="puzzle-grid">
-        <!-- Puzzle 1 -->
-        <div class="puzzle-card">
+    <!-- 3. PUZZLE ARENA LAYOUT -->
+    <h2 class="section-title"><span>02.</span> The Thinker's Proving Grounds / કોયડા અખાડો</h2>
+    
+    <!-- Live Arena Score Display Tracker -->
+    <div class="score-board">
+        Current Score Mastery / તમારી વૈજ્ઞાનિક ક્ષમતા: <span id="score">0</span> / 4 Artifacts
+    </div>
+
+    <div class="puzzle-matrix">
+        <!-- Puzzle Card 1 -->
+        <div class="puzzle-deck-card">
             <div>
-                <span class="badge badge-logic">Logic | તર્કશાસ્ત્ર</span>
+                <span class="category-badge bg-logic">Logic Theory</span>
                 <h3>The False Coin Dilemma</h3>
-                <p class="english-text">You have 9 identical coins. One is counterfeit and weighs slightly less. What is the minimum number of weighings needed on a balance scale to find it?</p>
-                <p class="gujarati-text">તમારી પાસે એકસરખા દેખાતા 9 સિક્કા છે. તેમાંથી એક નકલી છે અને તેનું વજન થોડું ઓછું છે. ત્રાજવાનો ઉપયોગ કરીને તેને શોધવા માટે ઓછામાં ઓછું કેટલી વાર વજન કરવું પડે?</p>
+                <p class="eng-desc">You have 9 identical coins. One is counterfeit and weighs slightly less than the standard value. What is the absolute minimum number of weighings needed on a manual balance scale to locate it?</p>
+                <p class="guj-desc">તમારી પાસે એકસરખા દેખાતા 9 સિક્કા છે. તેમાંથી એક નકલી છે અને તેનું વજન થોડું ઓછું છે. સાદા ત્રાજવાનો ઉપયોગ કરીને તેને ચોક્કસ શોધવા માટે ઓછામાં ઓછું કેટલી વાર વજન કરવું પડે?</p>
             </div>
-            <div>
-                <div class="interactive-area">
-                    <label for="ans1">Your Answer / તમારો જવાબ:</label>
-                    <input type="number" id="ans1" placeholder="??">
-                    <div id="feed1" class="feedback"></div>
-                    <button class="btn-check" onclick="checkAnswer('ans1', '2', 'feed1')">Check Answer / જવાબ તપાસો</button>
-                </div>
+            <div class="input-wrapper">
+                <label for="puz1">Input Integer / તમારો આંકડો:</label>
+                <input type="number" id="puz1" placeholder="?">
+                <div id="out1" class="feedback-line"></div>
+                <button class="action-btn" onclick="evaluateAnswer('puz1', '2', 'out1')">Verify Logic</button>
             </div>
         </div>
 
-        <!-- Puzzle 2 -->
-        <div class="puzzle-card">
+        <!-- Puzzle Card 2 -->
+        <div class="puzzle-deck-card">
             <div>
-                <span class="badge badge-geometry">Geometry | ભૂમિતિ</span>
+                <span class="category-badge bg-geometry">Infinity Paradox</span>
                 <h3>The Infinite Square Path</h3>
-                <p class="english-text">Imagine a square of area 1. You cut it in half. You cut that half in half, and repeat infinitely. If you sum all pieces together, what total area do you get?</p>
-                <p class="gujarati-text">1 ક્ષેત્રફળવાળો એક ચોરસ વિચારો. તમે તેને બરાબર અડધો કાપો છો. પછી તે અડધા ભાગને ફરી અડધો કરો છો, અને આવું અનંત સુધી ચાલુ રાખો છો. જો આ બધા ટુકડાઓ ભેગા કરીએ, તો કુલ કેટલું ક્ષેત્રફળ મળશે?</p>
+                <p class="eng-desc">Imagine a solid geometric square of total area 1. You cut it precisely in half. You then take that half, cut it in half again, and repeat this process infinitely. If you sum all infinite pieces together, what total area value do you get?</p>
+                <p class="guj-desc">1 ક્ષેત્રફળવાળો એક સળંગ ચોરસ વિચારો. તમે તેને બરાબર અડધો કાપો છો. પછી તે અડધા ભાગને ફરી અડધો કરો છો, અને આવું અનંત સુધી ચાલુ રાખો છો. જો આ બધા કાપેલા ટુકડાઓ ભેગા કરીએ, તો છેલ્લે કુલ કેટલું ક્ષેત્રફળ મળશે?</p>
             </div>
-            <div>
-                <div class="interactive-area">
-                    <label for="ans2">Your Answer / તમારો જવાબ:</label>
-                    <input type="number" id="ans2" placeholder="??">
-                    <div id="feed2" class="feedback"></div>
-                    <button class="btn-check" onclick="checkAnswer('ans2', '1', 'feed2')">Check Answer / જવાબ તપાસો</button>
-                </div>
+            <div class="input-wrapper">
+                <label for="puz2">Input Integer / તમારો આંકડો:</label>
+                <input type="number" id="puz2" placeholder="?">
+                <div id="out2" class="feedback-line"></div>
+                <button class="action-btn" onclick="evaluateAnswer('puz2', '1', 'out2')">Verify Logic</button>
             </div>
         </div>
 
-        <!-- Puzzle 3 -->
-        <div class="puzzle-card">
+        <!-- Puzzle Card 3 -->
+        <div class="puzzle-deck-card">
             <div>
-                <span class="badge badge-infinity">Patterns | પેટર્ન</span>
+                <span class="category-badge bg-infinity">Exponential Growth</span>
                 <h3>The Rice Grain Paradox</h3>
-                <p class="english-text">A chessboard starts with 1 grain of rice on the 1st square, 2 on the 2nd, 4 on the 3rd, doubling each time. How many grains are on the 7th square?</p>
-                <p class="gujarati-text">એક ચેસબોર્ડના પહેલા ખાનામાં ચોખાનો 1 દાણો, બીજા ખાનામાં 2, ત્રીજામાં 4 એમ દર વખતે બમણા દાણા મૂકવામાં આવે છે. તો 7મા ખાનામાં કેટલા દાણા હશે?</p>
+                <p class="eng-desc">A classic chessboard begins with 1 grain of rice placed upon the first isolated grid square, 2 on the second, 4 on the third, doubling every single step. How many total rice grains sit strictly on the 7th square?</p>
+                <p class="guj-desc">એક ચેસબોર્ડના પહેલા ખાનામાં ચોખાનો 1 દાણો, બીજા ખાનામાં 2, ત્રીજામાં 4 એમ દર વખતે બમણા દાણા મૂકવામાં આવે છે. તો માત્ર 7મા ખાનામાં કેટલા દાણા હશે?</p>
             </div>
-            <div>
-                <div class="interactive-area">
-                    <label for="ans3">Your Answer / તમારો જવાબ:</label>
-                    <input type="number" id="ans3" placeholder="??">
-                    <div id="feed3" class="feedback"></div>
-                    <button class="btn-check" onclick="checkAnswer('ans3', '64', 'feed3')">Check Answer / જવાબ તપાસો</button>
-                </div>
+            <div class="input-wrapper">
+                <label for="puz3">Input Integer / તમારો આંકડો:</label>
+                <input type="number" id="puz3" placeholder="?">
+                <div id="out3" class="feedback-line"></div>
+                <button class="action-btn" onclick="evaluateAnswer('puz3', '64', 'out3')">Verify Logic</button>
             </div>
         </div>
 
-        <!-- Puzzle 4 -->
-        <div class="puzzle-card">
+        <!-- Puzzle Card 4 -->
+        <div class="puzzle-deck-card">
             <div>
-                <span class="badge badge-algebra">Algebra | બીજગણિત</span>
+                <span class="category-badge bg-algebra">Equations & Sets</span>
                 <h3>The Sibling Count</h3>
-                <p class="english-text">In a family, a boy has as many sisters as brothers. However, his sister has twice as many brothers as sisters. How many brothers are in this family?</p>
-                <p class="gujarati-text">એક પરિવારમાં, એક છોકરાને જેટલી બહેનો છે એટલા જ ભાઈઓ છે. પરંતુ, તેની બહેનને તેના કરતા બમણા ભાઈઓ છે. તો આ પરિવારમાં કુલ કેટલા ભાઈઓ હશે?</p>
+                <p class="eng-desc">Inside a family household, a specific boy has exactly as many sisters as he has brothers. However, his sister has twice as many brothers as she has sisters. How many brothers are in this family total?</p>
+                <p class="guj-desc">એક પરિવારમાં, એક છોકરાને જેટલી બહેનો છે એટલા જ ભાઈઓ છે. પરંતુ, તેની બહેનને તેના કરતા બમણા ભાઈઓ છે. તો આ પરિવારમાં કુલ કેટલા ભાઈઓ હશે?</p>
             </div>
-            <div>
-                <div class="interactive-area">
-                    <label for="ans4">Your Answer / તમારો જવાબ:</label>
-                    <input type="number" id="ans4" placeholder="??">
-                    <div id="feed4" class="feedback"></div>
-                    <button class="btn-check" onclick="checkAnswer('ans4', '4', 'feed4')">Check Answer / જવાબ તપાસો</button>
-                </div>
+            <div class="input-wrapper">
+                <label for="puz4">Input Integer / તમારો આંકડો:</label>
+                <input type="number" id="puz4" placeholder="?">
+                <div id="out4" class="feedback-line"></div>
+                <button class="action-btn" onclick="evaluateAnswer('puz4', '4', 'out4')">Verify Logic</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    // --- PUZZLE LOGIC TRACKING ---
-    const solvedQuestions = {};
-    let totalScore = 0;
+    // --- SCORE & VALIDATION ENGINE ---
+    const recordSolved = {};
+    let pointMetric = 0;
 
-    const solutions = {
-        'ans1': "Correct! / સાચો જવાબ! (3-3-3 ના ત્રણ ગ્રુપ બનાવો. પ્રથમ વજનથી નકલી સિક્કાવાળું ગ્રુપ અલગ થશે અને બીજા વજનથી સિક્કો મળી જશે.)",
-        'ans2': "Brilliant! / અદભુત! (1/2 + 1/4 + 1/8... નો અનંત સરવાળો હંમેશા મૂળ ચોરસ એટલે કે 1 બરાબર જ થાય.)",
-        'ans3': "Spot on! / ઉત્તમ! (નિયમ મુજબ 2^(n-1) થાય. એટલે કે 7મા ખાના માટે 2^6 = 64 દાણા થાય.)",
-        'ans4': "Genius! / અસાધારણ! (પરિવારમાં 4 ભાઈઓ અને 3 બહેનો છે. છોકરા માટે 3 ભાઈ અને 3 બહેન; બહેન માટે 4 ભાઈ અને 2 બહેન થાય.)"
+    const explanationBook = {
+        'puz1': "Correct! / સાચો જવાબ! (Make groups of 3-3-3. Weigh group 1 against group 2. If balanced, it is in group 3. One more split uncovers the low weight.)",
+        'puz2': "Brilliant! / અદભુત! (The infinite series sum of $1/2 + 1/4 + 1/8 + \dots$ approaches the finite limit of exactly 1.)",
+        'puz3': "Spot on! / ઉત્તમ! (The mathematical progression tracks via formula $2^{n-1}$. For square 7, it maps as $2^6 = 64$.)",
+        'puz4': "Genius! / અસાધારણ! (There are 4 brothers and 3 sisters. The boy sees 3 brothers/3 sisters. The girl sees 4 brothers/2 sisters.)"
     };
 
-    function checkAnswer(inputId, correctAnswer, feedbackId) {
-        const userInput = document.getElementById(inputId).value.trim();
-        const feedbackEl = document.getElementById(feedbackId);
+    function evaluateAnswer(inputFieldId, validTarget, textOutputId) {
+        const clientVal = document.getElementById(inputFieldId).value.trim();
+        const displayBox = document.getElementById(textOutputId);
         
-        if (userInput === correctAnswer) {
-            feedbackEl.style.color = "var(--accent-green)";
-            feedbackEl.innerText = solutions[inputId];
+        if (clientVal === validTarget) {
+            displayBox.style.color = "var(--neon-green)";
+            displayBox.innerText = explanationBook[inputFieldId];
             
-            if (!solvedQuestions[inputId]) {
-                solvedQuestions[inputId] = true;
-                totalScore++;
-                document.getElementById('score').innerText = totalScore;
+            if (!recordSolved[inputFieldId]) {
+                recordSolved[inputFieldId] = true;
+                pointMetric++;
+                document.getElementById('score').innerText = pointMetric;
             }
         } else {
-            feedbackEl.style.color = "#ef4444";
-            feedbackEl.innerText = "Try again! / ફરી પ્રયત્ન કરો! તમારા તર્કની ફરીથી ચકાસણી કરો.";
+            displayBox.style.color = "var(--neon-pink)";
+            displayBox.innerText = "Try again! / ફરી પ્રયત્ન કરો! Check your logic assumptions.";
         }
     }
 
-    // --- MATH MAGIC LAB INTERACTION SCRIPT ---
-    
-    // 1. Mind Reader System
-    const symbols = ['Δ', 'Ω', '★', '⚙', '♦', '♣', '♠', '♥', '✖', '✪', '✦', '☀️'];
-    let specialSymbol = '';
+    // --- RAMANUJAN MIND MATRIX ALGORITHMS ---
+    const cosmicGlyphs = ['🔯', '🔮', '🌀', '🪐', '☄️', '🌌', '⚡', '☀️', '⭐', '💎', '🎨', '🧩'];
+    let universalKeySymbol = '';
 
-    function resetMatrix() {
-        const grid = document.getElementById('matrixGrid');
-        grid.innerHTML = '';
-        document.getElementById('crystalBall').innerText = '🔮';
+    function generateMatrixDeck() {
+        const deckElement = document.getElementById('matrixDeck');
+        deckElement.innerHTML = '';
+        document.getElementById('cosmicBall').innerText = '🔮';
         
-        // Pick a random primary symbol for multiples of 9
-        specialSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+        // Randomly isolate one true hidden key for multiples of 9
+        universalKeySymbol = cosmicGlyphs[Math.floor(Math.random() * cosmicGlyphs.length)];
         
-        for (let i = 1; i <= 99; i++) {
-            let sym = symbols[Math.floor(Math.random() * symbols.length)];
-            // Algebraic certainty property: Any 2 digit number minus its digit sum results in a multiple of 9
-            if (i % 9 === 0) {
-                sym = specialSymbol;
+        for (let idx = 1; idx <= 99; idx++) {
+            let selectedGlyph = cosmicGlyphs[Math.floor(Math.random() * cosmicGlyphs.length)];
+            
+            // Mathematical invariant truth rule: Any integer minus sum of its base-10 components collapses into an integer divisible by 9
+            if (idx % 9 === 0) {
+                selectedGlyph = universalKeySymbol;
             }
             
-            const item = document.createElement('div');
-            item.className = 'matrix-item';
-            item.innerHTML = `<span>${i}</span>:${sym}`;
-            grid.appendChild(item);
+            const block = document.createElement('div');
+            block.className = 'matrix-node';
+            block.innerHTML = `<strong>${idx}</strong>:${selectedGlyph}`;
+            deckElement.appendChild(block);
         }
     }
 
-    function readMind() {
-        const ball = document.getElementById('crystalBall');
-        ball.innerText = '⌛';
+    function revealMindReader() {
+        const targetSphere = document.getElementById('cosmicBall');
+        targetSphere.innerText = '⚡';
         setTimeout(() => {
-            ball.innerText = specialSymbol;
-        }, 1000);
+            targetSphere.innerText = universalKeySymbol;
+        }, 900);
     }
 
-    // 2. Interactive Fractal Tree System
-    const canvas = document.getElementById('fractalCanvas');
-    const ctx = canvas.getContext('2d');
-    const slider = document.getElementById('angleSlider');
+    // --- GEOMETRIC INFINITY FRACTAL ENGINE ---
+    const renderCanvas = document.getElementById('chaosCanvas');
+    const drawCtx = renderCanvas.getContext('2d');
+    const angleNode = document.getElementById('branchAngle');
+    const ratioNode = document.getElementById('growthRatio');
 
-    function drawTree(startX, startY, len, angle, branchWidth) {
-        ctx.beginPath();
-        ctx.save();
-        ctx.strokeStyle = `hsl(${len + 140}, 80%, 65%)`;
-        ctx.lineWidth = branchWidth;
-        ctx.translate(startX, startY);
-        ctx.rotate(angle * Math.PI / 180);
-        ctx.moveTo(0, 0);
-        ctx.lineTo(0, -len);
-        ctx.stroke();
+    function paintFractalTree(coordinateX, coordinateY, lengthSize, angleRad, coreLineWidth) {
+        drawCtx.beginPath();
+        drawCtx.save();
+        
+        // Dynamic structural color variance based on depth lines
+        drawCtx.strokeStyle = `hsl(${lengthSize * 3.5 + 190}, 90%, 60%)`;
+        drawCtx.lineWidth = coreLineWidth;
+        drawCtx.translate(coordinateX, coordinateY);
+        drawCtx.rotate(angleRad * Math.PI / 180);
+        drawCtx.moveTo(0, 0);
+        drawCtx.lineTo(0, -lengthSize);
+        drawCtx.stroke();
 
-        if (len < 10) {
-            ctx.restore();
+        if (lengthSize < 9) {
+            drawCtx.restore();
             return;
         }
 
-        const currentSliderVal = parseInt(slider.value);
+        const traceAngle = parseInt(angleNode.value);
+        const ratioMultiplier = parseInt(ratioNode.value) / 100;
+
+        // Recursive geometry calling equations
+        paintFractalTree(0, -lengthSize, lengthSize * ratioMultiplier, traceAngle, coreLineWidth * 0.68);
+        paintFractalTree(0, -lengthSize, lengthSize * ratioMultiplier, -traceAngle, coreLineWidth * 0.68);
+
+        drawCtx.restore();
+    }
+
+    function paintCanvasFrame() {
+        drawCtx.clearRect(0, 0, renderCanvas.width, renderCanvas.height);
+        document.getElementById('angleVal').innerText = angleNode.value + "°";
+        document.getElementById('ratioVal').innerText = (ratioNode.value / 100).toFixed(2);
         
-        // Recursion formulas generating the fractal branch geometry
-        drawTree(0, -len, len * 0.75, currentSliderVal, branchWidth * 0.7);
-        drawTree(0, -len, len * 0.75, -currentSliderVal, branchWidth * 0.7);
-
-        ctx.restore();
+        // Base seed coordinate anchor execution 
+        paintFractalTree(renderCanvas.width / 2, renderCanvas.height - 10, 65, 0, 7);
     }
 
-    function updateFractal() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        // Core baseline setup for the tree stem
-        drawTree(canvas.width / 2, canvas.height - 10, 50, 0, 6);
-    }
+    angleNode.addEventListener('input', paintCanvasFrame);
+    ratioNode.addEventListener('input', paintCanvasFrame);
 
-    slider.addEventListener('input', updateFractal);
-
-    // Run Initializations
-    resetMatrix();
-    updateFractal();
+    // Dynamic Systems Initial Run Commands
+    generateMatrixDeck();
+    paintCanvasFrame();
 </script>
 
 </body>
