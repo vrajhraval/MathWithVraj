@@ -13,7 +13,7 @@
         :root {
             --bg-deep: #05070f;
             --bg-cosmic: #0b0f19;
-            --card-glass: rgba(19, 28, 46, 0.7);
+            --card-glass: rgba(13, 22, 41, 0.85);
             --border-glow: rgba(56, 189, 248, 0.2);
             --text-pure: #ffffff;
             --text-glow: #f1f5f9;
@@ -30,8 +30,8 @@
         body {
             background-color: var(--bg-deep);
             background-image: 
-                radial-gradient(at 10% 10%, rgba(168, 85, 247, 0.1) 0px, transparent 50%),
-                radial-gradient(at 90% 90%, rgba(56, 189, 248, 0.1) 0px, transparent 50%);
+                radial-gradient(at 10% 10%, rgba(168, 85, 247, 0.12) 0px, transparent 50%),
+                radial-gradient(at 90% 90%, rgba(56, 189, 248, 0.12) 0px, transparent 50%);
             color: var(--text-glow);
             font-family: 'Plus Jakarta Sans', 'Noto Sans Gujarati', sans-serif;
             margin: 0;
@@ -74,13 +74,12 @@
 
         .hero-header p {
             color: var(--text-muted);
-            font-size: 1.2.rem;
-            max-width: 700px;
+            font-size: 1.15rem;
+            max-width: 750px;
             margin: 20px auto 0 auto;
             line-height: 1.6;
         }
 
-        /* Global Layout Grid Layout */
         .section-title {
             font-family: 'Cinzel', serif;
             font-size: 2rem;
@@ -93,7 +92,7 @@
         }
         .section-title span { color: var(--neon-pink); }
 
-        /* --- THE MAGIC LAB (EXPANDED BROAD SECTION) --- */
+        /* --- THE MAGIC LAB --- */
         .magic-universe {
             display: grid;
             grid-template-columns: 1.2fr 1fr;
@@ -111,7 +110,7 @@
             border: 1px solid var(--border-glow);
             border-radius: 24px;
             padding: 40px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -144,7 +143,6 @@
             padding-right: 10px;
         }
 
-        /* Custom Scrollbar for matrix */
         .matrix-scroll-grid::-webkit-scrollbar { width: 6px; }
         .matrix-scroll-grid::-webkit-scrollbar-thumb { background: var(--neon-purple); border-radius: 10px; }
 
@@ -289,7 +287,7 @@
         .bg-logic { background: rgba(56, 189, 248, 0.15); color: var(--neon-blue); }
         .bg-geometry { background: rgba(168, 85, 247, 0.15); color: var(--neon-purple); }
         .bg-infinity { background: rgba(34, 197, 94, 0.15); color: var(--neon-green); }
-        .bg-algebra { background: rgba(249, 73, 22, 0.15); color: var(--neon-orange); }
+        .bg-algebra { background: rgba(249, 115, 22, 0.15); color: var(--neon-orange); }
 
         .puzzle-deck-card h3 {
             font-size: 1.5rem;
@@ -384,24 +382,24 @@
 
 <div class="odyssey-container">
     
-    <!-- Big Bold Header Block -->
+    <!-- Hero Header Block -->
     <div class="hero-header">
         <h1>The Grand Math Odyssey</h1>
         <span class="gujarati-hero">મહાન ગણિત બ્રહ્માંડ સફર</span>
-        <p>Mathematics is not about numbers, equations, or algorithms: it is about understanding. Explore the magic, play with chaos, and conquer logic puzzles below!</p>
+        <p>Mathematics is not about numbers, equations, or algorithms: it is about pure imagination and understanding. Explore the magic, control geometric chaos, and conquer our enhanced thinkers' vault below!</p>
     </div>
 
-    <!-- 1. BROAD THINKING EXPANDED SECTION: THE MAGIC REALM -->
+    <!-- 1. INTERACTIVE LAB -->
     <h2 class="section-title"><span>01.</span> The Interactive Reality Lab / પ્રયોગશાળા</h2>
     <div class="magic-universe">
         
-        <!-- Module A: Extended Mind Reader -->
+        <!-- Module A: Ramanujan Mind Reader Matrix -->
         <div class="cosmic-card">
             <div>
                 <span class="category-badge bg-logic">Algebra Magic | અંકગણિત જાદુ</span>
                 <h3>The Ramanujan Mind Matrix</h3>
-                <p class="eng-desc">Think of any 2-digit number (e.g., 84). Add its digits together ($8+4=12$). Subtract that sum from your initial choice ($84-12=72$). Find your calculated number inside our matrix array, memorize its celestial symbol, then tap the Crystal Sphere!</p>
-                <p class="guj-desc">કોઈપણ ૨-અંકની સંખ્યા વિચારો (દા.ત. 84). તેના અંકોનો સરવાળો કરો ($8+4=12$). મૂળ સંખ્યામાંથી તે બાદ કરો ($84-12=72$). નીચેના કોષ્ટકમાં તમારા જવાબની સામેનો સિમ્બોલ મનમાં બરાબર યાદ રાખીને જાદુઈ સ્ફિયર પર ક્લિક કરો!</p>
+                <p class="eng-desc">Think of any 2-digit number (e.g., 84). Add its individual digits together (8 + 4 = 12). Subtract that new sum from your initial choosing (84 - 12 = 72). Find your final calculated number inside our cosmic matrix array below, memorize its celestial symbol, then tap the Crystal Sphere!</p>
+                <p class="guj-desc">કોઈપણ ૨-અંકની સંખ્યા વિચારો (દા.ત. 84). તેના અંકોનો સરવાળો કરો (8 + 4 = 12). મૂળ સંખ્યામાંથી તે સરવાળો બાદ કરો (84 - 12 = 72). નીચેના કોષ્ટકમાં તમારા જવાબની સામેનો સિમ્બોલ મનમાં યાદ રાખીને જાદુઈ સ્ફિયર પર ક્લિક કરો!</p>
             </div>
             
             <div class="matrix-container">
@@ -414,13 +412,13 @@
             </div>
         </div>
 
-        <!-- Module B: Dynamic Chaos / Fractal Canvas Simulator -->
+        <!-- Module B: Infinite Fractal Tree Simulator -->
         <div class="cosmic-card">
             <div>
                 <span class="category-badge bg-geometry">Chaos & Order | ભૂમિતિ અને અનંત</span>
                 <h3>The Geometric Tree of Infinity</h3>
-                <p class="eng-desc">This structure is painted entirely by triggering simple recursive calculations. Change the parameters below to witness how static algebraic rules morph directly into organic structures found across nature.</p>
-                <p class="guj-desc">આ આકૃતિ સંપૂર્ણપણે ગણિતના રિકર્સિવ સૂત્રો આધારિત બનેલી છે. ડાળીઓનો ખૂણો બદલીને જુઓ કે કેવી રીતે ગણિતના અફર નિયમો કુદરતની જીવંત સુંદરતામાં પરિવર્તિત થાય છે.</p>
+                <p class="eng-desc">This majestic pattern is rendered live entirely via basic recursive math equations. Move the sliders below to witness how static numeric laws grow directly into organic structures found throughout nature!</p>
+                <p class="guj-desc">આ આકૃતિ સંપૂર્ણપણે ગણિતના રિકર્સિવ સૂત્રો આધારિત બનેલી છે. ડાળીઓનો ખૂણો અને લંબાઈ બદલીને જુઓ કે કેવી રીતે ગણિતના અફર નિયમો કુદરતની જીવંત સુંદરતામાં પરિવર્તિત થાય છે.</p>
             </div>
 
             <div class="canvas-frame">
@@ -440,21 +438,20 @@
         </div>
     </div>
 
-    <!-- 2. DEEP INTELLECTUAL BANNER SECTION -->
+    <!-- 2. INTELLECTUAL BANNER SECTION -->
     <div class="philosophy-banner">
         <div class="philosophy-icon">🧠</div>
         <div class="philosophy-text">
-            <h4>Thought-Provoking Paradox / વિચારવા જેવું:</h4>
-            <p class="eng-desc" style="color: #fff; margin:0; font-size:0.95rem;">Did you know? If you could fold a single standard sheet of paper perfectly 42 times, its total thickness would reach all the way to the <strong>Moon</strong>! This is the breathtaking power of exponential growth ($2^{42}$)—the very math governing our cosmos.</p>
+            <h4>Thought-Provoking Reality / આશ્ચર્યજનક હકીકત:</h4>
+            <p class="eng-desc" style="color: #fff; margin:0; font-size:0.95rem;">Did you know? If you could fold a standard sheet of paper perfectly 42 times, its total thickness would grow exponentially and reach all the way to the <strong>Moon</strong>! This highlights the immense, invisible power of exponential curves governing our universe.</p>
         </div>
     </div>
 
-    <!-- 3. PUZZLE ARENA LAYOUT -->
-    <h2 class="section-title"><span>02.</span> The Thinker's Proving Grounds / કોયડા અખાડો</h2>
+    <!-- 3. EXTENDED PUZZLE VAULT (8 REWORKED CONTEXT PUZZLES) -->
+    <h2 class="section-title"><span>02.</span> The Thinker's Vault / કોયડા અખાડો</h2>
     
-    <!-- Live Arena Score Display Tracker -->
     <div class="score-board">
-        Current Score Mastery / તમારી વૈજ્ઞાનિક ક્ષમતા: <span id="score">0</span> / 4 Artifacts
+        Current Score Mastery / તમારી વૈજ્ઞાનિક ક્ષમતા: <span id="score">0</span> / 8 Artifacts
     </div>
 
     <div class="puzzle-matrix">
@@ -463,11 +460,11 @@
             <div>
                 <span class="category-badge bg-logic">Logic Theory</span>
                 <h3>The False Coin Dilemma</h3>
-                <p class="eng-desc">You have 9 identical coins. One is counterfeit and weighs slightly less than the standard value. What is the absolute minimum number of weighings needed on a manual balance scale to locate it?</p>
+                <p class="eng-desc">You have 9 identical looking coins. One is counterfeit and weighs slightly less than the standard value. What is the absolute minimum number of weighings needed on a manual balance scale to isolate it?</p>
                 <p class="guj-desc">તમારી પાસે એકસરખા દેખાતા 9 સિક્કા છે. તેમાંથી એક નકલી છે અને તેનું વજન થોડું ઓછું છે. સાદા ત્રાજવાનો ઉપયોગ કરીને તેને ચોક્કસ શોધવા માટે ઓછામાં ઓછું કેટલી વાર વજન કરવું પડે?</p>
             </div>
             <div class="input-wrapper">
-                <label for="puz1">Input Integer / તમારો આંકડો:</label>
+                <label for="puz1">Input Integer / તમારો જવાબ:</label>
                 <input type="number" id="puz1" placeholder="?">
                 <div id="out1" class="feedback-line"></div>
                 <button class="action-btn" onclick="evaluateAnswer('puz1', '2', 'out1')">Verify Logic</button>
@@ -479,11 +476,11 @@
             <div>
                 <span class="category-badge bg-geometry">Infinity Paradox</span>
                 <h3>The Infinite Square Path</h3>
-                <p class="eng-desc">Imagine a solid geometric square of total area 1. You cut it precisely in half. You then take that half, cut it in half again, and repeat this process infinitely. If you sum all infinite pieces together, what total area value do you get?</p>
+                <p class="eng-desc">Imagine a solid geometric square of total area 1. You cut it precisely in half. You then take that half, cut it in half again, and repeat this process infinitely. If you sum all these infinite pieces together, what total area value do you get?</p>
                 <p class="guj-desc">1 ક્ષેત્રફળવાળો એક સળંગ ચોરસ વિચારો. તમે તેને બરાબર અડધો કાપો છો. પછી તે અડધા ભાગને ફરી અડધો કરો છો, અને આવું અનંત સુધી ચાલુ રાખો છો. જો આ બધા કાપેલા ટુકડાઓ ભેગા કરીએ, તો છેલ્લે કુલ કેટલું ક્ષેત્રફળ મળશે?</p>
             </div>
             <div class="input-wrapper">
-                <label for="puz2">Input Integer / તમારો આંકડો:</label>
+                <label for="puz2">Input Integer / તમારો જવાબ:</label>
                 <input type="number" id="puz2" placeholder="?">
                 <div id="out2" class="feedback-line"></div>
                 <button class="action-btn" onclick="evaluateAnswer('puz2', '1', 'out2')">Verify Logic</button>
@@ -499,7 +496,7 @@
                 <p class="guj-desc">એક ચેસબોર્ડના પહેલા ખાનામાં ચોખાનો 1 દાણો, બીજા ખાનામાં 2, ત્રીજામાં 4 એમ દર વખતે બમણા દાણા મૂકવામાં આવે છે. તો માત્ર 7મા ખાનામાં કેટલા દાણા હશે?</p>
             </div>
             <div class="input-wrapper">
-                <label for="puz3">Input Integer / તમારો આંકડો:</label>
+                <label for="puz3">Input Integer / તમારો જવાબ:</label>
                 <input type="number" id="puz3" placeholder="?">
                 <div id="out3" class="feedback-line"></div>
                 <button class="action-btn" onclick="evaluateAnswer('puz3', '64', 'out3')">Verify Logic</button>
@@ -515,10 +512,74 @@
                 <p class="guj-desc">એક પરિવારમાં, એક છોકરાને જેટલી બહેનો છે એટલા જ ભાઈઓ છે. પરંતુ, તેની બહેનને તેના કરતા બમણા ભાઈઓ છે. તો આ પરિવારમાં કુલ કેટલા ભાઈઓ હશે?</p>
             </div>
             <div class="input-wrapper">
-                <label for="puz4">Input Integer / તમારો આંકડો:</label>
+                <label for="puz4">Input Integer / તમારો જવાબ:</label>
                 <input type="number" id="puz4" placeholder="?">
                 <div id="out4" class="feedback-line"></div>
                 <button class="action-btn" onclick="evaluateAnswer('puz4', '4', 'out4')">Verify Logic</button>
+            </div>
+        </div>
+
+        <!-- New Puzzle Card 5 -->
+        <div class="puzzle-deck-card">
+            <div>
+                <span class="category-badge bg-infinity">Probability Matrix</span>
+                <h3>The Shared Birthday Probability</h3>
+                <p class="eng-desc">What is the minimum number of random people required in a single room so that the probability of at least two individuals sharing an identical birth date cross over a 50% chance tier?</p>
+                <p class="guj-desc">એક રૂમમાં ઓછામાં ઓછા કેટલા લોકો હાજર હોવા જોઈએ જેથી કોઈપણ બે વ્યક્તિનો જન્મદિવસ એક જ તારીખે આવવાની સંભાવના 50% થી વધુ થઈ જાય?</p>
+            </div>
+            <div class="input-wrapper">
+                <label for="puz5">Input Integer / તમારો જવાબ:</label>
+                <input type="number" id="puz5" placeholder="?">
+                <div id="out5" class="feedback-line"></div>
+                <button class="action-btn" onclick="evaluateAnswer('puz5', '23', 'out5')">Verify Logic</button>
+            </div>
+        </div>
+
+        <!-- New Puzzle Card 6 -->
+        <div class="puzzle-deck-card">
+            <div>
+                <span class="category-badge bg-geometry">Graph Topology</span>
+                <h3>The Bridges of Konigsberg</h3>
+                <p class="eng-desc">A classic city layout possesses 7 specialized access bridges. If an explorer wants to traverse across the entire network walking over every single bridge exactly once without repeating any path, how many absolute bridges must exist inside a valid loop? Input 0 if it is mathematically impossible.</p>
+                <p class="guj-desc">કોઈ નગરમાં ૭ અલગ નદી કિનારાના પુલ છે. એક પદયાત્રી દરેક પુલ પરથી ફક્ત એક જ વાર પસાર થઈને આખું નગર ભ્રમણ કરવા ઈચ્છે છે. આ ગ્રાફ થીયરી મુજબ જો આવું કરવું અશક્ય હોય તો જવાબમાં 0 લખો.</p>
+            </div>
+            <div class="input-wrapper">
+                <label for="puz6">Input Integer / તમારો જવાબ:</label>
+                <input type="number" id="puz6" placeholder="?">
+                <div id="out6" class="feedback-line"></div>
+                <button class="action-btn" onclick="evaluateAnswer('puz6', '0', 'out6')">Verify Logic</button>
+            </div>
+        </div>
+
+        <!-- New Puzzle Card 7 -->
+        <div class="puzzle-deck-card">
+            <div>
+                <span class="category-badge bg-algebra">Kinematic Ratios</span>
+                <h3>The Harmonic Velocity Trap</h3>
+                <p class="eng-desc">A driver journeys up an elevated mountain road at exactly 30 km/h speed. They immediately turn around and drive down the exact same road path descending at 60 km/h speed. What is the total average round-trip speed in km/h?</p>
+                <p class="guj-desc">એક કાર પહાડી રસ્તા પર ૩૦ કિમી/કલાકની ઝડપે ઉપર જાય છે. તે જ રસ્તા પરથી તે પાછી ૬૦ કિમી/કલાકની ઝડપે નીચે ઉતરે છે. તો આખી મુસાફરીની સરેરાશ ઝડપ (km/h) કેટલી થશે?</p>
+            </div>
+            <div class="input-wrapper">
+                <label for="puz7">Input Integer / તમારો જવાબ:</label>
+                <input type="number" id="puz7" placeholder="?">
+                <div id="out7" class="feedback-line"></div>
+                <button class="action-btn" onclick="evaluateAnswer('puz7', '40', 'out7')">Verify Logic</button>
+            </div>
+        </div>
+
+        <!-- New Puzzle Card 8 -->
+        <div class="puzzle-deck-card">
+            <div>
+                <span class="category-badge bg-logic">Financial Paradox</span>
+                <h3>The Missing Dollar Illusion</h3>
+                <p class="eng-desc">Three guests check into a room totaling 30 dollars expense (10 dollars each). The manager realizes a discount and returns 5 dollars back via a bellboy. The dishonest bellboy keeps 2 dollars secretly and returns 1 dollar to each guest. Now, each guest paid 9 dollars (9 x 3 = 27). The bellboy has 2 dollars (27 + 2 = 29). Where is the missing 1 dollar? Input the actual value of the final mathematical accounting error discrepancy inside the system.</p>
+                <p class="guj-desc">૩ મિત્રો એક હોટેલમાં ૩૦ રૂપિયા આપી રૂમ રાખે છે. મેનેજર વળતર પેટે ૫ રૂપિયા પાછા આપે છે. નોકર ૨ રૂપિયા પોતાની પાસે રાખી ત્રણેય મિત્રોને ૧-૧ રૂપિયો પાછો આપે છે. હવે ત્રણેયે ૯-૯ રૂપિયા આપ્યા કહેવાય (૯ x ૩ = ૨૭). નોકર પાસેના ૨ ગણીએ તો (૨૭ + ૨ = ૨૯) થાય. આ હિસાબની ગોલમાલમાં વાસ્તવિક ભૂલ કઈ રકમ પર થઈ?</p>
+            </div>
+            <div class="input-wrapper">
+                <label for="puz8">Input Integer / તમારો જવાબ:</label>
+                <input type="number" id="puz8" placeholder="?">
+                <div id="out8" class="feedback-line"></div>
+                <button class="action-btn" onclick="evaluateAnswer('puz8', '29', 'out8')">Verify Logic</button>
             </div>
         </div>
     </div>
@@ -530,10 +591,14 @@
     let pointMetric = 0;
 
     const explanationBook = {
-        'puz1': "Correct! / સાચો જવાબ! (Make groups of 3-3-3. Weigh group 1 against group 2. If balanced, it is in group 3. One more split uncovers the low weight.)",
-        'puz2': "Brilliant! / અદભુત! (The infinite series sum of $1/2 + 1/4 + 1/8 + \dots$ approaches the finite limit of exactly 1.)",
-        'puz3': "Spot on! / ઉત્તમ! (The mathematical progression tracks via formula $2^{n-1}$. For square 7, it maps as $2^6 = 64$.)",
-        'puz4': "Genius! / અસાધારણ! (There are 4 brothers and 3 sisters. The boy sees 3 brothers/3 sisters. The girl sees 4 brothers/2 sisters.)"
+        'puz1': "Correct! / સાચો જવાબ! (Make groups of 3-3-3. Weigh group 1 against group 2. If balanced, the fake is in group 3. One more weighing uncovers it.)",
+        'puz2': "Brilliant! / અદભુત! (The infinite series sum of 1/2 + 1/4 + 1/8 + ... approaches a finite limit of exactly 1.)",
+        'puz3': "Spot on! / ઉત્તમ! (The mathematical progression tracks via 2^(n-1). For square 7, it maps as 2^6 = 64.)",
+        'puz4': "Genius! / અસાધારણ! (There are 4 brothers and 3 sisters. The boy sees 3 brothers/3 sisters. The girl sees 4 brothers/2 sisters.)",
+        'puz5': "Astonishing! / અદભુત સંભાવના! (With just 23 people, the combinations of pairs create over a 50.7% likelihood of matching birthdays!)",
+        'puz6': "Incredible! / લાજવાબ તર્ક! (Graph theory proves that an Eulerian Path requires nodes to have even degrees. All vertices here are odd, making it completely impossible - 0.)",
+        'puz7': "Perfect! / ઉત્તમ ગણતરી! (We must find the harmonic mean, not arithmetic. Total distance divided by total time yields exactly 40 km/h.)",
+        'puz8': "Brilliant Analyst! / અદ્ભુત બુદ્ધિ ક્ષમતા! (The mistake is adding the bellboy's 2 dollars to the 27 dollars instead of subtracting it! 27 - 2 = 25 which equals the room cost. The calculation 29 is a false framing trap!)"
     };
 
     function evaluateAnswer(inputFieldId, validTarget, textOutputId) {
@@ -564,13 +629,11 @@
         deckElement.innerHTML = '';
         document.getElementById('cosmicBall').innerText = '🔮';
         
-        // Randomly isolate one true hidden key for multiples of 9
         universalKeySymbol = cosmicGlyphs[Math.floor(Math.random() * cosmicGlyphs.length)];
         
         for (let idx = 1; idx <= 99; idx++) {
             let selectedGlyph = cosmicGlyphs[Math.floor(Math.random() * cosmicGlyphs.length)];
             
-            // Mathematical invariant truth rule: Any integer minus sum of its base-10 components collapses into an integer divisible by 9
             if (idx % 9 === 0) {
                 selectedGlyph = universalKeySymbol;
             }
@@ -600,7 +663,6 @@
         drawCtx.beginPath();
         drawCtx.save();
         
-        // Dynamic structural color variance based on depth lines
         drawCtx.strokeStyle = `hsl(${lengthSize * 3.5 + 190}, 90%, 60%)`;
         drawCtx.lineWidth = coreLineWidth;
         drawCtx.translate(coordinateX, coordinateY);
@@ -617,7 +679,6 @@
         const traceAngle = parseInt(angleNode.value);
         const ratioMultiplier = parseInt(ratioNode.value) / 100;
 
-        // Recursive geometry calling equations
         paintFractalTree(0, -lengthSize, lengthSize * ratioMultiplier, traceAngle, coreLineWidth * 0.68);
         paintFractalTree(0, -lengthSize, lengthSize * ratioMultiplier, -traceAngle, coreLineWidth * 0.68);
 
@@ -629,14 +690,13 @@
         document.getElementById('angleVal').innerText = angleNode.value + "°";
         document.getElementById('ratioVal').innerText = (ratioNode.value / 100).toFixed(2);
         
-        // Base seed coordinate anchor execution 
         paintFractalTree(renderCanvas.width / 2, renderCanvas.height - 10, 65, 0, 7);
     }
 
     angleNode.addEventListener('input', paintCanvasFrame);
     ratioNode.addEventListener('input', paintCanvasFrame);
 
-    // Dynamic Systems Initial Run Commands
+    // Initial Launch
     generateMatrixDeck();
     paintCanvasFrame();
 </script>
