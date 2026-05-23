@@ -539,14 +539,21 @@
         <div class="nav-item">
             <a href="nep.html">NEP 2020</a>
         </div>
+        
+        <!-- NEW: Important Links Dropdown Section -->
         <div class="nav-item">
-            <a href="imp.html">Important Links</a>
+            <a href="imp.html" class="has-dropdown">Important Links</a>
+            <ul class="dropdown-menu">
+                <li><a href="imp.html#school">School Section</a></li>
+                <li><a href="imp.html#higher-ed">Higher Education</a></li>
+                <li><a href="imp.html#scholarship">Scholarships</a></li>
+            </ul>
         </div>
+        
         <div class="nav-item">
             <a href="about.html">About Me</a>
         </div>
         
-        <!-- Improved Interactive Higher Studies Dropdown Section -->
         <div class="nav-item">
             <a href="higher.html" class="has-dropdown">Higher Studies</a>
             <ul class="dropdown-menu">
@@ -833,22 +840,22 @@
         renderCurrentQuiz();
     }
 
-    // High performance Touch & Click handler
+    // High performance Touch & Click handler for dropdowns
     document.querySelectorAll('.top-navbar .has-dropdown').forEach(trigger => {
         trigger.addEventListener('click', function(e) {
             const parent = this.parentElement;
             
-            // If the user clicks/taps when the menu panel isn't open yet
             if (!parent.classList.contains('dropdown-active')) {
-                e.preventDefault(); // Stop instant page jumping
+                e.preventDefault(); 
                 
-                // Clear out any other open dropdowns
-                document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('dropdown-active'));
+                // Close any other open menus
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    if (item !== parent) item.classList.remove('dropdown-active');
+                });
                 
-                // Open our current element panel
+                // Open the selected menu
                 parent.classList.add('dropdown-active');
             } 
-            // If they click/tap a second time while it is already open, it follows the natural higher.html link!
         });
     });
 
