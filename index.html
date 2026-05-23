@@ -6,11 +6,8 @@
     <title>Vraj H Raval | Mathematics Education</title>
 
     <script src="https://cdn.jsdelivr.net/npm/mathjs@11/lib/browser/math.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
 
     <script>
@@ -25,7 +22,6 @@
             }
         };
     </script>
-
     <script
         id="MathJax-script"
         async
@@ -50,6 +46,8 @@
             --quiz-btn-hover: #f7faff;
             --nav-link-color: #555;
             --nav-link-hover: #2980b9;
+            --dropdown-bg: white;
+            --dropdown-shadow: rgba(0, 0, 0, 0.15);
         }
 
         /* Improved Premium Dark Mode Palette */
@@ -68,6 +66,8 @@
             --quiz-btn-hover: #334155;
             --nav-link-color: #cbd5e1;
             --nav-link-hover: #3498db;
+            --dropdown-bg: #1e293b;
+            --dropdown-shadow: rgba(0, 0, 0, 0.4);
         }
 
         * {
@@ -84,7 +84,6 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Forces MathJax colors to respect dark mode dynamically */
         body.dark-mode-active svg {
             color: var(--text-color) !important;
             fill: var(--text-color) !important;
@@ -130,6 +129,12 @@
             margin-left: auto;
         }
 
+        /* Dropdown item container styling */
+        .nav-item {
+            position: relative;
+            display: inline-block;
+        }
+
         .top-navbar a {
             text-decoration: none;
             color: var(--nav-link-color);
@@ -137,7 +142,8 @@
             font-size: 0.95rem;
             transition: color 0.2s ease;
             position: relative;
-            padding: 4px 0;
+            padding: 8px 0;
+            display: inline-block;
         }
 
         .top-navbar a:hover {
@@ -145,7 +151,7 @@
         }
 
         /* Clean underscore hover animation effect */
-        .top-navbar a::after {
+        .top-navbar > .nav-item > a::after {
             content: '';
             position: absolute;
             width: 0;
@@ -156,8 +162,54 @@
             transition: width 0.2s ease;
         }
 
-        .top-navbar a:hover::after {
+        .top-navbar > .nav-item:hover > a::after {
             width: 100%;
+        }
+
+        /* Hidden Dropdown Subsection Styles */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background-color: var(--dropdown-bg);
+            min-width: 180px;
+            box-shadow: 0 8px 24px var(--dropdown-shadow);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 8px 0;
+            margin: 0;
+            list-style: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+            z-index: 1100;
+        }
+
+        .dropdown-menu a {
+            color: var(--text-color);
+            padding: 8px 16px;
+            display: block;
+            font-size: 0.9rem;
+            font-weight: normal;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: var(--quiz-btn-hover);
+            color: var(--nav-link-hover);
+        }
+
+        .dropdown-menu a::after {
+            display: none !important; /* Disables underline inside dropdowns */
+        }
+
+        /* Show Dropdown on Hover */
+        .nav-item:hover .dropdown-menu,
+        .nav-item.mobile-open .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
         }
 
         header {
@@ -403,12 +455,25 @@
                 margin-left: 0;
                 flex-wrap: wrap;
                 gap: 12px;
+                width: 100%;
             }
-            .quiz-options {
-                grid-template-columns: 1fr;
+            .nav-item {
+                display: block;
+                width: auto;
             }
-            header h1 {
-                font-size: 2rem;
+            .dropdown-menu {
+                position: static;
+                transform: none !important;
+                box-shadow: none;
+                padding-left: 15px;
+                border: none;
+                background: transparent;
+                display: none;
+                opacity: 1;
+                visibility: visible;
+            }
+            .nav-item.mobile-open .dropdown-menu {
+                display: block;
             }
         }
 
@@ -452,14 +517,35 @@
         </div>
     </div>
 
+    <!-- Grouped relevant child items under dedicated .nav-item structures -->
     <nav class="top-navbar">
-        <a href="books.html">NCERT Books</a>
-        <a href="nep.html">NEP 2020</a>
-        <a href="imp.html">Important Links</a>
-        <a href="about.html">About Me</a>
-        <a href="higher.html">Higher Studies</a>
-        <a href="puzz.html">Puzzle</a>
-        <a href="3d.html">3D</a>
+        <div class="nav-item">
+            <a href="books.html">NCERT Books</a>
+        </div>
+        <div class="nav-item">
+            <a href="nep.html">NEP 2020</a>
+        </div>
+        <div class="nav-item">
+            <a href="imp.html">Important Links</a>
+        </div>
+        <div class="nav-item">
+            <a href="about.html">About Me</a>
+        </div>
+        <!-- Higher Studies now safely wraps its hidden sub-navigation structure -->
+        <div class="nav-item">
+            <a href="higher.html" class="has-dropdown">Higher Studies</a>
+            <ul class="dropdown-menu">
+                <li><a href="#">B.Sc Mathematics</a></li>
+                <li><a href="#">M.Sc Mathematics</a></li>
+                <li><a href="#">Research &amp; Ph.D</a></li>
+            </ul>
+        </div>
+        <div class="nav-item">
+            <a href="puzz.html">Puzzle</a>
+        </div>
+        <div class="nav-item">
+            <a href="3d.html">3D</a>
+        </div>
     </nav>
 </div>
 
@@ -469,10 +555,8 @@
 </header>
 
 <div class="container">
-
     <section>
         <h2>1. Ancient Foundations</h2>
-
         <div class="flex">
             <div style="flex:1;">
                 <p>
@@ -480,28 +564,22 @@
                     astronomy, engineering, and architecture.
                 </p>
             </div>
-
             <img src="bab.jpg" alt="Ancient Mathematics">
         </div>
     </section>
 
     <section>
         <h2>2. Greek & Indian Contributions</h2>
-
         <div class="flex">
             <img src="pytha.jfif" alt="Pythagoras">
-
             <div style="flex:1;">
                 <p>
                     From the geometric proofs of Pythagoras to the invention
                     of <strong>Zero</strong> in India, these civilizations laid
                     the foundation of modern mathematics.
                 </p>
-
                 <div style="background: var(--formula-card-bg); padding:15px; border-left:4px solid var(--accent); border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); border-radius: 4px; transition: background-color 0.3s, border-color 0.3s;">
-                    $$
-                    a^2+b^2=c^2
-                    $$
+                    $$ a^2+b^2=c^2 $$
                 </div>
             </div>
         </div>
@@ -509,125 +587,62 @@
 
     <section>
         <h2>3. Quick Formula Reference Library</h2>
-
         <div class="formula-grid">
-
             <div class="formula-card">
                 <h3>Algebraic Identities</h3>
-
-                $$
-                (a+b)^2=a^2+2ab+b^2
-                $$
-
-                $$
-                (a-b)^2=a^2-2ab+b^2
-                $$
+                $$ (a+b)^2=a^2+2ab+b^2 $$
+                $$ (a-b)^2=a^2-2ab+b^2 $$
             </div>
 
             <div class="formula-card">
                 <h3>Quadratic Formula</h3>
-
-                <p>
-                    For:
-                    \(ax^2+bx+c=0\)
-                </p>
-
-                $$
-                x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}
-                $$
+                <p>For: \(ax^2+bx+c=0\)</p>
+                $$ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a} $$
             </div>
 
             <div class="formula-card">
                 <h3>Distance Formula</h3>
-
-                $$
-                d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}
-                $$
+                $$ d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2} $$
             </div>
-
         </div>
     </section>
 
     <section>
         <h2>4. Interactive Quadratic Solver</h2>
-
         <div class="solver-ui">
-
             <input type="number" id="solve-a" value="1">
-
             <span>\(x^2+\)</span>
-
             <input type="number" id="solve-b" value="-5">
-
             <span>\(x+\)</span>
-
             <input type="number" id="solve-c" value="6">
-
             <span>\(=0\)</span>
-
-            <button class="solver-btn" onclick="solveQuadratic()">
-                Solve
-            </button>
+            <button class="solver-btn" onclick="solveQuadratic()">Solve</button>
         </div>
-
         <div class="solver-steps" id="solver-steps-output"></div>
     </section>
 
     <section>
         <h2>5. Interactive Practice Center</h2>
-
         <div class="quiz-container">
-
             <div class="quiz-question-box" id="quiz-question"></div>
-
             <div class="quiz-options" id="quiz-options-box"></div>
-
             <div class="quiz-feedback" id="quiz-feedback-box"></div>
-
-            <button class="next-quiz-btn" id="next-quiz-btn" onclick="loadNextQuestion()">
-                Next Question →
-            </button>
-
+            <button class="next-quiz-btn" id="next-quiz-btn" onclick="loadNextQuestion()">Next Question →</button>
         </div>
     </section>
 
     <div class="graph-section">
-
-        <h2 style="color:#e94560;">
-            Interactive Cartesian Plane
-        </h2>
-
-        <p>
-            Visualize mathematical functions in real time.
-        </p>
-
+        <h2 style="color:#e94560;">Interactive Cartesian Plane</h2>
+        <p>Visualize mathematical functions in real time.</p>
         <div class="graph-ui">
-
             <span style="font-size:1.5rem;">f(x)=</span>
-
-            <input
-                type="text"
-                id="eq-input"
-                value="sin(x) * x"
-                placeholder="e.g. x^2, cos(x), sqrt(x)"
-            >
-
-            <button class="plot-btn" onclick="plotGraph()">
-                Generate Graph
-            </button>
+            <input type="text" id="eq-input" value="sin(x) * x" placeholder="e.g. x^2, cos(x), sqrt(x)">
+            <button class="plot-btn" onclick="plotGraph()">Generate Graph</button>
         </div>
-
         <div class="chart-container">
             <canvas id="mathChart"></canvas>
         </div>
-
-        <button
-            onclick="resetZoomView()"
-            style="margin-top:15px; background:transparent; color:white; border:1px solid #444; padding:8px 15px; border-radius:5px; cursor:pointer;"
-        >
-            Reset View
-        </button>
-
+        <button onclick="resetZoomView()" style="margin-top:15px; background:transparent; color:white; border:1px solid #444; padding:8px 15px; border-radius:5px; cursor:pointer;">Reset View</button>
     </div>
 </div>
 
@@ -639,29 +654,20 @@
     let myChart;
 
     function plotGraph() {
-
         const input = document.getElementById('eq-input').value;
         const points = [];
-
         try {
-
             const expr = math.compile(input);
-
             for (let x = -50; x <= 50; x += 0.05) {
-
                 let y = expr.evaluate({ x: x });
-
                 if (typeof y === 'number' && isFinite(y)) {
                     points.push({ x: x, y: y });
                 }
             }
 
-            if (myChart) {
-                myChart.destroy();
-            }
+            if (myChart) { myChart.destroy(); }
 
             const ctx = document.getElementById('mathChart').getContext('2d');
-            
             const labelColor = '#ffffff'; 
             const horizontalGridSettings = 'rgba(255, 255, 255, 0.12)'; 
 
@@ -685,247 +691,152 @@
                             type: 'linear',
                             min: -10,
                             max: 10,
-                            grid: {
-                                color: horizontalGridSettings,
-                                borderColor: labelColor,
-                                tickColor: labelColor
-                            },
-                            ticks: {
-                                color: labelColor,
-                                font: {
-                                    weight: 'bold'
-                                }
-                            }
+                            grid: { color: horizontalGridSettings, borderColor: labelColor, tickColor: labelColor },
+                            ticks: { color: labelColor, font: { weight: 'bold' } }
                         },
                         y: {
                             type: 'linear',
                             min: -10,
                             max: 10,
-                            grid: {
-                                color: horizontalGridSettings,
-                                borderColor: labelColor,
-                                tickColor: labelColor
-                            },
-                            ticks: {
-                                color: labelColor,
-                                font: {
-                                    weight: 'bold'
-                                }
-                            }
+                            grid: { color: horizontalGridSettings, borderColor: labelColor, tickColor: labelColor },
+                            ticks: { color: labelColor, font: { weight: 'bold' } }
                         }
                     },
                     plugins: {
-                        legend: {
-                            labels: {
-                                color: labelColor
-                            }
-                        },
+                        legend: { labels: { color: labelColor } },
                         zoom: {
-                            pan: {
-                                enabled: true,
-                                mode: 'xy'
-                            },
-                            zoom: {
-                                wheel: {
-                                    enabled: true
-                                },
-                                pinch: {
-                                    enabled: true
-                                },
-                                mode: 'xy'
-                            }
+                            pan: { enabled: true, mode: 'xy' },
+                            zoom: { wheel: { enabled: true }, pinch: { enabled: true }, mode: 'xy' }
                         }
                     }
                 }
             });
-
         } catch (err) {
             alert("Invalid mathematical expression.");
         }
     }
 
-    function resetZoomView() {
-        if (myChart) {
-            myChart.resetZoom();
-        }
-    }
+    function resetZoomView() { if (myChart) { myChart.resetZoom(); } }
 
     function solveQuadratic() {
-
         const a = parseFloat(document.getElementById('solve-a').value);
         const b = parseFloat(document.getElementById('solve-b').value);
         const c = parseFloat(document.getElementById('solve-c').value);
-
         const outputDiv = document.getElementById('solver-steps-output');
 
         if (a === 0) {
-
-            outputDiv.innerHTML =
-                "<p style='color:red;'>Coefficient a cannot be zero.</p>";
-
+            outputDiv.innerHTML = "<p style='color:red;'>Coefficient a cannot be zero.</p>";
             outputDiv.style.display = "block";
-
             return;
         }
 
         const D = b * b - 4 * a * c;
-
         let html = `
             <h3>Solution Steps</h3>
-
             <div class="step-item">
-                $$
-                D=b^2-4ac
-                $$
-
-                $$
-                D=(${b})^2-4(${a})(${c})
-                $$
-
-                $$
-                D=${D}
-                $$
+                $$ D=b^2-4ac $$
+                $$ D=(${b})^2-4(${a})(${c}) $$
+                $$ D=${D} $$
             </div>
         `;
 
         if (D < 0) {
-
-            html += `
-                <div class="step-item">
-                    No real roots exist because:
-                    $$
-                    D<0
-                    $$
-                </div>
-            `;
-
+            html += `<div class="step-item">No real roots exist because: $$ D<0 $$</div>`;
         } else {
-
             const root1 = (-b + Math.sqrt(D)) / (2 * a);
             const root2 = (-b - Math.sqrt(D)) / (2 * a);
-
             html += `
                 <div class="step-item">
-
-                    $$
-                    x=\\frac{-b\\pm\\sqrt{D}}{2a}
-                    $$
-
-                    $$
-                    x_1=${root1.toFixed(3)}
-                    $$
-
-                    $$
-                    x_2=${root2.toFixed(3)}
-                    $$
-
+                    $$ x=\\frac{-b\\pm\\sqrt{D}}{2a} $$
+                    $$ x_1=${root1.toFixed(3)} $$
+                    $$ x_2=${root2.toFixed(3)} $$
                 </div>
             `;
         }
-
         outputDiv.innerHTML = html;
         outputDiv.style.display = "block";
-
         MathJax.typesetPromise([outputDiv]);
     }
 
     const quizDatabase = [
         {
-            question:
-                "Evaluate: \\(\\int_0^2 3x^2 \\, dx\\)",
-
+            question: "Evaluate: \\(\\int_0^2 3x^2 \\, dx\\)",
             options: ["4", "6", "8", "12"],
-
             correct: 2,
-
-            explanation:
-                "$$\\int 3x^2dx=x^3$$ $$[x^3]_0^2=8$$"
+            explanation: "$$\\int 3x^2dx=x^3$$ $$[x^3]_0^2=8$$"
         },
-
         {
-            question:
-                "Solve: \\(\\log_2(x)+\\log_2(x-2)=3\\)",
-
+            question: "Solve: \\(\\log_2(x)+\\log_2(x-2)=3\\)",
             options: ["2", "4", "-2", "8"],
-
             correct: 1,
-
-            explanation:
-                "$$x(x-2)=8$$ $$x^2-2x-8=0$$ $$x=4$$"
+            explanation: "$$x(x-2)=8$$ $$x^2-2x-8=0$$ $$x=4$$"
         }
     ];
 
     let currentQuestionIndex = 0;
 
     function renderCurrentQuiz() {
-
         const quiz = quizDatabase[currentQuestionIndex];
-
-        document.getElementById('quiz-question').innerHTML =
-            `<strong>Question:</strong> ${quiz.question}`;
-
-        const optionsBox =
-            document.getElementById('quiz-options-box');
-
+        document.getElementById('quiz-question').innerHTML = `<strong>Question:</strong> ${quiz.question}`;
+        const optionsBox = document.getElementById('quiz-options-box');
         optionsBox.innerHTML = "";
 
         quiz.options.forEach((opt, idx) => {
-
             const btn = document.createElement('button');
-
             btn.className = 'quiz-btn';
-
             btn.innerHTML = opt;
-
             btn.onclick = () => evaluateQuizSelection(idx);
-
             optionsBox.appendChild(btn);
         });
 
         document.getElementById('quiz-feedback-box').style.display = "none";
         document.getElementById('next-quiz-btn').style.display = "none";
-
         MathJax.typesetPromise();
     }
 
     function evaluateQuizSelection(selectedIndex) {
-
         const quiz = quizDatabase[currentQuestionIndex];
-
-        const feedbackBox =
-            document.getElementById('quiz-feedback-box');
+        const feedbackBox = document.getElementById('quiz-feedback-box');
 
         if (selectedIndex === quiz.correct) {
-
             feedbackBox.style.background = "#d4edda";
             feedbackBox.style.color = "green";
-
-            feedbackBox.innerHTML =
-                `<strong>Correct!</strong><br>${quiz.explanation}`;
-
+            feedbackBox.innerHTML = `<strong>Correct!</strong><br>${quiz.explanation}`;
         } else {
-
             feedbackBox.style.background = "#f8d7da";
             feedbackBox.style.color = "red";
-
-            feedbackBox.innerHTML =
-                `<strong>Incorrect!</strong><br>${quiz.explanation}`;
+            feedbackBox.innerHTML = `<strong>Incorrect!</strong><br>${quiz.explanation}`;
         }
-
         feedbackBox.style.display = "block";
-
         document.getElementById('next-quiz-btn').style.display = "inline-block";
-
         MathJax.typesetPromise([feedbackBox]);
     }
 
     function loadNextQuestion() {
-
-        currentQuestionIndex =
-            (currentQuestionIndex + 1) % quizDatabase.length;
-
+        currentQuestionIndex = (currentQuestionIndex + 1) % quizDatabase.length;
         renderCurrentQuiz();
     }
+
+    // Touch support for mobile devices
+    document.querySelectorAll('.top-navbar .has-dropdown').forEach(trigger => {
+        trigger.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768 || ('ontouchstart' in window)) {
+                const parent = this.parentElement;
+                if (!parent.classList.contains('mobile-open')) {
+                    e.preventDefault();
+                    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('mobile-open'));
+                    parent.classList.add('mobile-open');
+                }
+            }
+        });
+    });
+
+    // Close mobile dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.nav-item')) {
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('mobile-open'));
+        }
+    });
 
     const toggleBtn = document.getElementById('dark-mode-toggle');
     const bodyElement = document.body;
@@ -947,14 +858,9 @@
     });
 
     window.onload = function () {
-
         setTimeout(plotGraph, 300);
-
         renderCurrentQuiz();
-
-        if (window.MathJax) {
-            MathJax.typeset();
-        }
+        if (window.MathJax) { MathJax.typeset(); }
     };
 </script>
 
