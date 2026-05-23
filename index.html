@@ -142,7 +142,7 @@
             font-size: 0.95rem;
             transition: color 0.2s ease;
             position: relative;
-            padding: 8px 0;
+            padding: 8px 10px;
             display: inline-block;
         }
 
@@ -173,7 +173,7 @@
             left: 50%;
             transform: translateX(-50%) translateY(10px);
             background-color: var(--dropdown-bg);
-            min-width: 180px;
+            min-width: 200px;
             box-shadow: 0 8px 24px var(--dropdown-shadow);
             border: 1px solid var(--border-color);
             border-radius: 6px;
@@ -186,13 +186,18 @@
             z-index: 1100;
         }
 
+        .dropdown-menu li {
+            width: 100%;
+        }
+
         .dropdown-menu a {
             color: var(--text-color);
-            padding: 8px 16px;
+            padding: 10px 16px;
             display: block;
             font-size: 0.9rem;
             font-weight: normal;
             transition: background-color 0.2s ease, color 0.2s ease;
+            width: 100%;
         }
 
         .dropdown-menu a:hover {
@@ -204,9 +209,17 @@
             display: none !important; /* Disables underline inside dropdowns */
         }
 
-        /* Show Dropdown on Hover */
-        .nav-item:hover .dropdown-menu,
-        .nav-item.mobile-open .dropdown-menu {
+        /* Show Dropdown on Desktop Hover */
+        @media (min-width: 769px) {
+            .nav-item:hover .dropdown-menu {
+                opacity: 1;
+                visibility: visible;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        /* Active class triggered via JS touch/click actions */
+        .nav-item.dropdown-active .dropdown-menu {
             opacity: 1;
             visibility: visible;
             transform: translateX(-50%) translateY(0);
@@ -454,12 +467,12 @@
             .top-navbar {
                 margin-left: 0;
                 flex-wrap: wrap;
-                gap: 12px;
+                gap: 8px;
                 width: 100%;
             }
             .nav-item {
                 display: block;
-                width: auto;
+                width: 100%;
             }
             .dropdown-menu {
                 position: static;
@@ -467,12 +480,14 @@
                 box-shadow: none;
                 padding-left: 15px;
                 border: none;
+                border-left: 2px solid var(--accent);
                 background: transparent;
                 display: none;
                 opacity: 1;
                 visibility: visible;
+                margin-top: 5px;
             }
-            .nav-item.mobile-open .dropdown-menu {
+            .nav-item.dropdown-active .dropdown-menu {
                 display: block;
             }
         }
@@ -517,7 +532,6 @@
         </div>
     </div>
 
-    <!-- Grouped relevant child items under dedicated .nav-item structures -->
     <nav class="top-navbar">
         <div class="nav-item">
             <a href="books.html">NCERT Books</a>
@@ -531,15 +545,17 @@
         <div class="nav-item">
             <a href="about.html">About Me</a>
         </div>
-        <!-- Higher Studies now safely wraps its hidden sub-navigation structure -->
+        
+        <!-- Improved Interactive Higher Studies Dropdown Section -->
         <div class="nav-item">
             <a href="higher.html" class="has-dropdown">Higher Studies</a>
             <ul class="dropdown-menu">
-                <li><a href="#">B.Sc Mathematics</a></li>
-                <li><a href="#">M.Sc Mathematics</a></li>
-                <li><a href="#">Research &amp; Ph.D</a></li>
+                <li><a href="higher.html#bsc">B.Sc Mathematics</a></li>
+                <li><a href="higher.html#msc">M.Sc Mathematics</a></li>
+                <li><a href="higher.html#phd">Research &amp; Ph.D</a></li>
             </ul>
         </div>
+        
         <div class="nav-item">
             <a href="puzz.html">Puzzle</a>
         </div>
@@ -817,24 +833,29 @@
         renderCurrentQuiz();
     }
 
-    // Touch support for mobile devices
+    // High performance Touch & Click handler
     document.querySelectorAll('.top-navbar .has-dropdown').forEach(trigger => {
         trigger.addEventListener('click', function(e) {
-            if (window.innerWidth <= 768 || ('ontouchstart' in window)) {
-                const parent = this.parentElement;
-                if (!parent.classList.contains('mobile-open')) {
-                    e.preventDefault();
-                    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('mobile-open'));
-                    parent.classList.add('mobile-open');
-                }
-            }
+            const parent = this.parentElement;
+            
+            // If the user clicks/taps when the menu panel isn't open yet
+            if (!parent.classList.contains('dropdown-active')) {
+                e.preventDefault(); // Stop instant page jumping
+                
+                // Clear out any other open dropdowns
+                document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('dropdown-active'));
+                
+                // Open our current element panel
+                parent.classList.add('dropdown-active');
+            } 
+            // If they click/tap a second time while it is already open, it follows the natural higher.html link!
         });
     });
 
-    // Close mobile dropdowns when clicking outside
+    // Close open panels seamlessly if user clicks completely off the navigation layout
     document.addEventListener('click', function(e) {
         if (!e.target.closest('.nav-item')) {
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('mobile-open'));
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('dropdown-active'));
         }
     });
 
