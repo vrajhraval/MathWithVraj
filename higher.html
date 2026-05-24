@@ -17,6 +17,7 @@
             --badge-text: #334155;
             --calc-bg: #f1f5f9;
             --success-green: #16a34a;
+            --math-font: "Times New Roman", Times, serif;
         }
 
         * {
@@ -93,6 +94,12 @@
             font-size: 0.95rem;
         }
 
+        .math-symbol {
+            font-family: var(--math-font);
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
         /* Interactive Calculator Styles */
         .interactive-calc {
             background-color: var(--calc-bg);
@@ -112,13 +119,14 @@
         }
 
         .calc-formula {
-            font-family: monospace;
-            background: rgba(0,0,0,0.05);
-            padding: 4px 8px;
+            font-family: var(--math-font);
+            background: rgba(0,0,0,0.04);
+            padding: 6px 12px;
             border-radius: 4px;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             margin-bottom: 15px;
             display: inline-block;
+            border-left: 3px solid var(--accent-blue);
         }
 
         .input-group {
@@ -126,6 +134,7 @@
             flex-wrap: wrap;
             gap: 15px;
             margin-bottom: 15px;
+            align-items: flex-end;
         }
 
         .input-field {
@@ -154,14 +163,13 @@
             background-color: var(--accent-blue);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 9px 20px;
             font-size: 0.95rem;
             font-weight: 600;
             border-radius: 6px;
             cursor: pointer;
             transition: background 0.2s;
-            align-self: flex-end;
-            margin-top: 5px;
+            height: 38px;
         }
 
         .calc-btn:hover {
@@ -170,13 +178,35 @@
 
         .calc-result {
             margin-top: 15px;
-            padding: 12px;
+            padding: 14px;
             background: white;
             border-left: 4px solid var(--success-green);
             border-radius: 4px;
-            font-size: 1rem;
-            font-family: monospace;
+            font-size: 1.05rem;
+            font-family: var(--math-font);
             display: none;
+            line-height: 1.5;
+        }
+
+        .matrix-input-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 60px);
+            gap: 8px;
+            background: rgba(0,0,0,0.03);
+            padding: 10px;
+            border-radius: 6px;
+            border-left: 2px solid #94a3b8;
+            border-right: 2px solid #94a3b8;
+            width: fit-content;
+        }
+
+        .matrix-input-grid input {
+            width: 60px;
+            text-align: center;
+            padding: 6px;
+            font-family: monospace;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
         }
 
         .books-section {
@@ -243,45 +273,245 @@
 
     <header>
         <h1>Higher Mathematics Interactive Framework</h1>
-        <p>A functional, exploratory reference tool maps definitions alongside operational live computational engines.</p>
+        <p>A computational dashboard showing clear mathematical notation and interactive calculation engines.</p>
     </header>
 
-    <!-- 1. NUMBER THEORY & CRYPTOGRAPHY -->
+    <!-- 1. REAL ANALYSIS -->
     <div class="subject-card">
-        <div class="subject-title">Number Theory & Cryptography</div>
-        
+        <div class="subject-title">Real Analysis</div>
         <div class="meta-grid">
             <div class="meta-section">
                 <h3>Real-Life Usage</h3>
-                <p>Forms the architecture of modern security handshakes, public key pairs (RSA), data privacy channels, and transactional validation chains.</p>
+                <p>Forms the backbone of precision physical modeling, asset tracking optimization, and data metrics analysis.</p>
             </div>
             <div class="meta-section">
                 <h3>Future & Scope</h3>
-                <p>Critical for evolving zero-knowledge security models and robust, post-quantum algebraic mathematical safety lattices.</p>
+                <p>Essential for establishing modern mathematical structures used within continuous optimization networks.</p>
             </div>
         </div>
 
-        <!-- LIVE INTERACTIVE ENGINE -->
         <div class="interactive-calc">
-            <h3>⚡ Live Tool: Fast Powering Algorithm</h3>
-            <div class="calc-formula">Formula: Base^Exponent ≡ Remainder (mod Modulus)</div>
-            
+            <h3>⚡ Live Tool: Sequence Limit Explorer (<span class="math-symbol">&epsilon;-N</span> Verification)</h3>
+            <div class="calc-formula">Sequence: <span class="math-symbol">a<sub>n</sub> = 1 / n</span> &nbsp;&nbsp;&rArr;&nbsp;&nbsp; Target Limit: <span class="math-symbol">L = 0</span></div>
             <div class="input-group">
                 <div class="input-field">
-                    <label for="baseInput">Base (x)</label>
-                    <input type="number" id="baseInput" value="7" min="1">
+                    <label>Error Tolerance (<span class="math-symbol">&epsilon;</span>)</label>
+                    <input type="number" id="epsilonInput" value="0.005" step="0.001" min="0.00001">
                 </div>
-                <div class="input-field">
-                    <label for="expInput">Exponent (e)</label>
-                    <input type="number" id="expInput" value="560" min="0">
-                </div>
-                <div class="input-field">
-                    <label for="modInput">Modulus (n)</label>
-                    <input type="number" id="modInput" value="561" min="1">
-                </div>
-                <button class="calc-btn" onclick="runFastPowering()">Compute</button>
+                <button class="calc-btn" onclick="runRealAnalysis()">Verify Limit</button>
             </div>
-            
+            <div id="realResult" class="calc-result"></div>
+        </div>
+
+        <div class="books-section">
+            <h3>Essential Literature</h3>
+            <ul class="book-list">
+                <li class="book-item">
+                    <div><span class="book-title">Principles of Mathematical Analysis</span> – <span class="book-author">Walter Rudin</span></div>
+                    <span class="search-hint">Copy Title</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 2. COMPLEX ANALYSIS -->
+    <div class="subject-card">
+        <div class="subject-title">Complex Analysis</div>
+        <div class="meta-grid">
+            <div class="meta-section">
+                <h3>Real-Life Usage</h3>
+                <p>Handles advanced alternating current engineering equations, signal map sweeps, and wing aerodynamics fluid profiles.</p>
+            </div>
+            <div class="meta-section">
+                <h3>Future & Scope</h3>
+                <p>Invaluable for mapping wave transformations and solving complex field integration profiles.</p>
+            </div>
+        </div>
+
+        <div class="interactive-calc">
+            <h3>⚡ Live Tool: Euler's Complex Transform</h3>
+            <div class="calc-formula">Identity: <span class="math-symbol">e<sup>i&theta;</sup> = cos(&theta;) + i&sdot;sin(&theta;)</span></div>
+            <div class="input-group">
+                <div class="input-field">
+                    <label>Angle Parameter (<span class="math-symbol">&theta;</span> in degrees)</label>
+                    <input type="number" id="thetaInput" value="45">
+                </div>
+                <button class="calc-btn" onclick="runComplexAnalysis()">Expand Coordinate</button>
+            </div>
+            <div id="complexResult" class="calc-result"></div>
+        </div>
+
+        <div class="books-section">
+            <h3>Essential Literature</h3>
+            <ul class="book-list">
+                <li class="book-item">
+                    <div><span class="book-title">Visual Complex Analysis</span> – <span class="book-author">Tristan Needham</span></div>
+                    <span class="search-hint">Copy Title</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 3. ABSTRACT ALGEBRA -->
+    <div class="subject-card">
+        <div class="subject-title">Abstract Algebra</div>
+        <div class="meta-grid">
+            <div class="meta-section">
+                <h3>Real-Life Usage</h3>
+                <p>Skins core network verification protocols, structural grouping metrics, and digital code validation matrices.</p>
+            </div>
+            <div class="meta-section">
+                <h3>Future & Scope</h3>
+                <p>Forms the logic engine behind post-quantum lattice architectures and systemic multi-variable codes.</p>
+            </div>
+        </div>
+
+        <div class="interactive-calc">
+            <h3>⚡ Live Tool: Multiplicative Group Symmetries Generator</h3>
+            <div class="calc-formula">Group Space: <span class="math-symbol">&integers;<sub>p</sub><sup>*</sup></span> (Integers modulo prime <span class="math-symbol">p</span> under multiplication)</div>
+            <div class="input-group">
+                <div class="input-field">
+                    <label>Prime Modulus (<span class="math-symbol">p</span>)</label>
+                    <input type="number" id="algebraModInput" value="7" min="3">
+                </div>
+                <div class="input-field">
+                    <label>Element Generator (<span class="math-symbol">g</span>)</label>
+                    <input type="number" id="algebraGenInput" value="3" min="1">
+                </div>
+                <button class="calc-btn" onclick="runAbstractAlgebra()">Generate Orbit</button>
+            </div>
+            <div id="algebraResult" class="calc-result"></div>
+        </div>
+
+        <div class="books-section">
+            <h3>Essential Literature</h3>
+            <ul class="book-list">
+                <li class="book-item">
+                    <div><span class="book-title">Contemporary Abstract Algebra</span> – <span class="book-author">Joseph A. Gallian</span></div>
+                    <span class="search-hint">Copy Title</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 4. LINEAR ALGEBRA -->
+    <div class="subject-card">
+        <div class="subject-title">Linear Algebra</div>
+        <div class="meta-grid">
+            <div class="meta-section">
+                <h3>Real-Life Usage</h3>
+                <p>The operational framework fueling data prediction structures, neural arrays, and 3D geometric matrix pipelines.</p>
+            </div>
+            <div class="meta-section">
+                <h3>Future & Scope</h3>
+                <p>The primary core foundation for processing massive high-dimensional optimization models.</p>
+            </div>
+        </div>
+
+        <div class="interactive-calc">
+            <h3>⚡ Live Tool: 2&times;2 Matrix Determinant Solver</h3>
+            <div class="calc-formula">Matrix <span class="math-symbol">A = <span style="border-left:1px solid black; border-right:1px solid black; padding:0 4px;">[a, b; c, d]</span></span> &nbsp;&nbsp;&rArr;&nbsp;&nbsp; det(<span class="math-symbol">A</span>) = <span class="math-symbol">ad - bc</span></div>
+            <div class="input-group">
+                <div class="matrix-input-grid">
+                    <input type="number" id="m_a" value="4">
+                    <input type="number" id="m_b" value="2">
+                    <input type="number" id="m_c" value="1">
+                    <input type="number" id="m_d" value="3">
+                </div>
+                <button class="calc-btn" onclick="runLinearAlgebra()">Compute det(A)</button>
+            </div>
+            <div id="linearResult" class="calc-result"></div>
+        </div>
+
+        <div class="books-section">
+            <h3>Essential Literature</h3>
+            <ul class="book-list">
+                <li class="book-item">
+                    <div><span class="book-title">Linear Algebra and Its Applications</span> – <span class="book-author">Gilbert Strang</span></div>
+                    <span class="search-hint">Copy Title</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 5. TOPOLOGY -->
+    <div class="subject-card">
+        <div class="subject-title">Topology</div>
+        <div class="meta-grid">
+            <div class="meta-section">
+                <h3>Real-Life Usage</h3>
+                <p>Drives data dimension shape classification, network structure trace links, and molecular structural layout designs.</p>
+            </div>
+            <div class="meta-section">
+                <h3>Future & Scope</h3>
+                <p>Critical to creating fault-tolerant paths within advanced quantum topological hardware processing loops.</p>
+            </div>
+        </div>
+
+        <div class="interactive-calc">
+            <h3>⚡ Live Tool: Polyhedral Euler Characteristic Invariant</h3>
+            <div class="calc-formula">Topological Equation: <span class="math-symbol">&chi; = V - E + F</span></div>
+            <div class="input-group">
+                <div class="input-field">
+                    <label>Vertices (<span class="math-symbol">V</span>)</label>
+                    <input type="number" id="topV" value="8">
+                </div>
+                <div class="input-field">
+                    <label>Edges (<span class="math-symbol">E</span>)</label>
+                    <input type="number" id="topE" value="12">
+                </div>
+                <div class="input-field">
+                    <label>Faces (<span class="math-symbol">F</span>)</label>
+                    <input type="number" id="topF" value="6">
+                </div>
+                <button class="calc-btn" onclick="runTopology()">Compute Invariant</button>
+            </div>
+            <div id="topologyResult" class="calc-result"></div>
+        </div>
+
+        <div class="books-section">
+            <h3>Essential Literature</h3>
+            <ul class="book-list">
+                <li class="book-item">
+                    <div><span class="book-title">Topology</span> – <span class="book-author">James Munkres</span></div>
+                    <span class="search-hint">Copy Title</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 6. NUMBER THEORY & CRYPTOGRAPHY -->
+    <div class="subject-card">
+        <div class="subject-title">Number Theory & Cryptography</div>
+        <div class="meta-grid">
+            <div class="meta-section">
+                <h3>Real-Life Usage</h3>
+                <p>Secures transaction networks, handles secure browser handshakes, and establishes public token pairs.</p>
+            </div>
+            <div class="meta-section">
+                <h3>Future & Scope</h3>
+                <p>Accelerating safe homomorphic data computations and secure multi-endpoint verification logic.</p>
+            </div>
+        </div>
+
+        <div class="interactive-calc">
+            <h3>⚡ Live Tool: Fast Powering Engine (Modular Exponentiation)</h3>
+            <div class="calc-formula">Congruence: <span class="math-symbol">x<sup>e</sup> &equiv; r (mod n)</span></div>
+            <div class="input-group">
+                <div class="input-field">
+                    <label>Base (<span class="math-symbol">x</span>)</label>
+                    <input type="number" id="baseInput" value="7">
+                </div>
+                <div class="input-field">
+                    <label>Exponent (<span class="math-symbol">e</span>)</label>
+                    <input type="number" id="expInput" value="560">
+                </div>
+                <div class="input-field">
+                    <label>Modulus (<span class="math-symbol">n</span>)</label>
+                    <input type="number" id="modInput" value="561">
+                </div>
+                <button class="calc-btn" onclick="runFastPowering()">Compute Pow</button>
+            </div>
             <div id="poweringResult" class="calc-result"></div>
         </div>
 
@@ -296,6 +526,98 @@
         </div>
     </div>
 
+    <!-- 7. ORDINARY DIFFERENTIAL EQUATIONS (ODEs) -->
+    <div class="subject-card">
+        <div class="subject-title">Ordinary Differential Equations (ODEs)</div>
+        <div class="meta-grid">
+            <div class="meta-section">
+                <h3>Real-Life Usage</h3>
+                <p>Determines mechanical damper responses, structural satellite tracking curves, and core population trends.</p>
+            </div>
+            <div class="meta-section">
+                <h3>Future & Scope</h3>
+                <p>Directly applied inside continuous time tracking structures and systemic neural derivative networks.</p>
+            </div>
+        </div>
+
+        <div class="interactive-calc">
+            <h3>⚡ Live Tool: First-Order Linear Growth Modeler</h3>
+            <div class="calc-formula">Differential Form: <span class="math-symbol">dy / dt = k&sdot;y &nbsp;&nbsp;&rArr;&nbsp;&nbsp; Solution: y(t) = y<sub>0</sub>&sdot;e<sup>k&sdot;t</sup></span></div>
+            <div class="input-group">
+                <div class="input-field">
+                    <label>Initial Value (<span class="math-symbol">y<sub>0</sub></span>)</label>
+                    <input type="number" id="odeY0" value="5">
+                </div>
+                <div class="input-field">
+                    <label>Growth Rate Constant (<span class="math-symbol">k</span>)</label>
+                    <input type="number" id="odeK" value="0.2" step="0.1">
+                </div>
+                <div class="input-field">
+                    <label>Time Step Target (<span class="math-symbol">t</span>)</label>
+                    <input type="number" id="odeT" value="10">
+                </div>
+                <button class="calc-btn" onclick="runODE()">Solve Curve</button>
+            </div>
+            <div id="odeResult" class="calc-result"></div>
+        </div>
+
+        <div class="books-section">
+            <h3>Essential Literature</h3>
+            <ul class="book-list">
+                <li class="book-item">
+                    <div><span class="book-title">Ordinary Differential Equations</span> – <span class="book-author">Morris Tenenbaum</span></div>
+                    <span class="search-hint">Copy Title</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 8. PARTIAL DIFFERENTIAL EQUATIONS (PDEs) -->
+    <div class="subject-card">
+        <div class="subject-title">Partial Differential Equations (PDEs)</div>
+        <div class="meta-grid">
+            <div class="meta-section">
+                <h3>Real-Life Usage</h3>
+                <p>Powers global climate simulations, acoustic field balancing, and option index financial fields.</p>
+            </div>
+            <div class="meta-section">
+                <h3>Future & Scope</h3>
+                <p>Critical to scaling fluid-structure mechanics inside complex aerospace simulation frameworks.</p>
+            </div>
+        </div>
+
+        <div class="interactive-calc">
+            <h3>⚡ Live Tool: Heat Diffusion Field Solver</h3>
+            <div class="calc-formula">System: Fundamental 1D steady-state distribution field model over distance <span class="math-symbol">L</span></div>
+            <div class="input-group">
+                <div class="input-field">
+                    <label>Left boundary temp (<span class="math-symbol">U<sub>left</sub></span>)</label>
+                    <input type="number" id="pdeLeft" value="100">
+                </div>
+                <div class="input-field">
+                    <label>Right boundary temp (<span class="math-symbol">U<sub>right</sub></span>)</label>
+                    <input type="number" id="pdeRight" value="20">
+                </div>
+                <div class="input-field">
+                    <label>Evaluation point (<span class="math-symbol">x</span> from 0 to 1)</label>
+                    <input type="number" id="pdeX" value="0.5" step="0.1" min="0" max="1">
+                </div>
+                <button class="calc-btn" onclick="runPDE()">Project State</button>
+            </div>
+            <div id="pdeResult" class="calc-result"></div>
+        </div>
+
+        <div class="books-section">
+            <h3>Essential Literature</h3>
+            <ul class="book-list">
+                <li class="book-item">
+                    <div><span class="book-title">Partial Differential Equations: An Introduction</span> – <span class="book-author">Walter A. Strauss</span></div>
+                    <span class="search-hint">Copy Title</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
 </div>
 
 <footer>
@@ -303,48 +625,134 @@
 </footer>
 
 <script>
+    // 1. Real Analysis Logic
+    function runRealAnalysis() {
+        let eps = parseFloat(document.getElementById('epsilonInput').value);
+        let res = document.getElementById('realResult');
+        if(isNaN(eps) || eps <= 0) {
+            res.style.display = "block"; res.innerHTML = "❌ Input a valid positive error threshold."; return;
+        }
+        let N = Math.ceil(1 / eps);
+        res.style.display = "block";
+        res.innerHTML = `<strong>Rigorous Proof Threshold Found:</strong> For error bound <span class="math-symbol">&epsilon; = ${eps}</span>, choose step threshold <span class="math-symbol">N = ${N}</span>.<br>Thus, for all indexes <span class="math-symbol">n &gt; ${N}</span>, the sequence error state satisfies: <span class="math-symbol">|1/n - 0| &lt; ${eps}</span>.`;
+    }
+
+    // 2. Complex Analysis Logic
+    function runComplexAnalysis() {
+        let thetaDeg = parseFloat(document.getElementById('thetaInput').value);
+        let res = document.getElementById('complexResult');
+        if(isNaN(thetaDeg)) { res.style.display = "block"; res.innerHTML = "❌ Invalid degree value."; return; }
+        let rad = thetaDeg * Math.PI / 180;
+        let cosVal = Math.cos(rad).toFixed(4);
+        let sinVal = Math.sin(rad).toFixed(4);
+        res.style.display = "block";
+        res.innerHTML = `<strong>Complex Coordinate Projection:</strong><br><span class="math-symbol">e<sup>i&sdot;${thetaDeg}&deg;</sup> = cos(${thetaDeg}&deg;) + i&sdot;sin(${thetaDeg}&deg;) = <strong>${cosVal} + ${sinVal}i</strong></span>`;
+    }
+
+    // 3. Abstract Algebra Logic
+    function runAbstractAlgebra() {
+        let p = parseInt(document.getElementById('algebraModInput').value);
+        let g = parseInt(document.getElementById('algebraGenInput').value);
+        let res = document.getElementById('algebraResult');
+        res.style.display = "block";
+        
+        let orbit = [];
+        let curr = 1;
+        for(let i=0; i<p; i++) {
+            orbit.push(curr);
+            curr = (curr * g) % p;
+            if(curr === 1) break;
+        }
+        
+        let status = (orbit.length === p - 1) ? "Is a valid cyclic generator!" : "Is a sub-group subgroup element (does not sweep full space).";
+        res.innerHTML = `<strong>Generated Orbit Set Structure:</strong> { ${orbit.join(', ')} }<br><strong>Symmetry Metric:</strong> Set Volume = ${orbit.length} elements. Element <span class="math-symbol">g = ${g}</span> ${status}`;
+    }
+
+    // 4. Linear Algebra Logic
+    function runLinearAlgebra() {
+        let a = parseFloat(document.getElementById('m_a').value);
+        let b = parseFloat(document.getElementById('m_b').value);
+        let c = parseFloat(document.getElementById('m_c').value);
+        let d = parseFloat(document.getElementById('m_d').value);
+        let res = document.getElementById('linearResult');
+        res.style.display = "block";
+        
+        let det = (a * d) - (b * c);
+        let status = (det !== 0) ? "Invertible Matrix (Non-singular system)" : "Singular Matrix (No unique space mapping inversion)";
+        res.innerHTML = `<strong>Determinant Evaluation:</strong> det(<span class="math-symbol">A</span>) = (${a}&sdot;${d}) - (${b}&sdot;${c}) = <strong>${det}</strong><br><strong>Space Status:</strong> ${status}`;
+    }
+
+    // 5. Topology Logic
+    function runTopology() {
+        let v = parseInt(document.getElementById('topV').value);
+        let e = parseInt(document.getElementById('topE').value);
+        let f = parseInt(document.getElementById('topF').value);
+        let res = document.getElementById('topologyResult');
+        res.style.display = "block";
+        
+        let chi = v - e + f;
+        let type = (chi === 2) ? "Homeomorphic to a standard topological sphere layer (genus 0 space)." : "Non-spherical structured configuration boundary space.";
+        res.innerHTML = `<strong>Computed Space Signature:</strong> <span class="math-symbol">&chi; = ${v} - ${e} + ${f} = <strong>${chi}</strong></span><br><strong>Classification:</strong> ${type}`;
+    }
+
+    // 6. Number Theory Logic
     function runFastPowering() {
-        // Grab values from input nodes
         let base = parseInt(document.getElementById('baseInput').value);
         let exp = parseInt(document.getElementById('expInput').value);
         let mod = parseInt(document.getElementById('modInput').value);
+        let res = document.getElementById('poweringResult');
+        res.style.display = "block";
         
-        // Element target to output text
-        const resultDiv = document.getElementById('poweringResult');
-        
-        // Validation check
         if (isNaN(base) || isNaN(exp) || isNaN(mod) || mod <= 0) {
-            resultDiv.style.display = "block";
-            resultDiv.style.borderLeftColor = "#dc2626";
-            resultDiv.innerHTML = "❌ Please enter valid positive integer parameters.";
-            return;
+            res.innerHTML = "❌ Enter valid positive integer parameters."; return;
         }
 
-        let origBase = base;
-        let origExp = exp;
-        
-        // Square and Multiply modular exponentiation logic loop
-        let result = 1;
-        base = base % mod;
-        
+        let origBase = base; let origExp = exp;
+        let result = 1; base = base % mod;
         while (exp > 0) {
-            // If binary digit is odd (1), multiply current base scale step
-            if (exp % 2 === 1) {
-                result = (result * base) % mod;
-            }
-            // Shift binary value and square base tracking weights
+            if (exp % 2 === 1) result = (result * base) % mod;
             exp = Math.floor(exp / 2);
             base = (base * base) % mod;
         }
-        
-        // Render out calculation trace back block to view layer
-        resultDiv.style.display = "block";
-        resultDiv.style.borderLeftColor = "#16a34a";
-        resultDiv.innerHTML = `<strong>Result:</strong> ${origBase}^${origExp} ≡ <strong>${result}</strong> (mod ${mod})`;
+        res.innerHTML = `<strong>Square-and-Multiply Computation Output:</strong><br><span class="math-symbol">${origBase}<sup>${origExp}</sup> &equiv; <strong>${result}</strong> (mod ${mod})</span>`;
     }
-    
-    // Auto-execute execution cycle on first document window load step
-    window.onload = runFastPowering;
+
+    // 7. ODE Logic
+    function runODE() {
+        let y0 = parseFloat(document.getElementById('odeY0').value);
+        let k = parseFloat(document.getElementById('odeK').value);
+        let t = parseFloat(document.getElementById('odeT').value);
+        let res = document.getElementById('odeResult');
+        res.style.display = "block";
+        
+        let val = (y0 * Math.exp(k * t)).toFixed(4);
+        res.innerHTML = `<strong>Evaluated Boundary Vector Value:</strong> At target timeline check <span class="math-symbol">t = ${t}</span>:<br><span class="math-symbol">y(${t}) = ${y0} &sdot; e<sup>(${k} &sdot; ${t})</sup> = <strong>${val}</strong></span>`;
+    }
+
+    // 8. PDE Logic
+    function runPDE() {
+        let uL = parseFloat(document.getElementById('pdeLeft').value);
+        let uR = parseFloat(document.getElementById('pdeRight').value);
+        let x = parseFloat(document.getElementById('pdeX').value);
+        let res = document.getElementById('pdeResult');
+        res.style.display = "block";
+        
+        if(x < 0 || x > 1) { res.innerHTML = "❌ Position factor must exist between 0 and 1."; return; }
+        let uX = (uL + x * (uR - uL)).toFixed(2);
+        res.innerHTML = `<strong>Steady-State Solution Interpolation:</strong> Profile output calculation values at location point:<br><span class="math-symbol">U(x = ${x}) = ${uL} + ${x} &sdot; (${uR} - ${uL}) = <strong>${uX}&deg;</strong></span>`;
+    }
+
+    // Initialize all engines on window construction step
+    window.onload = function() {
+        runRealAnalysis();
+        runComplexAnalysis();
+        runAbstractAlgebra();
+        runLinearAlgebra();
+        runTopology();
+        runFastPowering();
+        runODE();
+        runPDE();
+    };
 </script>
 
 </body>
