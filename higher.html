@@ -184,22 +184,14 @@
             border-radius: 4px;
             margin-top: 12px;
             display: block;
+            max-width: 100%;
         }
 
-        .books-section {
-            background-color: rgba(0,0,0,0.02);
-            border-radius: 6px;
-            padding: 12px;
-            font-size: 0.85rem;
-        }
-
-        .book-title {
-            font-weight: 600;
-        }
-
-        .book-author {
-            font-style: italic;
+        footer {
+            text-align: center;
+            margin-top: 40px;
             color: var(--text-muted);
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -361,8 +353,6 @@
         </div>
     </div>
 
-    <!-- NEW SUBJECTS ADDED BELOW -->
-
     <!-- 9. FUNCTIONAL ANALYSIS -->
     <div class="subject-card">
         <div class="subject-title">9. Functional Analysis</div>
@@ -504,9 +494,9 @@
         </div>
         <div class="interactive-calc">
             <h4>⚡ Live Engine: Geometric Helix Mapping & Tangent Vector Visualizer</h4>
-            <div class="calc-formula">Space Curve Model: <span class="math-symbol">r(t) = (cos(t), sin(t), 0.2&sdot;t)</span> &nbsp;&rArr;&nbsp; Tangent Vector: <span class="math-symbol">r'(t) = (-sin(t), cos(t), 0.2)</span></div>
+            <div class="calc-formula">Space Curve Model: <span class="math-symbol">r(t) = (cos(t), sin(t), 0.2&sdot;t)</span></div>
             <div class="input-group">
-                <div class="input-field"><label>Curve Parameter Space (<span class="math-symbol">t</span>)</label><input type="range" id="dgT" min="0" max="12" step="0.1" value="3"></div>
+                <div class="input-field"><label>Curve Parameter Space (<span class="math-symbol">t</span>)</label><input type="range" id="dgT" min="0" max="12" step="0.1" value="3" oninput="drawGeometry()"></div>
                 <button class="calc-btn" onclick="drawGeometry()">Plot Tangent State</button>
             </div>
             <div id="dgRes" class="calc-result"></div>
@@ -616,40 +606,52 @@
         div.innerHTML = `Hilbert Sequence Coord Norm Value: <span class="math-symbol">||x|| = &radic;(${v1}<sup>2</sup> + ${v2}<sup>2</sup> + ${v3}<sup>2</sup>) = <strong>${norm.toFixed(4)}</strong></span>`;
     }
 
-    // 10. Graph Theory (With Canvas Drawing)
+    // 10. Graph Theory (With Complete Canvas Engine)
     function drawGraph() {
         let numNodes = parseInt(document.getElementById('gtNodes').value);
         let div = document.getElementById('gtRes'); div.style.display = "block";
         let canvas = document.getElementById('graphCanvas');
         let ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         
         let nodes = [];
-        let cx = canvas.width / 2; let cy = canvas.height / 2; let r = 70;
+        let cx = canvas.width / 2; let cy = canvas.height / 2; let r = 65;
         
         for(let i=0; i<numNodes; i++) {
             let ang = (i * 2 * Math.PI) / numNodes;
             nodes.push({x: cx + r*Math.cos(ang), y: cy + r*Math.sin(ang)});
         }
         
-        // Draw Edges (Complete Ring Network sample logic)
-        ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 2;
+        // Connect all nodes together (Complete Graph K_n)
+        ctx.strokeStyle = '#cbd5e1'; 
+        ctx.lineWidth = 1.5;
         let edgeCount = 0;
         for(let i=0; i<nodes.length; i++) {
             for(let j=i+1; j<nodes.length; j++) {
-                ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y); ctx.stroke();
+                ctx.beginPath(); 
+                ctx.moveTo(nodes[i].x, nodes[i].y); 
+                ctx.lineTo(nodes[j].x, nodes[j].y);
+                ctx.stroke();
                 edgeCount++;
             }
         }
         
         // Draw Nodes
-        nodes.forEach((n, idx) => {
-            ctx.beginPath(); ctx.arc(n.x, n.y, 10, 0, 2*Math.PI); ctx.fillStyle = '#2563eb'; ctx.fill();
-            ctx.fillStyle = '#ffffff'; ctx.font = '10px sans-serif'; ctx.fillText(idx+1, n.x-3, n.y+3);
+        nodes.forEach((node, index) => {
+            ctx.fillStyle = '#2563eb';
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, 10, 0, 2*Math.PI);
+            ctx.fill();
+            
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '10px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('v' + (index+1), node.x, node.y);
         });
-        
-        let sumDeg = numNodes * (numNodes - 1);
-        div.innerHTML = `Graph Parameters: Order <span class="math-symbol">V = ${numNodes}</span>, Total Connections Size <span class="math-symbol">|E| = ${edgeCount}</span>.<br>Handshaking Lemma Proof: Vertex Degree Sum total <span class="math-symbol">&sum; deg(v<sub>i</sub>) = ${sumDeg} = 2 &sdot; ${edgeCount}</span>.`;
+
+        let totalDegree = numNodes * (numNodes - 1);
+        div.innerHTML = `Complete Graph matrix <span class="math-symbol">K<sub>${numNodes}</sub></span> generated. Nodes (<span class="math-symbol">V</span>) = <strong>${numNodes}</strong>, Edges (<span class="math-symbol">E</span>) = <strong>${edgeCount}</strong>. Handshaking verification: Sum of Degrees (${totalDegree}) = 2 &sdot; Edges (${2 * edgeCount}).`;
     }
 
     // 11. Operator Theory
@@ -657,29 +659,34 @@
         let k = parseFloat(document.getElementById('opT').value);
         let lam = parseFloat(document.getElementById('opLam').value);
         let div = document.getElementById('opRes'); div.style.display = "block";
-        if(lam === k) { div.innerHTML = "❌ Error: Factor matches spectrum singularity element! Resolvent operator is undefined."; return; }
-        let res = 1 / (lam - k);
-        div.innerHTML = `Resolvent Scalar Spectrum Evaluation: <span class="math-symbol">R(&lambda;) = 1 / (${lam} - ${k}) = <strong>${res.toFixed(4)}</strong></span>`;
+        if (lam === k) {
+            div.innerHTML = `❌ Parameter <span class="math-symbol">&lambda; = ${lam}</span> lies within the spectrum point of the scaling operator. The resolvent matrix map is singular/undefined.`;
+        } else {
+            let val = 1 / (lam - k);
+            div.innerHTML = `Resolvent Spectrum Scalar Map output: <span class="math-symbol">R(&lambda;) = 1 / (${lam} - ${k}) = <strong>${val.toFixed(4)}</strong></span>. Mapped state is bounded.`;
+        }
     }
 
     // 12. Banach Algebra
     function calcBanach() {
-        let nA = parseFloat(document.getElementById('baA').value);
-        let nB = parseFloat(document.getElementById('baB').value);
+        let a = parseFloat(document.getElementById('baA').value);
+        let b = parseFloat(document.getElementById('baB').value);
         let div = document.getElementById('baRes'); div.style.display = "block";
-        let maxProdNorm = nA * nB;
-        div.innerHTML = `Submultiplicative Structural Vector Bound Property Verified:<br> <span class="math-symbol">||A &sdot; B|| &le; ||A|| &sdot; ||B|| = (${nA} &sdot; ${nB}) &rArr;  ||A &sdot; B|| &le; <strong>${maxProdNorm}</strong></span>`;
+        let bound = a * b;
+        div.innerHTML = `Sub-multiplicative constraint axiom verified: <span class="math-symbol">||A &sdot; B|| &le; ||A|| &sdot; ||B|| &rArr; ||A &sdot; B|| &le; ${a} &sdot; ${b} = <strong>${bound}</strong></span>. Complete norm space geometry holds true.`;
     }
 
     // 13. Mathematical Methods
     function calcMethods() {
         let t = parseFloat(document.getElementById('mmT').value);
-        let nMax = parseInt(document.getElementById('mmN').value);
+        let maxN = parseInt(document.getElementById('mmN').value);
         let div = document.getElementById('mmRes'); div.style.display = "block";
         let sum = 0;
-        for(let i=1; i<=nMax; i+=2) { sum += Math.sin(i * t) / i; }
-        let fVal = (4 / Math.PI) * sum;
-        div.innerHTML = `Fourier Harmonic Summation for target timeline value <span class="math-symbol">t = ${t}</span> up to step limit order <span class="math-symbol">N = ${nMax}</span>: <br> Approximation Value <span class="math-symbol">f(${t}) = <strong>${fVal.toFixed(4)}</strong></span>`;
+        for (let i = 1; i <= maxN; i += 2) {
+            sum += Math.sin(i * t) / i;
+        }
+        let finalVal = (4 / Math.PI) * sum;
+        div.innerHTML = `Fourier Expansion convergence profile evaluated at time <span class="math-symbol">t = ${t}</span> using ${maxN} harmonic components: <span class="math-symbol">f(${t}) = <strong>${finalVal.toFixed(4)}</strong></span>`;
     }
 
     // 14. Relativity
@@ -687,9 +694,9 @@
         let t = parseFloat(document.getElementById('relT').value);
         let v = parseFloat(document.getElementById('relV').value);
         let div = document.getElementById('relRes'); div.style.display = "block";
-        let factor = Math.sqrt(1 - v*v);
-        let tPrime = t / factor;
-        div.innerHTML = `Lorentz Factor <span class="math-symbol">&gamma; = ${(1/factor).toFixed(4)}</span>.<br>Dilated time coordinate path output: <span class="math-symbol">&Delta;t' = <strong>${tPrime.toFixed(4)}</strong> seconds</span>.`;
+        let gamma = 1 / Math.sqrt(1 - (v * v));
+        let dilated = t * gamma;
+        div.innerHTML = `Lorentz expansion metric factor <span class="math-symbol">&gamma; = ${gamma.toFixed(4)}</span>. Realized moving clock frame dilation time: <span class="math-symbol">&Delta;t' = <strong>${dilated.toFixed(4)} seconds</strong></span>.`;
     }
 
     // 15. Classical Mechanics
@@ -697,64 +704,73 @@
         let L = parseFloat(document.getElementById('cmL').value);
         let g = parseFloat(document.getElementById('cmG').value);
         let div = document.getElementById('cmRes'); div.style.display = "block";
+        if (L <= 0 || g <= 0) { div.innerHTML = "❌ Dimensions must be greater than zero."; return; }
         let period = 2 * Math.PI * Math.sqrt(L / g);
-        div.innerHTML = `Pendulum Oscillating Wave State Period Result: <span class="math-symbol">T = 2&pi; &sdot; &radic;(${L} / ${g}) = <strong>${period.toFixed(4)} seconds</strong></span>`;
+        div.innerHTML = `Computed Natural Invariant oscillation timeline path: <span class="math-symbol">T = 2&pi;&radic;(${L}/${g}) = <strong>${period.toFixed(4)} seconds</strong></span>.`;
     }
 
-    // 16. Differential Geometry (Interactive Geometric Plotting Engine)
+    // 16. Differential Geometry (With Dynamic Helix Projection Engine)
     function drawGeometry() {
-        let t = parseFloat(document.getElementById('dgT').value);
+        let tVal = parseFloat(document.getElementById('dgT').value);
         let div = document.getElementById('dgRes'); div.style.display = "block";
         let canvas = document.getElementById('geometryCanvas');
         let ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         
-        let cx = canvas.width/2; let cy = canvas.height/2 + 20;
+        let cx = canvas.width / 2; let cy = canvas.height / 2 + 30;
+        let scaleX = 60; let scaleY = 30; let scaleZ = 12;
         
-        // Draw Surface Coordinate Axis Projection Frame
-        ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 1;
-        ctx.beginPath(); ctx.moveTo(10, cy); ctx.lineTo(canvas.width-10, cy); ctx.stroke(); // X Axis
-        
-        // Render Intrinsic Curvature Space Path Line (Helix Curve projection mapping)
-        ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 2;
+        // Draw the static background space curve (Helix projected in pseudo-3D space)
+        ctx.strokeStyle = '#94a3b8';
+        ctx.lineWidth = 1.5;
         ctx.beginPath();
-        for(let step=0; step<=12; step+=0.1) {
-            let px = cx + 60*Math.cos(step);
-            let py = cy + 40*Math.sin(step) - step*8;
-            if(step===0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+        for(let t=0; t<=12; t+=0.05) {
+            let x = cx + scaleX * Math.cos(t);
+            let y = cy + scaleY * Math.sin(t) - (t * scaleZ);
+            if(t === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
         }
         ctx.stroke();
         
-        // Compute Point and Component Tangent Vector Direction State
-        let ptX = cx + 60*Math.cos(t);
-        let ptY = cy + 40*Math.sin(t) - t*8;
+        // Evaluate active coordinates based on target variable state parameter
+        let px = cx + scaleX * Math.cos(tVal);
+        let py = cy + scaleY * Math.sin(tVal) - (tVal * scaleZ);
         
-        let tanX = -60*Math.sin(t);
-        let tanY = 40*Math.cos(t) - 8;
-        // Normalize Vector scale for screen visual safety properties
-        let mag = Math.sqrt(tanX*tanX + tanY*tanY);
-        let vX = (tanX / mag) * 50;
-        let vY = (tanY / mag) * 50;
+        // Solve the velocity space derivation matrix mapping framework (Tangent vector component)
+        let tx = -scaleX * Math.sin(tVal);
+        let ty = scaleY * Math.cos(tVal) - scaleZ;
         
-        // Draw Tangent Vector Arrow Line Component Block
-        ctx.strokeStyle = '#dc2626'; ctx.lineWidth = 3;
-        ctx.beginPath(); ctx.moveTo(ptX, ptY); ctx.lineTo(ptX + vX, ptY + vY); ctx.stroke();
+        // Normalize the vector for accurate geometric layout representation
+        let len = Math.sqrt(tx*tx + ty*ty);
+        let dirX = tx / len; let dirY = ty / len;
         
-        // Draw Vector Pointer Cap
-        ctx.fillStyle = '#dc2626'; ctx.beginPath(); ctx.arc(ptX + vX, ptY + vY, 4, 0, 2*Math.PI); ctx.fill();
+        // Draw the local derivative tangent transformation vector arrow mapping line
+        ctx.strokeStyle = '#ef4444';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(px - dirX*40, py - dirY*40);
+        ctx.lineTo(px + dirX*40, py + dirY*40);
+        ctx.stroke();
         
-        // Point node trace marker
-        ctx.fillStyle = '#0f172a'; ctx.beginPath(); ctx.arc(ptX, ptY, 5, 0, 2*Math.PI); ctx.fill();
+        // Render base point marker node position
+        ctx.fillStyle = '#0f172a';
+        ctx.beginPath();
+        ctx.arc(px, py, 5, 0, 2*Math.PI);
+        ctx.fill();
         
-        div.innerHTML = `At curve space point coordinate value <span class="math-symbol">t = ${t}</span>:<br> Position vector space coordinate: <span class="math-symbol">r(t) = (${Math.cos(t).toFixed(2)}, ${Math.sin(t).toFixed(2)}, ${(0.2*t).toFixed(2)})</span>.<br> Computed <span style="color:#dc2626; font-weight:bold;">Velocity Tangent Vector direction r'(t)</span>: <span class="math-symbol">(${(-Math.sin(t)).toFixed(2)}, ${Math.cos(t).toFixed(2)}, 0.20)</span>`;
+        let cx_val = Math.cos(tVal).toFixed(2);
+        let sx_val = Math.sin(tVal).toFixed(2);
+        let tx_val = (-Math.sin(tVal)).toFixed(2);
+        let ty_val = Math.cos(tVal).toFixed(2);
+        
+        div.innerHTML = `At curve space value <span class="math-symbol">t = ${tVal}</span>:<br>` +
+                        `Position Vector <span class="math-symbol">r(t)</span> = (cos(t), sin(t), 0.2t) = <strong>(${cx_val}, ${sx_val}, ${(0.2*tVal).toFixed(2)})</strong><br>` +
+                        `Tangent Velocity Vector <span class="math-symbol">r'(t)</span> = (-sin(t), cos(t), 0.2) = <strong>(${tx_val}, ${ty_val}, 0.20)</strong>`;
     }
 
-    // Execute core tracking rendering loops on load step actions
+    // Initialize interactive canvas frames immediately upon initialization loading
     window.onload = function() {
-        calcReal(); calcComplex(); calcAlgebra(); calcLinear();
-        calcTop(); calcNT(); calcY = calcODE(); calcPDE();
-        calcFunctional(); drawGraph(); calcOperator(); calcBanach();
-        calcMethods(); calcRelativity(); calcClassical(); drawGeometry();
+        drawGraph();
+        drawGeometry();
     };
 </script>
 
