@@ -15,6 +15,8 @@
             --border-color: #e2e8f0;
             --badge-bg: #e2e8f0;
             --badge-text: #334155;
+            --code-bg: #f1f5f9;
+            --code-text: #0f172a;
         }
 
         * {
@@ -95,6 +97,30 @@
         .meta-section p {
             color: var(--text-muted);
             font-size: 0.95rem;
+        }
+
+        .example-section {
+            background-color: var(--accent-muted);
+            border-left: 4px solid var(--accent-blue);
+            border-radius: 4px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+        }
+
+        .example-section h3 {
+            font-size: 1rem;
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .example-code {
+            font-family: monospace;
+            background-color: rgba(0,0,0,0.04);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9rem;
         }
 
         .books-section {
@@ -187,7 +213,7 @@
 
     <header>
         <h1>Higher Mathematics Reference Directory</h1>
-        <p>A curated structural guide to core mathematical domains, applications, and foundational literature.</p>
+        <p>A curated structural guide to core mathematical domains, applications, examples, and foundational literature.</p>
     </header>
 
     <!-- 1. REAL ANALYSIS -->
@@ -210,6 +236,10 @@
                 <h3>Value of the Subject</h3>
                 <p>Replaces hand-wavy limit intuition with bulletproof epsilon-delta structural proof mechanics, training flawless analytical thinking.</p>
             </div>
+        </div>
+        <div class="example-section">
+            <h3>Core Computational Concrete Example</h3>
+            <p><strong>The Epsilon-N (&epsilon;-N) Proof for Sequence Convergence:</strong> To rigorously prove that a sequence <span class="example-code">a_n = 1/n</span> converges to <span class="example-code">0</span>, we find a threshold index <span class="example-code">N</span> such that for any tiny error bound <span class="example-code">&epsilon; > 0</span>, if <span class="example-code">n > N</span>, then <span class="example-code">|1/n - 0| < &epsilon;</span>. Setting <span class="example-code">N = ceil(1/&epsilon;)</span> directly yields the proof threshold.</p>
         </div>
         <div class="books-section">
             <h3>Standard Academic Literature (Search to Access)</h3>
@@ -247,6 +277,10 @@
                 <p>Reveals how extending the number field from flat 1D lines to 2D complex planes naturally untangles otherwise impossible real-number integrals.</p>
             </div>
         </div>
+        <div class="example-section">
+            <h3>Core Computational Concrete Example</h3>
+            <p><strong>Euler's Formula & Complex Roots:</strong> Solving deep real-axis trigonometry integrals using complex exponentials via <span class="example-code">e^(i&theta;) = cos(&theta;) + i&sdot;sin(&theta;)</span>. This allows geometric rotations to be calculated via simple polynomial exponent additions rather than complex geometric transforms.</p>
+        </div>
         <div class="books-section">
             <h3>Standard Academic Literature (Search to Access)</h3>
             <ul class="book-list">
@@ -282,6 +316,10 @@
                 <h3>Value of the Subject</h3>
                 <p>Exposes hidden underlying symmetries within equations, showing why certain polynomials can never be solved using basic radical formulas.</p>
             </div>
+        </div>
+        <div class="example-section">
+            <h3>Core Computational Concrete Example</h3>
+            <p><strong>Group Generators & Modular Symmetries:</strong> Finding the generator of a cyclic group. In the multiplicative group of integers modulo 7 <span class="example-code">(&integers;_7*)</span>, the number <span class="example-code">3</span> is a generator because its consecutive powers sweep every element: <span class="example-code">3^1=3, 3^2=2, 3^3=6, 3^4=4, 3^5=5, 3^6=1</span>.</p>
         </div>
         <div class="books-section">
             <h3>Standard Academic Literature (Search to Access)</h3>
@@ -319,6 +357,10 @@
                 <p>Provides the structural and computational frameworks to intuitively manipulate and analyze systems with thousands or millions of dimensions.</p>
             </div>
         </div>
+        <div class="example-section">
+            <h3>Core Computational Concrete Example</h3>
+            <p><strong>Eigenvector Decomposition Calculation:</strong> Finding the scaling vector invariants of matrix <span class="example-code">A</span> by solving the characteristic equation <span class="example-code">det(A - &lambda;I) = 0</span>. For a system, this isolates the fundamental independent axes of motion, stability, or data variance.</p>
+        </div>
         <div class="books-section">
             <h3>Standard Academic Literature (Search to Access)</h3>
             <ul class="book-list">
@@ -355,6 +397,10 @@
                 <p>Strips away rigid distance metrics to reveal fundamental connectivity and shape continuity laws, defining space in its purest form.</p>
             </div>
         </div>
+        <div class="example-section">
+            <h3>Core Computational Concrete Example</h3>
+            <p><strong>Euler Characteristic Invariant Optimization:</strong> Evaluating spatial geometry via the formula <span class="example-code">&chi; = V - E + F</span> (Vertices minus Edges plus Faces). Any simple polyhedral mesh topological sphere will *always* compute to exactly <span class="example-code">2</span>, no matter how much you distort it.</p>
+        </div>
         <div class="books-section">
             <h3>Standard Academic Literature (Search to Access)</h3>
             <ul class="book-list">
@@ -370,12 +416,12 @@
         </div>
     </div>
 
-    <!-- 6. NUMBER THEORY -->
+    <!-- 6. NUMBER THEORY & CRYPTOGRAPHY -->
     <div class="subject-card">
-        <div class="subject-title">6. Number Theory</div>
+        <div class="subject-title">6. Number Theory & Cryptography</div>
         <div class="meta-section" style="margin-bottom: 20px;">
             <h3>Introduction</h3>
-            <p>Number Theory explores the hidden properties, equations, and structures found within integers, paying obsessive attention to prime distributions and modular arithmetic pathways.</p>
+            <p>Number Theory explores the hidden properties, equations, and structures found within integers, paying obsessive attention to prime distributions and modular arithmetic pathways that form the bedrock of cybersecurity protocols.</p>
         </div>
         <div class="meta-grid">
             <div class="meta-section">
@@ -391,6 +437,10 @@
                 <p>Demonstrates how deceptively simple discrete integer patterns can hide profound structural complexity, demanding deep analytical logic to untangle.</p>
             </div>
         </div>
+        <div class="example-section">
+            <h3>Core Computational Concrete Example</h3>
+            <p><strong>Fast Powering Algorithm (Square-and-Multiply):</strong> To quickly compute a massive modular exponent like <span class="example-code">x^e mod n</span> in cryptography without memory overloads, the exponent <span class="example-code">e</span> is converted to binary. By repeatedly squaring the base and multiplying only when a binary <span class="example-code">1</span> appears, computational complexity drops instantly from <span class="example-code">O(e)</span> to <span class="example-code">O(log e)</span>.</p>
+        </div>
         <div class="books-section">
             <h3>Standard Academic Literature (Search to Access)</h3>
             <ul class="book-list">
@@ -399,7 +449,7 @@
                     <span class="search-hint">Copy Title to Search</span>
                 </li>
                 <li class="book-item">
-                    <div class="book-info"><span class="book-title">A Friendly Introduction to Number Theory</span> – <span class="book-author">Joseph H. Silverman</span></div>
+                    <div class="book-info"><span class="book-title">A Course in Number Theory and Cryptography</span> – <span class="book-author">Neal Koblitz</span></div>
                     <span class="search-hint">Copy Title to Search</span>
                 </li>
             </ul>
@@ -426,6 +476,10 @@
                 <h3>Value of the Subject</h3>
                 <p>Builds the analytical framework required to mathematically evaluate, break down, and optimize exact finite step tracking algorithms.</p>
             </div>
+        </div>
+        <div class="example-section">
+            <h3>Core Computational Concrete Example</h3>
+            <p><strong>The Euclidean Divisor Algorithm:</strong> Finding the Greatest Common Divisor <span class="example-code">gcd(a, b)</span> using programmatic remainder reduction steps. For example: <span class="example-code">gcd(270, 192) &rarr; 270 = 1&sdot;192 + 78 &rarr; 192 = 2&sdot;78 + 36 &rarr; 78 = 2&sdot;36 + 6 &rarr; 36 = 6&sdot;6 + 0</span>. The last non-zero remainder is <span class="example-code">6</span>.</p>
         </div>
         <div class="books-section">
             <h3>Standard Academic Literature (Search to Access)</h3>
@@ -463,6 +517,10 @@
                 <p>Provides the tools to shift from static snapshot algebra to dynamic rate-of-change modeling, capturing how the physical world evolves over time.</p>
             </div>
         </div>
+        <div class="example-section">
+            <h3>Core Computational Concrete Example</h3>
+            <p><strong>Separable Variable Integration:</strong> Solving the exponential growth equation <span class="example-code">dy/dt = ky</span> by separating variables: <span class="example-code">(1/y)dy = k&sdot;dt</span>. Integrating both sides yields <span class="example-code">ln(y) = kt + C</span>, transforming into the predictive real-world growth model <span class="example-code">y(t) = C&sdot;e^(kt)</span>.</p>
+        </div>
         <div class="books-section">
             <h3>Standard Academic Literature (Search to Access)</h3>
             <ul class="book-list">
@@ -498,6 +556,10 @@
                 <h3>Value of the Subject</h3>
                 <p>Enables formal mathematical framing of continuous multi-dimensional physical fields, detailing wave movements, heat diffusion, and complex quantum shifts.</p>
             </div>
+        </div>
+        <div class="example-section">
+            <h3>Core Computational Concrete Example</h3>
+            <p><strong>Fourier Separation of Variables for the Heat Equation:</strong> Solving <span class="example-code">&part;u/&part;t = k(&part;&sup2;u/&part;x&sup2;)</span> by assuming the solution splits into independent parts: <span class="example-code">u(x,t) = X(x)&sdot;T(t)</span>. This converts a brutal partial differential equation into two simple, easily solvable ordinary differential equations.</p>
         </div>
         <div class="books-section">
             <h3>Standard Academic Literature (Search to Access)</h3>
@@ -535,6 +597,10 @@
                 <p>Transforms raw, volatile noise into clear probability distributions and rigorous expectations, providing a logical framework to make decisions under uncertainty.</p>
             </div>
         </div>
+        <div class="example-section">
+            <h3>Core Computational Concrete Example</h3>
+            <p><strong>Bayes' Theorem Update Calculation:</strong> Computing conditional risk mapping via <span class="example-code">P(A|B) = [P(B|A) &sdot; P(A)] / P(B)</span>. This equation allows a system to instantly update the probability of a root cause 'A' occurring given that new observation anomaly data 'B' was detected.</p>
+        </div>
         <div class="books-section">
             <h3>Standard Academic Literature (Search to Access)</h3>
             <ul class="book-list">
@@ -570,6 +636,10 @@
                 <h3>Value of the Subject</h3>
                 <p>Bridges pure abstract math definitions with pragmatic engineering realities, translating infinite-step calculus problems into discrete, highly optimized machine operations.</p>
             </div>
+        </div>
+        <div class="example-section">
+            <h3>Core Computational Concrete Example</h3>
+            <p><strong>Newton-Raphson Root Convergence Method:</strong> Programmatically finding the precise roots of an impossible equation <span class="example-code">f(x) = 0</span> via the iterative step formula <span class="example-code">x_(n+1) = x_n - f(x_n)/f'(x_n)</span>. This technique yields extremely fast quadratic approximation convergence speeds.</p>
         </div>
         <div class="books-section">
             <h3>Standard Academic Literature (Search to Access)</h3>
@@ -607,6 +677,10 @@
                 <p>Teaches how to perform exact calculus transformations directly on curved shapes and spaces, paving the way for modern global physics models.</p>
             </div>
         </div>
+        <div class="example-section">
+            <h3>Core Computational Concrete Example</h3>
+            <p><strong>The Metric Tensor & Distance Formula on Curved Manifolds:</strong> Calculating true spatial paths using <span class="example-code">ds&sup2; = &sum; g_ij &sdot; dx^i &sdot; dx^j</span>. This modifies the simple straight-line Pythagorean theorem by blending in the metric tensor coordinate weights <span class="example-code">g_ij</span> to accurately calculate localized surface warps.</p>
+        </div>
         <div class="books-section">
             <h3>Standard Academic Literature (Search to Access)</h3>
             <ul class="book-list">
@@ -642,6 +716,10 @@
                 <h3>Value of the Subject</h3>
                 <p>Exposes the definitive outer limits of mathematical truth via Gödel's Incompleteness Theorems, proving some mathematical truths can never be formally demonstrated.</p>
             </div>
+        </div>
+        <div class="example-section">
+            <h3>Core Computational Concrete Example</h3>
+            <p><strong>Formal Propositional Proof Mechanics:</strong> Applying structural inference models like Modus Ponens: Given conditional truth rules <span class="example-code">P &rarr; Q</span> (If P is true, then Q must follow) and confirming active token entry condition status <span class="example-code">P</span> is true, the structural logic engine automatically deduces absolute fact state validity <span class="example-code">Q</span>.</p>
         </div>
         <div class="books-section">
             <h3>Standard Academic Literature (Search to Access)</h3>
@@ -679,6 +757,10 @@
                 <p>Develops structural methods to confidently catalog, evaluate, and optimize interconnected options across massive discrete configuration pools.</p>
             </div>
         </div>
+        <div class="example-section">
+            <h3>Core Computational Concrete Example</h3>
+            <p><strong>Permutation Binomial Distribution Counting:</strong> Solving non-overlapping unique path configuration allocations via the formal combinatorial equation <span class="example-code">nCr = n! / [r!(n - r)!]</span>. This isolates the absolute volume of valid path options available in finite setups.</p>
+        </div>
         <div class="books-section">
             <h3>Standard Academic Literature (Search to Access)</h3>
             <ul class="book-list">
@@ -714,6 +796,10 @@
                 <h3>Value of the Subject</h3>
                 <p>Explores how simple, completely deterministic equations can produce wildly chaotic, inherently unpredictable results over time.</p>
             </div>
+        </div>
+        <div class="example-section">
+            <h3>Core Computational Concrete Example</h3>
+            <p><strong>The Logistic Map State Evolution Iteration:</strong> Running recursive state tracking calculations via <span class="example-code">x_(n+1) = r &sdot; x_n(1 - x_n)</span>. Shifting parameter variable weight growth thresholds past <span class="example-code">r = 3.5699</span> directly pushes the system output loop out of stable cycles and straight into deep chaos.</p>
         </div>
         <div class="books-section">
             <h3>Standard Academic Literature (Search to Access)</h3>
@@ -751,6 +837,10 @@
                 <p>Operates as the ultimate abstraction tool, allowing researchers to transfer solutions discovered in geometry directly over into abstract algebra.</p>
             </div>
         </div>
+        <div class="example-section">
+            <h3>Core Computational Concrete Example</h3>
+            <p><strong>Functorial Structural Domain Mapping:</strong> Constructing a clear Functor <span class="example-code">F: C &rarr; D</span> that acts as a structural bridge pipeline. It safely maps items and internal relationship associations from source domain category 'C' over into target framework 'D' while preserving mapping composition paths.</p>
+        </div>
         <div class="books-section">
             <h3>Standard Academic Literature (Search to Access)</h3>
             <ul class="book-list">
@@ -769,7 +859,7 @@
 </div> <!-- Close Container -->
 
 <footer>
-    <p>&copy; 2026 Higher Mathematics Reference Directory. Built for academic synthesis and domain mapping.</p>
+    <p>&copy; 2026 Higher Mathematics Reference Directory. Enhanced with Algorithmic Examples & Domain Mapping.</p>
 </footer>
 
 </body>
