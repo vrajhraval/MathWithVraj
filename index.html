@@ -401,6 +401,80 @@
             display: none;
         }
 
+        /* New Matrix App UI Design */
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .matrix-input-box {
+            display: grid;
+            grid-template-columns: repeat(2, 70px);
+            gap: 10px;
+            justify-content: center;
+            align-content: center;
+            background: var(--quiz-container-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .matrix-input-box input {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            background: var(--card-bg);
+            color: var(--text-color);
+            text-align: center;
+            font-size: 1rem;
+        }
+        .matrix-render-canvas {
+            background: #111827;
+            border-radius: 8px;
+            height: 220px;
+            position: relative;
+        }
+
+        /* New Learning Path Tree Nodes */
+        .path-tree {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        .path-node {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: var(--formula-card-bg);
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--accent);
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        .path-node.mastered {
+            border-left-color: var(--success);
+            background: rgba(39, 174, 96, 0.05);
+        }
+        .master-btn {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .path-node.mastered .master-btn {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+
         /* Graph Section */
         .graph-section {
             background: #1a1a2e;
@@ -489,6 +563,9 @@
             }
             .nav-item.dropdown-active .dropdown-menu {
                 display: block;
+            }
+            .matrix-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -654,6 +731,55 @@
         </div>
     </section>
 
+    <!-- NEW SECTION 6: Linear Transformation Matrix Visualizer -->
+    <section>
+        <h2>6. 2D Linear Transformation Engine</h2>
+        <p>Modify the components of transformation matrix \(T\) to see how it alters space vectors visually:</p>
+        <div class="matrix-grid">
+            <div class="matrix-input-box">
+                <input type="number" id="m-a" value="1" step="0.5" oninput="drawMatrixSpace()">
+                <input type="number" id="m-b" value="0" step="0.5" oninput="drawMatrixSpace()">
+                <input type="number" id="m-c" value="0" step="0.5" oninput="drawMatrixSpace()">
+                <input type="number" id="m-d" value="1" step="0.5" oninput="drawMatrixSpace()">
+                <div style="grid-column: span 2; text-align: center; margin-top: 10px; font-weight: bold;">
+                    \(T = \begin{pmatrix} a & b \\ c & d \end{pmatrix}\)
+                </div>
+            </div>
+            <div class="matrix-render-canvas">
+                <canvas id="matrixCanvas" style="width:100%; height:100%;"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION 7: Structured Curriculum Tracking Map -->
+    <section>
+        <h2>7. Structured Mathematics Roadmap</h2>
+        <p>Monitor your development across fundamental modules. Progress saves directly inside your browser cache:</p>
+        <div class="path-tree">
+            <div class="path-node" id="node-alg">
+                <div>
+                    <strong style="font-size:1.1rem; display:block;">Module 1: Advanced Algebraic Frameworks</strong>
+                    <span style="color:var(--sub-text); font-size:0.9rem;">Quadratic forms, functions, matrices</span>
+                </div>
+                <button class="master-btn" onclick="toggleNodeMastery('alg')">Mark Mastered</button>
+            </div>
+            <div class="path-node" id="node-calc">
+                <div>
+                    <strong style="font-size:1.1rem; display:block;">Module 2: Integral Calculus Foundations</strong>
+                    <span style="color:var(--sub-text); font-size:0.9rem;">Definite integration, limit mechanics, areas</span>
+                </div>
+                <button class="master-btn" onclick="toggleNodeMastery('calc')">Mark Mastered</button>
+            </div>
+            <div class="path-node" id="node-geom">
+                <div>
+                    <strong style="font-size:1.1rem; display:block;">Module 3: Coordinate & Geometric Logic</strong>
+                    <span style="color:var(--sub-text); font-size:0.9rem;">Cartesian spaces, metrics, trigonometry transformations</span>
+                </div>
+                <button class="master-btn" onclick="toggleNodeMastery('geom')">Mark Mastered</button>
+            </div>
+        </div>
+    </section>
+
     <div class="graph-section">
         <h2 style="color:#e94560;">Interactive Cartesian Plane</h2>
         <p>Visualize mathematical functions in real time.</p>
@@ -781,6 +907,7 @@
         MathJax.typesetPromise([outputDiv]);
     }
 
+    // Expanded Database with diverse question parameters
     const quizDatabase = [
         {
             question: "Evaluate: \\(\\int_0^2 3x^2 \\, dx\\)",
@@ -793,6 +920,12 @@
             options: ["2", "4", "-2", "8"],
             correct: 1,
             explanation: "$$x(x-2)=8$$ $$x^2-2x-8=0$$ $$x=4$$"
+        },
+        {
+            question: "Find the determinant of matrix \\(\\begin{pmatrix} 3 & 2 \\\\ 1 & 4 \\end{pmatrix}\\)",
+            options: ["10", "14", "12", "8"],
+            correct: 0,
+            explanation: "$$\\det = (3 \\times 4) - (2 \\times 1) = 12 - 2 = 10$$"
         }
     ];
 
@@ -838,6 +971,97 @@
     function loadNextQuestion() {
         currentQuestionIndex = (currentQuestionIndex + 1) % quizDatabase.length;
         renderCurrentQuiz();
+    }
+
+    // High performance Vector Transformation Mapping Canvas engine
+    function drawMatrixSpace() {
+        const canvas = document.getElementById('matrixCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        
+        // Match logical dimensions with visual bounds
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+        
+        const w = canvas.width;
+        const h = canvas.height;
+        const center = { x: w / 2, y: h / 2 };
+        const scale = 40; // Scale metric factor 
+
+        ctx.clearRect(0, 0, w, h);
+
+        // Grid lines setup
+        ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+        ctx.lineWidth = 1;
+        for(let i = -10; i <= 10; i++) {
+            ctx.beginPath(); ctx.moveTo(center.x + i*scale, 0); ctx.lineTo(center.x + i*scale, h); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(0, center.y + i*scale); ctx.lineTo(w, center.y + i*scale); ctx.stroke();
+        }
+
+        // Base axes layout mapping
+        ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+        ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(0, center.y); ctx.lineTo(w, center.y); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(center.x, 0); ctx.lineTo(center.x, h); ctx.stroke();
+
+        // Get Input parameters safely
+        const a = parseFloat(document.getElementById('m-a').value) || 0;
+        const b = parseFloat(document.getElementById('m-b').value) || 0;
+        const c = parseFloat(document.getElementById('m-c').value) || 0;
+        const d = parseFloat(document.getElementById('m-d').value) || 0;
+
+        // Base geometric coordinate target configurations
+        const originalVectors = [{x: 1, y: 1}, {x: -1, y: 2}, {x: 2, y: -1}];
+
+        // Draw original bounding area reference nodes
+        originalVectors.forEach(v => {
+            ctx.strokeStyle = '#2980b9';
+            ctx.lineWidth = 2.5;
+            ctx.setLineDash([4, 4]); // Dashed logic array for standard vector mapping
+            ctx.beginPath();
+            ctx.moveTo(center.x, center.y);
+            ctx.lineTo(center.x + v.x * scale, center.y - v.y * scale);
+            ctx.stroke();
+
+            // Compute dynamic array transformation parameters
+            const tx = a * v.x + b * v.y;
+            const ty = c * v.x + d * v.y;
+
+            // Render output transformed linear maps
+            ctx.strokeStyle = '#e94560';
+            ctx.lineWidth = 3;
+            ctx.setLineDash([]); // Plain formatting line array maps
+            ctx.beginPath();
+            ctx.moveTo(center.x, center.y);
+            ctx.lineTo(center.x + tx * scale, center.y - ty * scale);
+            ctx.stroke();
+        });
+    }
+
+    // LocalStorage curriculum checking mechanism tracker rules
+    function toggleNodeMastery(id) {
+        const key = 'math-mastery-' + id;
+        const element = document.getElementById('node-' + id);
+        if (localStorage.getItem(key) === 'true') {
+            localStorage.setItem(key, 'false');
+            element.classList.remove('mastered');
+            element.querySelector('.master-btn').textContent = "Mark Mastered";
+        } else {
+            localStorage.setItem(key, 'true');
+            element.classList.add('mastered');
+            element.querySelector('.master-btn').textContent = "Mastered ✓";
+        }
+    }
+
+    function initMasteryNodes() {
+        ['alg', 'calc', 'geom'].forEach(id => {
+            const key = 'math-mastery-' + id;
+            const element = document.getElementById('node-' + id);
+            if (localStorage.getItem(key) === 'true') {
+                element.classList.add('mastered');
+                element.querySelector('.master-btn').textContent = "Mastered ✓";
+            }
+        });
     }
 
     // High performance Touch & Click handler for dropdowns
@@ -888,6 +1112,8 @@
     window.onload = function () {
         setTimeout(plotGraph, 300);
         renderCurrentQuiz();
+        drawMatrixSpace();
+        initMasteryNodes();
         if (window.MathJax) { MathJax.typeset(); }
     };
 </script>
