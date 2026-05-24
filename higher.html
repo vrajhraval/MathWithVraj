@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comprehensive Directory of Higher Mathematics</title>
+    <title>Interactive Higher Mathematics Directory</title>
     <style>
         :root {
             --bg-main: #f8fafc;
@@ -15,8 +15,8 @@
             --border-color: #e2e8f0;
             --badge-bg: #e2e8f0;
             --badge-text: #334155;
-            --code-bg: #f1f5f9;
-            --code-text: #0f172a;
+            --calc-bg: #f1f5f9;
+            --success-green: #16a34a;
         }
 
         * {
@@ -34,7 +34,7 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
@@ -44,7 +44,7 @@
         }
 
         header h1 {
-            font-size: 2.5rem;
+            font-size: 2.3rem;
             color: var(--text-dark);
             margin-bottom: 10px;
             font-weight: 800;
@@ -62,16 +62,10 @@
             padding: 30px;
             margin-bottom: 30px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .subject-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
         }
 
         .subject-title {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 700;
             color: var(--accent-blue);
             margin-bottom: 20px;
@@ -81,13 +75,13 @@
 
         .meta-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin-bottom: 25px;
         }
 
         .meta-section h3 {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--text-dark);
             margin-bottom: 8px;
             text-transform: uppercase;
@@ -99,28 +93,90 @@
             font-size: 0.95rem;
         }
 
-        .example-section {
-            background-color: var(--accent-muted);
-            border-left: 4px solid var(--accent-blue);
-            border-radius: 4px;
-            padding: 15px 20px;
+        /* Interactive Calculator Styles */
+        .interactive-calc {
+            background-color: var(--calc-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
             margin-bottom: 25px;
         }
 
-        .example-section h3 {
+        .interactive-calc h3 {
             font-size: 1rem;
             color: var(--accent-blue);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .example-code {
+        .calc-formula {
             font-family: monospace;
-            background-color: rgba(0,0,0,0.04);
-            padding: 2px 6px;
+            background: rgba(0,0,0,0.05);
+            padding: 4px 8px;
             border-radius: 4px;
             font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .input-field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .input-field label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .input-field input {
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: monospace;
+        }
+
+        .calc-btn {
+            background-color: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            align-self: flex-end;
+            margin-top: 5px;
+        }
+
+        .calc-btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        .calc-result {
+            margin-top: 15px;
+            padding: 12px;
+            background: white;
+            border-left: 4px solid var(--success-green);
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: monospace;
+            display: none;
         }
 
         .books-section {
@@ -130,9 +186,10 @@
         }
 
         .books-section h3 {
-            font-size: 1rem;
+            font-size: 0.95rem;
             margin-bottom: 12px;
             color: var(--text-dark);
+            text-transform: uppercase;
         }
 
         .book-list {
@@ -143,32 +200,23 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
+            padding: 8px 0;
             border-bottom: 1px solid var(--border-color);
         }
 
         .book-item:last-child {
             border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .book-item:first-child {
-            padding-top: 0;
-        }
-
-        .book-info {
-            font-size: 0.95rem;
-            color: var(--text-dark);
-            padding-right: 15px;
         }
 
         .book-title {
             font-weight: 600;
+            font-size: 0.95rem;
         }
 
         .book-author {
             color: var(--text-muted);
             font-style: italic;
+            font-size: 0.95rem;
         }
 
         .search-hint {
@@ -177,15 +225,8 @@
             color: var(--badge-text);
             padding: 4px 8px;
             border-radius: 4px;
-            white-space: nowrap;
             font-family: monospace;
-            user-select: all;
             cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .search-hint:hover {
-            background: #cbd5e1;
         }
 
         footer {
@@ -194,17 +235,6 @@
             color: var(--text-muted);
             font-size: 0.9rem;
         }
-
-        @media (max-width: 600px) {
-            .book-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-            }
-            .search-hint {
-                align-self: flex-end;
-            }
-        }
     </style>
 </head>
 <body>
@@ -212,655 +242,110 @@
 <div class="container">
 
     <header>
-        <h1>Higher Mathematics Reference Directory</h1>
-        <p>A curated structural guide to core mathematical domains, applications, examples, and foundational literature.</p>
+        <h1>Higher Mathematics Interactive Framework</h1>
+        <p>A functional, exploratory reference tool maps definitions alongside operational live computational engines.</p>
     </header>
 
-    <!-- 1. REAL ANALYSIS -->
+    <!-- 1. NUMBER THEORY & CRYPTOGRAPHY -->
     <div class="subject-card">
-        <div class="subject-title">1. Real Analysis</div>
-        <div class="meta-section" style="margin-bottom: 20px;">
-            <h3>Introduction</h3>
-            <p>Real Analysis provides the rigorous foundation for calculus, shifting away from mechanical computation to formal geometric proofs. It investigates the behavior of sequences, series, limits, and real-valued functions.</p>
-        </div>
+        <div class="subject-title">Number Theory & Cryptography</div>
+        
         <div class="meta-grid">
             <div class="meta-section">
                 <h3>Real-Life Usage</h3>
-                <p>Forms the backbone of precision physics simulation systems, financial asset derivatives valuation math, and signal parsing algorithms.</p>
+                <p>Forms the architecture of modern security handshakes, public key pairs (RSA), data privacy channels, and transactional validation chains.</p>
             </div>
             <div class="meta-section">
                 <h3>Future & Scope</h3>
-                <p>Provides the rigorous framework needed to build advanced functional spaces used in modern machine learning systems and deep optimization theory.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Value of the Subject</h3>
-                <p>Replaces hand-wavy limit intuition with bulletproof epsilon-delta structural proof mechanics, training flawless analytical thinking.</p>
+                <p>Critical for evolving zero-knowledge security models and robust, post-quantum algebraic mathematical safety lattices.</p>
             </div>
         </div>
-        <div class="example-section">
-            <h3>Core Computational Concrete Example</h3>
-            <p><strong>The Epsilon-N (&epsilon;-N) Proof for Sequence Convergence:</strong> To rigorously prove that a sequence <span class="example-code">a_n = 1/n</span> converges to <span class="example-code">0</span>, we find a threshold index <span class="example-code">N</span> such that for any tiny error bound <span class="example-code">&epsilon; > 0</span>, if <span class="example-code">n > N</span>, then <span class="example-code">|1/n - 0| < &epsilon;</span>. Setting <span class="example-code">N = ceil(1/&epsilon;)</span> directly yields the proof threshold.</p>
+
+        <!-- LIVE INTERACTIVE ENGINE -->
+        <div class="interactive-calc">
+            <h3>⚡ Live Tool: Fast Powering Algorithm</h3>
+            <div class="calc-formula">Formula: Base^Exponent ≡ Remainder (mod Modulus)</div>
+            
+            <div class="input-group">
+                <div class="input-field">
+                    <label for="baseInput">Base (x)</label>
+                    <input type="number" id="baseInput" value="7" min="1">
+                </div>
+                <div class="input-field">
+                    <label for="expInput">Exponent (e)</label>
+                    <input type="number" id="expInput" value="560" min="0">
+                </div>
+                <div class="input-field">
+                    <label for="modInput">Modulus (n)</label>
+                    <input type="number" id="modInput" value="561" min="1">
+                </div>
+                <button class="calc-btn" onclick="runFastPowering()">Compute</button>
+            </div>
+            
+            <div id="poweringResult" class="calc-result"></div>
         </div>
+
         <div class="books-section">
-            <h3>Standard Academic Literature (Search to Access)</h3>
+            <h3>Essential Literature</h3>
             <ul class="book-list">
                 <li class="book-item">
-                    <div class="book-info"><span class="book-title">Principles of Mathematical Analysis</span> – <span class="book-author">Walter Rudin</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Understanding Analysis</span> – <span class="book-author">Stephen Abbott</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
+                    <div><span class="book-title">A Course in Number Theory and Cryptography</span> – <span class="book-author">Neal Koblitz</span></div>
+                    <span class="search-hint">Copy Title</span>
                 </li>
             </ul>
         </div>
     </div>
 
-    <!-- 2. COMPLEX ANALYSIS -->
-    <div class="subject-card">
-        <div class="subject-title">2. Complex Analysis</div>
-        <div class="meta-section" style="margin-bottom: 20px;">
-            <h3>Introduction</h3>
-            <p>Complex Analysis investigates functions operating on complex numbers, focusing heavily on differentiable complex functions known as holomorphic or analytic functions.</p>
-        </div>
-        <div class="meta-grid">
-            <div class="meta-section">
-                <h3>Real-Life Usage</h3>
-                <p>Directly runs aeronautical wing lift fluid flow calculations, electrical engineering AC circuit impedance systems, and digital soundwave processing tools.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Future & Scope</h3>
-                <p>Essential for processing quantum state wave mechanics and solving complex integration boundaries in higher thermodynamic research fields.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Value of the Subject</h3>
-                <p>Reveals how extending the number field from flat 1D lines to 2D complex planes naturally untangles otherwise impossible real-number integrals.</p>
-            </div>
-        </div>
-        <div class="example-section">
-            <h3>Core Computational Concrete Example</h3>
-            <p><strong>Euler's Formula & Complex Roots:</strong> Solving deep real-axis trigonometry integrals using complex exponentials via <span class="example-code">e^(i&theta;) = cos(&theta;) + i&sdot;sin(&theta;)</span>. This allows geometric rotations to be calculated via simple polynomial exponent additions rather than complex geometric transforms.</p>
-        </div>
-        <div class="books-section">
-            <h3>Standard Academic Literature (Search to Access)</h3>
-            <ul class="book-list">
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Complex Analysis</span> – <span class="book-author">Lars Ahlfors</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Visual Complex Analysis</span> – <span class="book-author">Tristan Needham</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- 3. ABSTRACT ALGEBRA -->
-    <div class="subject-card">
-        <div class="subject-title">3. Abstract Algebra</div>
-        <div class="meta-section" style="margin-bottom: 20px;">
-            <h3>Introduction</h3>
-            <p>Abstract Algebra investigates generalized algebraic frameworks rather than explicit number calculations. It builds axiomatic logic rules for groups, rings, fields, and vector structures.</p>
-        </div>
-        <div class="meta-grid">
-            <div class="meta-section">
-                <h3>Real-Life Usage</h3>
-                <p>Powers internet-scale data security frameworks (RSA and Elliptic Curve Cryptography), digital error-correcting telecom arrays, and graphics matrix engines.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Future & Scope</h3>
-                <p>The core mathematical language driving post-quantum lattice cryptography design and advanced structural molecular symmetry grouping systems.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Value of the Subject</h3>
-                <p>Exposes hidden underlying symmetries within equations, showing why certain polynomials can never be solved using basic radical formulas.</p>
-            </div>
-        </div>
-        <div class="example-section">
-            <h3>Core Computational Concrete Example</h3>
-            <p><strong>Group Generators & Modular Symmetries:</strong> Finding the generator of a cyclic group. In the multiplicative group of integers modulo 7 <span class="example-code">(&integers;_7*)</span>, the number <span class="example-code">3</span> is a generator because its consecutive powers sweep every element: <span class="example-code">3^1=3, 3^2=2, 3^3=6, 3^4=4, 3^5=5, 3^6=1</span>.</p>
-        </div>
-        <div class="books-section">
-            <h3>Standard Academic Literature (Search to Access)</h3>
-            <ul class="book-list">
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Abstract Algebra</span> – <span class="book-author">David S. Dummit, Richard M. Foote</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Contemporary Abstract Algebra</span> – <span class="book-author">Joseph A. Gallian</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- 4. LINEAR ALGEBRA & MATRIX THEORY -->
-    <div class="subject-card">
-        <div class="subject-title">4. Linear Algebra & Matrix Theory</div>
-        <div class="meta-section" style="margin-bottom: 20px;">
-            <h3>Introduction</h3>
-            <p>Linear Algebra focuses on vector spaces, linear transformations, and matrices. It is the language of multi-dimensional systems, transforming complex geometric relations into solvable systems of linear equations.</p>
-        </div>
-        <div class="meta-grid">
-            <div class="meta-section">
-                <h3>Real-Life Usage</h3>
-                <p>The foundational bedrock of neural networks, Google's PageRank search algorithm, 3D video game engine transformations, and image compression (SVD).</p>
-            </div>
-            <div class="meta-section">
-                <h3>Future & Scope</h3>
-                <p>Indispensable for scaling high-dimensional machine learning datasets and designing state-space transformation models in quantum computing.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Value of the Subject</h3>
-                <p>Provides the structural and computational frameworks to intuitively manipulate and analyze systems with thousands or millions of dimensions.</p>
-            </div>
-        </div>
-        <div class="example-section">
-            <h3>Core Computational Concrete Example</h3>
-            <p><strong>Eigenvector Decomposition Calculation:</strong> Finding the scaling vector invariants of matrix <span class="example-code">A</span> by solving the characteristic equation <span class="example-code">det(A - &lambda;I) = 0</span>. For a system, this isolates the fundamental independent axes of motion, stability, or data variance.</p>
-        </div>
-        <div class="books-section">
-            <h3>Standard Academic Literature (Search to Access)</h3>
-            <ul class="book-list">
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Linear Algebra and Its Applications</span> – <span class="book-author">Gilbert Strang</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Linear Algebra Done Right</span> – <span class="book-author">Sheldon Axler</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- 5. TOPOLOGY -->
-    <div class="subject-card">
-        <div class="subject-title">5. Topology</div>
-        <div class="meta-section" style="margin-bottom: 20px;">
-            <h3>Introduction</h3>
-            <p>Topology investigates structural properties of spaces that remain completely unchanged when subjected to continuous bending, stretching, or squeezing deformation without breaking.</p>
-        </div>
-        <div class="meta-grid">
-            <div class="meta-section">
-                <h3>Real-Life Usage</h3>
-                <p>Maps DNA strand structural knot designs, shapes network routing cluster flows, and powers advanced topological data analysis (TDA) shape-sorting tools.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Future & Scope</h3>
-                <p>Critical for developing fault-tolerant topological quantum hardware architectures and analyzing manifold geometric structures in deep neural networks.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Value of the Subject</h3>
-                <p>Strips away rigid distance metrics to reveal fundamental connectivity and shape continuity laws, defining space in its purest form.</p>
-            </div>
-        </div>
-        <div class="example-section">
-            <h3>Core Computational Concrete Example</h3>
-            <p><strong>Euler Characteristic Invariant Optimization:</strong> Evaluating spatial geometry via the formula <span class="example-code">&chi; = V - E + F</span> (Vertices minus Edges plus Faces). Any simple polyhedral mesh topological sphere will *always* compute to exactly <span class="example-code">2</span>, no matter how much you distort it.</p>
-        </div>
-        <div class="books-section">
-            <h3>Standard Academic Literature (Search to Access)</h3>
-            <ul class="book-list">
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Topology</span> – <span class="book-author">James Munkres</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Algebraic Topology</span> – <span class="book-author">Allen Hatcher</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- 6. NUMBER THEORY & CRYPTOGRAPHY -->
-    <div class="subject-card">
-        <div class="subject-title">6. Number Theory & Cryptography</div>
-        <div class="meta-section" style="margin-bottom: 20px;">
-            <h3>Introduction</h3>
-            <p>Number Theory explores the hidden properties, equations, and structures found within integers, paying obsessive attention to prime distributions and modular arithmetic pathways that form the bedrock of cybersecurity protocols.</p>
-        </div>
-        <div class="meta-grid">
-            <div class="meta-section">
-                <h3>Real-Life Usage</h3>
-                <p>Directly manages modern banking safety infrastructures via prime factorization keys, digital signature tokens, and pseudorandom code generators.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Future & Scope</h3>
-                <p>Accelerating advanced cryptographic designs like homomorphic encryption layers, which permit secure computational operations on raw encrypted data streams.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Value of the Subject</h3>
-                <p>Demonstrates how deceptively simple discrete integer patterns can hide profound structural complexity, demanding deep analytical logic to untangle.</p>
-            </div>
-        </div>
-        <div class="example-section">
-            <h3>Core Computational Concrete Example</h3>
-            <p><strong>Fast Powering Algorithm (Square-and-Multiply):</strong> To quickly compute a massive modular exponent like <span class="example-code">x^e mod n</span> in cryptography without memory overloads, the exponent <span class="example-code">e</span> is converted to binary. By repeatedly squaring the base and multiplying only when a binary <span class="example-code">1</span> appears, computational complexity drops instantly from <span class="example-code">O(e)</span> to <span class="example-code">O(log e)</span>.</p>
-        </div>
-        <div class="books-section">
-            <h3>Standard Academic Literature (Search to Access)</h3>
-            <ul class="book-list">
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">An Introduction to the Theory of Numbers</span> – <span class="book-author">G.H. Hardy, E.M. Wright</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">A Course in Number Theory and Cryptography</span> – <span class="book-author">Neal Koblitz</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- 7. DISCRETE MATHEMATICS -->
-    <div class="subject-card">
-        <div class="subject-title">7. Discrete Mathematics</div>
-        <div class="meta-section" style="margin-bottom: 20px;">
-            <h3>Introduction</h3>
-            <p>Discrete Mathematics focuses on isolated, distinct computational units rather than continuous smooth processes, mapping graph logic, combinatorics, and relational structures.</p>
-        </div>
-        <div class="meta-grid">
-            <div class="meta-section">
-                <h3>Real-Life Usage</h3>
-                <p>The direct foundation of database relation design, GPS shortest-path routing graphs, compiler optimization logic, and data structure layouts.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Future & Scope</h3>
-                <p>Crucial for expanding graph neural network architectures (GNNs) and designing efficient, highly optimized schedules for distributed cloud infrastructure arrays.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Value of the Subject</h3>
-                <p>Builds the analytical framework required to mathematically evaluate, break down, and optimize exact finite step tracking algorithms.</p>
-            </div>
-        </div>
-        <div class="example-section">
-            <h3>Core Computational Concrete Example</h3>
-            <p><strong>The Euclidean Divisor Algorithm:</strong> Finding the Greatest Common Divisor <span class="example-code">gcd(a, b)</span> using programmatic remainder reduction steps. For example: <span class="example-code">gcd(270, 192) &rarr; 270 = 1&sdot;192 + 78 &rarr; 192 = 2&sdot;78 + 36 &rarr; 78 = 2&sdot;36 + 6 &rarr; 36 = 6&sdot;6 + 0</span>. The last non-zero remainder is <span class="example-code">6</span>.</p>
-        </div>
-        <div class="books-section">
-            <h3>Standard Academic Literature (Search to Access)</h3>
-            <ul class="book-list">
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Discrete Mathematics and Its Applications</span> – <span class="book-author">Kenneth H. Rosen</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Concrete Mathematics</span> – <span class="book-author">Ronald L. Graham, Donald E. Knuth, Oren Patashnik</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- 8. ORDINARY DIFFERENTIAL EQUATIONS (ODEs) -->
-    <div class="subject-card">
-        <div class="subject-title">8. Ordinary Differential Equations (ODEs)</div>
-        <div class="meta-section" style="margin-bottom: 20px;">
-            <h3>Introduction</h3>
-            <p>ODEs map equations containing unknown single-variable functions and their derivative rates of change, framing dynamic physical actions over explicit time steps.</p>
-        </div>
-        <div class="meta-grid">
-            <div class="meta-section">
-                <h3>Real-Life Usage</h3>
-                <p>Determines satellite orbital path corrections, designs automotive suspension mechanical damping rates, and charts basic epidemiological disease growth maps.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Future & Scope</h3>
-                <p>Directly utilized to build Neural ODE models within machine learning systems, enabling deep continuous-time hidden layer data state progressions.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Value of the Subject</h3>
-                <p>Provides the tools to shift from static snapshot algebra to dynamic rate-of-change modeling, capturing how the physical world evolves over time.</p>
-            </div>
-        </div>
-        <div class="example-section">
-            <h3>Core Computational Concrete Example</h3>
-            <p><strong>Separable Variable Integration:</strong> Solving the exponential growth equation <span class="example-code">dy/dt = ky</span> by separating variables: <span class="example-code">(1/y)dy = k&sdot;dt</span>. Integrating both sides yields <span class="example-code">ln(y) = kt + C</span>, transforming into the predictive real-world growth model <span class="example-code">y(t) = C&sdot;e^(kt)</span>.</p>
-        </div>
-        <div class="books-section">
-            <h3>Standard Academic Literature (Search to Access)</h3>
-            <ul class="book-list">
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Ordinary Differential Equations</span> – <span class="book-author">Morris Tenenbaum, Harry Pollard</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Differential Equations and Their Applications</span> – <span class="book-author">Martin Braun</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- 9. PARTIAL DIFFERENTIAL EQUATIONS (PDEs) -->
-    <div class="subject-card">
-        <div class="subject-title">9. Partial Differential Equations (PDEs)</div>
-        <div class="meta-section" style="margin-bottom: 20px;">
-            <h3>Introduction</h3>
-            <p>PDEs investigate multivariable functions and their partial derivatives, modeling highly complex physical fields where rates of change vary simultaneously across both space and time scales.</p>
-        </div>
-        <div class="meta-grid">
-            <div class="meta-section">
-                <h3>Real-Life Usage</h3>
-                <p>Powers global weather prediction models, simulates sound waves in acoustic design, regulates nuclear core heat flows, and structures option pricing indices.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Future & Scope</h3>
-                <p>The core computational engine for advanced fluid-structure interactions in aerospace design and modeling plasma field pathways in fusion reactor cores.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Value of the Subject</h3>
-                <p>Enables formal mathematical framing of continuous multi-dimensional physical fields, detailing wave movements, heat diffusion, and complex quantum shifts.</p>
-            </div>
-        </div>
-        <div class="example-section">
-            <h3>Core Computational Concrete Example</h3>
-            <p><strong>Fourier Separation of Variables for the Heat Equation:</strong> Solving <span class="example-code">&part;u/&part;t = k(&part;&sup2;u/&part;x&sup2;)</span> by assuming the solution splits into independent parts: <span class="example-code">u(x,t) = X(x)&sdot;T(t)</span>. This converts a brutal partial differential equation into two simple, easily solvable ordinary differential equations.</p>
-        </div>
-        <div class="books-section">
-            <h3>Standard Academic Literature (Search to Access)</h3>
-            <ul class="book-list">
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Partial Differential Equations</span> – <span class="book-author">Lawrence C. Evans</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Partial Differential Equations: An Introduction</span> – <span class="book-author">Walter A. Strauss</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- 10. PROBABILITY THEORY & STOCHASTIC PROCESSES -->
-    <div class="subject-card">
-        <div class="subject-title">10. Probability Theory & Stochastic Processes</div>
-        <div class="meta-section" style="margin-bottom: 20px;">
-            <h3>Introduction</h3>
-            <p>Probability Theory mathematically analyzes random phenomena. When extended to Stochastic Processes, it models systems that evolve over time with inherent uncertainty, moving beyond deterministic predictions to measure risk and variance.</p>
-        </div>
-        <div class="meta-grid">
-            <div class="meta-section">
-                <h3>Real-Life Usage</h3>
-                <p>Drives algorithmic trading desks (Black-Scholes framework), handles cellular network traffic congestion queue modeling, and forms the basis of insurance risk assessment.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Future & Scope</h3>
-                <p>Crucial for optimizing generative AI sampling paths (like diffusion models), tuning modern reinforcement learning reward tracking, and building predictive quantum models.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Value of the Subject</h3>
-                <p>Transforms raw, volatile noise into clear probability distributions and rigorous expectations, providing a logical framework to make decisions under uncertainty.</p>
-            </div>
-        </div>
-        <div class="example-section">
-            <h3>Core Computational Concrete Example</h3>
-            <p><strong>Bayes' Theorem Update Calculation:</strong> Computing conditional risk mapping via <span class="example-code">P(A|B) = [P(B|A) &sdot; P(A)] / P(B)</span>. This equation allows a system to instantly update the probability of a root cause 'A' occurring given that new observation anomaly data 'B' was detected.</p>
-        </div>
-        <div class="books-section">
-            <h3>Standard Academic Literature (Search to Access)</h3>
-            <ul class="book-list">
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">An Introduction to Probability Theory and Its Applications</span> – <span class="book-author">William Feller</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">A First Course in Stochastic Processes</span> – <span class="book-author">Samuel Karlin, Howard M. Taylor</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- 11. NUMERICAL ANALYSIS -->
-    <div class="subject-card">
-        <div class="subject-title">11. Numerical Analysis</div>
-        <div class="meta-section" style="margin-bottom: 20px;">
-            <h3>Introduction</h3>
-            <p>Numerical Analysis develops, analyzes, and executes algorithms for obtaining constructive numerical approximations to complex mathematical problems where exact analytical solutions are impossible or inefficient.</p>
-        </div>
-        <div class="meta-grid">
-            <div class="meta-section">
-                <h3>Real-Life Usage</h3>
-                <p>Feeds finite element analysis (FEA) software for architectural stress tests, executes large-scale matrix computations in graphics processing units (GPUs), and computes rocket trajectory windows.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Future & Scope</h3>
-                <p>Essential for scaling high-fidelity scientific simulations on exascale supercomputers and minimizing truncation and floating-point round-off errors in training massive model parameters.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Value of the Subject</h3>
-                <p>Bridges pure abstract math definitions with pragmatic engineering realities, translating infinite-step calculus problems into discrete, highly optimized machine operations.</p>
-            </div>
-        </div>
-        <div class="example-section">
-            <h3>Core Computational Concrete Example</h3>
-            <p><strong>Newton-Raphson Root Convergence Method:</strong> Programmatically finding the precise roots of an impossible equation <span class="example-code">f(x) = 0</span> via the iterative step formula <span class="example-code">x_(n+1) = x_n - f(x_n)/f'(x_n)</span>. This technique yields extremely fast quadratic approximation convergence speeds.</p>
-        </div>
-        <div class="books-section">
-            <h3>Standard Academic Literature (Search to Access)</h3>
-            <ul class="book-list">
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Numerical Analysis</span> – <span class="book-author">Richard L. Burden, J. Douglas Faires</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">First Course in the Numerical Analysis of Differential Equations</span> – <span class="book-author">Arieh Iserles</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- 12. DIFFERENTIAL GEOMETRY -->
-    <div class="subject-card">
-        <div class="subject-title">12. Differential Geometry</div>
-        <div class="meta-section" style="margin-bottom: 20px;">
-            <h3>Introduction</h3>
-            <p>Differential Geometry uses calculus techniques to analyze curves, surfaces, and multi-dimensional manifolds. It measures localized spatial changes like geometric curvature without relying on a surrounding flat frame.</p>
-        </div>
-        <div class="meta-grid">
-            <div class="meta-section">
-                <h3>Real-Life Usage</h3>
-                <p>Directly runs GPS satellite clock corrections, geographic mapping tools, 3D computer animation engines, and mechanical engine pathways.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Future & Scope</h3>
-                <p>Foundational for Einstein's General Relativity universe models, advanced computer vision tracking fields, and data manifold classification systems.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Value of the Subject</h3>
-                <p>Teaches how to perform exact calculus transformations directly on curved shapes and spaces, paving the way for modern global physics models.</p>
-            </div>
-        </div>
-        <div class="example-section">
-            <h3>Core Computational Concrete Example</h3>
-            <p><strong>The Metric Tensor & Distance Formula on Curved Manifolds:</strong> Calculating true spatial paths using <span class="example-code">ds&sup2; = &sum; g_ij &sdot; dx^i &sdot; dx^j</span>. This modifies the simple straight-line Pythagorean theorem by blending in the metric tensor coordinate weights <span class="example-code">g_ij</span> to accurately calculate localized surface warps.</p>
-        </div>
-        <div class="books-section">
-            <h3>Standard Academic Literature (Search to Access)</h3>
-            <ul class="book-list">
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Differential Geometry of Curves and Surfaces</span> – <span class="book-author">Manfredo P. do Carmo</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Introduction to Smooth Manifolds</span> – <span class="book-author">John M. Lee</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- 13. SET THEORY & MATHEMATICAL LOGIC -->
-    <div class="subject-card">
-        <div class="subject-title">13. Set Theory & Mathematical Logic</div>
-        <div class="meta-section" style="margin-bottom: 20px;">
-            <h3>Introduction</h3>
-            <p>Set Theory and Mathematical Logic construct the axiomatic bedrock of mathematical consistency, defining set groupings, consistency boundaries, proof validity, and unprovable truths.</p>
-        </div>
-        <div class="meta-grid">
-            <div class="meta-section">
-                <h3>Real-Life Usage</h3>
-                <p>Directly structures relational database algebra engines, safety-critical formal code verification routines, and hardware logic gate array maps.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Future & Scope</h3>
-                <p>Forms the operational core of automated theorem proving software and AI semantic validation models engineered to self-evaluate logic loops.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Value of the Subject</h3>
-                <p>Exposes the definitive outer limits of mathematical truth via Gödel's Incompleteness Theorems, proving some mathematical truths can never be formally demonstrated.</p>
-            </div>
-        </div>
-        <div class="example-section">
-            <h3>Core Computational Concrete Example</h3>
-            <p><strong>Formal Propositional Proof Mechanics:</strong> Applying structural inference models like Modus Ponens: Given conditional truth rules <span class="example-code">P &rarr; Q</span> (If P is true, then Q must follow) and confirming active token entry condition status <span class="example-code">P</span> is true, the structural logic engine automatically deduces absolute fact state validity <span class="example-code">Q</span>.</p>
-        </div>
-        <div class="books-section">
-            <h3>Standard Academic Literature (Search to Access)</h3>
-            <ul class="book-list">
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Set Theory</span> – <span class="book-author">Thomas Jech</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">A Mathematical Introduction to Logic</span> – <span class="book-author">Herbert B. Enderton</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- 14. COMBINATORICS & GRAPH THEORY -->
-    <div class="subject-card">
-        <div class="subject-title">14. Combinatorics & Graph Theory</div>
-        <div class="meta-section" style="margin-bottom: 20px;">
-            <h3>Introduction</h3>
-            <p>Combinatorics handles structured counting within discrete, finite setups, while Graph Theory maps how discrete vertex elements connect via transactional relational edge links.</p>
-        </div>
-        <div class="meta-grid">
-            <div class="meta-section">
-                <h3>Real-Life Usage</h3>
-                <p>Directly runs logistics network delivery optimization plans, social network friend recommendations, and structural chipboard trace logic.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Future & Scope</h3>
-                <p>The core computational engine behind web fraud tracking clusters, chemical molecule feature mapping pipelines, and quantum routing states.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Value of the Subject</h3>
-                <p>Develops structural methods to confidently catalog, evaluate, and optimize interconnected options across massive discrete configuration pools.</p>
-            </div>
-        </div>
-        <div class="example-section">
-            <h3>Core Computational Concrete Example</h3>
-            <p><strong>Permutation Binomial Distribution Counting:</strong> Solving non-overlapping unique path configuration allocations via the formal combinatorial equation <span class="example-code">nCr = n! / [r!(n - r)!]</span>. This isolates the absolute volume of valid path options available in finite setups.</p>
-        </div>
-        <div class="books-section">
-            <h3>Standard Academic Literature (Search to Access)</h3>
-            <ul class="book-list">
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Introductory Combinatorics</span> – <span class="book-author">Richard A. Brualdi</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Introduction to Graph Theory</span> – <span class="book-author">Douglas B. West</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- 15. DYNAMICAL SYSTEMS & CHAOS THEORY -->
-    <div class="subject-card">
-        <div class="subject-title">15. Dynamical Systems & Chaos Theory</div>
-        <div class="meta-section" style="margin-bottom: 20px;">
-            <h3>Introduction</h3>
-            <p>This field maps long-term state progressions within rule-bound environments, detailing how minor deviations in starting states yield dramatic behavioral drift.</p>
-        </div>
-        <div class="meta-grid">
-            <div class="meta-section">
-                <h3>Real-Life Usage</h3>
-                <p>Tracks unpredictable seasonal weather cycles, maps cardiac rhythm fibrillation anomalies, and shapes market pricing model flash crashes.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Future & Scope</h3>
-                <p>Key to predicting turbulence thresholds in rocket engine exhausts and understanding deep pattern fluctuations in global ecosystem stability maps.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Value of the Subject</h3>
-                <p>Explores how simple, completely deterministic equations can produce wildly chaotic, inherently unpredictable results over time.</p>
-            </div>
-        </div>
-        <div class="example-section">
-            <h3>Core Computational Concrete Example</h3>
-            <p><strong>The Logistic Map State Evolution Iteration:</strong> Running recursive state tracking calculations via <span class="example-code">x_(n+1) = r &sdot; x_n(1 - x_n)</span>. Shifting parameter variable weight growth thresholds past <span class="example-code">r = 3.5699</span> directly pushes the system output loop out of stable cycles and straight into deep chaos.</p>
-        </div>
-        <div class="books-section">
-            <h3>Standard Academic Literature (Search to Access)</h3>
-            <ul class="book-list">
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Nonlinear Dynamics and Chaos</span> – <span class="book-author">Steven H. Strogatz</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Differential Equations, Dynamical Systems, and an Introduction to Chaos</span> – <span class="book-author">Morris W. Hirsch, Stephen Smale, Robert L. Devaney</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- 16. CATEGORY THEORY -->
-    <div class="subject-card">
-        <div class="subject-title">16. Category Theory</div>
-        <div class="meta-section" style="margin-bottom: 20px;">
-            <h3>Introduction</h3>
-            <p>Category Theory functions as an overarching structural "meta-language," mapping fundamental mathematical commonalities by analyzing structural transformation paths between domains.</p>
-        </div>
-        <div class="meta-grid">
-            <div class="meta-section">
-                <h3>Real-Life Usage</h3>
-                <p>Dictates typed compiler architectures for modern functional languages (Haskell, Scala) and powers automated complex schema mapping frameworks.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Future & Scope</h3>
-                <p>Providing the underlying axiomatic structural blueprint for advanced, cross-disciplinary quantum programming languages and geometric data architectures.</p>
-            </div>
-            <div class="meta-section">
-                <h3>Value of the Subject</h3>
-                <p>Operates as the ultimate abstraction tool, allowing researchers to transfer solutions discovered in geometry directly over into abstract algebra.</p>
-            </div>
-        </div>
-        <div class="example-section">
-            <h3>Core Computational Concrete Example</h3>
-            <p><strong>Functorial Structural Domain Mapping:</strong> Constructing a clear Functor <span class="example-code">F: C &rarr; D</span> that acts as a structural bridge pipeline. It safely maps items and internal relationship associations from source domain category 'C' over into target framework 'D' while preserving mapping composition paths.</p>
-        </div>
-        <div class="books-section">
-            <h3>Standard Academic Literature (Search to Access)</h3>
-            <ul class="book-list">
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Categories for the Working Mathematician</span> – <span class="book-author">Saunders Mac Lane</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-                <li class="book-item">
-                    <div class="book-info"><span class="book-title">Conceptual Mathematics: A First Introduction to Categories</span> – <span class="book-author">F. William Lawvere, Stephen H. Schanuel</span></div>
-                    <span class="search-hint">Copy Title to Search</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-</div> <!-- Close Container -->
+</div>
 
 <footer>
-    <p>&copy; 2026 Higher Mathematics Reference Directory. Enhanced with Algorithmic Examples & Domain Mapping.</p>
+    <p>&copy; 2026 Mathematics Interactive Framework Dashboard.</p>
 </footer>
+
+<script>
+    function runFastPowering() {
+        // Grab values from input nodes
+        let base = parseInt(document.getElementById('baseInput').value);
+        let exp = parseInt(document.getElementById('expInput').value);
+        let mod = parseInt(document.getElementById('modInput').value);
+        
+        // Element target to output text
+        const resultDiv = document.getElementById('poweringResult');
+        
+        // Validation check
+        if (isNaN(base) || isNaN(exp) || isNaN(mod) || mod <= 0) {
+            resultDiv.style.display = "block";
+            resultDiv.style.borderLeftColor = "#dc2626";
+            resultDiv.innerHTML = "❌ Please enter valid positive integer parameters.";
+            return;
+        }
+
+        let origBase = base;
+        let origExp = exp;
+        
+        // Square and Multiply modular exponentiation logic loop
+        let result = 1;
+        base = base % mod;
+        
+        while (exp > 0) {
+            // If binary digit is odd (1), multiply current base scale step
+            if (exp % 2 === 1) {
+                result = (result * base) % mod;
+            }
+            // Shift binary value and square base tracking weights
+            exp = Math.floor(exp / 2);
+            base = (base * base) % mod;
+        }
+        
+        // Render out calculation trace back block to view layer
+        resultDiv.style.display = "block";
+        resultDiv.style.borderLeftColor = "#16a34a";
+        resultDiv.innerHTML = `<strong>Result:</strong> ${origBase}^${origExp} ≡ <strong>${result}</strong> (mod ${mod})`;
+    }
+    
+    // Auto-execute execution cycle on first document window load step
+    window.onload = runFastPowering;
+</script>
 
 </body>
 </html>
