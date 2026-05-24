@@ -1,647 +1,308 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master Graduate Mathematics Interactive Directory</title>
-    <style>
-        :root {
-            --bg-main: #f1f5f9;
-            --bg-card: #ffffff;
-            --text-dark: #0f172a;
-            --text-muted: #475569;
-            --accent-blue: #2563eb;
-            --accent-muted: #f0fdf4;
-            --border-color: #cbd5e1;
-            --calc-bg: #f8fafc;
-            --success-green: #15803d;
-            --math-font: "Times New Roman", Times, serif;
-            --subject-sep-line: 4px solid #3b82f6;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-main);
-            color: var(--text-dark);
-            line-height: 1.5;
-            padding: 30px 15px;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-        }
-
-        header h1 {
-            font-size: 2.2rem;
-            color: var(--text-dark);
-            margin-bottom: 8px;
-        }
-
-        .subject-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-top: var(--subject-sep-line);
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 35px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        }
-
-        .subject-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-blue);
-            margin-bottom: 15px;
-            padding-bottom: 5px;
-            border-bottom: 1px dashed var(--border-color);
-        }
-
-        .meta-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .meta-section h3 {
-            font-size: 0.85rem;
-            color: #1e293b;
-            margin-bottom: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .meta-section p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .math-symbol {
-            font-family: var(--math-font);
-            font-style: italic;
-            font-size: 1.1rem;
-        }
-
-        .interactive-calc {
-            background-color: var(--calc-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 18px;
-            margin-bottom: 15px;
-        }
-
-        .interactive-calc h4 {
-            font-size: 0.95rem;
-            color: #1e3a8a;
-            margin-bottom: 12px;
-        }
-
-        .calc-formula {
-            font-family: var(--math-font);
-            background: #e2e8f0;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 1.1rem;
-            margin-bottom: 12px;
-            display: inline-block;
-        }
-
-        .input-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 12px;
-            align-items: flex-end;
-        }
-
-        .input-field {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            flex: 1;
-            min-width: 110px;
-        }
-
-        .input-field label {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
-
-        .input-field input, .input-field select {
-            padding: 6px 10px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-size: 0.95rem;
-        }
-
-        .calc-btn {
-            background-color: var(--accent-blue);
-            color: white;
-            border: none;
-            padding: 7px 15px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            border-radius: 4px;
-            cursor: pointer;
-            height: 34px;
-        }
-
-        .calc-btn:hover {
-            background-color: #1d4ed8;
-        }
-
-        .calc-result {
-            margin-top: 12px;
-            padding: 12px;
-            background: white;
-            border-left: 4px solid var(--success-green);
-            border-radius: 4px;
-            font-size: 1rem;
-            font-family: var(--math-font);
-            display: none;
-        }
-
-        .visual-canvas {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            margin-top: 12px;
-            display: block;
-            max-width: 100%;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graduate Mathematics Directory</title>
+    <!-- Tailwind CSS for modern layout styling -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Chart.js for all continuous/analytical graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Vis-network for topological/graph theory node networks -->
+    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .subject-card { transition: all 0.2s ease-in-out; }
+        .subject-card:hover { transform: translateY(-2px); }
+    </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans">
 
-<div class="container">
+    <!-- Header Section -->
+    <header class="bg-white border-b border-slate-200 py-6 px-8 shadow-xs">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <i data-lucide="sigma" class="w-8 h-8 text-blue-600"></i>
+                <h1 class="text-2xl font-bold tracking-tight text-slate-900">Graduate Mathematics Directory</h1>
+            </div>
+            <p class="text-sm text-slate-500 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">16 Active Visualization Engines</p>
+        </div>
+    </header>
 
-    <header>
-        <h1>Graduate Mathematics Interactive Directory</h1>
-        <p>Comprehensive subject curriculum maps cross-linked with live semantic verification environments.</p>
-    </header>
+    <!-- Main Workspace Frame -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Left Column: Navigation Sidebar List (16 Items) -->
+        <div class="lg:col-span-4 bg-white border border-slate-200 rounded-xl p-4 shadow-xs h-[calc(100vh-12rem)] overflow-y-auto">
+            <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-wider px-3 mb-3">Core & Applied Subfields</h2>
+            <nav class="space-y-1" id="subject-menu">
+                <!-- Navigation injection targeting block via JavaScript below -->
+            </nav>
+        </div>
 
-    <!-- 1. REAL ANALYSIS -->
-    <div class="subject-card">
-        <div class="subject-title">1. Real Analysis</div>
-        <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Establishes foundational limits, continuous transformations, and rigorous engineering criteria metrics.</p></div>
-            <div class="meta-section"><h3>Scope</h3><p>Vital for advanced deterministic optimization structures.</p></div>
-        </div>
-        <div class="interactive-calc">
-            <h4>⚡ Live Engine: Sequence Convergency Proof (<span class="math-symbol">&epsilon;-N</span> Verification)</h4>
-            <div class="calc-formula">Target Condition: <span class="math-symbol">a<sub>n</sub> = 1/n &rarr; L = 0</span></div>
-            <div class="input-group">
-                <div class="input-field"><label>Tolerance (<span class="math-symbol">&epsilon;</span>)</label><input type="number" id="epsInp" value="0.01" step="0.001"></div>
-                <button class="calc-btn" onclick="calcReal()">Evaluate Bound</button>
-            </div>
-            <div id="realRes" class="calc-result"></div>
-        </div>
-    </div>
+        <!-- Right Column: Interactive Rendering Arena -->
+        <div class="lg:col-span-8 flex flex-col space-y-6">
+            <!-- Dynamic Sandbox Display Card -->
+            <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-xs flex-1 flex flex-col min-h-[450px]">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
+                    <div>
+                        <h2 id="active-title" class="text-xl font-bold text-slate-900">Select a Subject Module</h2>
+                        <p id="active-desc" class="text-sm text-slate-500 mt-0.5">Choose an arena from the directory list to activate its specialized interactive visualization calculation framework engine.</p>
+                    </div>
+                    <span id="active-badge" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-100">Pure Math</span>
+                </div>
 
-    <!-- 2. COMPLEX ANALYSIS -->
-    <div class="subject-card">
-        <div class="subject-title">2. Complex Analysis</div>
-        <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Maps contour spaces, fluid aerodynamics vectors, and signal processing frequencies.</p></div>
-        </div>
-        <div class="interactive-calc">
-            <h4>⚡ Live Engine: Complex Exponential Transformation</h4>
-            <div class="calc-formula"><span class="math-symbol">e<sup>i&theta;</sup> = cos(&theta;) + i&sdot;sin(&theta;)</span></div>
-            <div class="input-group">
-                <div class="input-field"><label>Angle (<span class="math-symbol">&theta;</span> in degrees)</label><input type="number" id="compDeg" value="60"></div>
-                <button class="calc-btn" onclick="calcComplex()">Map Field</button>
-            </div>
-            <div id="complexRes" class="calc-result"></div>
-        </div>
-    </div>
+                <!-- Dynamic Component Workspace Viewports -->
+                <div class="relative flex-1 w-full flex items-center justify-center min-h-[350px]">
+                    <!-- Canvas Chart Framework Layout Slot -->
+                    <canvas id="chart-viewport" class="w-full h-full max-h-[380px]"></canvas>
+                    <!-- Vis Node Structural Framework Layout Slot -->
+                    <div id="network-viewport" class="absolute inset-0 w-full h-full hidden"></div>
+                </div>
+            </div>
+        </div>
+    </main>
 
-    <!-- 3. ABSTRACT ALGEBRA -->
-    <div class="subject-card">
-        <div class="subject-title">3. Abstract Algebra</div>
-        <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Structures symmetry operations, error correction chains, and fundamental network layouts.</p></div>
-        </div>
-        <div class="interactive-calc">
-            <h4>⚡ Live Engine: Modular Multiplicative Cyclic Fields</h4>
-            <div class="calc-formula">Group Set Orbit: <span class="math-symbol">g<sup>k</sup> mod p</span></div>
-            <div class="input-group">
-                <div class="input-field"><label>Prime Modulus (<span class="math-symbol">p</span>)</label><input type="number" id="algP" value="11"></div>
-                <div class="input-field"><label>Generator (<span class="math-symbol">g</span>)</label><input type="number" id="algG" value="2"></div>
-                <button class="calc-btn" onclick="calcAlgebra()">Build Group</button>
-            </div>
-            <div id="algebraRes" class="calc-result"></div>
-        </div>
-    </div>
+    <!-- Global Application Engine Logic Script -->
+    <script>
+        // Global visual viewport references
+        let activeChartInstance = null;
+        let activeNetworkInstance = null;
 
-    <!-- 4. LINEAR ALGEBRA -->
-    <div class="subject-card">
-        <div class="subject-title">4. Linear Algebra</div>
-        <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Handles coordinate space transformation maps, projection arrays, and dimensionality changes.</p></div>
-        </div>
-        <div class="interactive-calc">
-            <h4>⚡ Live Engine: 2&times;2 Transformation Space Determinant Check</h4>
-            <div class="calc-formula">det(<span class="math-symbol">A</span>) = <span class="math-symbol">ad - bc</span></div>
-            <div class="input-group">
-                <div class="input-field"><label>a</label><input type="number" id="la_a" value="5"></div>
-                <div class="input-field"><label>b</label><input type="number" id="la_b" value="2"></div>
-                <div class="input-field"><label>c</label><input type="number" id="la_c" value="1"></div>
-                <div class="input-field"><label>d</label><input type="number" id="la_d" value="3"></div>
-                <button class="calc-btn" onclick="calcLinear()">Compute Det</button>
-            </div>
-            <div id="linearRes" class="calc-result"></div>
-        </div>
-    </div>
+        const subjectDatabase = [
+            { id: "real-analysis", title: "1. Real Analysis", desc: "Sequence convergence profile verifying bounds relative to an arbitrary epsilon limit criteria.", type: "Pure Math" },
+            { id: "complex-analysis", title: "2. Complex Analysis", desc: "Mapping the exponential mapping orbit trajectory projection space across imaginary unit components.", type: "Pure Math" },
+            { id: "abstract-algebra", title: "3. Abstract Algebra", desc: "Discrete elements distribution mapped inside a finite multiplicative cyclic ring space.", type: "Pure Math" },
+            { id: "linear-algebra", title: "4. Linear Algebra", desc: "Spatial grid basis coordinate transformations under a custom 2D matrix transformation.", type: "Pure Math" },
+            { id: "topology", title: "5. Topology", desc: "Planar graph invariants testing standard Euler structures over spatial geometry.", type: "Pure Math" },
+            { id: "number-theory", title: "6. Number Theory", desc: "Successive remainder periodic loop calculations wrapped inside modular systems.", type: "Pure Math" },
+            { id: "odes", title: "7. Ordinary Differential Equations", desc: "Continuous scale calculations of classic time-domain exponential decay functions.", type: "Applied Math" },
+            { id: "pdes", title: "8. Partial Differential Equations", desc: "Steady-state linear temperature gradient mapping over a Dirichlet spatial boundary.", type: "Applied Math" },
+            { id: "functional-analysis", title: "9. Functional Analysis", desc: "Evaluating coordinate magnitudes against an aggregate L2 space vector norm limit bound.", type: "Pure Math" },
+            { id: "graph-theory", title: "10. Graph Theory", desc: "Adjacency matrix layouts visualizing symmetric networks and link densities.", type: "Pure Math" },
+            { id: "operator-theory", title: "11. Operator Theory", desc: "Tracking resolvent metric mapping curves approaching a spectrum pole singularity point.", type: "Pure Math" },
+            { id: "banach-algebra", title: "12. Banach Algebra", desc: "Verifying norm inequalities mapping the structural properties of complex algebras.", type: "Pure Math" },
+            { id: "math-methods", title: "13. Mathematical Methods", desc: "Fourier series harmonic step expansions reconstructing a perfect target square wave.", type: "Applied Math" },
+            { id: "relativity", title: "14. Relativity", desc: "Lorentz transformation curve tracking time dilation curves as velocity approaches light speed.", type: "Applied Math" },
+            { id: "classical-mech", title: "15. Classical Mechanics", desc: "Evaluating fundamental harmonic period variations across structural physical system lengths.", type: "Applied Math" },
+            { id: "diff-geometry", title: "16. Differential Geometry", desc: "Intrinsic helix curve spiral mapping featuring local tangent directional tracks.", type: "Pure Math" }
+        ];
 
-    <!-- 5. TOPOLOGY -->
-    <div class="subject-card">
-        <div class="subject-title">5. Topology</div>
-        <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Studies deformation-invariant properties, data shapes, and continuous connectivity configurations.</p></div>
-        </div>
-        <div class="interactive-calc">
-            <h4>⚡ Live Engine: Euler Characteristic Invariant Solver</h4>
-            <div class="calc-formula">Invariant Shape Equation: <span class="math-symbol">&chi; = V - E + F</span></div>
-            <div class="input-group">
-                <div class="input-field"><label>Vertices (<span class="math-symbol">V</span>)</label><input type="number" id="tpV" value="4"></div>
-                <div class="input-field"><label>Edges (<span class="math-symbol">E</span>)</label><input type="number" id="tpE" value="6"></div>
-                <div class="input-field"><label>Faces (<span class="math-symbol">F</span>)</label><input type="number" id="tpF" value="4"></div>
-                <button class="calc-btn" onclick="calcTop()">Verify Invariant</button>
-            </div>
-            <div id="topRes" class="calc-result"></div>
-        </div>
-    </div>
+        // Core Window Setup Routing Initialization
+        window.addEventListener('DOMContentLoaded', () => {
+            renderSidebarNavigation();
+            activateSubjectModule("real-analysis"); // Default initial launch target
+            lucide.createIcons();
+        });
 
-    <!-- 6. NUMBER THEORY & CRYPTOGRAPHY -->
-    <div class="subject-card">
-        <div class="subject-title">6. Number Theory & Cryptography</div>
-        <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Powers internet key handshake protocols, signature schemas, and prime parity validations.</p></div>
-        </div>
-        <div class="interactive-calc">
-            <h4>⚡ Live Engine: Fast Powering Framework (Modular Exponentiation)</h4>
-            <div class="calc-formula">Relation: <span class="math-symbol">x<sup>e</sup> &equiv; r (mod n)</span></div>
-            <div class="input-group">
-                <div class="input-field"><label>Base (<span class="math-symbol">x</span>)</label><input type="number" id="ntX" value="3"></div>
-                <div class="input-field"><label>Exponent (<span class="math-symbol">e</span>)</label><input type="number" id="ntE" value="45"></div>
-                <div class="input-field"><label>Modulus (<span class="math-symbol">n</span>)</label><input type="number" id="ntN" value="7"></div>
-                <button class="calc-btn" onclick="calcNT()">Compute Remainder</button>
-            </div>
-            <div id="ntRes" class="calc-result"></div>
-        </div>
-    </div>
+        function renderSidebarNavigation() {
+            const menuContainer = document.getElementById('subject-menu');
+            subjectDatabase.forEach(sub => {
+                const button = document.createElement('button');
+                button.id = `nav-${sub.id}`;
+                button.className = "subject-card w-full flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-lg text-left text-slate-600 hover:bg-slate-100 hover:text-slate-900 cursor-pointer";
+                button.onclick = () => activateSubjectModule(sub.id);
+                
+                button.innerHTML = `
+                    <div class="flex items-center space-x-2.5 truncate">
+                        <span class="w-2 h-2 rounded-full ${sub.type === 'Pure Math' ? 'bg-blue-500' : 'bg-emerald-500'}"></span>
+                        <span class="truncate">${sub.title}</span>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                `;
+                menuContainer.appendChild(button);
+            });
+        }
 
-    <!-- 7. ORDINARY DIFFERENTIAL EQUATIONS (ODEs) -->
-    <div class="subject-card">
-        <div class="subject-title">7. Ordinary Differential Equations (ODEs)</div>
-        <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Models physical trajectories, structural vibrations, and single-parameter dynamical flows over time.</p></div>
-        </div>
-        <div class="interactive-calc">
-            <h4>⚡ Live Engine: Continuous Exponential Decay/Growth Tracker</h4>
-            <div class="calc-formula">Analytical Solution Form: <span class="math-symbol">y(t) = y<sub>0</sub> &sdot; e<sup>kt</sup></span></div>
-            <div class="input-group">
-                <div class="input-field"><label>Initial Amplitude (<span class="math-symbol">y<sub>0</sub></span>)</label><input type="number" id="odeY" value="10"></div>
-                <div class="input-field"><label>Coefficient (<span class="math-symbol">k</span>)</label><input type="number" id="odeK" value="-0.5" step="0.1"></div>
-                <div class="input-field"><label>Time Target (<span class="math-symbol">t</span>)</label><input type="number" id="odeT" value="4"></div>
-                <button class="calc-btn" onclick="calcODE()">Project State</button>
-            </div>
-            <div id="odeRes" class="calc-result"></div>
-        </div>
-    </div>
+        function clearViewports() {
+            if(activeChartInstance) { activeChartInstance.destroy(); activeChartInstance = null; }
+            if(activeNetworkInstance) { activeNetworkInstance.destroy(); activeNetworkInstance = null; }
+            document.getElementById('chart-viewport').style.display = 'none';
+            document.getElementById('network-viewport').style.display = 'none';
+        }
 
-    <!-- 8. PARTIAL DIFFERENTIAL EQUATIONS (PDEs) -->
-    <div class="subject-card">
-        <div class="subject-title">8. Partial Differential Equations (PDEs)</div>
-        <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Simulates continuous fluid fields, thermodynamics gradients, and multi-variable boundary distributions.</p></div>
-        </div>
-        <div class="interactive-calc">
-            <h4>⚡ Live Engine: 1D Steady State Linear Heat Interpolator</h4>
-            <div class="calc-formula">Boundary Formula: <span class="math-symbol">u(x) = u<sub>0</sub> + x &sdot; (u<sub>1</sub> - u<sub>0</sub>)</span></div>
-            <div class="input-group">
-                <div class="input-field"><label>Left Temp (<span class="math-symbol">u<sub>0</sub></span>)</label><input type="number" id="pdeL" value="80"></div>
-                <div class="input-field"><label>Right Temp (<span class="math-symbol">u<sub>1</sub></span>)</label><input type="number" id="pdeR" value="20"></div>
-                <div class="input-field"><label>Node Position (<span class="math-symbol">x</span> [0,1])</label><input type="number" id="pdeX" value="0.2" step="0.1" min="0" max="1"></div>
-                <button class="calc-btn" onclick="calcPDE()">Resolve Value</button>
-            </div>
-            <div id="pdeRes" class="calc-result"></div>
-        </div>
-    </div>
+        function activateSubjectModule(id) {
+            const subject = subjectDatabase.find(s => s.id === id);
+            if(!subject) return;
 
-    <!-- 9. FUNCTIONAL ANALYSIS -->
-    <div class="subject-card">
-        <div class="subject-title">9. Functional Analysis</div>
-        <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Explores infinite-dimensional vector structures, limit metrics, and inner product function spaces.</p></div>
-        </div>
-        <div class="interactive-calc">
-            <h4>⚡ Live Engine: Discrete <span class="math-symbol">l<sup>2</sup></span> Hilbert Space Sequence Norm Evaluator</h4>
-            <div class="calc-formula">Inner Product Vector Standard: <span class="math-symbol">||x|| = &radic;(&sum; |x<sub>i</sub>|<sup>2</sup>)</span></div>
-            <div class="input-group">
-                <div class="input-field"><label>Element <span class="math-symbol">x<sub>1</sub></span></label><input type="number" id="fa1" value="3"></div>
-                <div class="input-field"><label>Element <span class="math-symbol">x<sub>2</sub></span></label><input type="number" id="fa2" value="4"></div>
-                <div class="input-field"><label>Element <span class="math-symbol">x<sub>3</sub></span></label><input type="number" id="fa3" value="12"></div>
-                <button class="calc-btn" onclick="calcFunctional()">Compute Space Norm</button>
-            </div>
-            <div id="faRes" class="calc-result"></div>
-        </div>
-    </div>
+            // Highlight Active Navbar Element
+            subjectDatabase.forEach(s => {
+                const btn = document.getElementById(`nav-${s.id}`);
+                if(btn) btn.className = btn.className.replace(" bg-blue-50 text-blue-700", "").replace(" font-semibold", "");
+            });
+            const activeBtn = document.getElementById(`nav-${id}`);
+            if(activeBtn) activeBtn.className += " bg-blue-50 text-blue-700 font-semibold";
 
-    <!-- 10. GRAPH THEORY -->
-    <div class="subject-card">
-        <div class="subject-title">10. Graph Theory</div>
-        <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Maps discrete network connectivity, trace paths, routing circuits, and optimization nodes.</p></div>
-        </div>
-        <div class="interactive-calc">
-            <h4>⚡ Live Engine: Structural Node Tree Edge Connectivity Generator</h4>
-            <div class="calc-formula">Handshaking Lemma: <span class="math-symbol">&sum; deg(v<sub>i</sub>) = 2 &sdot; |E|</span></div>
-            <div class="input-group">
-                <div class="input-field"><label>Total Node Matrix Order (<span class="math-symbol">V</span>)</label><input type="number" id="gtNodes" value="5" min="2" max="8"></div>
-                <button class="calc-btn" onclick="drawGraph()">Render Network Map</button>
-            </div>
-            <div id="gtRes" class="calc-result"></div>
-            <canvas id="graphCanvas" class="visual-canvas" width="400" height="200"></canvas>
-        </div>
-    </div>
+            // Update UI Information Panel Headers
+            document.getElementById('active-title').innerText = subject.title;
+            document.getElementById('active-desc').innerText = subject.desc;
+            
+            const badge = document.getElementById('active-badge');
+            badge.innerText = subject.type;
+            badge.className = `text-xs font-semibold px-2.5 py-1 rounded-md border ${subject.type === 'Pure Math' ? 'bg-blue-50 text-blue-700 border-blue-100' : 'bg-emerald-50 text-emerald-700 border-emerald-100'}`;
 
-    <!-- 11. OPERATOR THEORY -->
-    <div class="subject-card">
-        <div class="subject-title">11. Operator Theory</div>
-        <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Analyzes linear operator mappings, spectrum behaviors, and state matrices within quantum mechanics formulas.</p></div>
-        </div>
-        <div class="interactive-calc">
-            <h4>⚡ Live Engine: Operator Scaling Spectral Inversion Solver</h4>
-            <div class="calc-formula">Resolvent Mapping Set Relation: <span class="math-symbol">R(&lambda;) = (&lambda;I - T)<sup>-1</sup></span></div>
-            <div class="input-group">
-                <div class="input-field"><label>Operator Scaling Factor (<span class="math-symbol">k</span>)</label><input type="number" id="opT" value="2"></div>
-                <div class="input-field"><label>Spectrum Parameter (<span class="math-symbol">&lambda;</span>)</label><input type="number" id="opLam" value="5"></div>
-                <button class="calc-btn" onclick="calcOperator()">Compute Resolvent</button>
-            </div>
-            <div id="opRes" class="calc-result"></div>
-        </div>
-    </div>
+            clearViewports();
+            
+            // Core Engine Router Pipeline Selection Switch
+            const useNetwork = ["topology", "graph-theory"].includes(id);
+            if(useNetwork) {
+                document.getElementById('network-viewport').style.display = 'block';
+                renderNetworkEngine(id);
+            } else {
+                document.getElementById('chart-viewport').style.display = 'block';
+                renderChartEngine(id);
+            }
+        }
 
-    <!-- 12. BANACH ALGEBRA -->
-    <div class="subject-card">
-        <div class="subject-title">12. Banach Algebra</div>
-        <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Unifies algebraic multiplication structures with complete normed topology properties.</p></div>
-        </div>
-        <div class="interactive-calc">
-            <h4>⚡ Live Engine: Sub-Multiplicative Vector Inequality Verifier</h4>
-            <div class="calc-formula">Axiom Invariant Bound: <span class="math-symbol">||A &sdot; B|| &le; ||A|| &sdot; ||B||</span></div>
-            <div class="input-group">
-                <div class="input-field"><label>Norm <span class="math-symbol">||A||</span></label><input type="number" id="baA" value="4"></div>
-                <div class="input-field"><label>Norm <span class="math-symbol">||B||</span></label><input type="number" id="baB" value="3"></div>
-                <button class="calc-btn" onclick="calcBanach()">Verify Property</button>
-            </div>
-            <div id="baRes" class="calc-result"></div>
-        </div>
-    </div>
+        // =====================================================================
+        // Continuous Chart Rendering Framework Engine
+        // =====================================================================
+        function renderChartEngine(id) {
+            const ctx = document.getElementById('chart-viewport').getContext('2d');
+            let chartConfig = { type: 'line', data: { datasets: [] }, options: { responsive: true, maintainAspectRatio: false } };
 
-    <!-- 13. MATHEMATICAL METHODS -->
-    <div class="subject-card">
-        <div class="subject-title">13. Mathematical Methods</div>
-        <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Provides advanced engineering toolkits like Fourier transforms, orthogonal functions, and series expansion approximations.</p></div>
-        </div>
-        <div class="interactive-calc">
-            <h4>⚡ Live Engine: Fourier Square Wave Approximation Engine</h4>
-            <div class="calc-formula">Harmonic Form: <span class="math-symbol">f(t) = (4/&pi;) &sdot; &sum; [sin(n&sdot;t) / n]</span> (for odd values of <span class="math-symbol">n</span>)</div>
-            <div class="input-group">
-                <div class="input-field"><label>Time Offset (<span class="math-symbol">t</span>)</label><input type="number" id="mmT" value="1.5" step="0.1"></div>
-                <div class="input-field"><label>Harmonic Cutoff Orders</label>
-                    <select id="mmN">
-                        <option value="1">1 Harmonic (Fundamental)</option>
-                        <option value="3">3 Harmonics</option>
-                        <option value="5">5 Harmonics</option>
-                    </select>
-                </div>
-                <button class="calc-btn" onclick="calcMethods()">Evaluate Expansion</button>
-            </div>
-            <div id="mmRes" class="calc-result"></div>
-        </div>
-    </div>
+            switch(id) {
+                case "real-analysis":
+                    let raPoints = Array.from({length: 30}, (_, i) => ({ x: i+1, y: 1/(i+1) }));
+                    chartConfig.data.datasets = [
+                        { label: 'a_n = 1/n', data: raPoints, borderColor: '#2563eb', backgroundColor: '#2563eb', showLine: true, tension: 0.1 },
+                        { label: 'Epsilon Limit (ε = 0.08)', data: [{x:1, y:0.08}, {x:30, y:0.08}], borderColor: '#ef4444', borderDash: [6,4], pointRadius: 0 }
+                    ];
+                    chartConfig.options.scales = { x: { type: 'linear', title: { display: true, text: 'Index (n)' } }, y: { min: 0, max: 1.1 } };
+                    break;
 
-    <!-- 14. RELATIVITY -->
-    <div class="subject-card">
-        <div class="subject-title">14. Relativity</div>
-        <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Calculates space-time metrics, gravitational coordinate distortions, and high-velocity transformations.</p></div>
-        </div>
-        <div class="interactive-calc">
-            <h4>⚡ Live Engine: Special Relativistic Lorentz Time Dilation Calculator</h4>
-            <div class="calc-formula">Time Distortion Law: <span class="math-symbol">&Delta;t' = &Delta;t / &radic;(1 - v<sup>2</sup>/c<sup>2</sup>)</span></div>
-            <div class="input-group">
-                <div class="input-field"><label>Stationary Time (<span class="math-symbol">&Delta;t</span> sec)</label><input type="number" id="relT" value="10"></div>
-                <div class="input-field"><label>Velocity Fractional Speed (<span class="math-symbol">v/c</span>)</label><input type="number" id="relV" value="0.8" step="0.05" min="0" max="0.99"></div>
-                <button class="calc-btn" onclick="calcRelativity()">Project Dilation</button>
-            </div>
-            <div id="relRes" class="calc-result"></div>
-        </div>
-    </div>
+                case "complex-analysis":
+                    let cxCircle = Array.from({length: 100}, (_, i) => { let t = (i/99)*2*Math.PI; return { x: Math.cos(t), y: Math.sin(t) }; });
+                    let angle = Math.PI / 3; // 60 degrees target point vector transformation 
+                    chartConfig.data.datasets = [
+                        { label: 'Unit Circle Plane Boundary', data: cxCircle, borderColor: '#cbd5e1', pointRadius: 0, showLine: true },
+                        { label: 'e^(i*θ) Transformation Vector', data: [{x:0,y:0}, {x: Math.cos(angle), y: Math.sin(angle)}], borderColor: '#2563eb', showLine: true, pointRadius: 4, backgroundColor: '#2563eb' }
+                    ];
+                    chartConfig.options.scales = { x: { type: 'linear', min: -1.2, max: 1.2 }, y: { min: -1.2, max: 1.2 } };
+                    break;
 
-    <!-- 15. CLASSICAL MECHANICS -->
-    <div class="subject-card">
-        <div class="subject-title">15. Classical Mechanics</div>
-        <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Tracks kinetic mechanical energy states, Lagrangian path optimizations, and momentum vector fields.</p></div>
-        </div>
-        <div class="interactive-calc">
-            <h4>⚡ Live Engine: Planar Simple Pendulum Angular Period Solver</h4>
-            <div class="calc-formula">Small-Angle Approximation Invariant: <span class="math-symbol">T = 2&pi; &sdot; &radic;(L / g)</span></div>
-            <div class="input-group">
-                <div class="input-field"><label>Pendulum Cord length (<span class="math-symbol">L</span> meters)</label><input type="number" id="cmL" value="2"></div>
-                <div class="input-field"><label>Gravity (<span class="math-symbol">g</span> m/s²)</label><input type="number" id="cmG" value="9.81"></div>
-                <button class="calc-btn" onclick="calcClassical()">Solve Period</button>
-            </div>
-            <div id="cmRes" class="calc-result"></div>
-        </div>
-    </div>
+                case "abstract-algebra":
+                    let g = 2, p = 11, aaPoints = [];
+                    let curr = 1;
+                    for(let k=0; k<11; k++) {
+                        aaPoints.push({ x: k, y: curr });
+                        curr = (curr * g) % p;
+                    }
+                    chartConfig.type = 'bar';
+                    chartConfig.data.labels = aaPoints.map(p => `k=${p.x}`);
+                    chartConfig.data.datasets = [{ label: 'g^k mod p Group Residues', data: aaPoints.map(p => p.y), backgroundColor: '#2563eb' }];
+                    break;
 
-    <!-- 16. DIFFERENTIAL GEOMETRY -->
-    <div class="subject-card">
-        <div class="subject-title">16. Differential Geometry</div>
-        <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Calculates surface curves, tangent plane vectors, and local intrinsic space curvature metrics.</p></div>
-        </div>
-        <div class="interactive-calc">
-            <h4>⚡ Live Engine: Geometric Helix Mapping & Tangent Vector Visualizer</h4>
-            <div class="calc-formula">Space Curve Model: <span class="math-symbol">r(t) = (cos(t), sin(t), 0.2&sdot;t)</span></div>
-            <div class="input-group">
-                <div class="input-field"><label>Curve Parameter Space (<span class="math-symbol">t</span>)</label><input type="range" id="dgT" min="0" max="12" step="0.1" value="3" oninput="drawGeometry()"></div>
-                <button class="calc-btn" onclick="drawGeometry()">Plot Tangent State</button>
-            </div>
-            <div id="dgRes" class="calc-result"></div>
-            <canvas id="geometryCanvas" class="visual-canvas" width="400" height="250"></canvas>
-        </div>
-    </div>
+                case "linear-algebra":
+                    chartConfig.data.datasets = [
+                        { label: 'Basis Vector i-hat', data: [{x:0,y:0}, {x:1,y:0}], borderColor: '#cbd5e1', borderDash:[4,4], showLine:true },
+                        { label: 'Basis Vector j-hat', data: [{x:0,y:0}, {x:0,y:1}], borderColor: '#cbd5e1', borderDash:[4,4], showLine:true },
+                        { label: 'Transformed Basis Ax_1', data: [{x:0,y:0}, {x:2,y:1}], borderColor: '#2563eb', showLine:true, pointRadius: 5 },
+                        { label: 'Transformed Basis Ax_2', data: [{x:0,y:0}, {x:1,y:3}], borderColor: '#ef4444', showLine:true, pointRadius: 5 }
+                    ];
+                    chartConfig.options.scales = { x: { type: 'linear', min:-0.5, max: 3.5 }, y: { min:-0.5, max:3.5 } };
+                    break;
 
-</div>
+                case "number-theory":
+                    let ntPoints = Array.from({length: 20}, (_, i) => ({ x: i, y: Math.pow(3, i) % 7 }));
+                    chartConfig.data.datasets = [{ label: '3^k mod 7 Periodic Elements Track', data: ntPoints, borderColor: '#2563eb', showLine:true, tension:0.1 }];
+                    chartConfig.options.scales = { x: { type: 'linear', title: { display:true, text:'Exponent Step Index' } }, y: { min:0, max:7 } };
+                    break;
 
-<footer>
-    <p>&copy; 2026 Mathematics Interactive Framework Dashboard.</p>
-</footer>
+                case "odes":
+                    let odePoints = Array.from({length: 50}, (_, i) => { let t = i*0.1; return { x: t, y: 10 * Math.exp(-0.6 * t) }; });
+                    chartConfig.data.datasets = [{ label: 'y(t) Continuous Decay Flow Matrix', data: odePoints, borderColor: '#2563eb', pointRadius:0, showLine:true }];
+                    chartConfig.options.scales = { x: { type: 'linear', title: { display:true, text:'Time (t)' } } };
+                    break;
 
-<script>
-    // 1. Real Analysis
-    function calcReal() {
-        let eps = parseFloat(document.getElementById('epsInp').value);
-        let div = document.getElementById('realRes'); div.style.display = "block";
-        if(isNaN(eps) || eps <= 0) { div.innerHTML = "❌ Input valid error bound."; return; }
-        let N = Math.ceil(1/eps);
-        div.innerHTML = `For convergence tolerance parameter <span class="math-symbol">&epsilon; = ${eps}</span>, the threshold index <span class="math-symbol">N = ${N}</span>. For all steps <span class="math-symbol">n &gt; ${N}</span>, error spacing <span class="math-symbol">|1/n - 0| &lt; ${eps}</span> is analytically verified.`;
-    }
+                case "pdes":
+                    let pdePoints = Array.from({length: 20}, (_, i) => { let x = i/19; return { x: x, y: 80 + x * (20 - 80) }; });
+                    chartConfig.data.datasets = [{ label: 'Steady-State Linear Heat Solution u(x)', data: pdePoints, borderColor: '#2563eb', showLine:true }];
+                    break;
 
-    // 2. Complex Analysis
-    function calcComplex() {
-        let deg = parseFloat(document.getElementById('compDeg').value);
-        let div = document.getElementById('complexRes'); div.style.display = "block";
-        let rad = deg * Math.PI / 180;
-        div.innerHTML = `<span class="math-symbol">e<sup>i&sdot;${deg}&deg;</sup> = cos(${deg}&deg;) + i&sdot;sin(${deg}&deg;) = <strong>${Math.cos(rad).toFixed(4)} + ${Math.sin(rad).toFixed(4)}i</strong></span>`;
-    }
+                case "functional-analysis":
+                    chartConfig.type = 'bar';
+                    chartConfig.data.labels = ['x_1 Coordinate', 'x_2 Coordinate', 'x_3 Coordinate', 'L2 Vector Norm Threshold'];
+                    chartConfig.data.datasets = [{ label: 'Space Elements Evaluation Magnitude', data: [3, 4, 12, 13], backgroundColor: ['#cbd5e1','#cbd5e1','#cbd5e1','#2563eb'] }];
+                    break;
 
-    // 3. Abstract Algebra
-    function calcAlgebra() {
-        let p = parseInt(document.getElementById('algP').value);
-        let g = parseInt(document.getElementById('algG').value);
-        let div = document.getElementById('algebraRes'); div.style.display = "block";
-        let orbit = []; let curr = 1;
-        for(let i=0; i<p; i++){
-            orbit.push(curr); curr = (curr * g) % p; if(curr === 1) break;
-        }
-        div.innerHTML = `Generated Cyclic Subgroup Orbit Space Elements: <strong>{ ${orbit.join(', ')} }</strong> <br> Subgroup Order Size = ${orbit.length} elements.`;
-    }
+                case "operator-theory":
+                    let opPoints = Array.from({length: 50}, (_, i) => { let lam = 2.2 + (i/49)*5; return { x: lam, y: 1 / (lam - 2) }; });
+                    chartConfig.data.datasets = [{ label: 'Resolvent R(λ) Scale Graph', data: opPoints, borderColor: '#2563eb', pointRadius:0, showLine:true }];
+                    chartConfig.options.scales = { x: { type: 'linear', title: { display:true, text: 'Spectrum Operator Spectrum Parameter (λ)' } } };
+                    break;
 
-    // 4. Linear Algebra
-    function calcLinear() {
-        let a = parseFloat(document.getElementById('la_a').value);
-        let b = parseFloat(document.getElementById('la_b').value);
-        let c = parseFloat(document.getElementById('la_c').value);
-        let d = parseFloat(document.getElementById('la_d').value);
-        let div = document.getElementById('linearRes'); div.style.display = "block";
-        let det = (a*d) - (b*c);
-        div.innerHTML = `Computed Space Scaling Invariant det(<span class="math-symbol">A</span>) = (${a}&sdot;${d}) - (${b}&sdot;${c}) = <strong>${det}</strong>. Space is ${det!==0?'Invertible':'Singular (Collapsed)'}.`;
-    }
+                case "banach-algebra":
+                    chartConfig.type = 'bar';
+                    chartConfig.data.labels = ['||A|| Element Norm', '||B|| Element Norm', '||A|| * ||B|| Sub-multiplicative Limit'];
+                    chartConfig.data.datasets = [{ label: 'Algebra Space Boundary Profiles', data: [4, 3, 12], backgroundColor: ['#cbd5e1','#cbd5e1','#2563eb'] }];
+                    break;
 
-    // 5. Topology
-    function calcTop() {
-        let v = parseInt(document.getElementById('tpV').value);
-        let e = parseInt(document.getElementById('tpE').value);
-        let f = parseInt(document.getElementById('tpF').value);
-        let div = document.getElementById('topRes'); div.style.display = "block";
-        let chi = v - e + f;
-        div.innerHTML = `Euler Signature Output: <span class="math-symbol">&chi; = V - E + F = ${v} - ${e} + ${f} = <strong>${chi}</strong></span>. Space configuration class verified.`;
-    }
+                case "math-methods":
+                    let mmPoints = Array.from({length: 200}, (_, i) => {
+                        let t = -Math.PI + (i/199)*2*Math.PI;
+                        let f = (4/Math.PI) * (Math.sin(t) + Math.sin(3*t)/3 + Math.sin(5*t)/5);
+                        return { x: t, y: f };
+                    });
+                    chartConfig.data.datasets = [{ label: 'Fourier Approximation (5 Harmonics Partial Sum)', data: mmPoints, borderColor: '#2563eb', pointRadius:0, showLine:true }];
+                    break;
 
-    // 6. Number Theory
-    function calcNT() {
-        let x = parseInt(document.getElementById('ntX').value);
-        let e = parseInt(document.getElementById('ntE').value);
-        let n = parseInt(document.getElementById('ntN').value);
-        let div = document.getElementById('ntRes'); div.style.display = "block";
-        let r = 1; let base = x % n;
-        let origE = e;
-        while(e > 0) {
-            if(e % 2 === 1) r = (r * base) % n;
-            e = Math.floor(e/2); base = (base * base) % n;
-        }
-        div.innerHTML = `Square-and-Multiply Result: <span class="math-symbol">${x}<sup>${origE}</sup> &equiv; <strong>${r}</strong> (mod ${n})</span>`;
-    }
+                case "relativity":
+                    let relPoints = Array.from({length: 50}, (_, i) => { let v = (i/49)*0.9; return { x: v, y: 10 / Math.sqrt(1 - v*v) }; });
+                    chartConfig.data.datasets = [{ label: 'Lorentz Expansion Dilation Profile Matrix', data: relPoints, borderColor: '#2563eb', pointRadius:0, showLine:true }];
+                    chartConfig.options.scales = { x: { type: 'linear', title: { display:true, text: 'Fractional Speed Velocity Ratio (v/c)' } } };
+                    break;
 
-    // 7. ODEs
-    function calcODE() {
-        let y0 = parseFloat(document.getElementById('odeY').value);
-        let k = parseFloat(document.getElementById('odeK').value);
-        let t = parseFloat(document.getElementById('odeT').value);
-        let div = document.getElementById('odeRes'); div.style.display = "block";
-        let res = y0 * Math.exp(k * t);
-        div.innerHTML = `Evaluated Value State at time parameter <span class="math-symbol">t = ${t}</span>: <span class="math-symbol">y(${t}) = ${y0}&sdot;e<sup>${k}&sdot;${t}</sup> = <strong>${res.toFixed(4)}</strong></span>`;
-    }
+                case "classical-mech":
+                    let cmPoints = Array.from({length: 50}, (_, i) => { let L = 0.1 + (i/49)*4.9; return { x: L, y: 2 * Math.PI * Math.sqrt(L / 9.81) }; });
+                    chartConfig.data.datasets = [{ label: 'Swing System Period Tracker Range T(L)', data: cmPoints, borderColor: '#2563eb', pointRadius:0, showLine:true }];
+                    chartConfig.options.scales = { x: { type: 'linear', title: { display:true, text: 'Pendulum Structural Length Scale (meters)' } } };
+                    break;
 
-    // 8. PDEs
-    function calcPDE() {
-        let l = parseFloat(document.getElementById('pdeL').value);
-        let r = parseFloat(document.getElementById('pdeR').value);
-        let x = parseFloat(document.getElementById('pdeX').value);
-        let div = document.getElementById('pdeRes'); div.style.display = "block";
-        let val = l + x*(r - l);
-        div.innerHTML = `Steady-State Interpolation Profile at Node Point position <span class="math-symbol">x = ${x}</span>: <span class="math-symbol">u(${x}) = <strong>${val.toFixed(2)}</strong></span>`;
-    }
+                case "diff-geometry":
+                    let dgPoints = Array.from({length: 100}, (_, i) => { let t = (i/99)*10; return { x: Math.cos(t), y: Math.sin(t) }; });
+                    chartConfig.data.datasets = [
+                        { label: 'Helix Projection Path Matrix 2D Profile', data: dgPoints, borderColor: '#cbd5e1', pointRadius:0, showLine:true },
+                        { label: 'Instantaneous Local Tangent Track r\'(t)', data: [{x:0.54, y:0.84}, {x:-0.3, y:1.38}], borderColor: '#2563eb', showLine:true, pointRadius:3 }
+                    ];
+                    break;
+            }
 
-    // 9. Functional Analysis
-    function calcFunctional() {
-        let v1 = parseFloat(document.getElementById('fa1').value);
-        let v2 = parseFloat(document.getElementById('fa2').value);
-        let v3 = parseFloat(document.getElementById('fa3').value);
-        let div = document.getElementById('faRes'); div.style.display = "block";
-        let norm = Math.sqrt(v1*v1 + v2*v2 + v3*v3);
-        div.innerHTML = `Hilbert Sequence Coord Norm Value: <span class="math-symbol">||x|| = &radic;(${v1}<sup>2</sup> + ${v2}<sup>2</sup> + ${v3}<sup>2</sup>) = <strong>${norm.toFixed(4)}</strong></span>`;
-    }
+            activeChartInstance = new Chart(ctx, chartConfig);
+        }
 
-    // 10. Graph Theory (With Complete Canvas Engine)
-    function drawGraph() {
-        let numNodes = parseInt(document.getElementById('gtNodes').value);
-        let div = document.getElementById('gtRes'); div.style.display = "block";
-        let canvas = document.getElementById('graphCanvas');
-        let ctx = canvas.getContext('2d');
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        let nodes = [];
-        let cx = canvas.width / 2; let cy = canvas.height / 2; let r = 65;
-        
-        for(let i=0; i<numNodes; i++) {
-            let ang = (i * 2 * Math.PI) / numNodes;
-            nodes.push({x: cx + r*Math.cos(ang), y: cy + r*Math.sin(ang)});
-        }
-        
-        // Connect all nodes together (Complete Graph K_n)
-        ctx.strokeStyle = '#cbd5e1'; 
-        ctx.lineWidth = 1.5;
-        let edgeCount = 0;
-        for(let i=0; i<nodes.length; i++) {
-            for(let j=i+1; j<nodes.length; j++) {
-                ctx.beginPath(); 
-                ctx.moveTo(nodes[i].x, nodes[i].y); 
-                ctx.lineTo(nodes[j].x, nodes[j].y);
-                ctx.stroke();
-                edgeCount++;
-            }
-        }
-        
-        // Draw Nodes
-        nodes.forEach((node, index) => {
-            ctx.fillStyle = '#2563eb';
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, 10, 0, 2*Math.PI);
-            ctx.fill();
-            
-            ctx.fillStyle = '#ffffff';
-            ctx.font = '10px sans-serif'
+        // =====================================================================
+        // Topological & Network Node Structures Rendering Engine
+        // =====================================================================
+        function renderNetworkEngine(id) {
+            const container = document.getElementById('network-viewport');
+            let data = { nodes: [], edges: [] };
+            const options = {
+                nodes: { shape: 'circle', color: { background: '#2563eb', border: '#1d4ed8' }, font: { color: '#ffffff', size: 14, face: 'sans-serif' }, borderWidth: 2 },
+                edges: { color: '#cbd5e1', width: 2, smooth: false },
+                physics: { stabilization: true }
+            };
+
+            if(id === "topology") {
+                // Classic Tetrahedron Graph (4 Nodes, Complete Structure Invariant Topology)
+                data.nodes = [ {id:1, label:'V1'}, {id:2, label:'V2'}, {id:3, label:'V3'}, {id:4, label:'V4'} ];
+                data.edges = [
+                    {from:1, to:2}, {from:1, to:3}, {from:1, to:4},
+                    {from:2, to:3}, {from:2, to:4}, {from:3, to:4}
+                ];
+            } else if(id === "graph-theory") {
+                // Symmetric Matrix Structure K_5 Network
+                data.nodes = Array.from({length: 5}, (_, i) => ({ id: i+1, label: `N${i+1}` }));
+                for(let i=1; i<=5; i++) {
+                    for(let j=i+1; j<=5; j++) {
+                        data.edges.push({ from: i, to: j });
+                    }
+                }
+            }
+
+            activeNetworkInstance = new vis.Network(container, data, options);
+        }
+    </script>
+</body>
+</html>
