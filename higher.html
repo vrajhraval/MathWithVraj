@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master Graduate Mathematics 3D Interactive Directory</title>
+    <title>Master Graduate Mathematics Interactive Directory</title>
     <script>
         window.MathJax = {
             tex: {
@@ -160,11 +160,6 @@
             color: #000000;
         }
 
-        .input-field input[type="range"] {
-            padding: 0;
-            cursor: pointer;
-        }
-
         .calc-btn {
             background-color: #0f172a;
             color: white;
@@ -201,7 +196,6 @@
             margin-top: 14px;
             display: block;
             max-width: 100%;
-            box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
         }
 
         footer {
@@ -217,241 +211,239 @@
 <div class="container">
 
     <header>
-        <h1>Graduate Mathematics 3D Interactive Engine Directory</h1>
-        <p>Comprehensive subject curriculum maps enhanced with high-contrast, deep-ink 3D structural projection components.</p>
+        <h1>Graduate Mathematics High-Contrast Interactive Directory</h1>
+        <p>Comprehensive subject curriculum maps enhanced with deep-ink, high-visibility 2D analytics calculators.</p>
     </header>
 
     <div class="subject-card">
         <div class="subject-title">1. Real Analysis</div>
         <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Establishes foundational limits, continuous transformations, and rigorous metrics.</p></div>
+            <div class="meta-section"><h3>Core Applications</h3><p>Establishes foundational limits, continuous transformations, and rigorous neighborhood criteria metrics.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: 3D Sequence Convergency Spiral ($\epsilon-N$ Verification Space)</h4>
-            <div class="calc-formula">Target Sequence Condition: $a_n = \frac{1}{n} \to L = 0$ mapped dynamically across complex phase rotations.</div>
+            <h4>⚡ Analytics Engine: Sequence Convergency Proof ($\epsilon-N$ Verification)</h4>
+            <div class="calc-formula">Target Condition: $a_n = \frac{1}{n} \to L = 0$</div>
             <div class="input-group">
                 <div class="input-field"><label>Tolerance ($\epsilon$)</label><input type="number" id="epsInp" value="0.05" step="0.005" min="0.001" oninput="calcReal()"></div>
-                <div class="input-field"><label>3D Yaw Rotation</label><input type="range" id="realYaw" min="0" max="360" value="45" oninput="calcReal()"></div>
                 <button class="calc-btn" onclick="calcReal()">Evaluate Bound</button>
             </div>
             <div id="realRes" class="calc-result"></div>
-            <canvas id="realCanvas" class="visual-canvas" width="450" height="250"></canvas>
+            <canvas id="realCanvas" class="visual-canvas" width="450" height="200"></canvas>
         </div>
     </div>
 
     <div class="subject-card">
         <div class="subject-title">2. Complex Analysis</div>
         <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Maps contour spaces, fluid dynamics, and Riemann surface structures.</p></div>
+            <div class="meta-section"><h3>Core Applications</h3><p>Maps contour vector paths, residues, fluid field aerodynamics, and frequencies.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: 3D Riemann Zeta/Exponential Helical Transformation</h4>
-            <div class="calc-formula">Euler's Mapping Projection: $z = e^{w}$ mapped into 3D Riemann Space sheet lines.</div>
+            <h4>⚡ Analytics Engine: Complex Exponential Circle Transformation</h4>
+            <div class="calc-formula">Euler's Identity Mapping: $e^{i\theta} = \cos(\theta) + i\sin(\theta)$</div>
             <div class="input-group">
-                <div class="input-field"><label>Frequency Pitch Scale</label><input type="number" id="compPitch" value="1.5" step="0.1" oninput="calcComplex()"></div>
-                <div class="input-field"><label>3D Yaw Rotation</label><input type="range" id="compYaw" min="0" max="360" value="60" oninput="calcComplex()"></div>
-                <button class="calc-btn" onclick="calcComplex()">Map Field</button>
+                <div class="input-field"><label>Angle ($\theta^\circ$)</label><input type="number" id="compDeg" value="60" oninput="calcComplex()"></div>
+                <button class="calc-btn" onclick="calcComplex()">Map Field Vector</button>
             </div>
             <div id="complexRes" class="calc-result"></div>
-            <canvas id="complexCanvas" class="visual-canvas" width="450" height="250"></canvas>
+            <canvas id="complexCanvas" class="visual-canvas" width="450" height="220"></canvas>
         </div>
     </div>
 
     <div class="subject-card">
         <div class="subject-title">3. Abstract Algebra</div>
         <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Structures symmetry operations, Galois field paths, and modular ring loops.</p></div>
+            <div class="meta-section"><h3>Core Applications</h3><p>Structures symmetry transformations, cyclic groups, and cryptographic chain fields.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: 3D Cyclic Group Orbit Toroid Generator</h4>
-            <div class="calc-formula">Group Set Orbit: $g^k \pmod p$ projected along a 3D structural symmetry ring.</div>
+            <h4>⚡ Analytics Engine: Modular Multiplicative Cyclic Group Orbits</h4>
+            <div class="calc-formula">Subgroup Set Orbit Orbitals: $g^k \pmod p$</div>
             <div class="input-group">
-                <div class="input-field"><label>Prime Modulus ($p$)</label><input type="number" id="algP" value="13" oninput="calcAlgebra()"></div>
+                <div class="input-field"><label>Prime Modulus ($p$)</label><input type="number" id="algP" value="11" oninput="calcAlgebra()"></div>
                 <div class="input-field"><label>Generator ($g$)</label><input type="number" id="algG" value="2" oninput="calcAlgebra()"></div>
-                <div class="input-field"><label>3D Yaw Rotation</label><input type="range" id="algYaw" min="0" max="360" value="35" oninput="calcAlgebra()"></div>
-                <button class="calc-btn" onclick="calcAlgebra()">Build Group</button>
+                <button class="calc-btn" onclick="calcAlgebra()">Build Group Field</button>
             </div>
             <div id="algebraRes" class="calc-result"></div>
-            <canvas id="algebraCanvas" class="visual-canvas" width="450" height="250"></canvas>
+            <canvas id="algebraCanvas" class="visual-canvas" width="450" height="150"></canvas>
         </div>
     </div>
 
     <div class="subject-card">
         <div class="subject-title">4. Linear Algebra</div>
         <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Handles coordinate vector mappings, eigenspace tracking, and dimensional matrices.</p></div>
+            <div class="meta-section"><h3>Core Applications</h3><p>Handles system state mappings, matrix projections, and eigenspace determinations.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: 3D Linear Coordinate Matrix Parallelepiped Determinant</h4>
-            <div class="calc-formula">Volume Mapping: Transformations of unit cubes into projected 3D spaces.</div>
+            <h4>⚡ Analytics Engine: $2\times2$ Grid Transformation Area Determinant Checker</h4>
+            <div class="calc-formula">$\det(A) = ad - bc$ (Area scaling factor)</div>
             <div class="input-group">
-                <div class="input-field"><label>Skew Factor X</label><input type="number" id="la_x" value="1.5" step="0.1" oninput="calcLinear()"></div>
-                <div class="input-field"><label>Skew Factor Y</label><input type="number" id="la_y" value="1.2" step="0.1" oninput="calcLinear()"></div>
-                <div class="input-field"><label>3D Yaw Rotation</label><input type="range" id="laYaw" min="0" max="360" value="45" oninput="calcLinear()"></div>
-                <button class="calc-btn" onclick="calcLinear()">Compute & Plot 3D</button>
+                <div class="input-field"><label>a (x-component i)</label><input type="number" id="la_a" value="2" oninput="calcLinear()"></div>
+                <div class="input-field"><label>b (x-component j)</label><input type="number" id="la_b" value="1" oninput="calcLinear()"></div>
+                <div class="input-field"><label>c (y-component i)</label><input type="number" id="la_c" value="0.5" oninput="calcLinear()"></div>
+                <div class="input-field"><label>d (y-component j)</label><input type="number" id="la_d" value="1.5" oninput="calcLinear()"></div>
+                <button class="calc-btn" onclick="calcLinear()">Compute & Plot</button>
             </div>
             <div id="linearRes" class="calc-result"></div>
-            <canvas id="linearCanvas" class="visual-canvas" width="450" height="250"></canvas>
+            <canvas id="linearCanvas" class="visual-canvas" width="450" height="220"></canvas>
         </div>
     </div>
 
     <div class="subject-card">
         <div class="subject-title">5. Topology</div>
         <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Studies deformation-invariant properties, non-orientable manifolds, and continuous space connectivity.</p></div>
+            <div class="meta-section"><h3>Core Applications</h3><p>Studies homeomorphisms, continuous invariants, and polygonal boundary metrics.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: High-Contrast 3D Möbius Strip Topology Wireframe Map</h4>
-            <div class="calc-formula">Parametric Coordinates: $x = \left(1 + \frac{v}{2}\cos\frac{u}{2}\right)\cos u, \quad y = \left(1 + \frac{v}{2}\cos\frac{u}{2}\right)\sin u, \quad z = \frac{v}{2}\sin\frac{u}{2}$</div>
+            <h4>⚡ Analytics Engine: Continuous Planar Manifold Intersection Invariant</h4>
+            <div class="calc-formula">Euler Polyhedral Profile: $\chi = V - E + F$</div>
             <div class="input-group">
-                <div class="input-field"><label>3D Pitch Rotation</label><input type="range" id="tpPitch" min="-90" max="90" value="25" oninput="calcTop()"></div>
-                <div class="input-field"><label>3D Yaw Rotation</label><input type="range" id="tpYaw" min="0" max="360" value="50" oninput="calcTop()"></div>
-                <button class="calc-btn" onclick="calcTop()">Recalculate View</button>
+                <div class="input-field"><label>Vertices ($V$)</label><input type="number" id="tpV" value="8" oninput="calcTop()"></div>
+                <div class="input-field"><label>Edges ($E$)</label><input type="number" id="tpE" value="12" oninput="calcTop()"></div>
+                <div class="input-field"><label>Faces ($F$)</label><input type="number" id="tpF" value="6" oninput="calcTop()"></div>
+                <button class="calc-btn" onclick="calcTop()">Verify Invariant</button>
             </div>
             <div id="topRes" class="calc-result"></div>
-            <canvas id="topologyCanvas" class="visual-canvas" width="450" height="280"></canvas>
+            <canvas id="topologyCanvas" class="visual-canvas" width="450" height="150"></canvas>
         </div>
     </div>
 
     <div class="subject-card">
         <div class="subject-title">6. Number Theory & Cryptography</div>
         <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Powers asymmetric cryptographic keys, discrete log lattices, and prime distributions.</p></div>
+            <div class="meta-section"><h3>Core Applications</h3><p>Powers asymmetric data handshakes, key signatures, and prime parity distributions.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: 3D Prime Modulus Exponentiation LHR Helix</h4>
-            <div class="calc-formula">Modular Space Congruence Vector: $x^e \equiv r \pmod n$ plotted across 3D cylindrical fields.</div>
+            <h4>⚡ Analytics Engine: Square-and-Multiply Modular Exponentiation Ring</h4>
+            <div class="calc-formula">Congruence Formula Matrix: $x^e \equiv r \pmod n$</div>
             <div class="input-group">
-                <div class="input-field"><label>Base ($x$)</label><input type="number" id="ntX" value="3" oninput="calcNT()"></div>
-                <div class="input-field"><label>Exponent Limit ($e$)</label><input type="number" id="ntE" value="16" oninput="calcNT()"></div>
-                <div class="input-field"><label>Modulus ($n$)</label><input type="number" id="ntN" value="19" oninput="calcNT()"></div>
-                <div class="input-field"><label>3D Yaw Rotation</label><input type="range" id="ntYaw" min="0" max="360" value="40" oninput="calcNT()"></div>
+                <div class="input-field"><label>Base ($x$)</label><input type="number" id="ntX" value="4" oninput="calcNT()"></div>
+                <div class="input-field"><label>Exponent ($e$)</label><input type="number" id="ntE" value="7" oninput="calcNT()"></div>
+                <div class="input-field"><label>Modulus ($n$)</label><input type="number" id="ntN" value="15" oninput="calcNT()"></div>
                 <button class="calc-btn" onclick="calcNT()">Compute Remainder</button>
             </div>
             <div id="ntRes" class="calc-result"></div>
-            <canvas id="ntCanvas" class="visual-canvas" width="450" height="250"></canvas>
+            <canvas id="ntCanvas" class="visual-canvas" width="450" height="150"></canvas>
         </div>
     </div>
 
     <div class="subject-card">
         <div class="subject-title">7. Ordinary Differential Equations (ODEs)</div>
         <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Models complex physical kinematics, orbital mechanics, and single-parameter dynamical flows.</p></div>
+            <div class="meta-section"><h3>Core Applications</h3><p>Models mechanical velocities, continuous kinetic flows, and single-parameter trajectories.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: 3D Atmospheric Lorenz Attractor Trajectory Solver</h4>
-            <div class="calc-formula">System Mappings: $\frac{dx}{dt} = \sigma(y-x), \quad \frac{dy}{dt} = x(\rho-z)-y, \quad \frac{dz}{dt} = xy-\beta z$</div>
+            <h4>⚡ Analytics Engine: Initial Value Problem Analytical Growth Curve</h4>
+            <div class="calc-formula">Analytical Dynamic Form: $y(t) = y_0 \cdot e^{kt}$</div>
             <div class="input-group">
-                <div class="input-field"><label>Rho Parameter ($\rho$)</label><input type="number" id="odeRho" value="28" step="1" oninput="calcODE()"></div>
-                <div class="input-field"><label>3D Yaw Rotation</label><input type="range" id="odeYaw" min="0" max="360" value="135" oninput="calcODE()"></div>
-                <button class="calc-btn" onclick="calcODE()">Solve Attractor</button>
+                <div class="input-field"><label>Initial State ($y_0$)</label><input type="number" id="odeY" value="8" oninput="calcODE()"></div>
+                <div class="input-field"><label>Rate Coeff ($k$)</label><input type="number" id="odeK" value="-0.4" step="0.1" oninput="calcODE()"></div>
+                <div class="input-field"><label>Time Bound ($t$)</label><input type="number" id="odeT" value="6" oninput="calcODE()"></div>
+                <button class="calc-btn" onclick="calcODE()">Project Trajectory</button>
             </div>
             <div id="odeRes" class="calc-result"></div>
-            <canvas id="odeCanvas" class="visual-canvas" width="450" height="280"></canvas>
+            <canvas id="odeCanvas" class="visual-canvas" width="450" height="200"></canvas>
         </div>
     </div>
 
     <div class="subject-card">
         <div class="subject-title">8. Partial Differential Equations (PDEs)</div>
         <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Simulates continuous fluid thermodynamic distributions, heat flows, and electromagnetic wave boundary shapes.</p></div>
+            <div class="meta-section"><h3>Core Applications</h3><p>Simulates multidimensional thermodynamic flows, fluid vectors, and continuous waves.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: 3D Dirichlet Thermal Surface Heat Grid Operator</h4>
-            <div class="calc-formula">Steady-State Spatial Mapping: $\nabla^2 u = 0$ solved dynamically across a 3D distribution field.</div>
+            <h4>⚡ Analytics Engine: 1D Steady-State Heat Boundary Interpolator</h4>
+            <div class="calc-formula">Dirichlet Solution Form: $u(x) = u_0 + x(u_1 - u_0)$</div>
             <div class="input-group">
-                <div class="input-field"><label>Peak Thermal Magnitude</label><input type="number" id="pdePeak" value="80" oninput="calcPDE()"></div>
-                <div class="input-field"><label>3D Yaw Rotation</label><input type="range" id="pdeYaw" min="0" max="360" value="45" oninput="calcPDE()"></div>
-                <button class="calc-btn" onclick="calcPDE()">Resolve Surface</button>
+                <div class="input-field"><label>Left Node Temp ($u_0$)</label><input type="number" id="pdeL" value="90" oninput="calcPDE()"></div>
+                <div class="input-field"><label>Right Node Temp ($u_1$)</label><input type="number" id="pdeR" value="30" oninput="calcPDE()"></div>
+                <div class="input-field"><label>Target Node ($x \in [0,1]$)</label><input type="number" id="pdeX" value="0.4" step="0.1" min="0" max="1" oninput="calcPDE()"></div>
+                <button class="calc-btn" onclick="calcPDE()">Resolve Field</button>
             </div>
             <div id="pdeRes" class="calc-result"></div>
-            <canvas id="pdeCanvas" class="visual-canvas" width="450" height="260"></canvas>
+            <canvas id="pdeCanvas" class="visual-canvas" width="450" height="180"></canvas>
         </div>
     </div>
 
     <div class="subject-card">
         <div class="subject-title">9. Functional Analysis</div>
         <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Explores infinite-dimensional vector norms, complete Banach spaces, and inner-product metrics.</p></div>
+            <div class="meta-section"><h3>Core Applications</h3><p>Evaluates complete infinite spaces, Hilbert systems, and operator standard norms.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: 3D Metric Ball Space Surface Plotter ($l^p$ Unit Bounds)</h4>
-            <div class="calc-formula">Norm Condition Space: $|x|^p + |y|^p + |z|^p = 1$ displayed via spatial boundary mesh.</div>
+            <h4>⚡ Analytics Engine: Discrete $l^2$ Norm Geometry Field Bounds</h4>
+            <div class="calc-formula">Hilbert Coordinate Norm Form: $\|x\|_{l^2} = \sqrt{|x_1|^2 + |x_2|^2}$$</div>
             <div class="input-group">
-                <div class="input-field"><label>Norm Degree ($p$)</label><input type="number" id="faP" value="2" step="0.5" min="1" max="4" oninput="calcFunctional()"></div>
-                <div class="input-field"><label>3D Yaw Rotation</label><input type="range" id="faYaw" min="0" max="360" value="60" oninput="calcFunctional()"></div>
+                <div class="input-field"><label>Vector Component $x_1$</label><input type="number" id="fa1" value="4" oninput="calcFunctional()"></div>
+                <div class="input-field"><label>Vector Component $x_2$</label><input type="number" id="fa2" value="3" oninput="calcFunctional()"></div>
                 <button class="calc-btn" onclick="calcFunctional()">Compute Space Norm</button>
             </div>
             <div id="faRes" class="calc-result"></div>
-            <canvas id="faCanvas" class="visual-canvas" width="450" height="260"></canvas>
+            <canvas id="faCanvas" class="visual-canvas" width="450" height="180"></canvas>
         </div>
     </div>
 
     <div class="subject-card">
         <div class="subject-title">10. Graph Theory</div>
         <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Maps network connectivity configurations, graph layouts, and cluster node trace optimizations.</p></div>
+            <div class="meta-section"><h3>Core Applications</h3><p>Maps discrete topological networks, path tracers, and structural matrix connections.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: Fully Rotational 3D Network Graph Visualizer ($K_n$ Topology)</h4>
-            <div class="calc-formula">Handshaking Lemma Matrix: Deep-ink ultra-bold edges mapping connections across 3D node points.</div>
+            <h4>⚡ Analytics Engine: Complete Network Edge Trace Array ($K_n$)</h4>
+            <div class="calc-formula">Handshaking Lemma Metric: $\sum \deg(v_i) = 2|E|$</div>
             <div class="input-group">
-                <div class="input-field"><label>Nodes Matrix Order ($V$)</label><input type="number" id="gtNodes" value="6" min="2" max="8" oninput="drawGraph()"></div>
-                <div class="input-field"><label>3D Yaw Rotation</label><input type="range" id="gtYaw" min="0" max="360" value="45" oninput="drawGraph()"></div>
+                <div class="input-field"><label>Nodes Array Order ($V$)</label><input type="number" id="gtNodes" value="5" min="2" max="8" oninput="drawGraph()"></div>
                 <button class="calc-btn" onclick="drawGraph()">Render Network Map</button>
             </div>
             <div id="gtRes" class="calc-result"></div>
-            <canvas id="graphCanvas" class="visual-canvas" width="450" height="260"></canvas>
+            <canvas id="graphCanvas" class="visual-canvas" width="450" height="220"></canvas>
         </div>
     </div>
 
     <div class="subject-card">
         <div class="subject-title">11. Operator Theory</div>
         <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Analyzes linear matrix operator mappings, spectral state shifts, and infinite quantum matrices.</p></div>
+            <div class="meta-section"><h3>Core Applications</h3><p>Analyzes spectral decompositions, bounded shifts, and system state transformations.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: 3D Vector Spectrum Resolvent Grid Operator</h4>
-            <div class="calc-formula">Resolvent Operator Space: $R(\lambda) = (\lambda I - T)^{-1}$ structural mapping.</div>
+            <h4>⚡ Analytics Engine: Linear Matrix Resolvent Spectral Map</h4>
+            <div class="calc-formula">System Invariant Operator: $R(\lambda) = (\lambda I - T)^{-1}$</div>
             <div class="input-group">
-                <div class="input-field"><label>Eigen-Scalar ($k$)</label><input type="number" id="opT" value="1.5" step="0.5" oninput="calcOperator()"></div>
-                <div class="input-field"><label>Spectral Param ($\lambda$)</label><input type="number" id="opLam" value="3" step="0.5" oninput="calcOperator()"></div>
-                <div class="input-field"><label>3D Yaw Rotation</label><input type="range" id="opRot" min="0" max="360" value="65" oninput="calcOperator()"></div>
+                <div class="input-field"><label>Eigenvalue Scalar ($k$)</label><input type="number" id="opT" value="2" step="0.5" oninput="calcOperator()"></div>
+                <div class="input-field"><label>Spectral Parameter ($\lambda$)</label><input type="number" id="opLam" value="5" step="0.5" oninput="calcOperator()"></div>
                 <button class="calc-btn" onclick="calcOperator()">Compute Resolvent</button>
             </div>
             <div id="opRes" class="calc-result"></div>
-            <canvas id="operatorCanvas" class="visual-canvas" width="450" height="250"></canvas>
+            <canvas id="operatorCanvas" class="visual-canvas" width="450" height="180"></canvas>
         </div>
     </div>
 
     <div class="subject-card">
         <div class="subject-title">12. Banach Algebra</div>
         <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Unifies metric vector limits with continuous product ring bounds.</p></div>
+            <div class="meta-section"><h3>Core Applications</h3><p>Unifies complete norm vector space fields with multiplicative structural loops.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: 3D Spectrum Unit Disk Boundary Projection Engine</h4>
-            <div class="calc-formula">Axiom Sub-multiplicative Spectrum Limit: $r(x) \le \|x\|$ visualization.</div>
+            <h4>⚡ Analytics Engine: Sub-Multiplicative Operator Absolute Boundary Verification</h4>
+            <div class="calc-formula">Banach Axiom Property: $\|A \cdot B\| \le \|A\| \cdot \|B\|$</div>
             <div class="input-group">
-                <div class="input-field"><label>Element Size Norm</label><input type="number" id="baA" value="3.5" oninput="calcBanach()"></div>
-                <div class="input-field"><label>3D Yaw Rotation</label><input type="range" id="baYaw" min="0" max="360" value="30" oninput="calcBanach()"></div>
+                <div class="input-field"><label>Norm Value $\|A\|$</label><input type="number" id="baA" value="4.5" oninput="calcBanach()"></div>
+                <div class="input-field"><label>Norm Value $\|B\|$</label><input type="number" id="baB" value="3" oninput="calcBanach()"></div>
                 <button class="calc-btn" onclick="calcBanach()">Verify Property</button>
             </div>
             <div id="baRes" class="calc-result"></div>
-            <canvas id="banachCanvas" class="visual-canvas" width="450" height="250"></canvas>
+            <canvas id="banachCanvas" class="visual-canvas" width="450" height="180"></canvas>
         </div>
     </div>
 
     <div class="subject-card">
         <div class="subject-title">13. Mathematical Methods</div>
         <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Provides operational tools like Fourier series expansions, harmonic algorithms, and transformations.</p></div>
+            <div class="meta-section"><h3>Core Applications</h3><p>Deploys operational algorithms, harmonic expansions, and Fourier tracking.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: 3D Fourier Harmonic Surface Wave Synthesis Engine</h4>
-            <div class="calc-formula">Harmonic Form: Synthesizing structural cross-sections over continuous space time dimensions.</div>
+            <h4>⚡ Analytics Engine: Fourier Sine Wave Harmonic Approximation</h4>
+            <div class="calc-formula">Fourier Decomposition Form: $f(t) = \frac{4}{\pi} \sum_{n=1,3,5\dots}^{N} \frac{\sin(nt)}{n}$</div>
             <div class="input-group">
-                <div class="input-field"><label>Harmonic Cutoff</label>
+                <div class="input-field"><label>Harmonic Cutoff Orders</label>
                     <select id="mmN" onchange="calcMethods()">
                         <option value="1">1 Harmonic (Fundamental)</option>
                         <option value="3">3 Harmonics</option>
@@ -459,101 +451,96 @@
                         <option value="15">15 Harmonics</option>
                     </select>
                 </div>
-                <div class="input-field"><label>3D Yaw Rotation</label><input type="range" id="mmYaw" min="0" max="360" value="55" oninput="calcMethods()"></div>
-                <button class="calc-btn" onclick="calcMethods()">Evaluate Expansion</button>
+                <button class="calc-btn" onclick="calcMethods()">Evaluate Harmonic Spectrum</button>
             </div>
             <div id="mmRes" class="calc-result"></div>
-            <canvas id="methodsCanvas" class="visual-canvas" width="450" height="250"></canvas>
+            <canvas id="methodsCanvas" class="visual-canvas" width="450" height="200"></canvas>
         </div>
     </div>
 
     <div class="subject-card">
         <div class="subject-title">14. Relativity</div>
         <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Calculates Minkowski space intervals, time dilation frames, and light cone causality horizons.</p></div>
+            <div class="meta-section"><h3>Core Applications</h3><p>Calculates flat Minkowski metric intervals, time dilation frames, and velocity bounds.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: True 3D Minkowski Space-Time Future/Past Light Cone Model</h4>
-            <div class="calc-formula">Lorentz Metric Interval Invariant: $s^2 = -(ct)^2 + x^2 + y^2$</div>
+            <h4>⚡ Analytics Engine: 2D Minkowski Light Cone Causality Bounds Map</h4>
+            <div class="calc-formula">Space Time Interval: $\Delta s^2 = -(c\Delta t)^2 + \Delta x^2$</div>
             <div class="input-group">
-                <div class="input-field"><label>Space Velocity ($v/c$)</label><input type="number" id="relV" value="0.5" step="0.05" min="0" max="0.95" oninput="calcRelativity()"></div>
-                <div class="input-field"><label>3D View Yaw Rotation</label><input type="range" id="relRot" min="0" max="360" value="120" oninput="calcRelativity()"></div>
-                <button class="calc-btn" onclick="calcRelativity()">Project Space-Time</button>
+                <div class="input-field"><label>Relative Speed Factor ($v/c$)</label><input type="number" id="relV" value="0.6" step="0.05" min="0" max="0.95" oninput="calcRelativity()"></div>
+                <button class="calc-btn" onclick="calcRelativity()">Project Metrics</button>
             </div>
             <div id="relRes" class="calc-result"></div>
-            <canvas id="relCanvas" class="visual-canvas" width="450" height="280"></canvas>
+            <canvas id="relCanvas" class="visual-canvas" width="450" height="220"></canvas>
         </div>
     </div>
 
     <div class="subject-card">
         <div class="subject-title">15. Classical Mechanics</div>
         <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Tracks kinetic mechanical states, Hamiltonian paths, and phase-space momentum fields.</p></div>
+            <div class="meta-section"><h3>Core Applications</h3><p>Tracks kinetic paths, Hamiltonian energy invariances, and oscillator phase states.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: True 3D Phase-Space Mechanical Orbital Trajectory Toroid</h4>
-            <div class="calc-formula">Hamiltonian Conservational Space Vector: state vectors traced across continuous time dimensions.</div>
+            <h4>⚡ Analytics Engine: Harmonic Pendulum Phase Space Invariant Orbit (Position vs Momentum)</h4>
+            <div class="calc-formula">Energy Conservational Map: $\frac{\theta^2}{\theta_{max}^2} + \frac{p^2}{p_{max}^2} = 1$</div>
             <div class="input-group">
-                <div class="input-field"><label>Max Amplitude ($\theta_{max}^\circ$)</label><input type="number" id="cmAmp" value="50" min="5" max="90" oninput="calcClassical()"></div>
-                <div class="input-field"><label>Pendulum Cord ($L$)</label><input type="number" id="cmL" value="2" min="1" max="5" oninput="calcClassical()"></div>
-                <div class="input-field"><label>3D View Yaw Rotation</label><input type="range" id="cmRot" min="0" max="360" value="40" oninput="calcClassical()"></div>
-                <button class="calc-btn" onclick="calcClassical()">Solve Phase Coordinates</button>
+                <div class="input-field"><label>Max Displacement ($\theta_{max}^\circ$)</label><input type="number" id="cmAmp" value="45" min="5" max="90" oninput="calcClassical()"></div>
+                <div class="input-field"><label>System Length ($L$)</label><input type="number" id="cmL" value="2" min="1" max="5" oninput="calcClassical()"></div>
+                <button class="calc-btn" onclick="calcClassical()">Trace Phase Orbit</button>
             </div>
             <div id="cmRes" class="calc-result"></div>
-            <canvas id="classicalCanvas" class="visual-canvas" width="450" height="280"></canvas>
+            <canvas id="classicalCanvas" class="visual-canvas" width="450" height="220"></canvas>
         </div>
     </div>
 
     <div class="subject-card">
         <div class="subject-title">16. Differential Geometry</div>
         <div class="meta-grid">
-            <div class="meta-section"><h3>Core Applications</h3><p>Calculates geometric curves, moving vector triads, and surface curvature matrices.</p></div>
+            <div class="meta-section"><h3>Core Applications</h3><p>Calculates localized curvature values, arcs, and moving structural tangent lines.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: True 3D Helix Map with Deep-Ink Bold Moving Tangent Vector</h4>
-            <div class="calc-formula">Parametric Geometry Vector Form: $\vec{r}(t) = R\cos(t)\hat{i} + R\sin(t)\hat{j} + ct\hat{k}$</div>
+            <h4>⚡ Analytics Engine: Curvature Vector Path Plane & Moving Tangent Line</h4>
+            <div class="calc-formula">Parametric Track Vector: $\vec{r}(t) = t\cdot\hat{i} + \sin(t)\cdot\hat{j} \quad \to \quad \text{Tangent Vector } \vec{T}(t)$</div>
             <div class="input-group">
-                <div class="input-field"><label>Helix Radius ($R$)</label><input type="number" id="dgR" value="2.5" step="0.5" min="1" oninput="drawGeometry()"></div>
-                <div class="input-field"><label>Vertical Pitch ($c$)</label><input type="number" id="dgC" value="0.2" step="0.05" oninput="drawGeometry()"></div>
-                <div class="input-field"><label>Evaluation Index ($t$)</label><input type="range" id="dgT" min="0" max="15" step="0.1" value="6" oninput="drawGeometry()"></div>
-                <div class="input-field"><label>3D View Yaw Rotation</label><input type="range" id="dgYaw" min="0" max="360" value="60" oninput="drawGeometry()"></div>
-                <button class="calc-btn" onclick="drawGeometry()">Plot Geometry State</button>
+                <div class="input-field"><label>Evaluation Vertex Index ($t$)</label><input type="range" id="dgT" min="0" max="6.28" step="0.1" value="2" oninput="drawGeometry()"></div>
+                <button class="calc-btn" onclick="drawGeometry()">Compute Geometry Frame</button>
             </div>
             <div id="dgRes" class="calc-result"></div>
-            <canvas id="geometryCanvas" class="visual-canvas" width="450" height="300"></canvas>
+            <canvas id="geometryCanvas" class="visual-canvas" width="450" height="200"></canvas>
+        </div>
+    </div>
+
+    <div class="subject-card">
+        <div class="subject-title">17. Approximation Theory</div>
+        <div class="meta-grid">
+            <div class="meta-section"><h3>Core Applications</h3><p>Optimizes polynomial convergence, minimizes interpolation function errors, and builds dense bounds.</p></div>
+        </div>
+        <div class="interactive-calc">
+            <h4>⚡ Analytics Engine: Chebyshev Orthogonal Polynomial Error Approximator</h4>
+            <div class="calc-formula">Recurrence Matrix Equation: $T_0(x)=1, \ T_1(x)=x, \ T_{n+1}(x) = 2xT_n(x) - T_{n-1}(x)$</div>
+            <div class="input-group">
+                <div class="input-field"><label>Polynomial Degree Order ($n$)</label>
+                    <select id="apN" onchange="calcApproximation()">
+                        <option value="2">Degree 2: $2x^2 - 1$</option>
+                        <option value="3">Degree 3: $4x^3 - 3x$</option>
+                        <option value="4" selected>Degree 4: $8x^4 - 8x^2 + 1$</option>
+                        <option value="5">Degree 5: $16x^5 - 20x^3 + 5x</option>
+                    </select>
+                </div>
+                <button class="calc-btn" onclick="calcApproximation()">Plot Approximation Vector</button>
+            </div>
+            <div id="apRes" class="calc-result"></div>
+            <canvas id="approxCanvas" class="visual-canvas" width="450" height="220"></canvas>
         </div>
     </div>
 
 </div>
 
 <footer>
-    <p>&copy; 2026 Mathematics 3D Spatial Interactive Framework Dashboard.</p>
+    <p>&copy; 2026 Mathematics High-Contrast Interactive Matrix Dashboard.</p>
 </footer>
 
 <script>
-    // Pure Geometric Matrix Transformation Engine
-    function project3D(x, y, z, pitchDeg, yawDeg, width, height, scale) {
-        let pitch = pitchDeg * Math.PI / 180;
-        let yaw = yawDeg * Math.PI / 180;
-        
-        let cosP = Math.cos(pitch), sinP = Math.sin(pitch);
-        let cosY = Math.cos(yaw), sinY = Math.sin(yaw);
-
-        // Core 3D Rotation Matrix Calculation
-        let x1 = cosY * x - sinY * z;
-        let z1 = sinY * x + cosY * z;
-        let y2 = cosP * y - sinP * z1;
-        let z2 = sinP * y + cosP * z1;
-
-        let dist = 400;
-        let perspective = dist / (dist + z2);
-        
-        return {
-            x: (width / 2) + x1 * scale * perspective,
-            y: (height / 2) - y2 * scale * perspective
-        };
-    }
-
     function getCtx(id) {
         const c = document.getElementById(id);
         const ctx = c.getContext('2d');
@@ -567,434 +554,381 @@
         }
     }
 
-    function drawAxes3D(ctx, pitch, yaw, w, h, scale) {
-        ctx.strokeStyle = '#000000'; ctx.lineWidth = 2;
-        let center = project3D(0, 0, 0, pitch, yaw, w, h, scale);
-        let ax = project3D(3, 0, 0, pitch, yaw, w, h, scale);
-        let ay = project3D(0, 3, 0, pitch, yaw, w, h, scale);
-        let az = project3D(0, 0, 3, pitch, yaw, w, h, scale);
-
-        ctx.beginPath(); ctx.moveTo(center.x, center.y); ctx.lineTo(ax.x, ax.y); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(center.x, center.y); ctx.lineTo(ay.x, ay.y); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(center.x, center.y); ctx.lineTo(az.x, az.y); ctx.stroke();
+    function drawAxes2D(ctx, cx, cy, w, h) {
+        ctx.strokeStyle = '#000000'; ctx.lineWidth = 2.5;
+        ctx.beginPath(); ctx.moveTo(15, cy); ctx.lineTo(w-15, cy); ctx.moveTo(cx, 15); ctx.lineTo(cx, h-15); ctx.stroke();
     }
 
-    // 1. Real Analysis (3D Convergency Spiral)
+    // 1. Real Analysis
     function calcReal() {
         let eps = parseFloat(document.getElementById('epsInp').value) || 0.05;
-        let yaw = parseFloat(document.getElementById('realYaw').value);
         let div = document.getElementById('realRes'); div.style.display = "block";
         let N = Math.ceil(1/eps);
-        div.innerHTML = `For convergence tolerance parameter $\\epsilon = ${eps}$, the threshold index is $N = ${N}$.`;
+        div.innerHTML = `For convergence metric bound parameter $\\epsilon = ${eps}$, threshold limit value is $N = ${N}$.`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('realCanvas');
-        drawAxes3D(ctx, 20, yaw, w, h, 30);
-
-        ctx.strokeStyle = '#000000'; ctx.lineWidth = 2.5; ctx.beginPath();
-        for(let n=1; n<=50; n++) {
-            let radius = 1 / n;
-            let angle = n * 0.5;
-            let x = radius * Math.cos(angle) * 4;
-            let y = radius * Math.sin(angle) * 4;
-            let z = (n / 10) - 2;
-            let pt = project3D(x, y, z, 20, yaw, w, h, 30);
-            if(n === 1) ctx.moveTo(pt.x, pt.y); else ctx.lineTo(pt.x, pt.y);
+        drawAxes2D(ctx, 35, h - 30, w, h);
+        
+        let epsY = (h-30) - (eps * (h-50));
+        ctx.strokeStyle = '#dc2626'; ctx.lineWidth = 2; ctx.setLineDash([5, 5]);
+        ctx.beginPath(); ctx.moveTo(35, epsY); ctx.lineTo(w-15, epsY); ctx.stroke(); ctx.setLineDash([]);
+        
+        ctx.strokeStyle = '#000000'; ctx.lineWidth = 3; ctx.beginPath();
+        for(let n=1; n<=40; n++) {
+            let cx = 35 + (n * (w-60)/40);
+            let cy = (h-30) - ((1/n) * (h-50));
+            if(n===1) ctx.moveTo(cx, cy); else ctx.lineTo(cx, cy);
+            
+            if(n >= N) { ctx.fillStyle = '#16a34a'; } else { ctx.fillStyle = '#000000'; }
+            ctx.beginPath(); ctx.arc(cx, cy, 4.5, 0, 2*Math.PI); ctx.fill();
         }
         ctx.stroke();
     }
 
-    // 2. Complex Analysis (3D Riemann Sheet Line Map)
+    // 2. Complex Analysis
     function calcComplex() {
-        let pitchScale = parseFloat(document.getElementById('compPitch').value) || 1.5;
-        let yaw = parseFloat(document.getElementById('compYaw').value);
+        let deg = parseFloat(document.getElementById('compDeg').value) || 0;
         let div = document.getElementById('complexRes'); div.style.display = "block";
-        div.innerHTML = `$$z = e^w \\text{ mapped into 3D multi-layered complex phase geometry sheets.}$$`;
+        let rad = deg * Math.PI / 180;
+        let cosV = Math.cos(rad); let sinV = Math.sin(rad);
+        div.innerHTML = `$$e^{i \\cdot ${deg}^\\circ} = \\cos(${deg}^\\circ) + i\\sin(${deg}^\\circ) = ${cosV.toFixed(4)} + ${sinV.toFixed(4)}i$$`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('complexCanvas');
-        drawAxes3D(ctx, 25, yaw, w, h, 30);
+        let cx = w/2, cy = h/2, r = 65;
+        drawAxes2D(ctx, cx, cy, w, h);
 
-        ctx.strokeStyle = '#000000'; ctx.lineWidth = 2.5;
-        for(let r = 0.2; r <= 2.0; r += 0.4) {
-            ctx.beginPath();
-            for(let theta = 0; theta <= 4*Math.PI; theta += 0.1) {
-                let x = r * Math.cos(theta);
-                let y = r * Math.sin(theta);
-                let z = (theta / (2*Math.PI)) * pitchScale - 1.5;
-                let pt = project3D(x, y, z, 25, yaw, w, h, 40);
-                if(theta === 0) ctx.moveTo(pt.x, pt.y); else ctx.lineTo(pt.x, pt.y);
-            }
-            ctx.stroke();
-        }
+        ctx.strokeStyle = '#000000'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2*Math.PI); ctx.stroke();
+        
+        let tx = cx + r*cosV; let ty = cy - r*sinV;
+        ctx.strokeStyle = '#000000'; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(tx, ty); ctx.stroke();
+        ctx.fillStyle = '#dc2626'; ctx.beginPath(); ctx.arc(tx, ty, 6, 0, 2*Math.PI); ctx.fill();
     }
 
-    // 3. Abstract Algebra (3D Subgroup Toroid Orbit)
+    // 3. Abstract Algebra
     function calcAlgebra() {
         let p = parseInt(document.getElementById('algP').value) || 11;
         let g = parseInt(document.getElementById('algG').value) || 2;
-        let yaw = parseFloat(document.getElementById('algYaw').value);
         let div = document.getElementById('algebraRes'); div.style.display = "block";
-        
         let orbit = []; let curr = 1;
         for(let i=0; i<p; i++){ orbit.push(curr); curr = (curr * g) % p; if(curr === 1) break; }
-        div.innerHTML = `Generated Cyclic Subgroup Space elements: $\\langle g \\rangle = \\{ ${orbit.join(', ')} \\}$.`;
+        div.innerHTML = `Generated Cyclic Subgroup Space subset: $\\langle g \\rangle = \\{ ${orbit.join(', ')} \\}$.`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('algebraCanvas');
-        drawAxes3D(ctx, 30, yaw, w, h, 30);
-
-        ctx.strokeStyle = '#000000'; ctx.lineWidth = 2.5; ctx.beginPath();
+        let step = (w-60) / p;
+        ctx.strokeStyle = '#000000'; ctx.lineWidth = 3; ctx.beginPath();
         for(let i=0; i<orbit.length; i++) {
-            let angle = (orbit[i] * 2 * Math.PI) / p;
-            let zAngle = (i * 2 * Math.PI) / orbit.length;
-            let x = (2 + 0.5 * Math.cos(zAngle)) * Math.cos(angle);
-            let y = (2 + 0.5 * Math.cos(zAngle)) * Math.sin(angle);
-            let z = 0.5 * Math.sin(zAngle);
-            let pt = project3D(x, y, z, 30, yaw, w, h, 35);
-            if(i === 0) ctx.moveTo(pt.x, pt.y); else ctx.lineTo(pt.x, pt.y);
-            
-            ctx.fillStyle = '#2563eb';
-            ctx.beginPath(); ctx.arc(pt.x, pt.y, 5, 0, 2*Math.PI); ctx.fill();
+            let cx = 30 + orbit[i]*step;
+            let cy = h/2 + Math.sin(i)*20;
+            if(i===0) ctx.moveTo(cx, cy); else ctx.lineTo(cx, cy);
+            ctx.fillStyle = '#2563eb'; ctx.beginPath(); ctx.arc(cx, cy, 6, 0, 2*Math.PI); ctx.fill();
         }
         ctx.stroke();
     }
 
-    // 4. Linear Algebra (3D Transformation Space Unit Parallelepiped Volume)
+    // 4. Linear Algebra
     function calcLinear() {
-        let sx = parseFloat(document.getElementById('la_x').value);
-        let sy = parseFloat(document.getElementById('la_y').value);
-        let yaw = parseFloat(document.getElementById('laYaw').value);
+        let a = parseFloat(document.getElementById('la_a').value);
+        let b = parseFloat(document.getElementById('la_b').value);
+        let c = parseFloat(document.getElementById('la_c').value);
+        let d = parseFloat(document.getElementById('la_d').value);
         let div = document.getElementById('linearRes'); div.style.display = "block";
-        div.innerHTML = `$$\\text{3D Linear Shear Matrix Object Transformation Map Volume Projected.}$$`;
+        let det = (a*d) - (b*c);
+        div.innerHTML = `$$\\det(A) = ad - bc = ${det.toFixed(3)}$$`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('linearCanvas');
-        drawAxes3D(ctx, 20, yaw, w, h, 35);
+        let cx = w/3, cy = h*2/3, scale = 40;
+        drawAxes2D(ctx, cx, cy, w, h);
 
-        let vertices = [
-            [0,0,0], [1,0,0], [1,1,0], [0,1,0],
-            [0,0,1], [1,0,1], [1,1,1], [0,1,1]
-        ];
-
-        let transformed = vertices.map(v => {
-            return {
-                x: v[0] + v[2] * sx,
-                y: v[1] + v[2] * sy,
-                z: v[2]
-            };
-        });
-
-        let connections = [
-            [0,1], [1,2], [2,3], [3,0],
-            [4,5], [5,6], [6,7], [7,4],
-            [0,4], [1,5], [2,6], [3,7]
-        ];
-
-        ctx.strokeStyle = '#000000'; ctx.lineWidth = 3;
-        connections.forEach(edge => {
-            let p1 = project3D(transformed[edge[0]].x, transformed[edge[0]].y, transformed[edge[0]].z, 20, yaw, w, h, 40);
-            let p2 = project3D(transformed[edge[1]].x, transformed[edge[1]].y, transformed[edge[1]].z, 20, yaw, w, h, 40);
-            ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
-        });
+        ctx.fillStyle = 'rgba(148, 163, 184, 0.3)'; ctx.strokeStyle = '#000000'; ctx.lineWidth = 3.5;
+        ctx.beginPath(); ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + a*scale, cy - c*scale);
+        ctx.lineTo(cx + (a+b)*scale, cy - (c+d)*scale);
+        ctx.lineTo(cx + b*scale, cy - d*scale);
+        ctx.closePath(); ctx.fill(); ctx.stroke();
     }
 
-    // 5. Topology (3D Möbius Strip Wireframe)
+    // 5. Topology
     function calcTop() {
-        let pitch = parseFloat(document.getElementById('tpPitch').value);
-        let yaw = parseFloat(document.getElementById('tpYaw').value);
+        let v = parseInt(document.getElementById('tpV').value) || 0;
+        let e = parseInt(document.getElementById('tpE').value) || 0;
+        let f = parseInt(document.getElementById('tpF').value) || 0;
         let div = document.getElementById('topRes'); div.style.display = "block";
-        div.innerHTML = `Euler characteristic mapped across non-orientable 3D visual space bounds.`;
+        let chi = v - e + f;
+        div.innerHTML = `Manifold Spatial Euler Characteristic Bound: $\\chi = V - E + F = ${chi}$.`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('topologyCanvas');
-        ctx.lineWidth = 2.5; ctx.strokeStyle = '#000000';
-
-        for (let u = 0; u <= 2 * Math.PI; u += 0.2) {
-            ctx.beginPath();
-            for (let vSeg = -1; vSeg <= 1; vSeg += 0.5) {
-                let x = (2 + (vSeg / 2) * Math.cos(u / 2)) * Math.cos(u);
-                let y = (2 + (vSeg / 2) * Math.cos(u / 2)) * Math.sin(u);
-                let z = (vSeg / 2) * Math.sin(u / 2);
-
-                let pt = project3D(x, y, z, pitch, yaw, w, h, 45);
-                if (vSeg === -1) ctx.moveTo(pt.x, pt.y); else ctx.lineTo(pt.x, pt.y);
-            }
-            ctx.stroke();
-        }
+        ctx.strokeStyle = '#000000'; ctx.lineWidth = 3;
+        ctx.strokeRect(w/2 - 60, h/2 - 40, 120, 80);
+        ctx.strokeRect(w/2 - 40, h/2 - 20, 120, 80);
     }
 
-    // 6. Number Theory (3D Cryptographic Cylinder Spiral)
+    // 6. Number Theory
     function calcNT() {
         let x = parseInt(document.getElementById('ntX').value);
-        let expLimit = parseInt(document.getElementById('ntE').value);
+        let e = parseInt(document.getElementById('ntE').value);
         let n = parseInt(document.getElementById('ntN').value);
-        let yaw = parseFloat(document.getElementById('ntYaw').value);
         let div = document.getElementById('ntRes'); div.style.display = "block";
-        div.innerHTML = `Discrete cyclic log lattices plotted into cylindrical topology rings.`;
+        let r = 1; let base = x % n; let origE = e;
+        while(e > 0) { if(e % 2 === 1) r = (r * base) % n; e = Math.floor(e/2); base = (base * base) % n; }
+        div.innerHTML = `$$\\text{Congruent Value Remainder Check: } ${x}^{${origE}} \\equiv ${r} \\pmod{${n}}$$`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('ntCanvas');
-        drawAxes3D(ctx, 20, yaw, w, h, 30);
-
+        drawAxes2D(ctx, 40, h/2, w, h);
         ctx.strokeStyle = '#000000'; ctx.lineWidth = 2.5; ctx.beginPath();
         let curr = 1;
-        for (let e = 1; e <= expLimit; e++) {
+        for(let i=1; i<=origE; i++) {
             curr = (curr * x) % n;
-            let ang = (curr * 2 * Math.PI) / n;
-            let tx = 2 * Math.cos(ang);
-            let ty = 2 * Math.sin(ang);
-            let tz = (e / 4) - 2;
-            let pt = project3D(tx, ty, tz, 20, yaw, w, h, 35);
-            if(e === 1) ctx.moveTo(pt.x, pt.y); else ctx.lineTo(pt.x, pt.y);
-
-            ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(pt.x, pt.y, 4, 0, 2*Math.PI); ctx.fill();
+            let stepX = 40 + i*(w-60)/origE;
+            let stepY = h - 20 - (curr*(h-40)/n);
+            if(i===1) ctx.moveTo(stepX, stepY); else ctx.lineTo(stepX, stepY);
+            ctx.fillStyle = '#dc2626'; ctx.beginPath(); ctx.arc(stepX, stepY, 5, 0, 2*Math.PI); ctx.fill();
         }
         ctx.stroke();
     }
 
-    // 7. ODEs (3D Lorenz Attractor State Path)
+    // 7. ODEs
     function calcODE() {
-        let rho = parseFloat(document.getElementById('odeRho').value) || 28;
-        let yaw = parseFloat(document.getElementById('odeYaw').value);
+        let y0 = parseFloat(document.getElementById('odeY').value);
+        let k = parseFloat(document.getElementById('odeK').value);
+        let t = parseFloat(document.getElementById('odeT').value);
         let div = document.getElementById('odeRes'); div.style.display = "block";
-        div.innerHTML = `$$\\text{Lorenz Attractor Chaos Path Space Resolved.}$$`;
+        let res = y0 * Math.exp(k * t);
+        div.innerHTML = `$$y(${t}) = ${y0} \\cdot e^{${k} \\cdot ${t}} = ${res.toFixed(4)}$$`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('odeCanvas');
-        ctx.strokeStyle = '#000000'; ctx.lineWidth = 2.0; ctx.beginPath();
-
-        let x = 0.1, y = 0, z = 0;
-        let dt = 0.01;
-        for(let i=0; i<1200; i++) {
-            let dx = 10 * (y - x) * dt;
-            let dy = (x * (rho - z) - y) * dt;
-            let dz = (x * y - (8/3) * z) * dt;
-            x += dx; y += dy; z += dz;
-
-            let pt = project3D(x * 0.12, y * 0.12, (z - 25) * 0.12, 15, yaw, w, h, 40);
-            if(i === 0) ctx.moveTo(pt.x, pt.y); else ctx.lineTo(pt.x, pt.y);
+        drawAxes2D(ctx, 35, h-25, w, h);
+        ctx.strokeStyle = '#000000'; ctx.lineWidth = 3; ctx.beginPath();
+        for(let i=0; i<=w-60; i++) {
+            let simT = (i / (w-60)) * t;
+            let simY = y0 * Math.exp(k * simT);
+            let cx = 35 + i;
+            let cy = h - 25 - (simY * (h-40) / (y0*1.2 || 10));
+            if(i===0) ctx.moveTo(cx, cy); else ctx.lineTo(cx, cy);
         }
         ctx.stroke();
     }
 
-    // 8. PDEs (3D Steady State Boundary Thermal Mesh Surface)
+    // 8. PDEs
     function calcPDE() {
-        let peak = parseFloat(document.getElementById('pdePeak').value);
-        let yaw = parseFloat(document.getElementById('pdeYaw').value);
+        let l = parseFloat(document.getElementById('pdeL').value);
+        let r = parseFloat(document.getElementById('pdeR').value);
+        let x = parseFloat(document.getElementById('pdeX').value);
         let div = document.getElementById('pdeRes'); div.style.display = "block";
-        div.innerHTML = `$$\\text{Dirichlet Boundary Grid Plane Solved for Geometric Distribution.}$$`;
+        let val = l + x*(r - l);
+        div.innerHTML = `$$u(${x}) = ${val.toFixed(4)}$$`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('pdeCanvas');
-        ctx.strokeStyle = '#000000'; ctx.lineWidth = 1.5;
-
-        for (let x = -2; x <= 2; x += 0.3) {
-            ctx.beginPath();
-            for (let y = -2; y <= 2; y += 0.3) {
-                let z = Math.cos(Math.sqrt(x*x + y*y)) * (peak / 50);
-                let pt = project3D(x, y, z, 30, yaw, w, h, 40);
-                if (y === -2) ctx.moveTo(pt.x, pt.y); else ctx.lineTo(pt.x, pt.y);
-            }
-            ctx.stroke();
-        }
+        drawAxes2D(ctx, 40, h-20, w, h);
+        let ly = h - 20 - (l/100)*(h-40); let ry = h - 20 - (r/100)*(h-40);
+        ctx.strokeStyle = '#000000'; ctx.lineWidth = 3.5; ctx.beginPath(); ctx.moveTo(40, ly); ctx.lineTo(w-40, ry); ctx.stroke();
+        
+        let tx = 40 + x*(w-80); let ty = ly + x*(ry - ly);
+        ctx.fillStyle = '#16a34a'; ctx.beginPath(); ctx.arc(tx, ty, 6, 0, 2*Math.PI); ctx.fill();
     }
 
-    // 9. Functional Analysis (3D Metric Lp Unit Balls Mesh)
+    // 9. Functional Analysis
     function calcFunctional() {
-        let p = parseFloat(document.getElementById('faP').value) || 2;
-        let yaw = parseFloat(document.getElementById('faYaw').value);
+        let v1 = parseFloat(document.getElementById('fa1').value);
+        let v2 = parseFloat(document.getElementById('fa2').value);
         let div = document.getElementById('faRes'); div.style.display = "block";
-        div.innerHTML = `$$\\text{Unit Bound Ball Topology Profile Vector for } l^p \\text{ Space Metric.}$$`;
+        let norm = Math.sqrt(v1*v1 + v2*v2);
+        div.innerHTML = `$$\\|x\\|_{l^2} = \\sqrt{(${v1})^2 + (${v2})^2} = ${norm.toFixed(4)}$$`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('faCanvas');
-        ctx.strokeStyle = '#000000'; ctx.lineWidth = 1.5;
-
-        for(let phi = 0; phi < Math.PI; phi += 0.2) {
-            ctx.beginPath();
-            for(let theta = 0; theta <= 2*Math.PI + 0.1; theta += 0.2) {
-                let r = 1 / Math.pow(Math.pow(Math.abs(Math.cos(theta)*Math.sin(phi)), p) + Math.pow(Math.abs(Math.sin(theta)*Math.sin(phi)), p) + Math.pow(Math.abs(Math.cos(phi)), p), 1/p);
-                let x = r * Math.cos(theta) * Math.sin(phi);
-                let y = r * Math.sin(theta) * Math.sin(phi);
-                let z = r * Math.cos(phi);
-
-                let pt = project3D(x * 1.5, y * 1.5, z * 1.5, 20, yaw, w, h, 40);
-                if(theta === 0) ctx.moveTo(pt.x, pt.y); else ctx.lineTo(pt.x, pt.y);
-            }
-            ctx.stroke();
-        }
+        let cx = 40, cy = h-30;
+        drawAxes2D(ctx, cx, cy, w, h);
+        ctx.strokeStyle = '#000000'; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + v1*40, cy - v2*40); ctx.stroke();
     }
 
-    // 10. Graph Theory (Rotational Complete 3D Network Graph Visualizer)
+    // 10. Graph Theory
     function drawGraph() {
-        let numNodes = parseInt(document.getElementById('gtNodes').value) || 5;
-        let yaw = parseFloat(document.getElementById('gtYaw').value);
+        let numNodes = parseInt(document.getElementById('gtNodes').value);
         let div = document.getElementById('gtRes'); div.style.display = "block";
-        div.innerHTML = `$$\\text{3D Graph Matrix Topology Space Renders Completed for } K_{${numNodes}}$$`;
+        div.innerHTML = `$$\\text{Complete Configuration } K_{${numNodes}} \\text{ plotted symmetrically.}$$`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('graphCanvas');
-        let nodes = [];
-        
+        let nodes = []; let cx = w/2, cy = h/2, r = 70;
         for(let i=0; i<numNodes; i++) {
-            let phi = Math.acos(-1 + (2 * i) / numNodes);
-            let theta = Math.sqrt(numNodes * Math.PI) * phi;
-            let x = 2 * Math.cos(theta) * Math.sin(phi);
-            let y = 2 * Math.sin(theta) * Math.sin(phi);
-            let z = 2 * Math.cos(phi);
-            nodes.push(project3D(x, y, z, 20, yaw, w, h, 40));
+            let ang = (i * 2 * Math.PI) / numNodes;
+            nodes.push({x: cx + r*Math.cos(ang), y: cy + r*Math.sin(ang)});
         }
-
-        // Ultra-Bold Thick Pitch Black Connected Structural Edges
-        ctx.strokeStyle = '#000000'; ctx.lineWidth = 3.5;
+        ctx.strokeStyle = '#000000'; ctx.lineWidth = 3;
         for(let i=0; i<nodes.length; i++) {
             for(let j=i+1; j<nodes.length; j++) {
                 ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y); ctx.stroke();
             }
         }
-
-        // Glistening Nodes 
-        nodes.forEach((node, idx) => {
-            ctx.fillStyle = '#0f172a'; ctx.strokeStyle = '#2563eb'; ctx.lineWidth = 3;
-            ctx.beginPath(); ctx.arc(node.x, node.y, 12, 0, 2*Math.PI); ctx.fill(); ctx.stroke();
-            ctx.fillStyle = '#ffffff'; ctx.font = 'bold 11px sans-serif'; ctx.fillText(`v${idx+1}`, node.x-7, node.y+4);
+        nodes.forEach((n, i) => {
+            ctx.fillStyle = '#0f172a'; ctx.beginPath(); ctx.arc(n.x, n.y, 11, 0, 2*Math.PI); ctx.fill();
+            ctx.fillStyle = '#ffffff'; ctx.font = 'bold 10px sans-serif'; ctx.fillText(`v${i+1}`, n.x-6, n.y+4);
         });
     }
 
-    // 11. Operator Theory (3D Resolvent Lattice Space)
+    // 11. Operator Theory
     function calcOperator() {
         let k = parseFloat(document.getElementById('opT').value);
         let lam = parseFloat(document.getElementById('opLam').value);
-        let yaw = parseFloat(document.getElementById('opRot').value);
+        let div = document.getElementById('opRes'); div.style.display = "block";
         let res = 1 / (lam - k);
-
-        const { ctx, w, h } = getCtx('operatorCanvas');
-        drawAxes3D(ctx, 20, yaw, w, h, 35);
-
-        ctx.strokeStyle = '#000000'; ctx.lineWidth = 2.0;
-        for(let g = -1.5; g <= 1.5; g += 0.5) {
-            ctx.beginPath();
-            for(let i = -1.5; i <= 1.5; i += 0.2) {
-                let p = project3D(i * res, g * res, k, 20, yaw, w, h, 40);
-                if (i === -1.5) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y);
-            }
-            ctx.stroke();
-        }
-    }
-
-    // 12. Banach Algebra (3D Spherical Boundary Space)
-    function calcBanach() {
-        let a = parseFloat(document.getElementById('baA').value) || 3;
-        let yaw = parseFloat(document.getElementById('baYaw').value);
-
-        const { ctx, w, h } = getCtx('banachCanvas');
-        drawAxes3D(ctx, 25, yaw, w, h, 30);
-        ctx.strokeStyle = '#000000'; ctx.lineWidth = 2.0;
-
-        for(let i=0; i<Math.PI; i+=0.3) {
-            ctx.beginPath();
-            for(let j=0; j<=2*Math.PI+0.1; j+=0.2) {
-                let x = (a/2) * Math.cos(j) * Math.sin(i);
-                let y = (a/2) * Math.sin(j) * Math.sin(i);
-                let z = (a/2) * Math.cos(i);
-                let pt = project3D(x, y, z, 25, yaw, w, h, 35);
-                if(j===0) ctx.moveTo(pt.x, pt.y); else ctx.lineTo(pt.x, pt.y);
-            }
-            ctx.stroke();
-        }
-    }
-
-    // 13. Mathematical Methods (3D Wave Surface Interpolation)
-    function calcMethods() {
-        let N = parseInt(document.getElementById('mmN').value) || 3;
-        let yaw = parseFloat(document.getElementById('mmYaw').value);
-
-        const { ctx, w, h } = getCtx('methodsCanvas');
-        ctx.strokeStyle = '#000000'; ctx.lineWidth = 1.5;
-
-        for(let x = -Math.PI; x <= Math.PI; x += 0.3) {
-            ctx.beginPath();
-            for(let y = -Math.PI; y <= Math.PI; y += 0.3) {
-                let sum = 0;
-                for(let n=1; n<=N; n+=2) { sum += Math.sin(n*x)*Math.cos(n*y)/n; }
-                let pt = project3D(x, y, sum * 1.5, 25, yaw, w, h, 35);
-                if(y === -Math.PI) ctx.moveTo(pt.x, pt.y); else ctx.lineTo(pt.x, pt.y);
-            }
-            ctx.stroke();
-        }
-    }
-
-    // 14. Relativity (3D Light Cone Matrix Map Space)
-    function calcRelativity() {
-        let yaw = parseFloat(document.getElementById('relRot').value);
-        const { ctx, w, h } = getCtx('relCanvas');
-        ctx.lineWidth = 2.0;
-
-        for (let tHeight = -2.5; tHeight <= 2.5; tHeight += 0.4) {
-            ctx.beginPath();
-            ctx.strokeStyle = tHeight >= 0 ? '#2563eb' : '#dc2626';
-            let coneRadius = Math.abs(tHeight);
-            
-            for (let a = 0; a <= 2*Math.PI + 0.1; a += 0.25) {
-                let x = coneRadius * Math.cos(a);
-                let y = coneRadius * Math.sin(a);
-                let pt = project3D(x, y, tHeight, 20, yaw, w, h, 30);
-                if (a === 0) ctx.moveTo(pt.x, pt.y); else ctx.lineTo(pt.x, pt.y);
-            }
-            ctx.stroke();
-        }
-    }
-
-    // 15. Classical Mechanics (3D Toroid Phase State Track)
-    function calcClassical() {
-        let ampDeg = parseFloat(document.getElementById('cmAmp').value);
-        let L = parseFloat(document.getElementById('cmL').value);
-        let yaw = parseFloat(document.getElementById('cmRot').value);
-        
-        const { ctx, w, h } = getCtx('classicalCanvas');
-        ctx.strokeStyle = '#000000'; ctx.lineWidth = 2.5; ctx.beginPath();
-
-        let radAmp = ampDeg * Math.PI / 180;
-        for (let t = -5; t <= 5; t += 0.04) {
-            let theta = radAmp * Math.cos(2.5 * t);
-            let momentum = -radAmp * Math.sin(2.5 * t) * Math.sqrt(9.81 / L);
-            let pt = project3D(theta * 3, momentum * 2, t * 0.6, 25, yaw, w, h, 35);
-            if (t === -5) ctx.moveTo(pt.x, pt.y); else ctx.lineTo(pt.x, pt.y);
-        }
-        ctx.stroke();
-    }
-
-    // 16. Differential Geometry (3D Helix Map with High-Contrast Thick Green Tangent)
-    function drawGeometry() {
-        let R = parseFloat(document.getElementById('dgR').value);
-        let c = parseFloat(document.getElementById('dgC').value);
-        let tVal = parseFloat(document.getElementById('dgT').value);
-        let yaw = parseFloat(document.getElementById('dgYaw').value);
-        
-        let div = document.getElementById('dgRes'); div.style.display = "block";
-        let x = R * Math.cos(tVal); let y = R * Math.sin(tVal); let z = c * tVal;
-        let tx = -R * Math.sin(tVal); let ty = R * Math.cos(tVal); let tz = c;
-        
-        div.innerHTML = `$$\\vec{r}(t) = (${x.toFixed(2)})\\hat{i} + (${y.toFixed(2)})\\hat{j} + (${z.toFixed(2)})\\hat{k}$$`;
+        div.innerHTML = `$$R(\\lambda) = (\\lambda I - T)^{-1} = \\frac{1}{${lam} - ${k}} = ${res.toFixed(4)}$$`;
         triggerMathJax();
 
-        const { ctx, w, h } = getCtx('geometryCanvas');
-        drawAxes3D(ctx, 20, yaw, w, h, 25);
+        const { ctx, w, h } = getCtx('operatorCanvas');
+        drawAxes2D(ctx, w/2, h/2, w, h);
+        ctx.strokeStyle = '#000000'; ctx.lineWidth = 3; ctx.beginPath();
+        for(let i=-5; i<=5; i+=0.1) {
+            if(Math.abs(i - k) < 0.2) continue;
+            let cx = w/2 + i*30;
+            let cy = h/2 - (1 / (i - k))*30;
+            if(i===-5) ctx.moveTo(cx, cy); else ctx.lineTo(cx, cy);
+        }
+        ctx.stroke();
+    }
 
-        ctx.strokeStyle = '#000000'; ctx.lineWidth = 3.0; ctx.beginPath();
-        for(let t=0; t<16; t+=0.05) {
-            let pt = project3D(R*Math.cos(t), R*Math.sin(t), c*t - 2, 20, yaw, w, h, 25);
-            if(t === 0) ctx.moveTo(pt.x, pt.y); else ctx.lineTo(pt.x, pt.y);
+    // 12. Banach Algebra
+    function calcBanach() {
+        let a = parseFloat(document.getElementById('baA').value);
+        let b = parseFloat(document.getElementById('baB').value);
+        let div = document.getElementById('baRes'); div.style.display = "block";
+        div.innerHTML = `$$\\|A \\cdot B\\| \\le \\|A\\| \\cdot \\|B\\| = ${a} \\cdot ${b} = ${(a*b).toFixed(2)}$$`;
+        triggerMathJax();
+
+        const { ctx, w, h } = getCtx('banachCanvas');
+        ctx.strokeStyle = '#000000'; ctx.lineWidth = 3;
+        ctx.strokeRect(30, 30, a*25, b*25);
+        ctx.fillStyle = 'rgba(0,0,0,0.05)'; ctx.fillRect(30, 30, a*25, b*25);
+    }
+
+    // 13. Mathematical Methods
+    function calcMethods() {
+        let N = parseInt(document.getElementById('mmN').value);
+        const { ctx, w, h } = getCtx('methodsCanvas');
+        drawAxes2D(ctx, 20, h/2, w, h);
+        ctx.strokeStyle = '#000000'; ctx.lineWidth = 2.5; ctx.beginPath();
+        for(let i=0; i<w-40; i++) {
+            let simT = (i / (w-40)) * 4 * Math.PI;
+            let sum = 0;
+            for(let n=1; n<=N; n+=2) { sum += Math.sin(n * simT) / n; }
+            let cy = h/2 - (4/Math.PI)*sum * (h-60)/2;
+            if(i===0) ctx.moveTo(20+i, cy); else ctx.lineTo(20+i, cy);
+        }
+        ctx.stroke();
+    }
+
+    // 14. Relativity
+    function calcRelativity() {
+        let v = parseFloat(document.getElementById('relV').value);
+        const { ctx, w, h } = getCtx('relCanvas');
+        let cx = w/2, cy = h/2;
+        drawAxes2D(ctx, cx, cy, w, h);
+        
+        ctx.strokeStyle = '#000000'; ctx.lineWidth = 2.5;
+        ctx.beginPath(); ctx.moveTo(cx - 80, cy - 80); ctx.lineTo(cx + 80, cy + 80);
+        ctx.moveTo(cx - 80, cy + 80); ctx.lineTo(cx + 80, cy - 80); ctx.stroke();
+        
+        // World-line line element
+        let slope = 1 / v;
+        ctx.strokeStyle = '#dc2626'; ctx.lineWidth = 4;
+        ctx.beginPath(); ctx.moveTo(cx - 50*v, cy + 50); ctx.lineTo(cx + 50*v, cy - 50); ctx.stroke();
+    }
+
+    // 15. Classical Mechanics
+    function calcClassical() {
+        let amp = parseFloat(document.getElementById('cmAmp').value);
+        let L = parseFloat(document.getElementById('cmL').value);
+        const { ctx, w, h } = getCtx('classicalCanvas');
+        let cx = w/2, cy = h/2;
+        drawAxes2D(ctx, cx, cy, w, h);
+
+        let rad = amp * Math.PI / 180;
+        let pMax = rad * Math.sqrt(9.81 / L);
+
+        ctx.strokeStyle = '#000000'; ctx.lineWidth = 3; ctx.beginPath();
+        for(let a=0; a<=2*Math.PI+0.1; a+=0.05) {
+            let x = cx + (rad * Math.cos(a)) * 120;
+            let y = cy - (pMax * Math.sin(a)) * 120;
+            if(a===0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+    }
+
+    // 16. Differential Geometry
+    function drawGeometry() {
+        let tVal = parseFloat(document.getElementById('dgT').value);
+        const { ctx, w, h } = getCtx('geometryCanvas');
+        let cx = 30, cy = h/2;
+        drawAxes2D(ctx, cx, cy, w, h);
+
+        ctx.strokeStyle = '#000000'; ctx.lineWidth = 3; ctx.beginPath();
+        for(let i=0; i<w-50; i++) {
+            let t = (i / (w-50)) * 2 * Math.PI;
+            let hx = cx + i;
+            let hy = cy - Math.sin(t)*50;
+            if(i===0) ctx.moveTo(hx, hy); else ctx.lineTo(hx, hy);
         }
         ctx.stroke();
 
-        let currentPt = project3D(x, y, z - 2, 20, yaw, w, h, 25);
-        ctx.fillStyle = '#dc2626'; ctx.beginPath(); ctx.arc(currentPt.x, currentPt.y, 7, 0, 2*Math.PI); ctx.fill();
+        // Moving Element Point and Tangent Line
+        let px = cx + (tVal / (2*Math.PI))*(w-50);
+        let py = cy - Math.sin(tVal)*50;
+        ctx.fillStyle = '#dc2626'; ctx.beginPath(); ctx.arc(px, py, 6, 0, 2*Math.PI); ctx.fill();
 
-        let tangentPt = project3D(x + tx*0.8, y + ty*0.8, (z - 2) + tz*0.8, 20, yaw, w, h, 25);
-        ctx.strokeStyle = '#16a34a'; ctx.lineWidth = 4.5; ctx.beginPath();
-        ctx.moveTo(currentPt.x, currentPt.y); ctx.lineTo(tangentPt.x, tangentPt.y); ctx.stroke();
+        let slope = -Math.cos(tVal)*50;
+        ctx.strokeStyle = '#16a34a'; ctx.lineWidth = 4; ctx.beginPath();
+        ctx.moveTo(px - 30, py + slope*0.5); ctx.lineTo(px + 30, py - slope*0.5); ctx.stroke();
+    }
+
+    // 17. Approximation Theory (Chebyshev Polynomial Approximations)
+    function calcApproximation() {
+        let n = parseInt(document.getElementById('apN').value) || 4;
+        let div = document.getElementById('apRes'); div.style.display = "block";
+        div.innerHTML = `Plotted Chebyshev Polynomial Equation profile $T_{${n}}(x)$ minimizing continuous interpolation min-max error bounds.`;
+        triggerMathJax();
+
+        const { ctx, w, h } = getCtx('approxCanvas');
+        let cx = w/2, cy = h/2;
+        drawAxes2D(ctx, cx, cy, w, h);
+
+        // Chebyshev Polynomial Recurrence Equation Calculator Logic
+        function getChebyshev(x, deg) {
+            if (deg === 0) return 1;
+            if (deg === 1) return x;
+            let t0 = 1, t1 = x, tN = 0;
+            for (let i = 2; i <= deg; i++) {
+                tN = 2 * x * t1 - t0;
+                t0 = t1;
+                t1 = tN;
+            }
+            return t1;
+        }
+
+        ctx.strokeStyle = '#000000'; ctx.lineWidth = 3.5; ctx.beginPath();
+        let scaleX = w / 2.5; 
+        let scaleY = h / 2.5;
+
+        for (let i = 0; i <= w; i++) {
+            // Map pixel width directly into Domain interval [-1, 1]
+            let xNorm = (i - cx) / scaleX;
+            if (xNorm < -1 || xNorm > 1) continue;
+
+            let yNorm = getChebyshev(xNorm, n);
+            let plotX = i;
+            let plotY = cy - (yNorm * scaleY);
+
+            if (i === Math.ceil(cx - scaleX)) ctx.moveTo(plotX, plotY); else ctx.lineTo(plotX, plotY);
+        }
+        ctx.stroke();
     }
 
     window.onload = function() {
@@ -1002,6 +936,7 @@
         calcTop(); calcNT(); calcODE(); calcPDE();
         calcFunctional(); drawGraph(); calcOperator(); calcBanach();
         calcMethods(); calcRelativity(); calcClassical(); drawGeometry();
+        calcApproximation();
     };
 </script>
 </body>
