@@ -4,6 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Master Graduate Mathematics Interactive Directory</title>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
     <style>
         :root {
             --bg-main: #f1f5f9;
@@ -15,7 +29,6 @@
             --border-color: #cbd5e1;
             --calc-bg: #f8fafc;
             --success-green: #15803d;
-            --math-font: "Times New Roman", Times, serif;
             --subject-sep-line: 4px solid #3b82f6;
         }
 
@@ -92,12 +105,6 @@
             font-size: 0.9rem;
         }
 
-        .math-symbol {
-            font-family: var(--math-font);
-            font-style: italic;
-            font-size: 1.1rem;
-        }
-
         .interactive-calc {
             background-color: var(--calc-bg);
             border: 1px solid var(--border-color);
@@ -113,13 +120,12 @@
         }
 
         .calc-formula {
-            font-family: var(--math-font);
             background: #e2e8f0;
-            padding: 6px 12px;
+            padding: 10px 14px;
             border-radius: 4px;
-            font-size: 1.1rem;
             margin-bottom: 12px;
-            display: inline-block;
+            display: block;
+            overflow-x: auto;
         }
 
         .input-group {
@@ -174,8 +180,8 @@
             border-left: 4px solid var(--success-green);
             border-radius: 4px;
             font-size: 1rem;
-            font-family: var(--math-font);
             display: none;
+            overflow-x: auto;
         }
 
         .visual-canvas {
@@ -204,7 +210,6 @@
         <p>Comprehensive subject curriculum maps cross-linked with live semantic verification environments.</p>
     </header>
 
-    <!-- 1. REAL ANALYSIS -->
     <div class="subject-card">
         <div class="subject-title">1. Real Analysis</div>
         <div class="meta-grid">
@@ -212,17 +217,17 @@
             <div class="meta-section"><h3>Scope</h3><p>Vital for advanced deterministic optimization structures.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: Sequence Convergency Proof (<span class="math-symbol">&epsilon;-N</span> Verification)</h4>
-            <div class="calc-formula">Target Condition: <span class="math-symbol">a<sub>n</sub> = 1/n &rarr; L = 0</span></div>
+            <h4>⚡ Live Engine: Sequence Convergency Proof ($\epsilon-N$ Verification)</h4>
+            <div class="calc-formula">Target Condition: $a_n = \frac{1}{n} \to L = 0$</div>
             <div class="input-group">
-                <div class="input-field"><label>Tolerance (<span class="math-symbol">&epsilon;</span>)</label><input type="number" id="epsInp" value="0.01" step="0.001"></div>
+                <div class="input-field"><label>Tolerance ($\epsilon$)</label><input type="number" id="epsInp" value="0.05" step="0.005" min="0.001"></div>
                 <button class="calc-btn" onclick="calcReal()">Evaluate Bound</button>
             </div>
             <div id="realRes" class="calc-result"></div>
+            <canvas id="realCanvas" class="visual-canvas" width="400" height="150"></canvas>
         </div>
     </div>
 
-    <!-- 2. COMPLEX ANALYSIS -->
     <div class="subject-card">
         <div class="subject-title">2. Complex Analysis</div>
         <div class="meta-grid">
@@ -230,16 +235,16 @@
         </div>
         <div class="interactive-calc">
             <h4>⚡ Live Engine: Complex Exponential Transformation</h4>
-            <div class="calc-formula"><span class="math-symbol">e<sup>i&theta;</sup> = cos(&theta;) + i&sdot;sin(&theta;)</span></div>
+            <div class="calc-formula">Euler's Identity Mapping: $e^{i\theta} = \cos(\theta) + i\sin(\theta)$</div>
             <div class="input-group">
-                <div class="input-field"><label>Angle (<span class="math-symbol">&theta;</span> in degrees)</label><input type="number" id="compDeg" value="60"></div>
+                <div class="input-field"><label>Angle ($\theta^\circ$)</label><input type="number" id="compDeg" value="60"></div>
                 <button class="calc-btn" onclick="calcComplex()">Map Field</button>
             </div>
             <div id="complexRes" class="calc-result"></div>
+            <canvas id="complexCanvas" class="visual-canvas" width="400" height="200"></canvas>
         </div>
     </div>
 
-    <!-- 3. ABSTRACT ALGEBRA -->
     <div class="subject-card">
         <div class="subject-title">3. Abstract Algebra</div>
         <div class="meta-grid">
@@ -247,37 +252,37 @@
         </div>
         <div class="interactive-calc">
             <h4>⚡ Live Engine: Modular Multiplicative Cyclic Fields</h4>
-            <div class="calc-formula">Group Set Orbit: <span class="math-symbol">g<sup>k</sup> mod p</span></div>
+            <div class="calc-formula">Group Set Orbit: $g^k \pmod p$</div>
             <div class="input-group">
-                <div class="input-field"><label>Prime Modulus (<span class="math-symbol">p</span>)</label><input type="number" id="algP" value="11"></div>
-                <div class="input-field"><label>Generator (<span class="math-symbol">g</span>)</label><input type="number" id="algG" value="2"></div>
+                <div class="input-field"><label>Prime Modulus ($p$)</label><input type="number" id="algP" value="11"></div>
+                <div class="input-field"><label>Generator ($g$)</label><input type="number" id="algG" value="2"></div>
                 <button class="calc-btn" onclick="calcAlgebra()">Build Group</button>
             </div>
             <div id="algebraRes" class="calc-result"></div>
+            <canvas id="algebraCanvas" class="visual-canvas" width="400" height="100"></canvas>
         </div>
     </div>
 
-    <!-- 4. LINEAR ALGEBRA -->
     <div class="subject-card">
         <div class="subject-title">4. Linear Algebra</div>
         <div class="meta-grid">
             <div class="meta-section"><h3>Core Applications</h3><p>Handles coordinate space transformation maps, projection arrays, and dimensionality changes.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: 2&times;2 Transformation Space Determinant Check</h4>
-            <div class="calc-formula">det(<span class="math-symbol">A</span>) = <span class="math-symbol">ad - bc</span></div>
+            <h4>⚡ Live Engine: $2\times2$ Transformation Space Determinant Check</h4>
+            <div class="calc-formula">$\det(A) = ad - bc$</div>
             <div class="input-group">
-                <div class="input-field"><label>a</label><input type="number" id="la_a" value="5"></div>
-                <div class="input-field"><label>b</label><input type="number" id="la_b" value="2"></div>
+                <div class="input-field"><label>a</label><input type="number" id="la_a" value="2"></div>
+                <div class="input-field"><label>b</label><input type="number" id="la_b" value="1"></div>
                 <div class="input-field"><label>c</label><input type="number" id="la_c" value="1"></div>
-                <div class="input-field"><label>d</label><input type="number" id="la_d" value="3"></div>
-                <button class="calc-btn" onclick="calcLinear()">Compute Det</button>
+                <div class="input-field"><label>d</label><input type="number" id="la_d" value="2"></div>
+                <button class="calc-btn" onclick="calcLinear()">Compute Det & Plot</button>
             </div>
             <div id="linearRes" class="calc-result"></div>
+            <canvas id="linearCanvas" class="visual-canvas" width="400" height="200"></canvas>
         </div>
     </div>
 
-    <!-- 5. TOPOLOGY -->
     <div class="subject-card">
         <div class="subject-title">5. Topology</div>
         <div class="meta-grid">
@@ -285,18 +290,18 @@
         </div>
         <div class="interactive-calc">
             <h4>⚡ Live Engine: Euler Characteristic Invariant Solver</h4>
-            <div class="calc-formula">Invariant Shape Equation: <span class="math-symbol">&chi; = V - E + F</span></div>
+            <div class="calc-formula">Invariant Shape Equation: $\chi = V - E + F$</div>
             <div class="input-group">
-                <div class="input-field"><label>Vertices (<span class="math-symbol">V</span>)</label><input type="number" id="tpV" value="4"></div>
-                <div class="input-field"><label>Edges (<span class="math-symbol">E</span>)</label><input type="number" id="tpE" value="6"></div>
-                <div class="input-field"><label>Faces (<span class="math-symbol">F</span>)</label><input type="number" id="tpF" value="4"></div>
+                <div class="input-field"><label>Vertices ($V$)</label><input type="number" id="tpV" value="4"></div>
+                <div class="input-field"><label>Edges ($E$)</label><input type="number" id="tpE" value="6"></div>
+                <div class="input-field"><label>Faces ($F$)</label><input type="number" id="tpF" value="4"></div>
                 <button class="calc-btn" onclick="calcTop()">Verify Invariant</button>
             </div>
             <div id="topRes" class="calc-result"></div>
+            <canvas id="topologyCanvas" class="visual-canvas" width="400" height="150"></canvas>
         </div>
     </div>
 
-    <!-- 6. NUMBER THEORY & CRYPTOGRAPHY -->
     <div class="subject-card">
         <div class="subject-title">6. Number Theory & Cryptography</div>
         <div class="meta-grid">
@@ -304,18 +309,18 @@
         </div>
         <div class="interactive-calc">
             <h4>⚡ Live Engine: Fast Powering Framework (Modular Exponentiation)</h4>
-            <div class="calc-formula">Relation: <span class="math-symbol">x<sup>e</sup> &equiv; r (mod n)</span></div>
+            <div class="calc-formula">Relation: $x^e \equiv r \pmod n$</div>
             <div class="input-group">
-                <div class="input-field"><label>Base (<span class="math-symbol">x</span>)</label><input type="number" id="ntX" value="3"></div>
-                <div class="input-field"><label>Exponent (<span class="math-symbol">e</span>)</label><input type="number" id="ntE" value="45"></div>
-                <div class="input-field"><label>Modulus (<span class="math-symbol">n</span>)</label><input type="number" id="ntN" value="7"></div>
+                <div class="input-field"><label>Base ($x$)</label><input type="number" id="ntX" value="3"></div>
+                <div class="input-field"><label>Exponent ($e$)</label><input type="number" id="ntE" value="14"></div>
+                <div class="input-field"><label>Modulus ($n$)</label><input type="number" id="ntN" value="17"></div>
                 <button class="calc-btn" onclick="calcNT()">Compute Remainder</button>
             </div>
             <div id="ntRes" class="calc-result"></div>
+            <canvas id="ntCanvas" class="visual-canvas" width="400" height="120"></canvas>
         </div>
     </div>
 
-    <!-- 7. ORDINARY DIFFERENTIAL EQUATIONS (ODEs) -->
     <div class="subject-card">
         <div class="subject-title">7. Ordinary Differential Equations (ODEs)</div>
         <div class="meta-grid">
@@ -323,18 +328,18 @@
         </div>
         <div class="interactive-calc">
             <h4>⚡ Live Engine: Continuous Exponential Decay/Growth Tracker</h4>
-            <div class="calc-formula">Analytical Solution Form: <span class="math-symbol">y(t) = y<sub>0</sub> &sdot; e<sup>kt</sup></span></div>
+            <div class="calc-formula">Analytical Solution Form: $y(t) = y_0 \cdot e^{kt}$</div>
             <div class="input-group">
-                <div class="input-field"><label>Initial Amplitude (<span class="math-symbol">y<sub>0</sub></span>)</label><input type="number" id="odeY" value="10"></div>
-                <div class="input-field"><label>Coefficient (<span class="math-symbol">k</span>)</label><input type="number" id="odeK" value="-0.5" step="0.1"></div>
-                <div class="input-field"><label>Time Target (<span class="math-symbol">t</span>)</label><input type="number" id="odeT" value="4"></div>
+                <div class="input-field"><label>Initial Amplitude ($y_0$)</label><input type="number" id="odeY" value="10"></div>
+                <div class="input-field"><label>Coefficient ($k$)</label><input type="number" id="odeK" value="-0.3" step="0.1"></div>
+                <div class="input-field"><label>Time Target ($t$)</label><input type="number" id="odeT" value="5"></div>
                 <button class="calc-btn" onclick="calcODE()">Project State</button>
             </div>
             <div id="odeRes" class="calc-result"></div>
+            <canvas id="odeCanvas" class="visual-canvas" width="400" height="180"></canvas>
         </div>
     </div>
 
-    <!-- 8. PARTIAL DIFFERENTIAL EQUATIONS (PDEs) -->
     <div class="subject-card">
         <div class="subject-title">8. Partial Differential Equations (PDEs)</div>
         <div class="meta-grid">
@@ -342,37 +347,37 @@
         </div>
         <div class="interactive-calc">
             <h4>⚡ Live Engine: 1D Steady State Linear Heat Interpolator</h4>
-            <div class="calc-formula">Boundary Formula: <span class="math-symbol">u(x) = u<sub>0</sub> + x &sdot; (u<sub>1</sub> - u<sub>0</sub>)</span></div>
+            <div class="calc-formula">Boundary Dirichlet Solution: $u(x) = u_0 + x(u_1 - u_0)$</div>
             <div class="input-group">
-                <div class="input-field"><label>Left Temp (<span class="math-symbol">u<sub>0</sub></span>)</label><input type="number" id="pdeL" value="80"></div>
-                <div class="input-field"><label>Right Temp (<span class="math-symbol">u<sub>1</sub></span>)</label><input type="number" id="pdeR" value="20"></div>
-                <div class="input-field"><label>Node Position (<span class="math-symbol">x</span> [0,1])</label><input type="number" id="pdeX" value="0.2" step="0.1" min="0" max="1"></div>
+                <div class="input-field"><label>Left Temp ($u_0$)</label><input type="number" id="pdeL" value="100"></div>
+                <div class="input-field"><label>Right Temp ($u_1$)</label><input type="number" id="pdeR" value="20"></div>
+                <div class="input-field"><label>Node Position ($x \in [0,1]$)</label><input type="number" id="pdeX" value="0.4" step="0.1" min="0" max="1"></div>
                 <button class="calc-btn" onclick="calcPDE()">Resolve Value</button>
             </div>
             <div id="pdeRes" class="calc-result"></div>
+            <canvas id="pdeCanvas" class="visual-canvas" width="400" height="150"></canvas>
         </div>
     </div>
 
-    <!-- 9. FUNCTIONAL ANALYSIS -->
     <div class="subject-card">
         <div class="subject-title">9. Functional Analysis</div>
         <div class="meta-grid">
             <div class="meta-section"><h3>Core Applications</h3><p>Explores infinite-dimensional vector structures, limit metrics, and inner product function spaces.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: Discrete <span class="math-symbol">l<sup>2</sup></span> Hilbert Space Sequence Norm Evaluator</h4>
-            <div class="calc-formula">Inner Product Vector Standard: <span class="math-symbol">||x|| = &radic;(&sum; |x<sub>i</sub>|<sup>2</sup>)</span></div>
+            <h4>⚡ Live Engine: Discrete $l^2$ Hilbert Space Sequence Norm Evaluator</h4>
+            <div class="calc-formula">Inner Product Vector Standard: $\|x\|_{l^2} = \sqrt{\sum |x_i|^2}\</div>
             <div class="input-group">
-                <div class="input-field"><label>Element <span class="math-symbol">x<sub>1</sub></span></label><input type="number" id="fa1" value="3"></div>
-                <div class="input-field"><label>Element <span class="math-symbol">x<sub>2</sub></span></label><input type="number" id="fa2" value="4"></div>
-                <div class="input-field"><label>Element <span class="math-symbol">x<sub>3</sub></span></label><input type="number" id="fa3" value="12"></div>
+                <div class="input-field"><label>Element $x_1$</label><input type="number" id="fa1" value="3"></div>
+                <div class="input-field"><label>Element $x_2$</label><input type="number" id="fa2" value="4"></div>
+                <div class="input-field"><label>Element $x_3$</label><input type="number" id="fa3" value="0"></div>
                 <button class="calc-btn" onclick="calcFunctional()">Compute Space Norm</button>
             </div>
             <div id="faRes" class="calc-result"></div>
+            <canvas id="faCanvas" class="visual-canvas" width="400" height="150"></canvas>
         </div>
     </div>
 
-    <!-- 10. GRAPH THEORY -->
     <div class="subject-card">
         <div class="subject-title">10. Graph Theory</div>
         <div class="meta-grid">
@@ -380,9 +385,9 @@
         </div>
         <div class="interactive-calc">
             <h4>⚡ Live Engine: Structural Node Tree Edge Connectivity Generator</h4>
-            <div class="calc-formula">Handshaking Lemma: <span class="math-symbol">&sum; deg(v<sub>i</sub>) = 2 &sdot; |E|</span></div>
+            <div class="calc-formula">Handshaking Lemma: $\sum \deg(v_i) = 2|E|$</div>
             <div class="input-group">
-                <div class="input-field"><label>Total Node Matrix Order (<span class="math-symbol">V</span>)</label><input type="number" id="gtNodes" value="5" min="2" max="8"></div>
+                <div class="input-field"><label>Nodes Matrix Order ($V$)</label><input type="number" id="gtNodes" value="5" min="2" max="8"></div>
                 <button class="calc-btn" onclick="drawGraph()">Render Network Map</button>
             </div>
             <div id="gtRes" class="calc-result"></div>
@@ -390,7 +395,6 @@
         </div>
     </div>
 
-    <!-- 11. OPERATOR THEORY -->
     <div class="subject-card">
         <div class="subject-title">11. Operator Theory</div>
         <div class="meta-grid">
@@ -398,17 +402,17 @@
         </div>
         <div class="interactive-calc">
             <h4>⚡ Live Engine: Operator Scaling Spectral Inversion Solver</h4>
-            <div class="calc-formula">Resolvent Mapping Set Relation: <span class="math-symbol">R(&lambda;) = (&lambda;I - T)<sup>-1</sup></span></div>
+            <div class="calc-formula">Resolvent Mapping Set Relation: $R(\lambda) = (\lambda I - T)^{-1}$</div>
             <div class="input-group">
-                <div class="input-field"><label>Operator Scaling Factor (<span class="math-symbol">k</span>)</label><input type="number" id="opT" value="2"></div>
-                <div class="input-field"><label>Spectrum Parameter (<span class="math-symbol">&lambda;</span>)</label><input type="number" id="opLam" value="5"></div>
+                <div class="input-field"><label>Operator Scalar Value ($T = k \cdot I$)</label><input type="number" id="opT" value="2"></div>
+                <div class="input-field"><label>Spectrum Parameter ($\lambda$)</label><input type="number" id="opLam" value="5"></div>
                 <button class="calc-btn" onclick="calcOperator()">Compute Resolvent</button>
             </div>
             <div id="opRes" class="calc-result"></div>
+            <canvas id="operatorCanvas" class="visual-canvas" width="400" height="150"></canvas>
         </div>
     </div>
 
-    <!-- 12. BANACH ALGEBRA -->
     <div class="subject-card">
         <div class="subject-title">12. Banach Algebra</div>
         <div class="meta-grid">
@@ -416,17 +420,17 @@
         </div>
         <div class="interactive-calc">
             <h4>⚡ Live Engine: Sub-Multiplicative Vector Inequality Verifier</h4>
-            <div class="calc-formula">Axiom Invariant Bound: <span class="math-symbol">||A &sdot; B|| &le; ||A|| &sdot; ||B||</span></div>
+            <div class="calc-formula">Axiom Invariant Bound: $\|A \cdot B\| \le \|A\| \cdot \|B\|$</div>
             <div class="input-group">
-                <div class="input-field"><label>Norm <span class="math-symbol">||A||</span></label><input type="number" id="baA" value="4"></div>
-                <div class="input-field"><label>Norm <span class="math-symbol">||B||</span></label><input type="number" id="baB" value="3"></div>
+                <div class="input-field"><label>Norm $\|A\|$</label><input type="number" id="baA" value="4"></div>
+                <div class="input-field"><label>Norm $\|B\|$</label><input type="number" id="baB" value="3"></div>
                 <button class="calc-btn" onclick="calcBanach()">Verify Property</button>
             </div>
             <div id="baRes" class="calc-result"></div>
+            <canvas id="banachCanvas" class="visual-canvas" width="400" height="150"></canvas>
         </div>
     </div>
 
-    <!-- 13. MATHEMATICAL METHODS -->
     <div class="subject-card">
         <div class="subject-title">13. Mathematical Methods</div>
         <div class="meta-grid">
@@ -434,23 +438,24 @@
         </div>
         <div class="interactive-calc">
             <h4>⚡ Live Engine: Fourier Square Wave Approximation Engine</h4>
-            <div class="calc-formula">Harmonic Form: <span class="math-symbol">f(t) = (4/&pi;) &sdot; &sum; [sin(n&sdot;t) / n]</span> (for odd values of <span class="math-symbol">n</span>)</div>
+            <div class="calc-formula">Harmonic Form: $f(t) = \frac{4}{\pi} \sum_{n=1,3,5\dots}^{N} \frac{\sin(nt)}{n}$</div>
             <div class="input-group">
-                <div class="input-field"><label>Time Offset (<span class="math-symbol">t</span>)</label><input type="number" id="mmT" value="1.5" step="0.1"></div>
+                <div class="input-field"><label>Time Axis Range Value ($t$)</label><input type="number" id="mmT" value="1.5" step="0.1"></div>
                 <div class="input-field"><label>Harmonic Cutoff Orders</label>
-                    <select id="mmN">
+                    <select id="mmN" onchange="calcMethods()">
                         <option value="1">1 Harmonic (Fundamental)</option>
                         <option value="3">3 Harmonics</option>
                         <option value="5">5 Harmonics</option>
+                        <option value="15">15 Harmonics</option>
                     </select>
                 </div>
                 <button class="calc-btn" onclick="calcMethods()">Evaluate Expansion</button>
             </div>
             <div id="mmRes" class="calc-result"></div>
+            <canvas id="methodsCanvas" class="visual-canvas" width="400" height="180"></canvas>
         </div>
     </div>
 
-    <!-- 14. RELATIVITY -->
     <div class="subject-card">
         <div class="subject-title">14. Relativity</div>
         <div class="meta-grid">
@@ -458,17 +463,17 @@
         </div>
         <div class="interactive-calc">
             <h4>⚡ Live Engine: Special Relativistic Lorentz Time Dilation Calculator</h4>
-            <div class="calc-formula">Time Distortion Law: <span class="math-symbol">&Delta;t' = &Delta;t / &radic;(1 - v<sup>2</sup>/c<sup>2</sup>)</span></div>
+            <div class="calc-formula">Time Distortion Law: $\Delta t' = \frac{\Delta t}{\sqrt{1 - \frac{v^2}{c^2}}}$</div>
             <div class="input-group">
-                <div class="input-field"><label>Stationary Time (<span class="math-symbol">&Delta;t</span> sec)</label><input type="number" id="relT" value="10"></div>
-                <div class="input-field"><label>Velocity Fractional Speed (<span class="math-symbol">v/c</span>)</label><input type="number" id="relV" value="0.8" step="0.05" min="0" max="0.99"></div>
+                <div class="input-field"><label>Stationary Time ($\Delta t$ sec)</label><input type="number" id="relT" value="10"></div>
+                <div class="input-field"><label>Velocity Factor ($v/c$)</label><input type="number" id="relV" value="0.6" step="0.05" min="0" max="0.99"></div>
                 <button class="calc-btn" onclick="calcRelativity()">Project Dilation</button>
             </div>
             <div id="relRes" class="calc-result"></div>
+            <canvas id="relCanvas" class="visual-canvas" width="400" height="160"></canvas>
         </div>
     </div>
 
-    <!-- 15. CLASSICAL MECHANICS -->
     <div class="subject-card">
         <div class="subject-title">15. Classical Mechanics</div>
         <div class="meta-grid">
@@ -476,17 +481,17 @@
         </div>
         <div class="interactive-calc">
             <h4>⚡ Live Engine: Planar Simple Pendulum Angular Period Solver</h4>
-            <div class="calc-formula">Small-Angle Approximation Invariant: <span class="math-symbol">T = 2&pi; &sdot; &radic;(L / g)</span></div>
+            <div class="calc-formula">Small-Angle Approximation Invariant: $T = 2\pi \sqrt{\frac{L}{g}}$</div>
             <div class="input-group">
-                <div class="input-field"><label>Pendulum Cord length (<span class="math-symbol">L</span> meters)</label><input type="number" id="cmL" value="2"></div>
-                <div class="input-field"><label>Gravity (<span class="math-symbol">g</span> m/s²)</label><input type="number" id="cmG" value="9.81"></div>
+                <div class="input-field"><label>Pendulum Cord length ($L$ m)</label><input type="number" id="cmL" value="2"></div>
+                <div class="input-field"><label>Gravity ($g$ m/s²)</label><input type="number" id="cmG" value="9.81"></div>
                 <button class="calc-btn" onclick="calcClassical()">Solve Period</button>
             </div>
             <div id="cmRes" class="calc-result"></div>
+            <canvas id="classicalCanvas" class="visual-canvas" width="400" height="160"></canvas>
         </div>
     </div>
 
-    <!-- 16. DIFFERENTIAL GEOMETRY -->
     <div class="subject-card">
         <div class="subject-title">16. Differential Geometry</div>
         <div class="meta-grid">
@@ -494,9 +499,9 @@
         </div>
         <div class="interactive-calc">
             <h4>⚡ Live Engine: Geometric Helix Mapping & Tangent Vector Visualizer</h4>
-            <div class="calc-formula">Space Curve Model: <span class="math-symbol">r(t) = (cos(t), sin(t), 0.2&sdot;t)</span></div>
+            <div class="calc-formula">Space Curve Vector Position: $\vec{r}(t) = \cos(t)\hat{i} + \sin(t)\hat{j} + 0.2t\hat{k}$</div>
             <div class="input-group">
-                <div class="input-field"><label>Curve Parameter Space (<span class="math-symbol">t</span>)</label><input type="range" id="dgT" min="0" max="12" step="0.1" value="3" oninput="drawGeometry()"></div>
+                <div class="input-field"><label>Curve Parameter Space ($t$)</label><input type="range" id="dgT" min="0" max="12" step="0.1" value="4" oninput="drawGeometry()"></div>
                 <button class="calc-btn" onclick="drawGeometry()">Plot Tangent State</button>
             </div>
             <div id="dgRes" class="calc-result"></div>
@@ -511,24 +516,71 @@
 </footer>
 
 <script>
-    // 1. Real Analysis
+    // Helper to clear and fetch canvas context elegantly
+    function getCtx(id) {
+        const c = document.getElementById(id);
+        const ctx = c.getContext('2d');
+        ctx.clearRect(0, 0, c.width, c.height);
+        return { ctx, w: c.width, h: c.height };
+    }
+
+    // Process Typeset queues reliably safely inside dynamic updates
+    function triggerMathJax() {
+        if (window.MathJax && window.MathJax.typesetPromise) {
+            window.MathJax.typesetPromise();
+        }
+    }
+
+    // 1. Real Analysis Engine
     function calcReal() {
         let eps = parseFloat(document.getElementById('epsInp').value);
         let div = document.getElementById('realRes'); div.style.display = "block";
         if(isNaN(eps) || eps <= 0) { div.innerHTML = "❌ Input valid error bound."; return; }
         let N = Math.ceil(1/eps);
-        div.innerHTML = `For convergence tolerance parameter <span class="math-symbol">&epsilon; = ${eps}</span>, the threshold index <span class="math-symbol">N = ${N}</span>. For all steps <span class="math-symbol">n &gt; ${N}</span>, error spacing <span class="math-symbol">|1/n - 0| &lt; ${eps}</span> is analytically verified.`;
+        div.innerHTML = `For convergence tolerance parameter $\\epsilon = ${eps}$, the threshold index is $N = ${N}$. Therefore, $\\forall n > ${N}$, the absolute metric distance standard condition $|\\frac{1}{n} - 0| < ${eps}$ holds verified.`;
+        triggerMathJax();
+
+        const { ctx, w, h } = getCtx('realCanvas');
+        ctx.strokeStyle = '#cbd5e1'; ctx.beginPath(); ctx.moveTo(20, h-20); ctx.lineTo(w-20, h-20); ctx.stroke(); // X axis
+        ctx.beginPath(); ctx.moveTo(30, 10); ctx.lineTo(30, h-10); ctx.stroke(); // Y axis
+        
+        // Target boundary line
+        let epsY = (h-20) - (eps * (h-40));
+        ctx.strokeStyle = '#ef4444'; ctx.setLineDash([4, 4]);
+        ctx.beginPath(); ctx.moveTo(30, epsY); ctx.lineTo(w-20, epsY); ctx.stroke(); ctx.setLineDash([]);
+        
+        // Draw points sequence mapping
+        ctx.fillStyle = '#2563eb';
+        for(let n=1; n <= 30; n++) {
+            let cx = 30 + (n * (w-50)/30);
+            let cy = (h-20) - ((1/n) * (h-40));
+            ctx.beginPath(); ctx.arc(cx, cy, n >= N ? 4 : 2, 0, 2*Math.PI);
+            if(n === N) ctx.fillStyle = '#10b981';
+            ctx.fill();
+        }
     }
 
-    // 2. Complex Analysis
+    // 2. Complex Analysis Engine
     function calcComplex() {
         let deg = parseFloat(document.getElementById('compDeg').value);
         let div = document.getElementById('complexRes'); div.style.display = "block";
         let rad = deg * Math.PI / 180;
-        div.innerHTML = `<span class="math-symbol">e<sup>i&sdot;${deg}&deg;</sup> = cos(${deg}&deg;) + i&sdot;sin(${deg}&deg;) = <strong>${Math.cos(rad).toFixed(4)} + ${Math.sin(rad).toFixed(4)}i</strong></span>`;
+        let cosVal = Math.cos(rad);
+        let sinVal = Math.sin(rad);
+        div.innerHTML = `$$e^{i \\cdot ${deg}^\\circ} = \\cos(${deg}^\\circ) + i\\sin(${deg}^\\circ) = ${cosVal.toFixed(4)} + ${sinVal.toFixed(4)}i$$`;
+        triggerMathJax();
+
+        const { ctx, w, h } = getCtx('complexCanvas');
+        let cx = w/2, cy = h/2, r = 60;
+        ctx.strokeStyle = '#e2e8f0'; ctx.beginPath(); ctx.moveTo(10, cy); ctx.lineTo(w-10, cy); ctx.moveTo(cx, 10); ctx.lineTo(cx, h-10); ctx.stroke(); // Axis
+        ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2*Math.PI); ctx.stroke(); // Complex Unit Circle
+        
+        let tx = cx + r*cosVal; let ty = cy - r*sinVal;
+        ctx.strokeStyle = '#2563eb'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(tx, ty); ctx.stroke();
+        ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(tx, ty, 5, 0, 2*Math.PI); ctx.fill();
     }
 
-    // 3. Abstract Algebra
+    // 3. Abstract Algebra Engine
     function calcAlgebra() {
         let p = parseInt(document.getElementById('algP').value);
         let g = parseInt(document.getElementById('algG').value);
@@ -537,10 +589,18 @@
         for(let i=0; i<p; i++){
             orbit.push(curr); curr = (curr * g) % p; if(curr === 1) break;
         }
-        div.innerHTML = `Generated Cyclic Subgroup Orbit Space Elements: <strong>{ ${orbit.join(', ')} }</strong> <br> Subgroup Order Size = ${orbit.length} elements.`;
+        div.innerHTML = `Generated Cyclic Subgroup Group Space Ring Pattern: $\\langle g \\rangle = \\{ ${orbit.join(', ')} \\}$, containing order size $|H| = ${orbit.length}$.`;
+        triggerMathJax();
+
+        const { ctx, w, h } = getCtx('algebraCanvas');
+        let step = (w-40) / p;
+        ctx.fillStyle = '#cbd5e1';
+        for(let i=0; i<p; i++) { ctx.beginPath(); ctx.arc(20 + i*step, h/2, 3, 0, 2*Math.PI); ctx.fill(); }
+        ctx.fillStyle = '#2563eb';
+        orbit.forEach((v) => { ctx.beginPath(); ctx.arc(20 + v*step, h/2, 6, 0, 2*Math.PI); ctx.fill(); });
     }
 
-    // 4. Linear Algebra
+    // 4. Linear Algebra Engine
     function calcLinear() {
         let a = parseFloat(document.getElementById('la_a').value);
         let b = parseFloat(document.getElementById('la_b').value);
@@ -548,231 +608,272 @@
         let d = parseFloat(document.getElementById('la_d').value);
         let div = document.getElementById('linearRes'); div.style.display = "block";
         let det = (a*d) - (b*c);
-        div.innerHTML = `Computed Space Scaling Invariant det(<span class="math-symbol">A</span>) = (${a}&sdot;${d}) - (${b}&sdot;${c}) = <strong>${det}</strong>. Space is ${det!==0?'Invertible':'Singular (Collapsed)'}.`;
+        div.innerHTML = `$$\\det \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix} = (${a}\\cdot${d}) - (${b}\\cdot${c}) = ${det}$$ Matrix configuration transformation state is standard <b>${det!==0?'Invertible':'Singular System'}</b>.`;
+        triggerMathJax();
+
+        const { ctx, w, h } = getCtx('linearCanvas');
+        let cx = w/2, cy = h/2, scale = 25;
+        ctx.strokeStyle = '#e2e8f0'; ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(w, cy); ctx.moveTo(cx, 0); ctx.lineTo(cx, h); ctx.stroke();
+        
+        // original square unit space mesh grid boundary lines
+        ctx.strokeStyle = '#cbd5e1'; ctx.strokeRect(cx, cy-scale, scale, scale);
+        // Transformed parallel basis matrix vectors
+        ctx.fillStyle = 'rgba(37, 99, 235, 0.2)'; ctx.strokeStyle = '#2563eb'; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + a*scale, cy - c*scale);
+        ctx.lineTo(cx + (a+b)*scale, cy - (c+d)*scale);
+        ctx.lineTo(cx + b*scale, cy - d*scale);
+        ctx.closePath(); ctx.fill(); ctx.stroke();
     }
 
-    // 5. Topology
+    // 5. Topology Engine
     function calcTop() {
         let v = parseInt(document.getElementById('tpV').value);
         let e = parseInt(document.getElementById('tpE').value);
         let f = parseInt(document.getElementById('tpF').value);
         let div = document.getElementById('topRes'); div.style.display = "block";
         let chi = v - e + f;
-        div.innerHTML = `Euler Signature Output: <span class="math-symbol">&chi; = V - E + F = ${v} - ${e} + ${f} = <strong>${chi}</strong></span>. Space configuration class verified.`;
+        div.innerHTML = `Topology Invariant Structural Signature: $\\chi = V - E + F = ${v} - ${e} + ${f} = ${chi}$.`;
+        triggerMathJax();
+
+        const { ctx, w, h } = getCtx('topologyCanvas');
+        ctx.fillStyle = '#f8fafc'; ctx.strokeStyle = '#475569'; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(w/2 - 40, h/2 + 20); ctx.lineTo(w/2 + 40, h/2 + 20);
+        ctx.lineTo(w/2, h/2 - 40); ctx.closePath(); ctx.fill(); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(w/2 - 40, h/2 + 20); ctx.lineTo(w/2, h/2);
+        ctx.lineTo(w/2 + 40, h/2 + 20); ctx.moveTo(w/2, h/2 - 40); ctx.lineTo(w/2, h/2); ctx.stroke();
     }
 
-    // 6. Number Theory
+    // 6. Number Theory Engine
     function calcNT() {
         let x = parseInt(document.getElementById('ntX').value);
         let e = parseInt(document.getElementById('ntE').value);
         let n = parseInt(document.getElementById('ntN').value);
         let div = document.getElementById('ntRes'); div.style.display = "block";
-        let r = 1; let base = x % n;
-        let origE = e;
-        while(e > 0) {
-            if(e % 2 === 1) r = (r * base) % n;
-            e = Math.floor(e/2); base = (base * base) % n;
-        }
-        div.innerHTML = `Square-and-Multiply Result: <span class="math-symbol">${x}<sup>${origE}</sup> &equiv; <strong>${r}</strong> (mod ${n})</span>`;
+        let r = 1; let base = x % n; let origE = e;
+        while(e > 0) { if(e % 2 === 1) r = (r * base) % n; e = Math.floor(e/2); base = (base * base) % n; }
+        div.innerHTML = `$$\\text{Congruence Resolution: } ${x}^{${origE}} \\equiv ${r} \\pmod{${n}}$$`;
+        triggerMathJax();
+
+        const { ctx, w, h } = getCtx('ntCanvas');
+        ctx.strokeStyle = '#2563eb'; ctx.beginPath(); ctx.arc(w/2, h/2, 40, 0, 2*Math.PI); ctx.stroke();
+        let ang = (r * 2 * Math.PI) / n;
+        ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(w/2 + 40*Math.cos(ang), h/2 + 40*Math.sin(ang), 6, 0, 2*Math.PI); ctx.fill();
     }
 
-    // 7. ODEs
+    // 7. ODEs Engine
     function calcODE() {
         let y0 = parseFloat(document.getElementById('odeY').value);
         let k = parseFloat(document.getElementById('odeK').value);
         let t = parseFloat(document.getElementById('odeT').value);
         let div = document.getElementById('odeRes'); div.style.display = "block";
         let res = y0 * Math.exp(k * t);
-        div.innerHTML = `Evaluated Value State at time parameter <span class="math-symbol">t = ${t}</span>: <span class="math-symbol">y(${t}) = ${y0}&sdot;e<sup>${k}&sdot;${t}</sup> = <strong>${res.toFixed(4)}</strong></span>`;
+        div.innerHTML = `At target coordinate point state variable metric $t = ${t}$, analytical solution value resolves to: $$y(${t}) = ${y0} \\cdot e^{${k} \\cdot ${t}} = ${res.toFixed(4)}$$`;
+        triggerMathJax();
+
+        const { ctx, w, h } = getCtx('odeCanvas');
+        ctx.strokeStyle = '#cbd5e1'; ctx.beginPath(); ctx.moveTo(20, h-20); ctx.lineTo(w-20, h-20); ctx.moveTo(20, 10); ctx.lineTo(20, h-20); ctx.stroke();
+        ctx.strokeStyle = '#2563eb'; ctx.lineWidth = 2; ctx.beginPath();
+        for(let i=0; i<=w-40; i++) {
+            let simT = (i / (w-40)) * (t * 1.5 || 5);
+            let simY = y0 * Math.exp(k * simT);
+            ctx.lineTo(20 + i, h - 20 - (simY * (h-40) / (y0*1.5 || 15)));
+        }
+        ctx.stroke();
     }
 
-    // 8. PDEs
+    // 8. PDEs Engine
     function calcPDE() {
         let l = parseFloat(document.getElementById('pdeL').value);
         let r = parseFloat(document.getElementById('pdeR').value);
         let x = parseFloat(document.getElementById('pdeX').value);
         let div = document.getElementById('pdeRes'); div.style.display = "block";
         let val = l + x*(r - l);
-        div.innerHTML = `Steady-State Interpolation Profile at Node Point position <span class="math-symbol">x = ${x}</span>: <span class="math-symbol">u(${x}) = <strong>${val.toFixed(2)}</strong></span>`;
+        div.innerHTML = `Steady-state temperature boundary profile metric at condition $x = ${x}$ maps explicitly to: $$u(${x}) = ${val.toFixed(4)}$$`;
+        triggerMathJax();
+
+        const { ctx, w, h } = getCtx('pdeCanvas');
+        let max = Math.max(l, r, 100);
+        ctx.strokeStyle = '#cbd5e1'; ctx.beginPath(); ctx.moveTo(40, h-20); ctx.lineTo(w-40, h-20); ctx.stroke();
+        let ly = h - 20 - (l/max)*(h-40); let ry = h - 20 - (r/max)*(h-40);
+        ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(40, ly); ctx.lineTo(w-40, ry); ctx.stroke();
+        let targetX = 40 + x*(w-80); let targetY = ly + x*(ry - ly);
+        ctx.fillStyle = '#2563eb'; ctx.beginPath(); ctx.arc(targetX, targetY, 6, 0, 2*Math.PI); ctx.fill();
     }
 
-    // 9. Functional Analysis
+    // 9. Functional Analysis Engine
     function calcFunctional() {
         let v1 = parseFloat(document.getElementById('fa1').value);
         let v2 = parseFloat(document.getElementById('fa2').value);
         let v3 = parseFloat(document.getElementById('fa3').value);
         let div = document.getElementById('faRes'); div.style.display = "block";
         let norm = Math.sqrt(v1*v1 + v2*v2 + v3*v3);
-        div.innerHTML = `Hilbert Sequence Coord Norm Value: <span class="math-symbol">||x|| = &radic;(${v1}<sup>2</sup> + ${v2}<sup>2</sup> + ${v3}<sup>2</sup>) = <strong>${norm.toFixed(4)}</strong></span>`;
+        div.innerHTML = `$$\\|x\\|_{l^2} = \\sqrt{(${v1})^2 + (${v2})^2 + (${v3})^2} = ${norm.toFixed(4)}$$`;
+        triggerMathJax();
+
+        const { ctx, w, h } = getCtx('faCanvas');
+        ctx.strokeStyle = '#e2e8f0'; ctx.beginPath(); ctx.moveTo(20, h-20); ctx.lineTo(w-20, h-20); ctx.moveTo(20, 20); ctx.lineTo(20, h-20); ctx.lineTo(w/2, h/2); ctx.stroke();
+        ctx.strokeStyle = '#10b981'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(20, h-20); ctx.lineTo(20 + v1*20, h - 20 - v2*20); ctx.stroke();
     }
 
-    // 10. Graph Theory (With Complete Canvas Engine)
+    // 10. Graph Theory Engine
     function drawGraph() {
         let numNodes = parseInt(document.getElementById('gtNodes').value);
         let div = document.getElementById('gtRes'); div.style.display = "block";
-        let canvas = document.getElementById('graphCanvas');
-        let ctx = canvas.getContext('2d');
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        let nodes = [];
-        let cx = canvas.width / 2; let cy = canvas.height / 2; let r = 65;
-        
+        let edgeCount = (numNodes * (numNodes - 1)) / 2;
+        div.innerHTML = `$$\\text{Complete Graph Metric } K_{${numNodes}}: V = ${numNodes}, |E| = \\frac{${numNodes}(${numNodes}-1)}{2} = ${edgeCount}$$ Degrees sum verified $\\sum \\deg(v_i) = ${numNodes * (numNodes - 1)} = 2|E|$.`;
+        triggerMathJax();
+
+        const { ctx, w, h } = getCtx('graphCanvas');
+        let nodes = []; let cx = w / 2, cy = h / 2, r = 65;
         for(let i=0; i<numNodes; i++) {
             let ang = (i * 2 * Math.PI) / numNodes;
             nodes.push({x: cx + r*Math.cos(ang), y: cy + r*Math.sin(ang)});
         }
-        
-        // Connect all nodes together (Complete Graph K_n)
-        ctx.strokeStyle = '#cbd5e1'; 
-        ctx.lineWidth = 1.5;
-        let edgeCount = 0;
+        ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 1.2;
         for(let i=0; i<nodes.length; i++) {
             for(let j=i+1; j<nodes.length; j++) {
-                ctx.beginPath(); 
-                ctx.moveTo(nodes[i].x, nodes[i].y); 
-                ctx.lineTo(nodes[j].x, nodes[j].y);
-                ctx.stroke();
-                edgeCount++;
+                ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y); ctx.stroke();
             }
         }
-        
-        // Draw Nodes
         nodes.forEach((node, index) => {
-            ctx.fillStyle = '#2563eb';
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, 10, 0, 2*Math.PI);
-            ctx.fill();
-            
-            ctx.fillStyle = '#ffffff';
-            ctx.font = '10px sans-serif';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText('v' + (index+1), node.x, node.y);
+            ctx.fillStyle = '#2563eb'; ctx.beginPath(); ctx.arc(node.x, node.y, 9, 0, 2*Math.PI); ctx.fill();
+            ctx.fillStyle = '#ffffff'; ctx.font = '10px sans-serif'; ctx.fillText(`v${index+1}`, node.x-6, node.y+3);
         });
-
-        let totalDegree = numNodes * (numNodes - 1);
-        div.innerHTML = `Complete Graph matrix <span class="math-symbol">K<sub>${numNodes}</sub></span> generated. Nodes (<span class="math-symbol">V</span>) = <strong>${numNodes}</strong>, Edges (<span class="math-symbol">E</span>) = <strong>${edgeCount}</strong>. Handshaking verification: Sum of Degrees (${totalDegree}) = 2 &sdot; Edges (${2 * edgeCount}).`;
     }
 
-    // 11. Operator Theory
+    // 11. Operator Theory Engine
     function calcOperator() {
         let k = parseFloat(document.getElementById('opT').value);
         let lam = parseFloat(document.getElementById('opLam').value);
         let div = document.getElementById('opRes'); div.style.display = "block";
-        if (lam === k) {
-            div.innerHTML = `❌ Parameter <span class="math-symbol">&lambda; = ${lam}</span> lies within the spectrum point of the scaling operator. The resolvent matrix map is singular/undefined.`;
-        } else {
-            let val = 1 / (lam - k);
-            div.innerHTML = `Resolvent Spectrum Scalar Map output: <span class="math-symbol">R(&lambda;) = 1 / (${lam} - ${k}) = <strong>${val.toFixed(4)}</strong></span>. Mapped state is bounded.`;
-        }
+        if(lam === k) { div.innerHTML = "❌ Spectrum Singular error ($\lambda I - T$ is non-invertible)."; return; }
+        let res = 1 / (lam - k);
+        div.innerHTML = `$$R(\\lambda) = (\\lambda I - ${k}I)^{-1} = \\frac{1}{\\lambda - ${k}} I = ${res.toFixed(4)} I$$`;
+        triggerMathJax();
+
+        const { ctx, w, h } = getCtx('operatorCanvas');
+        ctx.strokeStyle = '#cbd5e1'; ctx.beginPath(); ctx.moveTo(20, h/2); ctx.lineTo(w-20, h/2); ctx.stroke();
+        ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(20 + k*30, h/2, 6, 0, 2*Math.PI); ctx.fill(); // spectrum point
+        ctx.fillStyle = '#2563eb'; ctx.beginPath(); ctx.arc(20 + lam*30, h/2, 6, 0, 2*Math.PI); ctx.fill(); // lambda point
     }
 
-    // 12. Banach Algebra
+    // 12. Banach Algebra Engine
     function calcBanach() {
         let a = parseFloat(document.getElementById('baA').value);
         let b = parseFloat(document.getElementById('baB').value);
         let div = document.getElementById('baRes'); div.style.display = "block";
-        let bound = a * b;
-        div.innerHTML = `Sub-multiplicative constraint axiom verified: <span class="math-symbol">||A &sdot; B|| &le; ||A|| &sdot; ||B|| &rArr; ||A &sdot; B|| &le; ${a} &sdot; ${b} = <strong>${bound}</strong></span>. Complete norm space geometry holds true.`;
+        let maxProd = a * b;
+        div.innerHTML = `Sub-multiplicative continuous space criterion: $$\\|A \\cdot B\\| \\le \\|A\\| \\cdot \\|B\\| = ${a} \\cdot ${b} = ${maxProd}$$ Bound configuration holds correct.`;
+        triggerMathJax();
+
+        const { ctx, w, h } = getCtx('banachCanvas');
+        ctx.fillStyle = 'rgba(16, 185, 129, 0.2)'; ctx.fillRect(20, 20, a*25, b*25);
+        ctx.strokeStyle = '#10b981'; ctx.strokeRect(20, 20, a*25, b*25);
     }
 
-    // 13. Mathematical Methods
+    // 13. Mathematical Methods Engine
     function calcMethods() {
         let t = parseFloat(document.getElementById('mmT').value);
-        let maxN = parseInt(document.getElementById('mmN').value);
+        let N = parseInt(document.getElementById('mmN').value);
         let div = document.getElementById('mmRes'); div.style.display = "block";
+        
         let sum = 0;
-        for (let i = 1; i <= maxN; i += 2) {
-            sum += Math.sin(i * t) / i;
+        for(let n=1; n<=N; n+=2) { sum += Math.sin(n * t) / n; }
+        let f_t = (4 / Math.PI) * sum;
+        div.innerHTML = `Fourier convergence computation resolution for $N=${N}$ at index time interval point $t = ${t}$: $$f(${t}) = ${f_t.toFixed(5)}$$`;
+        triggerMathJax();
+
+        const { ctx, w, h } = getCtx('methodsCanvas');
+        ctx.strokeStyle = '#cbd5e1'; ctx.beginPath(); ctx.moveTo(10, h/2); ctx.lineTo(w-10, h/2); ctx.stroke();
+        ctx.strokeStyle = '#2563eb'; ctx.lineWidth = 1.5; ctx.beginPath();
+        for(let i=0; i<w-20; i++) {
+            let simT = (i / (w-20)) * 2 * Math.PI;
+            let simSum = 0;
+            for(let n=1; n<=N; n+=2) { simSum += Math.sin(n * simT) / n; }
+            let cy = h/2 - ((4/Math.PI)*simSum * (h-40)/2);
+            ctx.lineTo(10 + i, cy);
         }
-        let finalVal = (4 / Math.PI) * sum;
-        div.innerHTML = `Fourier Expansion convergence profile evaluated at time <span class="math-symbol">t = ${t}</span> using ${maxN} harmonic components: <span class="math-symbol">f(${t}) = <strong>${finalVal.toFixed(4)}</strong></span>`;
+        ctx.stroke();
     }
 
-    // 14. Relativity
+    // 14. Relativity Engine
     function calcRelativity() {
         let t = parseFloat(document.getElementById('relT').value);
         let v = parseFloat(document.getElementById('relV').value);
         let div = document.getElementById('relRes'); div.style.display = "block";
-        let gamma = 1 / Math.sqrt(1 - (v * v));
-        let dilated = t * gamma;
-        div.innerHTML = `Lorentz expansion metric factor <span class="math-symbol">&gamma; = ${gamma.toFixed(4)}</span>. Realized moving clock frame dilation time: <span class="math-symbol">&Delta;t' = <strong>${dilated.toFixed(4)} seconds</strong></span>.`;
+        let factor = Math.sqrt(1 - v*v);
+        let tPrime = t / factor;
+        div.innerHTML = `Lorentz space dilation factor $\\gamma = ${ (1/factor).toFixed(4) }$. Minkowski continuum dilated output transforms to: $$\\Delta t' = \\frac{${t}}{\\sqrt{1 - ${v}^2}} = ${tPrime.toFixed(4)}\\text{ seconds.}$$`;
+        triggerMathJax();
+
+        const { ctx, w, h } = getCtx('relCanvas');
+        ctx.fillStyle = '#cbd5e1'; ctx.fillRect(30, 40, 100, 30);
+        ctx.fillStyle = '#2563eb'; ctx.fillRect(30, 90, 100 * (tPrime/t), 30);
+        ctx.fillStyle = '#0f172a'; ctx.font = '12px sans-serif'; ctx.fillText(`Proper Time (${t}s)`, 35, 60); ctx.fillText(`Dilated Time (${tPrime.toFixed(1)}s)`, 35, 110);
     }
 
-    // 15. Classical Mechanics
+    // 15. Classical Mechanics Engine
     function calcClassical() {
         let L = parseFloat(document.getElementById('cmL').value);
         let g = parseFloat(document.getElementById('cmG').value);
         let div = document.getElementById('cmRes'); div.style.display = "block";
-        if (L <= 0 || g <= 0) { div.innerHTML = "❌ Dimensions must be greater than zero."; return; }
-        let period = 2 * Math.PI * Math.sqrt(L / g);
-        div.innerHTML = `Computed Natural Invariant oscillation timeline path: <span class="math-symbol">T = 2&pi;&radic;(${L}/${g}) = <strong>${period.toFixed(4)} seconds</strong></span>.`;
+        let T = 2 * Math.PI * Math.sqrt(L / g);
+        div.innerHTML = `Harmonic oscillator invariant execution period space solution: $$T = 2\\pi \\sqrt{\\frac{${L}}{${g}}} = ${T.toFixed(4)}\\text{ seconds.}$$`;
+        triggerMathJax();
+
+        const { ctx, w, h } = getCtx('classicalCanvas');
+        let cx = w/2, cy = 15;
+        ctx.strokeStyle = '#475569'; ctx.beginPath(); ctx.moveTo(cx-20, cy); ctx.lineTo(cx+20, cy); ctx.moveTo(cx, cy);
+        let lengthScale = L * 35;
+        let ang = 0.5 * Math.sin(Math.PI / 2); // Simulating max displacement angle frame projection
+        let px = cx + lengthScale*Math.sin(ang); let py = cy + lengthScale*Math.cos(ang);
+        ctx.lineTo(px, py); ctx.stroke();
+        ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(px, py, 8, 0, 2*Math.PI); ctx.fill();
     }
 
-    // 16. Differential Geometry (With Dynamic Helix Projection Engine)
+    // 16. Differential Geometry Engine
     function drawGeometry() {
         let tVal = parseFloat(document.getElementById('dgT').value);
         let div = document.getElementById('dgRes'); div.style.display = "block";
-        let canvas = document.getElementById('geometryCanvas');
-        let ctx = canvas.getContext('2d');
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
         
-        let cx = canvas.width / 2; let cy = canvas.height / 2 + 30;
-        let scaleX = 60; let scaleY = 30; let scaleZ = 12;
+        let x = Math.cos(tVal); let y = Math.sin(tVal); let z = 0.2 * tVal;
+        let tx = -Math.sin(tVal); let ty = Math.cos(tVal); let tz = 0.2;
         
-        // Draw the static background space curve (Helix projected in pseudo-3D space)
-        ctx.strokeStyle = '#94a3b8';
-        ctx.lineWidth = 1.5;
+        div.innerHTML = `At curve parameters metric space $t = ${tVal}$: <br> Position coordinate: $$\\vec{r}(t) = (${x.toFixed(3)}, ${y.toFixed(3)}, ${z.toFixed(3)})$$ Velocity Tangent Vector: $$\\vec{r}'(t) = (${tx.toFixed(3)}, ${ty.toFixed(3)}, ${tz.toFixed(3)})$$`;
+        triggerMathJax();
+
+        const { ctx, w, h } = getCtx('geometryCanvas');
+        let cx = w/2, cy = h/2 + 30;
+        
+        // Render isometric space curve trace line trajectory
+        ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 1;
         ctx.beginPath();
-        for(let t=0; t<=12; t+=0.05) {
-            let x = cx + scaleX * Math.cos(t);
-            let y = cy + scaleY * Math.sin(t) - (t * scaleZ);
-            if(t === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        for(let t=0; t<15; t+=0.1) {
+            let px = cx + 50*Math.cos(t) - 20*Math.sin(t);
+            let py = cy - 10*Math.cos(t) - 40*Math.sin(t) - (0.2*t * 12);
+            ctx.lineTo(px, py);
         }
         ctx.stroke();
-        
-        // Evaluate active coordinates based on target variable state parameter
-        let px = cx + scaleX * Math.cos(tVal);
-        let py = cy + scaleY * Math.sin(tVal) - (tVal * scaleZ);
-        
-        // Solve the velocity space derivation matrix mapping framework (Tangent vector component)
-        let tx = -scaleX * Math.sin(tVal);
-        let ty = scaleY * Math.cos(tVal) - scaleZ;
-        
-        // Normalize the vector for accurate geometric layout representation
-        let len = Math.sqrt(tx*tx + ty*ty);
-        let dirX = tx / len; let dirY = ty / len;
-        
-        // Draw the local derivative tangent transformation vector arrow mapping line
-        ctx.strokeStyle = '#ef4444';
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        ctx.moveTo(px - dirX*40, py - dirY*40);
-        ctx.lineTo(px + dirX*40, py + dirY*40);
-        ctx.stroke();
-        
-        // Render base point marker node position
-        ctx.fillStyle = '#0f172a';
-        ctx.beginPath();
-        ctx.arc(px, py, 5, 0, 2*Math.PI);
-        ctx.fill();
-        
-        let cx_val = Math.cos(tVal).toFixed(2);
-        let sx_val = Math.sin(tVal).toFixed(2);
-        let tx_val = (-Math.sin(tVal)).toFixed(2);
-        let ty_val = Math.cos(tVal).toFixed(2);
-        
-        div.innerHTML = `At curve space value <span class="math-symbol">t = ${tVal}</span>:<br>` +
-                        `Position Vector <span class="math-symbol">r(t)</span> = (cos(t), sin(t), 0.2t) = <strong>(${cx_val}, ${sx_val}, ${(0.2*tVal).toFixed(2)})</strong><br>` +
-                        `Tangent Velocity Vector <span class="math-symbol">r'(t)</span> = (-sin(t), cos(t), 0.2) = <strong>(${tx_val}, ${ty_val}, 0.20)</strong>`;
+
+        // Specific parameter point marker
+        let targetX = cx + 50*Math.cos(tVal) - 20*Math.sin(tVal);
+        let targetY = cy - 10*Math.cos(tVal) - 40*Math.sin(tVal) - (0.2*tVal * 12);
+        ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(targetX, targetY, 5, 0, 2*Math.PI); ctx.fill();
+
+        // Velocity Tangent Array Vector Line representation
+        let tanEndX = targetX + (50*tx - 20*ty)*0.4;
+        let tanEndY = targetY - (10*tx + 40*ty + tz*12)*0.4;
+        ctx.strokeStyle = '#2563eb'; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(targetX, targetY); ctx.lineTo(tanEndX, tanEndY); ctx.stroke();
     }
 
-    // Initialize interactive canvas frames immediately upon initialization loading
+    // Initial boot triggers to bootstrap system canvas calculations
     window.onload = function() {
-        drawGraph();
-        drawGeometry();
+        calcReal(); calcComplex(); calcAlgebra(); calcLinear();
+        calcTop(); calcNT(); calcODE(); calcPDE();
+        calcFunctional(); drawGraph(); calcOperator(); calcBanach();
+        calcMethods(); calcRelativity(); calcClassical(); drawGeometry();
     };
 </script>
-
 </body>
 </html>
