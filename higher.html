@@ -289,16 +289,16 @@
             <div class="meta-section"><h3>Core Applications</h3><p>Studies deformation-invariant properties, data shapes, and continuous connectivity configurations.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: Euler Characteristic Invariant Solver</h4>
-            <div class="calc-formula">Invariant Shape Equation: $\chi = V - E + F$</div>
+            <h4>⚡ Live Engine: Surface Manifold Mapping & Euler Characteristic Identifier</h4>
+            <div class="calc-formula">Euler-Poincaré Relationship: $\chi = V - E + F$</div>
             <div class="input-group">
-                <div class="input-field"><label>Vertices ($V$)</label><input type="number" id="tpV" value="4"></div>
-                <div class="input-field"><label>Edges ($E$)</label><input type="number" id="tpE" value="6"></div>
-                <div class="input-field"><label>Faces ($F$)</label><input type="number" id="tpF" value="4"></div>
-                <button class="calc-btn" onclick="calcTop()">Verify Invariant</button>
+                <div class="input-field"><label>Vertices ($V$)</label><input type="number" id="tpV" value="6"></div>
+                <div class="input-field"><label>Edges ($E$)</label><input type="number" id="tpE" value="12"></div>
+                <div class="input-field"><label>Faces ($F$)</label><input type="number" id="tpF" value="8"></div>
+                <button class="calc-btn" onclick="calcTop()">Verify Invariant Space</button>
             </div>
             <div id="topRes" class="calc-result"></div>
-            <canvas id="topologyCanvas" class="visual-canvas" width="400" height="150"></canvas>
+            <canvas id="topologyCanvas" class="visual-canvas" width="400" height="200"></canvas>
         </div>
     </div>
 
@@ -309,7 +309,7 @@
         </div>
         <div class="interactive-calc">
             <h4>⚡ Live Engine: Fast Powering Framework (Modular Exponentiation)</h4>
-            <div class="calc-formula">Relation: $x^e \equiv r \pmod n$</div>
+            <div class="calc-formula">Modular Space Congruence: $x^e \equiv r \pmod n$</div>
             <div class="input-group">
                 <div class="input-field"><label>Base ($x$)</label><input type="number" id="ntX" value="3"></div>
                 <div class="input-field"><label>Exponent ($e$)</label><input type="number" id="ntE" value="14"></div>
@@ -366,11 +366,11 @@
         </div>
         <div class="interactive-calc">
             <h4>⚡ Live Engine: Discrete $l^2$ Hilbert Space Sequence Norm Evaluator</h4>
-            <div class="calc-formula">Inner Product Vector Standard: $\|x\|_{l^2} = \sqrt{\sum |x_i|^2}\</div>
+            <div class="calc-formula">Inner Product Vector Standard: $\|x\|_{l^2} = \sqrt{\sum |x_i|^2}$</div>
             <div class="input-group">
                 <div class="input-field"><label>Element $x_1$</label><input type="number" id="fa1" value="3"></div>
                 <div class="input-field"><label>Element $x_2$</label><input type="number" id="fa2" value="4"></div>
-                <div class="input-field"><label>Element $x_3$</label><input type="number" id="fa3" value="0"></div>
+                <div class="input-field"><label>Element $x_3$</label><input type="number" id="fa3" value="5"></div>
                 <button class="calc-btn" onclick="calcFunctional()">Compute Space Norm</button>
             </div>
             <div id="faRes" class="calc-result"></div>
@@ -385,7 +385,7 @@
         </div>
         <div class="interactive-calc">
             <h4>⚡ Live Engine: Structural Node Tree Edge Connectivity Generator</h4>
-            <div class="calc-formula">Handshaking Lemma: $\sum \deg(v_i) = 2|E|$</div>
+            <div class="calc-formula">Handshaking Lemma Theorem: $\sum \deg(v_i) = 2|E|$</div>
             <div class="input-group">
                 <div class="input-field"><label>Nodes Matrix Order ($V$)</label><input type="number" id="gtNodes" value="5" min="2" max="8"></div>
                 <button class="calc-btn" onclick="drawGraph()">Render Network Map</button>
@@ -401,15 +401,15 @@
             <div class="meta-section"><h3>Core Applications</h3><p>Analyzes linear operator mappings, spectrum behaviors, and state matrices within quantum mechanics formulas.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: Operator Scaling Spectral Inversion Solver</h4>
-            <div class="calc-formula">Resolvent Mapping Set Relation: $R(\lambda) = (\lambda I - T)^{-1}$</div>
+            <h4>⚡ Live Engine: Linear Operator Space Vector Inversion Calculator</h4>
+            <div class="calc-formula">Resolvent System Map: $R(\lambda) = (\lambda I - T)^{-1}$</div>
             <div class="input-group">
-                <div class="input-field"><label>Operator Scalar Value ($T = k \cdot I$)</label><input type="number" id="opT" value="2"></div>
-                <div class="input-field"><label>Spectrum Parameter ($\lambda$)</label><input type="number" id="opLam" value="5"></div>
+                <div class="input-field"><label>Eigen-Scalar Value ($k$)</label><input type="number" id="opT" value="2" step="0.5"></div>
+                <div class="input-field"><label>Spectral Parameter ($\lambda$)</label><input type="number" id="opLam" value="4" step="0.5"></div>
                 <button class="calc-btn" onclick="calcOperator()">Compute Resolvent</button>
             </div>
             <div id="opRes" class="calc-result"></div>
-            <canvas id="operatorCanvas" class="visual-canvas" width="400" height="150"></canvas>
+            <canvas id="operatorCanvas" class="visual-canvas" width="400" height="200"></canvas>
         </div>
     </div>
 
@@ -440,7 +440,7 @@
             <h4>⚡ Live Engine: Fourier Square Wave Approximation Engine</h4>
             <div class="calc-formula">Harmonic Form: $f(t) = \frac{4}{\pi} \sum_{n=1,3,5\dots}^{N} \frac{\sin(nt)}{n}$</div>
             <div class="input-group">
-                <div class="input-field"><label>Time Axis Range Value ($t$)</label><input type="number" id="mmT" value="1.5" step="0.1"></div>
+                <div class="input-field"><label>Time Point Target ($t$)</label><input type="number" id="mmT" value="1.5" step="0.1"></div>
                 <div class="input-field"><label>Harmonic Cutoff Orders</label>
                     <select id="mmN" onchange="calcMethods()">
                         <option value="1">1 Harmonic (Fundamental)</option>
@@ -462,15 +462,15 @@
             <div class="meta-section"><h3>Core Applications</h3><p>Calculates space-time metrics, gravitational coordinate distortions, and high-velocity transformations.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: Special Relativistic Lorentz Time Dilation Calculator</h4>
-            <div class="calc-formula">Time Distortion Law: $\Delta t' = \frac{\Delta t}{\sqrt{1 - \frac{v^2}{c^2}}}$</div>
+            <h4>⚡ Live Engine: Minkowski Coordinate Transformation Space-Time Calculator</h4>
+            <div class="calc-formula">Lorentz Metric Matrix Shift: $x' = \gamma(x - vt), \quad t' = \gamma(t - \frac{vx}{c^2})$</div>
             <div class="input-group">
-                <div class="input-field"><label>Stationary Time ($\Delta t$ sec)</label><input type="number" id="relT" value="10"></div>
-                <div class="input-field"><label>Velocity Factor ($v/c$)</label><input type="number" id="relV" value="0.6" step="0.05" min="0" max="0.99"></div>
-                <button class="calc-btn" onclick="calcRelativity()">Project Dilation</button>
+                <div class="input-field"><label>Space Axis Coordinate ($x$)</label><input type="number" id="relX" value="2"></div>
+                <div class="input-field"><label>Relative Speed Value ($v/c$)</label><input type="number" id="relV" value="0.5" step="0.05" min="0" max="0.95"></div>
+                <button class="calc-btn" onclick="calcRelativity()">Project Space-Time</button>
             </div>
             <div id="relRes" class="calc-result"></div>
-            <canvas id="relCanvas" class="visual-canvas" width="400" height="160"></canvas>
+            <canvas id="relCanvas" class="visual-canvas" width="400" height="200"></canvas>
         </div>
     </div>
 
@@ -480,15 +480,15 @@
             <div class="meta-section"><h3>Core Applications</h3><p>Tracks kinetic mechanical energy states, Lagrangian path optimizations, and momentum vector fields.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: Planar Simple Pendulum Angular Period Solver</h4>
-            <div class="calc-formula">Small-Angle Approximation Invariant: $T = 2\pi \sqrt{\frac{L}{g}}$</div>
+            <h4>⚡ Live Engine: Simple Pendulum Phase Space Trajectory Estimator</h4>
+            <div class="calc-formula">Total Mechanical Energy Metric Constant: $E = \frac{p_\theta^2}{2mL^2} + mgL(1 - \cos\theta)$</div>
             <div class="input-group">
-                <div class="input-field"><label>Pendulum Cord length ($L$ m)</label><input type="number" id="cmL" value="2"></div>
-                <div class="input-field"><label>Gravity ($g$ m/s²)</label><input type="number" id="cmG" value="9.81"></div>
-                <button class="calc-btn" onclick="calcClassical()">Solve Period</button>
+                <div class="input-field"><label>Maximum Amplitude ($\theta_{max}^\circ$)</label><input type="number" id="cmAmp" value="45" min="5" max="90"></div>
+                <div class="input-field"><label>Pendulum Cord Length ($L$)</label><input type="number" id="cmL" value="2" min="1" max="5"></div>
+                <button class="calc-btn" onclick="calcClassical()">Solve Phase Coordinates</button>
             </div>
             <div id="cmRes" class="calc-result"></div>
-            <canvas id="classicalCanvas" class="visual-canvas" width="400" height="160"></canvas>
+            <canvas id="classicalCanvas" class="visual-canvas" width="400" height="200"></canvas>
         </div>
     </div>
 
@@ -498,11 +498,13 @@
             <div class="meta-section"><h3>Core Applications</h3><p>Calculates surface curves, tangent plane vectors, and local intrinsic space curvature metrics.</p></div>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Live Engine: Geometric Helix Mapping & Tangent Vector Visualizer</h4>
-            <div class="calc-formula">Space Curve Vector Position: $\vec{r}(t) = \cos(t)\hat{i} + \sin(t)\hat{j} + 0.2t\hat{k}$</div>
+            <h4>⚡ Live Engine: Variable Geometric Helix Surface Mapping & Tangent Suite</h4>
+            <div class="calc-formula">Parametric Curve Vector: $\vec{r}(t) = R\cos(t)\hat{i} + R\sin(t)\hat{j} + ct\hat{k}$</div>
             <div class="input-group">
-                <div class="input-field"><label>Curve Parameter Space ($t$)</label><input type="range" id="dgT" min="0" max="12" step="0.1" value="4" oninput="drawGeometry()"></div>
-                <button class="calc-btn" onclick="drawGeometry()">Plot Tangent State</button>
+                <div class="input-field"><label>Helix Radius ($R$)</label><input type="number" id="dgR" value="3" step="0.5" min="1" oninput="drawGeometry()"></div>
+                <div class="input-field"><label>Vertical Pitch ($c$)</label><input type="number" id="dgC" value="0.3" step="0.1" oninput="drawGeometry()"></div>
+                <div class="input-field"><label>Evaluation Point ($t$)</label><input type="range" id="dgT" min="0" max="12" step="0.1" value="5" oninput="drawGeometry()"></div>
+                <button class="calc-btn" onclick="drawGeometry()">Plot Geometry State</button>
             </div>
             <div id="dgRes" class="calc-result"></div>
             <canvas id="geometryCanvas" class="visual-canvas" width="400" height="250"></canvas>
@@ -516,7 +518,6 @@
 </footer>
 
 <script>
-    // Helper to clear and fetch canvas context elegantly
     function getCtx(id) {
         const c = document.getElementById(id);
         const ctx = c.getContext('2d');
@@ -524,32 +525,29 @@
         return { ctx, w: c.width, h: c.height };
     }
 
-    // Process Typeset queues reliably safely inside dynamic updates
     function triggerMathJax() {
         if (window.MathJax && window.MathJax.typesetPromise) {
             window.MathJax.typesetPromise();
         }
     }
 
-    // 1. Real Analysis Engine
+    // 1. Real Analysis
     function calcReal() {
         let eps = parseFloat(document.getElementById('epsInp').value);
         let div = document.getElementById('realRes'); div.style.display = "block";
         if(isNaN(eps) || eps <= 0) { div.innerHTML = "❌ Input valid error bound."; return; }
         let N = Math.ceil(1/eps);
-        div.innerHTML = `For convergence tolerance parameter $\\epsilon = ${eps}$, the threshold index is $N = ${N}$. Therefore, $\\forall n > ${N}$, the absolute metric distance standard condition $|\\frac{1}{n} - 0| < ${eps}$ holds verified.`;
+        div.innerHTML = `For convergence tolerance parameter $\\epsilon = ${eps}$, the threshold index is $N = ${N}$. Therefore, $\\forall n > ${N}$, the condition $|\\frac{1}{n} - 0| < ${eps}$ holds verified.`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('realCanvas');
-        ctx.strokeStyle = '#cbd5e1'; ctx.beginPath(); ctx.moveTo(20, h-20); ctx.lineTo(w-20, h-20); ctx.stroke(); // X axis
-        ctx.beginPath(); ctx.moveTo(30, 10); ctx.lineTo(30, h-10); ctx.stroke(); // Y axis
+        ctx.strokeStyle = '#cbd5e1'; ctx.beginPath(); ctx.moveTo(20, h-20); ctx.lineTo(w-20, h-20); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(30, 10); ctx.lineTo(30, h-10); ctx.stroke();
         
-        // Target boundary line
         let epsY = (h-20) - (eps * (h-40));
         ctx.strokeStyle = '#ef4444'; ctx.setLineDash([4, 4]);
         ctx.beginPath(); ctx.moveTo(30, epsY); ctx.lineTo(w-20, epsY); ctx.stroke(); ctx.setLineDash([]);
         
-        // Draw points sequence mapping
         ctx.fillStyle = '#2563eb';
         for(let n=1; n <= 30; n++) {
             let cx = 30 + (n * (w-50)/30);
@@ -560,7 +558,7 @@
         }
     }
 
-    // 2. Complex Analysis Engine
+    // 2. Complex Analysis
     function calcComplex() {
         let deg = parseFloat(document.getElementById('compDeg').value);
         let div = document.getElementById('complexRes'); div.style.display = "block";
@@ -572,15 +570,15 @@
 
         const { ctx, w, h } = getCtx('complexCanvas');
         let cx = w/2, cy = h/2, r = 60;
-        ctx.strokeStyle = '#e2e8f0'; ctx.beginPath(); ctx.moveTo(10, cy); ctx.lineTo(w-10, cy); ctx.moveTo(cx, 10); ctx.lineTo(cx, h-10); ctx.stroke(); // Axis
-        ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2*Math.PI); ctx.stroke(); // Complex Unit Circle
+        ctx.strokeStyle = '#e2e8f0'; ctx.beginPath(); ctx.moveTo(10, cy); ctx.lineTo(w-10, cy); ctx.moveTo(cx, 10); ctx.lineTo(cx, h-10); ctx.stroke();
+        ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2*Math.PI); ctx.stroke();
         
         let tx = cx + r*cosVal; let ty = cy - r*sinVal;
         ctx.strokeStyle = '#2563eb'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(tx, ty); ctx.stroke();
         ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(tx, ty, 5, 0, 2*Math.PI); ctx.fill();
     }
 
-    // 3. Abstract Algebra Engine
+    // 3. Abstract Algebra
     function calcAlgebra() {
         let p = parseInt(document.getElementById('algP').value);
         let g = parseInt(document.getElementById('algG').value);
@@ -589,7 +587,7 @@
         for(let i=0; i<p; i++){
             orbit.push(curr); curr = (curr * g) % p; if(curr === 1) break;
         }
-        div.innerHTML = `Generated Cyclic Subgroup Group Space Ring Pattern: $\\langle g \\rangle = \\{ ${orbit.join(', ')} \\}$, containing order size $|H| = ${orbit.length}$.`;
+        div.innerHTML = `Generated Cyclic Subgroup Space elements: $\\langle g \\rangle = \\{ ${orbit.join(', ')} \\}$, containing group field index pattern size $|H| = ${orbit.length}$.`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('algebraCanvas');
@@ -600,7 +598,7 @@
         orbit.forEach((v) => { ctx.beginPath(); ctx.arc(20 + v*step, h/2, 6, 0, 2*Math.PI); ctx.fill(); });
     }
 
-    // 4. Linear Algebra Engine
+    // 4. Linear Algebra
     function calcLinear() {
         let a = parseFloat(document.getElementById('la_a').value);
         let b = parseFloat(document.getElementById('la_b').value);
@@ -608,16 +606,14 @@
         let d = parseFloat(document.getElementById('la_d').value);
         let div = document.getElementById('linearRes'); div.style.display = "block";
         let det = (a*d) - (b*c);
-        div.innerHTML = `$$\\det \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix} = (${a}\\cdot${d}) - (${b}\\cdot${c}) = ${det}$$ Matrix configuration transformation state is standard <b>${det!==0?'Invertible':'Singular System'}</b>.`;
+        div.innerHTML = `$$\\det \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix} = (${a}\\cdot${d}) - (${b}\\cdot${c}) = ${det}$$ Matrix configuration transformation state is <b>${det!==0?'Invertible':'Singular (System Collapsed)'}</b>.`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('linearCanvas');
         let cx = w/2, cy = h/2, scale = 25;
         ctx.strokeStyle = '#e2e8f0'; ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(w, cy); ctx.moveTo(cx, 0); ctx.lineTo(cx, h); ctx.stroke();
         
-        // original square unit space mesh grid boundary lines
         ctx.strokeStyle = '#cbd5e1'; ctx.strokeRect(cx, cy-scale, scale, scale);
-        // Transformed parallel basis matrix vectors
         ctx.fillStyle = 'rgba(37, 99, 235, 0.2)'; ctx.strokeStyle = '#2563eb'; ctx.lineWidth = 1.5;
         ctx.beginPath(); ctx.moveTo(cx, cy);
         ctx.lineTo(cx + a*scale, cy - c*scale);
@@ -626,25 +622,32 @@
         ctx.closePath(); ctx.fill(); ctx.stroke();
     }
 
-    // 5. Topology Engine
+    // 5. Topology (Möbius Surface Projection Map)
     function calcTop() {
         let v = parseInt(document.getElementById('tpV').value);
         let e = parseInt(document.getElementById('tpE').value);
         let f = parseInt(document.getElementById('tpF').value);
         let div = document.getElementById('topRes'); div.style.display = "block";
         let chi = v - e + f;
-        div.innerHTML = `Topology Invariant Structural Signature: $\\chi = V - E + F = ${v} - ${e} + ${f} = ${chi}$.`;
+        div.innerHTML = `Manifold Euler Characteristic Metric: $\\chi = V - E + F = ${v} - ${e} + ${f} = ${chi}$.`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('topologyCanvas');
-        ctx.fillStyle = '#f8fafc'; ctx.strokeStyle = '#475569'; ctx.lineWidth = 2;
-        ctx.beginPath(); ctx.moveTo(w/2 - 40, h/2 + 20); ctx.lineTo(w/2 + 40, h/2 + 20);
-        ctx.lineTo(w/2, h/2 - 40); ctx.closePath(); ctx.fill(); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(w/2 - 40, h/2 + 20); ctx.lineTo(w/2, h/2);
-        ctx.lineTo(w/2 + 40, h/2 + 20); ctx.moveTo(w/2, h/2 - 40); ctx.lineTo(w/2, h/2); ctx.stroke();
+        let cx = w/2, cy = h/2;
+        ctx.strokeStyle = '#3b82f6'; ctx.lineWidth = 2;
+        ctx.beginPath();
+        for(let a=0; a<=2*Math.PI+0.1; a+=0.1) {
+            let r = 60 + 20 * Math.sin(a/2);
+            let tx = cx + r * Math.cos(a);
+            let ty = cy + r * Math.sin(a) * Math.cos(a/2);
+            if(a===0) ctx.moveTo(tx, ty); else ctx.lineTo(tx, ty);
+        }
+        ctx.stroke();
+        ctx.fillStyle = '#67e8f9'; ctx.font = '11px sans-serif';
+        ctx.fillText(`Continuous Euler Mesh Invariant Class ID: \u03C7 = ${chi}`, 15, h-15);
     }
 
-    // 6. Number Theory Engine
+    // 6. Number Theory
     function calcNT() {
         let x = parseInt(document.getElementById('ntX').value);
         let e = parseInt(document.getElementById('ntE').value);
@@ -652,23 +655,23 @@
         let div = document.getElementById('ntRes'); div.style.display = "block";
         let r = 1; let base = x % n; let origE = e;
         while(e > 0) { if(e % 2 === 1) r = (r * base) % n; e = Math.floor(e/2); base = (base * base) % n; }
-        div.innerHTML = `$$\\text{Congruence Resolution: } ${x}^{${origE}} \\equiv ${r} \\pmod{${n}}$$`;
+        div.innerHTML = `$$\\text{Modular Result: } ${x}^{${origE}} \\equiv ${r} \\pmod{${n}}$$`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('ntCanvas');
-        ctx.strokeStyle = '#2563eb'; ctx.beginPath(); ctx.arc(w/2, h/2, 40, 0, 2*Math.PI); ctx.stroke();
+        ctx.strokeStyle = '#2563eb'; ctx.beginPath(); ctx.arc(w/2, h/2, 35, 0, 2*Math.PI); ctx.stroke();
         let ang = (r * 2 * Math.PI) / n;
-        ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(w/2 + 40*Math.cos(ang), h/2 + 40*Math.sin(ang), 6, 0, 2*Math.PI); ctx.fill();
+        ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(w/2 + 35*Math.cos(ang), h/2 + 35*Math.sin(ang), 6, 0, 2*Math.PI); ctx.fill();
     }
 
-    // 7. ODEs Engine
+    // 7. ODEs
     function calcODE() {
         let y0 = parseFloat(document.getElementById('odeY').value);
         let k = parseFloat(document.getElementById('odeK').value);
         let t = parseFloat(document.getElementById('odeT').value);
         let div = document.getElementById('odeRes'); div.style.display = "block";
         let res = y0 * Math.exp(k * t);
-        div.innerHTML = `At target coordinate point state variable metric $t = ${t}$, analytical solution value resolves to: $$y(${t}) = ${y0} \\cdot e^{${k} \\cdot ${t}} = ${res.toFixed(4)}$$`;
+        div.innerHTML = `$$y(${t}) = ${y0} \\cdot e^{${k} \\cdot ${t}} = ${res.toFixed(4)}$$`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('odeCanvas');
@@ -682,26 +685,26 @@
         ctx.stroke();
     }
 
-    // 8. PDEs Engine
+    // 8. PDEs
     function calcPDE() {
         let l = parseFloat(document.getElementById('pdeL').value);
         let r = parseFloat(document.getElementById('pdeR').value);
         let x = parseFloat(document.getElementById('pdeX').value);
         let div = document.getElementById('pdeRes'); div.style.display = "block";
         let val = l + x*(r - l);
-        div.innerHTML = `Steady-state temperature boundary profile metric at condition $x = ${x}$ maps explicitly to: $$u(${x}) = ${val.toFixed(4)}$$`;
+        div.innerHTML = `$$u(${x}) = ${val.toFixed(4)}$$`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('pdeCanvas');
         let max = Math.max(l, r, 100);
         ctx.strokeStyle = '#cbd5e1'; ctx.beginPath(); ctx.moveTo(40, h-20); ctx.lineTo(w-40, h-20); ctx.stroke();
         let ly = h - 20 - (l/max)*(h-40); let ry = h - 20 - (r/max)*(h-40);
-        ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(40, ly); ctx.lineTo(w-40, ry); ctx.stroke();
+        ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(40, ly); ctx.lineTo(w-40, ry); ctx.stroke();
         let targetX = 40 + x*(w-80); let targetY = ly + x*(ry - ly);
         ctx.fillStyle = '#2563eb'; ctx.beginPath(); ctx.arc(targetX, targetY, 6, 0, 2*Math.PI); ctx.fill();
     }
 
-    // 9. Functional Analysis Engine
+    // 9. Functional Analysis
     function calcFunctional() {
         let v1 = parseFloat(document.getElementById('fa1').value);
         let v2 = parseFloat(document.getElementById('fa2').value);
@@ -716,12 +719,12 @@
         ctx.strokeStyle = '#10b981'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(20, h-20); ctx.lineTo(20 + v1*20, h - 20 - v2*20); ctx.stroke();
     }
 
-    // 10. Graph Theory Engine
+    // 10. Graph Theory (Upgraded Edges & Attractive Vertices)
     function drawGraph() {
         let numNodes = parseInt(document.getElementById('gtNodes').value);
         let div = document.getElementById('gtRes'); div.style.display = "block";
         let edgeCount = (numNodes * (numNodes - 1)) / 2;
-        div.innerHTML = `$$\\text{Complete Graph Metric } K_{${numNodes}}: V = ${numNodes}, |E| = \\frac{${numNodes}(${numNodes}-1)}{2} = ${edgeCount}$$ Degrees sum verified $\\sum \\deg(v_i) = ${numNodes * (numNodes - 1)} = 2|E|$.`;
+        div.innerHTML = `$$\\text{Complete Topology } K_{${numNodes}}: |V| = ${numNodes}, \\quad |E| = ${edgeCount}$$`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('graphCanvas');
@@ -730,41 +733,56 @@
             let ang = (i * 2 * Math.PI) / numNodes;
             nodes.push({x: cx + r*Math.cos(ang), y: cy + r*Math.sin(ang)});
         }
-        ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 1.2;
+        
+        // High-contrast, dark edges
+        ctx.strokeStyle = '#334155'; 
+        ctx.lineWidth = 2.5; 
         for(let i=0; i<nodes.length; i++) {
             for(let j=i+1; j<nodes.length; j++) {
                 ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y); ctx.stroke();
             }
         }
+        
+        // Glistening glowing nodes
         nodes.forEach((node, index) => {
-            ctx.fillStyle = '#2563eb'; ctx.beginPath(); ctx.arc(node.x, node.y, 9, 0, 2*Math.PI); ctx.fill();
-            ctx.fillStyle = '#ffffff'; ctx.font = '10px sans-serif'; ctx.fillText(`v${index+1}`, node.x-6, node.y+3);
+            ctx.fillStyle = '#1e3a8a'; 
+            ctx.strokeStyle = '#60a5fa'; 
+            ctx.lineWidth = 3;
+            ctx.beginPath(); ctx.arc(node.x, node.y, 11, 0, 2*Math.PI); ctx.fill(); ctx.stroke();
+            ctx.fillStyle = '#ffffff'; ctx.font = 'bold 10px sans-serif'; ctx.fillText(`v${index+1}`, node.x-7, node.y+3);
         });
     }
 
-    // 11. Operator Theory Engine
+    // 11. Operator Theory (Continuous Mapping Vector Matrix Transformation Grid)
     function calcOperator() {
         let k = parseFloat(document.getElementById('opT').value);
         let lam = parseFloat(document.getElementById('opLam').value);
         let div = document.getElementById('opRes'); div.style.display = "block";
-        if(lam === k) { div.innerHTML = "❌ Spectrum Singular error ($\lambda I - T$ is non-invertible)."; return; }
+        if(lam === k) { div.innerHTML = "❌ Spectrum Identity Singular error ($\lambda I - T$ non-invertible)."; return; }
         let res = 1 / (lam - k);
-        div.innerHTML = `$$R(\\lambda) = (\\lambda I - ${k}I)^{-1} = \\frac{1}{\\lambda - ${k}} I = ${res.toFixed(4)} I$$`;
+        div.innerHTML = `$$R(\\lambda) = (\\lambda I - T)^{-1} = \\frac{1}{${lam} - ${k}}I = ${res.toFixed(4)}I$$`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('operatorCanvas');
-        ctx.strokeStyle = '#cbd5e1'; ctx.beginPath(); ctx.moveTo(20, h/2); ctx.lineTo(w-20, h/2); ctx.stroke();
-        ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(20 + k*30, h/2, 6, 0, 2*Math.PI); ctx.fill(); // spectrum point
-        ctx.fillStyle = '#2563eb'; ctx.beginPath(); ctx.arc(20 + lam*30, h/2, 6, 0, 2*Math.PI); ctx.fill(); // lambda point
+        let cx = w/2, cy = h/2;
+        ctx.strokeStyle = '#f1f5f9'; ctx.strokeRect(0,0,w,h);
+        ctx.strokeStyle = '#cbd5e1'; ctx.beginPath(); ctx.moveTo(20, cy); ctx.lineTo(w-20, cy); ctx.moveTo(cx, 20); ctx.lineTo(cx, h-20); ctx.stroke();
+        
+        // Initial domain vector tracking loop
+        ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1; ctx.strokeRect(cx-30, cy-30, 60, 60);
+        // Rescaled transformed spectral maps bounded area 
+        ctx.strokeStyle = '#3b82f6'; ctx.lineWidth = 2;
+        let s = 30 * Math.abs(res);
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.15)'; ctx.fillRect(cx-s, cy-s, 2*s, 2*s); ctx.strokeRect(cx-s, cy-s, 2*s, 2*s);
     }
 
-    // 12. Banach Algebra Engine
+    // 12. Banach Algebra
     function calcBanach() {
         let a = parseFloat(document.getElementById('baA').value);
         let b = parseFloat(document.getElementById('baB').value);
         let div = document.getElementById('baRes'); div.style.display = "block";
         let maxProd = a * b;
-        div.innerHTML = `Sub-multiplicative continuous space criterion: $$\\|A \\cdot B\\| \\le \\|A\\| \\cdot \\|B\\| = ${a} \\cdot ${b} = ${maxProd}$$ Bound configuration holds correct.`;
+        div.innerHTML = `$$\\|A \\cdot B\\| \\le \\|A\\| \\cdot \\|B\\| = ${a} \\cdot ${b} = ${maxProd}$$ Bound configuration holds correct.`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('banachCanvas');
@@ -772,16 +790,15 @@
         ctx.strokeStyle = '#10b981'; ctx.strokeRect(20, 20, a*25, b*25);
     }
 
-    // 13. Mathematical Methods Engine
+    // 13. Mathematical Methods
     function calcMethods() {
         let t = parseFloat(document.getElementById('mmT').value);
         let N = parseInt(document.getElementById('mmN').value);
         let div = document.getElementById('mmRes'); div.style.display = "block";
-        
         let sum = 0;
         for(let n=1; n<=N; n+=2) { sum += Math.sin(n * t) / n; }
         let f_t = (4 / Math.PI) * sum;
-        div.innerHTML = `Fourier convergence computation resolution for $N=${N}$ at index time interval point $t = ${t}$: $$f(${t}) = ${f_t.toFixed(5)}$$`;
+        div.innerHTML = `$$\\text{Fourier Series Approximation: } f(${t}) = ${f_t.toFixed(5)}$$`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('methodsCanvas');
@@ -797,77 +814,98 @@
         ctx.stroke();
     }
 
-    // 14. Relativity Engine
+    // 14. Relativity (Minkowski Space-Time Lorentz Grid Modeler)
     function calcRelativity() {
-        let t = parseFloat(document.getElementById('relT').value);
-        let v = parseFloat(document.getElementById('relV').value);
+        let xVal = parseFloat(document.getElementById('relX').value);
+        let vFactor = parseFloat(document.getElementById('relV').value);
         let div = document.getElementById('relRes'); div.style.display = "block";
-        let factor = Math.sqrt(1 - v*v);
-        let tPrime = t / factor;
-        div.innerHTML = `Lorentz space dilation factor $\\gamma = ${ (1/factor).toFixed(4) }$. Minkowski continuum dilated output transforms to: $$\\Delta t' = \\frac{${t}}{\\sqrt{1 - ${v}^2}} = ${tPrime.toFixed(4)}\\text{ seconds.}$$`;
+        
+        let gamma = 1 / Math.sqrt(1 - vFactor*vFactor);
+        let xPrime = gamma * xVal; // assuming simplified t=0 snapshot slice
+        let tPrime = gamma * (-vFactor * xVal);
+        
+        div.innerHTML = `$$\\gamma = ${gamma.toFixed(4)}, \\quad x' = ${xPrime.toFixed(4)}, \\quad t' = ${tPrime.toFixed(4)}$$`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('relCanvas');
-        ctx.fillStyle = '#cbd5e1'; ctx.fillRect(30, 40, 100, 30);
-        ctx.fillStyle = '#2563eb'; ctx.fillRect(30, 90, 100 * (tPrime/t), 30);
-        ctx.fillStyle = '#0f172a'; ctx.font = '12px sans-serif'; ctx.fillText(`Proper Time (${t}s)`, 35, 60); ctx.fillText(`Dilated Time (${tPrime.toFixed(1)}s)`, 35, 110);
+        let cx = w/2, cy = h/2;
+        
+        // Base coordinate grid framework lines lines
+        ctx.strokeStyle = '#cbd5e1'; ctx.beginPath(); ctx.moveTo(10, cy); ctx.lineTo(w-10, cy); ctx.moveTo(cx, 10); ctx.lineTo(cx, h-10); ctx.stroke();
+        
+        // Skewed Relativistic Frame axes
+        ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 1.5;
+        let skew = vFactor * 40;
+        ctx.beginPath(); ctx.moveTo(10, cy + skew); ctx.lineTo(w-10, cy - skew); // x' axis
+        ctx.moveTo(cx - skew, h-10); ctx.lineTo(cx + skew, 10); // ct' axis
+        ctx.stroke();
+
+        // Vector tracking line marker location
+        ctx.fillStyle = '#2563eb'; ctx.beginPath(); ctx.arc(cx + xVal*30, cy, 5, 0, 2*Math.PI); ctx.fill();
     }
 
-    // 15. Classical Mechanics Engine
+    // 15. Classical Mechanics (Phase-Space Pendulum Elliptical Velocity Tracker)
     function calcClassical() {
+        let ampDeg = parseFloat(document.getElementById('cmAmp').value);
         let L = parseFloat(document.getElementById('cmL').value);
-        let g = parseFloat(document.getElementById('cmG').value);
         let div = document.getElementById('cmRes'); div.style.display = "block";
-        let T = 2 * Math.PI * Math.sqrt(L / g);
-        div.innerHTML = `Harmonic oscillator invariant execution period space solution: $$T = 2\\pi \\sqrt{\\frac{${L}}{${g}}} = ${T.toFixed(4)}\\text{ seconds.}$$`;
+        
+        let radAmp = ampDeg * Math.PI / 180;
+        let period = 2 * Math.PI * Math.sqrt(L / 9.81);
+        div.innerHTML = `$$\\text{Harmonic Period: } T = 2\\pi\\sqrt{\\frac{${L}}{g}} = ${period.toFixed(4)}\\text{s}$$ Conservation maps phase paths closed orbitals loop.`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('classicalCanvas');
-        let cx = w/2, cy = 15;
-        ctx.strokeStyle = '#475569'; ctx.beginPath(); ctx.moveTo(cx-20, cy); ctx.lineTo(cx+20, cy); ctx.moveTo(cx, cy);
-        let lengthScale = L * 35;
-        let ang = 0.5 * Math.sin(Math.PI / 2); // Simulating max displacement angle frame projection
-        let px = cx + lengthScale*Math.sin(ang); let py = cy + lengthScale*Math.cos(ang);
-        ctx.lineTo(px, py); ctx.stroke();
-        ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(px, py, 8, 0, 2*Math.PI); ctx.fill();
+        let cx = w/2, cy = h/2;
+        ctx.strokeStyle = '#e2e8f0'; ctx.beginPath(); ctx.moveTo(20, cy); ctx.lineTo(w-20, cy); ctx.moveTo(cx, 20); ctx.lineTo(cx, h-20); ctx.stroke();
+        
+        // Orbit tracing curve 
+        ctx.strokeStyle = '#f59e0b'; ctx.lineWidth = 2.5; ctx.beginPath();
+        let rx = radAmp * 80; let ry = Math.sqrt(2 * 9.81 * L * (1 - Math.cos(radAmp))) * 15;
+        ctx.ellipse(cx, cy, rx, ry, 0, 0, 2*Math.PI); ctx.stroke();
+        ctx.fillStyle = '#475569'; ctx.font = '10px sans-serif'; ctx.fillText("Position (\u03B8)", w-70, cy-5); ctx.fillText("Momentum (p)", cx+5, 15);
     }
 
-    // 16. Differential Geometry Engine
+    // 16. Differential Geometry (Fully Custom Advanced Helix Engine)
     function drawGeometry() {
+        let R = parseFloat(document.getElementById('dgR').value);
+        let c = parseFloat(document.getElementById('dgC').value);
         let tVal = parseFloat(document.getElementById('dgT').value);
         let div = document.getElementById('dgRes'); div.style.display = "block";
         
-        let x = Math.cos(tVal); let y = Math.sin(tVal); let z = 0.2 * tVal;
-        let tx = -Math.sin(tVal); let ty = Math.cos(tVal); let tz = 0.2;
+        if (isNaN(R) || isNaN(c)) return;
+
+        let x = R * Math.cos(tVal); let y = R * Math.sin(tVal); let z = c * tVal;
+        let tx = -R * Math.sin(tVal); let ty = R * Math.cos(tVal); let tz = c;
         
-        div.innerHTML = `At curve parameters metric space $t = ${tVal}$: <br> Position coordinate: $$\\vec{r}(t) = (${x.toFixed(3)}, ${y.toFixed(3)}, ${z.toFixed(3)})$$ Velocity Tangent Vector: $$\\vec{r}'(t) = (${tx.toFixed(3)}, ${ty.toFixed(3)}, ${tz.toFixed(3)})$$`;
+        div.innerHTML = `$$\\vec{r}(${tVal}) = (${x.toFixed(2)})\\hat{i} + (${y.toFixed(2)})\\hat{j} + (${z.toFixed(2)})\\hat{k}$$ $$\\vec{T}(${tVal}) = \\vec{r}'(${tVal}) = (${tx.toFixed(2)})\\hat{i} + (${ty.toFixed(2)})\\hat{j} + (${tz.toFixed(2)})\\hat{k}$$`;
         triggerMathJax();
 
         const { ctx, w, h } = getCtx('geometryCanvas');
-        let cx = w/2, cy = h/2 + 30;
+        let cx = w/2, cy = h/2 + 40;
         
-        // Render isometric space curve trace line trajectory
-        ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 1;
+        // Spatial curve plotting configuration loop
+        ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1.5;
         ctx.beginPath();
-        for(let t=0; t<15; t+=0.1) {
-            let px = cx + 50*Math.cos(t) - 20*Math.sin(t);
-            let py = cy - 10*Math.cos(t) - 40*Math.sin(t) - (0.2*t * 12);
-            ctx.lineTo(px, py);
+        for(let t=0; t<14; t+=0.1) {
+            let px = cx + 30 * R * Math.cos(t) - 12 * R * Math.sin(t);
+            let py = cy - 8 * R * Math.cos(t) - 25 * R * Math.sin(t) - (c * t * 12);
+            if(t === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
         }
         ctx.stroke();
 
-        // Specific parameter point marker
-        let targetX = cx + 50*Math.cos(tVal) - 20*Math.sin(tVal);
-        let targetY = cy - 10*Math.cos(tVal) - 40*Math.sin(tVal) - (0.2*tVal * 12);
-        ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(targetX, targetY, 5, 0, 2*Math.PI); ctx.fill();
+        // Focus evaluation marker projection point
+        let targetX = cx + 30 * R * Math.cos(tVal) - 12 * R * Math.sin(tVal);
+        let targetY = cy - 8 * R * Math.cos(tVal) - 25 * R * Math.sin(tVal) - (c * tVal * 12);
+        ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(targetX, targetY, 6, 0, 2*Math.PI); ctx.fill();
 
-        // Velocity Tangent Array Vector Line representation
-        let tanEndX = targetX + (50*tx - 20*ty)*0.4;
-        let tanEndY = targetY - (10*tx + 40*ty + tz*12)*0.4;
-        ctx.strokeStyle = '#2563eb'; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(targetX, targetY); ctx.lineTo(tanEndX, tanEndY); ctx.stroke();
+        // Vector head layout line projection tracking
+        let tanEndX = targetX + (30 * tx - 12 * ty) * 0.25;
+        let tanEndY = targetY - (8 * tx + 25 * ty + tz * 12) * 0.25;
+        ctx.strokeStyle = '#2563eb'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(targetX, targetY); ctx.lineTo(tanEndX, tanEndY); ctx.stroke();
     }
 
-    // Initial boot triggers to bootstrap system canvas calculations
+    // Initial automation boot trigger loading setups
     window.onload = function() {
         calcReal(); calcComplex(); calcAlgebra(); calcLinear();
         calcTop(); calcNT(); calcODE(); calcPDE();
