@@ -35,7 +35,7 @@
             --graph-border: #cbd5e1;
             --graph-grid: #e2e8f0;
             --graph-axis: #475569;
-            --graph-edge-dark: #334155; /* Darkened edges */
+            --graph-edge-dark: #334155;
             --graph-line-primary: #1e40af;
             --graph-line-secondary: #ea580c;
             --graph-accent: #10b981;
@@ -615,53 +615,34 @@
 </footer>
 
 <script>
-    // Global Helper: Creates an XY Plane / Ray Grid Background for exact measurement
     function drawXYPlane(ctx, width, height, scaleX = 20, scaleY = 20) {
         ctx.clearRect(0, 0, width, height);
-        
-        // Draw Light Grid Lines
         ctx.strokeStyle = "#e2e8f0";
         ctx.lineWidth = 1;
         
-        // Vertical lines
         for (let x = 0; x <= width; x += scaleX) {
-            ctx.beginPath();
-            ctx.moveTo(x, 0);
-            ctx.lineTo(x, height);
-            ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, height); ctx.stroke();
         }
-        // Horizontal lines
         for (let y = 0; y <= height; y += scaleY) {
-            ctx.beginPath();
-            ctx.moveTo(0, y);
-            ctx.lineTo(width, y);
-            ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(width, y); ctx.stroke();
         }
         
-        // Draw Darker Master X & Y Axes
         ctx.strokeStyle = "#64748b";
         ctx.lineWidth = 2;
-        
-        // X Axis (Middle Height)
-        ctx.beginPath();
-        ctx.moveTo(0, height / 2);
-        ctx.lineTo(width, height / 2);
-        ctx.stroke();
-        
-        // Y Axis (Middle Width)
-        ctx.beginPath();
-        ctx.moveTo(width / 2, 0);
-        ctx.lineTo(width / 2, height);
-        ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0, height / 2); ctx.lineTo(width, height / 2); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(width / 2, 0); ctx.lineTo(width / 2, height); ctx.stroke();
     }
 
     function showResult(id, text) {
         const el = document.getElementById(id);
         el.style.display = "block";
         el.innerHTML = text;
+        if (window.MathJax && window.MathJax.typesetPromise) {
+            window.MathJax.typesetPromise([el]);
+        }
     }
 
-    // 1. Real Analysis Logic
+    // 1. Real Analysis Logic - Fixed escaping of literal LaTeX commands inside Javascript
     function calcReal() {
         const eps = parseFloat(document.getElementById('epsInp').value) || 0.05;
         const N = Math.ceil(1 / eps);
@@ -671,17 +652,13 @@
         const ctx = canvas.getContext('2d');
         drawXYPlane(ctx, canvas.width, canvas.height, 25, 20);
         
-        // Plot sequence dots
         ctx.fillStyle = "#2563eb";
         for (let n = 1; n <= 20; n++) {
             let val = 1 / n;
             let x = 30 + n * 18;
             let y = canvas.height / 2 - val * 100;
-            ctx.beginPath();
-            ctx.arc(x, y, 4, 0, 2 * Math.PI);
-            ctx.fill();
+            ctx.beginPath(); ctx.arc(x, y, 4, 0, 2 * Math.PI); ctx.fill();
         }
-        // Bound lines
         ctx.strokeStyle = "#ea580c";
         ctx.lineWidth = 1.5;
         ctx.setLineDash([4, 4]);
@@ -690,7 +667,7 @@
         ctx.setLineDash([]);
     }
 
-    // 2. Complex Analysis Logic
+    // 2. Complex Analysis Logic - Fixed inner HTML escaping
     function calcComplex() {
         const deg = parseFloat(document.getElementById('compDeg').value) || 0;
         const rad = (deg * Math.PI) / 180;
@@ -704,21 +681,13 @@
         
         const cx = canvas.width / 2;
         const cy = canvas.height / 2;
-        
-        // Reference Unit Circle
         ctx.strokeStyle = "#cbd5e1";
         ctx.lineWidth = 1.5;
-        ctx.beginPath();
-        ctx.arc(cx, cy, 60, 0, 2 * Math.PI);
-        ctx.stroke();
+        ctx.beginPath(); ctx.arc(cx, cy, 60, 0, 2 * Math.PI); ctx.stroke();
         
-        // Vector Arrow
-        ctx.strokeStyle = "#334155"; // Darkened Vector Line
+        ctx.strokeStyle = "#334155";
         ctx.lineWidth = 3;
-        ctx.beginPath();
-        ctx.moveTo(cx, cy);
-        ctx.lineTo(cx + Math.cos(rad) * 60, cy - Math.sin(rad) * 60);
-        ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.cos(rad) * 60, cy - Math.sin(rad) * 60); ctx.stroke();
     }
 
     // 3. Abstract Algebra Logic
@@ -740,13 +709,11 @@
         
         ctx.fillStyle = "#ea580c";
         orbit.forEach((val, idx) => {
-            ctx.beginPath();
-            ctx.arc(40 + idx * 35, canvas.height / 2 - val * 8, 5, 0, 2 * Math.PI);
-            ctx.fill();
+            ctx.beginPath(); ctx.arc(40 + idx * 35, canvas.height / 2 - val * 8, 5, 0, 2 * Math.PI); ctx.fill();
         });
     }
 
-    // 4. Linear Algebra Logic
+    // 4. Linear Algebra Logic - Fixed inner HTML escaping
     function calcLinear() {
         const a = parseFloat(document.getElementById('la_a').value);
         const b = parseFloat(document.getElementById('la_b').value);
@@ -761,23 +728,20 @@
         
         const cx = canvas.width / 2;
         const cy = canvas.height / 2;
-        const f = 40; // visual scaling factor
+        const f = 40;
         
-        // Plot Transformed Parallel Grid Polygon Shape Area
         ctx.fillStyle = "rgba(37, 99, 235, 0.25)";
-        ctx.strokeStyle = "#334155"; // Darkened edges
+        ctx.strokeStyle = "#334155";
         ctx.lineWidth = 2.5;
         ctx.beginPath();
         ctx.moveTo(cx, cy);
         ctx.lineTo(cx + a * f, cy - c * f);
         ctx.lineTo(cx + (a + b) * f, cy - (c + d) * f);
         ctx.lineTo(cx + b * f, cy - d * f);
-        ctx.closePath();
-        ctx.fill();
-        ctx.stroke();
+        ctx.closePath(); ctx.fill(); ctx.stroke();
     }
 
-    // 5. Topology Logic
+    // 5. Topology Logic - Fixed inner HTML escaping
     function calcTop() {
         const V = parseInt(document.getElementById('tpV').value);
         const E = parseInt(document.getElementById('tpE').value);
@@ -788,15 +752,11 @@
         const canvas = document.getElementById('topologyCanvas');
         const ctx = canvas.getContext('2d');
         drawXYPlane(ctx, canvas.width, canvas.height, 40, 20);
-        
-        // Network Graph Map representation of the Polyhedral system
-        ctx.strokeStyle = "#334155"; // Darkened edges for better reading visibility
-        ctx.lineWidth = 3;
-        ctx.strokeRect(150, 30, 150, 90);
-        ctx.strokeRect(180, 50, 150, 90);
+        ctx.strokeStyle = "#334155"; ctx.lineWidth = 3;
+        ctx.strokeRect(150, 30, 150, 90); ctx.strokeRect(180, 50, 150, 90);
     }
 
-    // 6. Number Theory Logic
+    // 6. Number Theory Logic - Fixed inner HTML escaping
     function calcNT() {
         const x = parseInt(document.getElementById('ntX').value);
         const e = parseInt(document.getElementById('ntE').value);
@@ -807,17 +767,14 @@
         let exp = e;
         while (exp > 0) {
             if (exp % 2 === 1) res = (res * base) % n;
-            base = (base * base) % n;
-            exp = Math.floor(exp / 2);
+            base = (base * base) % n; exp = Math.floor(exp / 2);
         }
-        showResult('ntRes', `<strong>Modular Resolution:</strong> ${x}^{${e}} \\equiv ${res} \\pmod{${n}}. Cryptography ring operation validated.`);
+        showResult('ntRes', `<strong>Modular Resolution:</strong> $${x}^{${e}} \\equiv ${res} \\pmod{${n}}$. Cryptography ring operation validated.`);
         
         const canvas = document.getElementById('ntCanvas');
         const ctx = canvas.getContext('2d');
         drawXYPlane(ctx, canvas.width, canvas.height, 25, 25);
-        
-        ctx.fillStyle = "#16a34a";
-        ctx.font = "14px monospace";
+        ctx.fillStyle = "#16a34a"; ctx.font = "14px monospace";
         ctx.fillText(`Value Residue Remainder: ${res}`, 30, 40);
     }
 
@@ -826,16 +783,13 @@
         const y0 = parseFloat(document.getElementById('odeY').value);
         const k = parseFloat(document.getElementById('odeK').value);
         const tMax = parseFloat(document.getElementById('odeT').value);
-        
         showResult('odeRes', `<strong>Trajectory Modelled:</strong> Evaluated initial condition configuration boundary paths dynamically successfully.`);
         
         const canvas = document.getElementById('odeCanvas');
         const ctx = canvas.getContext('2d');
         drawXYPlane(ctx, canvas.width, canvas.height, 20, 20);
         
-        ctx.strokeStyle = "#ea580c";
-        ctx.lineWidth = 3;
-        ctx.beginPath();
+        ctx.strokeStyle = "#ea580c"; ctx.lineWidth = 3; ctx.beginPath();
         for (let t = 0; t <= tMax; t += 0.1) {
             let y = y0 * Math.exp(k * t);
             let cx = 40 + (t / tMax) * 350;
@@ -845,7 +799,7 @@
         ctx.stroke();
     }
 
-    // 8. PDEs Logic
+    // 8. PDEs Logic - Fixed inner HTML escaping
     function calcPDE() {
         const u0 = parseFloat(document.getElementById('pdeL').value);
         const u1 = parseFloat(document.getElementById('pdeR').value);
@@ -856,16 +810,11 @@
         const canvas = document.getElementById('pdeCanvas');
         const ctx = canvas.getContext('2d');
         drawXYPlane(ctx, canvas.width, canvas.height, 30, 20);
-        
-        ctx.strokeStyle = "#2563eb";
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        ctx.moveTo(50, canvas.height - u0 - 20);
-        ctx.lineTo(400, canvas.height - u1 - 20);
-        ctx.stroke();
+        ctx.strokeStyle = "#2563eb"; ctx.lineWidth = 3; ctx.beginPath();
+        ctx.moveTo(50, canvas.height - u0 - 20); ctx.lineTo(400, canvas.height - u1 - 20); ctx.stroke();
     }
 
-    // 9. Functional Analysis Logic
+    // 9. Functional Analysis Logic - Fixed inner HTML escaping
     function calcFunctional() {
         const x1 = parseFloat(document.getElementById('fa1').value);
         const x2 = parseFloat(document.getElementById('fa2').value);
@@ -875,66 +824,41 @@
         const canvas = document.getElementById('faCanvas');
         const ctx = canvas.getContext('2d');
         drawXYPlane(ctx, canvas.width, canvas.height, 25, 25);
-        
-        ctx.strokeStyle = "#334155"; // Darkened Vector Edge line
-        ctx.lineWidth = 3.5;
-        ctx.beginPath();
-        ctx.moveTo(canvas.width/2, canvas.height/2);
-        ctx.lineTo(canvas.width/2 + x1*20, canvas.height/2 - x2*20);
-        ctx.stroke();
+        ctx.strokeStyle = "#334155"; ctx.lineWidth = 3.5; ctx.beginPath();
+        ctx.moveTo(canvas.width/2, canvas.height/2); ctx.lineTo(canvas.width/2 + x1*20, canvas.height/2 - x2*20); ctx.stroke();
     }
 
-    // 10. Graph Theory Logic (DIAGRAM EDGES DARKENED & MINOR DARK MOD APPLIED HERE)
+    // 10. Graph Theory Logic - Fixed inner HTML escaping
     function drawGraph() {
         const nodesCount = parseInt(document.getElementById('gtNodes').value) || 5;
-        showResult('gtRes', `<strong> Lemma Metric Profile:</strong> Complete mesh network graph $K_{${nodesCount}}$ contains $\\lvert V \\rvert = ${nodesCount}$ nodes tracking exactly $\\lvert E \\rvert = ${(nodesCount * (nodesCount - 1)) / 2}$ edges.`);
+        showResult('gtRes', `<strong>Lemma Metric Profile:</strong> Complete mesh network graph $K_{${nodesCount}}$ contains $\\lvert V \\rvert = ${nodesCount}$ nodes tracking exactly $\\lvert E \\rvert = ${(nodesCount * (nodesCount - 1)) / 2}$ edges.`);
         
         const canvas = document.getElementById('graphCanvas');
         const ctx = canvas.getContext('2d');
         drawXYPlane(ctx, canvas.width, canvas.height, 35, 35);
         
-        const cx = canvas.width / 2;
-        const cy = canvas.height / 2;
-        const radius = 75;
+        const cx = canvas.width / 2; const cy = canvas.height / 2; const radius = 75;
         let points = [];
-        
         for (let i = 0; i < nodesCount; i++) {
             let angle = (i * 2 * Math.PI) / nodesCount;
-            points.push({
-                x: cx + radius * Math.cos(angle),
-                y: cy + radius * Math.sin(angle)
-            });
+            points.push({ x: cx + radius * Math.cos(angle), y: cy + radius * Math.sin(angle) });
         }
         
-        // RENDER EDGES - Made minor dark, dense color and thicker stroke line profile
-        ctx.strokeStyle = varColor('--graph-edge-dark', '#334155'); 
-        ctx.lineWidth = 2.5; // Made edges thicker and more distinctly viewable
+        ctx.strokeStyle = "#334155"; ctx.lineWidth = 2.5;
         for (let i = 0; i < points.length; i++) {
             for (let j = i + 1; j < points.length; j++) {
-                ctx.beginPath();
-                ctx.moveTo(points[i].x, points[i].y);
-                ctx.lineTo(points[j].x, points[j].y);
-                ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(points[i].x, points[i].y); ctx.lineTo(points[j].x, points[j].y); ctx.stroke();
             }
         }
         
-        // RENDER NODES
         ctx.fillStyle = "#1e40af";
         points.forEach((pt) => {
-            ctx.beginPath();
-            ctx.arc(pt.x, pt.y, 7, 0, 2 * Math.PI);
-            ctx.fill();
-            ctx.strokeStyle = "#ffffff";
-            ctx.lineWidth = 1.5;
-            ctx.stroke();
+            ctx.beginPath(); ctx.arc(pt.x, pt.y, 7, 0, 2 * Math.PI); ctx.fill();
+            ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 1.5; ctx.stroke();
         });
     }
 
-    function varColor(varName, fallback) {
-        return getComputedStyle(document.documentElement).getPropertyValue(varName).trim() || fallback;
-    }
-
-    // 11. Operator Theory Logic
+    // 11. Operator Theory Logic - Fixed inner HTML escaping
     function calcOperator() {
         const k = parseFloat(document.getElementById('opT').value);
         const lam = parseFloat(document.getElementById('opLam').value);
@@ -948,9 +872,7 @@
         const canvas = document.getElementById('operatorCanvas');
         const ctx = canvas.getContext('2d');
         drawXYPlane(ctx, canvas.width, canvas.height, 25, 25);
-        
-        ctx.fillStyle = "#2563eb";
-        ctx.fillRect(canvas.width/2 + k*15 - 3, canvas.height/2 - 20, 6, 40); // Operator spectrum line
+        ctx.fillStyle = "#2563eb"; ctx.fillRect(canvas.width/2 + k*15 - 3, canvas.height/2 - 20, 6, 40);
     }
 
     // 12. Banach Algebra Logic
@@ -962,12 +884,10 @@
         const canvas = document.getElementById('banachCanvas');
         const ctx = canvas.getContext('2d');
         drawXYPlane(ctx, canvas.width, canvas.height, 20, 20);
-        
-        ctx.strokeStyle = "#16a34a";
-        ctx.strokeRect(40, 40, a*20, b*20);
+        ctx.strokeStyle = "#16a34a"; ctx.strokeRect(40, 40, a*20, b*20);
     }
 
-    // 13. Mathematical Methods Logic
+    // 13. Mathematical Methods Logic - Fixed inner HTML escaping
     function calcMethods() {
         const h = parseInt(document.getElementById('mmN').value);
         showResult('mmRes', `<strong>Fourier Analytical Integration:</strong> Plotting transformation convergence limit at harmonic cutoff value $n = ${h}$.`);
@@ -976,23 +896,17 @@
         const ctx = canvas.getContext('2d');
         drawXYPlane(ctx, canvas.width, canvas.height, 20, 20);
         
-        ctx.strokeStyle = "#1e40af";
-        ctx.lineWidth = 2.5;
-        ctx.beginPath();
-        
+        ctx.strokeStyle = "#1e40af"; ctx.lineWidth = 2.5; ctx.beginPath();
         for (let x = 0; x < canvas.width; x++) {
-            let t = (x - 50) * 0.05;
-            let sum = 0;
-            for (let i = 1; i <= h; i += 2) {
-                sum += Math.sin(i * t) / i;
-            }
+            let t = (x - 50) * 0.05; let sum = 0;
+            for (let i = 1; i <= h; i += 2) { sum += Math.sin(i * t) / i; }
             let y = canvas.height / 2 - (sum * (4 / Math.PI) * 40);
             if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
         }
         ctx.stroke();
     }
 
-    // 14. Relativity Logic
+    // 14. Relativity Logic - Fixed inner HTML escaping
     function calcRelativity() {
         const v = parseFloat(document.getElementById('relV').value);
         const gamma = (1 / Math.sqrt(1 - v*v)).toFixed(4);
@@ -1002,12 +916,8 @@
         const ctx = canvas.getContext('2d');
         drawXYPlane(ctx, canvas.width, canvas.height, 25, 25);
         
-        const cx = canvas.width / 2;
-        const cy = canvas.height / 2;
-        
-        // Light Cone Bounds Line
-        ctx.strokeStyle = "rgba(234, 88, 12, 0.4)";
-        ctx.lineWidth = 2;
+        const cx = canvas.width / 2; const cy = canvas.height / 2;
+        ctx.strokeStyle = "rgba(234, 88, 12, 0.4)"; ctx.lineWidth = 2;
         ctx.beginPath(); ctx.moveTo(cx - 100, cy - 100); ctx.lineTo(cx + 100, cy + 100); ctx.stroke();
         ctx.beginPath(); ctx.moveTo(cx - 100, cy + 100); ctx.lineTo(cx + 100, cy - 100); ctx.stroke();
     }
@@ -1020,15 +930,11 @@
         const canvas = document.getElementById('classicalCanvas');
         const ctx = canvas.getContext('2d');
         drawXYPlane(ctx, canvas.width, canvas.height, 30, 30);
-        
-        ctx.strokeStyle = "#16a34a";
-        ctx.lineWidth = 2.5;
-        ctx.beginPath();
-        ctx.ellipse(canvas.width / 2, canvas.height / 2, deg * 1.5, deg * 0.8, 0, 0, 2 * Math.PI);
-        ctx.stroke();
+        ctx.strokeStyle = "#16a34a"; ctx.lineWidth = 2.5; ctx.beginPath();
+        ctx.ellipse(canvas.width / 2, canvas.height / 2, deg * 1.5, deg * 0.8, 0, 0, 2 * Math.PI); ctx.stroke();
     }
 
-    // 16. Differential Geometry Logic
+    // 16. Differential Geometry Logic - Fixed inner HTML escaping
     function calcDG() {
         const k1 = parseFloat(document.getElementById('dgK1').value);
         const k2 = parseFloat(document.getElementById('dgK2').value);
@@ -1038,30 +944,15 @@
         const canvas = document.getElementById('dgCanvas');
         const ctx = canvas.getContext('2d');
         drawXYPlane(ctx, canvas.width, canvas.height, 30, 20);
-        
-        ctx.fillStyle = "#1e40af";
-        ctx.font = "14px Arial";
+        ctx.fillStyle = "#1e40af"; ctx.font = "14px Arial";
         ctx.fillText(`Computed Product K Matrix Index: ${K}`, 40, 50);
     }
 
-    // Master Initialization Routine on page load context
     window.onload = function() {
-        calcReal();
-        calcComplex();
-        calcAlgebra();
-        calcLinear();
-        calcTop();
-        calcNT();
-        calcODE();
-        calcPDE();
-        calcFunctional();
-        drawGraph();
-        calcOperator();
-        calcBanach();
-        calcMethods();
-        calcRelativity();
-        calcClassical();
-        calcDG();
+        calcReal(); calcComplex(); calcAlgebra(); calcLinear(); calcTop();
+        calcNT(); calcODE(); calcPDE(); calcFunctional(); drawGraph();
+        calcOperator(); calcBanach(); calcMethods(); calcRelativity();
+        calcClassical(); calcDG();
     };
 </script>
 
