@@ -4,6 +4,7 @@ export default function FunMathPlatform() {
       title: "1. Interactive Visual Math",
       description:
         "Drag sliders, explore graphs, rotate 3D objects, and understand concepts visually.",
+      link: "mathwithfun.html", // 👈 Link added here
       features: [
         "Graph visualizer",
         "Geometry playground",
@@ -15,6 +16,7 @@ export default function FunMathPlatform() {
       title: "2. Math Games & Challenges",
       description:
         "Gamified learning with XP, badges, quizzes, and puzzle battles.",
+      link: "#",
       features: [
         "Daily challenge",
         "Leaderboard",
@@ -26,6 +28,7 @@ export default function FunMathPlatform() {
       title: "3. Real-Life Mathematics",
       description:
         "Learn how mathematics is used in finance, AI, sports, architecture, and coding.",
+      link: "#",
       features: [
         "Investment simulator",
         "Sports analytics",
@@ -37,6 +40,7 @@ export default function FunMathPlatform() {
       title: "4. Why Does This Work?",
       description:
         "Conceptual understanding with animated proofs and visual intuition.",
+      link: "#",
       features: [
         "Animated proofs",
         "Visual explanations",
@@ -47,6 +51,7 @@ export default function FunMathPlatform() {
       title: "5. AI Math Tutor",
       description:
         "Ask doubts and receive step-by-step conceptual explanations.",
+      link: "#",
       features: [
         "Explain like I'm 10",
         "Hint mode",
@@ -57,6 +62,7 @@ export default function FunMathPlatform() {
       title: "6. Personalized Learning Paths",
       description:
         "Adaptive learning for school, Olympiad, JEE, engineering, and higher mathematics.",
+      link: "#",
       features: [
         "Weakness analysis",
         "Topic recommendations",
@@ -67,6 +73,7 @@ export default function FunMathPlatform() {
       title: "7. Beautiful Animations",
       description:
         "Mathematical animations that make formulas intuitive and memorable.",
+      link: "#",
       features: [
         "Equation morphing",
         "Wave simulations",
@@ -77,6 +84,7 @@ export default function FunMathPlatform() {
       title: "8. Puzzle & Brain Teaser Zone",
       description:
         "Develop problem-solving skills with logic games and puzzles.",
+      link: "#",
       features: [
         "Sudoku",
         "Logic riddles",
@@ -88,6 +96,7 @@ export default function FunMathPlatform() {
       title: "9. Math in Nature",
       description:
         "Explore Fibonacci patterns, symmetry, spirals, and fractals.",
+      link: "#",
       features: [
         "Golden ratio gallery",
         "Fractal explorer",
@@ -98,6 +107,7 @@ export default function FunMathPlatform() {
       title: "10. Formula Explorer",
       description:
         "Interactive formula cards with derivations and graph previews.",
+      link: "#",
       features: [
         "Searchable formulas",
         "Graph preview",
@@ -108,6 +118,7 @@ export default function FunMathPlatform() {
       title: "11. Meme & Fun Corner",
       description:
         "Mathematics memes, jokes, and entertaining concepts.",
+      link: "#",
       features: [
         "Funny math comics",
         "Math paradoxes",
@@ -118,6 +129,7 @@ export default function FunMathPlatform() {
       title: "12. Community Features",
       description:
         "Connect students, teachers, and math enthusiasts.",
+      link: "#",
       features: [
         "Discussion rooms",
         "Study groups",
@@ -128,6 +140,7 @@ export default function FunMathPlatform() {
       title: "13. AR / 3D Math Lab",
       description:
         "Visualize higher-dimensional concepts and 3D surfaces.",
+      link: "#",
       features: [
         "3D vector field",
         "Surface explorer",
@@ -138,6 +151,7 @@ export default function FunMathPlatform() {
       title: "14. Math Adventure Story",
       description:
         "Learn mathematics through gamified storytelling.",
+      link: "#",
       features: [
         "Algebra Kingdom",
         "Calculus Mountain",
@@ -148,6 +162,7 @@ export default function FunMathPlatform() {
       title: "15. Exam Preparation Engine",
       description:
         "Powerful practice system for school and competitive exams.",
+      link: "#",
       features: [
         "Adaptive mock tests",
         "Previous year papers",
@@ -158,6 +173,7 @@ export default function FunMathPlatform() {
       title: "16. Coding + Mathematics",
       description:
         "Learn Python, algorithms, AI mathematics, and simulations.",
+      link: "#",
       features: [
         "Graph plotting",
         "Algorithm visualizer",
@@ -168,6 +184,7 @@ export default function FunMathPlatform() {
       title: "17. Instant Graphing Tools",
       description:
         "Experiment instantly using calculators and visual graph tools.",
+      link: "#",
       features: [
         "Matrix calculator",
         "Probability simulator",
@@ -178,6 +195,7 @@ export default function FunMathPlatform() {
       title: "18. Achievement System",
       description:
         "Reward consistency and progress with levels and badges.",
+      link: "#",
       features: [
         "XP system",
         "Daily streaks",
@@ -188,6 +206,7 @@ export default function FunMathPlatform() {
       title: "19. Short Animated Videos",
       description:
         "Concept-based short lessons designed for fast learning.",
+      link: "#",
       features: [
         "2-minute lessons",
         "Visual storytelling",
@@ -198,6 +217,7 @@ export default function FunMathPlatform() {
       title: "20. Play With Mathematics",
       description:
         "The platform transforms mathematics into an enjoyable experience.",
+      link: "#",
       features: [
         "Interactive exploration",
         "Creative learning",
@@ -233,9 +253,11 @@ export default function FunMathPlatform() {
 
         <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
           {sections.map((section, index) => (
-            <div
+            /* Changed from <div> to <a> to make it a link. Added dynamic href, cursor styling, and text-resetting styles */
+            <a
+              href={section.link}
               key={index}
-              className="rounded-3xl p-6 bg-white/5 border border-white/10 backdrop-blur-lg hover:scale-[1.02] transition-all duration-300 shadow-2xl"
+              className="block rounded-3xl p-6 bg-white/5 border border-white/10 backdrop-blur-lg hover:scale-[1.02] transition-all duration-300 shadow-2xl no-underline text-inherit cursor-pointer"
             >
               <div className="text-3xl font-bold mb-4 text-cyan-300">
                 {section.title}
@@ -256,7 +278,7 @@ export default function FunMathPlatform() {
                   </div>
                 ))}
               </div>
-            </div>
+            </a>
           ))}
         </section>
 
