@@ -756,26 +756,37 @@
         ctx.strokeRect(150, 30, 150, 90); ctx.strokeRect(180, 50, 150, 90);
     }
 
-    // 6. Number Theory Logic - Fixed inner HTML escaping
+    // 6. Number Theory Logic - Fixed canvas rendering context mapping
     function calcNT() {
-        const x = parseInt(document.getElementById('ntX').value);
-        const e = parseInt(document.getElementById('ntE').value);
-        const n = parseInt(document.getElementById('ntN').value);
+        const x = parseInt(document.getElementById('ntX').value) || 0;
+        const e = parseInt(document.getElementById('ntE').value) || 0;
+        const n = parseInt(document.getElementById('ntN').value) || 1;
         
         let res = 1;
         let base = x % n;
         let exp = e;
         while (exp > 0) {
             if (exp % 2 === 1) res = (res * base) % n;
-            base = (base * base) % n; exp = Math.floor(exp / 2);
+            base = (base * base) % n; 
+            exp = Math.floor(exp / 2);
         }
         showResult('ntRes', `<strong>Modular Resolution:</strong> $${x}^{${e}} \\equiv ${res} \\pmod{${n}}$. Cryptography ring operation validated.`);
         
         const canvas = document.getElementById('ntCanvas');
-        const ctx = canvas.getContext('2d');
-        drawXYPlane(ctx, canvas.width, canvas.height, 25, 25);
-        ctx.fillStyle = "#16a34a"; ctx.font = "14px monospace";
-        ctx.fillText(`Value Residue Remainder: ${res}`, 30, 40);
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            drawXYPlane(ctx, canvas.width, canvas.height, 25, 25);
+            
+            // Draw a visualization of the remainder step on the ring
+            ctx.fillStyle = "#16a34a";
+            ctx.font = "14px monospace";
+            ctx.fillText(`Value Residue Remainder: ${res}`, 30, 40);
+            
+            // Draw residue point
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2 + (res * 10), canvas.height / 2, 8, 0, 2 * Math.PI);
+            ctx.fill();
+        }
     }
 
     // 7. ODEs Logic
@@ -934,26 +945,42 @@
         ctx.ellipse(canvas.width / 2, canvas.height / 2, deg * 1.5, deg * 0.8, 0, 0, 2 * Math.PI); ctx.stroke();
     }
 
-    // 16. Differential Geometry Logic - Fixed inner HTML escaping
+    // 16. Differential Geometry Logic - Fixed layout and metrics output
     function calcDG() {
-        const k1 = parseFloat(document.getElementById('dgK1').value);
-        const k2 = parseFloat(document.getElementById('dgK2').value);
+        const k1 = parseFloat(document.getElementById('dgK1').value) || 0;
+        const k2 = parseFloat(document.getElementById('dgK2').value) || 0;
         const K = (k1 * k2).toFixed(3);
-        showResult('dgRes', `<strong>Gaussian Product Curvature Metric:</strong> $K = ${K}$. Surface is locally modeled as geometric variant.`);
+        
+        let surfaceType = "Minimal / Flat (Euclidean)";
+        if (K > 0) surfaceType = "Elliptic (Spherical Geometry)";
+        if (K < 0) surfaceType = "Hyperbolic (Saddle Geometry)";
+        
+        showResult('dgRes', `<strong>Gaussian Product Curvature Metric:</strong> $K = k_1 \\cdot k_2 = (${k1}) \\cdot (${k2}) = ${K}$. Surface behaves as ${surfaceType}.`);
         
         const canvas = document.getElementById('dgCanvas');
-        const ctx = canvas.getContext('2d');
-        drawXYPlane(ctx, canvas.width, canvas.height, 30, 20);
-        ctx.fillStyle = "#1e40af"; ctx.font = "14px Arial";
-        ctx.fillText(`Computed Product K Matrix Index: ${K}`, 40, 50);
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            drawXYPlane(ctx, canvas.width, canvas.height, 30, 20);
+            
+            // Text descriptor inside canvas frame
+            ctx.fillStyle = "#1e40af"; 
+            ctx.font = "13px sans-serif";
+            ctx.fillText(`Computed K Matrix Index: ${K}`, 25, 35);
+            ctx.fillText(`Type: ${surfaceType}`, 25, 55);
+            
+            // Draw visual curve representations based on curvatures
+            ctx.strokeStyle = "#2563eb";
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            for (let x = 0; x < canvas.width; x++) {
+                let dx = (x - canvas.width / 2) / 40;
+                // Simple parabolic surface slice estimation z = k1*x^2 / 2
+                let y = (canvas.height / 2) + (0.5 * k1 * dx * dx * 10);
+                if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+        }
     }
-
-    window.onload = function() {
-        calcReal(); calcComplex(); calcAlgebra(); calcLinear(); calcTop();
-        calcNT(); calcODE(); calcPDE(); calcFunctional(); drawGraph();
-        calcOperator(); calcBanach(); calcMethods(); calcRelativity();
-        calcClassical(); calcDG();
-    };
 </script>
 
 </body>
