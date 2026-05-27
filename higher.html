@@ -187,7 +187,7 @@
         }
 
         .visual-canvas {
-            background: #ffffff;
+            background: #fafafa;
             border: 3px solid #000000;
             border-radius: 6px;
             margin-top: 14px;
@@ -437,10 +437,10 @@
         </div>
         <div class="interactive-calc">
             <h4>⚡ Analytics Engine: Linear Matrix Resolvent Spectral Map</h4>
-            <div class="calc-formula">System Invariant Operator: $R(\lambda) = (3\lambda I - T)^{-1}$</div>
+            <div class="calc-formula">System Invariant Operator: $R(\lambda) = (\lambda I - T)^{-1}$</div>
             <div class="input-group">
-                <div class="input-field"><label>Eigenvalue Scalar (k)</label><input type="number" id="opT" value="2" step="0.5" oninput="calcOperator()"></div>
-                <div class="input-field"><label>Spectral Param (lambda)</label><input type="number" id="opLam" value="5" step="0.5" oninput="calcOperator()"></div>
+                <div class="input-field"><label>Operator Eigenvalue (k)</label><input type="number" id="opT" value="2" step="0.5" oninput="calcOperator()"></div>
+                <div class="input-field"><label>Spectral Param ($\lambda$)</label><input type="number" id="opLam" value="5" step="0.5" oninput="calcOperator()"></div>
                 <button class="calc-btn" onclick="calcOperator()">Compute Resolvent</button>
             </div>
             <div id="opRes" class="calc-result"></div>
@@ -561,179 +561,198 @@
             <p><strong>Standard Reference Books:</strong> *An Introduction to the Approximation of Functions* by Theodore J. Rivlin; *Approximation Theory and Approximation Practice* by Lloyd N. Trefethen.</p>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Analytics Engine: Taylor Series Expansion vs Primitive Sine Waves</h4>
-            <div class="calc-formula">Expansion Vector: $\sin(x) \approx x - \frac{x^3}{6} + \frac{x^5}{120}$</div>
+            <h4>⚡ Analytics Engine: Maclaurin Series Functional Error Space</h4>
+            <div class="calc-formula">Approximation Form: $P_n(x) = \sum_{k=0}^{n} \frac{f^{(k)}(0)}{k!} x^k$</div>
             <div class="input-group">
-                <div class="input-field"><label>Evaluation Coordinate Radian</label><input type="number" id="atX" value="1.5" step="0.1" oninput="calcApprox()"></div>
-                <button class="calc-btn" onclick="calcApprox()">Measure Truncation Residuals</button>
+                <div class="input-field"><label>Polynomial Degree (n)</label><input type="number" id="apN" value="3" min="1" max="7" oninput="calcApproximation()"></div>
+                <button class="calc-btn" onclick="calcApproximation()">Plot Approximation Error</button>
             </div>
-            <div id="atRes" class="calc-result"></div>
-            <canvas id="approxCanvas" class="visual-canvas" width="450" height="180"></canvas>
+            <div id="apRes" class="calc-result"></div>
+            <canvas id="approxCanvas" class="visual-canvas" width="450" height="200"></canvas>
         </div>
     </div>
 
 </div>
 
 <footer>
-    <p>&copy; 2026 Master Graduate Mathematics System Dashboard Panel • Fully Localized High-Contrast Processing Modules.</p>
+    <p>&copy; 2026 Mathematics Academic Analytics System Hub. Clear High-Contrast Accessible Mathematical Spaces.</p>
 </footer>
 
 <script>
-    // 1. Real Analysis Execution
-    function calcReal() {
-        const eps = parseFloat(document.getElementById('epsInp').value) || 0.01;
-        const N = Math.ceil(1 / eps);
-        const resDiv = document.getElementById('realRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Rigorous Bound Established:</strong> For epsilon $\\epsilon = ${eps}$, the threshold index selection $N = ${N}$. Hence, for all $n \\ge ${N}$, $|\\frac{1}{n} - 0| < ${eps}$.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
-
-        const canvas = document.getElementById('realCanvas');
+    // Global Cartesian Plane Grid Graphics Component Engine
+    function initPlane(canvasId, xMin, xMax, yMin, yMax) {
+        const canvas = document.getElementById(canvasId);
         const ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        
-        // Draw grid setup
-        ctx.strokeStyle = '#cbd5e1';
+        const W = canvas.width;
+        const H = canvas.height;
+
+        // Clear view area with soft light grid container tint
+        ctx.fillStyle = "#fafafa";
+        ctx.fillRect(0, 0, W, H);
+
+        // Transformation scalers
+        const scaleX = W / (xMax - xMin);
+        const scaleY = H / (yMax - yMin);
+
+        function toPxX(x) { return (x - xMin) * scaleX; }
+        function toPxY(y) { return (yMax - y) * scaleY; }
+
+        // Draw structural Grid Lines
+        ctx.strokeStyle = "#e2e8f0";
         ctx.lineWidth = 1;
+        ctx.font = "9px -apple-system, sans-serif";
+        ctx.fillStyle = "#94a3b8";
+
+        // Vertical lines & values
+        let xStep = Math.max(1, Math.floor((xMax - xMin) / 10));
+        for (let x = Math.ceil(xMin); x <= Math.floor(xMax); x += xStep) {
+            let px = toPxX(x);
+            ctx.beginPath();
+            ctx.moveTo(px, 0);
+            ctx.lineTo(px, H);
+            ctx.stroke();
+            
+            let zeroY = Math.min(Math.max(toPxY(0), 12), H - 4);
+            if (x !== 0) ctx.fillText(x, px + 2, zeroY - 2);
+        }
+
+        // Horizontal lines & values
+        let yStep = Math.max(1, Math.floor((yMax - yMin) / 6));
+        for (let y = Math.ceil(yMin); y <= Math.floor(yMax); y += yStep) {
+            let py = toPxY(y);
+            ctx.beginPath();
+            ctx.moveTo(0, py);
+            ctx.lineTo(W, py);
+            ctx.stroke();
+
+            let zeroX = Math.min(Math.max(toPxX(0), 4), W - 15);
+            if (y !== 0) ctx.fillText(y, zeroX + 2, py - 2);
+        }
+
+        // Main Base Coordinate Axes
+        ctx.strokeStyle = "#475569";
+        ctx.lineWidth = 2;
+        
+        // X-axis
         ctx.beginPath();
-        ctx.moveTo(40, 160); ctx.lineTo(430, 160); // Axis X
-        ctx.moveTo(40, 10); ctx.lineTo(40, 170); // Axis Y
+        ctx.moveTo(0, toPxY(0));
+        ctx.lineTo(W, toPxY(0));
         ctx.stroke();
 
-        // Target baseline 0
-        ctx.strokeStyle = '#2563eb';
-        ctx.setLineDash([4, 4]);
-        ctx.beginPath(); ctx.moveTo(40, 160); ctx.lineTo(430, 160); ctx.stroke(); ctx.setLineDash([]);
+        // Y-axis
+        ctx.beginPath();
+        ctx.moveTo(toPxX(0), 0);
+        ctx.lineTo(toPxX(0), H);
+        ctx.stroke();
 
-        // Epsilon bound line
-        const epsY = 160 - (eps * 120);
-        ctx.strokeStyle = '#dc2626';
-        ctx.lineWidth = 1.5;
-        ctx.beginPath(); ctx.moveTo(40, epsY); ctx.lineTo(430, epsY); ctx.stroke();
+        // Origin tracking character tag
+        ctx.fillText("0", toPxX(0) - 8, toPxY(0) + 10);
 
-        // Plot sequence markers
-        ctx.fillStyle = '#0f172a';
-        for (let n = 1; n <= 25; n++) {
-            const val = 1 / n;
-            const x = 40 + (n * 15);
-            const y = 160 - (val * 120);
-            ctx.beginPath();
-            ctx.arc(x, y, n >= N ? 4 : 3, 0, 2*Math.PI);
-            ctx.fillStyle = n >= N ? '#16a34a' : '#475569';
-            ctx.fill();
-        }
-        ctx.fillStyle = '#dc2626';
-        ctx.font = '11px sans-serif';
-        ctx.fillText('Tolerance limit ϵ', 260, epsY - 5);
+        return { ctx, toPxX, toPxY, W, H };
     }
 
-    // 2. Complex Analysis Execution
+    // 1. Real Analysis
+    function calcReal() {
+        const eps = parseFloat(document.getElementById('epsInp').value) || 0.05;
+        const N = Math.ceil(1 / eps);
+        const res = document.getElementById('realRes');
+        res.style.display = 'block';
+        res.innerHTML = `For $\\epsilon = ${eps}$, the verification boundary requires index $N > ${N}$ such that $\\forall n \\ge N, |\\frac{1}{n} - 0| < \\epsilon$.`;
+        MathJax.typesetPromise([res]);
+
+        const g = initPlane('realCanvas', -2, 25, -0.2, 1.2);
+        
+        // Target sequence dots loop
+        g.ctx.fillStyle = "var(--accent-blue)";
+        for (let n = 1; n <= 24; n++) {
+            g.ctx.beginPath();
+            g.ctx.arc(g.toPxX(n), g.toPxY(1/n), 4, 0, 2*Math.PI);
+            g.ctx.fill();
+        }
+
+        // Epsilon zone bound container line box
+        g.ctx.strokeStyle = "rgba(22, 163, 74, 0.3)";
+        g.ctx.fillStyle = "rgba(22, 163, 74, 0.05)";
+        g.ctx.fillRect(g.toPxX(-2), g.toPxY(eps), g.W, g.toPxY(-eps) - g.toPxY(eps));
+        
+        g.ctx.beginPath();
+        g.ctx.moveTo(0, g.toPxY(eps)); g.ctx.lineTo(g.W, g.toPxY(eps));
+        g.ctx.stroke();
+    }
+
+    // 2. Complex Analysis
     function calcComplex() {
         const deg = parseFloat(document.getElementById('compDeg').value) || 0;
         const rad = deg * Math.PI / 180;
-        const re = Math.cos(rad);
-        const im = Math.sin(rad);
+        const cos = Math.cos(rad);
+        const sin = Math.sin(rad);
 
-        const resDiv = document.getElementById('complexRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Euler Mapping Output:</strong> $e^{i \\cdot ${deg}^\\circ} = ${re.toFixed(4)} + ${im.toFixed(4)}i$. Vector Magnitude Metric = 1.0000.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
+        const res = document.getElementById('complexRes');
+        res.style.display = 'block';
+        res.innerHTML = `Mapped Identity Profile vector coordinate: $e^{i\\cdot ${deg}^\\circ} = ${cos.toFixed(4)} + ${sin.toFixed(4)}i$`;
+        MathJax.typesetPromise([res]);
 
-        const canvas = document.getElementById('complexCanvas');
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,canvas.width,canvas.height);
+        const g = initPlane('complexCanvas', -1.5, 1.5, -1.5, 1.5);
 
-        const cx = canvas.width / 2;
-        const cy = canvas.height / 2;
-        const r = 80;
+        // Circular Unit Path Frame Ring
+        g.ctx.strokeStyle = "#cbd5e1";
+        g.ctx.lineWidth = 1.5;
+        g.ctx.beginPath();
+        g.ctx.arc(g.toPxX(0), g.toPxY(0), g.toPxX(1) - g.toPxX(0), 0, 2*Math.PI);
+        g.ctx.stroke();
 
-        // Draw orthogonal fields
-        ctx.strokeStyle = '#e2e8f0';
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(0, cy); ctx.lineTo(canvas.width, cy);
-        ctx.moveTo(cx, 0); ctx.lineTo(cx, canvas.height);
-        ctx.stroke();
+        // Vector arrow path pointer
+        g.ctx.strokeStyle = "var(--accent-blue)";
+        g.ctx.lineWidth = 3;
+        g.ctx.beginPath();
+        g.ctx.moveTo(g.toPxX(0), g.toPxY(0));
+        g.ctx.lineTo(g.toPxX(cos), g.toPxY(sin));
+        g.ctx.stroke();
 
-        // Radius circle
-        ctx.strokeStyle = '#94a3b8';
-        ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2*Math.PI); ctx.stroke();
-
-        // Vector line
-        ctx.strokeStyle = '#2563eb';
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        ctx.moveTo(cx, cy);
-        ctx.lineTo(cx + re*r, cy - im*r);
-        ctx.stroke();
-
-        // Intersection point node
-        ctx.fillStyle = '#dc2626';
-        ctx.beginPath(); ctx.arc(cx + re*r, cy - im*r, 5, 0, 2*Math.PI); ctx.fill();
+        g.ctx.fillStyle = "#e24e24";
+        g.ctx.beginPath();
+        g.ctx.arc(g.toPxX(cos), g.toPxY(sin), 5, 0, 2*Math.PI);
+        g.ctx.fill();
     }
 
-    // 3. Abstract Algebra Orbit Fixes
+    // 3. Abstract Algebra
     function calcAlgebra() {
         const p = parseInt(document.getElementById('algP').value) || 11;
-        const g = parseInt(document.getElementById('algG').value) || 2;
+        const gVal = parseInt(document.getElementById('algG').value) || 2;
+        const res = document.getElementById('algebraRes');
         
-        let orbit = [];
-        let curr = 1;
+        let orbits = [];
+        let cur = 1;
         for (let k = 0; k < p; k++) {
-            orbit.push(curr);
-            curr = (curr * g) % p;
-            if (curr === 1) break;
+            orbits.push(cur);
+            cur = (cur * gVal) % p;
+            if (cur === 1) break;
         }
 
-        const isGenerator = orbit.length === (p - 1);
-        const resDiv = document.getElementById('algebraRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Subgroup Orbit Generation Sequence:</strong> {${orbit.join(', ')}} <br> Orbit Length Metric = ${orbit.length} (${isGenerator ? 'Generates entire group structure cyclic space' : 'Produces restricted proper isolated subgroup'}).`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
+        res.style.display = 'block';
+        res.innerHTML = `Multiplicative element orbit path tracking layout generator set: $\\langle ${gVal} \\rangle = \\{${orbits.join(', ')}\\}$ (Order: ${orbits.length})`;
+        MathJax.typesetPromise([res]);
 
-        const canvas = document.getElementById('algebraCanvas');
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,canvas.width,canvas.height);
+        const viewMax = p + 2;
+        const plane = initPlane('algebraCanvas', -1, viewMax, -1, viewMax);
 
-        const cx = canvas.width / 2;
-        const cy = canvas.height / 2;
-        const radius = 75;
+        plane.ctx.fillStyle = "purple";
+        plane.ctx.strokeStyle = "rgba(128, 0, 128, 0.25)";
+        plane.ctx.lineWidth = 1.5;
+        plane.ctx.beginPath();
 
-        // Base ring representation template
-        ctx.strokeStyle = '#f1f5f9';
-        ctx.beginPath(); ctx.arc(cx, cy, radius, 0, 2*Math.PI); ctx.stroke();
-
-        // Map modular nodes uniformly on the complex unit boundary circle
-        const elementCoords = {};
-        for(let i=0; i<p; i++) {
-            const angle = (2 * Math.PI * i) / p - Math.PI/2;
-            const x = cx + radius * Math.cos(angle);
-            const y = cy + radius * Math.sin(angle);
-            elementCoords[i] = {x, y};
-
-            ctx.fillStyle = '#94a3b8';
-            ctx.beginPath(); ctx.arc(x, y, 4, 0, 2*Math.PI); ctx.fill();
-            ctx.font = '10px sans-serif';
-            ctx.fillText(i, x + 8, y + 4);
+        for (let k = 0; k < orbits.length; k++) {
+            let px = plane.toPxX(k);
+            let py = plane.toPxY(orbits[k]);
+            plane.ctx.arc(px, py, 4, 0, 2*Math.PI);
+            if (k === 0) plane.ctx.moveTo(px, py);
+            else plane.ctx.lineTo(px, py);
         }
-
-        // Draw paths traced out by the multiplicative cyclic orbit engine
-        ctx.strokeStyle = '#2563eb';
-        ctx.lineWidth = 1.5;
-        ctx.beginPath();
-        for(let i=0; i<orbit.length; i++) {
-            const node = orbit[i];
-            const coords = elementCoords[node];
-            if(i === 0) ctx.moveTo(coords.x, coords.y);
-            else ctx.lineTo(coords.x, coords.y);
-        }
-        if(orbit[orbit.length-1] * g % p === orbit[0]) {
-            ctx.lineTo(elementCoords[orbit[0]].x, elementCoords[orbit[0]].y);
-        }
-        ctx.stroke();
+        plane.ctx.stroke();
+        plane.ctx.fill();
     }
 
-    // 4. Linear Algebra Execution
+    // 4. Linear Algebra
     function calcLinear() {
         const a = parseFloat(document.getElementById('la_a').value);
         const b = parseFloat(document.getElementById('la_b').value);
@@ -741,465 +760,427 @@
         const d = parseFloat(document.getElementById('la_d').value);
         const det = (a * d) - (b * c);
 
-        const resDiv = document.getElementById('linearRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Matrix Properties Calculated:</strong> Determinant value $\\det(A) = ${det.toFixed(4)}$. The transformation maps unit basis profiles into scaled space geometry layouts.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
+        const res = document.getElementById('linearRes');
+        res.style.display = 'block';
+        res.innerHTML = `Transformation Field Grid Area Determinant Value $\\det(A) = ${det.toFixed(3)}$`;
+        MathJax.typesetPromise([res]);
 
-        const canvas = document.getElementById('linearCanvas');
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,canvas.width,canvas.height);
+        const g = initPlane('linearCanvas', -2, 4, -2, 4);
 
-        const ox = 80; const oy = 160;
-        const scale = 50;
-
-        // Cartesian Grid Foundations
-        ctx.strokeStyle = '#e2e8f0';
-        ctx.lineWidth = 1;
-        for (let i = 0; i < 10; i++) {
-            ctx.beginPath(); ctx.moveTo(ox + i*scale, 0); ctx.lineTo(ox + i*scale, canvas.height); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo(0, oy - i*scale); ctx.lineTo(canvas.width, oy - i*scale); ctx.stroke();
-        }
-
-        // Transformed Parallel Span Area Mapping
-        ctx.fillStyle = 'rgba(37, 99, 235, 0.25)';
-        ctx.strokeStyle = '#2563eb';
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(ox, oy);
-        ctx.lineTo(ox + a*scale, oy - c*scale);
-        ctx.lineTo(ox + (a+b)*scale, oy - (c+d)*scale);
-        ctx.lineTo(ox + b*scale, oy - d*scale);
-        ctx.closePath();
-        ctx.fill(); ctx.stroke();
+        // Render transformed grid area quad mapping box segment
+        g.ctx.fillStyle = "rgba(37, 99, 235, 0.2)";
+        g.ctx.strokeStyle = "var(--accent-blue)";
+        g.ctx.lineWidth = 2.5;
+        g.ctx.beginPath();
+        g.ctx.moveTo(g.toPxX(0), g.toPxY(0));
+        g.ctx.lineTo(g.toPxX(a), g.toPxY(c));
+        g.ctx.lineTo(g.toPxX(a+b), g.toPxY(c+d));
+        g.ctx.lineTo(g.toPxX(b), g.toPxY(d));
+        g.ctx.closePath();
+        g.ctx.fill();
+        g.ctx.stroke();
     }
 
-    // 5. Topology Execution
+    // 5. Topology
     function calcTop() {
-        const v = parseInt(document.getElementById('tpV').value) || 0;
-        const e = parseInt(document.getElementById('tpE').value) || 0;
-        const f = parseInt(document.getElementById('tpF').value) || 0;
-        const chi = v - e + f;
+        const V = parseInt(document.getElementById('tpV').value);
+        const E = parseInt(document.getElementById('tpE').value);
+        const F = parseInt(document.getElementById('tpF').value);
+        const chi = V - E + F;
 
-        const resDiv = document.getElementById('topRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Topological Euler Characteristic Calculation:</strong> $\\chi = ${v} - ${e} + ${f} = ${chi}$. ${chi === 2 ? 'Valid homeomorphically bounded simple spherical element geometry.' : 'Alternative manifold structural genus profile.'}`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
+        const res = document.getElementById('topRes');
+        res.style.display = 'block';
+        res.innerHTML = `Computed Euler Characteristic invariant metric calculation: $\\chi = V - E + F = ${V} - ${E} + ${F} = ${chi}$`;
+        MathJax.typesetPromise([res]);
 
-        const canvas = document.getElementById('topologyCanvas');
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,canvas.width,canvas.height);
+        const g = initPlane('topologyCanvas', -1, 5, -1, 5);
+        g.ctx.fillStyle = "var(--success-green)";
+        g.ctx.strokeStyle = "var(--text-dark)";
+        g.ctx.lineWidth = 2;
         
-        ctx.fillStyle = '#0f172a';
-        ctx.font = '14px sans-serif';
-        ctx.fillText(`Manifold Profile Invariant Signature Chi: ${chi}`, 30, 40);
-
-        // Draw structural topological cube model components mapping lines
-        ctx.strokeStyle = '#475569';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(60, 60, 60, 60);
-        ctx.strokeRect(90, 40, 60, 60);
-        ctx.beginPath();
-        ctx.moveTo(60,60); ctx.lineTo(90,40);
-        ctx.moveTo(120,60); ctx.lineTo(150,40);
-        ctx.moveTo(60,120); ctx.lineTo(90,100);
-        ctx.moveTo(120,120); ctx.lineTo(150,100);
-        ctx.stroke();
+        // Simple planar representation polygon visual frame loop components
+        g.ctx.beginPath();
+        g.ctx.moveTo(g.toPxX(1), g.toPxY(1));
+        g.ctx.lineTo(g.toPxX(3), g.toPxY(1));
+        g.ctx.lineTo(g.toPxX(3.5), g.toPxY(3));
+        g.ctx.lineTo(g.toPxX(1.5), g.toPxY(3));
+        g.ctx.closePath();
+        g.ctx.fill();
+        g.ctx.stroke();
     }
 
-    // 6. Number Theory & Cryptography Matrix Fixes
+    // 6. Number Theory & Cryptography
     function calcNT() {
-        const base = parseInt(document.getElementById('ntX').value) || 2;
-        const exp = parseInt(document.getElementById('ntE').value) || 1;
-        const mod = parseInt(document.getElementById('ntN').value) || 10;
+        const base = parseInt(document.getElementById('ntX').value) || 4;
+        const exp = parseInt(document.getElementById('ntE').value) || 7;
+        const mod = parseInt(document.getElementById('ntN').value) || 15;
 
-        // Complete robust modular exponentiation calculation cycle loop
-        let res = 1;
-        let baseMod = base % mod;
-        let remainingExp = exp;
-        let traceSteps = [];
-
-        while (remainingExp > 0) {
-            if (remainingExp % 2 === 1) {
-                let prev = res;
-                res = (res * baseMod) % mod;
-                traceSteps.push(`Bit=1: (${prev} * ${baseMod}) mod ${mod} = ${res}`);
-            } else {
-                traceSteps.push(`Bit=0: Square base component ${baseMod}`);
-            }
-            baseMod = (baseMod * baseMod) % mod;
-            remainingExp = Math.floor(remainingExp / 2);
+        // BigInt math handling execution pattern safety parameters
+        let r = 1;
+        let b = base % mod;
+        let e = exp;
+        while (e > 0) {
+            if (e % 2 === 1) r = (r * b) % mod;
+            b = (b * b) % mod;
+            e = Math.floor(e / 2);
         }
 
-        const resDiv = document.getElementById('ntRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Cryptographic Evaluation Output:</strong> $${base}^{${exp}} \\equiv ${res} \\pmod{${mod}}$.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
+        const res = document.getElementById('ntRes');
+        res.style.display = 'block';
+        res.innerHTML = `Calculated Residue Congruence Node value: $${base}^{${exp}} \\equiv ${r} \\pmod{${mod}}$`;
+        MathJax.typesetPromise([res]);
 
-        const canvas = document.getElementById('ntCanvas');
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-
-        // Render calculated verification traces step arrays inside canvas context frames
-        ctx.fillStyle = '#000000';
-        ctx.font = '11px monospace';
-        ctx.fillText(`Exponent modular trace sequence values:`, 15, 25);
+        const g = initPlane('ntCanvas', -1, mod + 1, -1, mod + 1);
+        g.ctx.fillStyle = "orange";
         
-        let offsetY = 50;
-        ctx.fillStyle = '#1e40af';
-        ctx.fillText(`Initial Parameters: Base=${base}, Exp=${exp}, Mod=${mod}`, 15, offsetY);
-        
-        offsetY += 25;
-        ctx.fillStyle = '#16a34a';
-        ctx.fillText(`Calculated Remainder congruent result state: ${res}`, 15, offsetY);
-
-        offsetY += 25;
-        ctx.fillStyle = '#475569';
-        ctx.fillText(`Binary Square-Multiply pipelines complete execution.`, 15, offsetY);
+        let runningVal = 1;
+        for (let x = 0; x <= exp; x++) {
+            g.ctx.beginPath();
+            g.ctx.arc(g.toPxX(x), g.toPxY(runningVal), 5, 0, 2*Math.PI);
+            g.ctx.fill();
+            runningVal = (runningVal * (base % mod)) % mod;
+        }
     }
 
-    // 7. ODE Execution
+    // 7. Ordinary Differential Equations (ODEs)
     function calcODE() {
         const y0 = parseFloat(document.getElementById('odeY').value);
         const k = parseFloat(document.getElementById('odeK').value);
-        const tMax = parseFloat(document.getElementById('odeT').value);
-        const targetVal = y0 * Math.exp(k * tMax);
+        const tBound = parseFloat(document.getElementById('odeT').value);
 
-        const resDiv = document.getElementById('odeRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Boundary Trajectory State Result:</strong> State at time value $t = ${tMax}$ maps down to $y(${tMax}) = ${targetVal.toFixed(4)}$.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
+        const res = document.getElementById('odeRes');
+        res.style.display = 'block';
+        res.innerHTML = `At terminal evaluation frame point value $t = ${tBound}$, calculation yields position state: $y(${tBound}) = ${y0} \\cdot e^{${k} \\cdot ${tBound}} = ${(y0 * Math.exp(k * tBound)).toFixed(4)}$`;
+        MathJax.typesetPromise([res]);
 
-        const canvas = document.getElementById('odeCanvas');
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,canvas.width,canvas.height);
+        const g = initPlane('odeCanvas', -1, 10, -2, 12);
+        g.ctx.strokeStyle = "red";
+        g.ctx.lineWidth = 2.5;
+        g.ctx.beginPath();
 
-        ctx.strokeStyle = '#94a3b8';
-        ctx.beginPath(); ctx.moveTo(40,170); ctx.lineTo(420,170); ctx.stroke(); // line x
-
-        ctx.strokeStyle = '#16a34a';
-        ctx.lineWidth = 2.5;
-        ctx.beginPath();
-        for (let pixelX = 40; pixelX <= 420; pixelX++) {
-            const tVal = ((pixelX - 40) / 380) * tMax;
-            const yVal = y0 * Math.exp(k * tVal);
-            const pixelY = 170 - (yVal * 15);
-            if(pixelX === 40) ctx.moveTo(pixelX, pixelY);
-            else ctx.lineTo(pixelX, pixelY);
+        for (let t = 0; t <= 100; t++) {
+            let tModel = (t / 100) * 9;
+            let yVal = y0 * Math.exp(k * tModel);
+            if (t === 0) g.ctx.moveTo(g.toPxX(tModel), g.toPxY(yVal));
+            else g.ctx.lineTo(g.toPxX(tModel), g.toPxY(yVal));
         }
-        ctx.stroke();
+        g.ctx.stroke();
     }
 
-    // 8. PDE Execution
+    // 8. Partial Differential Equations (PDEs)
     function calcPDE() {
         const u0 = parseFloat(document.getElementById('pdeL').value);
         const u1 = parseFloat(document.getElementById('pdeR').value);
         const targetX = parseFloat(document.getElementById('pdeX').value);
-        const solutionVal = u0 + targetX * (u1 - u0);
+        const answer = u0 + targetX * (u1 - u0);
 
-        const resDiv = document.getElementById('pdeRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Interpolated Spatial Nodes:</strong> Interpolated temperature value $u(x=${targetX}) = ${solutionVal.toFixed(2)}^\\circ\\text{C}$.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
+        const res = document.getElementById('pdeRes');
+        res.style.display = 'block';
+        res.innerHTML = `Calculated node coordinate element: $u(${targetX}) = ${answer.toFixed(3)}$`;
+        MathJax.typesetPromise([res]);
 
-        const canvas = document.getElementById('pdeCanvas');
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,canvas.width,canvas.height);
+        const g = initPlane('pdeCanvas', -0.2, 1.2, -10, 110);
+        g.ctx.strokeStyle = "teal";
+        g.ctx.lineWidth = 3;
+        g.ctx.beginPath();
+        g.ctx.moveTo(g.toPxX(0), g.toPxY(u0));
+        g.ctx.lineTo(g.toPxX(1), g.toPxY(u1));
+        g.ctx.stroke();
 
-        // Linear Dirichlet steady-state trace lines
-        ctx.strokeStyle = '#dc2626';
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        ctx.moveTo(50, 160 - (u0 * 1.2));
-        ctx.lineTo(400, 160 - (u1 * 1.2));
-        ctx.stroke();
-
-        // Node intersection tracking marks
-        const targetPixelX = 50 + targetX * 350;
-        const targetPixelY = 160 - (solutionVal * 1.2);
-        ctx.fillStyle = '#0f172a';
-        ctx.beginPath(); ctx.arc(targetPixelX, targetPixelY, 6, 0, 2*Math.PI); ctx.fill();
+        g.ctx.fillStyle = "red";
+        g.ctx.beginPath();
+        g.ctx.arc(g.toPxX(targetX), g.toPxY(answer), 5, 0, 2*Math.PI);
+        g.ctx.fill();
     }
 
-    // 9. Functional Analysis Execution
+    // 9. Functional Analysis
     function calcFunctional() {
-        const x1 = parseFloat(document.getElementById('fa1').value) || 0;
-        const x2 = parseFloat(document.getElementById('fa2').value) || 0;
+        const x1 = parseFloat(document.getElementById('fa1').value);
+        const x2 = parseFloat(document.getElementById('fa2').value);
         const norm = Math.sqrt(x1*x1 + x2*x2);
 
-        const resDiv = document.getElementById('faRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Hilbert Norm Coordinate Output:</strong> Total calculated continuous norm spatial magnitude metrics value $\\|x\\|_{l^2} = ${norm.toFixed(4)}$.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
+        const res = document.getElementById('faRes');
+        res.style.display = 'block';
+        res.innerHTML = `Calculated space norm length coordinate value: $\\|x\\|_{l^2} = \\sqrt{${x1}^2 + ${x2}^2} = ${norm.toFixed(4)}$`;
+        MathJax.typesetPromise([res]);
 
-        const canvas = document.getElementById('faCanvas');
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-
-        ctx.strokeStyle = '#cbd5e1';
-        ctx.beginPath(); ctx.moveTo(30,150); ctx.lineTo(400,150); ctx.stroke();
-
-        ctx.strokeStyle = '#2563eb';
-        ctx.lineWidth = 3;
-        ctx.beginPath(); ctx.moveTo(30,150); ctx.lineTo(30 + x1*40, 150 - x2*40); ctx.stroke();
+        const g = initPlane('faCanvas', -1, 6, -1, 6);
+        g.ctx.strokeStyle = "blue";
+        g.ctx.lineWidth = 3;
+        g.ctx.beginPath();
+        g.ctx.moveTo(g.toPxX(0), g.toPxY(0));
+        g.ctx.lineTo(g.toPxX(x1), g.toPxY(x2));
+        g.ctx.stroke();
     }
 
-    // 10. Graph Theory Execution
+    // 10. Graph Theory
     function drawGraph() {
-        const nodes = parseInt(document.getElementById('gtNodes').value) || 4;
-        const edgesCount = (nodes * (nodes - 1)) / 2;
-
-        const resDiv = document.getElementById('gtRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Complete Network Topology Matrix ($K_{${nodes}}$):</strong> Total calculated structural connection edges array length $|E| = ${edgesCount}$. Regular edge degree metrics = ${nodes - 1}.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
+        const V = parseInt(document.getElementById('gtNodes').value) || 5;
+        const edges = (V * (V - 1)) / 2;
+        const res = document.getElementById('gtRes');
+        res.style.display = 'block';
+        res.innerHTML = `Complete structural network topology graph matrix ($K_{${V}}$). Edge count metric: $|E| = \\frac{${V}(${V}-1)}{2} = ${edges}$ lines.`;
+        MathJax.typesetPromise([res]);
 
         const canvas = document.getElementById('graphCanvas');
         const ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,canvas.width,canvas.height);
+        const W = canvas.width;
+        const H = canvas.height;
 
-        const cx = canvas.width / 2; const cy = canvas.height / 2;
-        const r = 70;
-        const pts = [];
+        ctx.fillStyle = "#fafafa";
+        ctx.fillRect(0, 0, W, H);
 
-        for(let i=0; i<nodes; i++) {
-            const ang = (2 * Math.PI * i) / nodes;
-            pts.push({ x: cx + r*Math.cos(ang), y: cy + r*Math.sin(ang) });
+        let nodes = [];
+        let cx = W / 2;
+        let cy = H / 2;
+        let r = 70;
+
+        for (let i = 0; i < V; i++) {
+            let angle = (i * 2 * Math.PI) / V;
+            nodes.push({ x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) });
         }
 
-        ctx.strokeStyle = '#94a3b8';
-        ctx.lineWidth = 1;
-        for(let i=0; i<nodes; i++) {
-            for(let j=i+1; j<nodes; j++) {
-                ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y); ctx.stroke();
+        ctx.strokeStyle = "#94a3b8";
+        ctx.lineWidth = 1.5;
+        for (let i = 0; i < V; i++) {
+            for (let j = i + 1; j < V; j++) {
+                ctx.beginPath();
+                ctx.moveTo(nodes[i].x, nodes[i].y);
+                ctx.lineTo(nodes[j].x, nodes[j].y);
+                ctx.stroke();
             }
         }
 
-        ctx.fillStyle = '#1e3a8a';
-        for(let i=0; i<nodes; i++) {
-            ctx.beginPath(); ctx.arc(pts[i].x, pts[i].y, 6, 0, 2*Math.PI); ctx.fill();
+        ctx.fillStyle = "var(--accent-blue)";
+        for (let i = 0; i < V; i++) {
+            ctx.beginPath();
+            ctx.arc(nodes[i].x, nodes[i].y, 7, 0, 2*Math.PI);
+            ctx.fill();
         }
     }
 
-    // 11. Operator Theory Execution
+    // 11. Operator Theory
     function calcOperator() {
-        const t = parseFloat(document.getElementById('opT').value);
+        const k = parseFloat(document.getElementById('opT').value);
         const lam = parseFloat(document.getElementById('opLam').value);
-        const denom = (3 * lam) - t;
+        const diff = lam - k;
+        const resolvent = diff !== 0 ? (1 / diff) : 0;
 
-        const resDiv = document.getElementById('opRes');
-        resDiv.style.display = 'block';
-        if (Math.abs(denom) < 0.001) {
-            resDiv.innerHTML = `<strong>Spectral Alert:</strong> Parameter lambda matches inside the operator spectrum field boundary set structure. Infinite resolvent state.`;
+        const res = document.getElementById('opRes');
+        res.style.display = 'block';
+        if (diff === 0) {
+            res.innerHTML = `Error: parameter $\\lambda = ${lam}$ lands on eigenvalue spectrum point ($k = ${k}$). Resolvent transformation operator undefined bounds.`;
         } else {
-            const val = 1 / denom;
-            resDiv.innerHTML = `<strong>Resolvent Element Magnitude Result:</strong> Operator value metric component scale breakdown index value $R(\\lambda) = ${val.toFixed(4)} \\cdot I$.`;
+            res.innerHTML = `Resolvent multiplier component mapping scalar solution: $R(${lam}) = (${lam}I - T)^{-1} = \\frac{1}{${lam} - ${k}} = ${resolvent.toFixed(4)}$`;
         }
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
+        MathJax.typesetPromise([res]);
 
-        const canvas = document.getElementById('operatorCanvas');
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        
-        ctx.fillStyle = '#0f172a';
-        ctx.font = '12px sans-serif';
-        ctx.fillText(`Resolvent Field Scale Singularity Threshold Point at Lambda = ${(t/3).toFixed(2)}`, 20, 40);
+        const g = initPlane('operatorCanvas', -2, 8, -2, 5);
+        g.ctx.strokeStyle = "purple";
+        g.ctx.lineWidth = 2;
+        g.ctx.beginPath();
+
+        for (let x = -20; x <= 80; x++) {
+            let lamVal = x / 10;
+            if (Math.abs(lamVal - k) < 0.1) continue;
+            let yVal = 1 / (lamVal - k);
+            if (x === -20) g.ctx.moveTo(g.toPxX(lamVal), g.toPxY(yVal));
+            else g.ctx.lineTo(g.toPxX(lamVal), g.toPxY(yVal));
+        }
+        g.ctx.stroke();
     }
 
-    // 12. Banach Algebra Graph Fixes
+    // 12. Banach Algebra
     function calcBanach() {
-        const normA = parseFloat(document.getElementById('baA').value) || 1;
-        const normB = parseFloat(document.getElementById('baB').value) || 1;
-        const maxProductNorm = normA * normB;
+        const a = parseFloat(document.getElementById('baA').value);
+        const b = parseFloat(document.getElementById('baB').value);
+        const maxProd = a * b;
 
-        const resDiv = document.getElementById('baRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Sub-Multiplicative Inequality Checked:</strong> Max product bound constraint: $\\|A \\cdot B\\| \\le \\|A\\| \\cdot \\|B\\| = ${normA} \\times ${normB} = ${maxProductNorm.toFixed(2)}$. Axiom verified smoothly.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
+        const res = document.getElementById('baRes');
+        res.style.display = 'block';
+        res.innerHTML = `Calculated boundary ceiling value metric verification target: $\\|A\\|\\cdot\\|B\\| = ${a} \\times ${b} = ${maxProd.toFixed(2)}$`;
+        MathJax.typesetPromise([res]);
 
-        const canvas = document.getElementById('banachCanvas');
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-
-        // Render dynamic descriptive vector layout fields
-        ctx.strokeStyle = '#94a3b8';
-        ctx.lineWidth = 1;
-        ctx.beginPath(); ctx.moveTo(30, 160); ctx.lineTo(420, 160); ctx.stroke(); // X line
-
-        // Draw Norm A Vector
-        ctx.strokeStyle = '#2563eb';
-        ctx.lineWidth = 3;
-        ctx.beginPath(); ctx.moveTo(30, 160); ctx.lineTo(30 + normA * 30, 160 - 40); ctx.stroke();
-        ctx.font = '11px sans-serif';
-        ctx.fillStyle = '#2563eb';
-        ctx.fillText(`||A|| (${normA})`, 35 + normA * 30, 125);
-
-        // Draw Norm B Vector stacked next to it
-        ctx.strokeStyle = '#16a34a';
-        ctx.beginPath(); ctx.moveTo(30, 160); ctx.lineTo(30 + normB * 30, 160 - 80); ctx.stroke();
-        ctx.fillStyle = '#16a34a';
-        ctx.fillText(`||B|| (${normB})`, 35 + normB * 30, 85);
-
-        // Max possible boundary wall indicator
-        ctx.strokeStyle = '#dc2626';
-        ctx.setLineDash([4, 4]);
-        ctx.beginPath(); ctx.moveTo(30 + maxProductNorm * 15, 20); ctx.lineTo(30 + maxProductNorm * 15, 170); ctx.stroke();
-        ctx.setLineDash([]);
-        ctx.fillStyle = '#dc2626';
-        ctx.fillText(`Max Bound: ${maxProductNorm.toFixed(1)}`, 15 + maxProductNorm * 15, 15);
-    }
-
-    // 13. Mathematical Methods Execution
-    function calcMethods() {
-        const h = parseInt(document.getElementById('mmN').value) || 1;
-        const resDiv = document.getElementById('mmRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Fourier Harmonic Cutoff Order Mode:</strong> Spectrum processing updates dynamically through ${h} structural index arrays.`;
+        const g = initPlane('banachCanvas', -1, 6, -5, 20);
+        g.ctx.fillStyle = "rgba(30, 64, 175, 0.1)";
+        g.ctx.fillRect(g.toPxX(0), g.toPxY(maxProd), g.toPxX(a) - g.toPxX(0), g.toPxY(0) - g.toPxY(maxProd));
         
-        const canvas = document.getElementById('methodsCanvas');
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-
-        ctx.strokeStyle = '#cbd5e1';
-        ctx.beginPath(); ctx.moveTo(20,100); ctx.lineTo(430,100); ctx.stroke();
-
-        ctx.strokeStyle = '#1e3a8a';
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-
-        for (let px = 20; px <= 430; px++) {
-            const t = ((px - 20) / 410) * (Math.PI * 2);
-            let sum = 0;
-            for (let n = 1; n <= h; n += 2) {
-                sum += Math.sin(n * t) / n;
-            }
-            const val = (4 / Math.PI) * sum;
-            const py = 100 - (val * 60);
-
-            if (px === 20) ctx.moveTo(px, py);
-            else ctx.lineTo(px, py);
-        }
-        ctx.stroke();
+        g.ctx.strokeStyle = "var(--accent-blue)";
+        g.ctx.strokeRect(g.toPxX(0), g.toPxY(maxProd), g.toPxX(a) - g.toPxX(0), g.toPxY(0) - g.toPxY(maxProd));
     }
 
-    // 14. Relativity Execution
+    // 13. Mathematical Methods
+    function calcMethods() {
+        const N = parseInt(document.getElementById('mmN').value) || 1;
+        const res = document.getElementById('mmRes');
+        res.style.display = 'block';
+        res.innerHTML = `Summing $N = ${N}$ partial sequence odd harmonic waves components metrics.`;
+        MathJax.typesetPromise([res]);
+
+        const g = initPlane('methodsCanvas', -0.5, 7, -2, 2);
+        g.ctx.strokeStyle = "darkblue";
+        g.ctx.lineWidth = 2.5;
+        g.ctx.beginPath();
+
+        for (let i = 0; i <= 200; i++) {
+            let t = (i / 200) * 6.5;
+            let sum = 0;
+            for (let h = 1; h <= N; h += 2) {
+                sum += Math.sin(h * t) / h;
+            }
+            let yVal = (4 / Math.PI) * sum;
+            if (i === 0) g.ctx.moveTo(g.toPxX(t), g.toPxY(yVal));
+            else g.ctx.lineTo(g.toPxX(t), g.toPxY(yVal));
+        }
+        g.ctx.stroke();
+    }
+
+    // 14. Relativity
     function calcRelativity() {
-        const v = parseFloat(document.getElementById('relV').value) || 0;
+        const v = parseFloat(document.getElementById('relV').value);
         const gamma = 1 / Math.sqrt(1 - v*v);
 
-        const resDiv = document.getElementById('relRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Lorentz Metrics Instantiated:</strong> Relativistic scale scaling factor index gamma value $\\gamma = ${gamma.toFixed(4)}$. Time dilation factors expand accordingly.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
+        const res = document.getElementById('relRes');
+        res.style.display = 'block';
+        res.innerHTML = `Computed Lorentz transform dilation factor: $\\gamma = ${gamma.toFixed(4)}$`;
+        MathJax.typesetPromise([res]);
 
-        const canvas = document.getElementById('relCanvas');
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-
-        const cx = canvas.width / 2; const cy = canvas.height - 20;
-
-        // Minkowski Light Cone edge lines matrix
-        ctx.strokeStyle = '#94a3b8';
-        ctx.lineWidth = 1.5;
-        ctx.beginPath(); ctx.moveTo(cx - 150, cy - 150); ctx.lineTo(cx + 150, cy); ctx.moveTo(cx + 150, cy - 150); ctx.lineTo(cx - 150, cy); ctx.stroke();
+        const g = initPlane('relCanvas', -3, 3, -1, 4);
         
-        // Dynamic velocity target line projection vectors
-        ctx.strokeStyle = '#dc2626';
-        ctx.lineWidth = 3;
-        ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + (v * 140), cy - 120); ctx.stroke();
+        // Light cone lines layout matrix
+        g.ctx.strokeStyle = "#cbd5e1";
+        g.ctx.lineWidth = 1;
+        g.ctx.beginPath();
+        g.ctx.moveTo(g.toPxX(-3), g.toPxY(3)); g.ctx.lineTo(g.toPxX(3), g.toPxY(-3));
+        g.ctx.moveTo(g.toPxX(-3), g.toPxY(-3)); g.ctx.lineTo(g.toPxX(3), g.toPxY(3));
+        g.ctx.stroke();
+
+        // Target Worldline trajectory mapping vector
+        g.ctx.strokeStyle = "orange";
+        g.ctx.lineWidth = 3;
+        g.ctx.beginPath();
+        g.ctx.moveTo(g.toPxX(0), g.toPxY(0));
+        g.ctx.lineTo(g.toPxX(3 * v), g.toPxY(3));
+        g.ctx.stroke();
     }
 
-    // 15. Classical Mechanics Execution
+    // 15. Classical Mechanics
     function calcClassical() {
         const ampDeg = parseFloat(document.getElementById('cmAmp').value);
+        const L = parseFloat(document.getElementById('cmL').value);
+        
+        const res = document.getElementById('cmRes');
+        res.style.display = 'block';
+        res.innerHTML = `Tracking trajectory mapping coordinates loop profile field system for max swing angle $\\theta = ${ampDeg}^\\circ$.`;
+        MathJax.typesetPromise([res]);
+
+        const g = initPlane('classicalCanvas', -2, 2, -2, 2);
         const ampRad = ampDeg * Math.PI / 180;
 
-        const resDiv = document.getElementById('cmRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Phase Space Trajectory Matrix Checked:</strong> Conservative invariant orbital configuration values initialized cleanly. Vector tracking remains closed loops.`;
+        g.ctx.strokeStyle = "darkgreen";
+        g.ctx.lineWidth = 2.5;
+        g.ctx.beginPath();
 
-        const canvas = document.getElementById('classicalCanvas');
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-
-        const cx = canvas.width / 2; const cy = canvas.height / 2;
-        
-        ctx.strokeStyle = '#e2e8f0';
-        ctx.beginPath(); ctx.moveTo(0,cy); ctx.lineTo(canvas.width,cy); ctx.moveTo(cx,0); ctx.lineTo(cx,canvas.height); ctx.stroke();
-
-        ctx.strokeStyle = '#2563eb';
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        for(let i=0; i<=360; i++) {
-            const rad = i * Math.PI / 180;
-            const x = cx + Math.cos(rad) * (ampDeg * 1.8);
-            const y = cy + Math.sin(rad) * 60;
-            if(i === 0) ctx.moveTo(x,y);
-            else ctx.lineTo(x,y);
+        for (let i = 0; i <= 100; i++) {
+            let angle = (i / 100) * 2 * Math.PI;
+            let x = ampRad * Math.cos(angle) * (2 / ampRad); // Scale visualization window context
+            let y = Math.sin(angle) * Math.sqrt(9.8 / L);
+            if (i === 0) g.ctx.moveTo(g.toPxX(x), g.toPxY(y));
+            else g.ctx.lineTo(g.toPxX(x), g.toPxY(y));
         }
-        ctx.stroke();
+        g.ctx.closePath();
+        g.ctx.stroke();
     }
 
-    // 16. Differential Geometry Execution
+    // 16. Differential Geometry
     function drawGeometry() {
-        const t = parseFloat(document.getElementById('dgT').value);
-        const resDiv = document.getElementById('dgRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Frenet-Serret Local Moving Vector Frame:</strong> Current track tracking tangent angle vector index point $t = ${t.toFixed(2)}$ rads.`;
+        const tVal = parseFloat(document.getElementById('dgT').value);
+        const res = document.getElementById('dgRes');
+        
+        let targetY = Math.sin(tVal);
+        let slopeY = Math.cos(tVal);
 
-        const canvas = document.getElementById('geometryCanvas');
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,canvas.width,canvas.height);
+        res.style.display = 'block';
+        res.innerHTML = `At target node tracking index evaluation matrix point $t = ${tVal}$: Vector direction $\\vec{T} = \\hat{i} + ${slopeY.toFixed(3)}\\hat{j}$`;
+        MathJax.typesetPromise([res]);
 
-        // Plot basic target function sine wave track curve
-        ctx.strokeStyle = '#94a3b8';
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        for (let px = 20; px <= 430; px++) {
-            const tVal = ((px - 20) / 410) * 6.28;
-            const py = 100 - Math.sin(tVal) * 50;
-            if(px === 20) ctx.moveTo(px, py);
-            else ctx.lineTo(px, py);
+        const g = initPlane('geometryCanvas', -1, 7, -2, 2);
+
+        // Core continuous helix sinus path structure track mapping line
+        g.ctx.strokeStyle = "#64748b";
+        g.ctx.lineWidth = 2;
+        g.ctx.beginPath();
+        for (let i = 0; i <= 100; i++) {
+            let tx = (i / 100) * 6.28;
+            if (i === 0) g.ctx.moveTo(g.toPxX(tx), g.toPxY(Math.sin(tx)));
+            else g.ctx.lineTo(g.toPxX(tx), g.toPxY(Math.sin(tx)));
         }
-        ctx.stroke();
+        g.ctx.stroke();
 
-        // Calculate location of current localized point and derivative tangent vectors
-        const posX = 20 + (t / 6.28) * 410;
-        const posY = 100 - Math.sin(t) * 50;
-        const slopeY = -Math.cos(t) * 50 * (410 / 6.28 / 50);
-
-        ctx.fillStyle = '#dc2626';
-        ctx.beginPath(); ctx.arc(posX, posY, 5, 0, 2*Math.PI); ctx.fill();
-
-        // Tangent vector trace indicator
-        ctx.strokeStyle = '#16a34a';
-        ctx.lineWidth = 2.5;
-        ctx.beginPath(); ctx.moveTo(posX, posY); ctx.lineTo(posX + 40, posY + slopeY * 0.4); ctx.stroke();
+        // Tangent trajectory line vector segment
+        g.ctx.strokeStyle = "magenta";
+        g.ctx.lineWidth = 3;
+        g.ctx.beginPath();
+        let xStart = tVal - 1;
+        let yStart = targetY - slopeY;
+        let xEnd = tVal + 1;
+        let yEnd = targetY + slopeY;
+        g.ctx.moveTo(g.toPxX(xStart), g.toPxY(yStart));
+        g.ctx.lineTo(g.toPxX(xEnd), g.toPxY(yEnd));
+        g.ctx.stroke();
     }
 
-    // 17. Approximation Theory Execution
-    function calcApprox() {
-        const x = parseFloat(document.getElementById('atX').value) || 0;
-        const actual = Math.sin(x);
-        const approx = x - (Math.pow(x,3)/6) + (Math.pow(x,5)/120);
-        const residual = Math.abs(actual - approx);
+    // 17. Approximation Theory
+    function calcApproximation() {
+        const degree = parseInt(document.getElementById('apN').value) || 3;
+        const res = document.getElementById('apRes');
+        res.style.display = 'block';
+        res.innerHTML = `Plotting expansion error deviation graph for a degree $n = ${degree}$ Taylor model tracking profile over continuous domain bands.`;
+        MathJax.typesetPromise([res]);
 
-        const resDiv = document.getElementById('atRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Residual Error Matrix Tracked:</strong> Real Sine Value = ${actual.toFixed(5)}, Taylor Order 5 Approximation = ${approx.toFixed(5)}. Absolute Residual Gap Metrics Value = ${residual.toFixed(6)}.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
+        const g = initPlane('approxCanvas', -3, 3, -1.5, 1.5);
 
-        const canvas = document.getElementById('approxCanvas');
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,canvas.width,canvas.height);
+        // Render basic reference curve track function: f(x) = sin(x)
+        g.ctx.strokeStyle = "#94a3b8";
+        g.ctx.lineWidth = 1.5;
+        g.ctx.beginPath();
+        for (let i = 0; i <= 100; i++) {
+            let mx = -3 + (i / 100) * 6;
+            let my = Math.sin(mx);
+            if (i === 0) g.ctx.moveTo(g.toPxX(mx), g.toPxY(my));
+            else g.ctx.lineTo(g.toPxX(mx), g.toPxY(my));
+        }
+        g.ctx.stroke();
 
-        ctx.fillStyle = '#0f172a';
-        ctx.font = '12px sans-serif';
-        ctx.fillText(`Error tracking vector magnitude index: ${residual.toFixed(6)}`, 25, 50);
+        // Custom Factorial helper node
+        const fact = (num) => (num <= 1 ? 1 : num * fact(num - 1));
+
+        // Render Approximation Polynomial Model profile line curve path
+        g.ctx.strokeStyle = "crimson";
+        g.ctx.lineWidth = 2.5;
+        g.ctx.beginPath();
+        for (let i = 0; i <= 100; i++) {
+            let mx = -3 + (i / 100) * 6;
+            let approxY = 0;
+            
+            // Maclaurin series polynomial structure loops computation for sin(x)
+            for (let k = 0; k < degree; k++) {
+                let termExponent = 2 * k + 1;
+                let term = (Math.pow(-1, k) * Math.pow(mx, termExponent)) / fact(termExponent);
+                approxY += term;
+            }
+
+            if (i === 0) g.ctx.moveTo(g.toPxX(mx), g.toPxY(approxY));
+            else {
+                let py = g.toPxY(approxY);
+                if (py >= 0 && py <= g.H) g.ctx.lineTo(g.toPxX(mx), py);
+            }
+        }
+        g.ctx.stroke();
     }
 
-    // Global initializer logic setup activation execution block
-    window.addEventListener('DOMContentLoaded', () => {
+    // Trigger universal auto calculation pipelines across application cycles immediately
+    window.onload = function() {
         calcReal();
         calcComplex();
         calcAlgebra();
@@ -1216,8 +1197,9 @@
         calcRelativity();
         calcClassical();
         drawGeometry();
-        calcApprox();
-    });
+        calcApproximation();
+    };
 </script>
+
 </body>
 </html>
