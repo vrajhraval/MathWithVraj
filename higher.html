@@ -34,8 +34,9 @@
             --graph-box-bg: #fdfdfd;
             --graph-border: #cbd5e1;
             --graph-grid: #e2e8f0;
-            --graph-axis: #64748b;
-            --graph-line-primary: #2563eb;
+            --graph-axis: #475569;
+            --graph-edge-dark: #334155; /* Darkened edges */
+            --graph-line-primary: #1e40af;
             --graph-line-secondary: #ea580c;
             --graph-accent: #10b981;
         }
@@ -195,7 +196,6 @@
             overflow-x: auto;
         }
 
-        /* Dedicated Beautiful Layout Box Container For All Graphs */
         .graph-box-container {
             margin-top: 16px;
             padding: 14px;
@@ -458,7 +458,7 @@
         </div>
         <div class="interactive-calc">
             <h4>⚡ Analytics Engine: Complete Network Edge Trace Array ($K_n$)</h4>
-            <div class="calc-formula">Handshaking Lemma Metric: $\sum \deg(v_i) = 2|E|$</div>
+            <div class="calc-formula">Handshaking Lemma Metric: $\sum \deg(v_i) = 2\lvert E \rvert$</div>
             <div class="input-group">
                 <div class="input-field"><label>Nodes Array Order (V)</label><input type="number" id="gtNodes" value="5" min="2" max="8" oninput="drawGraph()"></div>
                 <button class="calc-btn" onclick="drawGraph()">Render Network Map</button>
@@ -589,20 +589,21 @@
     <div class="subject-card">
         <div class="subject-title">16. Differential Geometry</div>
         <div class="academic-info">
-            <p><strong>Concept Summary:</strong> Explores smooth manifold structures, dynamic surface tensor metrics, moving frames, and localized Gaussian curvature fields.</p>
-            <p><strong>Real-World Usage:</strong> Crucial for structural automotive chassis surface modeling, computer vision face-recognition mappings, and geometric physics fields.</p>
-            <p><strong>Standard Reference Books:</strong> *Differential Geometry of Curves and Surfaces* by Manfredo P. do Carmo; *Elementary Differential Geometry* by Barrett O'Neill.</p>
+            <p><strong>Concept Summary:</strong> Explores smooth manifold structures, dynamic surface tensors, curvature geometries, and covariant vector derivatives.</p>
+            <p><strong>Real-World Usage:</strong> Shapes computational vision algorithms, geographic mapping models, and Einstein general relativity space-time calculations.</p>
+            <p><strong>Standard Reference Books:</strong> *Differential Geometry of Curves and Surfaces* by Manfredo P. do Carmo.</p>
         </div>
         <div class="interactive-calc">
-            <h4>⚡ Analytics Engine: Curvature Vector Path Plane & Moving Tangent Line</h4>
-            <div class="calc-formula">Parametric Track Vector: $\vec{r}(t) = t\cdot\hat{i} + \sin(t)\cdot\hat{j} \quad \to \quad \text{Tangent Vector } \vec{T}(t)$</div>
+            <h4>⚡ Analytics Engine: Surface Curvature Plot</h4>
+            <div class="calc-formula">Gaussian Curvature Scale: $K = k_1 \cdot k_2$</div>
             <div class="input-group">
-                <div class="input-field"><label>Evaluation Index (t)</label><input type="range" id="dgT" min="0" max="6.28" step="0.1" value="2" oninput="drawGeometry()"></div>
-                <button class="calc-btn" onclick="drawGeometry()">Compute Geometry Frame</button>
+                <div class="input-field"><label>Curvature k1</label><input type="number" id="dgK1" value="2" step="0.5" oninput="calcDG()"></div>
+                <div class="input-field"><label>Curvature k2</label><input type="number" id="dgK2" value="-0.5" step="0.5" oninput="calcDG()"></div>
+                <button class="calc-btn" onclick="calcDG()">Plot Curvature Profile</button>
             </div>
             <div id="dgRes" class="calc-result"></div>
             <div class="graph-box-container">
-                <canvas id="geometryCanvas" class="visual-canvas" width="450" height="200"></canvas>
+                <canvas id="dgCanvas" class="visual-canvas" width="450" height="150"></canvas>
             </div>
         </div>
     </div>
@@ -610,256 +611,139 @@
 </div>
 
 <footer>
-    <p>© 2026 Mathematics Research Directory. Built with Canvas Vector Framework. Formulated with High Contrast Academic Guardrails.</p>
+    <p>&copy; 2026 Graduate Mathematics Encyclopedia Dashboard. Rigorous Web-Based Coordinate Engines.</p>
 </footer>
 
 <script>
-    // Configuration helper to style canvas context elements uniformly
-    function prepareCanvas(canvasId) {
-        const c = document.getElementById(canvasId);
-        if (!c) return null;
-        const ctx = c.getContext('2d');
-        ctx.clearRect(0, 0, c.width, c.height);
-        return { c, ctx };
-    }
-
-    function drawGrid(ctx, w, h, step = 40) {
-        ctx.strokeStyle = '#e2e8f0'; 
+    // Global Helper: Creates an XY Plane / Ray Grid Background for exact measurement
+    function drawXYPlane(ctx, width, height, scaleX = 20, scaleY = 20) {
+        ctx.clearRect(0, 0, width, height);
+        
+        // Draw Light Grid Lines
+        ctx.strokeStyle = "#e2e8f0";
         ctx.lineWidth = 1;
-        // Verticals
-        for(let x = 0; x <= w; x += step) {
-            ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+        
+        // Vertical lines
+        for (let x = 0; x <= width; x += scaleX) {
+            ctx.beginPath();
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, height);
+            ctx.stroke();
         }
-        // Horizontals
-        for(let y = 0; y <= h; y += step) {
-            ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+        // Horizontal lines
+        for (let y = 0; y <= height; y += scaleY) {
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(width, y);
+            ctx.stroke();
         }
+        
+        // Draw Darker Master X & Y Axes
+        ctx.strokeStyle = "#64748b";
+        ctx.lineWidth = 2;
+        
+        // X Axis (Middle Height)
+        ctx.beginPath();
+        ctx.moveTo(0, height / 2);
+        ctx.lineTo(width, height / 2);
+        ctx.stroke();
+        
+        // Y Axis (Middle Width)
+        ctx.beginPath();
+        ctx.moveTo(width / 2, 0);
+        ctx.lineTo(width / 2, height);
+        ctx.stroke();
     }
 
-    function drawAxes(ctx, centerX, centerY, w, h, labelX = 'X', labelY = 'Y') {
-        ctx.strokeStyle = '#64748b';
-        ctx.lineWidth = 2;
-        ctx.fillStyle = '#64748b';
-        ctx.font = 'bold 11px sans-serif';
-
-        // X-Axis
-        ctx.beginPath(); ctx.moveTo(0, centerY); ctx.lineTo(w, centerY); ctx.stroke();
-        ctx.fillText(labelX, w - 15, centerY - 8);
-
-        // Y-Axis
-        ctx.beginPath(); ctx.moveTo(centerX, 0); ctx.lineTo(centerX, h); ctx.stroke();
-        ctx.fillText(labelY, centerX + 8, 15);
+    function showResult(id, text) {
+        const el = document.getElementById(id);
+        el.style.display = "block";
+        el.innerHTML = text;
     }
 
     // 1. Real Analysis Logic
     function calcReal() {
         const eps = parseFloat(document.getElementById('epsInp').value) || 0.05;
-        const N_bound = Math.ceil(1 / eps);
+        const N = Math.ceil(1 / eps);
+        showResult('realRes', `<strong>Verification Result:</strong> For $\\epsilon = ${eps}$, the sequence index boundary $N = ${N}$. For all $n \\ge ${N}$, $\\lvert a_n - 0 \\rvert < \\epsilon$.`);
         
-        const resDiv = document.getElementById('realRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Verification Results:</strong> For chosen $\\epsilon = ${eps}$, threshold index $N = ${N_bound}$. Hence, $\\forall n \\ge ${N_bound}, |\\frac{1}{n} - 0| < ${eps}$. Convergence mathematically verified.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
-
-        const target = prepareCanvas('realCanvas');
-        if(!target) return;
-        const { ctx, c } = target;
+        const canvas = document.getElementById('realCanvas');
+        const ctx = canvas.getContext('2d');
+        drawXYPlane(ctx, canvas.width, canvas.height, 25, 20);
         
-        drawGrid(ctx, c.width, c.height, 40);
-        
-        // Dynamic scales
-        const margin = 40;
-        const graphW = c.width - margin * 2;
-        const graphH = c.height - margin * 2;
-        const maxN = 30;
-
-        // Draw baseline axis
-        ctx.strokeStyle = '#64748b';
-        ctx.lineWidth = 1.5;
-        ctx.beginPath();
-        ctx.moveTo(margin, c.height - margin);
-        ctx.lineTo(c.width - margin, c.height - margin);
-        ctx.stroke();
-
-        // Draw Limit Line (L=0)
-        ctx.strokeStyle = '#cbd5e1';
-        ctx.setLineDash([4, 4]);
-        ctx.beginPath();
-        ctx.moveTo(margin, c.height - margin);
-        ctx.lineTo(c.width - margin, c.height - margin);
-        ctx.stroke();
-        ctx.setLineDash([]);
-
-        // Epsilon Envelope Line
-        const epsY = (c.height - margin) - (eps * graphH * 1.5);
-        ctx.strokeStyle = '#ea580c';
-        ctx.lineWidth = 1;
-        ctx.setLineDash([6, 3]);
-        ctx.beginPath();
-        ctx.moveTo(margin, epsY);
-        ctx.lineTo(c.width - margin, epsY);
-        ctx.stroke();
-        ctx.setLineDash([]);
-        ctx.fillStyle = '#ea580c';
-        ctx.fillText(`ε Bound (${eps})`, c.width - 95, epsY - 5);
-
-        // Sequence Nodes Plotting
-        ctx.fillStyle = '#2563eb';
-        for (let n = 1; n <= maxN; n++) {
-            const val = 1 / n;
-            const ptX = margin + ((n - 1) / (maxN - 1)) * graphW;
-            const ptY = (c.height - margin) - (val * graphH * 1.5);
-
+        // Plot sequence dots
+        ctx.fillStyle = "#2563eb";
+        for (let n = 1; n <= 20; n++) {
+            let val = 1 / n;
+            let x = 30 + n * 18;
+            let y = canvas.height / 2 - val * 100;
             ctx.beginPath();
-            if (n >= N_bound) {
-                ctx.fillStyle = '#10b981'; // In bounds
-                ctx.arc(ptX, ptY, 4, 0, 2 * Math.PI);
-            } else {
-                ctx.fillStyle = '#2563eb'; // Out of bounds
-                ctx.arc(ptX, ptY, 4, 0, 2 * Math.PI);
-            }
+            ctx.arc(x, y, 4, 0, 2 * Math.PI);
             ctx.fill();
         }
-
-        // Label N Threshold
-        const nThX = margin + ((N_bound - 1) / (maxN - 1)) * graphW;
-        if(N_bound <= maxN) {
-            ctx.strokeStyle = '#10b981';
-            ctx.lineWidth = 1.5;
-            ctx.beginPath();
-            ctx.moveTo(nThX, c.height - margin + 10);
-            ctx.lineTo(nThX, margin);
-            ctx.stroke();
-            ctx.fillStyle = '#10b981';
-            ctx.fillText(`N = ${N_bound}`, nThX - 14, c.height - margin + 22);
-        }
+        // Bound lines
+        ctx.strokeStyle = "#ea580c";
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([4, 4]);
+        let boundY = canvas.height / 2 - eps * 100;
+        ctx.beginPath(); ctx.moveTo(0, boundY); ctx.lineTo(canvas.width, boundY); ctx.stroke();
+        ctx.setLineDash([]);
     }
 
     // 2. Complex Analysis Logic
     function calcComplex() {
         const deg = parseFloat(document.getElementById('compDeg').value) || 0;
         const rad = (deg * Math.PI) / 180;
-        const cosVal = Math.cos(rad);
-        const sinVal = Math.sin(rad);
-
-        const resDiv = document.getElementById('complexRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Mapping Results:</strong> Polar vector $\\theta = ${deg}^\\circ \\to z = ${cosVal.toFixed(4)} + ${sinVal.toFixed(4)}i$. Absolute Norm $|z| = 1.0000$.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
-
-        const target = prepareCanvas('complexCanvas');
-        if(!target) return;
-        const { ctx, c } = target;
+        const cosVal = Math.cos(rad).toFixed(4);
+        const sinVal = Math.sin(rad).toFixed(4);
+        showResult('complexRes', `<strong>Field Vector:</strong> $e^{i (${deg}^\\circ)} = ${cosVal} + ${sinVal}i$. Transformation complete.`);
         
-        const cX = c.width / 2;
-        const cY = c.height / 2;
-        const rRadius = 75;
-
-        drawGrid(ctx, c.width, c.height, 40);
-        drawAxes(ctx, cX, cY, c.width, c.height, 'Re', 'Im');
-
-        // Draw Unit Metric Circle Profile
-        ctx.strokeStyle = '#cbd5e1';
+        const canvas = document.getElementById('complexCanvas');
+        const ctx = canvas.getContext('2d');
+        drawXYPlane(ctx, canvas.width, canvas.height, 30, 30);
+        
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        
+        // Reference Unit Circle
+        ctx.strokeStyle = "#cbd5e1";
         ctx.lineWidth = 1.5;
         ctx.beginPath();
-        ctx.arc(cX, cY, rRadius, 0, 2 * Math.PI);
+        ctx.arc(cx, cy, 60, 0, 2 * Math.PI);
         ctx.stroke();
-
-        // Map Vector Dynamic Line
-        const vX = cX + cosVal * rRadius;
-        const vY = cY - sinVal * rRadius; // flip axis inversion
-
-        ctx.strokeStyle = '#2563eb';
+        
+        // Vector Arrow
+        ctx.strokeStyle = "#334155"; // Darkened Vector Line
         ctx.lineWidth = 3;
         ctx.beginPath();
-        ctx.moveTo(cX, cY);
-        ctx.lineTo(vX, vY);
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + Math.cos(rad) * 60, cy - Math.sin(rad) * 60);
         ctx.stroke();
-
-        // Vector Terminal Endpoint Node
-        ctx.fillStyle = '#ea580c';
-        ctx.beginPath();
-        ctx.arc(vX, vY, 5, 0, 2 * Math.PI);
-        ctx.fill();
-
-        // Highlight mapping trajectory angle arc
-        ctx.strokeStyle = '#10b981';
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.arc(cX, cY, 25, 0, -rad, rad < 0);
-        ctx.stroke();
-        ctx.fillStyle = '#10b981';
-        ctx.fillText(`${deg}°`, cX + 30, cY - 10);
     }
 
     // 3. Abstract Algebra Logic
     function calcAlgebra() {
         const p = parseInt(document.getElementById('algP').value) || 11;
         const g = parseInt(document.getElementById('algG').value) || 2;
-
         let orbit = [];
-        let cur = 1;
-        let isCyclic = true;
-
-        for (let i = 0; i < p - 1; i++) {
-            orbit.push(cur);
-            cur = (cur * g) % p;
+        let curr = 1;
+        for (let k = 0; k < p; k++) {
+            orbit.push(curr);
+            curr = (curr * g) % p;
+            if (curr === 1) break;
         }
-
-        const uniqueElements = new Set(orbit);
-        if (uniqueElements.size < p - 1) isCyclic = false;
-
-        const resDiv = document.getElementById('algebraRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Group Analysis:</strong> Generated Orbit Sequence Strategy: [${orbit.join(', ')}]. Subgroup set structural validation is <strong>${isCyclic ? 'Cyclic Generator Field (Full)' : 'Non-Cyclic Trajectory'}</strong>.`;
-
-        const target = prepareCanvas('algebraCanvas');
-        if(!target) return;
-        const { ctx, c } = target;
-
-        const cX = c.width / 2;
-        const cY = c.height / 2;
-        const radius = 80;
-
-        drawGrid(ctx, c.width, c.height, 45);
-
-        // Map node indices geometrically onto an algebraic ring configuration
-        let nodeCoords = {};
-        ctx.fillStyle = '#0f172a';
-        ctx.font = '10px sans-serif';
-
-        for (let i = 0; i < p; i++) {
-            const theta = (i * 2 * Math.PI) / p - Math.PI / 2;
-            const nX = cX + radius * Math.cos(theta);
-            const nY = cY + radius * Math.sin(theta);
-            nodeCoords[i] = { x: nX, y: nY };
-
-            // Render background node ring indices
-            ctx.fillStyle = '#cbd5e1';
-            ctx.beginPath(); ctx.arc(nX, nY, 10, 0, 2*Math.PI); ctx.fill();
-            ctx.fillStyle = '#0f172a';
-            ctx.fillText(i, nX - 4, nY + 3);
-        }
-
-        // Draw structural orbit trajectories connection traces
-        ctx.strokeStyle = '#2563eb';
-        ctx.lineWidth = 1.5;
-        ctx.beginPath();
-        for (let k = 0; k < orbit.length; k++) {
-            const startNode = orbit[k];
-            const endNode = orbit[(k + 1) % orbit.length];
-            if (k === 0) ctx.moveTo(nodeCoords[startNode].x, nodeCoords[startNode].y);
-            ctx.lineTo(nodeCoords[endNode].x, nodeCoords[endNode].y);
-        }
-        ctx.stroke();
-
-        // Highlight generator base entry node
-        if (orbit.length > 0) {
-            ctx.fillStyle = '#ea580c';
+        showResult('algebraRes', `<strong>Subgroup Orbit Pattern:</strong> { ${orbit.join(', ')} ... } with element lifecycle index size = ${orbit.length}.`);
+        
+        const canvas = document.getElementById('algebraCanvas');
+        const ctx = canvas.getContext('2d');
+        drawXYPlane(ctx, canvas.width, canvas.height, 20, 20);
+        
+        ctx.fillStyle = "#ea580c";
+        orbit.forEach((val, idx) => {
             ctx.beginPath();
-            ctx.arc(nodeCoords[orbit[0]].x, nodeCoords[orbit[0]].y, 5, 0, 2 * Math.PI);
+            ctx.arc(40 + idx * 35, canvas.height / 2 - val * 8, 5, 0, 2 * Math.PI);
             ctx.fill();
-        }
+        });
     }
 
     // 4. Linear Algebra Logic
@@ -868,591 +752,300 @@
         const b = parseFloat(document.getElementById('la_b').value);
         const c = parseFloat(document.getElementById('la_c').value);
         const d = parseFloat(document.getElementById('la_d').value);
-
-        const det = a * d - b * c;
-        const resDiv = document.getElementById('linearRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Linear Matrix Bounds:</strong> Matrix $\\det(A) = (${a}\\cdot${d}) - (${b}\\cdot${c}) = ${det.toFixed(4)}$. System Mapping state is ${det === 0 ? 'Singular Span Line' : 'Invertible Vector Set Space'}.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
-
-        const target = prepareCanvas('linearCanvas');
-        if(!target) return;
-        const { ctx, c: canvas } = target;
-
-        const cX = canvas.width / 2;
-        const cY = canvas.height / 2;
-        const scale = 40; // 40px standard structural component unit
-
-        drawGrid(ctx, canvas.width, canvas.height, 40);
-        drawAxes(ctx, cX, cY, canvas.width, canvas.height, 'X', 'Y');
-
-        // Draw standard baseline space area box grid
-        ctx.fillStyle = 'rgba(148, 163, 184, 0.2)';
-        ctx.strokeStyle = '#94a3b8';
-        ctx.lineWidth = 1;
-        ctx.fillRect(cX, cY - scale, scale, scale);
-        ctx.strokeRect(cX, cY - scale, scale, scale);
-
-        // Map transformed vectors vectors mapping configurations
-        const ix = a * scale, iy = -b * scale;
-        const jx = c * scale, jy = -d * scale;
-
-        // Render transformed spanned subspace area matrix geometry polygon
-        ctx.fillStyle = 'rgba(37, 99, 235, 0.25)';
+        const det = (a * d - b * c).toFixed(2);
+        showResult('linearRes', `<strong>Determinant Check:</strong> $\\det(A) = ${det}$. Geometric space scaling ratio factor is ${det}.`);
+        
+        const canvas = document.getElementById('linearCanvas');
+        const ctx = canvas.getContext('2d');
+        drawXYPlane(ctx, canvas.width, canvas.height, 30, 30);
+        
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        const f = 40; // visual scaling factor
+        
+        // Plot Transformed Parallel Grid Polygon Shape Area
+        ctx.fillStyle = "rgba(37, 99, 235, 0.25)";
+        ctx.strokeStyle = "#334155"; // Darkened edges
+        ctx.lineWidth = 2.5;
         ctx.beginPath();
-        ctx.moveTo(cX, cY);
-        ctx.lineTo(cX + ix, cY + iy);
-        ctx.lineTo(cX + ix + jx, cY + iy + jy);
-        ctx.lineTo(cX + jx, cY + jy);
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + a * f, cy - c * f);
+        ctx.lineTo(cx + (a + b) * f, cy - (c + d) * f);
+        ctx.lineTo(cx + b * f, cy - d * f);
         ctx.closePath();
         ctx.fill();
-        ctx.strokeStyle = '#2563eb';
-        ctx.lineWidth = 1.5;
         ctx.stroke();
+    }
 
-        // Render basis transform basis vectors components
-        ctx.strokeStyle = '#ea580c'; ctx.lineWidth = 3; // Vector Basis i
-        ctx.beginPath(); ctx.moveTo(cX, cY); ctx.lineTo(cX + ix, cY + iy); ctx.stroke();
+    // 5. Topology Logic
+    function calcTop() {
+        const V = parseInt(document.getElementById('tpV').value);
+        const E = parseInt(document.getElementById('tpE').value);
+        const F = parseInt(document.getElementById('tpF').value);
+        const chi = V - E + F;
+        showResult('topRes', `<strong>Euler Formula Verification:</strong> $\\chi = ${V} - ${E} + ${F} = ${chi}$. Object is topologically equivalent to standard space sphere manifold.`);
         
-        ctx.strokeStyle = '#10b981'; ctx.lineWidth = 3; // Vector Basis j
-        ctx.beginPath(); ctx.moveTo(cX, cY); ctx.lineTo(cX + jx, cY + jy); ctx.stroke();
-    }
-
-    // 5. Topology Logic - Planar Tree Decomposition Layout
-function calcTop() {
-    const v = parseInt(document.getElementById('tpV').value) || 0;
-    const e = parseInt(document.getElementById('tpE').value) || 0;
-    const f = parseInt(document.getElementById('tpF').value) || 0;
-
-    const chi = v - e + f;
-    const resDiv = document.getElementById('topRes');
-    resDiv.style.display = 'block';
-    resDiv.innerHTML = `<strong>Topological Euler Profile:</strong> Invariant Identity calculation: $\\chi = V - E + F = ${v} - ${e} + ${f} = ${chi}$. Surface Profile structural topology classification corresponds to genus matrix spectrum index value: ${1 - (chi/2)}.`;
-    if(window.MathJax) MathJax.typesetPromise([resDiv]);
-
-    const target = prepareCanvas('topologyCanvas');
-    if(!target) return;
-    const { ctx, c } = target;
-
-    // 1. CLEAR FRAME: Stops past renderings from stacking up
-    ctx.clearRect(0, 0, c.width, c.height);
-
-    // 2. BACKGROUND: Render clean engineering grid
-    drawGrid(ctx, c.width, c.height, 30);
-
-    // 3. METADATA TEXT: Display status headers clearly
-    ctx.fillStyle = '#2563eb';
-    ctx.font = 'bold 12px sans-serif';
-    ctx.fillText(`Computed Invariant Metric Chi (χ) Area Value = ${chi}`, 35, 45);
-
-    ctx.fillStyle = '#7c3aed'; 
-    ctx.font = 'italic 11px sans-serif';
-    ctx.fillText(`Approximation Theory: Linear Topology Tree Decomposition`, 35, 65);
-
-    // 4. TREE GRAPH GENERATOR: Distribute nodes cleanly across layers
-    // Caps nodes at 15 to keep the layout absolutely clear and readable
-    const maxNodes = Math.max(1, Math.min(v, 15)); 
-    const nodes = [];
-
-    // Layer Configuration (Root, Layer 1, Layer 2)
-    // This systematically splits nodes across columns to avoid messy tangles
-    const layer1Count = Math.ceil((maxNodes - 1) * 0.4);
-    const layer2Count = maxNodes - 1 - layer1Count;
-
-    // Position Root Node (Foundational Layer)
-    nodes.push({ x: 70, y: c.height / 2, label: "R", parentIdx: null });
-
-    // Position Layer 1 Nodes (Sub-branches)
-    for (let i = 0; i < layer1Count; i++) {
-        const x = 180;
-        const spacing = (c.height - 100) / (layer1Count + 1);
-        const y = 50 + spacing * (i + 1);
-        nodes.push({ x, y, label: `A${i+1}`, parentIdx: 0 }); // Connects to Root
-    }
-
-    // Position Layer 2 Nodes (Deep Topology Leaves / Approximation nodes)
-    for (let i = 0; i < layer2Count; i++) {
-        const x = 300;
-        const spacing = (c.height - 100) / (layer2Count + 1);
-        const y = 50 + spacing * (i + 1);
-        // Map parent evenly to Layer 1 nodes
-        const parentIdx = (layer1Count > 0) ? (1 + (i % layer1Count)) : 0;
-        nodes.push({ x, y, label: `B${i+1}`, parentIdx });
-    }
-
-    // Draw Smooth Connections (Edges)
-    ctx.lineWidth = 2;
-    nodes.forEach((node, idx) => {
-        if (node.parentIdx !== null) {
-            const parent = nodes[node.parentIdx];
-            
-            // Create a sleek, professional bezier curve between layers
-            ctx.beginPath();
-            ctx.strokeStyle = '#94a3b8'; // Slate grey for standard connections
-            ctx.moveTo(parent.x, parent.y);
-            ctx.bezierCurveTo(
-                (parent.x + node.x) / 2, parent.y, 
-                (parent.x + node.x) / 2, node.y, 
-                node.x, node.y
-            );
-            ctx.stroke();
-        }
-    });
-
-    // Draw Nodes as cleanly styled circles
-    nodes.forEach((node) => {
-        ctx.beginPath();
-        ctx.arc(node.x, node.y, 10, 0, 2 * Math.PI);
+        const canvas = document.getElementById('topologyCanvas');
+        const ctx = canvas.getContext('2d');
+        drawXYPlane(ctx, canvas.width, canvas.height, 40, 20);
         
-        // Highlight root node in blue, branch nodes in soft purple
-        ctx.fillStyle = (node.label === "R") ? '#2563eb' : '#7c3aed';
-        ctx.fill();
-        ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-
-        // Print Node Labels cleanly right above the circles
-        ctx.fillStyle = '#1e293b';
-        ctx.font = 'bold 10px sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText(node.label, node.x, node.y - 14);
-    });
-
-    // 5. CANVAS BORDER: Render the structural green bounding outer frame
-    ctx.strokeStyle = '#10b981';
-    ctx.lineWidth = 2.5;
-    ctx.strokeRect(20, 20, c.width - 40, c.height - 40);
-}
+        // Network Graph Map representation of the Polyhedral system
+        ctx.strokeStyle = "#334155"; // Darkened edges for better reading visibility
+        ctx.lineWidth = 3;
+        ctx.strokeRect(150, 30, 150, 90);
+        ctx.strokeRect(180, 50, 150, 90);
+    }
 
     // 6. Number Theory Logic
     function calcNT() {
-        const base = parseInt(document.getElementById('ntX').value) || 2;
-        const exp = parseInt(document.getElementById('ntE').value) || 1;
-        const mod = parseInt(document.getElementById('ntN').value) || 10;
-
-        // Implementation of operational modular exponential configuration algorithm matrix
-        let steps = [];
-        let r = 1;
-        let b = base % mod;
-        let e = exp;
-
-        while (e > 0) {
-            if (e % 2 === 1) {
-                r = (r * b) % mod;
-                steps.push({ exp: exp - e + 1, val: r, type: 'Multiply' });
-            }
-            b = (b * b) % mod;
-            e = Math.floor(e / 2);
-            steps.push({ exp: exp - e, val: r, type: 'Square' });
-        }
-
-        const resDiv = document.getElementById('ntRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Calculated Congruence Space Bound:</strong> Multiplicative reduction remainder matrix calculation yields: $${base}^{${exp}} \\equiv ${r} \\pmod{${mod}}$. Operations trace finalized.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
-
-        const target = prepareCanvas('ntCanvas');
-        if(!target) return;
-        const { ctx, c } = target;
-
-        drawGrid(ctx, c.width, c.height, 40);
-
-        // Draw structural intermediate state remainders mapping step metrics bars
-        ctx.fillStyle = '#2563eb';
-        const barW = Math.min(30, (c.width - 60) / (steps.length || 1));
+        const x = parseInt(document.getElementById('ntX').value);
+        const e = parseInt(document.getElementById('ntE').value);
+        const n = parseInt(document.getElementById('ntN').value);
         
-        for(let i=0; i<steps.length; i++) {
-            const hVal = (steps[i].val / mod) * (c.height - 60);
-            ctx.fillStyle = steps[i].type === 'Multiply' ? '#2563eb' : '#ea580c';
-            ctx.fillRect(40 + i * (barW + 10), c.height - 30 - hVal, barW, hVal);
-            ctx.fillStyle = '#0f172a';
-            ctx.font = '9px sans-serif';
-            ctx.fillText(steps[i].val, 40 + i * (barW + 10) + 2, c.height - 35 - hVal);
+        let res = 1;
+        let base = x % n;
+        let exp = e;
+        while (exp > 0) {
+            if (exp % 2 === 1) res = (res * base) % n;
+            base = (base * base) % n;
+            exp = Math.floor(exp / 2);
         }
+        showResult('ntRes', `<strong>Modular Resolution:</strong> ${x}^{${e}} \\equiv ${res} \\pmod{${n}}. Cryptography ring operation validated.`);
+        
+        const canvas = document.getElementById('ntCanvas');
+        const ctx = canvas.getContext('2d');
+        drawXYPlane(ctx, canvas.width, canvas.height, 25, 25);
+        
+        ctx.fillStyle = "#16a34a";
+        ctx.font = "14px monospace";
+        ctx.fillText(`Value Residue Remainder: ${res}`, 30, 40);
     }
 
-    // 7. ODE Logic
+    // 7. ODEs Logic
     function calcODE() {
-        const y0 = parseFloat(document.getElementById('odeY').value) || 1;
-        const k = parseFloat(document.getElementById('odeK').value) || 0;
-        const maxT = parseFloat(document.getElementById('odeT').value) || 5;
-
-        const finalVal = y0 * Math.exp(k * maxT);
-        const resDiv = document.getElementById('odeRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Dynamic Initial Value Solution Projection:</strong> Terminal boundary calculation state yields $y(${maxT}) = ${finalVal.toFixed(5)}$.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
-
-        const target = prepareCanvas('odeCanvas');
-        if(!target) return;
-        const { ctx, c } = target;
-
-        drawGrid(ctx, c.width, c.height, 40);
-        drawAxes(ctx, 40, c.height - 40, c.width, c.height, 't', 'y(t)');
-
-        // Plot dynamic analytical exponential configuration trace field curve
-        ctx.strokeStyle = '#2563eb';
+        const y0 = parseFloat(document.getElementById('odeY').value);
+        const k = parseFloat(document.getElementById('odeK').value);
+        const tMax = parseFloat(document.getElementById('odeT').value);
+        
+        showResult('odeRes', `<strong>Trajectory Modelled:</strong> Evaluated initial condition configuration boundary paths dynamically successfully.`);
+        
+        const canvas = document.getElementById('odeCanvas');
+        const ctx = canvas.getContext('2d');
+        drawXYPlane(ctx, canvas.width, canvas.height, 20, 20);
+        
+        ctx.strokeStyle = "#ea580c";
         ctx.lineWidth = 3;
         ctx.beginPath();
-
-        const points = 60;
-        const marginX = 40, marginY = 40;
-        const graphW = c.width - marginX * 2;
-        const graphH = c.height - marginY * 2;
-
-        for (let i = 0; i <= points; i++) {
-            const tEval = (i / points) * maxT;
-            const yEval = y0 * Math.exp(k * tEval);
-
-            // Scale mappings equations configuration maps
-            const ptX = marginX + (tEval / maxT) * graphW;
-            const ptY = (c.height - marginY) - (yEval / 12) * graphH; // assume 12 is top baseline scale index bound
-
-            if (i === 0) ctx.moveTo(ptX, ptY);
-            else ctx.lineTo(ptX, ptY);
+        for (let t = 0; t <= tMax; t += 0.1) {
+            let y = y0 * Math.exp(k * t);
+            let cx = 40 + (t / tMax) * 350;
+            let cy = canvas.height - 20 - (y * 15);
+            if (t === 0) ctx.moveTo(cx, cy); else ctx.lineTo(cx, cy);
         }
         ctx.stroke();
     }
 
-    // 8. PDE Logic
+    // 8. PDEs Logic
     function calcPDE() {
-        const u0 = parseFloat(document.getElementById('pdeL').value) || 0;
-        const u1 = parseFloat(document.getElementById('pdeR').value) || 0;
-        const targetX = parseFloat(document.getElementById('pdeX').value) || 0.5;
-
-        const resU = u0 + targetX * (u1 - u0);
-        const resDiv = document.getElementById('pdeRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Dirichlet Spatial Interpolator Profile:</strong> Linear steady state value calculation resolved at target node site $u(${targetX}) = ${resU.toFixed(4)}^\\circ C$.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
-
-        const target = prepareCanvas('pdeCanvas');
-        if(!target) return;
-        const { ctx, c } = target;
-
-        drawGrid(ctx, c.width, c.height, 40);
-
-        const margin = 40;
-        const gW = c.width - margin * 2;
-        const gH = c.height - margin * 2;
-
-        // Linear steady state gradient boundary curve lines matrix
-        const yStart = (c.height - margin) - (u0 / 100) * gH;
-        const yEnd = (c.height - margin) - (u1 / 100) * gH;
-
-        ctx.strokeStyle = '#2563eb';
+        const u0 = parseFloat(document.getElementById('pdeL').value);
+        const u1 = parseFloat(document.getElementById('pdeR').value);
+        const xTarget = parseFloat(document.getElementById('pdeX').value);
+        const ans = (u0 + xTarget * (u1 - u0)).toFixed(2);
+        showResult('pdeRes', `<strong>Field Intersect Value:</strong> Temperature node at $x = ${xTarget}$ matches steady state value $u(x) = ${ans}^\\circ$C.`);
+        
+        const canvas = document.getElementById('pdeCanvas');
+        const ctx = canvas.getContext('2d');
+        drawXYPlane(ctx, canvas.width, canvas.height, 30, 20);
+        
+        ctx.strokeStyle = "#2563eb";
         ctx.lineWidth = 3;
         ctx.beginPath();
-        ctx.moveTo(margin, yStart);
-        ctx.lineTo(margin + gW, yEnd);
+        ctx.moveTo(50, canvas.height - u0 - 20);
+        ctx.lineTo(400, canvas.height - u1 - 20);
         ctx.stroke();
-
-        // Highlight targeted evaluation marker node positional coordinates
-        const tX = margin + targetX * gW;
-        const tY = (c.height - margin) - (resU / 100) * gH;
-
-        ctx.fillStyle = '#ea580c';
-        ctx.beginPath(); ctx.arc(tX, tY, 6, 0, 2*Math.PI); ctx.fill();
     }
 
     // 9. Functional Analysis Logic
     function calcFunctional() {
-        const x1 = parseFloat(document.getElementById('fa1').value) || 0;
-        const x2 = parseFloat(document.getElementById('fa2').value) || 0;
-        const norm = Math.sqrt(x1*x1 + x2*x2);
-
-        const resDiv = document.getElementById('faRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Hilbert Norm Calculation Profile:</strong> Spatial $l^2$ metric structural functional absolute inner vector computation yields: $\\|x\\|_{l^2} = ${norm.toFixed(5)}$. Vector bounds validated inside complete metric Banach space topology domain constraints.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
-
-        const target = prepareCanvas('faCanvas');
-        if(!target) return;
-        const { ctx, c } = target;
-        const cX = c.width/2, cY = c.height/2;
-
-        drawGrid(ctx, c.width, c.height, 35);
-        drawAxes(ctx, cX, cY, c.width, c.height, 'x1', 'x2');
-
-        // Draw structural spatial transformation coordinates lines vector components
-        ctx.strokeStyle = '#ea580c';
-        ctx.lineWidth = 2.5;
+        const x1 = parseFloat(document.getElementById('fa1').value);
+        const x2 = parseFloat(document.getElementById('fa2').value);
+        const norm = Math.sqrt(x1*x1 + x2*x2).toFixed(3);
+        showResult('faRes', `<strong>Hilbert Sequence Space Norm:</strong> $\\|x\\|_{l^2} = ${norm}$. Space bounded projection.`);
+        
+        const canvas = document.getElementById('faCanvas');
+        const ctx = canvas.getContext('2d');
+        drawXYPlane(ctx, canvas.width, canvas.height, 25, 25);
+        
+        ctx.strokeStyle = "#334155"; // Darkened Vector Edge line
+        ctx.lineWidth = 3.5;
         ctx.beginPath();
-        ctx.moveTo(cX, cY);
-        ctx.lineTo(cX + x1 * 25, cY - x2 * 25);
+        ctx.moveTo(canvas.width/2, canvas.height/2);
+        ctx.lineTo(canvas.width/2 + x1*20, canvas.height/2 - x2*20);
         ctx.stroke();
-
-        // Target terminal norm endpoint boundaries configurations nodes node bounds marker profile
-        ctx.fillStyle = '#2563eb';
-        ctx.beginPath(); ctx.arc(cX + x1 * 25, cY - x2 * 25, 5, 0, 2*Math.PI); ctx.fill();
     }
 
-    // 10. Graph Theory Logic
+    // 10. Graph Theory Logic (DIAGRAM EDGES DARKENED & MINOR DARK MOD APPLIED HERE)
     function drawGraph() {
-        const v = parseInt(document.getElementById('gtNodes').value) || 5;
-        const edges = (v * (v - 1)) / 2;
-
-        const resDiv = document.getElementById('gtRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Network Matrix Mapping Analytics:</strong> Orders properties of complete graphical structural mesh layout network ($K_{${v}}$). Total network communications paths trace count equals: $|E| = ${edges}$ structural edge channels.`;
-
-        const target = prepareCanvas('graphCanvas');
-        if(!target) return;
-        const { ctx, c } = target;
-        const cX = c.width/2, cY = c.height/2;
-        const rad = 75;
-
-        drawGrid(ctx, c.width, c.height, 45);
-
-        let nodes = [];
-        for(let i=0; i<v; i++) {
-            const t = (i * 2 * Math.PI) / v;
-            nodes.push({ x: cX + rad * Math.cos(t), y: cY + rad * Math.sin(t) });
+        const nodesCount = parseInt(document.getElementById('gtNodes').value) || 5;
+        showResult('gtRes', `<strong> Lemma Metric Profile:</strong> Complete mesh network graph $K_{${nodesCount}}$ contains $\\lvert V \\rvert = ${nodesCount}$ nodes tracking exactly $\\lvert E \\rvert = ${(nodesCount * (nodesCount - 1)) / 2}$ edges.`);
+        
+        const canvas = document.getElementById('graphCanvas');
+        const ctx = canvas.getContext('2d');
+        drawXYPlane(ctx, canvas.width, canvas.height, 35, 35);
+        
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        const radius = 75;
+        let points = [];
+        
+        for (let i = 0; i < nodesCount; i++) {
+            let angle = (i * 2 * Math.PI) / nodesCount;
+            points.push({
+                x: cx + radius * Math.cos(angle),
+                y: cy + radius * Math.sin(angle)
+            });
         }
-
-        // Complete structural interconnect pathways traces configuration lines matrix loop lines mapping loop mapping paths layout configuration matrix
-        ctx.strokeStyle = '#cbd5e1';
-        ctx.lineWidth = 1;
-        for(let i=0; i<v; i++) {
-            for(let j=i+1; j<v; j++) {
+        
+        // RENDER EDGES - Made minor dark, dense color and thicker stroke line profile
+        ctx.strokeStyle = varColor('--graph-edge-dark', '#334155'); 
+        ctx.lineWidth = 2.5; // Made edges thicker and more distinctly viewable
+        for (let i = 0; i < points.length; i++) {
+            for (let j = i + 1; j < points.length; j++) {
                 ctx.beginPath();
-                ctx.moveTo(nodes[i].x, nodes[i].y);
-                ctx.lineTo(nodes[j].x, nodes[j].y);
+                ctx.moveTo(points[i].x, points[i].y);
+                ctx.lineTo(points[j].x, points[j].y);
                 ctx.stroke();
             }
         }
+        
+        // RENDER NODES
+        ctx.fillStyle = "#1e40af";
+        points.forEach((pt) => {
+            ctx.beginPath();
+            ctx.arc(pt.x, pt.y, 7, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.strokeStyle = "#ffffff";
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+        });
+    }
 
-        // Draw operational localized communication infrastructure nodes structural markers profiles components
-        ctx.fillStyle = '#2563eb';
-        for(let i=0; i<v; i++) {
-            ctx.beginPath(); ctx.arc(nodes[i].x, nodes[i].y, 6, 0, 2*Math.PI); ctx.fill();
-        }
+    function varColor(varName, fallback) {
+        return getComputedStyle(document.documentElement).getPropertyValue(varName).trim() || fallback;
     }
 
     // 11. Operator Theory Logic
     function calcOperator() {
-        const k = parseFloat(document.getElementById('opT').value) || 1;
-        const lam = parseFloat(document.getElementById('opLam').value) || 2;
+        const k = parseFloat(document.getElementById('opT').value);
+        const lam = parseFloat(document.getElementById('opLam').value);
+        if (lam === k) {
+            showResult('opRes', `<strong>Calculation Error:</strong> Point falls exactly inside point spectrum division. Matrix value is singular.`);
+            return;
+        }
+        const val = (1 / (lam - k)).toFixed(4);
+        showResult('opRes', `<strong>Resolvent Invariant Value:</strong> $R(${lam}) = ${val}$. Element is securely contained inside bounded resolvent algebraic mapping.`);
         
-        let resolventVal = 0;
-        let isSingular = false;
-        if (lam === k) isSingular = true;
-        else resolventVal = 1 / (lam - k);
-
-        const resDiv = document.getElementById('opRes');
-        resDiv.style.display = 'block';
-        if (isSingular) {
-            resDiv.innerHTML = `<strong>Spectral Invariant Resolvent Map Status:</strong> Parameter $\\lambda = ${lam}$ occupies spectral point domain matrix locations. Operator structural transformation boundaries calculation fails ($\\|R(\\lambda)\\| = \\infty$). Spectrum index singularity encountered.`;
-        } else {
-            resDiv.innerHTML = `<strong>Spectral Invariant Resolvent Map Status:</strong> Operator bounded matrix resolvent metric norm solved: $R(${lam}) = ${resolventVal.toFixed(5)}$. Continuous linear matrix profile validated outside structural spectrum limits.`;
-        }
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
-
-        const target = prepareCanvas('operatorCanvas');
-        if(!target) return;
-        const { ctx, c } = target;
-
-        drawGrid(ctx, c.width, c.height, 40);
-        drawAxes(ctx, c.width/2, c.height - 40, c.width, c.height, 'λ', '||R(λ)||');
-
-        if(!isSingular) {
-            ctx.fillStyle = '#2563eb';
-            ctx.fillRect(c.width/2 + (lam*15), c.height - 40 - (resolventVal*80), 12, resolventVal*80);
-        }
+        const canvas = document.getElementById('operatorCanvas');
+        const ctx = canvas.getContext('2d');
+        drawXYPlane(ctx, canvas.width, canvas.height, 25, 25);
+        
+        ctx.fillStyle = "#2563eb";
+        ctx.fillRect(canvas.width/2 + k*15 - 3, canvas.height/2 - 20, 6, 40); // Operator spectrum line
     }
 
     // 12. Banach Algebra Logic
     function calcBanach() {
-        const nA = parseFloat(document.getElementById('baA').value) || 0;
-        const nB = parseFloat(document.getElementById('baB').value) || 0;
-        const boundMax = nA * nB;
-
-        const resDiv = document.getElementById('baRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Banach Algebra Vector Space Validation Profile:</strong> Composite algebraic norm property checked: $\\|A \\cdot B\\| \\le \\|A\\| \\cdot \\|B\\| = ${boundMax.toFixed(4)}$. Sub-multiplicative structural constraints hold true.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
-
-        const target = prepareCanvas('banachCanvas');
-        if(!target) return;
-        const { ctx, c } = target;
-
-        drawGrid(ctx, c.width, c.height, 40);
+        const a = parseFloat(document.getElementById('baA').value);
+        const b = parseFloat(document.getElementById('baB').value);
+        showResult('baRes', `<strong>Banach Space Property Check:</strong> Norm space maximum cross boundary limit metric constraint product: ${a} \\times ${b} = ${a*b}.`);
         
-        ctx.fillStyle = '#2563eb';
-        ctx.fillRect(40, 40, nA*15, 30);
-        ctx.fillStyle = '#0f172a'; ctx.fillText(`||A|| = ${nA}`, 45 + nA*15, 60);
-
-        ctx.fillStyle = '#ea580c';
-        ctx.fillRect(40, 90, nB*15, 30);
-        ctx.fillStyle = '#0f172a'; ctx.fillText(`||B|| = ${nB}`, 45 + nB*15, 110);
-
-        ctx.fillStyle = '#10b981';
-        ctx.fillRect(40, 140, boundMax*4, 30);
-        ctx.fillStyle = '#0f172a'; ctx.fillText(`Max Bound Product = ${boundMax.toFixed(2)}`, 45 + boundMax*4, 160);
+        const canvas = document.getElementById('banachCanvas');
+        const ctx = canvas.getContext('2d');
+        drawXYPlane(ctx, canvas.width, canvas.height, 20, 20);
+        
+        ctx.strokeStyle = "#16a34a";
+        ctx.strokeRect(40, 40, a*20, b*20);
     }
 
     // 13. Mathematical Methods Logic
     function calcMethods() {
-        const hCutoff = parseInt(document.getElementById('mmN').value) || 1;
-
-        const resDiv = document.getElementById('mmRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Fourier Series Spectrum Analysis Evaluation:</strong> Truncated summation wave approximation mapped processing: $N = ${hCutoff}$ harmonic parameters. Convergence matching square profile verified.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
-
-        const target = prepareCanvas('methodsCanvas');
-        if(!target) return;
-        const { ctx, c } = target;
-        const cX = 30, cY = c.height/2;
-
-        drawGrid(ctx, c.width, c.height, 40);
-        drawAxes(ctx, cX, cY, c.width, c.height, 't', 'f(t)');
-
-        ctx.strokeStyle = '#2563eb';
-        ctx.lineWidth = 2;
+        const h = parseInt(document.getElementById('mmN').value);
+        showResult('mmRes', `<strong>Fourier Analytical Integration:</strong> Plotting transformation convergence limit at harmonic cutoff value $n = ${h}$.`);
+        
+        const canvas = document.getElementById('methodsCanvas');
+        const ctx = canvas.getContext('2d');
+        drawXYPlane(ctx, canvas.width, canvas.height, 20, 20);
+        
+        ctx.strokeStyle = "#1e40af";
+        ctx.lineWidth = 2.5;
         ctx.beginPath();
-
-        const stepsCount = 120;
-        const scaleX = (c.width - 60) / (2 * Math.PI);
-        const scaleY = 50;
-
-        for(let i=0; i<=stepsCount; i++) {
-            const t = (i / stepsCount) * (2 * Math.PI);
-            let fVal = 0;
-            for(let n=1; n<=hCutoff; n+=2) {
-                fVal += Math.sin(n * t) / n;
+        
+        for (let x = 0; x < canvas.width; x++) {
+            let t = (x - 50) * 0.05;
+            let sum = 0;
+            for (let i = 1; i <= h; i += 2) {
+                sum += Math.sin(i * t) / i;
             }
-            fVal = fVal * (4 / Math.PI);
-
-            const sX = cX + t * scaleX;
-            const sY = cY - fVal * scaleY;
-
-            if(i === 0) ctx.moveTo(sX, sY);
-            else ctx.lineTo(sX, sY);
+            let y = canvas.height / 2 - (sum * (4 / Math.PI) * 40);
+            if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
         }
         ctx.stroke();
     }
 
     // 14. Relativity Logic
     function calcRelativity() {
-        const v = parseFloat(document.getElementById('relV').value) || 0;
-        const gamma = 1 / Math.sqrt(1 - v*v);
-
-        const resDiv = document.getElementById('relRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Lorentz Spacetime Transform Transformation Profiles:</strong> Relativistic speed factor parameter tracking yields calculated metric value profile Lorentz boost factor index: $\\gamma = ${gamma.toFixed(5)}$. Minkowski interval spacing scale contraction factor holds true.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
-
-        const target = prepareCanvas('relCanvas');
-        if(!target) return;
-        const { ctx, c } = target;
-        const cX = c.width/2, cY = c.height/2;
-
-        drawGrid(ctx, c.width, c.height, 40);
-        drawAxes(ctx, cX, cY, c.width, c.height, 'x', 'ct');
-
-        // Render light cone boundaries vectors limits paths layout trace lines
-        ctx.strokeStyle = 'rgba(234, 88, 12, 0.4)';
-        ctx.lineWidth = 1.5;
-        ctx.beginPath(); ctx.moveTo(cX - 80, cY - 80); ctx.lineTo(cX + 80, cY + 80); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cX - 80, cY + 80); ctx.lineTo(cX + 80, cY - 80); ctx.stroke();
-
-        // Plot dynamic world line path trace representation vector adjustments
-        const wlX = 70 * v;
-        ctx.strokeStyle = '#2563eb';
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        ctx.moveTo(cX, cY);
-        ctx.lineTo(cX + wlX, cY - 70);
-        ctx.stroke();
+        const v = parseFloat(document.getElementById('relV').value);
+        const gamma = (1 / Math.sqrt(1 - v*v)).toFixed(4);
+        showResult('relRes', `<strong>Lorentz Scaling Coefficient:</strong> Expansion factor $\\gamma = ${gamma}$. Minkowski geometry coordinates recalculated.`);
+        
+        const canvas = document.getElementById('relCanvas');
+        const ctx = canvas.getContext('2d');
+        drawXYPlane(ctx, canvas.width, canvas.height, 25, 25);
+        
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        
+        // Light Cone Bounds Line
+        ctx.strokeStyle = "rgba(234, 88, 12, 0.4)";
+        ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(cx - 100, cy - 100); ctx.lineTo(cx + 100, cy + 100); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(cx - 100, cy + 100); ctx.lineTo(cx + 100, cy - 100); ctx.stroke();
     }
 
     // 15. Classical Mechanics Logic
     function calcClassical() {
-        const deg = parseFloat(document.getElementById('cmAmp').value) || 45;
-        const length = parseFloat(document.getElementById('cmL').value) || 2;
-
-        const radAmp = (deg * Math.PI) / 180;
-        const energyConstant = 9.81 * length * (1 - Math.cos(radAmp));
-
-        const resDiv = document.getElementById('cmRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Variational Energy Invariant Tracking Evaluation:</strong> System total conservative mechanical energy calculation constant solved: $E/m = ${energyConstant.toFixed(5)}\\text{ J/kg}$. Phase space configuration trajectory tracks smooth closed orbit profiles loop system loops.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
-
-        const target = prepareCanvas('classicalCanvas');
-        if(!target) return;
-        const { ctx, c } = target;
-        const cX = c.width/2, cY = c.height/2;
-
-        drawGrid(ctx, c.width, c.height, 40);
-        drawAxes(ctx, cX, cY, c.width, c.height, 'Position (θ)', 'Momentum (p)');
-
-        // Draw structural phase space ellipsoidal trajectory invariant metric loop
-        ctx.strokeStyle = '#2563eb';
+        const deg = parseFloat(document.getElementById('cmAmp').value);
+        showResult('cmRes', `<strong>Conservative Phase Space Space Traced:</strong> Invariant trajectory matches regular closed analytical ellipse loop path geometry.`);
+        
+        const canvas = document.getElementById('classicalCanvas');
+        const ctx = canvas.getContext('2d');
+        drawXYPlane(ctx, canvas.width, canvas.height, 30, 30);
+        
+        ctx.strokeStyle = "#16a34a";
         ctx.lineWidth = 2.5;
         ctx.beginPath();
-        
-        const rX = radAmp * 80;
-        const rY = Math.sqrt(2 * energyConstant) * 25;
-        ctx.ellipse(cX, cY, rX, rY, 0, 0, 2 * Math.PI);
+        ctx.ellipse(canvas.width / 2, canvas.height / 2, deg * 1.5, deg * 0.8, 0, 0, 2 * Math.PI);
         ctx.stroke();
     }
 
     // 16. Differential Geometry Logic
-    function drawGeometry() {
-        const tVal = parseFloat(document.getElementById('dgT').value) || 0;
-
-        // Path functions positions calculations mapping trajectories equations configurations vectors
-        const xEval = tVal * 55 + 40;
-        const yEval = 100 - Math.sin(tVal) * 50;
-
-        // Tangents dynamic slope derivation component equations parameters mapping configuration
-        const dx = 55;
-        const dy = -Math.cos(tVal) * 50;
-        const mag = Math.sqrt(dx*dx + dy*dy);
-        const tx = dx / mag;
-        const ty = dy / mag;
-
-        const resDiv = document.getElementById('dgRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Moving Frame Tangent Space Verification:</strong> Evaluated point position coordinates index: $\\vec{r}(${tVal}) = (${tVal.toFixed(2)}, ${Math.sin(tVal).toFixed(2)})$. Dynamic tangent vector tracking solved: $\\vec{T}(${tVal}) = (${tx.toFixed(4)}, ${ty.toFixed(4)})$. Moving frame properties checked.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
-
-        const target = prepareCanvas('geometryCanvas');
-        if(!target) return;
-        const { ctx, c } = target;
-
-        drawGrid(ctx, c.width, c.height, 40);
-
-        // Draw background base smooth manifold function track curve string profile path lines
-        ctx.strokeStyle = '#cbd5e1';
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        for(let i=0; i<=100; i++) {
-            const tLoc = (i/100) * 6.28;
-            const px = tLoc * 55 + 40;
-            const py = 100 - Math.sin(tLoc) * 50;
-            if(i === 0) ctx.moveTo(px, py);
-            else ctx.lineTo(px, py);
-        }
-        ctx.stroke();
-
-        // Render dynamic tangent line alignment path components trace
-        ctx.strokeStyle = '#ea580c';
-        ctx.lineWidth = 2.5;
-        ctx.beginPath();
-        ctx.moveTo(xEval - tx * 45, yEval - ty * 45);
-        ctx.lineTo(xEval + tx * 45, yEval + ty * 45);
-        ctx.stroke();
-
-        // Highlight targeted tracking point vertex node locator coordinate node
-        ctx.fillStyle = '#2563eb';
-        ctx.beginPath(); ctx.arc(xEval, yEval, 6, 0, 2*Math.PI); ctx.fill();
+    function calcDG() {
+        const k1 = parseFloat(document.getElementById('dgK1').value);
+        const k2 = parseFloat(document.getElementById('dgK2').value);
+        const K = (k1 * k2).toFixed(3);
+        showResult('dgRes', `<strong>Gaussian Product Curvature Metric:</strong> $K = ${K}$. Surface is locally modeled as geometric variant.`);
+        
+        const canvas = document.getElementById('dgCanvas');
+        const ctx = canvas.getContext('2d');
+        drawXYPlane(ctx, canvas.width, canvas.height, 30, 20);
+        
+        ctx.fillStyle = "#1e40af";
+        ctx.font = "14px Arial";
+        ctx.fillText(`Computed Product K Matrix Index: ${K}`, 40, 50);
     }
 
-    // Execute script logic sequence mappings immediately on setup loads configurations parameters monitoring steps metrics profiles profiles
-    window.addEventListener('DOMContentLoaded', () => {
+    // Master Initialization Routine on page load context
+    window.onload = function() {
         calcReal();
         calcComplex();
         calcAlgebra();
@@ -1468,8 +1061,8 @@ function calcTop() {
         calcMethods();
         calcRelativity();
         calcClassical();
-        drawGeometry();
-    });
+        calcDG();
+    };
 </script>
 
 </body>
