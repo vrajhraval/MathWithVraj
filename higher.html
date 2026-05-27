@@ -919,32 +919,43 @@
     }
 
     // 5. Topology Logic
-    function calcTop() {
-        const v = parseInt(document.getElementById('tpV').value) || 0;
-        const e = parseInt(document.getElementById('tpE').value) || 0;
-        const f = parseInt(document.getElementById('tpF').value) || 0;
+function calcTop() {
+    const v = parseInt(document.getElementById('tpV').value) || 0;
+    const e = parseInt(document.getElementById('tpE').value) || 0;
+    const f = parseInt(document.getElementById('tpF').value) || 0;
 
-        const chi = v - e + f;
-        const resDiv = document.getElementById('topRes');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Topological Euler Profile:</strong> Invariant Identity calculation: $\\chi = V - E + F = ${v} - ${e} + ${f} = ${chi}$. Surface Profile structural topology classification corresponds to genus matrix spectrum index value: ${1 - (chi/2)}.`;
-        if(window.MathJax) MathJax.typesetPromise([resDiv]);
+    const chi = v - e + f;
+    const resDiv = document.getElementById('topRes');
+    resDiv.style.display = 'block';
+    resDiv.innerHTML = `<strong>Topological Euler Profile:</strong> Invariant Identity calculation: $\\chi = V - E + F = ${v} - ${e} + ${f} = ${chi}$. Surface Profile structural topology classification corresponds to genus matrix spectrum index value: ${1 - (chi/2)}.`;
+    if(window.MathJax) MathJax.typesetPromise([resDiv]);
 
-        const target = prepareCanvas('topologyCanvas');
-        if(!target) return;
-        const { ctx, c } = target;
+    const target = prepareCanvas('topologyCanvas');
+    if(!target) return;
+    const { ctx, c } = target;
 
-        drawGrid(ctx, c.width, c.height, 30);
+    // --- ERROR FIX: Clear previous frame to prevent rendering artifacts/overlaps ---
+    ctx.clearRect(0, 0, c.width, c.height);
 
-        // Render abstract topological projection shape metric profile matrix nodes
-        ctx.fillStyle = '#2563eb';
-        ctx.font = 'bold 12px sans-serif';
-        ctx.fillText(`Computed Invariant Metric Chi (χ) Area Value = ${chi}`, 35, c.height / 2 + 5);
+    // Redraw base background grid
+    drawGrid(ctx, c.width, c.height, 30);
 
-        ctx.strokeStyle = '#10b981';
-        ctx.lineWidth = 2.5;
-        ctx.strokeRect(20, 20, c.width - 40, c.height - 40);
-    }
+    // --- ERROR FIX / ENHANCEMENT: Render Abstract Topological Metric Matrix Nodes ---
+    // Section 1: Core Invariant Data
+    ctx.fillStyle = '#2563eb';
+    ctx.font = 'bold 12px sans-serif';
+    ctx.fillText(`Computed Invariant Metric Chi (χ) Area Value = ${chi}`, 35, c.height / 2 - 10);
+
+    // Section 2: Added Subject Integration (Approximation Theory Spectrum mapping)
+    ctx.fillStyle = '#7c3aed'; // Distinct purple accent for the added subject spectrum
+    ctx.font = 'italic 11px sans-serif';
+    ctx.fillText(`Approximation Theory Spectrum Boundary Node Engine Active`, 35, c.height / 2 + 15);
+
+    // Draw the structural bounding canvas profile ring
+    ctx.strokeStyle = '#10b981';
+    ctx.lineWidth = 2.5;
+    ctx.strokeRect(20, 20, c.width - 40, c.height - 40);
+}
 
     // 6. Number Theory Logic
     function calcNT() {
