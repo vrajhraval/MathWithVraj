@@ -934,24 +934,81 @@ function calcTop() {
     if(!target) return;
     const { ctx, c } = target;
 
-    // --- ERROR FIX: Clear previous frame to prevent rendering artifacts/overlaps ---
+    // 1. ERROR FIX: Completely wipe canvas before redraw to stop overlap artifacts
     ctx.clearRect(0, 0, c.width, c.height);
 
-    // Redraw base background grid
+    // 2. Draw background canvas metric grid
     drawGrid(ctx, c.width, c.height, 30);
 
-    // --- ERROR FIX / ENHANCEMENT: Render Abstract Topological Metric Matrix Nodes ---
-    // Section 1: Core Invariant Data
+    // 3. Render Status Text Metadata
     ctx.fillStyle = '#2563eb';
     ctx.font = 'bold 12px sans-serif';
-    ctx.fillText(`Computed Invariant Metric Chi (χ) Area Value = ${chi}`, 35, c.height / 2 - 10);
+    ctx.fillText(`Computed Invariant Metric Chi (χ) Area Value = ${chi}`, 35, 45);
 
-    // Section 2: Added Subject Integration (Approximation Theory Spectrum mapping)
-    ctx.fillStyle = '#7c3aed'; // Distinct purple accent for the added subject spectrum
+    ctx.fillStyle = '#7c3aed'; 
     ctx.font = 'italic 11px sans-serif';
-    ctx.fillText(`Approximation Theory Spectrum Boundary Node Engine Active`, 35, c.height / 2 + 15);
+    ctx.fillText(`Approximation Theory Spectrum Boundary Node Engine Active`, 35, 65);
 
-    // Draw the structural bounding canvas profile ring
+    // 4. ERROR FIX: Generate and Draw dynamic graph nodes and edges based on inputs
+    if (v > 0) {
+        const centerX = c.width / 2;
+        const centerY = c.height / 2 + 20; // Lower slightly to account for headers
+        const radius = Math.min(c.width, c.height) * 0.25;
+        const nodePositions = [];
+
+        // Generate circular positions for V nodes
+        for (let i = 0; i < v; i++) {
+            const angle = (i * 2 * Math.PI) / v;
+            const x = centerX + radius * Math.cos(angle);
+            const y = centerY + radius * Math.sin(angle);
+            nodePositions.push({ x, y });
+        }
+
+        // Draw structural topological Edges (E) based on connections
+        ctx.strokeStyle = '#94a3b8';
+        ctx.lineWidth = 1.5;
+        let edgeCount = 0;
+        
+        // Connect nodes iteratively to represent edges safely up to value E
+        for (let i = 0; i < v && edgeCount < e; i++) {
+            for (let j = i + 1; j < v && edgeCount < e; j++) {
+                ctx.beginPath();
+                ctx.moveTo(nodePositions[i].x, nodePositions[i].y);
+                ctx.lineTo(nodePositions[j].x, nodePositions[j].y);
+                ctx.stroke();
+                edgeCount++;
+            }
+        }
+
+        // Draw missing edges outside basic combinations as loops if E > combination limit
+        if (edgeCount < e) {
+            ctx.strokeStyle = '#ef4444'; // Red for non-planar/complex intersection edge extensions
+            for (let i = 0; i < v && edgeCount < e; i++) {
+                ctx.beginPath();
+                ctx.arc(nodePositions[i].x - 10, nodePositions[i].y - 10, 12, 0, 2 * Math.PI);
+                ctx.stroke();
+                edgeCount++;
+            }
+        }
+
+        // Draw Vertices (V) as styled blue network nodes
+        nodePositions.forEach((node, index) => {
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, 8, 0, 2 * Math.PI);
+            ctx.fillStyle = '#2563eb';
+            ctx.fill();
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+            // Label individual nodes
+            ctx.fillStyle = '#1e293b';
+            ctx.font = '9px sans-serif';
+            ctx.fillText(`v${index + 1}`, node.x + 12, node.y + 4);
+        });
+    }
+
+    // 5. Draw the structural green outer profile border frame
     ctx.strokeStyle = '#10b981';
     ctx.lineWidth = 2.5;
     ctx.strokeRect(20, 20, c.width - 40, c.height - 40);
