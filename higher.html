@@ -918,7 +918,7 @@
         ctx.beginPath(); ctx.moveTo(cX, cY); ctx.lineTo(cX + jx, cY + jy); ctx.stroke();
     }
 
-    // 5. Topology Logic
+    // 5. Topology Logic - Manifold Projection Engine
 function calcTop() {
     const v = parseInt(document.getElementById('tpV').value) || 0;
     const e = parseInt(document.getElementById('tpE').value) || 0;
@@ -934,81 +934,103 @@ function calcTop() {
     if(!target) return;
     const { ctx, c } = target;
 
-    // 1. ERROR FIX: Completely wipe canvas before redraw to stop overlap artifacts
+    // 1. ERROR FIX: Clean previous frame to prevent overlapping artifacts
     ctx.clearRect(0, 0, c.width, c.height);
 
-    // 2. Draw background canvas metric grid
+    // 2. Draw base topological background metric grid
     drawGrid(ctx, c.width, c.height, 30);
 
-    // 3. Render Status Text Metadata
+    // 3. Render Dashboard Metadata Headers
     ctx.fillStyle = '#2563eb';
     ctx.font = 'bold 12px sans-serif';
     ctx.fillText(`Computed Invariant Metric Chi (χ) Area Value = ${chi}`, 35, 45);
 
     ctx.fillStyle = '#7c3aed'; 
     ctx.font = 'italic 11px sans-serif';
-    ctx.fillText(`Approximation Theory Spectrum Boundary Node Engine Active`, 35, 65);
+    ctx.fillText(`Approximation Theory: Manifold Approximation Mesh Active`, 35, 65);
 
-    // 4. ERROR FIX: Generate and Draw dynamic graph nodes and edges based on inputs
-    if (v > 0) {
-        const centerX = c.width / 2;
-        const centerY = c.height / 2 + 20; // Lower slightly to account for headers
-        const radius = Math.min(c.width, c.height) * 0.25;
-        const nodePositions = [];
+    // 4. CORE ENGINE OVERHAUL: Render a Projected 3D Topological Torus Mesh
+    const centerX = c.width / 2;
+    const centerY = c.height / 2 + 15;
+    
+    // Scale mesh detail dynamically based on inputs (safeguarded against 0)
+    const majorSegments = Math.max(8, Math.min(v, 24)); 
+    const minorSegments = Math.max(6, Math.min(f, 16)); 
+    
+    const R = 70; // Major radius
+    const r = 35; // Minor radius
 
-        // Generate circular positions for V nodes
-        for (let i = 0; i < v; i++) {
-            const angle = (i * 2 * Math.PI) / v;
-            const x = centerX + radius * Math.cos(angle);
-            const y = centerY + radius * Math.sin(angle);
-            nodePositions.push({ x, y });
-        }
+    // 3D Projection Configuration Angles (Slight tilt for dimension)
+    const angleX = 0.6; 
+    const angleY = 0.5;
 
-        // Draw structural topological Edges (E) based on connections
-        ctx.strokeStyle = '#94a3b8';
-        ctx.lineWidth = 1.5;
-        let edgeCount = 0;
-        
-        // Connect nodes iteratively to represent edges safely up to value E
-        for (let i = 0; i < v && edgeCount < e; i++) {
-            for (let j = i + 1; j < v && edgeCount < e; j++) {
-                ctx.beginPath();
-                ctx.moveTo(nodePositions[i].x, nodePositions[i].y);
-                ctx.lineTo(nodePositions[j].x, nodePositions[j].y);
-                ctx.stroke();
-                edgeCount++;
-            }
-        }
+    function project3D(x, y, z) {
+        // Simple 3D Rotation Matrix projection to 2D Canvas plane
+        let rotX = x;
+        let rotY = y * Math.cos(angleX) - z * Math.sin(angleX);
+        let rotZ = y * Math.sin(angleX) + z * Math.cos(angleX);
 
-        // Draw missing edges outside basic combinations as loops if E > combination limit
-        if (edgeCount < e) {
-            ctx.strokeStyle = '#ef4444'; // Red for non-planar/complex intersection edge extensions
-            for (let i = 0; i < v && edgeCount < e; i++) {
-                ctx.beginPath();
-                ctx.arc(nodePositions[i].x - 10, nodePositions[i].y - 10, 12, 0, 2 * Math.PI);
-                ctx.stroke();
-                edgeCount++;
-            }
-        }
+        let finalX = rotX * Math.cos(angleY) + rotZ * Math.sin(angleY);
+        let finalY = rotY;
 
-        // Draw Vertices (V) as styled blue network nodes
-        nodePositions.forEach((node, index) => {
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, 8, 0, 2 * Math.PI);
-            ctx.fillStyle = '#2563eb';
-            ctx.fill();
-            ctx.strokeStyle = '#ffffff';
-            ctx.lineWidth = 1.5;
-            ctx.stroke();
-
-            // Label individual nodes
-            ctx.fillStyle = '#1e293b';
-            ctx.font = '9px sans-serif';
-            ctx.fillText(`v${index + 1}`, node.x + 12, node.y + 4);
-        });
+        return {
+            x: centerX + finalX,
+            y: centerY + finalY
+        };
     }
 
-    // 5. Draw the structural green outer profile border frame
+    // Draw the continuous manifold grid lines (Edges/Fibers)
+    ctx.strokeStyle = 'rgba(37, 99, 235, 0.45)'; // Sleek semi-transparent blue lines
+    ctx.lineWidth = 1.0;
+
+    for (let i = 0; i <= majorSegments; i++) {
+        const theta = (i * 2 * Math.PI) / majorSegments;
+        ctx.beginPath();
+        
+        for (let j = 0; j <= minorSegments; j++) {
+            const phi = (j * 2 * Math.PI) / minorSegments;
+            
+            // Torus parametric equations
+            const x3d = (R + r * Math.cos(phi)) * Math.cos(theta);
+            const y3d = (R + r * Math.cos(phi)) * Math.sin(theta);
+            const z3d = r * Math.sin(phi);
+
+            const pt = project3D(x3d, y3d, z3d);
+
+            if (j === 0) {
+                ctx.moveTo(pt.x, pt.y);
+            } else {
+                ctx.lineTo(pt.x, pt.y);
+            }
+        }
+        ctx.stroke();
+    }
+
+    // Draw secondary latitudinal loops for true mesh density
+    ctx.strokeStyle = 'rgba(124, 58, 237, 0.35)'; // Purple intersection curves
+    for (let j = 0; j <= minorSegments; j++) {
+        const phi = (j * 2 * Math.PI) / minorSegments;
+        ctx.beginPath();
+        
+        for (let i = 0; i <= majorSegments; i++) {
+            const theta = (i * 2 * Math.PI) / majorSegments;
+            
+            const x3d = (R + r * Math.cos(phi)) * Math.cos(theta);
+            const y3d = (R + r * Math.cos(phi)) * Math.sin(theta);
+            const z3d = r * Math.sin(phi);
+
+            const pt = project3D(x3d, y3d, z3d);
+
+            if (i === 0) {
+                ctx.moveTo(pt.x, pt.y);
+            } else {
+                ctx.lineTo(pt.x, pt.y);
+            }
+        }
+        ctx.stroke();
+    }
+
+    // 5. Draw the structural green outer profile bounding frame
     ctx.strokeStyle = '#10b981';
     ctx.lineWidth = 2.5;
     ctx.strokeRect(20, 20, c.width - 40, c.height - 40);
