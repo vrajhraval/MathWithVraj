@@ -918,7 +918,7 @@
         ctx.beginPath(); ctx.moveTo(cX, cY); ctx.lineTo(cX + jx, cY + jy); ctx.stroke();
     }
 
-    // 5. Topology Logic - Manifold Projection Engine
+    // 5. Topology Logic - Planar Tree Decomposition Layout
 function calcTop() {
     const v = parseInt(document.getElementById('tpV').value) || 0;
     const e = parseInt(document.getElementById('tpE').value) || 0;
@@ -934,103 +934,91 @@ function calcTop() {
     if(!target) return;
     const { ctx, c } = target;
 
-    // 1. ERROR FIX: Clean previous frame to prevent overlapping artifacts
+    // 1. CLEAR FRAME: Stops past renderings from stacking up
     ctx.clearRect(0, 0, c.width, c.height);
 
-    // 2. Draw base topological background metric grid
+    // 2. BACKGROUND: Render clean engineering grid
     drawGrid(ctx, c.width, c.height, 30);
 
-    // 3. Render Dashboard Metadata Headers
+    // 3. METADATA TEXT: Display status headers clearly
     ctx.fillStyle = '#2563eb';
     ctx.font = 'bold 12px sans-serif';
     ctx.fillText(`Computed Invariant Metric Chi (χ) Area Value = ${chi}`, 35, 45);
 
     ctx.fillStyle = '#7c3aed'; 
     ctx.font = 'italic 11px sans-serif';
-    ctx.fillText(`Approximation Theory: Manifold Approximation Mesh Active`, 35, 65);
+    ctx.fillText(`Approximation Theory: Linear Topology Tree Decomposition`, 35, 65);
 
-    // 4. CORE ENGINE OVERHAUL: Render a Projected 3D Topological Torus Mesh
-    const centerX = c.width / 2;
-    const centerY = c.height / 2 + 15;
-    
-    // Scale mesh detail dynamically based on inputs (safeguarded against 0)
-    const majorSegments = Math.max(8, Math.min(v, 24)); 
-    const minorSegments = Math.max(6, Math.min(f, 16)); 
-    
-    const R = 70; // Major radius
-    const r = 35; // Minor radius
+    // 4. TREE GRAPH GENERATOR: Distribute nodes cleanly across layers
+    // Caps nodes at 15 to keep the layout absolutely clear and readable
+    const maxNodes = Math.max(1, Math.min(v, 15)); 
+    const nodes = [];
 
-    // 3D Projection Configuration Angles (Slight tilt for dimension)
-    const angleX = 0.6; 
-    const angleY = 0.5;
+    // Layer Configuration (Root, Layer 1, Layer 2)
+    // This systematically splits nodes across columns to avoid messy tangles
+    const layer1Count = Math.ceil((maxNodes - 1) * 0.4);
+    const layer2Count = maxNodes - 1 - layer1Count;
 
-    function project3D(x, y, z) {
-        // Simple 3D Rotation Matrix projection to 2D Canvas plane
-        let rotX = x;
-        let rotY = y * Math.cos(angleX) - z * Math.sin(angleX);
-        let rotZ = y * Math.sin(angleX) + z * Math.cos(angleX);
+    // Position Root Node (Foundational Layer)
+    nodes.push({ x: 70, y: c.height / 2, label: "R", parentIdx: null });
 
-        let finalX = rotX * Math.cos(angleY) + rotZ * Math.sin(angleY);
-        let finalY = rotY;
-
-        return {
-            x: centerX + finalX,
-            y: centerY + finalY
-        };
+    // Position Layer 1 Nodes (Sub-branches)
+    for (let i = 0; i < layer1Count; i++) {
+        const x = 180;
+        const spacing = (c.height - 100) / (layer1Count + 1);
+        const y = 50 + spacing * (i + 1);
+        nodes.push({ x, y, label: `A${i+1}`, parentIdx: 0 }); // Connects to Root
     }
 
-    // Draw the continuous manifold grid lines (Edges/Fibers)
-    ctx.strokeStyle = 'rgba(37, 99, 235, 0.45)'; // Sleek semi-transparent blue lines
-    ctx.lineWidth = 1.0;
+    // Position Layer 2 Nodes (Deep Topology Leaves / Approximation nodes)
+    for (let i = 0; i < layer2Count; i++) {
+        const x = 300;
+        const spacing = (c.height - 100) / (layer2Count + 1);
+        const y = 50 + spacing * (i + 1);
+        // Map parent evenly to Layer 1 nodes
+        const parentIdx = (layer1Count > 0) ? (1 + (i % layer1Count)) : 0;
+        nodes.push({ x, y, label: `B${i+1}`, parentIdx });
+    }
 
-    for (let i = 0; i <= majorSegments; i++) {
-        const theta = (i * 2 * Math.PI) / majorSegments;
-        ctx.beginPath();
-        
-        for (let j = 0; j <= minorSegments; j++) {
-            const phi = (j * 2 * Math.PI) / minorSegments;
+    // Draw Smooth Connections (Edges)
+    ctx.lineWidth = 2;
+    nodes.forEach((node, idx) => {
+        if (node.parentIdx !== null) {
+            const parent = nodes[node.parentIdx];
             
-            // Torus parametric equations
-            const x3d = (R + r * Math.cos(phi)) * Math.cos(theta);
-            const y3d = (R + r * Math.cos(phi)) * Math.sin(theta);
-            const z3d = r * Math.sin(phi);
-
-            const pt = project3D(x3d, y3d, z3d);
-
-            if (j === 0) {
-                ctx.moveTo(pt.x, pt.y);
-            } else {
-                ctx.lineTo(pt.x, pt.y);
-            }
+            // Create a sleek, professional bezier curve between layers
+            ctx.beginPath();
+            ctx.strokeStyle = '#94a3b8'; // Slate grey for standard connections
+            ctx.moveTo(parent.x, parent.y);
+            ctx.bezierCurveTo(
+                (parent.x + node.x) / 2, parent.y, 
+                (parent.x + node.x) / 2, node.y, 
+                node.x, node.y
+            );
+            ctx.stroke();
         }
-        ctx.stroke();
-    }
+    });
 
-    // Draw secondary latitudinal loops for true mesh density
-    ctx.strokeStyle = 'rgba(124, 58, 237, 0.35)'; // Purple intersection curves
-    for (let j = 0; j <= minorSegments; j++) {
-        const phi = (j * 2 * Math.PI) / minorSegments;
+    // Draw Nodes as cleanly styled circles
+    nodes.forEach((node) => {
         ctx.beginPath();
+        ctx.arc(node.x, node.y, 10, 0, 2 * Math.PI);
         
-        for (let i = 0; i <= majorSegments; i++) {
-            const theta = (i * 2 * Math.PI) / majorSegments;
-            
-            const x3d = (R + r * Math.cos(phi)) * Math.cos(theta);
-            const y3d = (R + r * Math.cos(phi)) * Math.sin(theta);
-            const z3d = r * Math.sin(phi);
-
-            const pt = project3D(x3d, y3d, z3d);
-
-            if (i === 0) {
-                ctx.moveTo(pt.x, pt.y);
-            } else {
-                ctx.lineTo(pt.x, pt.y);
-            }
-        }
+        // Highlight root node in blue, branch nodes in soft purple
+        ctx.fillStyle = (node.label === "R") ? '#2563eb' : '#7c3aed';
+        ctx.fill();
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 1.5;
         ctx.stroke();
-    }
 
-    // 5. Draw the structural green outer profile bounding frame
+        // Print Node Labels cleanly right above the circles
+        ctx.fillStyle = '#1e293b';
+        ctx.font = 'bold 10px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(node.label, node.x, node.y - 14);
+    });
+
+    // 5. CANVAS BORDER: Render the structural green bounding outer frame
     ctx.strokeStyle = '#10b981';
     ctx.lineWidth = 2.5;
     ctx.strokeRect(20, 20, c.width - 40, c.height - 40);
