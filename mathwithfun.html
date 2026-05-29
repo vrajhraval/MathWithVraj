@@ -1,387 +1,460 @@
-export default function FunMathPlatform() {
-  const sections = [
-    {
-      title: "1. Interactive Visual Math",
-      description:
-        "Drag sliders, explore graphs, rotate 3D objects, and understand concepts visually.",
-      link: "mathwithfun.html", // 👈 Link added here
-      features: [
-        "Graph visualizer",
-        "Geometry playground",
-        "Function explorer",
-        "3D shape rotation",
-      ],
-    },
-    {
-      title: "2. Math Games & Challenges",
-      description:
-        "Gamified learning with XP, badges, quizzes, and puzzle battles.",
-      link: "#",
-      features: [
-        "Daily challenge",
-        "Leaderboard",
-        "Boss levels",
-        "Multiplayer quiz mode",
-      ],
-    },
-    {
-      title: "3. Real-Life Mathematics",
-      description:
-        "Learn how mathematics is used in finance, AI, sports, architecture, and coding.",
-      link: "#",
-      features: [
-        "Investment simulator",
-        "Sports analytics",
-        "AI math applications",
-        "Business calculations",
-      ],
-    },
-    {
-      title: "4. Why Does This Work?",
-      description:
-        "Conceptual understanding with animated proofs and visual intuition.",
-      link: "#",
-      features: [
-        "Animated proofs",
-        "Visual explanations",
-        "Historical discoveries",
-      ],
-    },
-    {
-      title: "5. AI Math Tutor",
-      description:
-        "Ask doubts and receive step-by-step conceptual explanations.",
-      link: "#",
-      features: [
-        "Explain like I'm 10",
-        "Hint mode",
-        "Exam shortcut mode",
-      ],
-    },
-    {
-      title: "6. Personalized Learning Paths",
-      description:
-        "Adaptive learning for school, Olympiad, JEE, engineering, and higher mathematics.",
-      link: "#",
-      features: [
-        "Weakness analysis",
-        "Topic recommendations",
-        "Smart revision plans",
-      ],
-    },
-    {
-      title: "7. Beautiful Animations",
-      description:
-        "Mathematical animations that make formulas intuitive and memorable.",
-      link: "#",
-      features: [
-        "Equation morphing",
-        "Wave simulations",
-        "Motion graphics",
-      ],
-    },
-    {
-      title: "8. Puzzle & Brain Teaser Zone",
-      description:
-        "Develop problem-solving skills with logic games and puzzles.",
-      link: "#",
-      features: [
-        "Sudoku",
-        "Logic riddles",
-        "Pattern games",
-        "Magic squares",
-      ],
-    },
-    {
-      title: "9. Math in Nature",
-      description:
-        "Explore Fibonacci patterns, symmetry, spirals, and fractals.",
-      link: "#",
-      features: [
-        "Golden ratio gallery",
-        "Fractal explorer",
-        "Nature mathematics",
-      ],
-    },
-    {
-      title: "10. Formula Explorer",
-      description:
-        "Interactive formula cards with derivations and graph previews.",
-      link: "#",
-      features: [
-        "Searchable formulas",
-        "Graph preview",
-        "Step-by-step derivations",
-      ],
-    },
-    {
-      title: "11. Meme & Fun Corner",
-      description:
-        "Mathematics memes, jokes, and entertaining concepts.",
-      link: "#",
-      features: [
-        "Funny math comics",
-        "Math paradoxes",
-        "Meme sharing",
-      ],
-    },
-    {
-      title: "12. Community Features",
-      description:
-        "Connect students, teachers, and math enthusiasts.",
-      link: "#",
-      features: [
-        "Discussion rooms",
-        "Study groups",
-        "Live sessions",
-      ],
-    },
-    {
-      title: "13. AR / 3D Math Lab",
-      description:
-        "Visualize higher-dimensional concepts and 3D surfaces.",
-      link: "#",
-      features: [
-        "3D vector field",
-        "Surface explorer",
-        "AR geometry",
-      ],
-    },
-    {
-      title: "14. Math Adventure Story",
-      description:
-        "Learn mathematics through gamified storytelling.",
-      link: "#",
-      features: [
-        "Algebra Kingdom",
-        "Calculus Mountain",
-        "Probability Universe",
-      ],
-    },
-    {
-      title: "15. Exam Preparation Engine",
-      description:
-        "Powerful practice system for school and competitive exams.",
-      link: "#",
-      features: [
-        "Adaptive mock tests",
-        "Previous year papers",
-        "Performance analytics",
-      ],
-    },
-    {
-      title: "16. Coding + Mathematics",
-      description:
-        "Learn Python, algorithms, AI mathematics, and simulations.",
-      link: "#",
-      features: [
-        "Graph plotting",
-        "Algorithm visualizer",
-        "Cryptography basics",
-      ],
-    },
-    {
-      title: "17. Instant Graphing Tools",
-      description:
-        "Experiment instantly using calculators and visual graph tools.",
-      link: "#",
-      features: [
-        "Matrix calculator",
-        "Probability simulator",
-        "Graphing calculator",
-      ],
-    },
-    {
-      title: "18. Achievement System",
-      description:
-        "Reward consistency and progress with levels and badges.",
-      link: "#",
-      features: [
-        "XP system",
-        "Daily streaks",
-        "Unlockable achievements",
-      ],
-    },
-    {
-      title: "19. Short Animated Videos",
-      description:
-        "Concept-based short lessons designed for fast learning.",
-      link: "#",
-      features: [
-        "2-minute lessons",
-        "Visual storytelling",
-        "Concept animations",
-      ],
-    },
-    {
-      title: "20. Play With Mathematics",
-      description:
-        "The platform transforms mathematics into an enjoyable experience.",
-      link: "#",
-      features: [
-        "Interactive exploration",
-        "Creative learning",
-        "Conceptual thinking",
-      ],
-    },
-  ];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Quest Arcade</title>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #161f33;
+            --accent-color: #3b82f6;
+            --text-color: #f3f4f6;
+        }
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-900 text-white p-6">
-      <div className="max-w-7xl mx-auto">
-        <header className="text-center py-16">
-          <h1 className="text-6xl font-black mb-6 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 text-transparent bg-clip-text">
-            Fun Mathematics Universe
-          </h1>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-          <p className="text-xl text-slate-300 max-w-4xl mx-auto leading-relaxed">
-            A next-generation interactive mathematics platform where students
-            from school to higher studies can explore, visualize, play, and
-            master mathematics with fun.
-          </p>
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
 
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <button className="px-8 py-4 rounded-2xl bg-cyan-500 hover:scale-105 transition font-bold text-lg shadow-2xl">
-              Start Learning
-            </button>
+        header {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(180deg, #111827 0%, rgba(11,15,25,0) 100%);
+        }
 
-            <button className="px-8 py-4 rounded-2xl border border-purple-400 hover:bg-purple-500/20 transition font-bold text-lg">
-              Explore Features
-            </button>
-          </div>
-        </header>
+        header h1 {
+            font-size: 2.5rem;
+            color: #38bdf8;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+        }
 
-        <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-          {sections.map((section, index) => (
-            /* Changed from <div> to <a> to make it a link. Added dynamic href, cursor styling, and text-resetting styles */
-            <a
-              href={section.link}
-              key={index}
-              className="block rounded-3xl p-6 bg-white/5 border border-white/10 backdrop-blur-lg hover:scale-[1.02] transition-all duration-300 shadow-2xl no-underline text-inherit cursor-pointer"
-            >
-              <div className="text-3xl font-bold mb-4 text-cyan-300">
-                {section.title}
-              </div>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
 
-              <p className="text-slate-300 mb-6 leading-relaxed">
-                {section.description}
-              </p>
+        /* Portal Selection Screen */
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
 
-              <div className="space-y-3">
-                {section.features.map((feature, featureIndex) => (
-                  <div
-                    key={featureIndex}
-                    className="flex items-center gap-3 bg-white/5 rounded-xl p-3"
-                  >
-                    <div className="w-3 h-3 rounded-full bg-pink-400"></div>
-                    <span>{feature}</span>
-                  </div>
-                ))}
-              </div>
-            </a>
-          ))}
-        </section>
+        .portal-card {
+            background: var(--card-bg);
+            border: 2px solid #1e293b;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
-        <section className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-10">
-          <div className="bg-white/5 rounded-3xl p-8 border border-white/10">
-            <h2 className="text-4xl font-bold mb-6 text-purple-300">
-              Live Formula Visualizer
-            </h2>
+        .portal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.2);
+        }
 
-            <div className="space-y-5 text-lg text-slate-300">
-              <div className="bg-slate-900 rounded-2xl p-5 font-mono text-cyan-300 overflow-auto">
-                y = ax² + bx + c
-              </div>
+        /* Tier Specific Colors */
+        .tier-1 { border-color: #4ade80; }
+        .tier-1:hover { box-shadow: 0 0 20px rgba(74, 222, 128, 0.3); }
+        .tier-2 { border-color: #facc15; }
+        .tier-2:hover { box-shadow: 0 0 20px rgba(250, 204, 21, 0.3); }
+        .tier-3 { border-color: #f97316; }
+        .tier-3:hover { box-shadow: 0 0 20px rgba(249, 115, 22, 0.3); }
+        .tier-4 { border-color: #ec4899; }
+        .tier-4:hover { box-shadow: 0 0 20px rgba(236, 72, 153, 0.3); }
+        .tier-5 { border-color: #a855f7; }
+        .tier-5:hover { box-shadow: 0 0 20px rgba(168, 85, 247, 0.3); }
+        .tier-6 { border-color: #3b82f6; }
+        .tier-6:hover { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <label>a = 1</label>
-                  <input type="range" className="w-full" />
+        .portal-card h2 {
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .portal-card p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Game Interface Area */
+        #game-arena {
+            display: none;
+            background: #111827;
+            border: 2px solid #1e293b;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 1rem;
+            position: relative;
+        }
+
+        .back-btn {
+            background: #334155;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+        }
+
+        .back-btn:hover { background: #475569; }
+
+        .game-window {
+            background: #020617;
+            border-radius: 12px;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+        }
+
+        /* Game Mechanics UIs */
+        .game-input {
+            background: #1e293b;
+            border: 2px solid #475569;
+            color: white;
+            padding: 0.75rem 1rem;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 1rem;
+            width: 200px;
+        }
+
+        .game-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+
+        .game-btn:hover { background: #2563eb; }
+
+        .score-board {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            font-weight: bold;
+            color: #38bdf8;
+        }
+
+        /* Level 1 Specific Balloon styles */
+        .balloon-container {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .balloon {
+            width: 70px;
+            height: 85px;
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+        }
+        .balloon:hover { transform: scale(1.1); }
+
+        /* Level 5 Matrix input layout */
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 60px);
+            gap: 10px;
+            margin: 1.5rem 0;
+        }
+        .matrix-cell {
+            width: 60px;
+            height: 60px;
+            background: #1e293b;
+            border: 2px solid #3b82f6;
+            color: white;
+            text-align: center;
+            font-size: 1.2rem;
+            border-radius: 6px;
+        }
+
+        .feedback {
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            height: 1.5rem;
+        }
+        .correct { color: #4ade80; }
+        .wrong { color: #f87171; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>⚔️ Math Quest Arcade ⚔️</h1>
+        <p>Choose your realm, solve the puzzles, and master the multiverse.</p>
+    </header>
+
+    <div class="container">
+        <div id="portal-selector">
+            <div class="portal-grid">
+                <div class="portal-card tier-1" onclick="startLevel(1)">
+                    <span class="badge" style="color: #4ade80;">K-5 Base</span>
+                    <h2 style="color: #4ade80; margin-top:1rem;">1. The Meadow Realm</h2>
+                    <p>KG Level: Pop the balloons to collect items and learn simple counting structures.</p>
+                    <button class="game-btn" style="background:#4ade80; color:#000;">Enter Portal</button>
                 </div>
 
-                <div>
-                  <label>b = 2</label>
-                  <input type="range" className="w-full" />
+                <div class="portal-card tier-2" onclick="startLevel(2)">
+                    <span class="badge" style="color: #facc15;">Grades 1-5</span>
+                    <h2 style="color: #facc15; margin-top:1rem;">2. The Dungeon Crawler</h2>
+                    <p>Primary School Level: Battle enemies by out-smarting them with multiplication loops.</p>
+                    <button class="game-btn" style="background:#facc15; color:#000;">Enter Portal</button>
                 </div>
 
-                <div>
-                  <label>c = 3</label>
-                  <input type="range" className="w-full" />
+                <div class="portal-card tier-3" onclick="startLevel(3)">
+                    <span class="badge" style="color: #f97316;">Grades 6-10</span>
+                    <h2 style="color: #f97316; margin-top:1rem;">3. Cyberpunk Matrix</h2>
+                    <p>Secondary School Level: Balance dynamic coordinates and linear paths to hack mainframes.</p>
+                    <button class="game-btn" style="background:#f97316;">Enter Portal</button>
                 </div>
-              </div>
 
-              <div className="h-64 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20 flex items-center justify-center text-2xl">
-                Interactive Graph Area
-              </div>
+                <div class="portal-card tier-4" onclick="startLevel(4)">
+                    <span class="badge" style="color: #ec4899;">Grades 11-12</span>
+                    <h2 style="color: #ec4899; margin-top:1rem;">4. The Space Odyssey</h2>
+                    <p>Higher Secondary Level: Optimize launch vectors and derivatives to navigate space fields.</p>
+                    <button class="game-btn" style="background:#ec4899;">Enter Portal</button>
+                </div>
+
+                <div class="portal-card tier-5" onclick="startLevel(5)">
+                    <span class="badge" style="color: #a855f7;">Undergraduate</span>
+                    <h2 style="color: #a855f7; margin-top:1rem;">5. Quantum Vector Grid</h2>
+                    <p>UG Level: Control dimensional vector planes using matrix transformation metrics.</p>
+                    <button class="game-btn" style="background:#a855f7;">Enter Portal</button>
+                </div>
+
+                <div class="portal-card tier-6" onclick="startLevel(6)">
+                    <span class="badge" style="color: #3b82f6;">Postgraduate</span>
+                    <h2 style="color: #3b82f6; margin-top:1rem;">6. The Multiverse Lab</h2>
+                    <p>PG Level: Solve complex graph structures and topology maps to bypass system anomalies.</p>
+                    <button class="game-btn" style="background:#3b82f6;">Enter Portal</button>
+                </div>
             </div>
-          </div>
+        </div>
 
-          <div className="bg-white/5 rounded-3xl p-8 border border-white/10">
-            <h2 className="text-4xl font-bold mb-6 text-pink-300">
-              AI Mathematics Tutor
-            </h2>
-
-            <div className="space-y-5">
-              <div className="bg-slate-900 rounded-2xl p-5 text-slate-300">
-                Ask any mathematics question and receive conceptual explanations,
-                hints, visual breakdowns, and exam shortcuts.
-              </div>
-
-              <textarea
-                placeholder="Ask your mathematics doubt..."
-                className="w-full h-40 rounded-2xl bg-slate-900 p-5 outline-none border border-white/10"
-              ></textarea>
-
-              <button className="w-full py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-purple-500 font-bold text-lg hover:scale-[1.02] transition">
-                Solve With AI
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <section className="mt-20">
-          <div className="rounded-3xl p-10 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-white/10 text-center">
-            <h2 className="text-5xl font-black mb-6">
-              Mathematics Should Feel Like Exploration
-            </h2>
-
-            <p className="text-xl text-slate-300 max-w-4xl mx-auto leading-relaxed">
-              This platform combines visualization, gamification, AI, puzzles,
-              real-world applications, coding, and conceptual understanding to
-              create a powerful learning experience for every student.
-            </p>
-
-            <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-6">
-              <div className="bg-white/5 rounded-2xl p-6">
-                <div className="text-4xl font-black text-cyan-300">100+</div>
-                <div className="text-slate-400">Interactive Lessons</div>
-              </div>
-
-              <div className="bg-white/5 rounded-2xl p-6">
-                <div className="text-4xl font-black text-purple-300">50+</div>
-                <div className="text-slate-400">Math Games</div>
-              </div>
-
-              <div className="bg-white/5 rounded-2xl p-6">
-                <div className="text-4xl font-black text-pink-300">24/7</div>
-                <div className="text-slate-400">AI Support</div>
-              </div>
-
-              <div className="bg-white/5 rounded-2xl p-6">
-                <div className="text-4xl font-black text-green-300">∞</div>
-                <div className="text-slate-400">Creative Possibilities</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <footer className="py-20 text-center text-slate-500">
-          <p>
-            Built for students who want to experience mathematics with fun,
-            creativity, and deep conceptual understanding.
-          </p>
-        </footer>
-      </div>
+        <div id="game-arena">
+            <button class="back-btn" onclick="exitGame()">← Leave Realm</button>
+            <h2 id="realm-title" style="margin-bottom: 1rem; color: #38bdf8;"></h2>
+            <div class="game-window" id="window-content">
+                </div>
+        </div>
     </div>
-  );
-}
+
+    <script>
+        // Game State Engine variables
+        let currentTier = 0;
+        let score = 0;
+        let streak = 0;
+        let currentAnswer = null;
+
+        const titles = {
+            1: "🌸 Realm 1: The Meadow (Counting)",
+            2: "⚔️ Realm 2: Dungeon Crawler (Multiplication Clash)",
+            3: "🌐 Realm 3: Cyberpunk Hack (Linear Balance)",
+            4: "🚀 Realm 4: Deep Orbit (Calculus Injection)",
+            5: "🌀 Realm 5: Quantum Grid (Matrix Transformations)",
+            6: "👁️ Realm 6: Multiverse Node (Graph Topology)"
+        };
+
+        function startLevel(tier) {
+            currentTier = tier;
+            score = 0;
+            streak = 0;
+            document.getElementById('portal-selector').style.display = 'none';
+            document.getElementById('game-arena').style.display = 'block';
+            document.getElementById('realm-title').innerText = titles[tier];
+            generateChallenge();
+        }
+
+        function exitGame() {
+            document.getElementById('portal-selector').style.display = 'block';
+            document.getElementById('game-arena').style.display = 'none';
+            document.getElementById('window-content').innerHTML = '';
+        }
+
+        function verifyAnswer(userAns) {
+            const feedbackEl = document.getElementById('game-feedback');
+            let isCorrect = false;
+
+            if(currentTier === 5) {
+                // Special check array parameters for Level 5 matrix cell calculations
+                isCorrect = JSON.stringify(userAns) === JSON.stringify(currentAnswer);
+            } else {
+                isCorrect = parseInt(userAns) === parseInt(currentAnswer);
+            }
+
+            if(isCorrect) {
+                score += 10;
+                streak += 1;
+                feedbackEl.className = "feedback correct";
+                feedbackEl.innerText = `✨ Correct! +10 Points. Streak: ${streak}`;
+                setTimeout(generateChallenge, 1500);
+            } else {
+                streak = 0;
+                feedbackEl.className = "feedback wrong";
+                feedbackEl.innerText = `❌ Paradigm Error. Try Again!`;
+            }
+            document.getElementById('score-val').innerText = score;
+            document.getElementById('streak-val').innerText = streak;
+        }
+
+        function generateChallenge() {
+            const container = document.getElementById('window-content');
+            container.innerHTML = `
+                <div class="score-board">
+                    <div>SCORE: <span id="score-val">${score}</span></div>
+                    <div>STREAK: <span id="streak-val">${streak}</span></div>
+                </div>
+                <div id="game-playground" style="text-align:center; width:100%;"></div>
+                <div id="game-feedback" class="feedback"></div>
+            `;
+            
+            const playground = document.getElementById('game-playground');
+
+            switch(currentTier) {
+                case 1: // KG Level
+                    let targetCount = Math.floor(Math.random() * 5) + 3;
+                    currentAnswer = targetCount;
+                    playground.innerHTML = `<h3>Help the Monkey! Pop the balloon with exactly <span style="color:#4ade80; font-size:1.5rem;">${targetCount}</span> dots!</h3>`;
+                    
+                    let balloonWrap = document.createElement('div');
+                    balloonWrap.className = "balloon-container";
+                    balloonWrap.style.justifyContent = "center";
+                    
+                    let colors = ['#ef4444', '#3b82f6', '#10b981', '#f59e0b'];
+                    let choices = [targetCount, targetCount - 1, targetCount + 2].sort(() => Math.random() - 0.5);
+                    
+                    choices.forEach((num, idx) => {
+                        let b = document.createElement('div');
+                        b.className = "balloon";
+                        b.style.backgroundColor = colors[idx % colors.length];
+                        b.innerText = "•".repeat(num);
+                        b.onclick = () => verifyAnswer(num);
+                        balloonWrap.appendChild(b);
+                    });
+                    playground.appendChild(balloonWrap);
+                    break;
+
+                case 2: // Primary School
+                    let factor1 = Math.floor(Math.random() * 8) + 2;
+                    let factor2 = Math.floor(Math.random() * 9) + 1;
+                    currentAnswer = factor1 * factor2;
+                    playground.innerHTML = `
+                        <h3>An Orc blocks the door! Cast a spell by solving:</h3>
+                        <h1 style="margin: 1.5rem 0; font-size: 3rem; color:#facc15;">${factor1} × ${factor2} = ?</h1>
+                        <input type="number" id="ans-input" class="game-input" placeholder="Your Answer" autofocus />
+                        <br><button class="game-btn" style="background:#facc15; color:#000;" onclick="verifyAnswer(document.getElementById('ans-input').value)">Cast Spell</button>
+                    `;
+                    break;
+
+                case 3: // Secondary School
+                    let xVal = Math.floor(Math.random() * 6) + 2;
+                    let slope = Math.floor(Math.random() * 3) + 2;
+                    let constant = Math.floor(Math.random() * 5) + 1;
+                    currentAnswer = (slope * xVal) + constant;
+                    playground.innerHTML = `
+                        <h3>Hack the mainframe. Adjust the terminal buffer intercept:</h3>
+                        <p style="color:#94a3b8; margin-bottom:1rem;">Find $y$ when the line is defined by $y = ${slope}x + ${constant}$ and $x = ${xVal}$</p>
+                        <h2 style="color:#f97316;">y = ?</h2>
+                        <input type="number" id="ans-input" class="game-input" autofocus />
+                        <br><button class="game-btn" style="background:#f97316;" onclick="verifyAnswer(document.getElementById('ans-input').value)">Execute Hack</button>
+                    `;
+                    break;
+
+                case 4: // Higher Secondary School
+                    let t = Math.floor(Math.random() * 4) + 2;
+                    let exponent = 3;
+                    currentAnswer = 3 * (t * t); // Derivative of t^3 is 3t^2
+                    playground.innerHTML = `
+                        <h3>Rocket Trajectory Calculation Required!</h3>
+                        <p style="color:#94a3b8; margin-bottom:1rem;">Position equation of rocket: $s(t) = t^3$. Calculate instantaneous velocity acceleration at time $t = ${t}$ units.</p>
+                        <h2 style="color:#ec4899;">ds/dt = ?</h2>
+                        <input type="number" id="ans-input" class="game-input" autofocus />
+                        <br><button class="game-btn" style="background:#ec4899;" onclick="verifyAnswer(document.getElementById('ans-input').value)">Burn Thrusters</button>
+                    `;
+                    break;
+
+                case 5: // Undergraduate Level
+                    let scaleFactor = Math.floor(Math.random() * 3) + 2;
+                    currentAnswer = [scaleFactor * 2, scaleFactor * 4];
+                    playground.innerHTML = `
+                        <h3>Apply Linear Scaling Matrix Transformation:</h3>
+                        <p style="color:#94a3b8;">Transform the vector $\\begin{bmatrix} 2 \\\\ 4 \\end{bmatrix}$ using Identity scaling matrix scalar value $k = ${scaleFactor}$</p>
+                        <div style="display:flex; justify-content:center; align-items:center;">
+                            <div class="matrix-grid">
+                                <input type="number" id="m1" class="matrix-cell" placeholder="X">
+                                <input type="number" id="m2" class="matrix-cell" placeholder="Y">
+                            </div>
+                        </div>
+                        <button class="game-btn" style="background:#a855f7;" onclick="verifyMatrixAnswer()">Pulse Matrix Vector</button>
+                    `;
+                    break;
+
+                case 6: // Postgraduate Level
+                    let nodes = Math.floor(Math.random() * 3) + 4; 
+                    currentAnswer = nodes - 1; // Minimum spanning tree edges formula: V - 1
+                    playground.innerHTML = `
+                        <h3>Quantum Node Structural Topology Loop</h3>
+                        <p style="color:#94a3b8; margin-bottom:1rem;">To establish absolute synchronization across a local space network mesh containing <span style="color:#3b82f6; font-weight:bold;">${nodes} vertices</span>, what is the exact minimum number of edge paths needed to build a Minimum Spanning Tree (MST)?</p>
+                        <input type="number" id="ans-input" class="game-input" autofocus />
+                        <br><button class="game-btn" style="background:#3b82f6;" onclick="verifyAnswer(document.getElementById('ans-input').value)">Synchronize Network</button>
+                    `;
+                    break;
+            }
+        }
+
+        // Special evaluation method for level 5 multidimensional arrays
+        function verifyMatrixAnswer() {
+            let x = parseInt(document.getElementById('m1').value);
+            let y = parseInt(document.getElementById('m2').value);
+            verifyAnswer([x, y]);
+        }
+    </script>
+</body>
+</html>
