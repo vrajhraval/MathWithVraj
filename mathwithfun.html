@@ -1,582 +1,859 @@
+# Enhanced Mathematics Multiverse Archive (Full Upgrade)
+
+Replace your existing HTML with the complete upgraded version below.
+
+```html
 <!DOCTYPE html>
 <html lang="gu">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Grand Math Multiverse Archive</title>
-    
-    <script>
-        window.MathJax = {
-            tex: {
-                inlineMath: [['\\(', '\\)'], ['$', '$']],
-                displayMath: [['$$', '$$']]
-            },
-            svg: { fontCache: 'global' }
-        };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Grand Math Multiverse Archive</title>
 
-    <style>
-        :root {
-            --bg-deep: #020617;
-            --bg-surface: #0f172a;
-            --bg-card: #1e293b;
-            --accent-neon: #38bdf8;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-glow: #334155;
-        }
+<script>
+window.MathJax = {
+    tex: {
+        inlineMath: [['\\(','\\)'], ['$','$']],
+        displayMath: [['$$','$$']]
+    },
+    svg: { fontCache: 'global' }
+};
+</script>
 
-        body {
-            background-color: var(--bg-deep);
-            color: var(--text-main);
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-        }
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/function-plot/dist/function-plot.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
 
-        .arcade-container {
-            max-width: 1300px;
-            margin: 0 auto;
-        }
+<style>
+:root{
+    --bg-deep:#020617;
+    --bg-surface:#0f172a;
+    --bg-card:#1e293b;
+    --accent:#38bdf8;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --border:#334155;
+    --success:#22c55e;
+    --error:#ef4444;
+    --warning:#facc15;
+}
 
-        .header-panel {
-            text-align: center;
-            padding: 2rem;
-            background: var(--bg-surface);
-            border: 2px solid var(--border-glow);
-            border-radius: 16px;
-            margin-bottom: 2rem;
-        }
+*{
+    box-sizing:border-box;
+}
 
-        .header-panel h1 {
-            font-size: 2.5rem;
-            color: #38bdf8;
-            margin: 0 0 0.5rem 0;
-            text-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
-        }
+body{
+    margin:0;
+    padding:20px;
+    background:var(--bg-deep);
+    color:var(--text);
+    font-family:'Segoe UI',sans-serif;
+    overflow-x:hidden;
+}
 
-        /* Tier Navigation Tabs */
-        .tier-navigation {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
+#particles-js{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+}
 
-        .tier-tab {
-            background: var(--bg-surface);
-            border: 2px solid var(--border-glow);
-            color: var(--text-muted);
-            padding: 12px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-        }
+.arcade-container{
+    max-width:1400px;
+    margin:auto;
+}
 
-        .tier-tab.active {
-            border-color: #38bdf8;
-            color: #38bdf8;
-            background: var(--bg-card);
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
-        }
+.header-panel{
+    background:rgba(15,23,42,0.85);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:2rem;
+    margin-bottom:2rem;
+    text-align:center;
+    backdrop-filter:blur(8px);
+    box-shadow:0 0 30px rgba(56,189,248,0.12);
+}
 
-        /* Subject Selector Grid */
-        .subject-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
+.header-panel h1{
+    margin:0;
+    font-size:3rem;
+    color:var(--accent);
+    text-shadow:0 0 20px rgba(56,189,248,0.35);
+}
 
-        .subject-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-glow);
-            border-radius: 12px;
-            padding: 1.5rem;
-            cursor: pointer;
-            transition: transform 0.2s, border-color 0.2s;
-        }
+.header-panel p{
+    color:var(--muted);
+    margin-top:1rem;
+}
 
-        .subject-card:hover {
-            transform: translateY(-4px);
-            border-color: #38bdf8;
-        }
+.stats-bar{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:1rem;
+    margin-bottom:2rem;
+}
 
-        .subject-card h3 {
-            margin: 0 0 0.5rem 0;
-            color: #f8fafc;
-        }
+.stat-card{
+    background:rgba(15,23,42,0.85);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:1rem;
+    text-align:center;
+    transition:0.3s ease;
+}
 
-        .subject-card p {
-            margin: 0;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.4;
-        }
+.stat-card:hover{
+    transform:translateY(-5px);
+    border-color:var(--accent);
+}
 
-        /* Arena Layout */
-        #arena-workspace {
-            display: none;
-            background: var(--bg-surface);
-            border: 2px solid var(--border-glow);
-            border-radius: 16px;
-            padding: 2rem;
-        }
+.stat-number{
+    font-size:2rem;
+    font-weight:bold;
+    color:var(--accent);
+}
 
-        .arena-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 2rem;
-        }
+.tier-navigation{
+    display:flex;
+    justify-content:center;
+    gap:1rem;
+    flex-wrap:wrap;
+    margin-bottom:2rem;
+}
 
-        @media (max-width: 900px) {
-            .arena-grid { grid-template-columns: 1fr; }
-        }
+.tier-tab{
+    padding:14px 28px;
+    border-radius:10px;
+    border:1px solid var(--border);
+    background:rgba(15,23,42,0.9);
+    color:var(--muted);
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s ease;
+}
 
-        .display-panel {
-            background: rgba(2, 6, 23, 0.5);
-            padding: 1.5rem;
-            border-radius: 8px;
-            border-left: 4px solid #38bdf8;
-        }
+.tier-tab:hover{
+    transform:translateY(-3px);
+    border-color:var(--accent);
+}
 
-        .gujarati-block {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px dashed #334155;
-            color: #cbd5e1;
-            font-size: 1.05rem;
-            line-height: 1.6;
-        }
+.tier-tab.active{
+    background:var(--bg-card);
+    color:var(--accent);
+    border-color:var(--accent);
+    box-shadow:0 0 20px rgba(56,189,248,0.2);
+}
 
-        .input-panel {
-            background: var(--bg-card);
-            border-radius: 8px;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
+.subject-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:1.5rem;
+}
 
-        .custom-input {
-            background: var(--bg-deep);
-            border: 2px solid var(--border-glow);
-            color: white;
-            padding: 12px;
-            font-size: 1.2rem;
-            border-radius: 6px;
-            width: 80%;
-            text-align: center;
-            margin-bottom: 1rem;
-        }
+.subject-card{
+    background:rgba(15,23,42,0.88);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:1.5rem;
+    cursor:pointer;
+    transition:0.35s ease;
+    position:relative;
+    overflow:hidden;
+}
 
-        .custom-input:focus { border-color: #38bdf8; outline: none; }
+.subject-card::before{
+    content:'';
+    position:absolute;
+    width:200px;
+    height:200px;
+    background:radial-gradient(circle,rgba(56,189,248,0.2),transparent);
+    top:-100px;
+    right:-100px;
+}
 
-        .submit-btn {
-            background: #38bdf8;
-            color: #020617;
-            font-weight: bold;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 6px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            width: 80%;
-        }
+.subject-card:hover{
+    transform:translateY(-8px) scale(1.02);
+    border-color:var(--accent);
+    box-shadow:0 0 30px rgba(56,189,248,0.15);
+}
 
-        .feedback-message {
-            margin-top: 1rem;
-            font-weight: bold;
-            font-size: 1.1rem;
-            min-height: 2.5rem;
-            text-align: center;
-        }
+.subject-card h3{
+    color:var(--accent);
+    margin-top:0;
+}
 
-        .btn-container {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-        }
+.subject-card p{
+    color:var(--muted);
+    line-height:1.5;
+}
 
-        .control-btn {
-            background: #334155;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .control-btn:hover { background: #475569; }
-    </style>
+#arena-workspace{
+    display:none;
+    margin-top:2rem;
+    background:rgba(15,23,42,0.9);
+    border-radius:20px;
+    border:1px solid var(--border);
+    padding:2rem;
+    backdrop-filter:blur(10px);
+}
+
+.arena-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:2rem;
+}
+
+@media(max-width:950px){
+    .arena-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+.display-panel,
+.input-panel,
+.graph-panel,
+.ai-panel{
+    background:rgba(30,41,59,0.7);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:1.5rem;
+}
+
+.display-panel{
+    border-left:4px solid var(--accent);
+}
+
+.gujarati-block{
+    margin-top:1.5rem;
+    border-top:1px dashed var(--border);
+    padding-top:1rem;
+    line-height:1.7;
+    color:#dbeafe;
+}
+
+.custom-input{
+    width:100%;
+    background:#020617;
+    border:2px solid var(--border);
+    color:white;
+    padding:14px;
+    border-radius:10px;
+    font-size:1.1rem;
+    margin-bottom:1rem;
+    transition:0.3s;
+}
+
+.custom-input:focus{
+    outline:none;
+    border-color:var(--accent);
+    box-shadow:0 0 15px rgba(56,189,248,0.3);
+}
+
+.submit-btn,
+.control-btn,
+.hint-btn{
+    background:var(--accent);
+    color:#020617;
+    border:none;
+    padding:12px 22px;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s ease;
+}
+
+.submit-btn:hover,
+.control-btn:hover,
+.hint-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 0 20px rgba(56,189,248,0.25);
+}
+
+.feedback-message{
+    margin-top:1rem;
+    min-height:50px;
+    font-weight:bold;
+    text-align:center;
+    font-size:1.1rem;
+}
+
+.text-correct{
+    color:var(--success);
+}
+
+.text-error{
+    color:var(--error);
+}
+
+.btn-container{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:1rem;
+    margin-bottom:2rem;
+}
+
+#graph{
+    width:100%;
+    height:420px;
+}
+
+.timer{
+    color:var(--warning);
+    font-weight:bold;
+}
+
+.badge-box{
+    margin-top:1rem;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.badge{
+    background:#1d4ed8;
+    padding:8px 14px;
+    border-radius:999px;
+    font-size:0.85rem;
+}
+
+.ai-box{
+    color:#cbd5e1;
+    line-height:1.7;
+}
+
+.progress-bar{
+    width:100%;
+    height:14px;
+    background:#111827;
+    border-radius:999px;
+    overflow:hidden;
+    margin-top:10px;
+}
+
+.progress-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#38bdf8,#22c55e);
+    transition:0.5s ease;
+}
+
+.footer-note{
+    margin-top:3rem;
+    text-align:center;
+    color:var(--muted);
+}
+</style>
 </head>
+
 <body>
+<div id="particles-js"></div>
 
-    <div class="arcade-container">
-        
-        <div class="header-panel">
-            <h1>🌌 The Grand Mathematics Multiverse Archive</h1>
-            <p style="color: var(--text-muted); margin: 0;">Comprehensive Academic Syllabus Coverage: School Units up to Postgraduate Fields (English & ગુજરાતી)</p>
-        </div>
+<div class="arcade-container">
 
-        <div class="tier-navigation">
-            <div class="tier-tab active" onclick="switchTier('school', this)">School Core (Std 6-12)</div>
-            <div class="tier-tab" onclick="switchTier('ug', this)">Undergraduate (UG)</div>
-            <div class="tier-tab" onclick="switchTier('pg', this)">Postgraduate (PG)</div>
-        </div>
+<div class="header-panel">
+    <h1>🌌 The Grand Mathematics Multiverse Archive</h1>
+    <p>
+        Interactive Mathematics Universe • School → Undergraduate → Postgraduate
+        <br>
+        English + ગુજરાતી Academic Exploration Engine
+    </p>
+</div>
 
-        <div id="subject-selector-zone" class="subject-grid"></div>
-
-        <div id="arena-workspace">
-            <div class="btn-container">
-                <button class="control-btn" onclick="exitArena()">← Close Subject / બહાર નીકળો</button>
-                <div style="font-weight: bold; color: #38bdf8;" id="progress-tracker">Question 1/5</div>
-            </div>
-
-            <div class="arena-grid">
-                <div class="display-panel">
-                    <span id="branch-tag" style="background:#334155; padding:4px 10px; border-radius:4px; font-size:0.8rem; font-weight:bold; color:#38bdf8; text-transform:uppercase;">BRANCH</span>
-                    <div id="eng-story" style="margin-top: 1rem; line-height: 1.5;"></div>
-                    <div id="guj-story" class="gujarati-block"></div>
-                </div>
-
-                <div class="input-panel">
-                    <div id="interactive-game-field" style="width:100%; text-align:center;">
-                        <input type="text" id="user-response-input" class="custom-input" placeholder="Type your numeric answer here" autocomplete="off">
-                        <button class="submit-btn" onclick="verifyCurrentAnswer()">Evaluate Answer / ચકાસણી કરો</button>
-                    </div>
-                    <div id="arena-feedback" class="feedback-message"></div>
-                </div>
-            </div>
-        </div>
-
+<div class="stats-bar">
+    <div class="stat-card">
+        <div class="stat-number" id="xp-counter">0</div>
+        <div>Total XP</div>
     </div>
 
-    <script>
-        // High-Density Central Database Matrix Array
-        const MasterQuestionDatabase = {
-            school: {
-                "std6-7-arithmetic": {
-                    title: "Std 6-7: Fractions & Ratios",
-                    desc: "Basic proportional fractions and simplified division scaling systems.",
-                    questions: [
-                        {
-                            eng: "A recipe container requires a strict scale validation ratio. If a structural unit requires 12 parts component A to 18 parts component B, simplify the operational fraction completely to its base denominator form \\(\\frac{2}{x}\\). Find \\(x\\).",
-                            guj: "એક રેસીપીમાં ઘટક A ના 12 ભાગ અને ઘટક B ના 18 ભાગ ઉમેરવામાં આવે છે. આ ગુણોત્તરને તેના અતિસંક્ષિપ્ત સ્વરૂપ \\(\\frac{2}{x}\\) માં ફેરવો. \\(x\\) ની કિંમત શોધો.",
-                            ans: "3"
-                        },
-                        {
-                            eng: "An asset container array drops 35 items out of 100 total capacity allocation loops. Reduce the remaining elements to a percentage. What is the value?",
-                            guj: "એક બોક્સમાંથી 100 વસ્તુઓમાંથી 35 વસ્તુઓ બહાર કાઢવામાં આવે છે. બાકી બચેલી વસ્તુઓની ટકાવારી કેટલી થશે?",
-                            ans: "65"
-                        }
-                    ]
+    <div class="stat-card">
+        <div class="stat-number" id="correct-counter">0</div>
+        <div>Correct Answers</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-number" id="streak-counter">0</div>
+        <div>Streak</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-number" id="rank-counter">Novice</div>
+        <div>Mathematics Rank</div>
+    </div>
+</div>
+
+<div class="tier-navigation">
+    <div class="tier-tab active" onclick="switchTier('school', this)">School Core</div>
+    <div class="tier-tab" onclick="switchTier('ug', this)">Undergraduate</div>
+    <div class="tier-tab" onclick="switchTier('pg', this)">Postgraduate</div>
+</div>
+
+<div id="subject-selector-zone" class="subject-grid"></div>
+
+<div id="arena-workspace">
+
+<div class="btn-container">
+    <button class="control-btn" onclick="exitArena()">← Exit Subject</button>
+
+    <div>
+        <div id="progress-tracker">Question 1/5</div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+        </div>
+    </div>
+
+    <div class="timer">⏳ Time Left: <span id="timer">60</span>s</div>
+</div>
+
+<div class="arena-grid">
+
+<div>
+
+<div class="display-panel">
+    <span id="branch-tag" style="background:#334155;padding:6px 12px;border-radius:6px;color:#38bdf8;font-weight:bold;">
+        BRANCH
+    </span>
+
+    <div id="eng-story" style="margin-top:1rem;line-height:1.7"></div>
+
+    <div id="guj-story" class="gujarati-block"></div>
+</div>
+
+<div class="graph-panel" style="margin-top:1.5rem;">
+    <h3>📈 Live Mathematics Visualizer</h3>
+    <div id="graph"></div>
+</div>
+
+</div>
+
+<div>
+
+<div class="input-panel">
+    <input
+        type="text"
+        id="user-response-input"
+        class="custom-input"
+        placeholder="Type answer here"
+        autocomplete="off"
+    >
+
+    <button class="submit-btn" onclick="verifyCurrentAnswer()">
+        Evaluate Answer
+    </button>
+
+    <button class="hint-btn" onclick="showHint()" style="margin-top:1rem;">
+        💡 AI Hint
+    </button>
+
+    <div id="arena-feedback" class="feedback-message"></div>
+</div>
+
+<div class="ai-panel" style="margin-top:1.5rem;">
+    <h3>🤖 Mathematical Assistant</h3>
+    <div class="ai-box" id="ai-box">
+        Explore mathematical structures interactively.
+    </div>
+
+    <div class="badge-box" id="badge-box"></div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer-note">
+    Mathematical Exploration Engine • Interactive Academic Universe • GitHub Ready
+</div>
+
+</div>
+
+<script>
+
+const MasterQuestionDatabase = {
+    school:{
+        algebra:{
+            title:'School Algebra',
+            desc:'Linear equations, simplification, symbolic logic.',
+            graph:'x^2',
+            questions:[
+                {
+                    eng:'Solve the equation: $$4x-7=29$$',
+                    guj:'સમીકરણ ઉકેલો: $$4x-7=29$$',
+                    ans:'9',
+                    hint:'Add 7 on both sides then divide by 4.'
                 },
-                "std8-9-algebra": {
-                    title: "Std 8-9: Linear Equations",
-                    desc: "Single and multi-variable linear configurations and coordinate balance equations.",
-                    questions: [
-                        {
-                            eng: "Balance the linear transmission module line variable parameters. Solve for coordinate component \\(x\\): $$4x - 7 = 29$$",
-                            guj: "આપેલા રેખીય સમીકરણનો ઉકેલ મેળવી ચલ \\(x\\) ની સાચી કિંમત શોધો: $$4x - 7 = 29$$",
-                            ans: "9"
-                        },
-                        {
-                            eng: "Evaluate the intersection system configuration logic. Find the scalar root balance point \\(y\\) for: $$3(y + 4) = 33$$",
-                            guj: "આપેલા સમીકરણ પ્રણાલીનો ઉકેલ શોધો અને ચલ \\(y\\) ની સાચી કિંમત નક્કી કરો: $$3(y + 4) = 33$$",
-                            ans: "7"
-                        }
-                    ]
-                },
-                "std10-geometry": {
-                    title: "Std 10: Coordinate Geometry",
-                    desc: "Triangles, trigonometric values, and basic spatial coordinate theorems.",
-                    questions: [
-                        {
-                            eng: "A right-angled triangle structural segment exhibits a horizontal base boundary line dimension of 6 units and a vertical height of 8 units. Calculate the absolute hypotenuse path length using the Pythagorean theorem.",
-                            guj: "એક કાટકોણ ત્રિકોણ પાયાની લંબાઈ 6 એકમ અને લંબ ઊંચાઈ 8 એકમ ધરાવે છે. પાયથાગોરસના પ્રમેયનો ઉપયોગ કરી કર્ણની લંબાઈ શોધો.",
-                            ans: "10"
-                        },
-                        {
-                            eng: "Evaluate the exact scalar trigonometric function configuration metric: Find the absolute numerical value of the expression: $$\\sin^2(45^\\circ) + \\cos^2(45^\\circ) + 5$$",
-                            guj: "આપેલા ત્રિકોણમિતીય નિત્યસમનું મૂલ્ય નક્કી કરો: $$\\sin^2(45^\\circ) + \\cos^2(45^\\circ) + 5$$",
-                            ans: "6"
-                        }
-                    ]
-                },
-                "std11-probability": {
-                    title: "Std 11: Combinatorics & Sets",
-                    desc: "Permutations, simple configurations, set theory interactions, and cards maps.",
-                    questions: [
-                        {
-                            eng: "A local system array needs to compute structural permutations. How many unique string sequences can be structured using all elements of the letter set \\(\\{M, A, T, H\\}\\) without replication values?",
-                            guj: "પુનરાવર્તન વગર \\(\\{M, A, T, H\\}\\) શબ્દના તમામ અક્ષરોનો ઉપયોગ કરીને કુલ કેટલા ક્રમચય (અલગ-અલગ ગોઠવણીઓ) બનાવી શકાય?",
-                            ans: "24"
-                        },
-                        {
-                            eng: "Set \\(A\\) contains 15 structural node IDs, and Set \\(B\\) holds 20 node IDs. If their absolute union set array size is \\(|A \\cup B| = 30\\), calculate the intersection overlap array size \\(|A \\cap B|\\).",
-                            guj: "ગણ \\(A\\) માં 15 સભ્યો છે અને ગણ \\(B\\) માં 20 સભ્યો છે. જો બંનેના યોગગણની સંખ્યા \\(|A \\cup B| = 30\\) હોય, તો તેમના છેદગણની સભ્ય સંખ્યા \\(|A \\cap B|\\) શોધો.",
-                            ans: "5"
-                        }
-                    ]
-                },
-                "std12-calculus": {
-                    title: "Std 12: Applied Calculus",
-                    desc: "Basic continuous derivatives, slope rules, and boundary integration matrices.",
-                    questions: [
-                        {
-                            eng: "Evaluate the derivative profile matrix to calculate the slope function tracking metric. Compute the instantaneous derivative value of \\(f(x) = 3x^2 + 5x\\) precisely at evaluation step point \\(x = 2\\).",
-                            guj: "આપેલા વિધેય \\(f(x) = 3x^2 + 5x\\) નું વિકલન મેળવી બિંદુ \\(x = 2\\) આગળ તેનો તત્કાલીન દર (ઢાળ) શોધો.",
-                            ans: "17"
-                        },
-                        {
-                            eng: "Find the absolute area under the linear trajectory vector by computing the definite integral bound limits: $$\\int_{0}^{3} 3x^2 \\, dx$$",
-                            guj: "આપેલા નિયત સંકલનનો ઉપયોગ કરીને વક્ર રેખા હેઠળ ઘેરાયેલું ક્ષેત્રફળ શોધો: $$\\int_{0}^{3} 3x^2 \\, dx$$",
-                            ans: "27"
-                        }
-                    ]
+                {
+                    eng:'Find the value of $$3(y+4)=33$$',
+                    guj:'$$3(y+4)=33$$ નું મૂલ્ય શોધો.',
+                    ans:'7',
+                    hint:'First divide by 3.'
                 }
-            },
-            ug: {
-                "real-analysis": {
-                    title: "UG: Real Analysis",
-                    desc: "Convergence criteria bounds, Dedekind properties, limits, and sequence mechanics.",
-                    questions: [
-                        {
-                            eng: "Examine the bounded monotonic sequence configuration array map. Evaluate the absolute limit convergence ceiling point for the sequence function as state constraints scale out to infinity: $$a_n = \\frac{6n^2 + 4n}{2n^2 - 1}$$",
-                            guj: "વાસ્તવિક વિશ્લેષણ (Real Analysis) ના નિયમો મુજબ, આપેલી અનંત શ્રેણી માટે લિમિટની સર્વોચ્ચ કિંમત શોધો જ્યારે લક્ષ્ય અનંત સુધી જતું હોય: $$a_n = \\frac{6n^2 + 4n}{2n^2 - 1}$$",
-                            ans: "3"
-                        },
-                        {
-                            eng: "Determine the supremum limit bound layer of the bounded real subset interval definition matrix array: $$S = \\left\\{ 5 - \\frac{1}{n} \\;\\middle|\\; n \\in \\mathbb{N} \\right\\}$$",
-                            guj: "આપેલા વાસ્તવિક સંખ્યાઓના ઉપગણ માટે સુપ્રિમમ (Supremum - ન્યૂનતમ ઉચ્ચતમ સીમા) કિંમત નક્કી કરો: $$S = \\left\\{ 5 - \\frac{1}{n} \\;\\middle|\\; n \\in \\mathbb{N} \\right\\}$$",
-                            ans: "5"
-                        }
-                    ]
-                },
-                "complex-analysis": {
-                    title: "UG: Complex Analysis",
-                    desc: "Cauchy residue integrals, imaginary identities, and conformal map paths.",
-                    questions: [
-                        {
-                            eng: "An isolated singularity point index resides inside a contour line track loop. Evaluate the integral along contour \\(C\\) using Cauchy's Residue Formula if the lone residue at poles equals 7: $$\\frac{1}{2\\pi i}\\oint_C f(z)\\,dz$$",
-                            guj: "સંકીર્ણ વિશ્લેષણ (Complex Analysis) માં કૌશીના રેસિડ્યુ પ્રમેયનો ઉપયોગ કરી આપેલા ક્લોઝ્ડ કોન્ટૂર સંકલનનું મૂલ્ય શોધો જો રેસિડ્યુનું મૂલ્ય 7 હોય: $$\\frac{1}{2\\pi i}\\oint_C f(z)\\,dz$$",
-                            ans: "7"
-                        },
-                        {
-                            eng: "Compute the square modules factor value of the complex matrix transformation vector system asset coordinate: $$z = 3 + 4i \\implies |z|$$",
-                            guj: "આપેલી સંકીર્ણ સંખ્યા માટે માનાંક (Absolute Modulus Value) શોધો: $$z = 3 + 4i \\implies |z|$$",
-                            ans: "5"
-                        }
-                    ]
-                },
-                "abstract-algebra": {
-                    title: "UG: Abstract Group Theory",
-                    desc: "Lagrange subgroups, cyclic order symmetries, and modular groups configurations.",
-                    questions: [
-                        {
-                            eng: "A finite cyclic group configuration structure \\(G\\) contains an absolute set rank size of order 24. If \\(H\\) is formed as a proper subgroup element, and Lagrange's Theorem dictates its order must divide 24, find the largest possible order of \\(H\\) if \\(H \\neq G\\).",
-                            guj: "એક નિયમિત સાયક્લિક ગ્રુપ \\(G\\) નો ઓર્ડર 24 છે. લેગ્રેંજના પ્રમેય અનુસાર તેના ઉપગ્રુપ \\(H\\) નો મહત્તમ શક્ય ઓર્ડર શોધો (જ્યાં \\(H \\neq G\\)).",
-                            ans: "12"
-                        },
-                        {
-                            eng: "Calculate the exact number of generator element paths belonging directly inside a cyclic group structure containing an abstract order sizing profile of exactly 5.",
-                            guj: "ઓર્ડર 5 ધરાવતા સાયક્લિક ગ્રુપના જનરેટર (Generators) ની કુલ સંખ્યા કેટલી હશે?",
-                            ans: "4"
-                        }
-                    ]
-                },
-                "classical-mechanics": {
-                    title: "UG: Classical Mechanics",
-                    desc: "Lagrangian coordinate models, path actions, momentum vectors, and planetary fields.",
-                    questions: [
-                        {
-                            eng: "A system state is tracked via generalized coordinates where potential spatial constraint fields match zero. If the kinetic framework matches standard profile: $$L = T - V = \\frac{1}{2}(2)\\dot{x}^2 - 0$$ Extract the linear momentum conjugate value if \\(\\dot{x} = 6\\).",
-                            guj: "ક્લાસિકલ મિકેનિક્સ સમીકરણ હેઠળ લેગ્રાન્જિયન તંત્ર માટે રેખીય વેગમાન (Linear Momentum Conjugate) શોધો જ્યાં માસ 2 છે અને વેગ \\(\\dot{x} = 6\\) છે.",
-                            ans: "12"
-                        }
-                    ]
-                },
-                "number-theory": {
-                    title: "UG: Number Theory",
-                    desc: "Prime distributions, Euler's totient paths, and Fermat congruence identities.",
-                    questions: [
-                        {
-                            eng: "Compute the exact output value of Euler's Totient phi function mapping array sequence for the prime tracking factor node of 11: $$\\phi(11)$$",
-                            guj: "યુલરના ટોશન્ટ વિધેય (Euler's Totient function) ની ગણતરી કરી આપેલ અવિભાજ્ય સંખ્યા માટે કિંમત મેળવો: $$\\phi(11)$$",
-                            ans: "10"
-                        }
-                    ]
+            ]
+        },
+
+        geometry:{
+            title:'School Geometry',
+            desc:'Triangles, trigonometry, coordinate geometry.',
+            graph:'sqrt(100-x^2)',
+            questions:[
+                {
+                    eng:'A right triangle has sides 6 and 8. Find hypotenuse.',
+                    guj:'કર્ણ શોધો જો બાજુઓ 6 અને 8 છે.',
+                    ans:'10',
+                    hint:'Use Pythagoras theorem.'
                 }
-            },
-            pg: {
-                "topology": {
-                    title: "PG: Advanced Topology",
-                    desc: "Homotopy loops, compactness boundaries, and Hausdorff metric structures.",
-                    questions: [
-                        {
-                            eng: "An abstract topological space grid framework maps node structures. If a discrete metric layer maps over a set containing 8 elements, evaluate the total open sets configured within the power set topology array.",
-                            guj: "એક ડિસ્ક્રીટ ટોપોલોજીકલ સ્પેસમાં સભ્યોની સંખ્યા 8 છે. પાવર સેટ ટોપોલોજી નિયમ મુજબ આ સ્પેસમાં બનતા કુલ ઓપન સેટ્સની (Open Sets) સંખ્યા શોધો.",
-                            ans: "256"
-                        }
-                    ]
-                },
-                "functional-analysis": {
-                    title: "PG: Functional Analysis",
-                    desc: "Hilbert space vectors, Banach spaces, and linear operator norm bounds.",
-                    questions: [
-                        {
-                            eng: "An inner product operation inside a continuous Hilbert space vector space checks structural identity alignment. If orthogonal state flags hold true, evaluate the exact scalar product of two perfectly orthogonal element lines: $$\\langle x, y \\rangle$$",
-                            guj: "ફંક્શનલ એનાલિસિસ હેઠળ હિલ્બર્ટ સ્પેસમાં બે પરસ્પર લંબ (Orthogonal) વેક્ટર્સ માટે ઇનર પ્રોડક્ટ (Inner Product) નું મૂલ્ય કેટલું થાય?: $$\\langle x, y \\rangle$$",
-                            ans: "0"
-                        }
-                    ]
-                },
-                "relativity": {
-                    title: "PG: General Relativity & Mechanics",
-                    desc: "Einstein field tensors, Minkowski metric horizons, and space-time curves.",
-                    questions: [
-                        {
-                            eng: "A flat four-dimensional Minkowski space-time continuum metric tensor maps diagonal metrics array fields. If the signature components map as \\((-1, 1, 1, 1)\\), evaluate the trace trace invariant factor sum value.",
-                            guj: "સામાન્ય સાપેક્ષતાવાદ (General Relativity) ના મિન્કોવસ્કી સ્પેસ-ટાઇમ મેટ્રિક ટેન્સર ડાયાગોનલ સિગ્નેચર \\((-1, 1, 1, 1)\\) નો ટ્રેસ (Trace) સરવાળો કેટલો થાય?",
-                            ans: "2"
-                        }
-                    ]
-                },
-                "cryptography": {
-                    title: "PG: Cryptography & Security",
-                    desc: "RSA key mechanics, trapdoor permutations, and discrete logarithms.",
-                    questions: [
-                        {
-                            eng: "An asymmetric RSA asymmetric cryptographic node uses twin prime keys \\(p=3\\) and \\(q=5\\). Compute the total system storage modulus parameter factor component: $$n = p \\times q$$",
-                            guj: "ક્રિપ્ટોગ્રાફી એલગોરિધમ RSA પ્રણાલીમાં બે અવિભાજ્ય સંખ્યાઓ \\(p=3\\) અને \\(q=5\\) લેવામાં આવે છે. મોડ્યુલસ પેરામીટર \\(n\\) ની કિંમત શોધો: $$n = p \\times q$$",
-                            ans: "15"
-                        }
-                    ]
-                },
-                "graph-theory": {
-                    title: "PG: Discrete Graph Theory",
-                    desc: "Matrix vertex matching, tree paths, and planar network color bounds.",
-                    questions: [
-                        {
-                            eng: "According to the verified Four Color Theorem statement mapping for network planar nodes configurations, what is the maximum number of absolute tracking colors required to partition any complex planar map loop safely?",
-                            guj: "ડિસ્ક્રીટ ગ્રાફ થીયરીના ફોર-કલર પ્રમેય (Four Color Theorem) મુજબ પ્લેનર મેપ ગ્રાફને રંગવા માટે વધુમાં વધુ કેટલા રંગોની જરૂર પડે?",
-                            ans: "4"
-                        }
-                    ]
+            ]
+        }
+    },
+
+    ug:{
+        analysis:{
+            title:'UG Real Analysis',
+            desc:'Limits, convergence, bounded sequences.',
+            graph:'(6*x^2+4*x)/(2*x^2-1)',
+            questions:[
+                {
+                    eng:'Find the limit: $$\\lim_{n\\to\\infty} \\frac{6n^2+4n}{2n^2-1}$$',
+                    guj:'આપેલી લિમિટ શોધો.',
+                    ans:'3',
+                    hint:'Compare highest degree terms.'
                 }
-            }
-        };
+            ]
+        },
 
-        let activeTier = 'school';
-        let currentSubjectKey = '';
-        let currentQuestionIndex = 0;
-
-        // Initialize and draw the category selector dynamically on load
-        window.onload = function() {
-            renderSubjectSelectorGrid();
-        };
-
-        function switchTier(tierId, tabElement) {
-            activeTier = tierId;
-            
-            // Manage UI active styles on tabs
-            document.querySelectorAll('.tier-tab').forEach(tab => tab.classList.remove('active'));
-            tabElement.classList.add('active');
-            
-            exitArena();
-            renderSubjectSelectorGrid();
-        }
-
-        function renderSubjectSelectorGrid() {
-            const container = document.getElementById('subject-selector-zone');
-            container.innerHTML = '';
-            
-            const selectedTierData = MasterQuestionDatabase[activeTier];
-            
-            for (let key in selectedTierData) {
-                const subject = selectedTierData[key];
-                const card = document.createElement('div');
-                card.className = 'subject-card';
-                card.setAttribute('onclick', `enterArena('${key}')`);
-                card.innerHTML = `
-                    <h3>${subject.title}</h3>
-                    <p>${subject.desc}</p>
-                `;
-                container.appendChild(card);
-            }
-        }
-
-        function enterArena(subjectKey) {
-            currentSubjectKey = subjectKey;
-            currentQuestionIndex = 0;
-            
-            document.getElementById('subject-selector-zone').style.display = 'none';
-            document.getElementById('arena-workspace').style.display = 'block';
-            
-            loadQuestionInstance();
-        }
-
-        function exitArena() {
-            document.getElementById('subject-selector-zone').style.display = 'grid';
-            document.getElementById('arena-workspace').style.display = 'none';
-            document.getElementById('arena-feedback').innerHTML = '';
-            document.getElementById('user-response-input').value = '';
-        }
-
-        function loadQuestionInstance() {
-            const subject = MasterQuestionDatabase[activeTier][currentSubjectKey];
-            const currentQuestion = subject.questions[currentQuestionIndex];
-            
-            // Update tracking parameters metrics
-            document.getElementById('progress-tracker').innerText = `Question ${currentQuestionIndex + 1} / ${subject.questions.length}`;
-            document.getElementById('branch-tag').innerText = subject.title;
-            
-            // Set bilingual content lines
-            document.getElementById('eng-story').innerHTML = `<strong>Context Engine (EN):</strong><br>${currentQuestion.eng}`;
-            document.getElementById('guj-story').innerHTML = `<strong>વિષયવસ્તુ સંદર્ભ (GU):</strong><br>${currentQuestion.guj}`;
-            
-            // Clear prior entry feedback lines
-            document.getElementById('user-response-input').value = '';
-            document.getElementById('arena-feedback').innerHTML = '';
-            document.getElementById('arena-feedback').className = 'feedback-message';
-
-            // Refresh MathJax rendering engine instantly
-            if (window.MathJax && window.MathJax.typesetPromise) {
-                window.MathJax.typesetPromise();
-            }
-        }
-
-        function verifyCurrentAnswer() {
-            const subject = MasterQuestionDatabase[activeTier][currentSubjectKey];
-            const currentQuestion = subject.questions[currentQuestionIndex];
-            const userInput = document.getElementById('user-response-input').value.trim();
-            const feedbackBox = document.getElementById('arena-feedback');
-
-            if (userInput === currentQuestion.ans) {
-                feedbackBox.className = "feedback-message text-correct";
-                feedbackBox.innerHTML = "✨ Correct Integration! સાચો જવાબ છે!";
-                
-                // Shift to next question index sequence loop parameters
-                if (currentQuestionIndex + 1 < subject.questions.length) {
-                    currentQuestionIndex++;
-                    setTimeout(loadQuestionInstance, 2000);
-                } else {
-                    setTimeout(() => {
-                        feedbackBox.innerHTML = "🏆 Subject Core Clear! All system layers stabilized in this matrix.";
-                        setTimeout(exitArena, 2500);
-                    }, 2000);
+        complex:{
+            title:'UG Complex Analysis',
+            desc:'Complex numbers and residues.',
+            graph:'sqrt(25-x^2)',
+            questions:[
+                {
+                    eng:'If $$z=3+4i$$ find $$|z|$$',
+                    guj:'$$z=3+4i$$ માટે માનાંક શોધો.',
+                    ans:'5',
+                    hint:'Use modulus formula.'
                 }
-            } else {
-                feedbackBox.className = "feedback-message text-error";
-                feedbackBox.innerHTML = "❌ Transformation Failed. ખોટો જવાબ, ગણતરી ફરીથી તપાસો.";
-            }
+            ]
         }
-    </script>
+    },
+
+    pg:{
+        topology:{
+            title:'PG Topology',
+            desc:'Compactness and topological structures.',
+            graph:'sin(x)',
+            questions:[
+                {
+                    eng:'A discrete topology has 8 elements. Find total open sets.',
+                    guj:'8 સભ્યો ધરાવતા ડિસ્ક્રીટ ટોપોલોજીમાં કુલ ઓપન સેટ્સ શોધો.',
+                    ans:'256',
+                    hint:'Power set size = 2^n.'
+                }
+            ]
+        },
+
+        cryptography:{
+            title:'PG Cryptography',
+            desc:'RSA systems and modular structures.',
+            graph:'log(x)',
+            questions:[
+                {
+                    eng:'RSA system with p=3 and q=5. Find n=pq.',
+                    guj:'RSA માટે n=pq શોધો.',
+                    ans:'15',
+                    hint:'Multiply primes.'
+                }
+            ]
+        }
+    }
+};
+
+let activeTier='school';
+let currentSubjectKey='';
+let currentQuestionIndex=0;
+let timer;
+let timeLeft=60;
+
+let xp=parseInt(localStorage.getItem('mathXP')) || 0;
+let correct=parseInt(localStorage.getItem('mathCorrect')) || 0;
+let streak=parseInt(localStorage.getItem('mathStreak')) || 0;
+
+function updateStats(){
+
+    document.getElementById('xp-counter').innerText=xp;
+    document.getElementById('correct-counter').innerText=correct;
+    document.getElementById('streak-counter').innerText=streak;
+
+    let rank='Novice';
+
+    if(xp>100) rank='Scholar';
+    if(xp>250) rank='Analyst';
+    if(xp>500) rank='Mathematician';
+    if(xp>1000) rank='Grandmaster';
+
+    document.getElementById('rank-counter').innerText=rank;
+}
+
+window.onload=function(){
+    renderSubjectSelectorGrid();
+    updateStats();
+    startParticles();
+};
+
+function startParticles(){
+    tsParticles.load('particles-js',{
+        particles:{
+            number:{value:60},
+            color:{value:'#38bdf8'},
+            links:{enable:true,color:'#38bdf8'},
+            move:{enable:true,speed:1},
+            size:{value:2}
+        }
+    });
+}
+
+function switchTier(tierId, tabElement){
+
+    activeTier=tierId;
+
+    document.querySelectorAll('.tier-tab').forEach(tab=>{
+        tab.classList.remove('active');
+    });
+
+    tabElement.classList.add('active');
+
+    exitArena();
+    renderSubjectSelectorGrid();
+}
+
+function renderSubjectSelectorGrid(){
+
+    const container=document.getElementById('subject-selector-zone');
+    container.innerHTML='';
+
+    const selectedTierData=MasterQuestionDatabase[activeTier];
+
+    for(let key in selectedTierData){
+
+        const subject=selectedTierData[key];
+
+        const card=document.createElement('div');
+        card.className='subject-card';
+
+        card.innerHTML=`
+            <h3>${subject.title}</h3>
+            <p>${subject.desc}</p>
+        `;
+
+        card.onclick=()=>enterArena(key);
+
+        container.appendChild(card);
+    }
+}
+
+function enterArena(subjectKey){
+
+    currentSubjectKey=subjectKey;
+    currentQuestionIndex=0;
+
+    document.getElementById('subject-selector-zone').style.display='none';
+    document.getElementById('arena-workspace').style.display='block';
+
+    shuffleQuestions();
+    loadQuestionInstance();
+    startTimer();
+}
+
+function shuffleQuestions(){
+    MasterQuestionDatabase[activeTier][currentSubjectKey]
+    .questions
+    .sort(()=>Math.random()-0.5);
+}
+
+function exitArena(){
+
+    clearInterval(timer);
+
+    document.getElementById('subject-selector-zone').style.display='grid';
+    document.getElementById('arena-workspace').style.display='none';
+}
+
+function loadQuestionInstance(){
+
+    const subject=MasterQuestionDatabase[activeTier][currentSubjectKey];
+    const currentQuestion=subject.questions[currentQuestionIndex];
+
+    document.getElementById('progress-tracker').innerText=
+        `Question ${currentQuestionIndex+1}/${subject.questions.length}`;
+
+    document.getElementById('branch-tag').innerText=subject.title;
+
+    document.getElementById('eng-story').innerHTML=
+        `<strong>English:</strong><br>${currentQuestion.eng}`;
+
+    document.getElementById('guj-story').innerHTML=
+        `<strong>ગુજરાતી:</strong><br>${currentQuestion.guj}`;
+
+    document.getElementById('arena-feedback').innerHTML='';
+    document.getElementById('user-response-input').value='';
+
+    updateProgressBar(subject.questions.length);
+    renderGraph(subject.graph);
+
+    document.getElementById('ai-box').innerHTML=
+        'Explore the mathematics carefully and identify the hidden structure behind the equation.';
+
+    if(window.MathJax && window.MathJax.typesetPromise){
+        MathJax.typesetPromise();
+    }
+}
+
+function updateProgressBar(total){
+    const progress=((currentQuestionIndex+1)/total)*100;
+    document.getElementById('progress-fill').style.width=progress+'%';
+}
+
+function renderGraph(fn){
+
+    document.getElementById('graph').innerHTML='';
+
+    try{
+        functionPlot({
+            target:'#graph',
+            width:600,
+            height:400,
+            grid:true,
+            data:[{
+                fn:fn
+            }]
+        });
+    }
+    catch(err){
+        document.getElementById('graph').innerHTML='Graph unavailable';
+    }
+}
+
+function verifyCurrentAnswer(){
+
+    const subject=MasterQuestionDatabase[activeTier][currentSubjectKey];
+    const currentQuestion=subject.questions[currentQuestionIndex];
+
+    const input=document.getElementById('user-response-input')
+        .value
+        .trim();
+
+    const feedback=document.getElementById('arena-feedback');
+
+    if(input===currentQuestion.ans){
+
+        feedback.className='feedback-message text-correct';
+        feedback.innerHTML='✨ Correct Mathematical Resolution!';
+
+        xp+=25;
+        correct++;
+        streak++;
+
+        localStorage.setItem('mathXP',xp);
+        localStorage.setItem('mathCorrect',correct);
+        localStorage.setItem('mathStreak',streak);
+
+        unlockBadges();
+        updateStats();
+
+        if(currentQuestionIndex+1 < subject.questions.length){
+            currentQuestionIndex++;
+            setTimeout(loadQuestionInstance,1800);
+        }
+        else{
+            feedback.innerHTML='🏆 Subject Cleared Successfully!';
+            setTimeout(exitArena,2500);
+        }
+    }
+    else{
+
+        feedback.className='feedback-message text-error';
+        feedback.innerHTML='❌ Incorrect. Re-evaluate the mathematical structure.';
+
+        streak=0;
+        localStorage.setItem('mathStreak',streak);
+        updateStats();
+    }
+}
+
+function unlockBadges(){
+
+    const badgeBox=document.getElementById('badge-box');
+
+    badgeBox.innerHTML='';
+
+    if(correct>=1){
+        badgeBox.innerHTML += `<div class="badge">🎯 First Solution</div>`;
+    }
+
+    if(correct>=5){
+        badgeBox.innerHTML += `<div class="badge">📘 Algebra Explorer</div>`;
+    }
+
+    if(correct>=10){
+        badgeBox.innerHTML += `<div class="badge">🧠 Analysis Thinker</div>`;
+    }
+
+    if(xp>=300){
+        badgeBox.innerHTML += `<div class="badge">🌌 Multiverse Scholar</div>`;
+    }
+}
+
+function showHint(){
+
+    const subject=MasterQuestionDatabase[activeTier][currentSubjectKey];
+    const currentQuestion=subject.questions[currentQuestionIndex];
+
+    document.getElementById('ai-box').innerHTML=
+        '💡 Hint: '+currentQuestion.hint;
+}
+
+function startTimer(){
+
+    clearInterval(timer);
+
+    timeLeft=60;
+    document.getElementById('timer').innerText=timeLeft;
+
+    timer=setInterval(()=>{
+
+        timeLeft--;
+
+        document.getElementById('timer').innerText=timeLeft;
+
+        if(timeLeft<=0){
+
+            clearInterval(timer);
+
+            document.getElementById('arena-feedback').className=
+                'feedback-message text-error';
+
+            document.getElementById('arena-feedback').innerHTML=
+                '⏰ Time Expired';
+        }
+
+    },1000);
+}
+
+// ENTER KEY SUPPORT
+
+document.addEventListener('keypress',function(e){
+
+    if(e.key==='Enter'){
+
+        if(document.getElementById('arena-workspace').style.display==='block'){
+            verifyCurrentAnswer();
+        }
+    }
+});
+
+</script>
+
 </body>
 </html>
+```
