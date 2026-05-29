@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Quest Arcade - Premium Edition</title>
+    <title>Math Quest Arcade - Multiverse Edition</title>
     
     <script>
         window.MathJax = {
@@ -73,6 +73,7 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
 
         .portal-card:hover {
@@ -108,15 +109,12 @@
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s;
+            text-align: center;
         }
 
-        /* Level Specific Themes */
+        /* Level Themes */
         .card-t1 { --accent-color: #4ade80; }
-        .card-t2 { --accent-color: #facc15; }
-        .card-t3 { --accent-color: #f97316; }
-        .card-t4 { --accent-color: #ec4899; }
-        .card-t5 { --accent-color: #a855f7; }
-        .card-t6 { --accent-color: #3b82f6; }
+        .card-t2 { --accent-color: #3b82f6; }
 
         .portal-card:hover .enter-btn {
             background: var(--accent-color);
@@ -186,22 +184,19 @@
             font-weight: bold;
         }
 
-        /* Level Specific Component UIs */
-        .balloon-field { display: flex; gap: 1rem; margin-top: 1.5rem; }
-        .balloon {
-            width: 75px;
-            height: 90px;
-            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #000;
+        .branch-badge {
+            background: #1e293b;
+            color: #38bdf8;
+            padding: 6px 14px;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
             font-weight: bold;
-            cursor: pointer;
-            font-size: 1.3rem;
-            transition: transform 0.2s;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: inline-block;
         }
-        .balloon:hover { transform: scale(1.15) rotate(5deg); }
 
         .arcade-input {
             background: var(--bg-deep);
@@ -229,9 +224,6 @@
             width: 80%;
         }
 
-        .matrix-container { display: grid; grid-template-columns: repeat(2, 70px); gap: 10px; margin: 1.5rem 0; }
-        .matrix-box { width: 70px; height: 70px; background: var(--bg-deep); border: 2px solid #a855f7; color: white; text-align: center; font-size: 1.3rem; border-radius: 8px; }
-
         .feedback-box {
             margin-top: 1.5rem;
             font-size: 1.2rem;
@@ -248,89 +240,77 @@
         
         <div class="title-banner" id="banner-view">
             <h1>🎮 The Grand Math Multiverse 🎮</h1>
-            <p style="color: var(--text-muted); font-size: 1.1rem;">Cross standard barriers and experience reality calculated through immersive game mechanics.</p>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Explore integrated simulations generating problems across all core mathematical disciplines.</p>
         </div>
 
         <div id="portal-selector">
-            <div class="portal-grid">
+            <div class="portal-grid" style="grid-template-columns: 1fr 1fr; max-width: 800px; margin: 0 auto;">
                 
-                <div class="portal-card card-t1" onclick="initiateRealm(1)">
-                    <span class="tier-badge" style="background: #4ade80; color: #000;">KG Level</span>
-                    <h2 style="color: #4ade80;">1. The Whispering Meadow</h2>
-                    <p class="scenario-desc">Welcome, little adventurer! The friendly animals of the forest need help collecting items. Count objects, track down flying shapes, and burst the magical energy balloons to solve target loops.</p>
-                    <button class="enter-btn">Cross Horizon</button>
+                <div class="portal-card card-t1" onclick="initiateArcade('random')">
+                    <span class="tier-badge" style="background: #4ade80; color: #000;">Infinite Mode</span>
+                    <h2 style="color: #4ade80;">Integrated Randomizer Wheel</h2>
+                    <p class="scenario-desc">The ultimate test. Jump into a continuous cycle of randomly refreshing challenges spanning Cryptography, Calculus, Topology, Reasoning, and Data Analysis sequentially.</p>
+                    <div class="enter-btn">Spin the Wheel</div>
                 </div>
 
-                <div class="portal-card card-t2" onclick="initiateRealm(2)">
-                    <span class="tier-badge" style="background: #facc15; color: #000;">Primary School</span>
-                    <h2 style="color: #facc15;">2. Shadow Dungeon Crawler</h2>
-                    <p class="scenario-desc">Dungeon rooms ahead are blocked by algebraic gatekeepers! Arm your inventory array with multiplication factors, find common denominators, and execute structural hits to bypass defensive enemy walls.</p>
-                    <button class="enter-btn">Cross Horizon</button>
-                </div>
-
-                <div class="portal-card card-t3" onclick="initiateRealm(3)">
-                    <span class="tier-badge" style="background: #f97316; color: #fff;">Secondary School</span>
-                    <h2 style="color: #f97316;">3. Cyberpunk Core Matrix</h2>
-                    <p class="scenario-desc">Infiltrate the city mainframe data terminal. The grid operates via linear equations. Balance dynamic coordinate lines, evaluate target slope metrics, and adjust intercept streams to crack deep systemic walls.</p>
-                    <button class="enter-btn">Cross Horizon</button>
-                </div>
-
-                <div class="portal-card card-t4" onclick="initiateRealm(4)">
-                    <span class="tier-badge" style="background: #ec4899; color: #fff;">Higher Secondary</span>
-                    <h2 style="color: #ec4899;">4. Interstellar Velocity Field</h2>
-                    <p class="scenario-desc">Your ship is navigating a massive gravitational asteroid cluster. Command terminal engines through instantaneous rates of change. Compute precise calculus derivatives to calculate escape velocity positions.</p>
-                    <button class="enter-btn">Cross Horizon</button>
-                </div>
-
-                <div class="portal-card card-t5" onclick="initiateRealm(5)">
-                    <span class="tier-badge" style="background: #a855f7; color: #fff;">Undergraduate</span>
-                    <h2 style="color: #a855f7;">5. Quantum Space Vector Grid</h2>
-                    <p class="scenario-desc">Step into the quantum sandbox loop. Space vectors require dimensional alignment. Apply vector transformation profiles, manipulate linear maps, and alter grid orientation spaces using 2D metrics.</p>
-                    <button class="enter-btn">Cross Horizon</button>
-                </div>
-
-                <div class="portal-card card-t6" onclick="initiateRealm(6)">
-                    <span class="tier-badge" style="background: #3b82f6; color: #fff;">Postgraduate</span>
-                    <h2 style="color: #3b82f6;">6. The Chaos Singularity</h2>
-                    <p class="scenario-desc">Deconstruct the network anomaly using abstract models. Map network node paths using Discrete Graph Optimization frameworks, analyze tree metrics, and evaluate network maps to close spatial cracks.</p>
-                    <button class="enter-btn">Cross Horizon</button>
+                <div class="portal-card card-t2" onclick="initiateArcade('select')">
+                    <span class="tier-badge" style="background: #3b82f6; color: #fff;">Topic Selection</span>
+                    <h2 style="color: #3b82f6;">Targeted Subject Hub</h2>
+                    <p class="scenario-desc">Want to hone a specific skillset? Enter the hub to select individual custom matrices focusing cleanly on a singular mathematics field of study.</p>
+                    <div class="enter-btn">Open Selector Hub</div>
                 </div>
 
             </div>
         </div>
 
         <div id="game-arena">
-            <button class="back-btn" onclick="terminateSession()">← Return to Portal Hub</button>
+            <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <button class="back-btn" style="margin-bottom:0;" onclick="terminateSession()">← Return to Portal Hub</button>
+                <div id="hub-inline-selector" style="display:none; gap:10px;">
+                    <select id="branch-dropdown" onchange="switchBranchManually()" style="background:#1e293b; color:white; border:1px solid #334155; padding:8px 12px; border-radius:6px; font-weight:bold; cursor:pointer;">
+                        <option value="algebra">Algebra Frameworks</option>
+                        <option value="calculus">Calculus Dynamics</option>
+                        <option value="topology">Topological Networks</option>
+                        <option value="cryptography">Cryptographic Decryption</option>
+                        <option value="reasoning">Analytical Logic & Reasoning</option>
+                        <option value="data">Data Interpretation & Analytics</option>
+                    </select>
+                </div>
+            </div>
             
             <div class="game-split-layout">
-                <div class="story-panel" id="story-block">
-                    </div>
+                <div class="story-panel" id="story-block"></div>
 
-                <div class="interactive-panel" id="action-block">
-                    </div>
+                <div class="interactive-panel" id="action-block"></div>
             </div>
         </div>
 
     </div>
 
     <script>
-        let currentTier = 0;
+        let gameMode = 'random'; // 'random' or 'select'
         let score = 0;
         let streak = 0;
         let targetAnswer = null;
+        let currentActiveBranch = '';
 
-        const colorsMap = { 1: "#4ade80", 2: "#facc15", 3: "#f97316", 4: "#ec4899", 5: "#a855f7", 6: "#3b82f6" };
+        const branchesList = ['algebra', 'calculus', 'topology', 'cryptography', 'reasoning', 'data'];
 
-        function initiateRealm(tier) {
-            currentTier = tier;
+        function initiateArcade(mode) {
+            gameMode = mode;
             score = 0;
             streak = 0;
             document.getElementById('portal-selector').style.display = 'none';
             document.getElementById('banner-view').style.display = 'none';
-            
-            const arena = document.getElementById('game-arena');
-            arena.style.display = 'block';
-            arena.style.setProperty('--arena-accent', colorsMap[tier]);
+            document.getElementById('game-arena').style.display = 'block';
+
+            if (mode === 'select') {
+                document.getElementById('hub-inline-selector').style.display = 'block';
+                currentActiveBranch = document.getElementById('branch-dropdown').value;
+            } else {
+                document.getElementById('hub-inline-selector').style.display = 'none';
+                pickRandomBranch();
+            }
 
             generateNewProblemInstance();
         }
@@ -341,26 +321,31 @@
             document.getElementById('game-arena').style.display = 'none';
         }
 
+        function pickRandomBranch() {
+            const randomIndex = Math.floor(Math.random() * branchesList.length);
+            currentActiveBranch = branchesList[randomIndex];
+        }
+
+        function switchBranchManually() {
+            currentActiveBranch = document.getElementById('branch-dropdown').value;
+            generateNewProblemInstance();
+        }
+
         function processSubmission(userResponse) {
             const feedback = document.getElementById('feedback-output');
-            let matched = false;
-
-            if (currentTier === 5) {
-                matched = JSON.stringify(userResponse) === JSON.stringify(targetAnswer);
-            } else {
-                matched = parseInt(userResponse) === parseInt(targetAnswer);
-            }
-
-            if (matched) {
-                score += 15;
+            
+            if (parseInt(userResponse) === parseInt(targetAnswer)) {
+                score += 20;
                 streak++;
                 feedback.className = "feedback-box text-correct";
-                feedback.innerHTML = `✨ Success! +15 Points added to configuration. Active Streak: ${streak}`;
+                feedback.innerHTML = `✨ Vector Aligned! +20 Points. Active Streak: ${streak}`;
+                
+                if (gameMode === 'random') { pickRandomBranch(); }
                 setTimeout(generateNewProblemInstance, 1800);
             } else {
                 streak = 0;
                 feedback.className = "feedback-box text-error";
-                feedback.innerHTML = `❌ Alignment Failed. Mathematical paradox generated. Read the context and try again!`;
+                feedback.innerHTML = `❌ System Misalignment. Inverse paradox created. Re-verify the calculation path!`;
             }
             document.getElementById('arena-score').innerText = score;
             document.getElementById('arena-streak').innerText = streak;
@@ -370,162 +355,164 @@
             const storyBlock = document.getElementById('story-block');
             const actionBlock = document.getElementById('action-block');
 
-            // Setup common score container template framework
-            const scoreHeaderHTML = `
+            const baseUIHTML = `
                 <div class="score-row">
-                    <div>ECO-SYSTEM SCORE: <span id="arena-score">${score}</span></div>
+                    <div>ARCADE SCORE: <span id="arena-score">${score}</span></div>
                     <div>STREAK: <span id="arena-streak">${streak}</span></div>
                 </div>
                 <div id="runtime-game-field" style="width:100%; text-align:center;"></div>
                 <div id="feedback-output" class="feedback-box"></div>
             `;
-            actionBlock.innerHTML = scoreHeaderHTML;
+            actionBlock.innerHTML = baseUIHTML;
             const gameField = document.getElementById('runtime-game-field');
 
-            switch(currentTier) {
-                case 1:
-                    let itemsCount = Math.floor(Math.random() * 4) + 4;
-                    targetAnswer = itemsCount;
-                    
-                    storyBlock.innerHTML = `
-                        <h2 style="color:#4ade80;">The Whispering Meadow Loop</h2>
-                        <p style="margin-top:1rem;">A friendly rabbit needs to cross the stream! To help them, look at the energy clouds floating above. Each cloud contains tiny floating seed markers inside.</p>
-                        <p style="margin-top:0.5rem; font-weight:bold; color:#4ade80;">Your Quest: Find the cloud asset container holding exactly ${itemsCount} magical marker points so the rabbit can bridge the gap!</p>
-                    `;
-
-                    let wrap = document.createElement('div');
-                    wrap.className = "balloon-field";
-                    wrap.style.justifyContent = "center";
-                    let opts = [itemsCount, itemsCount - 2, itemsCount + 2].sort(() => Math.random() - 0.5);
-                    let bColors = ['#f87171', '#60a5fa', '#34d399'];
-
-                    opts.forEach((val, i) => {
-                        let b = document.createElement('div');
-                        b.className = "balloon";
-                        b.style.backgroundColor = bColors[i];
-                        b.innerText = "•".repeat(val);
-                        b.onclick = () => processSubmission(val);
-                        wrap.appendChild(b);
-                    });
-                    gameField.appendChild(wrap);
-                    break;
-
-                case 2:
-                    let val1 = Math.floor(Math.random() * 7) + 3;
-                    let val2 = Math.floor(Math.random() * 8) + 2;
-                    targetAnswer = val1 * val2;
+            switch(currentActiveBranch) {
+                case 'algebra':
+                    let root1 = Math.floor(Math.random() * 4) + 2;
+                    let root2 = Math.floor(Math.random() * 3) + 6;
+                    let sumCoeff = root1 + root2;
+                    let prodCoeff = root1 * root2;
+                    targetAnswer = root2; // Player must find the larger root
 
                     storyBlock.innerHTML = `
-                        <h2 style="color:#facc15;">The Shadow Dungeon Lock</h2>
-                        <p style="margin-top:1rem;">A iron gate blocks your progress down into the math labyrinth. The lock interface displays two glowing integers forming a structural multiplication challenge matrix.</p>
-                        <p style="margin-top:0.5rem;">To generate the energy bolt needed to break the door, compute the total area product of the matrix fields configured below.</p>
-                        <p style="margin-top:1rem; font-weight:bold; color:#facc15;">Core Identity Equation: \\( \\text{Area} = A \\times B \\)</p>
+                        <span class="branch-badge">Algebraic Frameworks</span>
+                        <h2>The Higher Poly-Root Boundary</h2>
+                        <p>A locked barrier file system requires the input parameters of its highest scalar zero factor.</p>
+                        <p>The polynomial signature reads as:</p>
+                        <p style="text-align:center; font-size:1.3rem; color:#4ade80;">$$x^2 - ${sumCoeff}x + ${prodCoeff} = 0$$</p>
+                        <p>By executing quadratic factorization rules, identify the constituent roots where the system balances cleanly:</p>
+                        <p style="text-align:center; color:var(--text-muted);">$$(x - r_1)(x - r_2) = 0$$</p>
                     `;
 
                     gameField.innerHTML = `
-                        <h3>Compute Spell Matrix Output:</h3>
-                        <h2 style="font-size:3rem; color:#facc15; margin:1rem 0;">${val1} \\(\\times\\) ${val2}</h2>
-                        <input type="number" id="input-t2" class="arcade-input" placeholder="Enter Product integer" autofocus />
-                        <button class="action-btn" style="background:#facc15;" onclick="processSubmission(document.getElementById('input-t2').value)">Cast Breach Spell</button>
+                        <h3>Identify and enter the LARGEST root value (\(r_2\)) to break the lock:</h3>
+                        <input type="number" id="input-ans" class="arcade-input" placeholder="Value of larger root" autofocus />
+                        <button class="action-btn" style="background:#4ade80; color:#000;" onclick="processSubmission(document.getElementById('input-ans').value)">Inject Root Asset</button>
                     `;
                     break;
 
-                case 3:
-                    let targetX = Math.floor(Math.random() * 5) + 2;
-                    let currentSlope = Math.floor(Math.random() * 3) + 3;
-                    let offsetValue = Math.floor(Math.random() * 6) + 1;
-                    targetAnswer = (currentSlope * targetX) + offsetValue;
+                case 'calculus':
+                    let multiplier = Math.floor(Math.random() * 4) + 2; 
+                    let upperLimit = Math.floor(Math.random() * 2) + 3; // 3 or 4
+                    // Integral of multiplier*x from 0 to upperLimit is (multiplier/2) * upperLimit^2
+                    // Let's ensure multiplier is even to keep integration clean integers
+                    if (multiplier % 2 !== 0) multiplier++;
+                    targetAnswer = (multiplier / 2) * (upperLimit * upperLimit);
 
                     storyBlock.innerHTML = `
-                        <h2 style="color:#f97316;">Terminal Mainframe Infiltration</h2>
-                        <p style="margin-top:1rem;">The node stream requires data alignment along a linear equation vector. You have successfully mapped the line trajectory variables.</p>
-                        <p style="margin-top:0.5rem;">The processing engine utilizes standard Cartesian Slope-Intercept structural logic:</p>
-                        <p style="margin-top:0.5rem; text-align:center; font-size:1.2rem; color:#f97316;">$$y = mx + c$$</p>
-                        <p style="margin-top:0.5rem;">The current environment parameters are parsed as follows: Slope parameter \\(m = ${currentSlope}\\), Intercept factor \\(c = ${offsetValue}\\).</p>
+                        <span class="branch-badge">Calculus Dynamics</span>
+                        <h2>Accumulated Flux Integration</h2>
+                        <p>A localized gravity reactor requires a precise energetic injection matching the exact accumulated area under its current dynamic curve profile.</p>
+                        <p>The acceleration flux line function is declared explicitly as:</p>
+                        <p style="text-align:center; font-size:1.3rem; color:#38bdf8;">$$f(x) = ${multiplier}x$$</p>
+                        <p>Determine total density mass by executing a definite integral computation across spatial boundary limits:</p>
+                        <p style="text-align:center; color:var(--text-muted);">$$\\int_{0}^{${upperLimit}} ${multiplier}x \\, dx$$</p>
                     `;
 
                     gameField.innerHTML = `
-                        <h3>Find target coordinate variable \\(y\\) when system scales to state \\(x = ${targetX}\\):</h3>
-                        <input type="number" id="input-t3" class="arcade-input" placeholder="Solve for y" autofocus />
-                        <button class="action-btn" style="background:#f97316; color:white;" onclick="processSubmission(document.getElementById('input-t3').value)">Inject Command Stream</button>
+                        <h3>Compute the definite accumulation value:</h3>
+                        <input type="number" id="input-ans" class="arcade-input" placeholder="Evaluated Area Integer" autofocus />
+                        <button class="action-btn" style="background:#38bdf8; color:#000;" onclick="processSubmission(document.getElementById('input-ans').value)">Calibrate Flux Valve</button>
                     `;
                     break;
 
-                case 4:
-                    let timeState = Math.floor(Math.random() * 4) + 2;
-                    targetAnswer = 3 * (timeState * timeState); // f'(t) for t^3 is 3t^2
+                case 'topology':
+                    let faces = Math.floor(Math.random() * 6) + 6; // 6 to 11
+                    let edges = faces + Math.floor(Math.random() * 4) + 4; // ensures structural balance
+                    targetAnswer = edges - faces + 2; // Euler characteristic: V - E + F = 2 => V = E - F + 2
 
                     storyBlock.innerHTML = `
-                        <h2 style="color:#ec4899;">Interstellar Velocity Processing</h2>
-                        <p style="margin-top:1rem;">Asteroids detected! To safety guide the crew spaceship hull, the tracking system needs to know the instantaneous rate of change of position with respect to space-time metrics.</p>
-                        <p style="margin-top:0.5rem;">The displacement profile equation mapping your rocket distance metrics follows a standard cubic power curve function:</p>
-                        <p style="margin-top:0.5rem; text-align:center; font-size:1.2rem; color:#ec4899;">$$s(t) = t^3$$</p>
-                        <p style="margin-top:0.5rem;">By applying the foundational power rule derivative theorem, extract the velocity matrix transformation rule:</p>
-                        <p style="margin-top:0.5rem; text-align:center; color:#94a3b8;">$$\\frac{ds}{dt} = \\frac{d}{dt}[t^3] = 3t^2$$</p>
+                        <span class="branch-badge">Topological Networks</span>
+                        <h2>Eulerian Polyhedral Grid</h2>
+                        <p>You are mapping an abstract geometric spatial node network inside a multidimensional matrix terminal.</p>
+                        <p>The network surface features stable metrics conforming directly to the **Euler Characteristic Theorem** for simple convex polyhedra structures:</p>
+                        <p style="text-align:center; font-size:1.3rem; color:#a855f7;">$$V - E + F = 2$$</p>
+                        <p>Telemetry reports state that the anomaly area holds exactly \\(E = ${edges}\\) connection line edges and \\(F = ${faces}\\) bounding surface faces.</p>
                     `;
 
                     gameField.innerHTML = `
-                        <h3>Evaluate precise velocity tracking output \\(\\frac{ds}{dt}\\) at clock time \\(t = ${timeState}\\):</h3>
-                        <input type="number" id="input-t4" class="arcade-input" placeholder="Compute s'(t)" autofocus />
-                        <button class="action-btn" style="background:#ec4899; color:white;" onclick="processSubmission(document.getElementById('input-t4').value)">Engage Engine Burns</button>
+                        <h3>Calculate the absolute number of structural vertices (\(V\)) present:</h3>
+                        <input type="number" id="input-ans" class="arcade-input" placeholder="Solve for V" autofocus />
+                        <button class="action-btn" style="background:#a855f7; color:white;" onclick="processSubmission(document.getElementById('input-ans').value)">Map Vertex Points</button>
                     `;
                     break;
 
-                case 5:
-                    let scalarK = Math.floor(Math.random() * 3) + 2;
-                    targetAnswer = [scalarK * 3, scalarK * 5];
+                case 'cryptography':
+                    let shift = Math.floor(Math.random() * 4) + 2; // Shift key
+                    let plainValue = Math.floor(Math.random() * 5) + 10; // Base numeric character code
+                    targetAnswer = (plainValue + shift) % 26;
 
                     storyBlock.innerHTML = `
-                        <h2 style="color:#a855f7;">Quantum Space Vector Transformation</h2>
-                        <p style="margin-top:1rem;">You are manipulating a 2D vector space plane inside a localized quantum state engine simulation field.</p>
-                        <p style="margin-top:0.5rem;">An entry vector coordinate anchor is mapped inside the matrix tracking array as follows:</p>
-                        <p style="margin-top:0.5rem; text-align:center; font-size:1.2rem; color:#a855f7;">$$\\vec{v} = \\begin{bmatrix} 3 \\\\ 5 \\end{bmatrix}$$</p>
-                        <p style="margin-top:0.5rem;">The system requires you to apply a uniform structural linear map transformation via an identity scaling metric operation containing scalar multiplier factor \\(k = ${scalarK}\\).</p>
+                        <span class="branch-badge">Cryptographic Decryption</span>
+                        <h2>Modular Shift Cipher Lock</h2>
+                        <p>Infiltrate an encrypted channel by verifying cipher transmission patterns using finite group modular mechanics.</p>
+                        <p>The network encodes values utilizing a **Modular Shift Operation** mapped over a standard 26-element alphabet wheel:</p>
+                        <p style="text-align:center; font-size:1.3rem; color:#eab308;">$$C \\equiv (P + k) \\pmod{26}$$</p>
+                        <p>Intercept vectors display plaintext packet index \\(P = ${plainValue}\\) run through encryption shift step key value \\(k = ${shift}\\).</p>
                     `;
 
                     gameField.innerHTML = `
-                        <h3>Compute Transformed Vector Coordinates:</h3>
-                        <p style="margin-bottom:1rem; color:#94a3b8;">$$T(\\vec{v}) = ${scalarK} \\cdot \\begin{bmatrix} 3 \\\\ 5 \\end{bmatrix} = \\begin{bmatrix} x' \\\\ y' \\end{bmatrix}$$</p>
-                        <div style="display:flex; justify-content:center;">
-                            <div class="matrix-container">
-                                <input type="number" id="m-x" class="matrix-box" placeholder="x'">
-                                <input type="number" id="m-y" class="matrix-box" placeholder="y'">
-                            </div>
-                        </div>
-                        <button class="action-btn" style="background:#a855f7; color:white;" onclick="evaluateMatrixInputs()">Pulse Vector Grid</button>
+                        <h3>Solve for the resulting cipher packet target integer value (\(C\)):</h3>
+                        <input type="number" id="input-ans" class="arcade-input" placeholder="Cipher Code result" autofocus />
+                        <button class="action-btn" style="background:#eab308; color:#000;" onclick="processSubmission(document.getElementById('input-ans').value)">Transmit Decryption Key</button>
                     `;
                     break;
 
-                case 6:
-                    let vertexCount = Math.floor(Math.random() * 3) + 5; 
-                    targetAnswer = vertexCount - 1; // Cayley's theorem tree property: Edges = V - 1
+                case 'reasoning':
+                    let seriesBase = Math.floor(Math.random() * 5) + 3;
+                    let ratio = 2;
+                    let s1 = seriesBase;
+                    let s2 = s1 * ratio;
+                    let s3 = s2 * ratio;
+                    targetAnswer = s3 * ratio;
 
                     storyBlock.innerHTML = `
-                        <h2 style="color:#3b82f6;">The Chaos Singularity Topology</h2>
-                        <p style="margin-top:1rem;">A corrupted topological server mesh network has split into multiple loose data segments. You must deploy a Minimum Spanning Tree (MST) algorithm layout protocol to bind them back together safely.</p>
-                        <p style="margin-top:0.5rem;">According to foundational theorems within **Discrete Graph Theory**, any connected acyclic graph framework linking together a specific configuration pool of structural elements follows a strict parameter rule:</p>
-                        <p style="margin-top:0.5rem; text-align:center; font-size:1.2rem; color:#3b82f6;">$$E = V - 1$$</p>
-                        <p style="margin-top:0.5rem;">Where \\(V\\) represents the vertex nodes pool count, and \\(E\\) denotes the absolute minimal edge lines required to secure absolute synchronization without creating loops.</p>
+                        <span class="branch-badge">Analytical Logic & Reasoning</span>
+                        <h2>Inductive Logic Sequence Terminal</h2>
+                        <p>Crack open the heuristic puzzle node by decoding sequential logic pathways using inductive inference operations.</p>
+                        <p>An array sequence tracking pattern has been parsed from database stream activity logs:</p>
+                        <p style="text-align:center; font-size:1.5rem; letter-spacing:8px; color:#ec4899; font-weight:bold;">
+                            ${s1}, ${s2}, ${s3}, ?
+                        </p>
+                        <p>Analyze the operational progression factor bridging the connection between values to determine the hidden element.</p>
                     `;
 
                     gameField.innerHTML = `
-                        <h3>If the anomaly zone map contains \\(V = ${vertexCount}\\) structural nodes, calculate total edges \\(E\\) required:</h3>
-                        <input type="number" id="input-t6" class="arcade-input" placeholder="Solve for E" autofocus />
-                        <button class="action-btn" style="background:#3b82f6; color:white;" onclick="processSubmission(document.getElementById('input-t6').value)">Stabilize Topology</button>
+                        <h3>Enter the correct missing integer array step value:</h3>
+                        <input type="number" id="input-ans" class="arcade-input" placeholder="Next item in sequence" autofocus />
+                        <button class="action-btn" style="background:#ec4899; color:white;" onclick="processSubmission(document.getElementById('input-ans').value)">Submit Logical Vector</button>
+                    `;
+                    break;
+
+                case 'data':
+                    let samples = [2, 5, 8, 11].map(v => v + Math.floor(Math.random() * 3));
+                    let sampleSum = samples.reduce((a, b) => a + b, 0);
+                    targetAnswer = Math.round(sampleSum / 4);
+
+                    storyBlock.innerHTML = `
+                        <span class="branch-badge">Data Interpretation & Analytics</span>
+                        <h2>Statistical Metric Evaluation</h2>
+                        <p>An analytics database requires optimization parsing. You must find the central tendency metrics from an active packet stream observation matrix sample pool.</p>
+                        <p>Telemetry hardware returns the following array dataset matrix entries:</p>
+                        <p style="text-align:center; font-size:1.4rem; color:#f97316; font-weight:bold;">
+                            💾 Pool Elements: [ ${samples.join(', ')} ]
+                        </p>
+                        <p>The standard arithmetic mean structural formula dictates accumulating the universal sum divided by sample sizing constraints:</p>
+                        <p style="text-align:center; color:var(--text-muted);">$$\\mu = \\frac{1}{N}\\sum_{i=1}^{N} x_i$$</p>
+                    `;
+
+                    gameField.innerHTML = `
+                        <h3>Calculate the standard Arithmetic Mean (\\(\\mu\\)) (Round to nearest integer):</h3>
+                        <input type="number" id="input-ans" class="arcade-input" placeholder="Mean Average Integer" autofocus />
+                        <button class="action-btn" style="background:#f97316; color:white;" onclick="processSubmission(document.getElementById('input-ans').value)">Commit Analytics Stream</button>
                     `;
                     break;
             }
 
-            // Force MathJax to scan and beautifully render the freshly injected LaTeX markup strings
+            // Dynamically refresh and print out polished LaTeX formulas instantly
             if (window.MathJax && window.MathJax.typesetPromise) {
                 window.MathJax.typesetPromise();
             }
-        }
-
-        function evaluateMatrixInputs() {
-            let userX = parseInt(document.getElementById('m-x').value);
-            let userY = parseInt(document.getElementById('m-y').value);
-            processSubmission([userX, userY]);
         }
     </script>
 </body>
