@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="gu">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Math Quest Arcade - Multiverse Edition</title>
     
+    <!-- Load MathJax for flawless LaTeX rendering -->
     <script>
         window.MathJax = {
             tex: {
@@ -49,13 +50,12 @@
         }
 
         .title-banner h1 {
-            font-size: 3rem;
+            font-size: 2.8rem;
             color: #38bdf8;
             text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
             margin-bottom: 0.5rem;
         }
 
-        /* Portal Selection Cards */
         .portal-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -97,7 +97,7 @@
             font-size: 0.95rem;
             color: var(--text-muted);
             margin: 1rem 0 1.5rem 0;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .enter-btn {
@@ -112,7 +112,6 @@
             text-align: center;
         }
 
-        /* Level Themes */
         .card-t1 { --accent-color: #4ade80; }
         .card-t2 { --accent-color: #3b82f6; }
 
@@ -122,7 +121,6 @@
             box-shadow: 0 0 15px var(--accent-color);
         }
 
-        /* Active Game Arena Layout */
         #game-arena {
             display: none;
             background: var(--bg-surface);
@@ -147,7 +145,7 @@
 
         .game-split-layout {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 11fr 10fr;
             gap: 2.5rem;
         }
 
@@ -160,6 +158,17 @@
             border-left: 4px solid var(--arena-accent, #38bdf8);
             padding: 1.5rem;
             border-radius: 8px;
+        }
+
+        .story-panel h2 { margin-top: 0; }
+
+        .lang-gu {
+            color: #e2e8f0;
+            border-top: 1px dashed #334155;
+            margin-top: 15px;
+            padding-top: 15px;
+            font-size: 1.05rem;
+            line-height: 1.6;
         }
 
         .interactive-panel {
@@ -207,7 +216,7 @@
             border-radius: 8px;
             text-align: center;
             width: 80%;
-            margin-top: 1.5rem;
+            margin-top: 1rem;
         }
         .arcade-input:focus { border-color: #38bdf8; outline: none; }
 
@@ -226,9 +235,10 @@
 
         .feedback-box {
             margin-top: 1.5rem;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: bold;
             min-height: 2rem;
+            text-align: center;
         }
         .text-correct { color: #4ade80; text-shadow: 0 0 10px rgba(74,222,128,0.2); }
         .text-error { color: #f87171; text-shadow: 0 0 10px rgba(248,113,113,0.2); }
@@ -239,48 +249,61 @@
     <div class="arcade-container">
         
         <div class="title-banner" id="banner-view">
-            <h1>🎮 The Grand Math Multiverse 🎮</h1>
-            <p style="color: var(--text-muted); font-size: 1.1rem;">Explore integrated simulations generating problems across all core mathematical disciplines.</p>
+            <h1>🎮 Math Multiverse Arcade 🎮</h1>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Infinite mathematical challenges translated in English & Gujarati!</p>
+            <p style="color: #38bdf8; font-size: 1rem; margin-top: 5px;">અનંત ગણિતના પડકારો હવે અંગ્રેજી અને ગુજરાતી ભાષામાં!</p>
         </div>
 
+        <!-- Portal Selection Screen -->
         <div id="portal-selector">
-            <div class="portal-grid" style="grid-template-columns: 1fr 1fr; max-width: 800px; margin: 0 auto;">
+            <div class="portal-grid" style="grid-template-columns: 1fr 1fr; max-width: 900px; margin: 0 auto;">
                 
+                <!-- Mode 1: Random Wheel -->
                 <div class="portal-card card-t1" onclick="initiateArcade('random')">
                     <span class="tier-badge" style="background: #4ade80; color: #000;">Infinite Mode</span>
-                    <h2 style="color: #4ade80;">Integrated Randomizer Wheel</h2>
-                    <p class="scenario-desc">The ultimate test. Jump into a continuous cycle of randomly refreshing challenges spanning Cryptography, Calculus, Topology, Reasoning, and Data Analysis sequentially.</p>
-                    <div class="enter-btn">Spin the Wheel</div>
+                    <h2 style="color: #4ade80;">Integrated Randomizer</h2>
+                    <p class="scenario-desc">
+                        <strong>EN:</strong> Continuous shuffle mode generating endless live variables across algebra, calculus, topology, and crypto.<br>
+                        <strong>GU:</strong> અનંત મોડ જે અલ્જીબ્રા, કેલ્ક્યુલસ, ટોપોલોજી અને ક્રિપ્ટોગ્રાફીના પ્રશ્નો સતત બદલતું રહેશે.
+                    </p>
+                    <div class="enter-btn">Spin Wheel / વ્હીલ ફેરવો</div>
                 </div>
 
+                <!-- Mode 2: Manual Hub -->
                 <div class="portal-card card-t2" onclick="initiateArcade('select')">
                     <span class="tier-badge" style="background: #3b82f6; color: #fff;">Topic Selection</span>
                     <h2 style="color: #3b82f6;">Targeted Subject Hub</h2>
-                    <p class="scenario-desc">Want to hone a specific skillset? Enter the hub to select individual custom matrices focusing cleanly on a singular mathematics field of study.</p>
-                    <div class="enter-btn">Open Selector Hub</div>
+                    <p class="scenario-desc">
+                        <strong>EN:</strong> Select a specific branch of mathematics manually to systematically master its core formulas.<br>
+                        <strong>GU:</strong> ચોક્કસ વિષય પસંદ કરો અને તેના નિયમો અને ગણતરીઓ સરળતાથી શીખો.
+                    </p>
+                    <div class="enter-btn">Open Hub / સબ્જેક્ટ હબ ખોલો</div>
                 </div>
 
             </div>
         </div>
 
+        <!-- Active Game Arena Workspace -->
         <div id="game-arena">
             <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                <button class="back-btn" style="margin-bottom:0;" onclick="terminateSession()">← Return to Portal Hub</button>
-                <div id="hub-inline-selector" style="display:none; gap:10px;">
+                <button class="back-btn" style="margin-bottom:0;" onclick="terminateSession()">← Exit Arena / બહાર નીકળો</button>
+                <div id="hub-inline-selector" style="display:none;">
                     <select id="branch-dropdown" onchange="switchBranchManually()" style="background:#1e293b; color:white; border:1px solid #334155; padding:8px 12px; border-radius:6px; font-weight:bold; cursor:pointer;">
-                        <option value="algebra">Algebra Frameworks</option>
-                        <option value="calculus">Calculus Dynamics</option>
-                        <option value="topology">Topological Networks</option>
-                        <option value="cryptography">Cryptographic Decryption</option>
-                        <option value="reasoning">Analytical Logic & Reasoning</option>
-                        <option value="data">Data Interpretation & Analytics</option>
+                        <option value="algebra">Algebra (બીજગણિત)</option>
+                        <option value="calculus">Calculus (કલનશાસ્ત્ર)</option>
+                        <option value="topology">Topology (સ્થાનશાસ્ત્ર)</option>
+                        <option value="cryptography">Cryptography (ગૂઢલેખન)</option>
+                        <option value="reasoning">Logical Reasoning (તાર્કિક કસોટી)</option>
+                        <option value="data">Data Analysis (માહિતી પૃથક્કરણ)</option>
                     </select>
                 </div>
             </div>
             
             <div class="game-split-layout">
+                <!-- Left: Bilingual Story/Explanation Panel -->
                 <div class="story-panel" id="story-block"></div>
 
+                <!-- Right: Answer Input & Feedback -->
                 <div class="interactive-panel" id="action-block"></div>
             </div>
         </div>
@@ -288,7 +311,7 @@
     </div>
 
     <script>
-        let gameMode = 'random'; // 'random' or 'select'
+        let gameMode = 'random';
         let score = 0;
         let streak = 0;
         let targetAnswer = null;
@@ -338,14 +361,14 @@
                 score += 20;
                 streak++;
                 feedback.className = "feedback-box text-correct";
-                feedback.innerHTML = `✨ Vector Aligned! +20 Points. Active Streak: ${streak}`;
+                feedback.innerHTML = `✨ Correct! સાચો જવાબ! +20 Points.<br>Active Streak: ${streak}`;
                 
                 if (gameMode === 'random') { pickRandomBranch(); }
-                setTimeout(generateNewProblemInstance, 1800);
+                setTimeout(generateNewProblemInstance, 2000);
             } else {
                 streak = 0;
                 feedback.className = "feedback-box text-error";
-                feedback.innerHTML = `❌ System Misalignment. Inverse paradox created. Re-verify the calculation path!`;
+                feedback.innerHTML = `❌ Incorrect Answer! ખોટો જવાબ. Try analyzing the equation again!`;
             }
             document.getElementById('arena-score').innerText = score;
             document.getElementById('arena-streak').innerText = streak;
@@ -355,161 +378,187 @@
             const storyBlock = document.getElementById('story-block');
             const actionBlock = document.getElementById('action-block');
 
-            const baseUIHTML = `
+            actionBlock.innerHTML = `
                 <div class="score-row">
-                    <div>ARCADE SCORE: <span id="arena-score">${score}</span></div>
+                    <div>SCORE: <span id="arena-score">${score}</span></div>
                     <div>STREAK: <span id="arena-streak">${streak}</span></div>
                 </div>
                 <div id="runtime-game-field" style="width:100%; text-align:center;"></div>
                 <div id="feedback-output" class="feedback-box"></div>
             `;
-            actionBlock.innerHTML = baseUIHTML;
             const gameField = document.getElementById('runtime-game-field');
 
             switch(currentActiveBranch) {
                 case 'algebra':
-                    let root1 = Math.floor(Math.random() * 4) + 2;
-                    let root2 = Math.floor(Math.random() * 3) + 6;
+                    let root1 = Math.floor(Math.random() * 5) + 1; // 1 to 5
+                    let root2 = Math.floor(Math.random() * 6) + 6; // 6 to 11
                     let sumCoeff = root1 + root2;
                     let prodCoeff = root1 * root2;
-                    targetAnswer = root2; // Player must find the larger root
+                    targetAnswer = root2; 
 
                     storyBlock.innerHTML = `
-                        <span class="branch-badge">Algebraic Frameworks</span>
-                        <h2>The Higher Poly-Root Boundary</h2>
-                        <p>A locked barrier file system requires the input parameters of its highest scalar zero factor.</p>
-                        <p>The polynomial signature reads as:</p>
+                        <span class="branch-badge">Algebra / બીજગણيت</span>
+                        <h2>The Quadratic Root Barrier</h2>
+                        <p><strong>English:</strong> Solve the polynomial system signature to unlock the portal door. Find the roots of the equation:</p>
                         <p style="text-align:center; font-size:1.3rem; color:#4ade80;">$$x^2 - ${sumCoeff}x + ${prodCoeff} = 0$$</p>
-                        <p>By executing quadratic factorization rules, identify the constituent roots where the system balances cleanly:</p>
-                        <p style="text-align:center; color:var(--text-muted);">$$(x - r_1)(x - r_2) = 0$$</p>
+                        
+                        <div class="lang-gu">
+                            <strong>ગુજરાતી ભાષાંતર:</strong><br>
+                            પોર્ટલનો દરવાજો ખોલવા માટે આ દ્વિઘાત સમીકરણનો ઉકેલ શોધો. સમીકરણના અવયવો પાડો:<br>
+                            $$x^2 - ${sumCoeff}x + ${prodCoeff} = 0$$
+                        </div>
                     `;
 
                     gameField.innerHTML = `
-                        <h3>Identify and enter the LARGEST root value (\(r_2\)) to break the lock:</h3>
-                        <input type="number" id="input-ans" class="arcade-input" placeholder="Value of larger root" autofocus />
-                        <button class="action-btn" style="background:#4ade80; color:#000;" onclick="processSubmission(document.getElementById('input-ans').value)">Inject Root Asset</button>
+                        <h4 style="margin-bottom:5px;">Enter the LARGEST root value (\(r_2\)):</h4>
+                        <h4 style="color:#38bdf8; margin-top:0;">સૌથી મોટું મૂળ (રૂટ) કિંમત લખો:</h4>
+                        <input type="number" id="input-ans" class="arcade-input" placeholder="Largest Root" autofocus />
+                        <button class="action-btn" style="background:#4ade80; color:#000;" onclick="processSubmission(document.getElementById('input-ans').value)">Submit / સબમિટ કરો</button>
                     `;
                     break;
 
                 case 'calculus':
-                    let multiplier = Math.floor(Math.random() * 4) + 2; 
-                    let upperLimit = Math.floor(Math.random() * 2) + 3; // 3 or 4
-                    // Integral of multiplier*x from 0 to upperLimit is (multiplier/2) * upperLimit^2
-                    // Let's ensure multiplier is even to keep integration clean integers
-                    if (multiplier % 2 !== 0) multiplier++;
-                    targetAnswer = (multiplier / 2) * (upperLimit * upperLimit);
+                    let c_mult = (Math.floor(Math.random() * 3) + 1) * 2; // Always even (2, 4, 6)
+                    let c_upper = Math.floor(Math.random() * 3) + 2; // 2, 3, 4
+                    targetAnswer = (c_mult / 2) * (c_upper * c_upper);
 
                     storyBlock.innerHTML = `
-                        <span class="branch-badge">Calculus Dynamics</span>
-                        <h2>Accumulated Flux Integration</h2>
-                        <p>A localized gravity reactor requires a precise energetic injection matching the exact accumulated area under its current dynamic curve profile.</p>
-                        <p>The acceleration flux line function is declared explicitly as:</p>
-                        <p style="text-align:center; font-size:1.3rem; color:#38bdf8;">$$f(x) = ${multiplier}x$$</p>
-                        <p>Determine total density mass by executing a definite integral computation across spatial boundary limits:</p>
-                        <p style="text-align:center; color:var(--text-muted);">$$\\int_{0}^{${upperLimit}} ${multiplier}x \\, dx$$</p>
+                        <span class="branch-badge">Calculus / કલનશાસ્ત્ર</span>
+                        <h2>Area Under the Curve</h2>
+                        <p><strong>English:</strong> Calibrate the core engine by computing the definite integral of the velocity function from bounds \(0\) to \(${c_upper}\):</p>
+                        <p style="text-align:center; font-size:1.3rem; color:#38bdf8;">$$\\int_{0}^{${c_upper}} ${c_mult}x \\, dx$$</p>
+                        
+                        <div class="lang-gu">
+                            <strong>ગુજરાતી ભાષાંતર:</strong><br>
+                            એન્જીનને સેટ કરવા માટે આપેલા વેગ વિધેયનું સીમાઓ \(0\) થી \(${c_upper}\) ની વચ્ચે નિયત સંકલન (Definite Integral) મેળવો:<br>
+                            $$\\int_{0}^{${c_upper}} ${c_mult}x \\, dx$$
+                        </div>
                     `;
 
                     gameField.innerHTML = `
-                        <h3>Compute the definite accumulation value:</h3>
-                        <input type="number" id="input-ans" class="arcade-input" placeholder="Evaluated Area Integer" autofocus />
-                        <button class="action-btn" style="background:#38bdf8; color:#000;" onclick="processSubmission(document.getElementById('input-ans').value)">Calibrate Flux Valve</button>
+                        <h4 style="margin-bottom:5px;">Compute the accumulation value:</h4>
+                        <h4 style="color:#38bdf8; margin-top:0;">સંકલનની ચોક્કસ કિંમત શોધો:</h4>
+                        <input type="number" id="input-ans" class="arcade-input" placeholder="Answer Integer" autofocus />
+                        <button class="action-btn" style="background:#38bdf8; color:#000;" onclick="processSubmission(document.getElementById('input-ans').value)">Submit / સબમિટ કરો</button>
                     `;
                     break;
 
                 case 'topology':
-                    let faces = Math.floor(Math.random() * 6) + 6; // 6 to 11
-                    let edges = faces + Math.floor(Math.random() * 4) + 4; // ensures structural balance
-                    targetAnswer = edges - faces + 2; // Euler characteristic: V - E + F = 2 => V = E - F + 2
+                    let t_faces = Math.floor(Math.random() * 5) + 4; // 4 to 8
+                    let t_edges = t_faces + Math.floor(Math.random() * 4) + 5; 
+                    targetAnswer = t_edges - t_faces + 2; 
 
                     storyBlock.innerHTML = `
-                        <span class="branch-badge">Topological Networks</span>
-                        <h2>Eulerian Polyhedral Grid</h2>
-                        <p>You are mapping an abstract geometric spatial node network inside a multidimensional matrix terminal.</p>
-                        <p>The network surface features stable metrics conforming directly to the **Euler Characteristic Theorem** for simple convex polyhedra structures:</p>
+                        <span class="branch-badge">Topology / સ્થાનશાસ્ત્ર</span>
+                        <h2>Euler's Polyhedral Network</h2>
+                        <p><strong>English:</strong> A complex 3D convex shape inside the engine has exactly \(E = ${t_edges}\) edges and \(F = ${t_faces}\) faces. Use Euler's formula to solve for Vertices (\(V\)):</p>
                         <p style="text-align:center; font-size:1.3rem; color:#a855f7;">$$V - E + F = 2$$</p>
-                        <p>Telemetry reports state that the anomaly area holds exactly \\(E = ${edges}\\) connection line edges and \\(F = ${faces}\\) bounding surface faces.</p>
+                        
+                        <div class="lang-gu">
+                            <strong>ગુજરાતી ભાષાંતર:</strong><br>
+                            એક બહુફલકીય આકારમાં ધારની સંખ્યા \(E = ${t_edges}\) અને સપાટીઓની સંખ્યા \(F = ${t_faces}\) છે. યુલરના નિયમનો ઉપયોગ કરીને શિરોબિંદુઓની સંખ્યા (\(V\)) શોધો:<br>
+                            $$V - E + F = 2$$
+                        </div>
                     `;
 
                     gameField.innerHTML = `
-                        <h3>Calculate the absolute number of structural vertices (\(V\)) present:</h3>
-                        <input type="number" id="input-ans" class="arcade-input" placeholder="Solve for V" autofocus />
-                        <button class="action-btn" style="background:#a855f7; color:white;" onclick="processSubmission(document.getElementById('input-ans').value)">Map Vertex Points</button>
+                        <h4 style="margin-bottom:5px;">Calculate total vertices (\(V\)):</h4>
+                        <h4 style="color:#38bdf8; margin-top:0;">કુલ શિરોબિંદુઓ (V) ગણો:</h4>
+                        <input type="number" id="input-ans" class="arcade-input" placeholder="Vertices (V)" autofocus />
+                        <button class="action-btn" style="background:#a855f7; color:white;" onclick="processSubmission(document.getElementById('input-ans').value)">Submit / સબમિટ કરો</button>
                     `;
                     break;
 
                 case 'cryptography':
-                    let shift = Math.floor(Math.random() * 4) + 2; // Shift key
-                    let plainValue = Math.floor(Math.random() * 5) + 10; // Base numeric character code
-                    targetAnswer = (plainValue + shift) % 26;
+                    let cr_shift = Math.floor(Math.random() * 5) + 2; 
+                    let cr_plain = Math.floor(Math.random() * 8) + 5; 
+                    targetAnswer = (cr_plain + cr_shift) % 26;
 
                     storyBlock.innerHTML = `
-                        <span class="branch-badge">Cryptographic Decryption</span>
-                        <h2>Modular Shift Cipher Lock</h2>
-                        <p>Infiltrate an encrypted channel by verifying cipher transmission patterns using finite group modular mechanics.</p>
-                        <p>The network encodes values utilizing a **Modular Shift Operation** mapped over a standard 26-element alphabet wheel:</p>
-                        <p style="text-align:center; font-size:1.3rem; color:#eab308;">$$C \\equiv (P + k) \\pmod{26}$$</p>
-                        <p>Intercept vectors display plaintext packet index \\(P = ${plainValue}\\) run through encryption shift step key value \\(k = ${shift}\\).</p>
+                        <span class="branch-badge">Cryptography / ગૂઢલેખન</span>
+                        <h2>Modular Shift Encryption</h2>
+                        <p><strong>English:</strong> A Caesar cipher shift key is operating on alphabet coordinates. Find the encrypted cipher index character integer \(C\):</p>
+                        <p style="text-align:center; font-size:1.3rem; color:#eab308;">$$C \\equiv (${cr_plain} + ${cr_shift}) \\pmod{26}$$</p>
+                        
+                        <div class="lang-gu">
+                            <strong>ગુજરાતી ભાષાંતર:</strong><br>
+                            એક ગુપ્ત સંદેશા પદ્ધતિમાં અક્ષરોના સ્થાન બદલવામાં આવે છે. સમીકરણ ઉકેલીને ગુપ્ત કોડ નંબર \(C\) શોધો:<br>
+                            $$C \\equiv (${cr_plain} + ${cr_shift}) \\pmod{26}$$
+                        </div>
                     `;
 
                     gameField.innerHTML = `
-                        <h3>Solve for the resulting cipher packet target integer value (\(C\)):</h3>
-                        <input type="number" id="input-ans" class="arcade-input" placeholder="Cipher Code result" autofocus />
-                        <button class="action-btn" style="background:#eab308; color:#000;" onclick="processSubmission(document.getElementById('input-ans').value)">Transmit Decryption Key</button>
+                        <h4 style="margin-bottom:5px;">Solve for cipher value \(C\):</h4>
+                        <h4 style="color:#38bdf8; margin-top:0;">કોડ કિંમત C શોધો:</h4>
+                        <input type="number" id="input-ans" class="arcade-input" placeholder="Value of C" autofocus />
+                        <button class="action-btn" style="background:#eab308; color:#000;" onclick="processSubmission(document.getElementById('input-ans').value)">Submit / સબમિટ કરો</button>
                     `;
                     break;
 
                 case 'reasoning':
-                    let seriesBase = Math.floor(Math.random() * 5) + 3;
-                    let ratio = 2;
-                    let s1 = seriesBase;
-                    let s2 = s1 * ratio;
-                    let s3 = s2 * ratio;
-                    targetAnswer = s3 * ratio;
+                    let r_base = Math.floor(Math.random() * 6) + 2;
+                    let r_diff = Math.floor(Math.random() * 4) + 3;
+                    let r1 = r_base;
+                    let r2 = r1 + r_diff;
+                    let r3 = r2 + r_diff;
+                    targetAnswer = r3 + r_diff;
 
                     storyBlock.innerHTML = `
-                        <span class="branch-badge">Analytical Logic & Reasoning</span>
-                        <h2>Inductive Logic Sequence Terminal</h2>
-                        <p>Crack open the heuristic puzzle node by decoding sequential logic pathways using inductive inference operations.</p>
-                        <p>An array sequence tracking pattern has been parsed from database stream activity logs:</p>
+                        <span class="branch-badge">Logical Reasoning / તાર્કિક કસોટી</span>
+                        <h2>Arithmetic Sequence Deduction</h2>
+                        <p><strong>English:</strong> Analyze the logic connecting the progression loop array and deduce the missing index integer step:</p>
                         <p style="text-align:center; font-size:1.5rem; letter-spacing:8px; color:#ec4899; font-weight:bold;">
-                            ${s1}, ${s2}, ${s3}, ?
+                            ${r1}, ${r2}, ${r3}, ?
                         </p>
-                        <p>Analyze the operational progression factor bridging the connection between values to determine the hidden element.</p>
+                        
+                        <div class="lang-gu">
+                            <strong>ગુજરાતી ભાષાંતર:</strong><br>
+                            આપેલી સંખ્યાઓની શ્રેણી પાછળનું તાર્કિક કારણ સમજો અને પ્રશ્નાર્થ ચિહ્ન (?) ની જગ્યાએ કઈ સંખ્યા આવશે તે નક્કી કરો:<br>
+                            <span style="font-size:1.3rem; letter-spacing:6px; color:#ec4899;">${r1}, ${r2}, ${r3}, ?</span>
+                        </div>
                     `;
 
                     gameField.innerHTML = `
-                        <h3>Enter the correct missing integer array step value:</h3>
-                        <input type="number" id="input-ans" class="arcade-input" placeholder="Next item in sequence" autofocus />
-                        <button class="action-btn" style="background:#ec4899; color:white;" onclick="processSubmission(document.getElementById('input-ans').value)">Submit Logical Vector</button>
+                        <h4 style="margin-bottom:5px;">Enter the next sequential value:</h4>
+                        <h4 style="color:#38bdf8; margin-top:0;">શ્રેણીની આગામી સંખ્યા લખો:</h4>
+                        <input type="number" id="input-ans" class="arcade-input" placeholder="Next Number" autofocus />
+                        <button class="action-btn" style="background:#ec4899; color:white;" onclick="processSubmission(document.getElementById('input-ans').value)">Submit / સબમિટ કરો</button>
                     `;
                     break;
 
                 case 'data':
-                    let samples = [2, 5, 8, 11].map(v => v + Math.floor(Math.random() * 3));
-                    let sampleSum = samples.reduce((a, b) => a + b, 0);
-                    targetAnswer = Math.round(sampleSum / 4);
+                    let d1 = Math.floor(Math.random() * 10) + 5;
+                    let d2 = d1 + Math.floor(Math.random() * 5) + 2;
+                    let d3 = d2 + Math.floor(Math.random() * 5) + 2;
+                    let d4 = d3 + Math.floor(Math.random() * 5) + 2;
+                    let d_sum = d1 + d2 + d3 + d4;
+                    targetAnswer = Math.round(d_sum / 4);
 
                     storyBlock.innerHTML = `
-                        <span class="branch-badge">Data Interpretation & Analytics</span>
-                        <h2>Statistical Metric Evaluation</h2>
-                        <p>An analytics database requires optimization parsing. You must find the central tendency metrics from an active packet stream observation matrix sample pool.</p>
-                        <p>Telemetry hardware returns the following array dataset matrix entries:</p>
+                        <span class="branch-badge">Data Analysis / માહિતી પૃથક્કરણ</span>
+                        <h2>The Statistical Central Mean</h2>
+                        <p><strong>English:</strong> Analyze the incoming packet data stream matrix array and compute its arithmetic mean average value (\(\mu\)):</p>
                         <p style="text-align:center; font-size:1.4rem; color:#f97316; font-weight:bold;">
-                            💾 Pool Elements: [ ${samples.join(', ')} ]
+                            📥 Data Stream: [ ${d1}, ${d2}, ${d3}, ${d4} ]
                         </p>
-                        <p>The standard arithmetic mean structural formula dictates accumulating the universal sum divided by sample sizing constraints:</p>
-                        <p style="text-align:center; color:var(--text-muted);">$$\\mu = \\frac{1}{N}\\sum_{i=1}^{N} x_i$$</p>
+                        
+                        <div class="lang-gu">
+                            <strong>ગુજરાતી ભાષાંતર:</strong><br>
+                            આપેલા અવલોકનોની માહિતીના સમૂહ પરથી તેની સરાસરી અથવા મધ્યક (\(\mu\)) ની કિંમત શોધો:<br>
+                            <span style="color:#f97316; font-weight:bold;">📥 માહિતી સ્ત્રોત: [ ${d1}, ${d2}, ${d3}, ${d4} ]</span>
+                        </div>
                     `;
 
                     gameField.innerHTML = `
-                        <h3>Calculate the standard Arithmetic Mean (\\(\\mu\\)) (Round to nearest integer):</h3>
-                        <input type="number" id="input-ans" class="arcade-input" placeholder="Mean Average Integer" autofocus />
-                        <button class="action-btn" style="background:#f97316; color:white;" onclick="processSubmission(document.getElementById('input-ans').value)">Commit Analytics Stream</button>
+                        <h4 style="margin-bottom:5px;">Calculate Mean (Round to nearest integer):</h4>
+                        <h4 style="color:#38bdf8; margin-top:0;">મધ્યક શોધો (નજીકની પૂર્ણાંક સંખ્યા લખો):</h4>
+                        <input type="number" id="input-ans" class="arcade-input" placeholder="Mean Value" autofocus />
+                        <button class="action-btn" style="background:#f97316; color:white;" onclick="processSubmission(document.getElementById('input-ans').value)">Submit / સબમિટ કરો</button>
                     `;
                     break;
             }
 
-            // Dynamically refresh and print out polished LaTeX formulas instantly
+            // Trigger MathJax formula typesetting instantly for new numbers
             if (window.MathJax && window.MathJax.typesetPromise) {
                 window.MathJax.typesetPromise();
             }
