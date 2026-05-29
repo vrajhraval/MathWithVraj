@@ -569,36 +569,167 @@ const MasterQuestionDatabase = {
     }
 };
 
-// MASSIVE QUESTION EXPANSION ENGINE
+// ADVANCED DYNAMIC QUESTION GENERATION ENGINE
 
-function generateQuestions(baseQuestions,count){
-    const generated=[];
+function randomInt(min,max){
+    return Math.floor(Math.random()*(max-min+1))+min;
+}
 
-    for(let i=0;i<count;i++){
-        const q=baseQuestions[i % baseQuestions.length];
+function buildLargeQuestionBank(){
 
-        generated.push({
-            eng:q.eng,
-            guj:q.guj,
-            ans:q.ans,
-            hint:q.hint || 'Analyze carefully.'
+    // ================= SCHOOL ALGEBRA =================
+
+    const algebraQuestions=[];
+
+    for(let i=0;i<100;i++){
+
+        const a=randomInt(2,12);
+        const x=randomInt(2,20);
+        const b=randomInt(1,25);
+        const c=(a*x)+b;
+
+        algebraQuestions.push({
+            eng:`Solve the equation: $$${a}x+${b}=${c}$$`,
+            guj:`સમીકરણ ઉકેલો: $$${a}x+${b}=${c}$$`,
+            ans:String(x),
+            hint:'Move constant term then divide.'
         });
     }
 
-    return generated;
+    MasterQuestionDatabase.school.algebra.questions=algebraQuestions;
+
+    // ================= SCHOOL GEOMETRY =================
+
+    const geometryQuestions=[];
+
+    for(let i=0;i<100;i++){
+
+        const a=randomInt(3,15);
+        const b=randomInt(4,20);
+        const hyp=Math.sqrt(a*a+b*b);
+
+        geometryQuestions.push({
+            eng:`A right triangle has sides ${a} and ${b}. Find the hypotenuse.`,
+            guj:`કાટકોણ ત્રિકોણની બાજુઓ ${a} અને ${b} છે. કર્ણ શોધો.`,
+            ans:String(hyp),
+            hint:'Use Pythagoras theorem.'
+        });
+
+        const r=randomInt(2,12);
+
+        geometryQuestions.push({
+            eng:`Find area of circle radius ${r} using π=3.14`,
+            guj:`ત્રિજ્યા ${r} ધરાવતા વર્તુળનું ક્ષેત્રફળ શોધો.`,
+            ans:String((3.14*r*r).toFixed(2)),
+            hint:'Use πr².'
+        });
+    }
+
+    MasterQuestionDatabase.school.geometry.questions=geometryQuestions.slice(0,100);
+
+    // ================= REAL ANALYSIS =================
+
+    const analysisQuestions=[];
+
+    for(let i=0;i<100;i++){
+
+        const a=randomInt(1,10);
+        const b=randomInt(1,10);
+
+        analysisQuestions.push({
+            eng:`Evaluate $$\\lim_{x\\to0} \\frac{${a}\\sin x}{${a}x}$$`,
+            guj:`લિમિટ શોધો: $$\\lim_{x\\to0} \\frac{${a}\\sin x}{${a}x}$$`,
+            ans:'1',
+            hint:'Use fundamental trigonometric limit.'
+        });
+
+        analysisQuestions.push({
+            eng:`Find derivative of $$${b}x^2$$ at x=2`,
+            guj:`x=2 પર $$${b}x^2$$ નું derivative શોધો.`,
+            ans:String(4*b),
+            hint:'Derivative of ax² is 2ax.'
+        });
+    }
+
+    MasterQuestionDatabase.ug.analysis.questions=analysisQuestions.slice(0,100);
+
+    // ================= COMPLEX ANALYSIS =================
+
+    const complexQuestions=[];
+
+    for(let i=0;i<100;i++){
+
+        const a=randomInt(1,12);
+        const b=randomInt(1,12);
+        const modulus=Math.sqrt(a*a+b*b).toFixed(2);
+
+        complexQuestions.push({
+            eng:`If $$z=${a}+${b}i$$ find $$|z|$$`,
+            guj:`$$z=${a}+${b}i$$ માટે modulus શોધો.`,
+            ans:String(modulus),
+            hint:'Use √(a²+b²).'
+        });
+
+        complexQuestions.push({
+            eng:`Find conjugate of $$${a}-${b}i$$`,
+            guj:`$$${a}-${b}i$$ નો conjugate શોધો.`,
+            ans:`${a}+${b}i`,
+            hint:'Change sign of imaginary part.'
+        });
+    }
+
+    MasterQuestionDatabase.ug.complex.questions=complexQuestions.slice(0,100);
+
+    // ================= TOPOLOGY =================
+
+    const topologyQuestions=[];
+
+    for(let i=1;i<=100;i++){
+
+        const n=randomInt(2,10);
+        const power=Math.pow(2,n);
+
+        topologyQuestions.push({
+            eng:`How many open sets exist in discrete topology with ${n} elements?`,
+            guj:`${n} સભ્યો ધરાવતા discrete topology માં કેટલા open sets હશે?`,
+            ans:String(power),
+            hint:'Power set cardinality.'
+        });
+    }
+
+    MasterQuestionDatabase.pg.topology.questions=topologyQuestions;
+
+    // ================= CRYPTOGRAPHY =================
+
+    const cryptoQuestions=[];
+
+    for(let i=0;i<100;i++){
+
+        const p=[2,3,5,7,11][randomInt(0,4)];
+        const q=[13,17,19,23][randomInt(0,3)];
+
+        cryptoQuestions.push({
+            eng:`RSA system uses p=${p} and q=${q}. Find modulus n=pq.`,
+            guj:`RSA માટે p=${p} અને q=${q} છે. n=pq શોધો.`,
+            ans:String(p*q),
+            hint:'Multiply prime numbers.'
+        });
+
+        const a=randomInt(10,50);
+        const b=randomInt(2,9);
+
+        cryptoQuestions.push({
+            eng:`Find $$${a} \\mod ${b}$$`,
+            guj:`$$${a} \\mod ${b}$$ શોધો.`,
+            ans:String(a%b),
+            hint:'Find remainder.'
+        });
+    }
+
+    MasterQuestionDatabase.pg.cryptography.questions=cryptoQuestions.slice(0,100);
 }
 
-// EXPAND ALL SUBJECTS TO 100 QUESTIONS EACH
-
-Object.keys(MasterQuestionDatabase).forEach(level=>{
-
-    Object.keys(MasterQuestionDatabase[level]).forEach(subject=>{
-
-        const data=MasterQuestionDatabase[level][subject];
-
-        data.questions=generateQuestions(data.questions,100);
-    });
-});
+buildLargeQuestionBank();
 
 let activeTier='school';
 let currentSubjectKey='';
