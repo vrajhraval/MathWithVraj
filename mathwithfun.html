@@ -3,457 +3,529 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Quest Arcade</title>
+    <title>Math Quest Arcade - Premium Edition</title>
+    
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['$$', '$$']]
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
     <style>
         :root {
-            --bg-color: #0b0f19;
-            --card-bg: #161f33;
-            --accent-color: #3b82f6;
-            --text-color: #f3f4f6;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --bg-deep: #020617;
+            --bg-surface: #0f172a;
+            --bg-card: #1e293b;
+            --accent-neon: #38bdf8;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-glow: #334155;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            overflow-x: hidden;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 20px;
             min-height: 100vh;
         }
 
-        header {
-            text-align: center;
-            padding: 2rem;
-            background: linear-gradient(180deg, #111827 0%, rgba(11,15,25,0) 100%);
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            color: #38bdf8;
-            text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
-        }
-
-        .container {
+        .arcade-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
         }
 
-        /* Portal Selection Screen */
+        .title-banner {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 2px dashed #334155;
+            margin-bottom: 2rem;
+        }
+
+        .title-banner h1 {
+            font-size: 3rem;
+            color: #38bdf8;
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Portal Selection Cards */
         .portal-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
         }
 
         .portal-card {
-            background: var(--card-bg);
-            border: 2px solid #1e293b;
+            background: var(--bg-surface);
+            border: 2px solid var(--border-glow);
             border-radius: 16px;
             padding: 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
         }
 
         .portal-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.2);
+            transform: translateY(-8px);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
         }
 
-        /* Tier Specific Colors */
-        .tier-1 { border-color: #4ade80; }
-        .tier-1:hover { box-shadow: 0 0 20px rgba(74, 222, 128, 0.3); }
-        .tier-2 { border-color: #facc15; }
-        .tier-2:hover { box-shadow: 0 0 20px rgba(250, 204, 21, 0.3); }
-        .tier-3 { border-color: #f97316; }
-        .tier-3:hover { box-shadow: 0 0 20px rgba(249, 115, 22, 0.3); }
-        .tier-4 { border-color: #ec4899; }
-        .tier-4:hover { box-shadow: 0 0 20px rgba(236, 72, 153, 0.3); }
-        .tier-5 { border-color: #a855f7; }
-        .tier-5:hover { box-shadow: 0 0 20px rgba(168, 85, 247, 0.3); }
-        .tier-6 { border-color: #3b82f6; }
-        .tier-6:hover { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
-
-        .portal-card h2 {
-            margin-bottom: 0.5rem;
-            font-size: 1.5rem;
-        }
-
-        .portal-card p {
-            color: #94a3b8;
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
+        .tier-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 4px 12px;
             border-radius: 9999px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: bold;
-            background: rgba(255,255,255,0.1);
+            text-transform: uppercase;
         }
 
-        /* Game Interface Area */
+        .scenario-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin: 1rem 0 1.5rem 0;
+            line-height: 1.5;
+        }
+
+        .enter-btn {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            color: white;
+            border: 1px solid var(--border-glow);
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        /* Level Specific Themes */
+        .card-t1 { --accent-color: #4ade80; }
+        .card-t2 { --accent-color: #facc15; }
+        .card-t3 { --accent-color: #f97316; }
+        .card-t4 { --accent-color: #ec4899; }
+        .card-t5 { --accent-color: #a855f7; }
+        .card-t6 { --accent-color: #3b82f6; }
+
+        .portal-card:hover .enter-btn {
+            background: var(--accent-color);
+            color: #000;
+            box-shadow: 0 0 15px var(--accent-color);
+        }
+
+        /* Active Game Arena Layout */
         #game-arena {
             display: none;
-            background: #111827;
-            border: 2px solid #1e293b;
+            background: var(--bg-surface);
+            border: 2px solid var(--border-glow);
             border-radius: 20px;
-            padding: 2rem;
-            margin-top: 1rem;
-            position: relative;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
         }
 
         .back-btn {
             background: #334155;
             color: white;
             border: none;
-            padding: 0.5rem 1rem;
+            padding: 10px 20px;
             border-radius: 8px;
             cursor: pointer;
-            margin-bottom: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
         }
 
         .back-btn:hover { background: #475569; }
 
-        .game-window {
-            background: #020617;
+        .game-split-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .game-split-layout { grid-template-columns: 1fr; }
+        }
+
+        .story-panel {
+            background: rgba(2, 6, 23, 0.6);
+            border-left: 4px solid var(--arena-accent, #38bdf8);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .interactive-panel {
+            background: var(--bg-card);
             border-radius: 12px;
-            min-height: 400px;
+            padding: 2rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+            border: 1px solid var(--border-glow);
         }
 
-        /* Game Mechanics UIs */
-        .game-input {
-            background: #1e293b;
-            border: 2px solid #475569;
-            color: white;
-            padding: 0.75rem 1rem;
-            font-size: 1.2rem;
-            border-radius: 8px;
-            text-align: center;
-            margin-top: 1rem;
-            width: 200px;
-        }
-
-        .game-btn {
-            background: #3b82f6;
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            font-size: 1.1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-top: 1rem;
-            font-weight: bold;
-        }
-
-        .game-btn:hover { background: #2563eb; }
-
-        .score-board {
+        .score-row {
             display: flex;
             justify-content: space-between;
             width: 100%;
-            max-width: 600px;
-            margin-bottom: 2rem;
-            font-weight: bold;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #334155;
+            margin-bottom: 1.5rem;
             color: #38bdf8;
+            font-weight: bold;
         }
 
-        /* Level 1 Specific Balloon styles */
-        .balloon-container {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
+        /* Level Specific Component UIs */
+        .balloon-field { display: flex; gap: 1rem; margin-top: 1.5rem; }
         .balloon {
-            width: 70px;
-            height: 85px;
+            width: 75px;
+            height: 90px;
             border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: #000;
             font-weight: bold;
-            font-size: 1.5rem;
             cursor: pointer;
-            transition: transform 0.1s ease;
+            font-size: 1.3rem;
+            transition: transform 0.2s;
         }
-        .balloon:hover { transform: scale(1.1); }
+        .balloon:hover { transform: scale(1.15) rotate(5deg); }
 
-        /* Level 5 Matrix input layout */
-        .matrix-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 60px);
-            gap: 10px;
-            margin: 1.5rem 0;
-        }
-        .matrix-cell {
-            width: 60px;
-            height: 60px;
-            background: #1e293b;
-            border: 2px solid #3b82f6;
+        .arcade-input {
+            background: var(--bg-deep);
+            border: 2px solid var(--border-glow);
             color: white;
+            padding: 12px;
+            font-size: 1.3rem;
+            border-radius: 8px;
             text-align: center;
-            font-size: 1.2rem;
-            border-radius: 6px;
+            width: 80%;
+            margin-top: 1.5rem;
+        }
+        .arcade-input:focus { border-color: #38bdf8; outline: none; }
+
+        .action-btn {
+            background: #38bdf8;
+            color: #020617;
+            font-weight: bold;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            cursor: pointer;
+            width: 80%;
         }
 
-        .feedback {
+        .matrix-container { display: grid; grid-template-columns: repeat(2, 70px); gap: 10px; margin: 1.5rem 0; }
+        .matrix-box { width: 70px; height: 70px; background: var(--bg-deep); border: 2px solid #a855f7; color: white; text-align: center; font-size: 1.3rem; border-radius: 8px; }
+
+        .feedback-box {
             margin-top: 1.5rem;
             font-size: 1.2rem;
             font-weight: bold;
-            height: 1.5rem;
+            min-height: 2rem;
         }
-        .correct { color: #4ade80; }
-        .wrong { color: #f87171; }
+        .text-correct { color: #4ade80; text-shadow: 0 0 10px rgba(74,222,128,0.2); }
+        .text-error { color: #f87171; text-shadow: 0 0 10px rgba(248,113,113,0.2); }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>⚔️ Math Quest Arcade ⚔️</h1>
-        <p>Choose your realm, solve the puzzles, and master the multiverse.</p>
-    </header>
+    <div class="arcade-container">
+        
+        <div class="title-banner" id="banner-view">
+            <h1>🎮 The Grand Math Multiverse 🎮</h1>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Cross standard barriers and experience reality calculated through immersive game mechanics.</p>
+        </div>
 
-    <div class="container">
         <div id="portal-selector">
             <div class="portal-grid">
-                <div class="portal-card tier-1" onclick="startLevel(1)">
-                    <span class="badge" style="color: #4ade80;">K-5 Base</span>
-                    <h2 style="color: #4ade80; margin-top:1rem;">1. The Meadow Realm</h2>
-                    <p>KG Level: Pop the balloons to collect items and learn simple counting structures.</p>
-                    <button class="game-btn" style="background:#4ade80; color:#000;">Enter Portal</button>
+                
+                <div class="portal-card card-t1" onclick="initiateRealm(1)">
+                    <span class="tier-badge" style="background: #4ade80; color: #000;">KG Level</span>
+                    <h2 style="color: #4ade80;">1. The Whispering Meadow</h2>
+                    <p class="scenario-desc">Welcome, little adventurer! The friendly animals of the forest need help collecting items. Count objects, track down flying shapes, and burst the magical energy balloons to solve target loops.</p>
+                    <button class="enter-btn">Cross Horizon</button>
                 </div>
 
-                <div class="portal-card tier-2" onclick="startLevel(2)">
-                    <span class="badge" style="color: #facc15;">Grades 1-5</span>
-                    <h2 style="color: #facc15; margin-top:1rem;">2. The Dungeon Crawler</h2>
-                    <p>Primary School Level: Battle enemies by out-smarting them with multiplication loops.</p>
-                    <button class="game-btn" style="background:#facc15; color:#000;">Enter Portal</button>
+                <div class="portal-card card-t2" onclick="initiateRealm(2)">
+                    <span class="tier-badge" style="background: #facc15; color: #000;">Primary School</span>
+                    <h2 style="color: #facc15;">2. Shadow Dungeon Crawler</h2>
+                    <p class="scenario-desc">Dungeon rooms ahead are blocked by algebraic gatekeepers! Arm your inventory array with multiplication factors, find common denominators, and execute structural hits to bypass defensive enemy walls.</p>
+                    <button class="enter-btn">Cross Horizon</button>
                 </div>
 
-                <div class="portal-card tier-3" onclick="startLevel(3)">
-                    <span class="badge" style="color: #f97316;">Grades 6-10</span>
-                    <h2 style="color: #f97316; margin-top:1rem;">3. Cyberpunk Matrix</h2>
-                    <p>Secondary School Level: Balance dynamic coordinates and linear paths to hack mainframes.</p>
-                    <button class="game-btn" style="background:#f97316;">Enter Portal</button>
+                <div class="portal-card card-t3" onclick="initiateRealm(3)">
+                    <span class="tier-badge" style="background: #f97316; color: #fff;">Secondary School</span>
+                    <h2 style="color: #f97316;">3. Cyberpunk Core Matrix</h2>
+                    <p class="scenario-desc">Infiltrate the city mainframe data terminal. The grid operates via linear equations. Balance dynamic coordinate lines, evaluate target slope metrics, and adjust intercept streams to crack deep systemic walls.</p>
+                    <button class="enter-btn">Cross Horizon</button>
                 </div>
 
-                <div class="portal-card tier-4" onclick="startLevel(4)">
-                    <span class="badge" style="color: #ec4899;">Grades 11-12</span>
-                    <h2 style="color: #ec4899; margin-top:1rem;">4. The Space Odyssey</h2>
-                    <p>Higher Secondary Level: Optimize launch vectors and derivatives to navigate space fields.</p>
-                    <button class="game-btn" style="background:#ec4899;">Enter Portal</button>
+                <div class="portal-card card-t4" onclick="initiateRealm(4)">
+                    <span class="tier-badge" style="background: #ec4899; color: #fff;">Higher Secondary</span>
+                    <h2 style="color: #ec4899;">4. Interstellar Velocity Field</h2>
+                    <p class="scenario-desc">Your ship is navigating a massive gravitational asteroid cluster. Command terminal engines through instantaneous rates of change. Compute precise calculus derivatives to calculate escape velocity positions.</p>
+                    <button class="enter-btn">Cross Horizon</button>
                 </div>
 
-                <div class="portal-card tier-5" onclick="startLevel(5)">
-                    <span class="badge" style="color: #a855f7;">Undergraduate</span>
-                    <h2 style="color: #a855f7; margin-top:1rem;">5. Quantum Vector Grid</h2>
-                    <p>UG Level: Control dimensional vector planes using matrix transformation metrics.</p>
-                    <button class="game-btn" style="background:#a855f7;">Enter Portal</button>
+                <div class="portal-card card-t5" onclick="initiateRealm(5)">
+                    <span class="tier-badge" style="background: #a855f7; color: #fff;">Undergraduate</span>
+                    <h2 style="color: #a855f7;">5. Quantum Space Vector Grid</h2>
+                    <p class="scenario-desc">Step into the quantum sandbox loop. Space vectors require dimensional alignment. Apply vector transformation profiles, manipulate linear maps, and alter grid orientation spaces using 2D metrics.</p>
+                    <button class="enter-btn">Cross Horizon</button>
                 </div>
 
-                <div class="portal-card tier-6" onclick="startLevel(6)">
-                    <span class="badge" style="color: #3b82f6;">Postgraduate</span>
-                    <h2 style="color: #3b82f6; margin-top:1rem;">6. The Multiverse Lab</h2>
-                    <p>PG Level: Solve complex graph structures and topology maps to bypass system anomalies.</p>
-                    <button class="game-btn" style="background:#3b82f6;">Enter Portal</button>
+                <div class="portal-card card-t6" onclick="initiateRealm(6)">
+                    <span class="tier-badge" style="background: #3b82f6; color: #fff;">Postgraduate</span>
+                    <h2 style="color: #3b82f6;">6. The Chaos Singularity</h2>
+                    <p class="scenario-desc">Deconstruct the network anomaly using abstract models. Map network node paths using Discrete Graph Optimization frameworks, analyze tree metrics, and evaluate network maps to close spatial cracks.</p>
+                    <button class="enter-btn">Cross Horizon</button>
                 </div>
+
             </div>
         </div>
 
         <div id="game-arena">
-            <button class="back-btn" onclick="exitGame()">← Leave Realm</button>
-            <h2 id="realm-title" style="margin-bottom: 1rem; color: #38bdf8;"></h2>
-            <div class="game-window" id="window-content">
-                </div>
+            <button class="back-btn" onclick="terminateSession()">← Return to Portal Hub</button>
+            
+            <div class="game-split-layout">
+                <div class="story-panel" id="story-block">
+                    </div>
+
+                <div class="interactive-panel" id="action-block">
+                    </div>
+            </div>
         </div>
+
     </div>
 
     <script>
-        // Game State Engine variables
         let currentTier = 0;
         let score = 0;
         let streak = 0;
-        let currentAnswer = null;
+        let targetAnswer = null;
 
-        const titles = {
-            1: "🌸 Realm 1: The Meadow (Counting)",
-            2: "⚔️ Realm 2: Dungeon Crawler (Multiplication Clash)",
-            3: "🌐 Realm 3: Cyberpunk Hack (Linear Balance)",
-            4: "🚀 Realm 4: Deep Orbit (Calculus Injection)",
-            5: "🌀 Realm 5: Quantum Grid (Matrix Transformations)",
-            6: "👁️ Realm 6: Multiverse Node (Graph Topology)"
-        };
+        const colorsMap = { 1: "#4ade80", 2: "#facc15", 3: "#f97316", 4: "#ec4899", 5: "#a855f7", 6: "#3b82f6" };
 
-        function startLevel(tier) {
+        function initiateRealm(tier) {
             currentTier = tier;
             score = 0;
             streak = 0;
             document.getElementById('portal-selector').style.display = 'none';
-            document.getElementById('game-arena').style.display = 'block';
-            document.getElementById('realm-title').innerText = titles[tier];
-            generateChallenge();
+            document.getElementById('banner-view').style.display = 'none';
+            
+            const arena = document.getElementById('game-arena');
+            arena.style.display = 'block';
+            arena.style.setProperty('--arena-accent', colorsMap[tier]);
+
+            generateNewProblemInstance();
         }
 
-        function exitGame() {
-            document.getElementById('portal-selector').style.display = 'block';
+        function terminateSession() {
+            document.getElementById('portal-selector').style.display = 'grid';
+            document.getElementById('banner-view').style.display = 'block';
             document.getElementById('game-arena').style.display = 'none';
-            document.getElementById('window-content').innerHTML = '';
         }
 
-        function verifyAnswer(userAns) {
-            const feedbackEl = document.getElementById('game-feedback');
-            let isCorrect = false;
+        function processSubmission(userResponse) {
+            const feedback = document.getElementById('feedback-output');
+            let matched = false;
 
-            if(currentTier === 5) {
-                // Special check array parameters for Level 5 matrix cell calculations
-                isCorrect = JSON.stringify(userAns) === JSON.stringify(currentAnswer);
+            if (currentTier === 5) {
+                matched = JSON.stringify(userResponse) === JSON.stringify(targetAnswer);
             } else {
-                isCorrect = parseInt(userAns) === parseInt(currentAnswer);
+                matched = parseInt(userResponse) === parseInt(targetAnswer);
             }
 
-            if(isCorrect) {
-                score += 10;
-                streak += 1;
-                feedbackEl.className = "feedback correct";
-                feedbackEl.innerText = `✨ Correct! +10 Points. Streak: ${streak}`;
-                setTimeout(generateChallenge, 1500);
+            if (matched) {
+                score += 15;
+                streak++;
+                feedback.className = "feedback-box text-correct";
+                feedback.innerHTML = `✨ Success! +15 Points added to configuration. Active Streak: ${streak}`;
+                setTimeout(generateNewProblemInstance, 1800);
             } else {
                 streak = 0;
-                feedbackEl.className = "feedback wrong";
-                feedbackEl.innerText = `❌ Paradigm Error. Try Again!`;
+                feedback.className = "feedback-box text-error";
+                feedback.innerHTML = `❌ Alignment Failed. Mathematical paradox generated. Read the context and try again!`;
             }
-            document.getElementById('score-val').innerText = score;
-            document.getElementById('streak-val').innerText = streak;
+            document.getElementById('arena-score').innerText = score;
+            document.getElementById('arena-streak').innerText = streak;
         }
 
-        function generateChallenge() {
-            const container = document.getElementById('window-content');
-            container.innerHTML = `
-                <div class="score-board">
-                    <div>SCORE: <span id="score-val">${score}</span></div>
-                    <div>STREAK: <span id="streak-val">${streak}</span></div>
+        function generateNewProblemInstance() {
+            const storyBlock = document.getElementById('story-block');
+            const actionBlock = document.getElementById('action-block');
+
+            // Setup common score container template framework
+            const scoreHeaderHTML = `
+                <div class="score-row">
+                    <div>ECO-SYSTEM SCORE: <span id="arena-score">${score}</span></div>
+                    <div>STREAK: <span id="arena-streak">${streak}</span></div>
                 </div>
-                <div id="game-playground" style="text-align:center; width:100%;"></div>
-                <div id="game-feedback" class="feedback"></div>
+                <div id="runtime-game-field" style="width:100%; text-align:center;"></div>
+                <div id="feedback-output" class="feedback-box"></div>
             `;
-            
-            const playground = document.getElementById('game-playground');
+            actionBlock.innerHTML = scoreHeaderHTML;
+            const gameField = document.getElementById('runtime-game-field');
 
             switch(currentTier) {
-                case 1: // KG Level
-                    let targetCount = Math.floor(Math.random() * 5) + 3;
-                    currentAnswer = targetCount;
-                    playground.innerHTML = `<h3>Help the Monkey! Pop the balloon with exactly <span style="color:#4ade80; font-size:1.5rem;">${targetCount}</span> dots!</h3>`;
+                case 1:
+                    let itemsCount = Math.floor(Math.random() * 4) + 4;
+                    targetAnswer = itemsCount;
                     
-                    let balloonWrap = document.createElement('div');
-                    balloonWrap.className = "balloon-container";
-                    balloonWrap.style.justifyContent = "center";
-                    
-                    let colors = ['#ef4444', '#3b82f6', '#10b981', '#f59e0b'];
-                    let choices = [targetCount, targetCount - 1, targetCount + 2].sort(() => Math.random() - 0.5);
-                    
-                    choices.forEach((num, idx) => {
+                    storyBlock.innerHTML = `
+                        <h2 style="color:#4ade80;">The Whispering Meadow Loop</h2>
+                        <p style="margin-top:1rem;">A friendly rabbit needs to cross the stream! To help them, look at the energy clouds floating above. Each cloud contains tiny floating seed markers inside.</p>
+                        <p style="margin-top:0.5rem; font-weight:bold; color:#4ade80;">Your Quest: Find the cloud asset container holding exactly ${itemsCount} magical marker points so the rabbit can bridge the gap!</p>
+                    `;
+
+                    let wrap = document.createElement('div');
+                    wrap.className = "balloon-field";
+                    wrap.style.justifyContent = "center";
+                    let opts = [itemsCount, itemsCount - 2, itemsCount + 2].sort(() => Math.random() - 0.5);
+                    let bColors = ['#f87171', '#60a5fa', '#34d399'];
+
+                    opts.forEach((val, i) => {
                         let b = document.createElement('div');
                         b.className = "balloon";
-                        b.style.backgroundColor = colors[idx % colors.length];
-                        b.innerText = "•".repeat(num);
-                        b.onclick = () => verifyAnswer(num);
-                        balloonWrap.appendChild(b);
+                        b.style.backgroundColor = bColors[i];
+                        b.innerText = "•".repeat(val);
+                        b.onclick = () => processSubmission(val);
+                        wrap.appendChild(b);
                     });
-                    playground.appendChild(balloonWrap);
+                    gameField.appendChild(wrap);
                     break;
 
-                case 2: // Primary School
-                    let factor1 = Math.floor(Math.random() * 8) + 2;
-                    let factor2 = Math.floor(Math.random() * 9) + 1;
-                    currentAnswer = factor1 * factor2;
-                    playground.innerHTML = `
-                        <h3>An Orc blocks the door! Cast a spell by solving:</h3>
-                        <h1 style="margin: 1.5rem 0; font-size: 3rem; color:#facc15;">${factor1} × ${factor2} = ?</h1>
-                        <input type="number" id="ans-input" class="game-input" placeholder="Your Answer" autofocus />
-                        <br><button class="game-btn" style="background:#facc15; color:#000;" onclick="verifyAnswer(document.getElementById('ans-input').value)">Cast Spell</button>
+                case 2:
+                    let val1 = Math.floor(Math.random() * 7) + 3;
+                    let val2 = Math.floor(Math.random() * 8) + 2;
+                    targetAnswer = val1 * val2;
+
+                    storyBlock.innerHTML = `
+                        <h2 style="color:#facc15;">The Shadow Dungeon Lock</h2>
+                        <p style="margin-top:1rem;">A iron gate blocks your progress down into the math labyrinth. The lock interface displays two glowing integers forming a structural multiplication challenge matrix.</p>
+                        <p style="margin-top:0.5rem;">To generate the energy bolt needed to break the door, compute the total area product of the matrix fields configured below.</p>
+                        <p style="margin-top:1rem; font-weight:bold; color:#facc15;">Core Identity Equation: \\( \\text{Area} = A \\times B \\)</p>
+                    `;
+
+                    gameField.innerHTML = `
+                        <h3>Compute Spell Matrix Output:</h3>
+                        <h2 style="font-size:3rem; color:#facc15; margin:1rem 0;">${val1} \\(\\times\\) ${val2}</h2>
+                        <input type="number" id="input-t2" class="arcade-input" placeholder="Enter Product integer" autofocus />
+                        <button class="action-btn" style="background:#facc15;" onclick="processSubmission(document.getElementById('input-t2').value)">Cast Breach Spell</button>
                     `;
                     break;
 
-                case 3: // Secondary School
-                    let xVal = Math.floor(Math.random() * 6) + 2;
-                    let slope = Math.floor(Math.random() * 3) + 2;
-                    let constant = Math.floor(Math.random() * 5) + 1;
-                    currentAnswer = (slope * xVal) + constant;
-                    playground.innerHTML = `
-                        <h3>Hack the mainframe. Adjust the terminal buffer intercept:</h3>
-                        <p style="color:#94a3b8; margin-bottom:1rem;">Find $y$ when the line is defined by $y = ${slope}x + ${constant}$ and $x = ${xVal}$</p>
-                        <h2 style="color:#f97316;">y = ?</h2>
-                        <input type="number" id="ans-input" class="game-input" autofocus />
-                        <br><button class="game-btn" style="background:#f97316;" onclick="verifyAnswer(document.getElementById('ans-input').value)">Execute Hack</button>
+                case 3:
+                    let targetX = Math.floor(Math.random() * 5) + 2;
+                    let currentSlope = Math.floor(Math.random() * 3) + 3;
+                    let offsetValue = Math.floor(Math.random() * 6) + 1;
+                    targetAnswer = (currentSlope * targetX) + offsetValue;
+
+                    storyBlock.innerHTML = `
+                        <h2 style="color:#f97316;">Terminal Mainframe Infiltration</h2>
+                        <p style="margin-top:1rem;">The node stream requires data alignment along a linear equation vector. You have successfully mapped the line trajectory variables.</p>
+                        <p style="margin-top:0.5rem;">The processing engine utilizes standard Cartesian Slope-Intercept structural logic:</p>
+                        <p style="margin-top:0.5rem; text-align:center; font-size:1.2rem; color:#f97316;">$$y = mx + c$$</p>
+                        <p style="margin-top:0.5rem;">The current environment parameters are parsed as follows: Slope parameter \\(m = ${currentSlope}\\), Intercept factor \\(c = ${offsetValue}\\).</p>
+                    `;
+
+                    gameField.innerHTML = `
+                        <h3>Find target coordinate variable \\(y\\) when system scales to state \\(x = ${targetX}\\):</h3>
+                        <input type="number" id="input-t3" class="arcade-input" placeholder="Solve for y" autofocus />
+                        <button class="action-btn" style="background:#f97316; color:white;" onclick="processSubmission(document.getElementById('input-t3').value)">Inject Command Stream</button>
                     `;
                     break;
 
-                case 4: // Higher Secondary School
-                    let t = Math.floor(Math.random() * 4) + 2;
-                    let exponent = 3;
-                    currentAnswer = 3 * (t * t); // Derivative of t^3 is 3t^2
-                    playground.innerHTML = `
-                        <h3>Rocket Trajectory Calculation Required!</h3>
-                        <p style="color:#94a3b8; margin-bottom:1rem;">Position equation of rocket: $s(t) = t^3$. Calculate instantaneous velocity acceleration at time $t = ${t}$ units.</p>
-                        <h2 style="color:#ec4899;">ds/dt = ?</h2>
-                        <input type="number" id="ans-input" class="game-input" autofocus />
-                        <br><button class="game-btn" style="background:#ec4899;" onclick="verifyAnswer(document.getElementById('ans-input').value)">Burn Thrusters</button>
+                case 4:
+                    let timeState = Math.floor(Math.random() * 4) + 2;
+                    targetAnswer = 3 * (timeState * timeState); // f'(t) for t^3 is 3t^2
+
+                    storyBlock.innerHTML = `
+                        <h2 style="color:#ec4899;">Interstellar Velocity Processing</h2>
+                        <p style="margin-top:1rem;">Asteroids detected! To safety guide the crew spaceship hull, the tracking system needs to know the instantaneous rate of change of position with respect to space-time metrics.</p>
+                        <p style="margin-top:0.5rem;">The displacement profile equation mapping your rocket distance metrics follows a standard cubic power curve function:</p>
+                        <p style="margin-top:0.5rem; text-align:center; font-size:1.2rem; color:#ec4899;">$$s(t) = t^3$$</p>
+                        <p style="margin-top:0.5rem;">By applying the foundational power rule derivative theorem, extract the velocity matrix transformation rule:</p>
+                        <p style="margin-top:0.5rem; text-align:center; color:#94a3b8;">$$\\frac{ds}{dt} = \\frac{d}{dt}[t^3] = 3t^2$$</p>
+                    `;
+
+                    gameField.innerHTML = `
+                        <h3>Evaluate precise velocity tracking output \\(\\frac{ds}{dt}\\) at clock time \\(t = ${timeState}\\):</h3>
+                        <input type="number" id="input-t4" class="arcade-input" placeholder="Compute s'(t)" autofocus />
+                        <button class="action-btn" style="background:#ec4899; color:white;" onclick="processSubmission(document.getElementById('input-t4').value)">Engage Engine Burns</button>
                     `;
                     break;
 
-                case 5: // Undergraduate Level
-                    let scaleFactor = Math.floor(Math.random() * 3) + 2;
-                    currentAnswer = [scaleFactor * 2, scaleFactor * 4];
-                    playground.innerHTML = `
-                        <h3>Apply Linear Scaling Matrix Transformation:</h3>
-                        <p style="color:#94a3b8;">Transform the vector $\\begin{bmatrix} 2 \\\\ 4 \\end{bmatrix}$ using Identity scaling matrix scalar value $k = ${scaleFactor}$</p>
-                        <div style="display:flex; justify-content:center; align-items:center;">
-                            <div class="matrix-grid">
-                                <input type="number" id="m1" class="matrix-cell" placeholder="X">
-                                <input type="number" id="m2" class="matrix-cell" placeholder="Y">
+                case 5:
+                    let scalarK = Math.floor(Math.random() * 3) + 2;
+                    targetAnswer = [scalarK * 3, scalarK * 5];
+
+                    storyBlock.innerHTML = `
+                        <h2 style="color:#a855f7;">Quantum Space Vector Transformation</h2>
+                        <p style="margin-top:1rem;">You are manipulating a 2D vector space plane inside a localized quantum state engine simulation field.</p>
+                        <p style="margin-top:0.5rem;">An entry vector coordinate anchor is mapped inside the matrix tracking array as follows:</p>
+                        <p style="margin-top:0.5rem; text-align:center; font-size:1.2rem; color:#a855f7;">$$\\vec{v} = \\begin{bmatrix} 3 \\\\ 5 \\end{bmatrix}$$</p>
+                        <p style="margin-top:0.5rem;">The system requires you to apply a uniform structural linear map transformation via an identity scaling metric operation containing scalar multiplier factor \\(k = ${scalarK}\\).</p>
+                    `;
+
+                    gameField.innerHTML = `
+                        <h3>Compute Transformed Vector Coordinates:</h3>
+                        <p style="margin-bottom:1rem; color:#94a3b8;">$$T(\\vec{v}) = ${scalarK} \\cdot \\begin{bmatrix} 3 \\\\ 5 \\end{bmatrix} = \\begin{bmatrix} x' \\\\ y' \\end{bmatrix}$$</p>
+                        <div style="display:flex; justify-content:center;">
+                            <div class="matrix-container">
+                                <input type="number" id="m-x" class="matrix-box" placeholder="x'">
+                                <input type="number" id="m-y" class="matrix-box" placeholder="y'">
                             </div>
                         </div>
-                        <button class="game-btn" style="background:#a855f7;" onclick="verifyMatrixAnswer()">Pulse Matrix Vector</button>
+                        <button class="action-btn" style="background:#a855f7; color:white;" onclick="evaluateMatrixInputs()">Pulse Vector Grid</button>
                     `;
                     break;
 
-                case 6: // Postgraduate Level
-                    let nodes = Math.floor(Math.random() * 3) + 4; 
-                    currentAnswer = nodes - 1; // Minimum spanning tree edges formula: V - 1
-                    playground.innerHTML = `
-                        <h3>Quantum Node Structural Topology Loop</h3>
-                        <p style="color:#94a3b8; margin-bottom:1rem;">To establish absolute synchronization across a local space network mesh containing <span style="color:#3b82f6; font-weight:bold;">${nodes} vertices</span>, what is the exact minimum number of edge paths needed to build a Minimum Spanning Tree (MST)?</p>
-                        <input type="number" id="ans-input" class="game-input" autofocus />
-                        <br><button class="game-btn" style="background:#3b82f6;" onclick="verifyAnswer(document.getElementById('ans-input').value)">Synchronize Network</button>
+                case 6:
+                    let vertexCount = Math.floor(Math.random() * 3) + 5; 
+                    targetAnswer = vertexCount - 1; // Cayley's theorem tree property: Edges = V - 1
+
+                    storyBlock.innerHTML = `
+                        <h2 style="color:#3b82f6;">The Chaos Singularity Topology</h2>
+                        <p style="margin-top:1rem;">A corrupted topological server mesh network has split into multiple loose data segments. You must deploy a Minimum Spanning Tree (MST) algorithm layout protocol to bind them back together safely.</p>
+                        <p style="margin-top:0.5rem;">According to foundational theorems within **Discrete Graph Theory**, any connected acyclic graph framework linking together a specific configuration pool of structural elements follows a strict parameter rule:</p>
+                        <p style="margin-top:0.5rem; text-align:center; font-size:1.2rem; color:#3b82f6;">$$E = V - 1$$</p>
+                        <p style="margin-top:0.5rem;">Where \\(V\\) represents the vertex nodes pool count, and \\(E\\) denotes the absolute minimal edge lines required to secure absolute synchronization without creating loops.</p>
+                    `;
+
+                    gameField.innerHTML = `
+                        <h3>If the anomaly zone map contains \\(V = ${vertexCount}\\) structural nodes, calculate total edges \\(E\\) required:</h3>
+                        <input type="number" id="input-t6" class="arcade-input" placeholder="Solve for E" autofocus />
+                        <button class="action-btn" style="background:#3b82f6; color:white;" onclick="processSubmission(document.getElementById('input-t6').value)">Stabilize Topology</button>
                     `;
                     break;
             }
+
+            // Force MathJax to scan and beautifully render the freshly injected LaTeX markup strings
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise();
+            }
         }
 
-        // Special evaluation method for level 5 multidimensional arrays
-        function verifyMatrixAnswer() {
-            let x = parseInt(document.getElementById('m1').value);
-            let y = parseInt(document.getElementById('m2').value);
-            verifyAnswer([x, y]);
+        function evaluateMatrixInputs() {
+            let userX = parseInt(document.getElementById('m-x').value);
+            let userY = parseInt(document.getElementById('m-y').value);
+            processSubmission([userX, userY]);
         }
     </script>
 </body>
