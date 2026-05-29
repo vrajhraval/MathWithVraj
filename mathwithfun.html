@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Quest Arcade - Multiverse Edition</title>
+    <title>The Grand Math Multiverse Archive</title>
     
-    <!-- Load MathJax for flawless LaTeX rendering -->
     <script>
         window.MathJax = {
             tex: {
@@ -38,529 +37,544 @@
         }
 
         .arcade-container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
         }
 
-        .title-banner {
+        .header-panel {
             text-align: center;
-            padding: 2rem 0;
-            border-bottom: 2px dashed #334155;
+            padding: 2rem;
+            background: var(--bg-surface);
+            border: 2px solid var(--border-glow);
+            border-radius: 16px;
             margin-bottom: 2rem;
         }
 
-        .title-banner h1 {
-            font-size: 2.8rem;
+        .header-panel h1 {
+            font-size: 2.5rem;
             color: #38bdf8;
-            text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
-            margin-bottom: 0.5rem;
+            margin: 0 0 0.5rem 0;
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
         }
 
-        .portal-grid {
+        /* Tier Navigation Tabs */
+        .tier-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .tier-tab {
+            background: var(--bg-surface);
+            border: 2px solid var(--border-glow);
+            color: var(--text-muted);
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .tier-tab.active {
+            border-color: #38bdf8;
+            color: #38bdf8;
+            background: var(--bg-card);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+        }
+
+        /* Subject Selector Grid */
+        .subject-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
         }
 
-        .portal-card {
+        .subject-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-glow);
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-4px);
+            border-color: #38bdf8;
+        }
+
+        .subject-card h3 {
+            margin: 0 0 0.5rem 0;
+            color: #f8fafc;
+        }
+
+        .subject-card p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* Arena Layout */
+        #arena-workspace {
+            display: none;
             background: var(--bg-surface);
             border: 2px solid var(--border-glow);
             border-radius: 16px;
             padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
         }
 
-        .portal-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent-color);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-        }
-
-        .tier-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            padding: 4px 12px;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .scenario-desc {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin: 1rem 0 1.5rem 0;
-            line-height: 1.6;
-        }
-
-        .enter-btn {
-            background: linear-gradient(135deg, #1e293b, #334155);
-            color: white;
-            border: 1px solid var(--border-glow);
-            padding: 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-            text-align: center;
-        }
-
-        .card-t1 { --accent-color: #4ade80; }
-        .card-t2 { --accent-color: #3b82f6; }
-
-        .portal-card:hover .enter-btn {
-            background: var(--accent-color);
-            color: #000;
-            box-shadow: 0 0 15px var(--accent-color);
-        }
-
-        #game-arena {
-            display: none;
-            background: var(--bg-surface);
-            border: 2px solid var(--border-glow);
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
-        }
-
-        .back-btn {
-            background: #334155;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-bottom: 2rem;
-        }
-
-        .back-btn:hover { background: #475569; }
-
-        .game-split-layout {
+        .arena-grid {
             display: grid;
-            grid-template-columns: 11fr 10fr;
-            gap: 2.5rem;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 2rem;
         }
 
         @media (max-width: 900px) {
-            .game-split-layout { grid-template-columns: 1fr; }
+            .arena-grid { grid-template-columns: 1fr; }
         }
 
-        .story-panel {
-            background: rgba(2, 6, 23, 0.6);
-            border-left: 4px solid var(--arena-accent, #38bdf8);
+        .display-panel {
+            background: rgba(2, 6, 23, 0.5);
             padding: 1.5rem;
             border-radius: 8px;
+            border-left: 4px solid #38bdf8;
         }
 
-        .story-panel h2 { margin-top: 0; }
-
-        .lang-gu {
-            color: #e2e8f0;
+        .gujarati-block {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
             border-top: 1px dashed #334155;
-            margin-top: 15px;
-            padding-top: 15px;
+            color: #cbd5e1;
             font-size: 1.05rem;
             line-height: 1.6;
         }
 
-        .interactive-panel {
+        .input-panel {
             background: var(--bg-card);
-            border-radius: 12px;
-            padding: 2rem;
+            border-radius: 8px;
+            padding: 1.5rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            border: 1px solid var(--border-glow);
         }
 
-        .score-row {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #334155;
-            margin-bottom: 1.5rem;
-            color: #38bdf8;
-            font-weight: bold;
-        }
-
-        .branch-badge {
-            background: #1e293b;
-            color: #38bdf8;
-            padding: 6px 14px;
-            border: 1px solid #334155;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 1px;
-            margin-bottom: 1rem;
-            display: inline-block;
-        }
-
-        .arcade-input {
+        .custom-input {
             background: var(--bg-deep);
             border: 2px solid var(--border-glow);
             color: white;
             padding: 12px;
-            font-size: 1.3rem;
-            border-radius: 8px;
-            text-align: center;
+            font-size: 1.2rem;
+            border-radius: 6px;
             width: 80%;
-            margin-top: 1rem;
+            text-align: center;
+            margin-bottom: 1rem;
         }
-        .arcade-input:focus { border-color: #38bdf8; outline: none; }
 
-        .action-btn {
+        .custom-input:focus { border-color: #38bdf8; outline: none; }
+
+        .submit-btn {
             background: #38bdf8;
             color: #020617;
             font-weight: bold;
-            padding: 12px 30px;
-            font-size: 1.1rem;
             border: none;
-            border-radius: 8px;
-            margin-top: 1.5rem;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-size: 1.1rem;
             cursor: pointer;
             width: 80%;
         }
 
-        .feedback-box {
-            margin-top: 1.5rem;
-            font-size: 1.1rem;
+        .feedback-message {
+            margin-top: 1rem;
             font-weight: bold;
-            min-height: 2rem;
+            font-size: 1.1rem;
+            min-height: 2.5rem;
             text-align: center;
         }
-        .text-correct { color: #4ade80; text-shadow: 0 0 10px rgba(74,222,128,0.2); }
-        .text-error { color: #f87171; text-shadow: 0 0 10px rgba(248,113,113,0.2); }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .control-btn {
+            background: #334155;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .control-btn:hover { background: #475569; }
     </style>
 </head>
 <body>
 
     <div class="arcade-container">
         
-        <div class="title-banner" id="banner-view">
-            <h1>🎮 Math Multiverse Arcade 🎮</h1>
-            <p style="color: var(--text-muted); font-size: 1.1rem;">Infinite mathematical challenges translated in English & Gujarati!</p>
-            <p style="color: #38bdf8; font-size: 1rem; margin-top: 5px;">અનંત ગણિતના પડકારો હવે અંગ્રેજી અને ગુજરાતી ભાષામાં!</p>
+        <div class="header-panel">
+            <h1>🌌 The Grand Mathematics Multiverse Archive</h1>
+            <p style="color: var(--text-muted); margin: 0;">Comprehensive Academic Syllabus Coverage: School Units up to Postgraduate Fields (English & ગુજરાતી)</p>
         </div>
 
-        <!-- Portal Selection Screen -->
-        <div id="portal-selector">
-            <div class="portal-grid" style="grid-template-columns: 1fr 1fr; max-width: 900px; margin: 0 auto;">
-                
-                <!-- Mode 1: Random Wheel -->
-                <div class="portal-card card-t1" onclick="initiateArcade('random')">
-                    <span class="tier-badge" style="background: #4ade80; color: #000;">Infinite Mode</span>
-                    <h2 style="color: #4ade80;">Integrated Randomizer</h2>
-                    <p class="scenario-desc">
-                        <strong>EN:</strong> Continuous shuffle mode generating endless live variables across algebra, calculus, topology, and crypto.<br>
-                        <strong>GU:</strong> અનંત મોડ જે અલ્જીબ્રા, કેલ્ક્યુલસ, ટોપોલોજી અને ક્રિપ્ટોગ્રાફીના પ્રશ્નો સતત બદલતું રહેશે.
-                    </p>
-                    <div class="enter-btn">Spin Wheel / વ્હીલ ફેરવો</div>
-                </div>
-
-                <!-- Mode 2: Manual Hub -->
-                <div class="portal-card card-t2" onclick="initiateArcade('select')">
-                    <span class="tier-badge" style="background: #3b82f6; color: #fff;">Topic Selection</span>
-                    <h2 style="color: #3b82f6;">Targeted Subject Hub</h2>
-                    <p class="scenario-desc">
-                        <strong>EN:</strong> Select a specific branch of mathematics manually to systematically master its core formulas.<br>
-                        <strong>GU:</strong> ચોક્કસ વિષય પસંદ કરો અને તેના નિયમો અને ગણતરીઓ સરળતાથી શીખો.
-                    </p>
-                    <div class="enter-btn">Open Hub / સબ્જેક્ટ હબ ખોલો</div>
-                </div>
-
-            </div>
+        <div class="tier-navigation">
+            <div class="tier-tab active" onclick="switchTier('school', this)">School Core (Std 6-12)</div>
+            <div class="tier-tab" onclick="switchTier('ug', this)">Undergraduate (UG)</div>
+            <div class="tier-tab" onclick="switchTier('pg', this)">Postgraduate (PG)</div>
         </div>
 
-        <!-- Active Game Arena Workspace -->
-        <div id="game-arena">
-            <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                <button class="back-btn" style="margin-bottom:0;" onclick="terminateSession()">← Exit Arena / બહાર નીકળો</button>
-                <div id="hub-inline-selector" style="display:none;">
-                    <select id="branch-dropdown" onchange="switchBranchManually()" style="background:#1e293b; color:white; border:1px solid #334155; padding:8px 12px; border-radius:6px; font-weight:bold; cursor:pointer;">
-                        <option value="algebra">Algebra (બીજગણિત)</option>
-                        <option value="calculus">Calculus (કલનશાસ્ત્ર)</option>
-                        <option value="topology">Topology (સ્થાનશાસ્ત્ર)</option>
-                        <option value="cryptography">Cryptography (ગૂઢલેખન)</option>
-                        <option value="reasoning">Logical Reasoning (તાર્કિક કસોટી)</option>
-                        <option value="data">Data Analysis (માહિતી પૃથક્કરણ)</option>
-                    </select>
-                </div>
-            </div>
-            
-            <div class="game-split-layout">
-                <!-- Left: Bilingual Story/Explanation Panel -->
-                <div class="story-panel" id="story-block"></div>
+        <div id="subject-selector-zone" class="subject-grid"></div>
 
-                <!-- Right: Answer Input & Feedback -->
-                <div class="interactive-panel" id="action-block"></div>
+        <div id="arena-workspace">
+            <div class="btn-container">
+                <button class="control-btn" onclick="exitArena()">← Close Subject / બહાર નીકળો</button>
+                <div style="font-weight: bold; color: #38bdf8;" id="progress-tracker">Question 1/5</div>
+            </div>
+
+            <div class="arena-grid">
+                <div class="display-panel">
+                    <span id="branch-tag" style="background:#334155; padding:4px 10px; border-radius:4px; font-size:0.8rem; font-weight:bold; color:#38bdf8; text-transform:uppercase;">BRANCH</span>
+                    <div id="eng-story" style="margin-top: 1rem; line-height: 1.5;"></div>
+                    <div id="guj-story" class="gujarati-block"></div>
+                </div>
+
+                <div class="input-panel">
+                    <div id="interactive-game-field" style="width:100%; text-align:center;">
+                        <input type="text" id="user-response-input" class="custom-input" placeholder="Type your numeric answer here" autocomplete="off">
+                        <button class="submit-btn" onclick="verifyCurrentAnswer()">Evaluate Answer / ચકાસણી કરો</button>
+                    </div>
+                    <div id="arena-feedback" class="feedback-message"></div>
+                </div>
             </div>
         </div>
 
     </div>
 
     <script>
-        let gameMode = 'random';
-        let score = 0;
-        let streak = 0;
-        let targetAnswer = null;
-        let currentActiveBranch = '';
-
-        const branchesList = ['algebra', 'calculus', 'topology', 'cryptography', 'reasoning', 'data'];
-
-        function initiateArcade(mode) {
-            gameMode = mode;
-            score = 0;
-            streak = 0;
-            document.getElementById('portal-selector').style.display = 'none';
-            document.getElementById('banner-view').style.display = 'none';
-            document.getElementById('game-arena').style.display = 'block';
-
-            if (mode === 'select') {
-                document.getElementById('hub-inline-selector').style.display = 'block';
-                currentActiveBranch = document.getElementById('branch-dropdown').value;
-            } else {
-                document.getElementById('hub-inline-selector').style.display = 'none';
-                pickRandomBranch();
+        // High-Density Central Database Matrix Array
+        const MasterQuestionDatabase = {
+            school: {
+                "std6-7-arithmetic": {
+                    title: "Std 6-7: Fractions & Ratios",
+                    desc: "Basic proportional fractions and simplified division scaling systems.",
+                    questions: [
+                        {
+                            eng: "A recipe container requires a strict scale validation ratio. If a structural unit requires 12 parts component A to 18 parts component B, simplify the operational fraction completely to its base denominator form \\(\\frac{2}{x}\\). Find \\(x\\).",
+                            guj: "એક રેસીપીમાં ઘટક A ના 12 ભાગ અને ઘટક B ના 18 ભાગ ઉમેરવામાં આવે છે. આ ગુણોત્તરને તેના અતિસંક્ષિપ્ત સ્વરૂપ \\(\\frac{2}{x}\\) માં ફેરવો. \\(x\\) ની કિંમત શોધો.",
+                            ans: "3"
+                        },
+                        {
+                            eng: "An asset container array drops 35 items out of 100 total capacity allocation loops. Reduce the remaining elements to a percentage. What is the value?",
+                            guj: "એક બોક્સમાંથી 100 વસ્તુઓમાંથી 35 વસ્તુઓ બહાર કાઢવામાં આવે છે. બાકી બચેલી વસ્તુઓની ટકાવારી કેટલી થશે?",
+                            ans: "65"
+                        }
+                    ]
+                },
+                "std8-9-algebra": {
+                    title: "Std 8-9: Linear Equations",
+                    desc: "Single and multi-variable linear configurations and coordinate balance equations.",
+                    questions: [
+                        {
+                            eng: "Balance the linear transmission module line variable parameters. Solve for coordinate component \\(x\\): $$4x - 7 = 29$$",
+                            guj: "આપેલા રેખીય સમીકરણનો ઉકેલ મેળવી ચલ \\(x\\) ની સાચી કિંમત શોધો: $$4x - 7 = 29$$",
+                            ans: "9"
+                        },
+                        {
+                            eng: "Evaluate the intersection system configuration logic. Find the scalar root balance point \\(y\\) for: $$3(y + 4) = 33$$",
+                            guj: "આપેલા સમીકરણ પ્રણાલીનો ઉકેલ શોધો અને ચલ \\(y\\) ની સાચી કિંમત નક્કી કરો: $$3(y + 4) = 33$$",
+                            ans: "7"
+                        }
+                    ]
+                },
+                "std10-geometry": {
+                    title: "Std 10: Coordinate Geometry",
+                    desc: "Triangles, trigonometric values, and basic spatial coordinate theorems.",
+                    questions: [
+                        {
+                            eng: "A right-angled triangle structural segment exhibits a horizontal base boundary line dimension of 6 units and a vertical height of 8 units. Calculate the absolute hypotenuse path length using the Pythagorean theorem.",
+                            guj: "એક કાટકોણ ત્રિકોણ પાયાની લંબાઈ 6 એકમ અને લંબ ઊંચાઈ 8 એકમ ધરાવે છે. પાયથાગોરસના પ્રમેયનો ઉપયોગ કરી કર્ણની લંબાઈ શોધો.",
+                            ans: "10"
+                        },
+                        {
+                            eng: "Evaluate the exact scalar trigonometric function configuration metric: Find the absolute numerical value of the expression: $$\\sin^2(45^\\circ) + \\cos^2(45^\\circ) + 5$$",
+                            guj: "આપેલા ત્રિકોણમિતીય નિત્યસમનું મૂલ્ય નક્કી કરો: $$\\sin^2(45^\\circ) + \\cos^2(45^\\circ) + 5$$",
+                            ans: "6"
+                        }
+                    ]
+                },
+                "std11-probability": {
+                    title: "Std 11: Combinatorics & Sets",
+                    desc: "Permutations, simple configurations, set theory interactions, and cards maps.",
+                    questions: [
+                        {
+                            eng: "A local system array needs to compute structural permutations. How many unique string sequences can be structured using all elements of the letter set \\(\\{M, A, T, H\\}\\) without replication values?",
+                            guj: "પુનરાવર્તન વગર \\(\\{M, A, T, H\\}\\) શબ્દના તમામ અક્ષરોનો ઉપયોગ કરીને કુલ કેટલા ક્રમચય (અલગ-અલગ ગોઠવણીઓ) બનાવી શકાય?",
+                            ans: "24"
+                        },
+                        {
+                            eng: "Set \\(A\\) contains 15 structural node IDs, and Set \\(B\\) holds 20 node IDs. If their absolute union set array size is \\(|A \\cup B| = 30\\), calculate the intersection overlap array size \\(|A \\cap B|\\).",
+                            guj: "ગણ \\(A\\) માં 15 સભ્યો છે અને ગણ \\(B\\) માં 20 સભ્યો છે. જો બંનેના યોગગણની સંખ્યા \\(|A \\cup B| = 30\\) હોય, તો તેમના છેદગણની સભ્ય સંખ્યા \\(|A \\cap B|\\) શોધો.",
+                            ans: "5"
+                        }
+                    ]
+                },
+                "std12-calculus": {
+                    title: "Std 12: Applied Calculus",
+                    desc: "Basic continuous derivatives, slope rules, and boundary integration matrices.",
+                    questions: [
+                        {
+                            eng: "Evaluate the derivative profile matrix to calculate the slope function tracking metric. Compute the instantaneous derivative value of \\(f(x) = 3x^2 + 5x\\) precisely at evaluation step point \\(x = 2\\).",
+                            guj: "આપેલા વિધેય \\(f(x) = 3x^2 + 5x\\) નું વિકલન મેળવી બિંદુ \\(x = 2\\) આગળ તેનો તત્કાલીન દર (ઢાળ) શોધો.",
+                            ans: "17"
+                        },
+                        {
+                            eng: "Find the absolute area under the linear trajectory vector by computing the definite integral bound limits: $$\\int_{0}^{3} 3x^2 \\, dx$$",
+                            guj: "આપેલા નિયત સંકલનનો ઉપયોગ કરીને વક્ર રેખા હેઠળ ઘેરાયેલું ક્ષેત્રફળ શોધો: $$\\int_{0}^{3} 3x^2 \\, dx$$",
+                            ans: "27"
+                        }
+                    ]
+                }
+            },
+            ug: {
+                "real-analysis": {
+                    title: "UG: Real Analysis",
+                    desc: "Convergence criteria bounds, Dedekind properties, limits, and sequence mechanics.",
+                    questions: [
+                        {
+                            eng: "Examine the bounded monotonic sequence configuration array map. Evaluate the absolute limit convergence ceiling point for the sequence function as state constraints scale out to infinity: $$a_n = \\frac{6n^2 + 4n}{2n^2 - 1}$$",
+                            guj: "વાસ્તવિક વિશ્લેષણ (Real Analysis) ના નિયમો મુજબ, આપેલી અનંત શ્રેણી માટે લિમિટની સર્વોચ્ચ કિંમત શોધો જ્યારે લક્ષ્ય અનંત સુધી જતું હોય: $$a_n = \\frac{6n^2 + 4n}{2n^2 - 1}$$",
+                            ans: "3"
+                        },
+                        {
+                            eng: "Determine the supremum limit bound layer of the bounded real subset interval definition matrix array: $$S = \\left\\{ 5 - \\frac{1}{n} \\;\\middle|\\; n \\in \\mathbb{N} \\right\\}$$",
+                            guj: "આપેલા વાસ્તવિક સંખ્યાઓના ઉપગણ માટે સુપ્રિમમ (Supremum - ન્યૂનતમ ઉચ્ચતમ સીમા) કિંમત નક્કી કરો: $$S = \\left\\{ 5 - \\frac{1}{n} \\;\\middle|\\; n \\in \\mathbb{N} \\right\\}$$",
+                            ans: "5"
+                        }
+                    ]
+                },
+                "complex-analysis": {
+                    title: "UG: Complex Analysis",
+                    desc: "Cauchy residue integrals, imaginary identities, and conformal map paths.",
+                    questions: [
+                        {
+                            eng: "An isolated singularity point index resides inside a contour line track loop. Evaluate the integral along contour \\(C\\) using Cauchy's Residue Formula if the lone residue at poles equals 7: $$\\frac{1}{2\\pi i}\\oint_C f(z)\\,dz$$",
+                            guj: "સંકીર્ણ વિશ્લેષણ (Complex Analysis) માં કૌશીના રેસિડ્યુ પ્રમેયનો ઉપયોગ કરી આપેલા ક્લોઝ્ડ કોન્ટૂર સંકલનનું મૂલ્ય શોધો જો રેસિડ્યુનું મૂલ્ય 7 હોય: $$\\frac{1}{2\\pi i}\\oint_C f(z)\\,dz$$",
+                            ans: "7"
+                        },
+                        {
+                            eng: "Compute the square modules factor value of the complex matrix transformation vector system asset coordinate: $$z = 3 + 4i \\implies |z|$$",
+                            guj: "આપેલી સંકીર્ણ સંખ્યા માટે માનાંક (Absolute Modulus Value) શોધો: $$z = 3 + 4i \\implies |z|$$",
+                            ans: "5"
+                        }
+                    ]
+                },
+                "abstract-algebra": {
+                    title: "UG: Abstract Group Theory",
+                    desc: "Lagrange subgroups, cyclic order symmetries, and modular groups configurations.",
+                    questions: [
+                        {
+                            eng: "A finite cyclic group configuration structure \\(G\\) contains an absolute set rank size of order 24. If \\(H\\) is formed as a proper subgroup element, and Lagrange's Theorem dictates its order must divide 24, find the largest possible order of \\(H\\) if \\(H \\neq G\\).",
+                            guj: "એક નિયમિત સાયક્લિક ગ્રુપ \\(G\\) નો ઓર્ડર 24 છે. લેગ્રેંજના પ્રમેય અનુસાર તેના ઉપગ્રુપ \\(H\\) નો મહત્તમ શક્ય ઓર્ડર શોધો (જ્યાં \\(H \\neq G\\)).",
+                            ans: "12"
+                        },
+                        {
+                            eng: "Calculate the exact number of generator element paths belonging directly inside a cyclic group structure containing an abstract order sizing profile of exactly 5.",
+                            guj: "ઓર્ડર 5 ધરાવતા સાયક્લિક ગ્રુપના જનરેટર (Generators) ની કુલ સંખ્યા કેટલી હશે?",
+                            ans: "4"
+                        }
+                    ]
+                },
+                "classical-mechanics": {
+                    title: "UG: Classical Mechanics",
+                    desc: "Lagrangian coordinate models, path actions, momentum vectors, and planetary fields.",
+                    questions: [
+                        {
+                            eng: "A system state is tracked via generalized coordinates where potential spatial constraint fields match zero. If the kinetic framework matches standard profile: $$L = T - V = \\frac{1}{2}(2)\\dot{x}^2 - 0$$ Extract the linear momentum conjugate value if \\(\\dot{x} = 6\\).",
+                            guj: "ક્લાસિકલ મિકેનિક્સ સમીકરણ હેઠળ લેગ્રાન્જિયન તંત્ર માટે રેખીય વેગમાન (Linear Momentum Conjugate) શોધો જ્યાં માસ 2 છે અને વેગ \\(\\dot{x} = 6\\) છે.",
+                            ans: "12"
+                        }
+                    ]
+                },
+                "number-theory": {
+                    title: "UG: Number Theory",
+                    desc: "Prime distributions, Euler's totient paths, and Fermat congruence identities.",
+                    questions: [
+                        {
+                            eng: "Compute the exact output value of Euler's Totient phi function mapping array sequence for the prime tracking factor node of 11: $$\\phi(11)$$",
+                            guj: "યુલરના ટોશન્ટ વિધેય (Euler's Totient function) ની ગણતરી કરી આપેલ અવિભાજ્ય સંખ્યા માટે કિંમત મેળવો: $$\\phi(11)$$",
+                            ans: "10"
+                        }
+                    ]
+                }
+            },
+            pg: {
+                "topology": {
+                    title: "PG: Advanced Topology",
+                    desc: "Homotopy loops, compactness boundaries, and Hausdorff metric structures.",
+                    questions: [
+                        {
+                            eng: "An abstract topological space grid framework maps node structures. If a discrete metric layer maps over a set containing 8 elements, evaluate the total open sets configured within the power set topology array.",
+                            guj: "એક ડિસ્ક્રીટ ટોપોલોજીકલ સ્પેસમાં સભ્યોની સંખ્યા 8 છે. પાવર સેટ ટોપોલોજી નિયમ મુજબ આ સ્પેસમાં બનતા કુલ ઓપન સેટ્સની (Open Sets) સંખ્યા શોધો.",
+                            ans: "256"
+                        }
+                    ]
+                },
+                "functional-analysis": {
+                    title: "PG: Functional Analysis",
+                    desc: "Hilbert space vectors, Banach spaces, and linear operator norm bounds.",
+                    questions: [
+                        {
+                            eng: "An inner product operation inside a continuous Hilbert space vector space checks structural identity alignment. If orthogonal state flags hold true, evaluate the exact scalar product of two perfectly orthogonal element lines: $$\\langle x, y \\rangle$$",
+                            guj: "ફંક્શનલ એનાલિસિસ હેઠળ હિલ્બર્ટ સ્પેસમાં બે પરસ્પર લંબ (Orthogonal) વેક્ટર્સ માટે ઇનર પ્રોડક્ટ (Inner Product) નું મૂલ્ય કેટલું થાય?: $$\\langle x, y \\rangle$$",
+                            ans: "0"
+                        }
+                    ]
+                },
+                "relativity": {
+                    title: "PG: General Relativity & Mechanics",
+                    desc: "Einstein field tensors, Minkowski metric horizons, and space-time curves.",
+                    questions: [
+                        {
+                            eng: "A flat four-dimensional Minkowski space-time continuum metric tensor maps diagonal metrics array fields. If the signature components map as \\((-1, 1, 1, 1)\\), evaluate the trace trace invariant factor sum value.",
+                            guj: "સામાન્ય સાપેક્ષતાવાદ (General Relativity) ના મિન્કોવસ્કી સ્પેસ-ટાઇમ મેટ્રિક ટેન્સર ડાયાગોનલ સિગ્નેચર \\((-1, 1, 1, 1)\\) નો ટ્રેસ (Trace) સરવાળો કેટલો થાય?",
+                            ans: "2"
+                        }
+                    ]
+                },
+                "cryptography": {
+                    title: "PG: Cryptography & Security",
+                    desc: "RSA key mechanics, trapdoor permutations, and discrete logarithms.",
+                    questions: [
+                        {
+                            eng: "An asymmetric RSA asymmetric cryptographic node uses twin prime keys \\(p=3\\) and \\(q=5\\). Compute the total system storage modulus parameter factor component: $$n = p \\times q$$",
+                            guj: "ક્રિપ્ટોગ્રાફી એલગોરિધમ RSA પ્રણાલીમાં બે અવિભાજ્ય સંખ્યાઓ \\(p=3\\) અને \\(q=5\\) લેવામાં આવે છે. મોડ્યુલસ પેરામીટર \\(n\\) ની કિંમત શોધો: $$n = p \\times q$$",
+                            ans: "15"
+                        }
+                    ]
+                },
+                "graph-theory": {
+                    title: "PG: Discrete Graph Theory",
+                    desc: "Matrix vertex matching, tree paths, and planar network color bounds.",
+                    questions: [
+                        {
+                            eng: "According to the verified Four Color Theorem statement mapping for network planar nodes configurations, what is the maximum number of absolute tracking colors required to partition any complex planar map loop safely?",
+                            guj: "ડિસ્ક્રીટ ગ્રાફ થીયરીના ફોર-કલર પ્રમેય (Four Color Theorem) મુજબ પ્લેનર મેપ ગ્રાફને રંગવા માટે વધુમાં વધુ કેટલા રંગોની જરૂર પડે?",
+                            ans: "4"
+                        }
+                    ]
+                }
             }
+        };
 
-            generateNewProblemInstance();
-        }
+        let activeTier = 'school';
+        let currentSubjectKey = '';
+        let currentQuestionIndex = 0;
 
-        function terminateSession() {
-            document.getElementById('portal-selector').style.display = 'grid';
-            document.getElementById('banner-view').style.display = 'block';
-            document.getElementById('game-arena').style.display = 'none';
-        }
+        // Initialize and draw the category selector dynamically on load
+        window.onload = function() {
+            renderSubjectSelectorGrid();
+        };
 
-        function pickRandomBranch() {
-            const randomIndex = Math.floor(Math.random() * branchesList.length);
-            currentActiveBranch = branchesList[randomIndex];
-        }
-
-        function switchBranchManually() {
-            currentActiveBranch = document.getElementById('branch-dropdown').value;
-            generateNewProblemInstance();
-        }
-
-        function processSubmission(userResponse) {
-            const feedback = document.getElementById('feedback-output');
+        function switchTier(tierId, tabElement) {
+            activeTier = tierId;
             
-            if (parseInt(userResponse) === parseInt(targetAnswer)) {
-                score += 20;
-                streak++;
-                feedback.className = "feedback-box text-correct";
-                feedback.innerHTML = `✨ Correct! સાચો જવાબ! +20 Points.<br>Active Streak: ${streak}`;
-                
-                if (gameMode === 'random') { pickRandomBranch(); }
-                setTimeout(generateNewProblemInstance, 2000);
-            } else {
-                streak = 0;
-                feedback.className = "feedback-box text-error";
-                feedback.innerHTML = `❌ Incorrect Answer! ખોટો જવાબ. Try analyzing the equation again!`;
-            }
-            document.getElementById('arena-score').innerText = score;
-            document.getElementById('arena-streak').innerText = streak;
+            // Manage UI active styles on tabs
+            document.querySelectorAll('.tier-tab').forEach(tab => tab.classList.remove('active'));
+            tabElement.classList.add('active');
+            
+            exitArena();
+            renderSubjectSelectorGrid();
         }
 
-        function generateNewProblemInstance() {
-            const storyBlock = document.getElementById('story-block');
-            const actionBlock = document.getElementById('action-block');
-
-            actionBlock.innerHTML = `
-                <div class="score-row">
-                    <div>SCORE: <span id="arena-score">${score}</span></div>
-                    <div>STREAK: <span id="arena-streak">${streak}</span></div>
-                </div>
-                <div id="runtime-game-field" style="width:100%; text-align:center;"></div>
-                <div id="feedback-output" class="feedback-box"></div>
-            `;
-            const gameField = document.getElementById('runtime-game-field');
-
-            switch(currentActiveBranch) {
-                case 'algebra':
-                    let root1 = Math.floor(Math.random() * 5) + 1; // 1 to 5
-                    let root2 = Math.floor(Math.random() * 6) + 6; // 6 to 11
-                    let sumCoeff = root1 + root2;
-                    let prodCoeff = root1 * root2;
-                    targetAnswer = root2; 
-
-                    storyBlock.innerHTML = `
-                        <span class="branch-badge">Algebra / બીજગણيت</span>
-                        <h2>The Quadratic Root Barrier</h2>
-                        <p><strong>English:</strong> Solve the polynomial system signature to unlock the portal door. Find the roots of the equation:</p>
-                        <p style="text-align:center; font-size:1.3rem; color:#4ade80;">$$x^2 - ${sumCoeff}x + ${prodCoeff} = 0$$</p>
-                        
-                        <div class="lang-gu">
-                            <strong>ગુજરાતી ભાષાંતર:</strong><br>
-                            પોર્ટલનો દરવાજો ખોલવા માટે આ દ્વિઘાત સમીકરણનો ઉકેલ શોધો. સમીકરણના અવયવો પાડો:<br>
-                            $$x^2 - ${sumCoeff}x + ${prodCoeff} = 0$$
-                        </div>
-                    `;
-
-                    gameField.innerHTML = `
-                        <h4 style="margin-bottom:5px;">Enter the LARGEST root value (\(r_2\)):</h4>
-                        <h4 style="color:#38bdf8; margin-top:0;">સૌથી મોટું મૂળ (રૂટ) કિંમત લખો:</h4>
-                        <input type="number" id="input-ans" class="arcade-input" placeholder="Largest Root" autofocus />
-                        <button class="action-btn" style="background:#4ade80; color:#000;" onclick="processSubmission(document.getElementById('input-ans').value)">Submit / સબમિટ કરો</button>
-                    `;
-                    break;
-
-                case 'calculus':
-                    let c_mult = (Math.floor(Math.random() * 3) + 1) * 2; // Always even (2, 4, 6)
-                    let c_upper = Math.floor(Math.random() * 3) + 2; // 2, 3, 4
-                    targetAnswer = (c_mult / 2) * (c_upper * c_upper);
-
-                    storyBlock.innerHTML = `
-                        <span class="branch-badge">Calculus / કલનશાસ્ત્ર</span>
-                        <h2>Area Under the Curve</h2>
-                        <p><strong>English:</strong> Calibrate the core engine by computing the definite integral of the velocity function from bounds \(0\) to \(${c_upper}\):</p>
-                        <p style="text-align:center; font-size:1.3rem; color:#38bdf8;">$$\\int_{0}^{${c_upper}} ${c_mult}x \\, dx$$</p>
-                        
-                        <div class="lang-gu">
-                            <strong>ગુજરાતી ભાષાંતર:</strong><br>
-                            એન્જીનને સેટ કરવા માટે આપેલા વેગ વિધેયનું સીમાઓ \(0\) થી \(${c_upper}\) ની વચ્ચે નિયત સંકલન (Definite Integral) મેળવો:<br>
-                            $$\\int_{0}^{${c_upper}} ${c_mult}x \\, dx$$
-                        </div>
-                    `;
-
-                    gameField.innerHTML = `
-                        <h4 style="margin-bottom:5px;">Compute the accumulation value:</h4>
-                        <h4 style="color:#38bdf8; margin-top:0;">સંકલનની ચોક્કસ કિંમત શોધો:</h4>
-                        <input type="number" id="input-ans" class="arcade-input" placeholder="Answer Integer" autofocus />
-                        <button class="action-btn" style="background:#38bdf8; color:#000;" onclick="processSubmission(document.getElementById('input-ans').value)">Submit / સબમિટ કરો</button>
-                    `;
-                    break;
-
-                case 'topology':
-                    let t_faces = Math.floor(Math.random() * 5) + 4; // 4 to 8
-                    let t_edges = t_faces + Math.floor(Math.random() * 4) + 5; 
-                    targetAnswer = t_edges - t_faces + 2; 
-
-                    storyBlock.innerHTML = `
-                        <span class="branch-badge">Topology / સ્થાનશાસ્ત્ર</span>
-                        <h2>Euler's Polyhedral Network</h2>
-                        <p><strong>English:</strong> A complex 3D convex shape inside the engine has exactly \(E = ${t_edges}\) edges and \(F = ${t_faces}\) faces. Use Euler's formula to solve for Vertices (\(V\)):</p>
-                        <p style="text-align:center; font-size:1.3rem; color:#a855f7;">$$V - E + F = 2$$</p>
-                        
-                        <div class="lang-gu">
-                            <strong>ગુજરાતી ભાષાંતર:</strong><br>
-                            એક બહુફલકીય આકારમાં ધારની સંખ્યા \(E = ${t_edges}\) અને સપાટીઓની સંખ્યા \(F = ${t_faces}\) છે. યુલરના નિયમનો ઉપયોગ કરીને શિરોબિંદુઓની સંખ્યા (\(V\)) શોધો:<br>
-                            $$V - E + F = 2$$
-                        </div>
-                    `;
-
-                    gameField.innerHTML = `
-                        <h4 style="margin-bottom:5px;">Calculate total vertices (\(V\)):</h4>
-                        <h4 style="color:#38bdf8; margin-top:0;">કુલ શિરોબિંદુઓ (V) ગણો:</h4>
-                        <input type="number" id="input-ans" class="arcade-input" placeholder="Vertices (V)" autofocus />
-                        <button class="action-btn" style="background:#a855f7; color:white;" onclick="processSubmission(document.getElementById('input-ans').value)">Submit / સબમિટ કરો</button>
-                    `;
-                    break;
-
-                case 'cryptography':
-                    let cr_shift = Math.floor(Math.random() * 5) + 2; 
-                    let cr_plain = Math.floor(Math.random() * 8) + 5; 
-                    targetAnswer = (cr_plain + cr_shift) % 26;
-
-                    storyBlock.innerHTML = `
-                        <span class="branch-badge">Cryptography / ગૂઢલેખન</span>
-                        <h2>Modular Shift Encryption</h2>
-                        <p><strong>English:</strong> A Caesar cipher shift key is operating on alphabet coordinates. Find the encrypted cipher index character integer \(C\):</p>
-                        <p style="text-align:center; font-size:1.3rem; color:#eab308;">$$C \\equiv (${cr_plain} + ${cr_shift}) \\pmod{26}$$</p>
-                        
-                        <div class="lang-gu">
-                            <strong>ગુજરાતી ભાષાંતર:</strong><br>
-                            એક ગુપ્ત સંદેશા પદ્ધતિમાં અક્ષરોના સ્થાન બદલવામાં આવે છે. સમીકરણ ઉકેલીને ગુપ્ત કોડ નંબર \(C\) શોધો:<br>
-                            $$C \\equiv (${cr_plain} + ${cr_shift}) \\pmod{26}$$
-                        </div>
-                    `;
-
-                    gameField.innerHTML = `
-                        <h4 style="margin-bottom:5px;">Solve for cipher value \(C\):</h4>
-                        <h4 style="color:#38bdf8; margin-top:0;">કોડ કિંમત C શોધો:</h4>
-                        <input type="number" id="input-ans" class="arcade-input" placeholder="Value of C" autofocus />
-                        <button class="action-btn" style="background:#eab308; color:#000;" onclick="processSubmission(document.getElementById('input-ans').value)">Submit / સબમિટ કરો</button>
-                    `;
-                    break;
-
-                case 'reasoning':
-                    let r_base = Math.floor(Math.random() * 6) + 2;
-                    let r_diff = Math.floor(Math.random() * 4) + 3;
-                    let r1 = r_base;
-                    let r2 = r1 + r_diff;
-                    let r3 = r2 + r_diff;
-                    targetAnswer = r3 + r_diff;
-
-                    storyBlock.innerHTML = `
-                        <span class="branch-badge">Logical Reasoning / તાર્કિક કસોટી</span>
-                        <h2>Arithmetic Sequence Deduction</h2>
-                        <p><strong>English:</strong> Analyze the logic connecting the progression loop array and deduce the missing index integer step:</p>
-                        <p style="text-align:center; font-size:1.5rem; letter-spacing:8px; color:#ec4899; font-weight:bold;">
-                            ${r1}, ${r2}, ${r3}, ?
-                        </p>
-                        
-                        <div class="lang-gu">
-                            <strong>ગુજરાતી ભાષાંતર:</strong><br>
-                            આપેલી સંખ્યાઓની શ્રેણી પાછળનું તાર્કિક કારણ સમજો અને પ્રશ્નાર્થ ચિહ્ન (?) ની જગ્યાએ કઈ સંખ્યા આવશે તે નક્કી કરો:<br>
-                            <span style="font-size:1.3rem; letter-spacing:6px; color:#ec4899;">${r1}, ${r2}, ${r3}, ?</span>
-                        </div>
-                    `;
-
-                    gameField.innerHTML = `
-                        <h4 style="margin-bottom:5px;">Enter the next sequential value:</h4>
-                        <h4 style="color:#38bdf8; margin-top:0;">શ્રેણીની આગામી સંખ્યા લખો:</h4>
-                        <input type="number" id="input-ans" class="arcade-input" placeholder="Next Number" autofocus />
-                        <button class="action-btn" style="background:#ec4899; color:white;" onclick="processSubmission(document.getElementById('input-ans').value)">Submit / સબમિટ કરો</button>
-                    `;
-                    break;
-
-                case 'data':
-                    let d1 = Math.floor(Math.random() * 10) + 5;
-                    let d2 = d1 + Math.floor(Math.random() * 5) + 2;
-                    let d3 = d2 + Math.floor(Math.random() * 5) + 2;
-                    let d4 = d3 + Math.floor(Math.random() * 5) + 2;
-                    let d_sum = d1 + d2 + d3 + d4;
-                    targetAnswer = Math.round(d_sum / 4);
-
-                    storyBlock.innerHTML = `
-                        <span class="branch-badge">Data Analysis / માહિતી પૃથક્કરણ</span>
-                        <h2>The Statistical Central Mean</h2>
-                        <p><strong>English:</strong> Analyze the incoming packet data stream matrix array and compute its arithmetic mean average value (\(\mu\)):</p>
-                        <p style="text-align:center; font-size:1.4rem; color:#f97316; font-weight:bold;">
-                            📥 Data Stream: [ ${d1}, ${d2}, ${d3}, ${d4} ]
-                        </p>
-                        
-                        <div class="lang-gu">
-                            <strong>ગુજરાતી ભાષાંતર:</strong><br>
-                            આપેલા અવલોકનોની માહિતીના સમૂહ પરથી તેની સરાસરી અથવા મધ્યક (\(\mu\)) ની કિંમત શોધો:<br>
-                            <span style="color:#f97316; font-weight:bold;">📥 માહિતી સ્ત્રોત: [ ${d1}, ${d2}, ${d3}, ${d4} ]</span>
-                        </div>
-                    `;
-
-                    gameField.innerHTML = `
-                        <h4 style="margin-bottom:5px;">Calculate Mean (Round to nearest integer):</h4>
-                        <h4 style="color:#38bdf8; margin-top:0;">મધ્યક શોધો (નજીકની પૂર્ણાંક સંખ્યા લખો):</h4>
-                        <input type="number" id="input-ans" class="arcade-input" placeholder="Mean Value" autofocus />
-                        <button class="action-btn" style="background:#f97316; color:white;" onclick="processSubmission(document.getElementById('input-ans').value)">Submit / સબમિટ કરો</button>
-                    `;
-                    break;
+        function renderSubjectSelectorGrid() {
+            const container = document.getElementById('subject-selector-zone');
+            container.innerHTML = '';
+            
+            const selectedTierData = MasterQuestionDatabase[activeTier];
+            
+            for (let key in selectedTierData) {
+                const subject = selectedTierData[key];
+                const card = document.createElement('div');
+                card.className = 'subject-card';
+                card.setAttribute('onclick', `enterArena('${key}')`);
+                card.innerHTML = `
+                    <h3>${subject.title}</h3>
+                    <p>${subject.desc}</p>
+                `;
+                container.appendChild(card);
             }
+        }
 
-            // Trigger MathJax formula typesetting instantly for new numbers
+        function enterArena(subjectKey) {
+            currentSubjectKey = subjectKey;
+            currentQuestionIndex = 0;
+            
+            document.getElementById('subject-selector-zone').style.display = 'none';
+            document.getElementById('arena-workspace').style.display = 'block';
+            
+            loadQuestionInstance();
+        }
+
+        function exitArena() {
+            document.getElementById('subject-selector-zone').style.display = 'grid';
+            document.getElementById('arena-workspace').style.display = 'none';
+            document.getElementById('arena-feedback').innerHTML = '';
+            document.getElementById('user-response-input').value = '';
+        }
+
+        function loadQuestionInstance() {
+            const subject = MasterQuestionDatabase[activeTier][currentSubjectKey];
+            const currentQuestion = subject.questions[currentQuestionIndex];
+            
+            // Update tracking parameters metrics
+            document.getElementById('progress-tracker').innerText = `Question ${currentQuestionIndex + 1} / ${subject.questions.length}`;
+            document.getElementById('branch-tag').innerText = subject.title;
+            
+            // Set bilingual content lines
+            document.getElementById('eng-story').innerHTML = `<strong>Context Engine (EN):</strong><br>${currentQuestion.eng}`;
+            document.getElementById('guj-story').innerHTML = `<strong>વિષયવસ્તુ સંદર્ભ (GU):</strong><br>${currentQuestion.guj}`;
+            
+            // Clear prior entry feedback lines
+            document.getElementById('user-response-input').value = '';
+            document.getElementById('arena-feedback').innerHTML = '';
+            document.getElementById('arena-feedback').className = 'feedback-message';
+
+            // Refresh MathJax rendering engine instantly
             if (window.MathJax && window.MathJax.typesetPromise) {
                 window.MathJax.typesetPromise();
+            }
+        }
+
+        function verifyCurrentAnswer() {
+            const subject = MasterQuestionDatabase[activeTier][currentSubjectKey];
+            const currentQuestion = subject.questions[currentQuestionIndex];
+            const userInput = document.getElementById('user-response-input').value.trim();
+            const feedbackBox = document.getElementById('arena-feedback');
+
+            if (userInput === currentQuestion.ans) {
+                feedbackBox.className = "feedback-message text-correct";
+                feedbackBox.innerHTML = "✨ Correct Integration! સાચો જવાબ છે!";
+                
+                // Shift to next question index sequence loop parameters
+                if (currentQuestionIndex + 1 < subject.questions.length) {
+                    currentQuestionIndex++;
+                    setTimeout(loadQuestionInstance, 2000);
+                } else {
+                    setTimeout(() => {
+                        feedbackBox.innerHTML = "🏆 Subject Core Clear! All system layers stabilized in this matrix.";
+                        setTimeout(exitArena, 2500);
+                    }, 2000);
+                }
+            } else {
+                feedbackBox.className = "feedback-message text-error";
+                feedbackBox.innerHTML = "❌ Transformation Failed. ખોટો જવાબ, ગણતરી ફરીથી તપાસો.";
             }
         }
     </script>
