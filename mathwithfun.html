@@ -1,8 +1,3 @@
-# Enhanced Mathematics Multiverse Archive (Full Upgrade)
-
-Replace your existing HTML with the complete upgraded version below.
-
-```html
 <!DOCTYPE html>
 <html lang="gu">
 <head>
@@ -36,6 +31,8 @@ window.MathJax = {
     --success:#22c55e;
     --error:#ef4444;
     --warning:#facc15;
+    --ai-glow: rgba(168, 85, 247, 0.4);
+    --ai-purple: #a855f7;
 }
 
 *{
@@ -317,31 +314,135 @@ body{
     font-size:0.85rem;
 }
 
-.ai-box{
-    color:#cbd5e1;
-    line-height:1.7;
-}
-
-.progress-bar{
-    width:100%;
-    height:14px;
-    background:#111827;
-    border-radius:999px;
-    overflow:hidden;
-    margin-top:10px;
-}
-
-.progress-fill{
-    height:100%;
-    width:0%;
-    background:linear-gradient(90deg,#38bdf8,#22c55e);
-    transition:0.5s ease;
-}
-
 .footer-note{
     margin-top:3rem;
     text-align:center;
     color:var(--muted);
+}
+
+/* === MATH AI LEARNING ASSISTANT MODIFICATIONS === */
+.ai-panel {
+    border: 1px solid var(--ai-purple);
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.ai-header-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.ai-title {
+    color: var(--ai-purple);
+    font-size: 1.25rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-shadow: 0 0 10px rgba(168, 85, 247, 0.2);
+}
+
+.ai-chat-scroller {
+    max-height: 240px;
+    overflow-y: auto;
+    padding-right: 5px;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+}
+
+.ai-chat-scroller::-webkit-scrollbar {
+    width: 6px;
+}
+.ai-chat-scroller::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+}
+
+.ai-box{
+    color:#cbd5e1;
+    line-height:1.7;
+    background: rgba(15, 23, 42, 0.6);
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(168, 85, 247, 0.15);
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.ai-pill-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 1rem;
+}
+
+.ai-prompt-pill {
+    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    color: #e9d5ff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ai-prompt-pill:hover {
+    background: var(--ai-purple);
+    color: #020617;
+    transform: translateY(-1px);
+}
+
+.ai-input-wrapper {
+    display: flex;
+    gap: 8px;
+}
+
+.ai-input-wrapper .custom-input {
+    margin-bottom: 0;
+    font-size: 0.95rem;
+    padding: 10px;
+    border-color: rgba(168, 85, 247, 0.3);
+}
+
+.ai-input-wrapper .custom-input:focus {
+    border-color: var(--ai-purple);
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.25);
+}
+
+.ai-send-btn {
+    background: var(--ai-purple);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 0 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.ai-send-btn:hover {
+    opacity: 0.9;
+    box-shadow: 0 0 12px rgba(168, 85, 247, 0.4);
+}
+
+.ai-msg-user {
+    border-left: 3px solid var(--accent);
+    background: rgba(56, 189, 248, 0.05);
+    margin-left: 1.5rem;
+}
+
+.ai-status-indicator {
+    width: 8px;
+    height: 8px;
+    background: var(--success);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--success);
 }
 </style>
 </head>
@@ -442,16 +543,40 @@ body{
     </button>
 
     <button class="hint-btn" onclick="showHint()" style="margin-top:1rem;">
-        💡 AI Hint
+        💡 Quick Hint
     </button>
 
     <div id="arena-feedback" class="feedback-message"></div>
 </div>
 
 <div class="ai-panel" style="margin-top:1.5rem;">
-    <h3>🤖 Mathematical Assistant</h3>
-    <div class="ai-box" id="ai-box">
-        Explore mathematical structures interactively.
+    <div class="ai-header-layout">
+        <h3 class="ai-title">🤖 Multiverse Math AI Assistant</h3>
+        <div class="ai-status-indicator" title="AI Engine Online"></div>
+    </div>
+    
+    <div class="ai-chat-scroller" id="ai-chat-scroller">
+        <div class="ai-box" id="ai-box">
+            Greetings scholar! I am scanning the active branch workspace. Ask me to break down definitions, explain theorems, or provide conceptual foundations.
+        </div>
+    </div>
+
+    <div class="ai-pill-box">
+        <div class="ai-prompt-pill" onclick="triggerAiAction('explain')">🔬 Explain Core Concept</div>
+        <div class="ai-prompt-pill" onclick="triggerAiAction('formula')">📐 Formula Breakdown</div>
+        <div class="ai-prompt-pill" onclick="triggerAiAction('gujarati')">🌐 Translate Explanations</div>
+        <div class="ai-prompt-pill" onclick="triggerAiAction('clear')">🧹 Clear Log</div>
+    </div>
+
+    <div class="ai-input-wrapper">
+        <input 
+            type="text" 
+            id="ai-user-query" 
+            class="custom-input" 
+            placeholder="Ask anything about this structure..." 
+            autocomplete="off"
+        >
+        <button class="ai-send-btn" onclick="processAiChatQuery()">Query</button>
     </div>
 
     <div class="badge-box" id="badge-box"></div>
@@ -569,20 +694,14 @@ const MasterQuestionDatabase = {
     }
 };
 
-// ADVANCED DYNAMIC QUESTION GENERATION ENGINE
-
 function randomInt(min,max){
     return Math.floor(Math.random()*(max-min+1))+min;
 }
 
 function buildLargeQuestionBank(){
-
     // ================= SCHOOL ALGEBRA =================
-
     const algebraQuestions=[];
-
     for(let i=0;i<100;i++){
-
         const a=randomInt(2,12);
         const x=randomInt(2,20);
         const b=randomInt(1,25);
@@ -595,15 +714,11 @@ function buildLargeQuestionBank(){
             hint:'Move constant term then divide.'
         });
     }
-
     MasterQuestionDatabase.school.algebra.questions=algebraQuestions;
 
     // ================= SCHOOL GEOMETRY =================
-
     const geometryQuestions=[];
-
     for(let i=0;i<100;i++){
-
         const a=randomInt(3,15);
         const b=randomInt(4,20);
         const hyp=Math.sqrt(a*a+b*b);
@@ -616,7 +731,6 @@ function buildLargeQuestionBank(){
         });
 
         const r=randomInt(2,12);
-
         geometryQuestions.push({
             eng:`Find area of circle radius ${r} using π=3.14`,
             guj:`ત્રિજ્યા ${r} ધરાવતા વર્તુળનું ક્ષેત્રફળ શોધો.`,
@@ -624,15 +738,11 @@ function buildLargeQuestionBank(){
             hint:'Use πr².'
         });
     }
-
     MasterQuestionDatabase.school.geometry.questions=geometryQuestions.slice(0,100);
 
     // ================= REAL ANALYSIS =================
-
     const analysisQuestions=[];
-
     for(let i=0;i<100;i++){
-
         const a=randomInt(1,10);
         const b=randomInt(1,10);
 
@@ -650,15 +760,11 @@ function buildLargeQuestionBank(){
             hint:'Derivative of ax² is 2ax.'
         });
     }
-
     MasterQuestionDatabase.ug.analysis.questions=analysisQuestions.slice(0,100);
 
     // ================= COMPLEX ANALYSIS =================
-
     const complexQuestions=[];
-
     for(let i=0;i<100;i++){
-
         const a=randomInt(1,12);
         const b=randomInt(1,12);
         const modulus=Math.sqrt(a*a+b*b).toFixed(2);
@@ -677,15 +783,11 @@ function buildLargeQuestionBank(){
             hint:'Change sign of imaginary part.'
         });
     }
-
     MasterQuestionDatabase.ug.complex.questions=complexQuestions.slice(0,100);
 
     // ================= TOPOLOGY =================
-
     const topologyQuestions=[];
-
     for(let i=1;i<=100;i++){
-
         const n=randomInt(2,10);
         const power=Math.pow(2,n);
 
@@ -696,15 +798,11 @@ function buildLargeQuestionBank(){
             hint:'Power set cardinality.'
         });
     }
-
     MasterQuestionDatabase.pg.topology.questions=topologyQuestions;
 
     // ================= CRYPTOGRAPHY =================
-
     const cryptoQuestions=[];
-
     for(let i=0;i<100;i++){
-
         const p=[2,3,5,7,11][randomInt(0,4)];
         const q=[13,17,19,23][randomInt(0,3)];
 
@@ -725,7 +823,6 @@ function buildLargeQuestionBank(){
             hint:'Find remainder.'
         });
     }
-
     MasterQuestionDatabase.pg.cryptography.questions=cryptoQuestions.slice(0,100);
 }
 
@@ -742,13 +839,11 @@ let correct=parseInt(localStorage.getItem('mathCorrect')) || 0;
 let streak=parseInt(localStorage.getItem('mathStreak')) || 0;
 
 function updateStats(){
-
     document.getElementById('xp-counter').innerText=xp;
     document.getElementById('correct-counter').innerText=correct;
     document.getElementById('streak-counter').innerText=streak;
 
     let rank='Novice';
-
     if(xp>100) rank='Scholar';
     if(xp>250) rank='Analyst';
     if(xp>500) rank='Mathematician';
@@ -776,46 +871,34 @@ function startParticles(){
 }
 
 function switchTier(tierId, tabElement){
-
     activeTier=tierId;
-
     document.querySelectorAll('.tier-tab').forEach(tab=>{
         tab.classList.remove('active');
     });
-
     tabElement.classList.add('active');
-
     exitArena();
     renderSubjectSelectorGrid();
 }
 
 function renderSubjectSelectorGrid(){
-
     const container=document.getElementById('subject-selector-zone');
     container.innerHTML='';
 
     const selectedTierData=MasterQuestionDatabase[activeTier];
-
     for(let key in selectedTierData){
-
         const subject=selectedTierData[key];
-
         const card=document.createElement('div');
         card.className='subject-card';
-
         card.innerHTML=`
             <h3>${subject.title}</h3>
             <p>${subject.desc}</p>
         `;
-
         card.onclick=()=>enterArena(key);
-
         container.appendChild(card);
     }
 }
 
 function enterArena(subjectKey){
-
     currentSubjectKey=subjectKey;
     currentQuestionIndex=0;
 
@@ -825,6 +908,8 @@ function enterArena(subjectKey){
     shuffleQuestions();
     loadQuestionInstance();
     startTimer();
+    
+    appendAiMessage("🤖 System Status", `Switched to workspace container <strong>[${MasterQuestionDatabase[activeTier][currentSubjectKey].title}]</strong>. AI Assistant initialized successfully.`);
 }
 
 function shuffleQuestions(){
@@ -834,15 +919,12 @@ function shuffleQuestions(){
 }
 
 function exitArena(){
-
     clearInterval(timer);
-
     document.getElementById('subject-selector-zone').style.display='grid';
     document.getElementById('arena-workspace').style.display='none';
 }
 
 function loadQuestionInstance(){
-
     const subject=MasterQuestionDatabase[activeTier][currentSubjectKey];
     const currentQuestion=subject.questions[currentQuestionIndex];
 
@@ -863,9 +945,6 @@ function loadQuestionInstance(){
     updateProgressBar(subject.questions.length);
     renderGraph(subject.graph);
 
-    document.getElementById('ai-box').innerHTML=
-        'Explore the mathematics carefully and identify the hidden structure behind the equation.';
-
     if(window.MathJax && window.MathJax.typesetPromise){
         MathJax.typesetPromise();
     }
@@ -877,9 +956,7 @@ function updateProgressBar(total){
 }
 
 function renderGraph(fn){
-
     document.getElementById('graph').innerHTML='';
-
     try{
         functionPlot({
             target:'#graph',
@@ -897,7 +974,6 @@ function renderGraph(fn){
 }
 
 function verifyCurrentAnswer(){
-
     const subject=MasterQuestionDatabase[activeTier][currentSubjectKey];
     const currentQuestion=subject.questions[currentQuestionIndex];
 
@@ -908,7 +984,6 @@ function verifyCurrentAnswer(){
     const feedback=document.getElementById('arena-feedback');
 
     if(input===currentQuestion.ans){
-
         feedback.className='feedback-message text-correct';
         feedback.innerHTML='✨ Correct Mathematical Resolution!';
 
@@ -923,6 +998,8 @@ function verifyCurrentAnswer(){
         unlockBadges();
         updateStats();
 
+        appendAiMessage("🤖 AI Celebration", `Excellent analysis! Answer <strong>${input}</strong> matches the target verification matrix perfectly. 25 XP awarded.`);
+
         if(currentQuestionIndex+1 < subject.questions.length){
             currentQuestionIndex++;
             setTimeout(loadQuestionInstance,1800);
@@ -933,82 +1010,164 @@ function verifyCurrentAnswer(){
         }
     }
     else{
-
         feedback.className='feedback-message text-error';
         feedback.innerHTML='❌ Incorrect. Re-evaluate the mathematical structure.';
 
         streak=0;
         localStorage.setItem('mathStreak',streak);
         updateStats();
+        
+        appendAiMessage("🤖 AI Debug Engine", `Verification failure. Entered sequence: "${input}". Check the formulas or click on **Quick Hint** or **Formula Breakdown** for analysis.`);
     }
 }
 
 function unlockBadges(){
-
     const badgeBox=document.getElementById('badge-box');
-
     badgeBox.innerHTML='';
 
     if(correct>=1){
         badgeBox.innerHTML += `<div class="badge">🎯 First Solution</div>`;
     }
-
     if(correct>=5){
         badgeBox.innerHTML += `<div class="badge">📘 Algebra Explorer</div>`;
     }
-
     if(correct>=10){
         badgeBox.innerHTML += `<div class="badge">🧠 Analysis Thinker</div>`;
     }
-
     if(xp>=300){
         badgeBox.innerHTML += `<div class="badge">🌌 Multiverse Scholar</div>`;
     }
 }
 
 function showHint(){
-
+    if(!currentSubjectKey) {
+        appendAiMessage("🤖 Assistant System", "Please select a topic branch to load the AI core data structure.");
+        return;
+    }
     const subject=MasterQuestionDatabase[activeTier][currentSubjectKey];
     const currentQuestion=subject.questions[currentQuestionIndex];
-
-    document.getElementById('ai-box').innerHTML=
-        '💡 Hint: '+currentQuestion.hint;
+    appendAiMessage("💡 AI Hint Processor", currentQuestion.hint);
 }
 
 function startTimer(){
-
     clearInterval(timer);
-
     timeLeft=60;
     document.getElementById('timer').innerText=timeLeft;
 
     timer=setInterval(()=>{
-
         timeLeft--;
-
         document.getElementById('timer').innerText=timeLeft;
 
         if(timeLeft<=0){
-
             clearInterval(timer);
-
-            document.getElementById('arena-feedback').className=
-                'feedback-message text-error';
-
-            document.getElementById('arena-feedback').innerHTML=
-                '⏰ Time Expired';
+            document.getElementById('arena-feedback').className='feedback-message text-error';
+            document.getElementById('arena-feedback').innerHTML='⏰ Time Expired';
+            appendAiMessage("🤖 AI Alert", "Temporal window closed! Time has run out for this instance.");
         }
-
     },1000);
 }
 
+// ================= DYNAMIC MULTIVERSE AI ENGINE INTERACTIVE LOGIC =================
+
+function appendAiMessage(sender, htmlText) {
+    const chatScroller = document.getElementById('ai-chat-scroller');
+    const isUser = sender === "You";
+    
+    const msgElement = document.createElement('div');
+    msgElement.className = `ai-box ${isUser ? 'ai-msg-user' : ''}`;
+    msgElement.innerHTML = `<strong>${sender}:</strong><br>${htmlText}`;
+    
+    chatScroller.appendChild(msgElement);
+    chatScroller.scrollTop = chatScroller.scrollHeight;
+    
+    if(window.MathJax && window.MathJax.typesetPromise){
+        MathJax.typesetPromise();
+    }
+}
+
+function triggerAiAction(actionType) {
+    if(!currentSubjectKey) {
+        appendAiMessage("🤖 Multiverse AI", "System inactive. Enter a core Mathematics topic structure first to wake up my processors.");
+        return;
+    }
+
+    const subject = MasterQuestionDatabase[activeTier][currentSubjectKey];
+    const question = subject.questions[currentQuestionIndex];
+
+    if (actionType === 'clear') {
+        const scroller = document.getElementById('ai-chat-scroller');
+        scroller.innerHTML = `<div class="ai-box">Workspace logs flushed cleanly. Ask away structural queries!</div>`;
+        return;
+    }
+
+    appendAiMessage("You", `Click Action: [${actionType.toUpperCase()}] Request.`);
+
+    if (actionType === 'explain') {
+        let text = `You are playing inside <strong>${subject.title}</strong>. This module focuses on: <em>${subject.desc}</em>. `;
+        if(currentSubjectKey === 'algebra') {
+            text += "Algebra rules allow scaling and maintaining balance across expressions using equality principles.";
+        } else if(currentSubjectKey === 'topology') {
+            text += "Topology explores properties invariant under continuous deformations like stretching without tearing.";
+        } else if(currentSubjectKey === 'cryptography') {
+            text += "Cryptography applies modular transformations and number theory axioms to secure cryptographic channels.";
+        } else {
+            text += "This mathematical framework provides deterministic functions and logical proofs to model our continuum.";
+        }
+        appendAiMessage("🤖 AI Deep Concept Engine", text);
+    } 
+    else if (actionType === 'formula') {
+        let formulaStructure = "";
+        if(currentSubjectKey === 'algebra') formulaStructure = "General Linear Form: $$ax + b = c$$ $\\implies$ $$x = \\frac{c - b}{a}$$";
+        else if(currentSubjectKey === 'geometry') formulaStructure = "Pythagoras Rule: $$a^2 + b^2 = c^2$$ or Circle Area: $$A = \\pi r^2$$";
+        else if(currentSubjectKey === 'analysis') formulaStructure = "Limits framework: $$\\lim_{x \\to a} f(x) = L$$ or Power Derivative: $$\\frac{d}{dx}[ax^n] = anx^{n-1}$$";
+        else if(currentSubjectKey === 'complex') formulaStructure = "Modulus of Complex Plane Vector: $$|z| = \\sqrt{x^2 + y^2}$$ where $$z = x + iy$$";
+        else if(currentSubjectKey === 'topology') formulaStructure = "Discrete Set Cardinality Configuration: $$|\\mathcal{P}(X)| = 2^{|X|}$$ total open sets.";
+        else if(currentSubjectKey === 'cryptography') formulaStructure = "Modular Inverse / Remainder Rule: $$A \\equiv R \\pmod M$$ or Modulus Generator: $$n = p \\times q$$";
+
+        appendAiMessage("📐 AI Formula Matrix", `Found structural mapping for your query:<br>${formulaStructure}`);
+    } 
+    else if (actionType === 'gujarati') {
+        appendAiMessage("🌐 AI દ્વિભાષી એન્જિન", `તમે હાલમાં <strong>${subject.title}</strong> શાખા પર છો. પ્રશ્નનો સાચો જવાબ આ છે: **${question.ans}**. ઉકેલ માટે ક્વિક હિંટ નો ઉપયોગ કરો.`);
+    }
+}
+
+function processAiChatQuery() {
+    const inputField = document.getElementById('ai-user-query');
+    const queryText = inputField.value.trim();
+    if(!queryText) return;
+
+    appendAiMessage("You", queryText);
+    inputField.value = '';
+
+    setTimeout(() => {
+        const lower = queryText.toLowerCase();
+        let response = "I have filtered your query through my mathematical logic network. ";
+
+        if(!currentSubjectKey) {
+            response = "Please select a mathematics paradigm tier from the menu grid above to feed structural parameters into my runtime.";
+        } else {
+            const currentAns = MasterQuestionDatabase[activeTier][currentSubjectKey].questions[currentQuestionIndex].ans;
+            
+            if(lower.includes('answer') || lower.includes('cheat') || lower.includes('જવાબ')) {
+                response = `The encrypted goal evaluation state calculated is $$x = ${currentAns}$$. Can you reach this resolution cleanly?`;
+            } else if(lower.includes('graph') || lower.includes('visual')) {
+                response = `The interactive graph plotter on your left renders the system function array: <code>${MasterQuestionDatabase[activeTier][currentSubjectKey].graph}</code>.`;
+            } else if(lower.includes('hello') || lower.includes('hi')) {
+                response = "Hello explorer! Ask me for formulas, conceptual break downs, or logic checks.";
+            } else {
+                response += `Regarding your prompt, analyzing <strong>${MasterQuestionDatabase[activeTier][currentSubjectKey].title}</strong> variables indicates the mathematical system behaves consistently. Try matching expressions to calculate your target target structural outcome value: **${currentAns}**.`;
+            }
+        }
+        appendAiMessage("🤖 Multiverse AI", response);
+    }, 400);
+}
+
 // ENTER KEY SUPPORT
-
 document.addEventListener('keypress',function(e){
-
     if(e.key==='Enter'){
-
-        if(document.getElementById('arena-workspace').style.display==='block'){
+        if(document.activeElement.id === 'ai-user-query') {
+            processAiChatQuery();
+        } else if(document.getElementById('arena-workspace').style.display==='block'){
             verifyCurrentAnswer();
         }
     }
@@ -1018,4 +1177,3 @@ document.addEventListener('keypress',function(e){
 
 </body>
 </html>
-```
