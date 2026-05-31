@@ -31,7 +31,6 @@ window.MathJax = {
     --success:#22c55e;
     --error:#ef4444;
     --warning:#facc15;
-    --ai-glow: rgba(168, 85, 247, 0.4);
     --ai-purple: #a855f7;
 }
 
@@ -57,6 +56,8 @@ body{
 .arcade-container{
     max-width:1400px;
     margin:auto;
+    position: relative;
+    z-index: 1;
 }
 
 .header-panel{
@@ -323,7 +324,7 @@ body{
 /* === MATH AI LEARNING ASSISTANT MODIFICATIONS === */
 .ai-panel {
     border: 1px solid var(--ai-purple);
-    box-shadow: 0 0 15px rgba(168, 85, 247, 0.1);
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.15);
     display: flex;
     flex-direction: column;
 }
@@ -407,7 +408,7 @@ body{
     margin-bottom: 0;
     font-size: 0.95rem;
     padding: 10px;
-    border-color: rgba(168, 85, 247, 0.3);
+    border-color: rgba(168, 85, 247, 0.4);
 }
 
 .ai-input-wrapper .custom-input:focus {
@@ -557,7 +558,7 @@ body{
     
     <div class="ai-chat-scroller" id="ai-chat-scroller">
         <div class="ai-box" id="ai-box">
-            Greetings scholar! I am scanning the active branch workspace. Ask me to break down definitions, explain theorems, or provide conceptual foundations.
+            Greetings scholar! I am scanning the active branch workspace. Select a prompt pill below or query me directly to unlock core equations and concepts.
         </div>
     </div>
 
@@ -861,11 +862,11 @@ window.onload=function(){
 function startParticles(){
     tsParticles.load('particles-js',{
         particles:{
-            number:{value:60},
+            number:{value:40},
             color:{value:'#38bdf8'},
-            links:{enable:true,color:'#38bdf8'},
-            move:{enable:true,speed:1},
-            size:{value:2}
+            links:{enable:true,color:'#38bdf8',opacity:0.2},
+            move:{enable:true,speed:0.8},
+            size:{value:1.5}
         }
     });
 }
@@ -920,6 +921,7 @@ function shuffleQuestions(){
 
 function exitArena(){
     clearInterval(timer);
+    currentSubjectKey='';
     document.getElementById('subject-selector-zone').style.display='grid';
     document.getElementById('arena-workspace').style.display='none';
 }
@@ -974,6 +976,7 @@ function renderGraph(fn){
 }
 
 function verifyCurrentAnswer(){
+    if(!currentSubjectKey) return;
     const subject=MasterQuestionDatabase[activeTier][currentSubjectKey];
     const currentQuestion=subject.questions[currentQuestionIndex];
 
@@ -998,7 +1001,7 @@ function verifyCurrentAnswer(){
         unlockBadges();
         updateStats();
 
-        appendAiMessage("🤖 AI Celebration", `Excellent analysis! Answer <strong>${input}</strong> matches the target verification matrix perfectly. 25 XP awarded.`);
+        appendAiMessage("🤖 AI Celebration", `Excellent analysis! Answer <strong>${input}</strong> matches the verification array perfectly. +25 XP.`);
 
         if(currentQuestionIndex+1 < subject.questions.length){
             currentQuestionIndex++;
@@ -1017,7 +1020,7 @@ function verifyCurrentAnswer(){
         localStorage.setItem('mathStreak',streak);
         updateStats();
         
-        appendAiMessage("🤖 AI Debug Engine", `Verification failure. Entered sequence: "${input}". Check the formulas or click on **Quick Hint** or **Formula Breakdown** for analysis.`);
+        appendAiMessage("🤖 AI Debug Engine", `Verification failure. Entered sequence: "${input}". Check the formulas or use **Quick Hint** for analysis.`);
     }
 }
 
@@ -1067,7 +1070,7 @@ function startTimer(){
     },1000);
 }
 
-// ================= DYNAMIC MULTIVERSE AI ENGINE INTERACTIVE LOGIC =================
+// ================= FIXED MULTIVERSE AI ENGINE LOGIC =================
 
 function appendAiMessage(sender, htmlText) {
     const chatScroller = document.getElementById('ai-chat-scroller');
@@ -1081,7 +1084,7 @@ function appendAiMessage(sender, htmlText) {
     chatScroller.scrollTop = chatScroller.scrollHeight;
     
     if(window.MathJax && window.MathJax.typesetPromise){
-        MathJax.typesetPromise();
+        window.MathJax.typesetPromise();
     }
 }
 
@@ -1117,12 +1120,12 @@ function triggerAiAction(actionType) {
     } 
     else if (actionType === 'formula') {
         let formulaStructure = "";
-        if(currentSubjectKey === 'algebra') formulaStructure = "General Linear Form: $$ax + b = c$$ $\\implies$ $$x = \\frac{c - b}{a}$$";
+        if(currentSubjectKey === 'algebra') formulaStructure = "General Linear Form: $$4x - 7 = 29 \\implies 4x = 36 \\implies x = 9$$";
         else if(currentSubjectKey === 'geometry') formulaStructure = "Pythagoras Rule: $$a^2 + b^2 = c^2$$ or Circle Area: $$A = \\pi r^2$$";
-        else if(currentSubjectKey === 'analysis') formulaStructure = "Limits framework: $$\\lim_{x \\to a} f(x) = L$$ or Power Derivative: $$\\frac{d}{dx}[ax^n] = anx^{n-1}$$";
-        else if(currentSubjectKey === 'complex') formulaStructure = "Modulus of Complex Plane Vector: $$|z| = \\sqrt{x^2 + y^2}$$ where $$z = x + iy$$";
-        else if(currentSubjectKey === 'topology') formulaStructure = "Discrete Set Cardinality Configuration: $$|\\mathcal{P}(X)| = 2^{|X|}$$ total open sets.";
-        else if(currentSubjectKey === 'cryptography') formulaStructure = "Modular Inverse / Remainder Rule: $$A \\equiv R \\pmod M$$ or Modulus Generator: $$n = p \\times q$$";
+        else if(currentSubjectKey === 'analysis') formulaStructure = "Limits framework: $$\\lim_{n \\to \\infty} \\frac{a_n}{b_n}$$ or Power Derivative: $$\\frac{d}{dx}[ax^2] = 2ax$$";
+        else if(currentSubjectKey === 'complex') formulaStructure = "Modulus of Complex Vector: $$|z| = \\sqrt{a^2 + b^2}$$ where $$z = a + bi$$";
+        else if(currentSubjectKey === 'topology') formulaStructure = "Discrete Set Cardinality Configuration: $$|\\mathcal{P}(X)| = 2^n$$ total open sets.";
+        else if(currentSubjectKey === 'cryptography') formulaStructure = "Modular Inverse / Remainder Rule: $$A \\pmod M$$ or Modulus Generator: $$n = p \\times q$$";
 
         appendAiMessage("📐 AI Formula Matrix", `Found structural mapping for your query:<br>${formulaStructure}`);
     } 
@@ -1149,25 +1152,28 @@ function processAiChatQuery() {
             const currentAns = MasterQuestionDatabase[activeTier][currentSubjectKey].questions[currentQuestionIndex].ans;
             
             if(lower.includes('answer') || lower.includes('cheat') || lower.includes('જવાબ')) {
-                response = `The encrypted goal evaluation state calculated is $$x = ${currentAns}$$. Can you reach this resolution cleanly?`;
+                response = `The calculated verification target value state is $$x = ${currentAns}$$. Use this calculation to resolve the active prompt.`;
             } else if(lower.includes('graph') || lower.includes('visual')) {
-                response = `The interactive graph plotter on your left renders the system function array: <code>${MasterQuestionDatabase[activeTier][currentSubjectKey].graph}</code>.`;
+                response = `The interactive graph plotter renders the current system function: <code>${MasterQuestionDatabase[activeTier][currentSubjectKey].graph}</code>.`;
             } else if(lower.includes('hello') || lower.includes('hi')) {
-                response = "Hello explorer! Ask me for formulas, conceptual break downs, or logic checks.";
+                response = "Hello explorer! Ask me for formulas, conceptual breakdowns, or logic checks.";
             } else {
-                response += `Regarding your prompt, analyzing <strong>${MasterQuestionDatabase[activeTier][currentSubjectKey].title}</strong> variables indicates the mathematical system behaves consistently. Try matching expressions to calculate your target target structural outcome value: **${currentAns}**.`;
+                response += `Regarding your question, analyzing <strong>${MasterQuestionDatabase[activeTier][currentSubjectKey].title}</strong> variables indicates the mathematical system behaves consistently. Match expressions to reach your target structural answer value: **${currentAns}**.`;
             }
         }
         appendAiMessage("🤖 Multiverse AI", response);
-    }, 400);
+    }, 300);
 }
 
-// ENTER KEY SUPPORT
-document.addEventListener('keypress',function(e){
-    if(e.key==='Enter'){
-        if(document.activeElement.id === 'ai-user-query') {
+// FIXED INTERACTIVE ENTER-KEY SANITIZATION
+document.addEventListener('keydown', function(e){
+    if(e.key === 'Enter'){
+        const activeId = document.activeElement.id;
+        if(activeId === 'ai-user-query') {
+            e.preventDefault();
             processAiChatQuery();
-        } else if(document.getElementById('arena-workspace').style.display==='block'){
+        } else if(activeId === 'user-response-input') {
+            e.preventDefault();
             verifyCurrentAnswer();
         }
     }
