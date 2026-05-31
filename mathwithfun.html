@@ -151,12 +151,12 @@ canvas#scratchpad { width:100%; height:100%; display:block; cursor:crosshair; ba
 .ai-panel { border: 1px solid var(--ai-purple); box-shadow: 0 0 15px rgba(168, 85, 247, 0.15); display: flex; flex-direction: column; }
 .ai-header-layout { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; margin-bottom: 1rem; }
 .ai-title { color: var(--ai-purple); font-size: 1.2rem; margin: 0; text-shadow: 0 0 10px rgba(168, 85, 247, 0.2); }
-.ai-chat-scroller { max-height: 200px; overflow-y: auto; margin-bottom: 1rem; }
+.ai-chat-scroller { height: 200px; max-height: 200px; overflow-y: auto; margin-bottom: 1rem; padding-right: 5px; }
 .ai-chat-scroller::-webkit-scrollbar { width: 5px; }
 .ai-chat-scroller::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-.ai-box{ color:#cbd5e1; line-height:1.6; background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 10px; border: 1px solid rgba(168, 85, 247, 0.15); margin-bottom: 0.5rem; font-size: 0.9rem; }
+.ai-box{ color:#cbd5e1; line-height:1.6; background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 10px; border: 1px solid rgba(168, 85, 247, 0.15); margin-bottom: 0.5rem; font-size: 0.9rem; overflow-wrap: break-word; }
 .ai-pill-box { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
-.ai-prompt-pill { background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3); color: #e9d5ff; padding: 6px 12px; border-radius: 8px; font-size: 0.75rem; cursor: pointer; transition: 0.2s; }
+.ai-prompt-pill { background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3); color: #e9d5ff; padding: 6px 12px; border-radius: 8px; font-size: 0.75rem; cursor: pointer; transition: 0.2s; user-select: none; }
 .ai-prompt-pill:hover { background: var(--ai-purple); color: #020617; }
 .ai-input-wrapper { display: flex; gap: 8px; }
 .ai-input-wrapper .custom-input { margin-bottom: 0; font-size: 0.95rem; padding: 10px; border-color: rgba(168, 85, 247, 0.4); }
@@ -253,7 +253,7 @@ canvas#scratchpad { width:100%; height:100%; display:block; cursor:crosshair; ba
                     <div class="ai-status-indicator"></div>
                 </div>
                 <div class="ai-chat-scroller" id="ai-chat-scroller">
-                    <div class="ai-box">Workspace pipeline verified. Select automated action pills or query directly.</div>
+                    <div class="ai-box">Workspace pipeline verified. Select automated action pills or query directly. Type "answer" or "જવાબ" to extract target values instantly.</div>
                 </div>
                 <div class="ai-pill-box">
                     <div class="ai-prompt-pill" onclick="triggerAiAction('explain')">🔬 Explain Core Concept</div>
@@ -379,7 +379,7 @@ function exitArena(){
 
 function loadQuestionInstance(){
     const sub=MasterQuestionDatabase[activeTier][currentSubjectKey]; const q=sub.questions[currentQuestionIndex];
-    document.getElementById('progress-tracker').innerText=`Question ${currentQuestionIndex+1}/${sub.questions.length}`;
+    document.getElementById('progress-tracker').innerText=\`Question \${currentQuestionIndex+1}/\${sub.questions.length}\`;
     document.getElementById('branch-tag').innerText=sub.title;
     document.getElementById('eng-story').innerHTML=`<strong>English Target Prompt:</strong><br>${q.eng}`;
     document.getElementById('guj-story').innerHTML=`<strong>ગુજરાતી એકેડેમિક પ્રશ્ન:</strong><br>${q.guj}`;
@@ -468,7 +468,7 @@ function verifyCurrentAnswer(){
     if(val===q.ans){
         fb.className='feedback-message text-correct'; fb.innerHTML='✨ Verification Succeeded. Structural Alignment True.';
         xp+=40; correct++; streak++; localStorage.setItem('mathXP',xp); localStorage.setItem('mathCorrect',correct); localStorage.setItem('mathStreak',streak);
-        updateStats(); appendAiMessage("🤖 AI Validation Core", `Calculated token state parsed correctly: [${val}]. +40 XP Appended.`);
+        updateStats(); appendAiMessage("🤖 AI Validation Core", `Calculated token state parsed correctly: [\${val}]. +40 XP Appended.`);
         
         if(currentQuestionIndex+1 < sub.questions.length){ currentQuestionIndex++; setTimeout(loadQuestionInstance,1600); }
         else { fb.innerHTML='🏆 Category Space Node Explored Fully!'; setTimeout(exitArena,2200); }
@@ -491,8 +491,8 @@ function startTimer(){
 
 function appendAiMessage(sender, html){
     const scr=document.getElementById('ai-chat-scroller'); const isU=sender==="You";
-    const box=document.createElement('div'); box.className=`ai-box ${isU?'ai-msg-user':''}`;
-    box.innerHTML=`<strong>${sender}:</strong><br>${html}`; scr.appendChild(box); scr.scrollTop=scr.scrollHeight;
+    const box=document.createElement('div'); box.className=`ai-box \${isU?'ai-msg-user':''}`;
+    box.innerHTML=`<strong>\${sender}:</strong><br>\${html}`; scr.appendChild(box); scr.scrollTop=scr.scrollHeight;
     if(window.MathJax && window.MathJax.typesetPromise) MathJax.typesetPromise();
 }
 
@@ -501,29 +501,41 @@ function triggerAiAction(type){
     const sub=MasterQuestionDatabase[activeTier][currentSubjectKey];
     if(type==='clear'){ document.getElementById('ai-chat-scroller').innerHTML='<div class="ai-box">Workspace pipeline cleaned.</div>'; return; }
     
-    appendAiMessage("You", `Request Context: [${type.toUpperCase()}]`);
+    appendAiMessage("You", `Request Context: [\${type.toUpperCase()}]`);
     if(type==='explain'){
-        appendAiMessage("🤖 AI Conceptual Explorer", `Exploring <strong>${sub.title}</strong> structure: <em>${sub.desc}</em>. Visualizations run via specialized native ${sub.graphDimension.toUpperCase()} graphics pipelines.`);
+        appendAiMessage("🤖 AI Conceptual Explorer", `Exploring <strong>\${sub.title}</strong> structure: <em>\${sub.desc}</em>. Visualizations run via specialized native \${sub.graphDimension.toUpperCase()} graphics pipelines.`);
     } else if(type==='formula'){
         let f="Generic Function Mapping Parameters.";
         if(currentSubjectKey==='analysis') f="Saddle critical transformation matrix trace format: $$z = x^2 - y^2$$";
         if(currentSubjectKey==='topology') f="Non-orientable parametric topology variant containing precisely 1 boundary limit closure.";
         appendAiMessage("📐 AI Formula Matrix", f);
     } else if(type==='gujarati'){
-        appendAiMessage("🌐 AI દ્વિભાષી મોડ્યુલ", `તમે હાલમાં <strong>${sub.title}</strong> શાખા પર છો. પ્રશ્નનો ઉકેલ લાવવા માટે સંકેતોનો ઉપયોગ કરી શકો છો.`);
+        appendAiMessage("🌐 AI દ્વિભાષી મોડ્યુલ", `તમે હાલમાં <strong>\${sub.title}</strong> શાખા પર છો. પ્રશ્નનો ઉકેલ લાવવા માટે સંકેતોનો ઉપયોગ કરી શકો છો.`);
     }
 }
 
+// FIXED CRITICAL RUNTIME AI CHAT FUNCTIONALITY
 function processAiChatQuery(){
     const f=document.getElementById('ai-user-query'); const val=f.value.trim(); if(!val)return;
     appendAiMessage("You", val); f.value='';
+    
     setTimeout(()=>{
         let r="Query analyzed through mathematical logic layers. ";
-        if(!currentSubjectKey){ r="Please wake up a paradigm module cluster node above first."; }
-        else {
-            const ans=MasterQuestionDatabase[activeTier][currentSubjectKey].questions[currentQuestionIndex].ans;
-            if(val.toLowerCase().includes('answer') || val.toLowerCase().includes('જવાબ')){ r+=`The expected target validation calculation equals: **${ans}**.`; }
-            else { r+=`Regarding core metrics of <strong>${MasterQuestionDatabase[activeTier][currentSubjectKey].title}</strong>, review layout visual graphs or match parameters to resolve the node cleanly.`; }
+        if(!currentSubjectKey){ 
+            r="Please enter an active workspace subject module first to initialize the AI engine."; 
+        } else {
+            const sub = MasterQuestionDatabase[activeTier][currentSubjectKey];
+            const q = sub.questions[currentQuestionIndex];
+            const lowerVal = val.toLowerCase();
+            
+            // Comprehensive Student Intent Parsing Engine
+            if(lowerVal.includes('answer') || lowerVal.includes('solution') || lowerVal.includes('જવાબ') || lowerVal.includes('ઉકેલ')){ 
+                r += `The current question verification key token state is exactly: **\${q.ans}**.`; 
+            } else if(lowerVal.includes('hint') || lowerVal.includes('મદદ') || lowerVal.includes('સમજાવો')){
+                r += `Here is your contextual breakdown hint: *\${q.hint}*`;
+            } else { 
+                r += `Regarding core metrics of <strong>\${sub.title}</strong>, review the layout visual graphs, plot targets using your inputs, or type "answer" to resolve this current node cleanly.`; 
+            }
         }
         appendAiMessage("🤖 Multiverse AI", r);
     },200);
