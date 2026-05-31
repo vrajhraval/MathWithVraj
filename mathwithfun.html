@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Grand Math Multiverse Archive - 3D Edition</title>
+<title>The Ultimate Math Multiverse Workspace</title>
 
 <script>
 window.MathJax = {
@@ -37,322 +37,133 @@ window.MathJax = {
     --error:#ef4444;
     --warning:#facc15;
     --ai-purple: #a855f7;
+    --canvas-orange: #f97316;
 }
 
 *{ box-sizing:border-box; }
-
 body{
-    margin:0;
-    padding:20px;
-    background:var(--bg-deep);
-    color:var(--text);
-    font-family:'Segoe UI',sans-serif;
+    margin:0; padding:20px;
+    background:var(--bg-deep); color:var(--text);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow-x:hidden;
 }
 
-#particles-js{
-    position:fixed;
-    inset:0;
-    z-index:-1;
-}
-
-.arcade-container{
-    max-width:1400px;
-    margin:auto;
-    position: relative;
-    z-index: 1;
-}
+#particles-js{ position:fixed; inset:0; z-index:-1; }
+.arcade-container{ max-width:1600px; margin:auto; position: relative; z-index: 1; }
 
 .header-panel{
-    background:rgba(15,23,42,0.85);
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:2rem;
-    margin-bottom:2rem;
-    text-align:center;
-    backdrop-filter:blur(8px);
+    background:rgba(15,23,42,0.85); border:1px solid var(--border); border-radius:20px;
+    padding:2rem; margin-bottom:2rem; text-align:center; backdrop-filter:blur(8px);
     box-shadow:0 0 30px rgba(56,189,248,0.12);
 }
-
-.header-panel h1{
-    margin:0;
-    font-size:3rem;
-    color:var(--accent);
-    text-shadow:0 0 20px rgba(56,189,248,0.35);
-}
-
-.header-panel p{ color:var(--muted); margin-top:1rem; }
+.header-panel h1{ margin:0; font-size:2.8rem; color:var(--accent); text-shadow:0 0 20px rgba(56,189,248,0.35); }
+.header-panel p{ color:var(--muted); margin-top:0.5rem; }
 
 .stats-bar{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:1rem;
-    margin-bottom:2rem;
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:1rem; margin-bottom:2rem;
 }
-
 .stat-card{
-    background:rgba(15,23,42,0.85);
-    border:1px solid var(--border);
-    border-radius:14px;
-    padding:1rem;
-    text-align:center;
-    transition:0.3s ease;
+    background:rgba(15,23,42,0.85); border:1px solid var(--border);
+    border-radius:14px; padding:1.2rem; text-align:center; transition:0.3s ease;
 }
+.stat-card:hover{ transform:translateY(-4px); border-color:var(--accent); }
+.stat-number{ font-size:2.2rem; font-weight:bold; color:var(--accent); }
+.stat-label{ color:var(--muted); font-size:0.9rem; margin-top:4px; }
 
-.stat-card:hover{ transform:translateY(-5px); border-color:var(--accent); }
-.stat-number{ font-size:2rem; font-weight:bold; color:var(--accent); }
-
-.tier-navigation{
-    display:flex;
-    justify-content:center;
-    gap:1rem;
-    flex-wrap:wrap;
-    margin-bottom:2rem;
-}
-
+.tier-navigation{ display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; margin-bottom:2rem; }
 .tier-tab{
-    padding:14px 28px;
-    border-radius:10px;
-    border:1px solid var(--border);
-    background:rgba(15,23,42,0.9);
-    color:var(--muted);
-    cursor:pointer;
-    font-weight:bold;
-    transition:0.3s ease;
+    padding:14px 32px; border-radius:10px; border:1px solid var(--border);
+    background:rgba(15,23,42,0.9); color:var(--muted); cursor:pointer;
+    font-weight:bold; transition:0.3s ease;
 }
-
-.tier-tab:hover{ transform:translateY(-3px); border-color:var(--accent); }
+.tier-tab:hover{ transform:translateY(-2px); border-color:var(--accent); }
 .tier-tab.active{
-    background:var(--bg-card);
-    color:var(--accent);
-    border-color:var(--accent);
+    background:var(--bg-card); color:var(--accent); border-color:var(--accent);
     box-shadow:0 0 20px rgba(56,189,248,0.2);
 }
 
-.subject-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:1.5rem;
-}
-
+.subject-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; }
 .subject-card{
-    background:rgba(15,23,42,0.88);
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:1.5rem;
-    cursor:pointer;
-    transition:0.35s ease;
-    position:relative;
-    overflow:hidden;
+    background:rgba(15,23,42,0.88); border:1px solid var(--border); border-radius:18px;
+    padding:1.8rem; cursor:pointer; transition:0.35s ease; position:relative; overflow:hidden;
 }
+.subject-card:hover{ transform:translateY(-6px); border-color:var(--accent); box-shadow:0 0 25px rgba(56,189,248,0.15); }
+.subject-card h3{ color:var(--accent); margin:0 0 0.5rem 0; }
+.subject-card p{ color:var(--muted); margin:0; line-height:1.5; }
 
-.subject-card::before{
-    content:'';
-    position:absolute;
-    width:200px;
-    height:200px;
-    background:radial-gradient(circle,rgba(56,189,248,0.2),transparent);
-    top:-100px;
-    right:-100px;
+#arena-workspace{ display:none; margin-top:2rem; background:rgba(15,23,42,0.9); border-radius:20px; border:1px solid var(--border); padding:2rem; backdrop-filter:blur(10px); }
+.arena-layout-grid{ display:grid; grid-template-columns:1.2fr 1fr; gap:2rem; }
+
+@media(max-width:1100px){ .arena-layout-grid{ grid-template-columns:1fr; } }
+
+.display-panel, .input-panel, .graph-panel, .ai-panel, .canvas-panel{
+    background:rgba(30,41,59,0.6); border:1px solid var(--border); border-radius:16px; padding:1.5rem; margin-bottom:1.5rem;
 }
-
-.subject-card:hover{
-    transform:translateY(-8px) scale(1.02);
-    border-color:var(--accent);
-    box-shadow:0 0 30px rgba(56,189,248,0.15);
-}
-
-.subject-card h3{ color:var(--accent); margin-top:0; }
-.subject-card p{ color:var(--muted); line-height:1.5; }
-
-#arena-workspace{
-    display:none;
-    margin-top:2rem;
-    background:rgba(15,23,42,0.9);
-    border-radius:20px;
-    border:1px solid var(--border);
-    padding:2rem;
-    backdrop-filter:blur(10px);
-}
-
-.arena-grid{
-    display:grid;
-    grid-template-columns:1.3fr 1fr;
-    gap:2rem;
-}
-
-@media(max-width:950px){
-    .arena-grid{ grid-template-columns:1fr; }
-}
-
-.display-panel, .input-panel, .graph-panel, .ai-panel{
-    background:rgba(30,41,59,0.7);
-    border:1px solid var(--border);
-    border-radius:16px;
-    padding:1.5rem;
-}
-
 .display-panel{ border-left:4px solid var(--accent); }
-.gujarati-block{
-    margin-top:1.5rem;
-    border-top:1px dashed var(--border);
-    padding-top:1rem;
-    line-height:1.7;
-    color:#dbeafe;
-}
+.gujarati-block{ margin-top:1.2rem; border-top:1px dashed var(--border); padding-top:1rem; line-height:1.7; color:#dbeafe; }
 
 .custom-input{
-    width:100%;
-    background:#020617;
-    border:2px solid var(--border);
-    color:white;
-    padding:14px;
-    border-radius:10px;
-    font-size:1.1rem;
-    margin-bottom:1rem;
-    transition:0.3s;
+    width:100%; background:#020617; border:2px solid var(--border); color:white;
+    padding:14px; border-radius:10px; font-size:1.1rem; margin-bottom:1rem; transition:0.3s;
 }
+.custom-input:focus{ outline:none; border-color:var(--accent); box-shadow:0 0 15px rgba(56,189,248,0.3); }
 
-.custom-input:focus{
-    outline:none;
-    border-color:var(--accent);
-    box-shadow:0 0 15px rgba(56,189,248,0.3);
+.action-btn-row{ display:flex; gap:10px; margin-bottom:1rem; }
+.submit-btn, .control-btn, .hint-btn, .util-btn{
+    background:var(--accent); color:#020617; border:none; padding:12px 24px;
+    border-radius:10px; font-weight:bold; cursor:pointer; transition:0.2s ease;
 }
+.submit-btn:hover, .control-btn:hover, .hint-btn:hover, .util-btn:hover{ transform:translateY(-2px); box-shadow:0 0 15px rgba(56,189,248,0.3); }
+.hint-btn{ background:transparent; border:1px solid var(--border); color:var(--text); }
+.hint-btn:hover{ border-color:var(--warning); color:var(--warning); }
 
-.submit-btn, .control-btn, .hint-btn{
-    background:var(--accent);
-    color:#020617;
-    border:none;
-    padding:12px 22px;
-    border-radius:10px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.3s ease;
-}
-
-.submit-btn:hover, .control-btn:hover, .hint-btn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 0 20px rgba(56,189,248,0.25);
-}
-
-.feedback-message{
-    margin-top:1rem;
-    min-height:50px;
-    font-weight:bold;
-    text-align:center;
-    font-size:1.1rem;
-}
-
-.text-correct{ color:var(--success); }
-.text-error{ color:var(--error); }
-
-.btn-container{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:1rem;
-    margin-bottom:2rem;
-}
-
-#graph-wrapper-2d, #graph-wrapper-3d {
-    width:100%;
-    height:420px;
-    border-radius:10px;
-    overflow:hidden;
-    background: #020617;
-}
-
-#graph-wrapper-3d {
-    position: relative;
-    cursor: grab;
-}
+#graph-wrapper-2d, #graph-wrapper-3d { width:100%; height:400px; border-radius:12px; overflow:hidden; background:#020617; }
+#graph-wrapper-3d { position: relative; cursor: grab; }
 #graph-wrapper-3d:active { cursor: grabbing; }
 
-.timer{ color:var(--warning); font-weight:bold; }
-.badge-box{ margin-top:1rem; display:flex; flex-wrap:wrap; gap:10px; }
-.badge{ background:#1d4ed8; padding:8px 14px; border-radius:999px; font-size:0.85rem; }
-.footer-note{ margin-top:3rem; text-align:center; color:var(--muted); }
+.timer{ color:var(--warning); font-weight:bold; font-size:1.1rem; }
+.badge-box{ margin-top:1rem; display:flex; flex-wrap:wrap; gap:8px; }
+.badge{ background:#1d4ed8; padding:6px 12px; border-radius:999px; font-size:0.8rem; font-weight:bold; }
+.feedback-message{ font-weight:bold; text-align:center; margin-top:0.5rem; font-size:1.1rem; min-height:24px; }
 
-/* === MATH AI LEARNING ASSISTANT === */
-.ai-panel {
-    border: 1px solid var(--ai-purple);
-    box-shadow: 0 0 15px rgba(168, 85, 247, 0.15);
-    display: flex;
-    flex-direction: column;
+/* === DIGITAL CANVAS SCRACHPAD === */
+.canvas-panel { border-color: var(--canvas-orange); }
+.canvas-title { color: var(--canvas-orange); display:flex; justify-content:space-between; align-items:center; margin:0 0 1rem 0; }
+.canvas-container-layer { background:#1e293b; border-radius:10px; position:relative; overflow:hidden; height:220px; }
+canvas#scratchpad { width:100%; height:100%; display:block; cursor:crosshair; background:#0f172a; }
+.canvas-controls { display:flex; gap:10px; margin-top:0.75rem; }
+
+/* === VIRTUAL MATHEMATICAL KEYBOARD === */
+.math-keyboard-tray {
+    background: rgba(15, 23, 42, 0.95); border: 1px solid var(--border);
+    border-radius: 12px; padding: 10px; margin-bottom: 1rem;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap: 6px;
 }
-
-.ai-header-layout {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 0.75rem;
-    margin-bottom: 1rem;
+.key-cap {
+    background: var(--bg-card); border: 1px solid var(--border); color: var(--accent);
+    padding: 10px; border-radius: 6px; text-align: center; font-weight: bold;
+    cursor: pointer; transition: 0.15s; font-size: 1.05rem; user-select: none;
 }
+.key-cap:hover { background: var(--accent); color: var(--bg-deep); transform: scale(1.05); }
 
-.ai-title {
-    color: var(--ai-purple);
-    font-size: 1.25rem;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-shadow: 0 0 10px rgba(168, 85, 247, 0.2);
-}
-
-.ai-chat-scroller {
-    max-height: 240px;
-    overflow-y: auto;
-    padding-right: 5px;
-    margin-bottom: 1rem;
-    border-radius: 8px;
-}
-
-.ai-chat-scroller::-webkit-scrollbar { width: 6px; }
-.ai-chat-scroller::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-
-.ai-box{
-    color:#cbd5e1;
-    line-height:1.7;
-    background: rgba(15, 23, 42, 0.6);
-    padding: 1rem;
-    border-radius: 10px;
-    border: 1px solid rgba(168, 85, 247, 0.15);
-    margin-bottom: 0.75rem;
-    font-size: 0.95rem;
-}
-
-.ai-pill-box { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1rem; }
-.ai-prompt-pill {
-    background: rgba(168, 85, 247, 0.1);
-    border: 1px solid rgba(168, 85, 247, 0.3);
-    color: #e9d5ff;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.ai-prompt-pill:hover { background: var(--ai-purple); color: #020617; transform: translateY(-1px); }
+/* === MULTIVERSE AI ARCHITECTURE === */
+.ai-panel { border: 1px solid var(--ai-purple); box-shadow: 0 0 15px rgba(168, 85, 247, 0.15); display: flex; flex-direction: column; }
+.ai-header-layout { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; margin-bottom: 1rem; }
+.ai-title { color: var(--ai-purple); font-size: 1.2rem; margin: 0; text-shadow: 0 0 10px rgba(168, 85, 247, 0.2); }
+.ai-chat-scroller { max-height: 200px; overflow-y: auto; margin-bottom: 1rem; }
+.ai-chat-scroller::-webkit-scrollbar { width: 5px; }
+.ai-chat-scroller::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+.ai-box{ color:#cbd5e1; line-height:1.6; background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 10px; border: 1px solid rgba(168, 85, 247, 0.15); margin-bottom: 0.5rem; font-size: 0.9rem; }
+.ai-pill-box { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
+.ai-prompt-pill { background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3); color: #e9d5ff; padding: 6px 12px; border-radius: 8px; font-size: 0.75rem; cursor: pointer; transition: 0.2s; }
+.ai-prompt-pill:hover { background: var(--ai-purple); color: #020617; }
 .ai-input-wrapper { display: flex; gap: 8px; }
 .ai-input-wrapper .custom-input { margin-bottom: 0; font-size: 0.95rem; padding: 10px; border-color: rgba(168, 85, 247, 0.4); }
-.ai-input-wrapper .custom-input:focus { border-color: var(--ai-purple); box-shadow: 0 0 10px rgba(168, 85, 247, 0.25); }
-
-.ai-send-btn {
-    background: var(--ai-purple);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 0 18px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.2s;
-}
-.ai-send-btn:hover { opacity: 0.9; box-shadow: 0 0 12px rgba(168, 85, 247, 0.4); }
+.ai-send-btn { background: var(--ai-purple); color: white; border: none; border-radius: 10px; padding: 0 16px; font-weight: bold; cursor: pointer; }
 .ai-msg-user { border-left: 3px solid var(--accent); background: rgba(56, 189, 248, 0.05); margin-left: 1.5rem; }
 .ai-status-indicator { width: 8px; height: 8px; background: var(--success); border-radius: 50%; box-shadow: 0 0 8px var(--success); }
+.footer-note{ margin-top:3rem; text-align:center; color:var(--muted); font-size: 0.9rem; }
 </style>
 </head>
 
@@ -363,30 +174,14 @@ body{
 
 <div class="header-panel">
     <h1>🌌 The Grand Mathematics Multiverse Archive</h1>
-    <p>
-        Interactive Mathematics Universe • School → Undergraduate → Postgraduate
-        <br>
-        Powered by 2D Math Engines & <strong>WebGL MathBox3D Systems</strong>
-    </p>
+    <p>Ultimate Engine Variant • 2D Plotter • WebGL MathBox3D Systems • Built-in Drawing Canvas & Custom Symbols</p>
 </div>
 
 <div class="stats-bar">
-    <div class="stat-card">
-        <div class="stat-number" id="xp-counter">0</div>
-        <div>Total XP</div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-number" id="correct-counter">0</div>
-        <div>Correct Answers</div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-number" id="streak-counter">0</div>
-        <div>Streak</div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-number" id="rank-counter">Novice</div>
-        <div>Mathematics Rank</div>
-    </div>
+    <div class="stat-card"><div class="stat-number" id="xp-counter">0</div><div class="stat-label">Total Scholar XP</div></div>
+    <div class="stat-card"><div class="stat-number" id="correct-counter">0</div><div class="stat-label">Correct Trackings</div></div>
+    <div class="stat-card"><div class="stat-number" id="streak-counter">0</div><div class="stat-label">Active Vector Streak</div></div>
+    <div class="stat-card"><div class="stat-number" id="rank-counter">Novice</div><div class="stat-label">Evolution Tier Rank</div></div>
 </div>
 
 <div class="tier-navigation">
@@ -398,511 +193,351 @@ body{
 <div id="subject-selector-zone" class="subject-grid"></div>
 
 <div id="arena-workspace">
-
-<div class="btn-container">
-    <button class="control-btn" onclick="exitArena()">← Exit Subject</button>
-    <div>
-        <div id="progress-tracker">Question 1/5</div>
-    </div>
-    <div class="timer">⏳ Time Left: <span id="timer">60</span>s</div>
-</div>
-
-<div class="arena-grid">
-<div>
-    <div class="display-panel">
-        <span id="branch-tag" style="background:#334155;padding:6px 12px;border-radius:6px;color:#38bdf8;font-weight:bold;">BRANCH</span>
-        <div id="eng-story" style="margin-top:1rem;line-height:1.7"></div>
-        <div id="guj-story" class="gujarati-block"></div>
+    <div class="action-btn-row" style="justify-content: space-between; align-items:center;">
+        <button class="control-btn" onclick="exitArena()">← Exit Workspace Node</button>
+        <div id="progress-tracker" style="font-weight:bold; color:var(--accent);">Question 1/5</div>
+        <div class="timer">⏳ Window: <span id="timer">60</span>s</div>
     </div>
 
-    <div class="graph-panel" style="margin-top:1.5rem;">
-        <h3 id="graph-title-indicator">📈 Live Mathematics Visualizer</h3>
-        
-        <div id="graph-wrapper-2d"></div>
-        
-        <div id="graph-wrapper-3d" style="display:none;"></div>
-    </div>
-</div>
+    <div class="arena-layout-grid">
+        <div>
+            <div class="display-panel">
+                <span id="branch-tag" style="background:#334155; padding:4px 10px; border-radius:6px; color:#38bdf8; font-weight:bold; font-size:0.85rem;">BRANCH</span>
+                <div id="eng-story" style="margin-top:1rem; font-size:1.1rem; line-height:1.6;"></div>
+                <div id="guj-story" class="gujarati-block"></div>
+            </div>
 
-<div>
-    <div class="input-panel">
-        <input type="text" id="user-response-input" class="custom-input" placeholder="Type answer here" autocomplete="off">
-        <button class="submit-btn" onclick="verifyCurrentAnswer()">Evaluate Answer</button>
-        <button class="hint-btn" onclick="showHint()" style="margin-top:1rem;">💡 Quick Hint</button>
-        <div id="arena-feedback" class="feedback-message"></div>
-    </div>
-
-    <div class="ai-panel" style="margin-top:1.5rem;">
-        <div class="ai-header-layout">
-            <h3 class="ai-title">🤖 Multiverse Math AI Assistant</h3>
-            <div class="ai-status-indicator" title="AI Engine Online"></div>
-        </div>
-        
-        <div class="ai-chat-scroller" id="ai-chat-scroller">
-            <div class="ai-box" id="ai-box">
-                Greetings scholar! I am scanning the active branch workspace. Select a prompt pill below or query me directly to unlock core equations and concepts.
+            <div class="graph-panel">
+                <h3 id="graph-title-indicator" style="margin-top:0; font-size:1.1rem; color:var(--accent);">📈 Live Geometric Matrix</h3>
+                <div id="graph-wrapper-2d"></div>
+                <div id="graph-wrapper-3d" style="display:none;"></div>
             </div>
         </div>
 
-        <div class="ai-pill-box">
-            <div class="ai-prompt-pill" onclick="triggerAiAction('explain')">🔬 Explain Core Concept</div>
-            <div class="ai-prompt-pill" onclick="triggerAiAction('formula')">📐 Formula Breakdown</div>
-            <div class="ai-prompt-pill" onclick="triggerAiAction('gujarati')">🌐 Translate Explanations</div>
-            <div class="ai-prompt-pill" onclick="triggerAiAction('clear')">🧹 Clear Log</div>
-        </div>
+        <div>
+            <div class="canvas-panel">
+                <h3 class="canvas-title">🎨 Live Scratchpad Whiteboard <span style="font-size:0.8rem; color:var(--muted);">Draw calculations directly</span></h3>
+                <div class="canvas-container-layer">
+                    <canvas id="scratchpad"></canvas>
+                </div>
+                <div class="canvas-controls">
+                    <button class="util-btn" style="background:var(--canvas-orange); color:white; padding:6px 12px; font-size:0.85rem;" onclick="clearScratchpad()">Clear Pad</button>
+                </div>
+            </div>
 
-        <div class="ai-input-wrapper">
-            <input type="text" id="ai-user-query" class="custom-input" placeholder="Ask anything about this structure..." autocomplete="off">
-            <button class="ai-send-btn" onclick="processAiChatQuery()">Query</button>
+            <div class="input-panel">
+                <label style="display:block; margin-bottom:6px; font-size:0.85rem; color:var(--muted);">Math Matrix Input Token Location:</label>
+                <input type="text" id="user-response-input" class="custom-input" placeholder="Type answer or map keys..." autocomplete="off">
+                
+                <div class="math-keyboard-tray">
+                    <div class="key-cap" onclick="injectMathSymbol('π')">π</div>
+                    <div class="key-cap" onclick="injectMathSymbol('√(')">√</div>
+                    <div class="key-cap" onclick="injectMathSymbol('²')">x²</div>
+                    <div class="key-cap" onclick="injectMathSymbol('^')">^</div>
+                    <div class="key-cap" onclick="injectMathSymbol('∞')">∞</div>
+                    <div class="key-cap" onclick="injectMathSymbol('∫')">∫</div>
+                    <div class="key-cap" onclick="injectMathSymbol('∂')">∂</div>
+                    <div class="key-cap" onclick="injectMathSymbol('(0,0)')">(0,0)</div>
+                </div>
+
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                    <button class="submit-btn" onclick="verifyCurrentAnswer()">Evaluate Answer</button>
+                    <button class="hint-btn" onclick="showHint()">💡 Quick Hint</button>
+                </div>
+                <div id="arena-feedback" class="feedback-message"></div>
+            </div>
+
+            <div class="ai-panel">
+                <div class="ai-header-layout">
+                    <h3 class="ai-title">🤖 Multiverse Math AI Assistant</h3>
+                    <div class="ai-status-indicator"></div>
+                </div>
+                <div class="ai-chat-scroller" id="ai-chat-scroller">
+                    <div class="ai-box">Workspace pipeline loaded cleanly. Select prompt triggers or process natural logs natively.</div>
+                </div>
+                <div class="ai-pill-box">
+                    <div class="ai-prompt-pill" onclick="triggerAiAction('explain')">🔬 Explain Core Concept</div>
+                    <div class="ai-prompt-pill" onclick="triggerAiAction('formula')">📐 Formula Breakdown</div>
+                    <div class="ai-prompt-pill" onclick="triggerAiAction('gujarati')">🌐 Translate Explanations</div>
+                    <div class="ai-prompt-pill" onclick="triggerAiAction('clear')">🧹 Clear Log</div>
+                </div>
+                <div class="ai-input-wrapper">
+                    <input type="text" id="ai-user-query" class="custom-input" placeholder="Ask anything about this structure..." autocomplete="off">
+                    <button class="ai-send-btn" onclick="processAiChatQuery()">Query</button>
+                </div>
+                <div class="badge-box" id="badge-box"></div>
+            </div>
+
         </div>
-        <div class="badge-box" id="badge-box"></div>
     </div>
 </div>
-</div>
-</div>
 
-<div class="footer-note">
-    Mathematical Exploration Engine • Interactive Academic Universe • GitHub Ready
-</div>
+<div class="footer-note">Grand Multiverse Academic Architecture Module • WebGL Context • Production Stable Build</div>
 </div>
 
 <script>
-// Upgraded Datastructure to cleanly handle dimension flags ('2d' vs '3d')
 const MasterQuestionDatabase = {
     school:{
-        algebra:{
-            title:'School Algebra',
-            desc:'Linear equations, simplification, symbolic logic.',
-            graphDimension: '2d',
-            graph:'x^2',
-            questions:[]
-        },
-        geometry:{
-            title:'School Geometry',
-            desc:'Triangles, trigonometry, coordinate geometry.',
-            graphDimension: '2d',
-            graph:'sqrt(100-x^2)',
-            questions:[]
-        }
+        algebra:{ title:'School Algebra', desc:'Linear equations, simplification, symbolic logic.', graphDimension:'2d', graph:'x^2', questions:[] },
+        geometry:{ title:'School Geometry', desc:'Triangles, trigonometry, coordinate geometry.', graphDimension:'2d', graph:'sqrt(100-x^2)', questions:[] }
     },
     ug:{
-        analysis:{
-            title:'UG Real Analysis',
-            desc:'Multivariable calculus, limits, and saddle dimensions.',
-            graphDimension: '3d',
-            graph: 'saddle', // Trigger custom WebGL processing
-            questions:[]
-        },
-        complex:{
-            title:'UG Complex Analysis',
-            desc:'Complex numbers and residues.',
-            graphDimension: '2d',
-            graph:'sqrt(25-x^2)',
-            questions:[]
-        }
+        analysis:{ title:'UG Real Analysis', desc:'Multivariable calculus, limits, and stationary saddle traces.', graphDimension:'3d', graph:'saddle', questions:[] },
+        complex:{ title:'UG Complex Analysis', desc:'Complex vector frameworks and residues.', graphDimension:'2d', graph:'sqrt(36-x^2)', questions:[] }
     },
     pg:{
-        topology:{
-            title:'PG Topology',
-            desc:'Manifolds, compactness, and Möbius continuous surfaces.',
-            graphDimension: '3d',
-            graph: 'mobius', // Trigger custom WebGL processing
-            questions:[]
-        },
-        cryptography:{
-            title:'PG Cryptography',
-            desc:'RSA systems and modular structures.',
-            graphDimension: '2d',
-            graph:'log(x)',
-            questions:[]
-        }
+        topology:{ title:'PG Topology', desc:'Manifolds, continuous dimensions, and parametric Möbius rings.', graphDimension:'3d', graph:'mobius', questions:[] },
+        cryptography:{ title:'PG Cryptography', desc:'Modular rings and prime exponential distributions.', graphDimension:'2d', graph:'log(x)', questions:[] }
     }
 };
 
 function randomInt(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
 
-function buildLargeQuestionBank(){
-    // School Algebra
-    const algebraQuestions=[];
-    for(let i=0;i<50;i++){
-        const a=randomInt(2,12); const x=randomInt(2,20); const b=randomInt(1,25); const c=(a*x)+b;
-        algebraQuestions.push({
-            eng:`Solve the equation: $$${a}x+${b}=${c}$$`,
-            guj:`સમીકરણ ઉકેલો: $$${a}x+${b}=${c}$$`,
-            ans:String(x),
-            hint:'Move constant term to the right side, then isolate x.'
-        });
-    }
-    MasterQuestionDatabase.school.algebra.questions=algebraQuestions;
+function buildComprehensiveDatabase(){
+    // Algebra
+    let aQ=[]; for(let i=0;i<30;i++){
+        let a=randomInt(2,10); let x=randomInt(2,15); let b=randomInt(1,20); let c=(a*x)+b;
+        aQ.push({ eng:`Solve for system matrix variable $$x$$: $$${a}x+${b}=${c}$$`, guj:`સમીકરણમાંથી $$x$$ ની કિંમત શોધો: $$${a}x+${b}=${c}$$`, ans:String(x), hint:'Subtract constant scalar first, then scale down.' });
+    } MasterQuestionDatabase.school.algebra.questions=aQ;
 
-    // School Geometry
-    const geometryQuestions=[];
-    for(let i=0;i<50;i++){
-        const a=randomInt(3,15); const b=randomInt(4,20); const hyp=Math.sqrt(a*a+b*b).toFixed(0);
-        geometryQuestions.push({
-            eng:`A right triangle has base ${a} and height ${b}. Find hypotenuse floor rounding.`,
-            guj:`કાટકોણ ત્રિકોણની બાજુઓ ${a} અને ${b} છે. કર્ણ શોધો.`,
-            ans:String(hyp),
-            hint:'Apply Pythagoras formula: c = sqrt(a^2 + b^2).'
-        });
-    }
-    MasterQuestionDatabase.school.geometry.questions=geometryQuestions;
+    // Geometry
+    let gQ=[]; for(let i=0;i<30;i++){
+        let base=3; let ht=4;
+        gQ.push({ eng:`A right angle matrix structure has legs ${base} and ${ht}. Find the absolute length of its hypotenuse boundary.`, guj:`કાટકોણ ત્રિકોણની બાજુઓ ${base} અને ${ht} છે. કર્ણની લંબાઈ શોધો.`, ans:'5', hint:'Use Pythagoras configuration theorem.' });
+    } MasterQuestionDatabase.school.geometry.questions=gQ;
 
-    // UG Analysis (3D Saddle focus)
-    const analysisQuestions=[];
-    for(let i=0;i<50;i++){
-        const multiplier = randomInt(2, 6);
-        analysisQuestions.push({
-            eng:`Identify the stationary point coordinates of the 3D surface generated by $$z = x^2 - y^2$$`,
-            guj:`ત્રિપરિમાણીય સપાટી $$z = x^2 - y^2$$ ના સ્ટેશનરી પોઇન્ટ ના કોઓર્ડિનેટ્સ શોધો.`,
-            ans:'(0,0)',
-            hint:'The partial derivatives vanish cleanly at the absolute origin origin center.'
-        });
-    }
-    MasterQuestionDatabase.ug.analysis.questions=analysisQuestions;
+    // UG Analysis
+    MasterQuestionDatabase.ug.analysis.questions=[
+        { eng:'Identify the absolute global stationary configuration critical coordinates of the 3D saddle surface vector field mapped by $$z = x^2 - y^2$$', guj:'આપેલી સપાટી $$z = x^2 - y^2$$ ના સેડલ પોઇન્ટ ના કોઓર્ડિનેટ્સ શોધો.', ans:'(0,0)', hint:'The local derivative vanishes directly at the geometric origin point vector (0,0).' }
+    ];
 
-    // UG Complex Analysis
-    const complexQuestions=[];
-    for(let i=0;i<50;i++){
-        const a=randomInt(3,10); const b=randomInt(4,12); const mod=Math.sqrt(a*a+b*b).toFixed(2);
-        complexQuestions.push({
-            eng:`If complex variable $$z=${a}+${b}i$$, compute structural magnitude length $$|z|$$ (2 decimals)`,
-            guj:`જો $$z=${a}+${b}i$$ હોય તો માનાંક $$|z|$$ શોધો.`,
-            ans:String(mod),
-            hint:'Calculate value using square root sum arrays: sqrt(a*a + b*b).'
-        });
-    }
-    MasterQuestionDatabase.ug.complex.questions=complexQuestions;
+    // UG Complex
+    MasterQuestionDatabase.ug.complex.questions=[
+        { eng:'For complex mapping value variable $$z = 3 + 4i$$, compute its absolute length scale modulus vector structure $$|z|$$', guj:`જટિલ સંખ્યા $$z = 3 + 4i$$ નો માનાંક શોધો.`, ans:'5', hint:'Compute the geometric vector length using formula: sqrt(a^2 + b^2).' }
+    ];
 
-    // PG Topology (3D Möbius strip context)
-    const topologyQuestions=[];
-    for(let i=0;i<50;i++){
-        topologyQuestions.push({
-            eng:`How many boundaries/edges does a classic 3D Möbius strip manifold contain?`,
-            guj:`એક મોબીયસ સ્ટ્રીપ મેનીફોલ્ડમાં કુલ કેટલી કિનારીઓ (boundaries) હોય છે?`,
-            ans:'1',
-            hint:'A Mobius strip is non-orientable and possesses exactly one continuous boundary edge curve.'
-        });
-    }
-    MasterQuestionDatabase.pg.topology.questions=topologyQuestions;
+    // PG Topology
+    MasterQuestionDatabase.pg.topology.questions=[
+        { eng:'How many boundaries/edges does a classic 3D Möbius strip manifold contain?', guj:'એક મોબીયસ સ્ટ્રીપ મેનીફોલ્ડમાં કુલ કેટલી કિનારીઓ (boundaries) હોય છે?', ans:'1', hint:'A Mobius strip is non-orientable and possesses exactly one continuous boundary edge curve.' }
+    ];
 
-    // PG Cryptography
-    const cryptoQuestions=[];
-    for(let i=0;i<50;i++){
-        const p=5; const q=11;
-        cryptoQuestions.push({
-            eng:`In an RSA key generator framework where prime inputs p=${p} and q=${q}, resolve system modulus value $$n = pq$$`,
-            guj:`RSA સિસ્ટમ માટે p=${p} અને q=${q} હોય, તો મોડ્યુલસ n શોધો.`,
-            ans:String(p*q),
-            hint:'Simply calculate the product vectors of variables p and q.'
-        });
-    }
-    MasterQuestionDatabase.pg.cryptography.questions=cryptoQuestions;
+    // PG Crypto
+    MasterQuestionDatabase.pg.cryptography.questions=[
+        { eng:'In an RSA algorithm configuration system using primes p=5 and q=7, find the public network encryption structural modules sequence value $$n = pq$$', guj:'RSA માટે જો p=5 અને q=7 હોય તો મોડ્યુલસ n=pq શોધો.', ans:'35', hint:'Multiply product components directly.' }
+    ];
 }
 
-buildLargeQuestionBank();
+buildComprehensiveDatabase();
 
-let activeTier='school'; let currentSubjectKey=''; let currentQuestionIndex=0; let timer; let timeLeft=60;
+let activeTier='school'; let currentSubjectKey=''; let currentQuestionIndex=0; let timer=null; let timeLeft=60;
 let xp=parseInt(localStorage.getItem('mathXP')) || 0;
 let correct=parseInt(localStorage.getItem('mathCorrect')) || 0;
 let streak=parseInt(localStorage.getItem('mathStreak')) || 0;
+let mathboxInstance=null;
 
-let mathboxInstance = null; // Holds 3D engine context
+// Scratchpad Canvas Engine Logic Configurations
+let canvas, ctx, drawing=false;
 
 window.onload=function(){
-    renderSubjectSelectorGrid();
-    updateStats();
+    renderSubjectSelectorGrid(); updateStats(); setupScratchpadEngine();
     tsParticles.load('particles-js',{
-        particles:{
-            number:{value:35},
-            color:{value:'#38bdf8'},
-            links:{enable:true,color:'#38bdf8',opacity:0.15},
-            move:{enable:true,speed:0.7},
-            size:{value:1.5}
-        }
+        particles:{ number:{value:40}, color:{value:'#38bdf8'}, links:{enable:true,color:'#38bdf8',opacity:0.15}, move:{enable:true,speed:0.8}, size:{value:1.5} }
     });
 };
 
 function updateStats(){
-    document.getElementById('xp-counter').innerText=xp;
-    document.getElementById('correct-counter').innerText=correct;
+    document.getElementById('xp-counter').innerText=xp; document.getElementById('correct-counter').innerText=correct;
     document.getElementById('streak-counter').innerText=streak;
-    let r='Novice';
-    if(xp>150) r='Scholar'; if(xp>350) r='Analyst'; if(xp>700) r='Mathematician';
-    document.getElementById('rank-counter').innerText=r;
+    let r='Novice'; if(xp>100) r='Scholar'; if(xp>300) r='Analyst'; if(xp>600) r='Grandmaster';
+    document.getElementById('rank-counter').innerText=r; unlockBadges();
 }
 
-function switchTier(tierId, tabElement){
-    activeTier=tierId;
-    document.querySelectorAll('.tier-tab').forEach(t=>t.classList.remove('active'));
-    tabElement.classList.add('active');
-    exitArena();
-    renderSubjectSelectorGrid();
+function switchTier(tierId, tabEl){
+    activeTier=tierId; document.querySelectorAll('.tier-tab').forEach(t=>t.classList.remove('active'));
+    tabEl.classList.add('active'); exitArena(); renderSubjectSelectorGrid();
 }
 
 function renderSubjectSelectorGrid(){
-    const zone=document.getElementById('subject-selector-zone');
-    zone.innerHTML='';
-    const selectedTierData=MasterQuestionDatabase[activeTier];
-    for(let key in selectedTierData){
-        const sub=selectedTierData[key];
-        const card=document.createElement('div');
-        card.className='subject-card';
-        card.innerHTML=`<h3>${sub.title}</h3><p>${sub.desc}</p>`;
-        card.onclick=()=>enterArena(key);
-        zone.appendChild(card);
+    const container=document.getElementById('subject-selector-zone'); container.innerHTML='';
+    const selected=MasterQuestionDatabase[activeTier];
+    for(let key in selected){
+        let sub=selected[key]; let card=document.createElement('div'); card.className='subject-card';
+        card.innerHTML=`<h3>${sub.title}</h3><p>${sub.desc}</p>`; card.onclick=()=>enterArena(key);
+        container.appendChild(card);
     }
 }
 
-function enterArena(subjectKey){
-    currentSubjectKey=subjectKey;
-    currentQuestionIndex=0;
+function enterArena(key){
+    currentSubjectKey=key; currentQuestionIndex=0;
     document.getElementById('subject-selector-zone').style.display='none';
     document.getElementById('arena-workspace').style.display='block';
-    
     MasterQuestionDatabase[activeTier][currentSubjectKey].questions.sort(()=>Math.random()-0.5);
-    loadQuestionInstance();
-    startTimer();
-    appendAiMessage("🤖 System Status", `Switched workspace down to <strong>[${MasterQuestionDatabase[activeTier][currentSubjectKey].title}]</strong>. Initializing tracking matrices.`);
+    loadQuestionInstance(); startTimer(); clearScratchpad();
 }
 
 function exitArena(){
-    clearInterval(timer);
-    currentSubjectKey='';
+    clearInterval(timer); currentSubjectKey='';
     document.getElementById('subject-selector-zone').style.display='grid';
     document.getElementById('arena-workspace').style.display='none';
     destroyMathBox();
 }
 
 function loadQuestionInstance(){
-    const sub=MasterQuestionDatabase[activeTier][currentSubjectKey];
-    const q=sub.questions[currentQuestionIndex];
-
+    const sub=MasterQuestionDatabase[activeTier][currentSubjectKey]; const q=sub.questions[currentQuestionIndex];
     document.getElementById('progress-tracker').innerText=`Question ${currentQuestionIndex+1}/${sub.questions.length}`;
     document.getElementById('branch-tag').innerText=sub.title;
-    document.getElementById('eng-story').innerHTML=`<strong>English:</strong><br>${q.eng}`;
-    document.getElementById('guj-story').innerHTML=`<strong>ગુજરાતી:</strong><br>${q.guj}`;
-    document.getElementById('arena-feedback').innerHTML='';
-    document.getElementById('user-response-input').value='';
+    document.getElementById('eng-story').innerHTML=`<strong>English Target Prompt:</strong><br>${q.eng}`;
+    document.getElementById('guj-story').innerHTML=`<strong>ગુજરાતી એકેડેમિક પ્રશ્ન:</strong><br>${q.guj}`;
+    document.getElementById('arena-feedback').innerHTML=''; document.getElementById('user-response-input').value='';
 
-    const total=sub.questions.length;
-    document.getElementById('timer').innerText=timeLeft;
-
-    // ROUTE TO CORRESPONDING 2D OR 3D GRAPHICAL VIEWPORT ENGINE
-    if(sub.graphDimension === '3d') {
-        document.getElementById('graph-wrapper-2d').style.display = 'none';
-        document.getElementById('graph-wrapper-3d').style.display = 'block';
-        document.getElementById('graph-title-indicator').innerHTML = '🌌 Live WebGL 3D MathBox Universe (Click & Drag to Rotate)';
-        initMathBox3DEngine(sub.graph);
+    if(sub.graphDimension==='3d'){
+        document.getElementById('graph-wrapper-2d').style.display='none';
+        document.getElementById('graph-wrapper-3d').style.display='block';
+        document.getElementById('graph-title-indicator').innerHTML='🌌 Interactive WebGL MathBox3D Engine Realtime Surface Matrix';
+        initMathBox3D(sub.graph);
     } else {
-        document.getElementById('graph-wrapper-3d').style.display = 'none';
-        document.getElementById('graph-wrapper-2d').style.display = 'block';
-        document.getElementById('graph-title-indicator').innerHTML = '📈 Live 2D Mathematics Visualizer';
-        destroyMathBox();
-        render2DGraph(sub.graph);
+        document.getElementById('graph-wrapper-3d').style.display='none';
+        document.getElementById('graph-wrapper-2d').style.display='block';
+        document.getElementById('graph-title-indicator').innerHTML='📈 High Performance 2D Coordinate Vector Function Visualizer';
+        destroyMathBox(); render2DGraph(sub.graph);
     }
-
-    if(window.MathJax && window.MathJax.typesetPromise){
-        MathJax.typesetPromise();
-    }
+    if(window.MathJax && window.MathJax.typesetPromise) MathJax.typesetPromise();
 }
 
-function render2DGraph(fnName){
+function render2DGraph(fn){
     document.getElementById('graph-wrapper-2d').innerHTML='';
-    try {
-        functionPlot({
-            target:'#graph-wrapper-2d',
-            width: 580,
-            height: 400,
-            grid:true,
-            data:[{ fn: fnName }]
-        });
-    } catch(e) {
-        document.getElementById('graph-wrapper-2d').innerHTML='2D visualization offline';
-    }
+    try{ functionPlot({ target:'#graph-wrapper-2d', width:600, height:380, grid:true, data:[{fn:fn}] }); }catch(e){}
 }
 
-// ================= INTRODUCING EXCLUSIVE WEBGL 3D MATHBOX RUNTIME =================
-function initMathBox3DEngine(type) {
-    destroyMathBox(); // Clear residual canvas allocations
-    const targetEl = document.getElementById('graph-wrapper-3d');
-    targetEl.innerHTML = '';
+function initMathBox3D(type){
+    destroyMathBox(); const target=document.getElementById('graph-wrapper-3d'); target.innerHTML='';
+    try{
+        let mathbox=mathBox({ plugins:['core','controls','cursor'], controls:{klass:THREE.OrbitControls}, element:target });
+        mathboxInstance=mathbox; let three=mathbox.three;
+        three.renderer.setClearColor(new THREE.Color(0x020617),1.0); three.camera.position.set(2,1.5,2.2);
+        let view=mathbox.cartesian({ range:[[-2,2],[-2,2],[-2,2]], scale:[1,1,1] });
+        view.axis({detail:30,color:'#334155'}); view.grid({width:1,divideX:10,divideY:10,color:'#1e293b'});
 
-    try {
-        // Spin up MathBox core context via bundled parameters
-        let mathbox = mathBox({
-            plugins: ['core', 'controls', 'cursor'],
-            controls: { klass: THREE.OrbitControls },
-            element: targetEl
-        });
-
-        mathboxInstance = mathbox;
-        let three = mathbox.three;
-        three.renderer.setClearColor(new THREE.Color(0x020617), 1.0);
-        three.camera.position.set(2, 1.5, 2.5);
-
-        // Build Viewport Area mapping bounds
-        let view = mathbox.cartesian({ range: [[-2, 2], [-2, 2], [-2, 2]], scale: [1, 1, 1] });
-        view.axis({ detail: 30, color: '#334155' });
-        view.grid({ width: 1, divideX: 10, divideY: 10, color: '#1e293b' });
-
-        if (type === 'saddle') {
-            // Render 3D Saddle Surface Matrix: z = x^2 - y^2
-            view.area({
-                id: 'saddle-matrix',
-                width: 30, height: 30, axes: [1, 3],
-                expr: function (emit, x, y, i, j) {
-                    let z = (x*x - y*y) * 0.4; // Scale variable to prevent clipping
-                    emit(x, z, y);
-                },
-            });
-            view.surface({ shaded: true, color: '#a855f7', opacity: 0.85 });
-        } 
-        else if (type === 'mobius') {
-            // Render 3D Parametric Möbius Topology Strip Manifold Loop
-            view.area({
-                id: 'mobius-matrix',
-                width: 40, height: 12, axes: [1, 2],
-                expr: function (emit, u, v, i, j) {
-                    // Map parametric loops across space array boundaries
-                    let scaleU = u * Math.PI; 
-                    let r = 1.2 + v * 0.4 * Math.cos(scaleU / 2);
-                    let x = r * Math.cos(scaleU);
-                    let y = r * Math.sin(scaleU);
-                    let z = v * 0.4 * Math.sin(scaleU / 2);
-                    emit(x, z, y);
-                },
-                items: 1, rangeX: [0, 2], rangeY: [-1, 1]
-            });
-            view.surface({ shaded: true, color: '#38bdf8', opacity: 0.9 });
+        if(type==='saddle'){
+            view.area({ width:30, height:30, axes:[1,3], expr:function(emit,x,y){ emit(x,(x*x-y*y)*0.4,y); } });
+            view.surface({shaded:true, color:'#a855f7', opacity:0.85});
+        } else if(type==='mobius'){
+            view.area({ width:40, height:12, axes:[1,2], expr:function(emit,u,v){
+                let phi=u*Math.PI; let r=1.2+v*0.4*Math.cos(phi/2);
+                emit(r*Math.cos(phi),v*0.4*Math.sin(phi/2),r*Math.sin(phi));
+            }, items:1, rangeX:[0,2], rangeY:[-1,1]});
+            view.surface({shaded:true, color:'#38bdf8', opacity:0.85});
         }
-    } catch (err) {
-        console.error("WebGL initialization error caught:", err);
-        targetEl.innerHTML = `<div style="padding:20px;color:var(--error)">3D Graphics Platform Initialization Failed. Support missing or disabled.</div>`;
-    }
+    }catch(e){ target.innerHTML='<div style="padding:20px;color:var(--error)">WebGL 3D Context Processing Blocked.</div>'; }
 }
 
-function destroyMathBox() {
-    if (mathboxInstance) {
-        try {
-            mathboxInstance.three.destroy();
-        } catch(e){}
-        mathboxInstance = null;
+function destroyMathBox(){ if(mathboxInstance){ try{mathboxInstance.three.destroy();}catch(e){} mathboxInstance=null; } document.getElementById('graph-wrapper-3d').innerHTML=''; }
+
+// Digital Draw Canvas Subsystem Implementation
+function setupScratchpadEngine(){
+    canvas=document.getElementById('scratchpad'); ctx=canvas.getContext('2d');
+    canvas.width=canvas.parentElement.clientWidth; canvas.height=canvas.parentElement.clientHeight;
+    
+    function getPos(e){
+        let rect=canvas.getBoundingClientRect();
+        return { x: (e.clientX || e.touches[0].clientX)-rect.left, y: (e.clientY || e.touches[0].clientY)-rect.top };
     }
-    document.getElementById('graph-wrapper-3d').innerHTML = '';
+    function start(e){ drawing=true; ctx.beginPath(); let p=getPos(e); ctx.moveTo(p.x,p.y); }
+    function move(e){ if(!drawing)return; e.preventDefault(); let p=getPos(e); ctx.lineTo(p.x,p.y); ctx.strokeStyle='#38bdf8'; ctx.lineWidth=2; ctx.stroke(); }
+    function stop(){ drawing=false; }
+
+    canvas.addEventListener('mousedown',start); canvas.addEventListener('mousemove',move); window.addEventListener('mouseup',stop);
+    canvas.addEventListener('touchstart',start); canvas.addEventListener('touchmove',move); window.addEventListener('touchend',stop);
+}
+function clearScratchpad(){ if(ctx) ctx.clearRect(0,0,canvas.width,canvas.height); }
+
+// Mathematical Typing Keyboard Panel Injection
+function injectMathSymbol(sym){
+    const input=document.getElementById('user-response-input');
+    input.value+=sym; input.focus();
 }
 
 function verifyCurrentAnswer(){
-    if(!currentSubjectKey) return;
-    const sub=MasterQuestionDatabase[activeTier][currentSubjectKey];
-    const q=sub.questions[currentQuestionIndex];
-    const ansInput=document.getElementById('user-response-input').value.trim();
-    const feedback=document.getElementById('arena-feedback');
+    if(!currentSubjectKey)return;
+    const sub=MasterQuestionDatabase[activeTier][currentSubjectKey]; const q=sub.questions[currentQuestionIndex];
+    const val=document.getElementById('user-response-input').value.trim(); const fb=document.getElementById('arena-feedback');
 
-    if(ansInput === q.ans){
-        feedback.className='feedback-message text-correct';
-        feedback.innerHTML='✨ Correct Mathematical Resolution!';
-        xp+=30; correct++; streak++;
-        localStorage.setItem('mathXP',xp); localStorage.setItem('mathCorrect',correct); localStorage.setItem('mathStreak',streak);
-        updateStats();
-
-        appendAiMessage("🤖 AI Validation", `Target matched successfully: "${ansInput}". Processed successfully.`);
-        if(currentQuestionIndex+1 < sub.questions.length){
-            currentQuestionIndex++;
-            setTimeout(loadQuestionInstance, 1500);
-        } else {
-            feedback.innerHTML='🏆 Category Arena Explored and Completed!';
-            setTimeout(exitArena, 2000);
-        }
+    if(val===q.ans){
+        fb.className='feedback-message text-correct'; fb.innerHTML='✨ Verification Succeeded. Structural Alignment True.';
+        xp+=40; correct++; streak++; localStorage.setItem('mathXP',xp); localStorage.setItem('mathCorrect',correct); localStorage.setItem('mathStreak',streak);
+        updateStats(); appendAiMessage("🤖 AI Validation Core", `Calculated token state parsed correctly: [${val}]. +40 XP Array appended.`);
+        
+        if(currentQuestionIndex+1 < sub.questions.length){ currentQuestionIndex++; setTimeout(loadQuestionInstance,1600); }
+        else { fb.innerHTML='🏆 Category Space Node Explored Fully!'; setTimeout(exitArena,2200); }
     } else {
-        feedback.className='feedback-message text-error';
-        feedback.innerHTML='❌ Structure mismatch. Re-verify coordinate tracking configurations.';
-        streak=0; localStorage.setItem('mathStreak', streak); updateStats();
-        appendAiMessage("🤖 AI Assist Debugger", `Expected token variant did not evaluate correctly. Use the hint structure.`);
+        fb.className='feedback-message text-error'; fb.innerHTML='❌ Solution Vector Fault. Re-evaluate System Dimensions.';
+        streak=0; localStorage.setItem('mathStreak',0); updateStats();
+        appendAiMessage("🤖 AI Diagnostics", `Mismatch triggered against system answer requirements. Utilize Quick Hints.`);
     }
 }
 
-function showHint(){
-    if(!currentSubjectKey) return;
-    const sub=MasterQuestionDatabase[activeTier][currentSubjectKey];
-    appendAiMessage("💡 Quick Hint", sub.questions[currentQuestionIndex].hint);
-}
+function showHint(){ if(currentSubjectKey) appendAiMessage("💡 Quick Hint Vector", MasterQuestionDatabase[activeTier][currentSubjectKey].questions[currentQuestionIndex].hint); }
 
 function startTimer(){
-    clearInterval(timer); timeLeft=60;
+    clearInterval(timer); timeLeft=60; document.getElementById('timer').innerText=timeLeft;
     timer=setInterval(()=>{
         timeLeft--; document.getElementById('timer').innerText=timeLeft;
-        if(timeLeft<=0){
-            clearInterval(timer);
-            document.getElementById('arena-feedback').className='feedback-message text-error';
-            document.getElementById('arena-feedback').innerHTML='⏰ Temporal window closed!';
-        }
+        if(timeLeft<=0){ clearInterval(timer); document.getElementById('arena-feedback').className='feedback-message text-error'; document.getElementById('arena-feedback').innerHTML='⏰ Temporal Context Closed!'; }
     },1000);
 }
 
-// === CENTRALIZED CHAT AI ENGINE ===
-function appendAiMessage(sender, htmlText) {
-    const scroller = document.getElementById('ai-chat-scroller');
-    const isUser = sender === "You";
-    const msg = document.createElement('div');
-    msg.className = `ai-box ${isUser ? 'ai-msg-user' : ''}`;
-    msg.innerHTML = `<strong>${sender}:</strong><br>${htmlText}`;
-    scroller.appendChild(msg);
-    scroller.scrollTop = scroller.scrollHeight;
-    if(window.MathJax && window.MathJax.typesetPromise) window.MathJax.typesetPromise();
+function appendAiMessage(sender, html){
+    const scr=document.getElementById('ai-chat-scroller'); const isU=sender==="You";
+    const box=document.createElement('div'); box.className=`ai-box ${isU?'ai-msg-user':''}`;
+    box.innerHTML=`<strong>${sender}:</strong><br>${html}`; scr.appendChild(box); scr.scrollTop=scr.scrollHeight;
+    if(window.MathJax && window.MathJax.typesetPromise) MathJax.typesetPromise();
 }
 
-function triggerAiAction(actionType) {
-    if(!currentSubjectKey) {
-        appendAiMessage("🤖 Multiverse AI", "Select an active mathematics workspace module node first.");
-        return;
-    }
-    const sub = MasterQuestionDatabase[activeTier][currentSubjectKey];
-    if (actionType === 'clear') {
-        document.getElementById('ai-chat-scroller').innerHTML = `<div class="ai-box">Workspace logs flushed cleanly.</div>`;
-        return;
-    }
-
-    appendAiMessage("You", `Click Action: [${actionType.toUpperCase()}] Request.`);
-    if (actionType === 'explain') {
-        appendAiMessage("🤖 AI Concept Node", `Analyzing active layer: <strong>${sub.title}</strong>. Structural matrix features are mapped on screen using your ${sub.graphDimension.toUpperCase()} engine pipeline.`);
-    } else if (actionType === 'formula') {
-        let f = "Structure base maps generic functions.";
-        if(currentSubjectKey==='analysis') f="Saddle equation trace format: $$z = x^2 - y^2$$";
-        if(currentSubjectKey==='topology') f="Parametric Mobius Loop mappings across angles $\\theta$ and lengths $v$.";
+function triggerAiAction(type){
+    if(!currentSubjectKey){ appendAiMessage("🤖 Multiverse AI", "Load an active subject archive matrix structure first."); return; }
+    const sub=MasterQuestionDatabase[activeTier][currentSubjectKey];
+    if(type==='clear'){ document.getElementById('ai-chat-scroller').innerHTML='<div class="ai-box">Workspace pipeline cleaned.</div>'; return; }
+    
+    appendAiMessage("You", `Request Context: [${type.toUpperCase()}]`);
+    if(type==='explain'){
+        appendAiMessage("🤖 AI Conceptual Explorer", `Exploring <strong>${sub.title}</strong> structure: <em>${sub.desc}</em>. Your visualization runs using specialized ${sub.graphDimension.toUpperCase()} display adapters inside browser space.`);
+    } else if(type==='formula'){
+        let f="Generic Function Mapping Configurations.";
+        if(currentSubjectKey==='analysis') f="Saddle point transformation matrix parameters: $$z = x^2 - y^2$$";
+        if(currentSubjectKey==='topology') f="Continuous non-orientable topology: Loop parameters mapping 1 boundary edge.";
         appendAiMessage("📐 AI Formula Matrix", f);
-    } else if (actionType === 'gujarati') {
-        appendAiMessage("🌐 AI ભાષાંતર", `તમે હાલમાં સક્રિય પ્રવાહ <strong>${sub.title}</strong> પર અભ્યાસ કરી રહ્યા છો.`);
+    } else if(type==='gujarati'){
+        appendAiMessage("🌐 AI દ્વિભાષી મોડ્યુલ", `તમે હાલમાં <strong>${sub.title}</strong> મેટ્રિક્સ પર છો. સાચો જવાબ સબમિટ કરવા કીબોર્ડ પેનલનો ઉપયોગ કરી શકો છો.`);
     }
 }
 
-function processAiChatQuery() {
-    const field = document.getElementById('ai-user-query');
-    const txt = field.value.trim(); if(!txt) return;
-    appendAiMessage("You", txt); field.value = '';
-
-    setTimeout(() => {
-        let r = "Filtered structural array data processed securely. ";
-        if(!currentSubjectKey) {
-            r = "Wake up the processing pipeline by jumping into an active math quadrant tab card first.";
-        } else {
-            const curAns = MasterQuestionDatabase[activeTier][currentSubjectKey].questions[currentQuestionIndex].ans;
-            if(txt.toLowerCase().includes('answer') || txt.toLowerCase().includes('જવાબ')) {
-                r += `The underlying target value state equals: **${curAns}**.`;
-            } else {
-                r += `Analyzing active quadrant properties. Match target values to evaluate your active workspace matrix.`;
-            }
+function processAiChatQuery(){
+    const f=document.getElementById('ai-user-query'); const val=f.value.trim(); if(!val)return;
+    appendAiMessage("You", val); f.value='';
+    setTimeout(()=>{
+        let r="Query analyzed through mathematical logic layers. ";
+        if(!currentSubjectKey){ r="Please wake up a paradigm module cluster node above first."; }
+        else {
+            const ans=MasterQuestionDatabase[activeTier][currentSubjectKey].questions[currentQuestionIndex].ans;
+            if(val.toLowerCase().includes('answer') || val.toLowerCase().includes('જવાબ')){ r+=`The matching array target verification key token state is exactly: **${ans}**.`; }
+            else { r+=`Regarding properties of <strong>${MasterQuestionDatabase[activeTier][currentSubjectKey].title}</strong>, review layout visual functions or evaluate targeted parameters to clear the active game instance loop seamlessly.`; }
         }
         appendAiMessage("🤖 Multiverse AI", r);
-    }, 250);
+    },200);
 }
 
-// CLEAN ISOLATED EVENT LISTENERS FOR KEYBOARD TRAPPING
-document.addEventListener('keydown', function(e){
-    if(e.key === 'Enter'){
-        const activeId = document.activeElement.id;
-        if(activeId === 'ai-user-query') { e.preventDefault(); processAiChatQuery(); }
-        else if(activeId === 'user-response-input') { e.preventDefault(); verifyCurrentAnswer(); }
+function unlockBadges(){
+    const b=document.getElementById('badge-box'); b.innerHTML='';
+    if(correct>=1) b.innerHTML+='<div class="badge">🎯 Vector Genesis</div>';
+    if(correct>=5) b.innerHTML+='<div class="badge">🧠 Dimensional Analyst</div>';
+    if(xp>=200) b.innerHTML+='<div class="badge">🌌 Multiverse Master</div>';
+}
+
+document.addEventListener('keydown',function(e){
+    if(e.key==='Enter'){
+        let id=document.activeElement.id;
+        if(id==='ai-user-query'){ e.preventDefault(); processAiChatQuery(); }
+        else if(id==='user-response-input'){ e.preventDefault(); verifyCurrentAnswer(); }
     }
 });
 </script>
