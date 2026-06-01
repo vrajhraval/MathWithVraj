@@ -1,1 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Magic of Fibonacci</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #16a085;
+            --background: #f8f9fa;
+            --text: #333;
+        }
 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: var(--background);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .interactive-box {
+            background: #edf2f7;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border-left: 5px solid var(--accent);
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="number"] {
+            width: 100px;
+            padding: 10px;
+            font-size: 1rem;
+            border: 2px solid #cbd5e0;
+            border-radius: 6px;
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background-color: #117a65;
+        }
+
+        .output-section {
+            margin-top: 20px;
+            word-wrap: break-word;
+        }
+
+        .sequence-display {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            max-height: 150px;
+            overflow-y: auto;
+            letter-spacing: 0.5px;
+        }
+
+        .ratio-box {
+            margin-top: 15px;
+            font-size: 0.95rem;
+            color: #4a5568;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .educational-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 600px) {
+            .educational-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .level-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .level-card h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>The Fibonacci Sequence</h1>
+    <p class="subtitle">Where Math Meets Nature, Art, and Science</p>
+
+    <p>The Fibonacci sequence is a beautiful mathematical pattern where each number is the sum of the two preceding ones. It starts simply but unlocks deep secrets about the universe.</p>
+
+    <div class="interactive-box">
+        <h3>Live Sequence Generator</h3>
+        <p>Enter how many numbers you want to generate (Try 2 to 50):</p>
+        <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <input type="number" id="stepsInput" min="2" max="100" value="10">
+            <button onclick="generateFibonacci()">Explore Pattern</button>
+        </div>
+
+        <div class="output-section">
+            <label>Your Sequence:</label>
+            <div id="sequenceOutput" class="sequence-display">0, 1, 1, 2, 3, 5, 8, 13, 21, 34</div>
+            
+            <div id="ratioOutput" class="ratio-box">
+                Take the last two numbers: 34 ÷ 21 = <span class="highlight">1.6190</span> (Approaching the Golden Ratio!)
+            </div>
+        </div>
+    </div>
+
+    <h2>Why it matters to every student:</h2>
+    <div class="educational-grid">
+        <div class="level-card">
+            <h3>🎒 School Level</h3>
+            <p><strong>The Basic Rule:</strong> Just add the last two numbers! It's a fun way to practice addition. This exact pattern dictates how many petals grow on flowers, how pinecones spiral, and how shells are shaped!</p>
+        </div>
+        <div class="level-card">
+            <h3>🎓 College Level</h3>
+            <p><strong>The Golden Ratio:</strong> As the numbers grow larger, dividing a Fibonacci number by the previous one converges precisely onto the <strong>Golden Ratio (&Phi; ≈ 1.618)</strong>. It is vital in computer science algorithms, geometry, and finance.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+function generateFibonacci() {
+    const input = document.getElementById('stepsInput').value;
+    const steps = parseInt(input);
+    
+    if (isNaN(steps) || steps < 2) {
+        alert("Please enter a number greater than or equal to 2.");
+        return;
+    }
+    if (steps > 150) {
+        alert("To prevent your browser from slowing down, please choose a number under 150.");
+        return;
+    }
+
+    // Calculate Fibonacci array
+    let fib = [0, 1];
+    for (let i = 2; i < steps; i++) {
+        // Using BigInt for larger numbers to prevent precision loss
+        fib[i] = fib[i-1] + fib[i-2];
+    }
+
+    // Cut to requested size if they asked for exactly 2
+    const finalSequence = fib.slice(0, steps);
+    
+    // Display sequence
+    document.getElementById('sequenceOutput').innerText = finalSequence.join(', ');
+
+    // Calculate and display Golden Ratio approximation
+    const last = finalSequence[finalSequence.length - 1];
+    const secondLast = finalSequence[finalSequence.length - 2];
+    
+    if (secondLast !== 0) {
+        const ratio = (Number(last) / Number(secondLast)).toFixed(6);
+        document.getElementById('ratioOutput').innerHTML = 
+            `Take the last two numbers: ${last} ÷ ${secondLast} = <span class="highlight">${ratio}</span> (Approaching the Golden Ratio &Phi; = 1.618033...)`;
+    } else {
+        document.getElementById('ratioOutput').innerText = "";
+    }
+}
+</script>
+
+</body>
+</html>
