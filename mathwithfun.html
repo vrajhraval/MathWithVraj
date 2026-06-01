@@ -179,7 +179,7 @@
 
 <div class="container">
     <h1>The Fibonacci Spiral & Golden Ratio</h1>
-    <p class="subtitle">Adjust the slider to see how simple addition builds nature's signature spiral!</p>
+    <p class="subtitle">Change values using the slider to watch the graph update instantly!</p>
 
     <div class="workspace">
         <div class="visual-panel">
@@ -188,12 +188,12 @@
             
             <div class="controls">
                 <div class="slider-group">
-                    <span>Number of Squares:</span>
-                    <input type="range" id="squareSlider" min="2" max="12" value="8">
+                    <span>Number of Squares (N):</span>
+                    <input type="range" id="squareSlider" min="2" max="15" value="8">
                     <span id="sliderValue">8</span>
                 </div>
                 <div class="btn-group">
-                    <button class="btn-play" onclick="startAnimation()">Animate</button>
+                    <button class="btn-play" onclick="startAnimation()">Animate Step-by-Step</button>
                     <button class="btn-reset" onclick="resetVisualization()">Reset</button>
                 </div>
             </div>
@@ -228,46 +228,51 @@ const sliderValue = document.getElementById('sliderValue');
 const tableBody = document.getElementById('tableBody');
 const ratioBanner = document.getElementById('ratioBanner');
 
-let animationId = null;
-let currentStep = 2;
+let animationInterval = null;
 
-// Generate Fibonacci numbers dynamically up to required limit
-function getFibonacciSequence(n) {
+// Pre-calculate fixed Fibonacci numbers to prevent any logic breaking
+function getFibonacciSequence(maxTerms) {
     let seq = [1, 1];
-    for(let i = 2; i < n; i++) {
+    for (let i = 2; i < maxTerms; i++) {
         seq.push(seq[i-1] + seq[i-2]);
     }
-    return seq.slice(0, n);
+    return seq.slice(0, maxTerms);
 }
 
-// Draw the dynamic board
-function draw(limit) {
+// Fixed coordinate drawing logic to eliminate graph bugs
+function drawSpiral(limit) {
+    // Clear canvas completely
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     const seq = getFibonacciSequence(limit);
     
-    // Scale factor keeps the canvas fitting dynamically as sizes explode
-    let scale = 180 / seq[seq.length - 1]; 
-    if (limit < 5) scale = 40; 
+    // Auto-scale setup based on the current highest number
+    let maxFib = seq[seq.length - 1];
+    let scale = 340 / (maxFib * 1.5); 
+    if (limit < 6) scale = 35; // Don't let it look tiny for small values
 
-    // Visual anchor center point 
-    let x = canvas.width / 2 + (limit > 5 ? seq[seq.length-2]*scale/2 : 0);
-    let y = canvas.height / 2 - (limit > 5 ? seq[seq.length-3]*scale/2 : 0);
+    // Re-center system dynamically based on the current limit
+    let x = canvas.width / 2;
+    let y = canvas.height / 2;
+    
+    if (limit > 2) x += (seq[1] * scale) / 2;
+    if (limit > 3) y += (seq[2] * scale) / 2;
+    if (limit > 4) x -= (seq[3] * scale) / 2;
+    if (limit > 5) y -= (seq[4] * scale) / 2;
 
-    let directions = [
-        { dx: -1, dy: 0,  cx: 0,  cy: 0,  startAngle: 0,           endAngle: Math.PI/2 },     // Left
-        { dx: 0,  dy: -1, cx: 0,  cy: 0,  startAngle: Math.PI/2,   endAngle: Math.PI },       // Up
-        { dx: 0,  dy: 0,  cx: 1,  cy: 0,  startAngle: Math.PI,     endAngle: Math.PI*1.5 },   // Right
-        { dx: -1, dy: -1, cx: 0,  cy: 1,  startAngle: Math.PI*1.5, endAngle: 0 }              // Down
+    // Directions vector mappings
+    const directions = [
+        { nx: -1, ny: 0,  cx: 0, cy: 0, sa: 0,           ea: Math.PI / 2 },    // Left
+        { nx: 0,  ny: -1, cx: 0, cy: 1, sa: Math.PI / 2,   ea: Math.PI },        // Up
+        { nx: 0,  ny: 0,  cx: 1, cy: 1, sa: Math.PI,     ea: Math.PI * 1.5 },  // Right
+        { nx: -1, ny: -1, cx: 1, cy: 0, sa: Math.PI * 1.5, ea: 0 }               // Down
     ];
 
-    // Reset paths
-    ctx.lineWidth = 1.5;
-    
     for (let i = 0; i < limit; i++) {
         let size = seq[i] * scale;
-        let dir = directions[i % 4];
+        let d = directions[i % 4];
 
+        // Process alignment offsets dynamically relative to previous box size
         if (i > 0) {
             let prevSize = seq[i-1] * scale;
             if (i % 4 === 0) { x -= size; y += prevSize; }
@@ -275,40 +280,40 @@ function draw(limit) {
             else if (i % 4 === 2) { x += prevSize; }
             else if (i % 4 === 3) { y += prevSize; }
         } else {
-            x -= size;
+            x -= size; // starting block adjustment
         }
 
-        // 1. Draw Square Box
+        // Draw individual square box borders
         ctx.strokeStyle = '#cbd5e0';
+        ctx.lineWidth = 1;
         ctx.strokeRect(x, y, size, size);
 
-        // Fill inner subtle shade
-        ctx.fillStyle = `rgba(37, 99, 235, ${0.03 + (i * 0.02)})`;
+        // Fill subtle gradient color background per square block
+        ctx.fillStyle = `rgba(37, 99, 235, ${0.02 + (i * 0.025)})`;
         ctx.fillRect(x, y, size, size);
 
-        // 2. Put number tags inside square (Skip if too tiny)
-        if(size > 15) {
-            ctx.fillStyle = '#64748b';
-            ctx.font = '12px sans-serif';
-            ctx.fillText(seq[i], x + size/2 - 4, y + size/2 + 4);
+        // Write numbers inside boxes if big enough
+        if (size > 18) {
+            ctx.fillStyle = '#475569';
+            ctx.font = 'bold 12px sans-serif';
+            ctx.fillText(seq[i], x + size/2 - 5, y + size/2 + 5);
         }
 
-        // 3. Draw The Golden Arc
+        // Draw the golden geometric spiral arc
         ctx.beginPath();
-        let arcX = x + dir.cx * size;
-        let arcY = y + dir.cy * size;
-        ctx.arc(arcX, arcY, size, dir.startAngle, dir.endAngle);
+        let arcX = x + d.cx * size;
+        let arcY = y + d.cy * size;
+        ctx.arc(arcX, arcY, size, d.sa, d.ea);
         ctx.strokeStyle = '#2563eb';
         ctx.lineWidth = 3;
         ctx.stroke();
     }
 }
 
-// Render values inside the data dashboard
-function updateDataStructure(limit) {
+// Render values inside the data table panel
+function updateDataTable(limit) {
     const seq = getFibonacciSequence(limit);
     tableBody.innerHTML = '';
-    
     let lastRatio = "N/A";
 
     for (let i = 0; i < limit; i++) {
@@ -319,7 +324,7 @@ function updateDataStructure(limit) {
         }
 
         let row = document.createElement('tr');
-        if (i === limit - 1) row.className = "highlight-row"; // Track active outer step
+        if (i === limit - 1) row.className = "highlight-row";
 
         row.innerHTML = `
             <td>${i + 1}</td>
@@ -329,41 +334,52 @@ function updateDataStructure(limit) {
         tableBody.appendChild(row);
     }
 
-    // Update banner message for higher-level insight
-    if(limit === 1) {
-        ratioBanner.innerText = `Golden Ratio requires at least 2 numbers.`;
+    if (limit === 1) {
+        ratioBanner.innerText = `Golden Ratio requires at least 2 steps.`;
     } else {
-        ratioBanner.innerHTML = `Current Ratio (F<sub>${limit}</sub> ÷ F<sub>${limit-1}</sub>) = <span style="font-size:1.2rem">${lastRatio}</span> ${limit > 8 ? '≈ φ (1.61803)' : ''}`;
+        ratioBanner.innerHTML = `Current Ratio (F<sub>${limit}</sub> ÷ F<sub>${limit-1}</sub>) = <span style="font-size:1.2rem; color:#2563eb;">${lastRatio}</span> ${limit > 7 ? '≈ φ (1.61803)' : ''}`;
     }
 }
 
-// Controller logic linking interactive changes
-function updateVisualization(value) {
-    sliderValue.innerText = value;
-    draw(parseInt(value));
-    updateDataStructure(parseInt(value));
+// Master state updater
+function renderEverything(value) {
+    let numericValue = parseInt(value);
+    slider.value = numericValue;
+    sliderValue.innerText = numericValue;
+    drawSpiral(numericValue);
+    updateDataTable(numericValue);
 }
 
+// Fixed Step Animation Logic
 function startAnimation() {
-    if(animationId) clearInterval(animationId);
-    
-    let maxTarget = parseInt(slider.value);
-    currentStep = 1;
-    
-    animationId = setInterval(() => {
-        if(currentStep <= maxTarget) {
-            updateVisualization(currentStep);
-            currentStep++;
+    clearInterval(animationInterval);
+    let targetMax = parseInt(slider.value);
+    let step = 1;
+
+    animationInterval = setInterval(() => {
+        if (step <= targetMax) {
+            renderEverything(step);
+            step++;
         } else {
-            clearInterval(animationId);
+            clearInterval(animationInterval);
         }
-    }, 450); // Frame transitions smoothly every 450ms
+    }, 400);
 }
 
 function resetVisualization() {
-    if(animationId) clearInterval(animationId);
-    slider.value = 8;
-    updateVisualization(8);
+    clearInterval(animationInterval);
+    renderEverything(8);
 }
 
-//
+// Attach listener for instant real-time slider value updates
+slider.addEventListener('input', (e) => {
+    clearInterval(animationInterval);
+    renderEverything(e.target.value);
+});
+
+// Initial load build configuration
+renderEverything(8);
+</script>
+
+</body>
+</html>
