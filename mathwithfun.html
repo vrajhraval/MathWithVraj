@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visual Mathematics: Fibonacci & Beyond</title>
+    <title>Visual Mathematics Workspace</title>
     <style>
         :root {
             --bg-color: #0b0f19;
@@ -37,7 +37,7 @@
         header h1 {
             font-size: 3rem;
             margin-bottom: 10px;
-            background: linear-gradient(45deg, #60a5fa, #a78bfa, #f43f5e);
+            background: linear-gradient(45deg, #60a5fa, #a78bfa, #f43f5e, #10b981, #f59e0b);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -146,21 +146,22 @@
             border-radius: 8px;
             font-family: 'Courier New', Courier, monospace;
             font-size: 0.9rem;
-            color: #34d399;
             max-height: 100px;
             overflow-y: auto;
         }
         
-        .stat-box.pink {
-            color: #f43f5e;
-        }
+        .c-blue { color: #60a5fa; }
+        .c-green { color: #34d399; }
+        .c-pink { color: #f43f5e; }
+        .c-orange { color: #f59e0b; }
+        .c-purple { color: #c084fc; }
     </style>
 </head>
 <body>
 
     <header>
         <h1>Visualizing Mathematics</h1>
-        <p>Exploring geometry, sequences, waves, and topology through dynamic code representations.</p>
+        <p>Exploring geometry, sequences, waves, topology, and chaos theory through dynamic visual code.</p>
     </header>
 
     <div class="container">
@@ -176,9 +177,7 @@
                     <button class="btn" id="btn-grow-fib">Add Step</button>
                     <button class="btn btn-secondary" id="btn-reset-fib">Reset</button>
                 </div>
-                <div class="stat-box" id="fib-sequence">
-                    Sequence: 1, 1
-                </div>
+                <div class="stat-box c-blue" id="fib-sequence">Sequence: 1, 1</div>
             </div>
         </section>
 
@@ -193,9 +192,7 @@
                     <button class="btn" id="btn-add-fourier">Add Term (Harmonic)</button>
                     <button class="btn btn-secondary" id="btn-sub-fourier">Remove Term</button>
                 </div>
-                <div class="stat-box" id="fourier-stats">
-                    Active Orbits: 1 (Fundamental Frequency)
-                </div>
+                <div class="stat-box c-green" id="fourier-stats">Active Orbits: 1 (Fundamental Frequency)</div>
             </div>
         </section>
 
@@ -209,16 +206,42 @@
                 <div class="controls">
                     <button class="btn" id="btn-pause-mobius" style="background-color: #e11d48;">Toggle Auto-Rotate</button>
                 </div>
-                <div class="stat-box pink" id="mobius-stats">
-                    Equation Parameter: θ variant [0 to 2π], w variant [-1 to 1]
+                <div class="stat-box c-pink" id="mobius-stats">Equation Parameter: θ variant [0 to 2π], w variant [-1 to 1]</div>
+            </div>
+        </section>
+
+        <section class="visual-card">
+            <div class="canvas-container">
+                <canvas id="lorenzCanvas"></canvas>
+            </div>
+            <div class="info-panel">
+                <h2>The Lorenz Attractor</h2>
+                <p>Derived from atmospheric equations by Edward Lorenz, this system represents <b>deterministic chaos</b>. Even though the rules are completely fixed, slight variations in starting points trigger drastically wild pathways, tracing out a pattern resembling butterfly wings.</p>
+                <div class="controls">
+                    <button class="btn" id="btn-reset-lorenz" style="background-color: #d97706;">Restart Trace</button>
                 </div>
+                <div class="stat-box c-orange" id="lorenz-stats">dx/dt = σ(y - x), dy/dt = x(ρ - z) - y</div>
+            </div>
+        </section>
+
+        <section class="visual-card">
+            <div class="canvas-container">
+                <canvas id="ulamCanvas"></canvas>
+            </div>
+            <div class="info-panel">
+                <h2>The Ulam Spiral</h2>
+                <p>Discovered by Stanislaw Ulam during a boring meeting, this is a spiral grid layout of integers. When you color only the <b>prime numbers</b>, they unexpected form crisp, non-random diagonal lines. It hints at hidden mathematical structures deep within the distribution of primes.</p>
+                <div class="controls">
+                    <button class="btn" id="btn-grow-ulam" style="background-color: #7c3aed;">Expand Grid Size</button>
+                </div>
+                <div class="stat-box c-purple" id="ulam-stats">Evaluating integers for primality along a coordinate matrix...</div>
             </div>
         </section>
 
     </div>
 
     <script>
-        // --- Shared Setup Function ---
+        // --- Core Setup Tool ---
         function setupCanvas(canvasId) {
             const canvas = document.getElementById(canvasId);
             const ctx = canvas.getContext('2d');
@@ -226,7 +249,7 @@
             const rect = canvas.parentElement.getBoundingClientRect();
             
             canvas.width = rect.width * dpr;
-            canvas.height = 400 * dpr; // Base height fixed
+            canvas.height = 400 * dpr; 
             ctx.scale(dpr, dpr);
             
             return { canvas, ctx, width: rect.width, height: 400 };
@@ -242,7 +265,6 @@
         function drawFibonacci() {
             const { ctx, width, height } = fibSetup;
             ctx.clearRect(0, 0, width, height);
-            
             ctx.save();
             ctx.translate(width / 2 + 50, height / 2 + 30);
             
@@ -251,12 +273,9 @@
             if (maxSteps > 8) scale = 1.2;
             if (maxSteps > 10) scale = 0.4;
             if (maxSteps > 12) scale = 0.1;
-
             ctx.scale(scale, scale);
 
-            let x = 0;
-            let y = 0;
-            
+            let x = 0, y = 0;
             for (let i = 0; i < maxSteps; i++) {
                 let f = fibSequence[i];
                 ctx.strokeStyle = 'rgba(79, 70, 229, 0.4)';
@@ -266,18 +285,15 @@
                 ctx.strokeStyle = '#60a5fa';
                 ctx.lineWidth = 3 / scale;
                 ctx.beginPath();
-                
                 if (i % 4 === 0) {
                     ctx.arc(x + f, y + f, f, Math.PI, 1.5 * Math.PI);
-                    x += f; 
-                    y += f - fibSequence[i+1];
+                    x += f; y += f - fibSequence[i+1];
                 } else if (i % 4 === 1) {
                     ctx.arc(x, y + f, f, 1.5 * Math.PI, 0);
                     x -= fibSequence[i+1];
                 } else if (i % 4 === 2) {
                     ctx.arc(x, y, f, 0, 0.5 * Math.PI);
-                    x -= fibSequence[i+1] - f;
-                    y -= fibSequence[i+1];
+                    x -= fibSequence[i+1] - f; y -= fibSequence[i+1];
                 } else if (i % 4 === 3) {
                     ctx.arc(x + f, y, f, 0.5 * Math.PI, Math.PI);
                     y += f;
@@ -296,10 +312,8 @@
             document.getElementById('fib-sequence').innerText = `Sequence: ${fibSequence.slice(0, maxSteps).join(', ')}`;
             drawFibonacci();
         });
-
         document.getElementById('btn-reset-fib').addEventListener('click', () => {
-            fibSequence = [1, 1];
-            maxSteps = 2;
+            fibSequence = [1, 1]; maxSteps = 2;
             document.getElementById('fib-sequence').innerText = `Sequence: 1, 1`;
             drawFibonacci();
         });
@@ -309,65 +323,40 @@
         // 2. FOURIER SERIES VISUALIZER
         // ==========================================
         const fourierSetup = setupCanvas('fourierCanvas');
-        let time = 0;
-        let wave = [];
-        let harmonics = 1; 
+        let time = 0; let wave = []; let harmonics = 1; 
 
         function drawFourier() {
             const { ctx, width, height } = fourierSetup;
             ctx.clearRect(0, 0, width, height);
-
-            let x = 150;
-            let y = height / 2;
-
+            let x = 150, y = height / 2;
             ctx.save();
             
             for (let i = 0; i < harmonics; i++) {
-                let prevX = x;
-                let prevY = y;
-
+                let prevX = x, prevY = y;
                 let n = i * 2 + 1; 
                 let radius = 60 * (4 / (n * Math.PI)); 
-                
                 x += radius * Math.cos(n * time);
                 y += radius * Math.sin(n * time);
 
                 ctx.strokeStyle = 'rgba(129, 140, 248, 0.2)';
-                ctx.lineWidth = 1;
-                ctx.beginPath();
-                ctx.arc(prevX, prevY, radius, 0, Math.PI * 2);
-                ctx.stroke();
-
+                ctx.beginPath(); ctx.arc(prevX, prevY, radius, 0, Math.PI * 2); ctx.stroke();
                 ctx.strokeStyle = '#a78bfa';
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.moveTo(prevX, prevY);
-                ctx.lineTo(x, y);
-                ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(prevX, prevY); ctx.lineTo(x, y); ctx.stroke();
             }
 
             wave.unshift(y);
-            if (wave.length > 450) {
-                wave.pop(); 
-            }
+            if (wave.length > 450) wave.pop(); 
 
             ctx.strokeStyle = 'rgba(52, 211, 153, 0.5)';
-            ctx.lineWidth = 1;
             ctx.setLineDash([4, 4]);
-            ctx.beginPath();
-            ctx.moveTo(x, y);
-            ctx.lineTo(300, y);
-            ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(300, y); ctx.stroke();
             ctx.setLineDash([]); 
 
             ctx.strokeStyle = '#34d399';
             ctx.lineWidth = 2.5;
             ctx.beginPath();
-            for (let i = 0; i < wave.length; i++) {
-                ctx.lineTo(300 + i, wave[i]);
-            }
+            for (let i = 0; i < wave.length; i++) ctx.lineTo(300 + i, wave[i]);
             ctx.stroke();
-
             ctx.restore();
             time -= 0.02; 
             requestAnimationFrame(drawFourier);
@@ -378,117 +367,171 @@
         // 3. MÖBIUS STRIP 3D VISUALIZER
         // ==========================================
         const mobiusSetup = setupCanvas('mobiusCanvas');
-        let angleX = 0.5;
-        let angleY = 0.8;
-        let autoRotate = true;
+        let angleX = 0.5, angleY = 0.8; let autoRotate = true;
 
-        // Parametric equations for a 3D Möbius Strip
         function getMobiusPoint(theta, w) {
-            let R = 110; // Major Radius
+            let R = 110; 
             let executionRadius = R + (w * Math.cos(theta / 2));
-            
-            let x = executionRadius * Math.cos(theta);
-            let y = executionRadius * Math.sin(theta);
-            let z = w * Math.sin(theta / 2);
-            
-            return { x, y, z };
+            return {
+                x: executionRadius * Math.cos(theta),
+                y: executionRadius * Math.sin(theta),
+                z: w * Math.sin(theta / 2)
+            };
         }
 
-        // 3D Matrix Projection Formula via vanilla JS
-        function project3D(x, y, z, width, height) {
-            // Rotate on X axis
-            let radX = angleX;
-            let y1 = y * Math.cos(radX) - z * Math.sin(radX);
-            let z1 = y * Math.sin(radX) + z * Math.cos(radX);
-
-            // Rotate on Y axis
-            let radY = angleY;
-            let x2 = x * Math.cos(radY) + z1 * Math.sin(radY);
-            let z2 = -x * Math.sin(radY) + z1 * Math.cos(radY);
-
-            // Perspective factor
+        function project3D(x, y, z, width, height, aX, aY) {
+            let y1 = y * Math.cos(aX) - z * Math.sin(aX);
+            let z1 = y * Math.sin(aX) + z * Math.cos(aX);
+            let x2 = x * Math.cos(aY) + z1 * Math.sin(aY);
+            let z2 = -x * Math.sin(aY) + z1 * Math.cos(aY);
             let distance = 300;
             let perspective = distance / (distance + z2);
-            
-            return {
-                x: width / 2 + x2 * perspective,
-                y: height / 2 + y1 * perspective,
-                depth: z2 // used later if depth-sorting is needed
-            };
+            return { x: width / 2 + x2 * perspective, y: height / 2 + y1 * perspective };
         }
 
         function drawMobius() {
             const { ctx, width, height } = mobiusSetup;
             ctx.clearRect(0, 0, width, height);
-
-            // Settings for grid resolution
-            const stepsTheta = 60; 
-            const stepsW = 8;       
-
-            ctx.lineWidth = 1;
+            const stepsTheta = 60, stepsW = 8;       
 
             for (let j = 0; j <= stepsW; j++) {
-                // Map w parameter dynamically between -40 and 40 (the strip's width)
                 let w = -40 + (80 * j / stepsW);
-                
                 ctx.beginPath();
-                // Color gradient effect using modern CSS hue properties
                 ctx.strokeStyle = `hsla(${210 + (j * 15)}, 85%, 65%, 0.65)`;
 
                 for (let i = 0; i <= stepsTheta; i++) {
                     let theta = (Math.PI * 2 * i) / stepsTheta;
                     let pt3d = getMobiusPoint(theta, w);
-                    let pt2d = project3D(pt3d.x, pt3d.y, pt3d.z, width, height);
-
-                    if (i === 0) {
-                        ctx.moveTo(pt2d.x, pt2d.y);
-                    } else {
-                        ctx.lineTo(pt2d.x, pt2d.y);
-                    }
+                    let pt2d = project3D(pt3d.x, pt3d.y, pt3d.z, width, height, angleX, angleY);
+                    if (i === 0) ctx.moveTo(pt2d.x, pt2d.y); else ctx.lineTo(pt2d.x, pt2d.y);
                 }
                 ctx.stroke();
             }
 
-            // Cross-rib lines linking the strip together visually
-            ctx.strokeStyle = 'rgba(244, 63, 94, 0.15)';
-            for (let i = 0; i <= stepsTheta; i += 2) {
-                let theta = (Math.PI * 2 * i) / stepsTheta;
-                ctx.beginPath();
-                
-                let pt3dStart = getMobiusPoint(theta, -40);
-                let pt2dStart = project3D(pt3dStart.x, pt3dStart.y, pt3dStart.z, width, height);
-                ctx.moveTo(pt2dStart.x, pt2dStart.y);
-
-                let pt3dEnd = getMobiusPoint(theta, 40);
-                let pt2dEnd = project3D(pt3dEnd.x, pt3dEnd.y, pt3dEnd.z, width, height);
-                ctx.lineTo(pt2dEnd.x, pt2dEnd.y);
-                
-                ctx.stroke();
-            }
-
-            if (autoRotate) {
-                angleX += 0.005;
-                angleY += 0.01;
-            }
-
+            if (autoRotate) { angleX += 0.005; angleY += 0.01; }
             requestAnimationFrame(drawMobius);
         }
+        document.getElementById('btn-pause-mobius').addEventListener('click', () => autoRotate = !autoRotate);
 
-        // Button Controls Configuration
-        document.getElementById('btn-add-fourier').addEventListener('click', () => {
-            harmonics++;
-            document.getElementById('fourier-stats').innerText = `Active Orbits: ${harmonics} (Using ${harmonics * 2 - 1}th Harmonic)`;
-        });
 
-        document.getElementById('btn-sub-fourier').addEventListener('click', () => {
-            if (harmonics > 1) {
-                harmonics--;
-                document.getElementById('fourier-stats').innerText = `Active Orbits: ${harmonics} (Using ${harmonics * 2 - 1}th Harmonic)`;
+        // ==========================================
+        // 4. LORENZ ATTRACTOR VISUALIZER
+        // ==========================================
+        const lorenzSetup = setupCanvas('lorenzCanvas');
+        let lx = 0.1, ly = 0, lz = 0;
+        const sigma = 10, rho = 28, beta = 8/3;
+        let lorenzPoints = [];
+        let lorenzAngle = 0;
+
+        function drawLorenz() {
+            const { ctx, width, height } = lorenzSetup;
+            ctx.clearRect(0, 0, width, height);
+
+            // Time step differential engine integration
+            let dt = 0.01;
+            let dx = (sigma * (ly - lx)) * dt;
+            let dy = (lx * (rho - lz) - ly) * dt;
+            let dz = (lx * ly - beta * lz) * dt;
+            lx += dx; ly += dy; lz += dz;
+
+            if (lorenzPoints.length < 1500) {
+                lorenzPoints.push({x: lx, y: ly, z: lz});
+            } else {
+                lorenzPoints.shift();
+                lorenzPoints.push({x: lx, y: ly, z: lz});
             }
+
+            ctx.save();
+            ctx.lineWidth = 1.5;
+
+            // Render accumulated path line strings
+            ctx.beginPath();
+            for(let i = 1; i < lorenzPoints.length; i++) {
+                // Scaled and rotated projection manually mapping to canvas dimensions
+                let p = lorenzPoints[i];
+                let rotX = p.x * Math.cos(lorenzAngle) - p.y * Math.sin(lorenzAngle);
+                
+                let screenX = width / 2 + rotX * 6;
+                let screenY = height / 2 + (p.z - 25) * 6; // offset center on z axis
+
+                ctx.strokeStyle = `hsla(${i * 0.2 % 360}, 90%, 60%, 0.8)`;
+                if (i === 1) ctx.moveTo(screenX, screenY); else ctx.lineTo(screenX, screenY);
+                
+                // Canvas trick to change colors dynamically down the line segment path
+                if(i % 30 === 0) { ctx.stroke(); ctx.beginPath(); ctx.moveTo(screenX, screenY); }
+            }
+            ctx.stroke();
+            ctx.restore();
+
+            lorenzAngle += 0.005;
+            requestAnimationFrame(drawLorenz);
+        }
+        document.getElementById('btn-reset-lorenz').addEventListener('click', () => {
+            lx = 0.1; ly = 0; lz = 0; lorenzPoints = [];
         });
 
-        document.getElementById('btn-pause-mobius').addEventListener('click', () => {
-            autoRotate = !autoRotate;
+
+        // ==========================================
+        // 5. ULAM PRIME SPIRAL VISUALIZER
+        // ==========================================
+        const ulamSetup = setupCanvas('ulamCanvas');
+        let spiralLimit = 2500; 
+
+        function isPrime(num) {
+            if (num <= 1) return false;
+            if (num <= 3) return true;
+            if (num % 2 === 0 || num % 3 === 0) return false;
+            for (let i = 5; i * i <= num; i += 6) {
+                if (num % i === 0 || num % (i + 2) === 0) return false;
+            }
+            return true;
+        }
+
+        function drawUlam() {
+            const { ctx, width, height } = ulamSetup;
+            ctx.clearRect(0, 0, width, height);
+
+            let x = width / 2;
+            let y = height / 2;
+            let stepLength = width / Math.sqrt(spiralLimit + 500); // step layout bounds
+            if (stepLength < 4) stepLength = 4;
+
+            let num = 1;
+            let stepsCount = 1;
+            let direction = 0; // 0: Right, 1: Up, 2: Left, 3: Down
+
+            ctx.fillStyle = '#c084fc';
+            
+            while (num <= spiralLimit) {
+                for (let i = 0; i < 2; i++) {
+                    for (let j = 0; j < stepsCount; j++) {
+                        if (num > spiralLimit) break;
+                        
+                        if (isPrime(num)) {
+                            ctx.beginPath();
+                            ctx.arc(x, y, stepLength * 0.4, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+
+                        // Move matrix head coordinates based on step index directions
+                        switch (direction) {
+                            case 0: x += stepLength; break;
+                            case 1: y -= stepLength; break;
+                            case 2: x -= stepLength; break;
+                            case 3: y += stepLength; break;
+                        }
+                        num++;
+                    }
+                    direction = (direction + 1) % 4;
+                }
+                stepsCount++;
+            }
+        }
+        document.getElementById('btn-grow-ulam').addEventListener('click', () => {
+            spiralLimit += 2000;
+            if(spiralLimit > 15000) spiralLimit = 2500; // loop wrapper safety
+            document.getElementById('ulam-stats').innerText = `Active Grid Limit: ${spiralLimit} numbers.`;
+            drawUlam();
         });
 
 
@@ -496,23 +539,21 @@
         drawFibonacci();
         drawFourier();
         drawMobius();
+        drawLorenz();
+        drawUlam();
 
-        // Keep layouts responsive on window resize
+        // Responsive handling
         window.addEventListener('resize', () => {
-            const canvases = [
-                { setup: fourierSetup, id: 'fourierCanvas' },
-                { setup: fibSetup, id: 'fibonacciCanvas' },
-                { setup: mobiusSetup, id: 'mobiusCanvas' }
+            const list = [
+                { s: fourierSetup }, { s: fibSetup }, { s: mobiusSetup }, { s: lorenzSetup }, { s: ulamSetup }
             ];
-
-            canvases.forEach(item => {
-                const rect = item.setup.canvas.parentElement.getBoundingClientRect();
-                item.setup.canvas.width = rect.width * (window.devicePixelRatio || 1);
-                item.setup.canvas.getContext('2d').scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
-                item.setup.width = rect.width;
+            list.forEach(item => {
+                const rect = item.s.canvas.parentElement.getBoundingClientRect();
+                item.s.canvas.width = rect.width * (window.devicePixelRatio || 1);
+                item.s.canvas.getContext('2d').scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+                item.s.width = rect.width;
             });
-            
-            drawFibonacci();
+            drawFibonacci(); drawUlam();
         });
     </script>
 </body>
