@@ -171,7 +171,7 @@
             <div class="canvas-container"><canvas id="fibonacciCanvas"></canvas></div>
             <div class="info-panel">
                 <h2>1. The Fibonacci Spiral</h2>
-                <p>By drawing quarter-circles inside squares sized by the Fibonacci sequence, we approximate the Golden Spiral. This logarithmic manifestation appears across nature, from seed heads to spiral galaxies.</p>
+                <p>By drawing quarter-circles inside squares sized by the Fibonacci sequence, we approximate the Golden Spiral.</p>
                 <div class="controls">
                     <button class="btn" id="btn-grow-fib">Add Step</button>
                     <button class="btn btn-secondary" id="btn-reset-fib">Reset</button>
@@ -184,12 +184,12 @@
             <div class="canvas-container"><canvas id="fourierCanvas"></canvas></div>
             <div class="info-panel">
                 <h2>2. Fourier Series: Square Wave</h2>
-                <p>Any periodic wave can be broken down into an infinite sum of simple sine waves. Watch how adding rotating epicycles (harmonics) slowly deforms a smooth circle into a sharp square wave.</p>
+                <p>Any periodic wave can be broken down into an infinite sum of simple sine waves.</p>
                 <div class="controls">
-                    <button class="btn" id="btn-add-fourier">Add Term (Harmonic)</button>
-                    <button class="btn btn-secondary" id="btn-sub-fourier">Remove Term</button>
+                    <button class="btn" id="btn-add-fourier">Add Term</button>
+                    <button class="btn btn-secondary" id="btn-reset-fourier">Reset</button>
                 </div>
-                <div class="stat-box c-green" id="fourier-stats">Active Orbits: 1 (Fundamental Frequency)</div>
+                <div class="stat-box c-green" id="fourier-stats">Active Orbits: 1</div>
             </div>
         </section>
 
@@ -197,9 +197,10 @@
             <div class="canvas-container"><canvas id="mobiusCanvas"></canvas></div>
             <div class="info-panel">
                 <h2>3. The Möbius Strip (3D)</h2>
-                <p>A non-orientable surface with only one side and one boundary component. Tracing a continuous line down the center completes a circuit covering both conceptual sides without passing over an edge.</p>
+                <p>A non-orientable surface with only one side and one boundary component.</p>
                 <div class="controls">
-                    <button class="btn" id="btn-pause-mobius" style="background-color: #e11d48;">Toggle Auto-Rotate</button>
+                    <button class="btn" id="btn-pause-mobius">Toggle Rotation</button>
+                    <button class="btn btn-secondary" id="btn-reset-mobius">Reset</button>
                 </div>
                 <div class="stat-box c-pink" id="mobius-stats">θ parameter matrix [0 to 2π]</div>
             </div>
@@ -209,9 +210,9 @@
             <div class="canvas-container"><canvas id="lorenzCanvas"></canvas></div>
             <div class="info-panel">
                 <h2>4. The Lorenz Attractor</h2>
-                <p>Derived from atmospheric convection differential equations, this chaotic system demonstrates the butterfly effect: infinitesimally minor changes in initials trace wildly non-repeating orbital systems.</p>
+                <p>Derived from atmospheric convection differential equations, this system demonstrates the butterfly effect.</p>
                 <div class="controls">
-                    <button class="btn" id="btn-reset-lorenz" style="background-color: #d97706;">Restart Trace</button>
+                    <button class="btn" id="btn-reset-lorenz" style="background-color: #d97706;">Reset Trace</button>
                 </div>
                 <div class="stat-box c-orange" id="lorenz-stats">dx/dt = σ(y - x), dy/dt = x(ρ - z) - y</div>
             </div>
@@ -221,9 +222,10 @@
             <div class="canvas-container"><canvas id="ulamCanvas"></canvas></div>
             <div class="info-panel">
                 <h2>5. The Ulam Spiral</h2>
-                <p>Integers laid out in a counterclockwise grid matrix isolate prime integers into distinct diagonal lines, demonstrating structural anomalies hiding inside prime distribution.</p>
+                <p>Integers laid out in a counterclockwise grid map prime values into clear diagonal structures.</p>
                 <div class="controls">
-                    <button class="btn" id="btn-grow-ulam" style="background-color: #7c3aed;">Expand Grid Size</button>
+                    <button class="btn" id="btn-grow-ulam" style="background-color: #7c3aed;">Expand Grid</button>
+                    <button class="btn btn-secondary" id="btn-reset-ulam">Reset</button>
                 </div>
                 <div class="stat-box c-purple" id="ulam-stats">Active Grid Limit: 2000 numbers.</div>
             </div>
@@ -233,10 +235,10 @@
             <div class="canvas-container"><canvas id="chaosCanvas"></canvas></div>
             <div class="info-panel">
                 <h2>6. Chaos Game: Fractals</h2>
-                <p>Repeatedly jumping halfway toward randomly selected triangle corner vertices maps an immaculate, highly structured Sierpinski Fractal out of pure probabilistic chaos.</p>
+                <p>Repeatedly jumping halfway toward randomly selected triangle corner vertices maps an immaculate fractal.</p>
                 <div class="controls">
-                    <button class="btn" id="btn-speed-chaos">Speed Up Evolution</button>
-                    <button class="btn btn-secondary" id="btn-reset-chaos">Reset & Random Color</button>
+                    <button class="btn" id="btn-speed-chaos">Speed Up</button>
+                    <button class="btn btn-secondary" id="btn-reset-chaos">Reset</button>
                 </div>
                 <div class="stat-box c-pink" id="chaos-stats">Total Points Plotted: 0</div>
             </div>
@@ -246,12 +248,12 @@
             <div class="canvas-container"><canvas id="cubeCanvas" style="cursor: move;"></canvas></div>
             <div class="info-panel">
                 <h2>7. 3D Graphics Engine: Projection</h2>
-                <p>Trigonometric rotation transformation vectors convert three-dimensional matrices (X, Y, Z) through a perspective divider scale onto a flat 2D viewport. Drag canvas to interact.</p>
+                <p>Perspective matrix divider transformation projection. Drag canvas area to rotate space manually.</p>
                 <div class="controls">
-                    <button class="btn" id="btn-toggle-auto-cube">Toggle Auto-Spin</button>
+                    <button class="btn" id="btn-toggle-auto-cube">Toggle Spin</button>
                     <button class="btn btn-secondary" id="btn-reset-cube">Reset Camera</button>
                 </div>
-                <div class="stat-box c-orange" id="cube-stats">Camera Space Calculations Active</div>
+                <div class="stat-box c-orange" id="cube-stats">Calculations Active</div>
             </div>
         </section>
 
@@ -259,12 +261,12 @@
             <div class="canvas-container"><canvas id="mandelbrotCanvas"></canvas></div>
             <div class="info-panel">
                 <h2>8. The Mandelbrot Set (Fractals)</h2>
-                <p>The boundary of this iconic fractal is calculated using the recursive complex number function z_next = z^2 + c. If the value remains bounded under iterations, it is captured within the set.</p>
+                <p>Calculated using the recursive complex number function z_next = z^2 + c. Real-time mathematical resolution.</p>
                 <div class="controls">
                     <button class="btn" id="btn-zoom-mandel">Zoom Into Boundary</button>
                     <button class="btn btn-secondary" id="btn-reset-mandel">Reset View</button>
                 </div>
-                <div class="stat-box c-blue" id="mandel-stats">f(z) = z² + c [Complex Plane Coordinate Grid]</div>
+                <div class="stat-box c-blue" id="mandel-stats">f(z) = z² + c [Complex Plane Plot]</div>
             </div>
         </section>
 
@@ -272,23 +274,25 @@
             <div class="canvas-container"><canvas id="hopfCanvas"></canvas></div>
             <div class="info-panel">
                 <h2>9. The Hopf Fibration</h2>
-                <p>A topological map projecting a four-dimensional hypersphere (S³) into three-dimensional space. Every coordinate point on a standard 2D sphere corresponds to an entire linked circle loop in 3D space.</p>
+                <p>A topological projection mapping a four-dimensional hypersphere (S³) directly into 3D structural space.</p>
                 <div class="controls">
-                    <button class="btn" id="btn-hopf-rotate" style="background-color:#10b981;">Change Rotation Plane</button>
+                    <button class="btn" id="btn-hopf-rotate" style="background-color:#10b981;">Shift Axis</button>
+                    <button class="btn btn-secondary" id="btn-reset-hopf">Reset</button>
                 </div>
-                <div class="stat-box c-teal" id="hopf-stats">Fiber mapping system: S³ -> S² projection matrix</div>
+                <div class="stat-box c-teal" id="hopf-stats">Fiber mapping calculation running.</div>
             </div>
         </section>
 
         <section class="visual-card">
-            <div class="canvas-container"><canvas id="vectorCanvas" style="cursor: crosshair;"></canvas></div>
+            <div class="canvas-container"><canvas id="vectorCanvas"></canvas></div>
             <div class="info-panel">
                 <h2>10. Vector Fields and Flow</h2>
-                <p>Every pixel coordinate maps to a distinct directional force vector. Particles dynamically navigate this differential field, visualizing equations that dictate magnetic fields or weather vectors. <b>Move mouse over canvas to influence fluid flow!</b></p>
+                <p>Pixel coordinates mapped to distinct force vectors. Move mouse over canvas to influence field flow vectors.</p>
                 <div class="controls">
-                    <button class="btn" id="btn-vector-type">Change Field Formula</button>
+                    <button class="btn" id="btn-vector-type">Change Formula</button>
+                    <button class="btn btn-secondary" id="btn-reset-vector">Reset</button>
                 </div>
-                <div class="stat-box c-green" id="vector-stats">Field State: F(x, y) = (-y, x) Rotational Vortex</div>
+                <div class="stat-box c-green" id="vector-stats">Field State: F(x, y) = (-y, x) Vortex</div>
             </div>
         </section>
 
@@ -296,11 +300,12 @@
             <div class="canvas-container"><canvas id="hyperbolicCanvas"></canvas></div>
             <div class="info-panel">
                 <h2>11. Non-Euclidean Geometries (Hyperbolic Tiling)</h2>
-                <p>In hyperbolic geometry, Euclid's parallel postulate fails—infinite parallel lines fit through one coordinate dot. Inside this disk model (Poincaré Disk), geometric spaces expand exponentially, causing uniform tiles to appear tiny near the rim.</p>
+                <p>Poincaré disk visualization engine showing true multi-order non-Euclidean geometric tiling scaling bounds.</p>
                 <div class="controls">
-                    <button class="btn" id="btn-hyper-depth" style="background-color: #f43f5e;">Regenerate Tiling</button>
+                    <button class="btn" id="btn-hyper-depth" style="background-color: #f43f5e;">Change Tiling Order</button>
+                    <button class="btn btn-secondary" id="btn-reset-hyper">Reset</button>
                 </div>
-                <div class="stat-box c-pink" id="hyper-stats">Poincaré Disk Metric Projection Engine</div>
+                <div class="stat-box c-pink" id="hyper-stats">Poincaré Metric Projection Running.</div>
             </div>
         </section>
 
@@ -308,11 +313,12 @@
             <div class="canvas-container"><canvas id="transformCanvas"></canvas></div>
             <div class="info-panel">
                 <h2>12. Fourier Transforms</h2>
-                <p>The Fourier Transform acts like a prism for complex signals: it converts raw time-domain variations (amplitudes) into explicit frequency-domain spikes, separating individual pure frequencies.</p>
+                <p>Conversion logic processing a complex signal variance down from its time domain into frequency-domain spectrograph spikes.</p>
                 <div class="controls">
-                    <button class="btn" id="btn-signal-mix">Inject Alternate Frequency</button>
+                    <button class="btn" id="btn-signal-mix">Inject Impulse Wave</button>
+                    <button class="btn btn-secondary" id="btn-reset-transform">Reset</button>
                 </div>
-                <div class="stat-box c-purple" id="transform-stats">Decomposing complex composite analog signals...</div>
+                <div class="stat-box c-purple" id="transform-stats">Decomposing complex composite signals...</div>
             </div>
         </section>
 
@@ -320,11 +326,12 @@
             <div class="canvas-container"><canvas id="genusCanvas"></canvas></div>
             <div class="info-panel">
                 <h2>13. Topology (The Genus-2 Torus)</h2>
-                <p>In topology, structural classification depends entirely on the count of structural holes (Genus). This double-donut surface rendering is generated via complex three-dimensional implicit parametric coordinate surface formulas.</p>
+                <p>Structural manifold featuring exactly two holes mapped via continuous parametric evaluation.</p>
                 <div class="controls">
-                    <button class="btn" id="btn-genus-spin">Reset Rotation</button>
+                    <button class="btn" id="btn-genus-spin">Invert Plane</button>
+                    <button class="btn btn-secondary" id="btn-reset-genus">Reset</button>
                 </div>
-                <div class="stat-box c-orange" id="genus-stats">Manifold classification structure: Genus = 2</div>
+                <div class="stat-box c-orange" id="genus-stats">Manifold tracking: Genus = 2</div>
             </div>
         </section>
 
@@ -332,11 +339,12 @@
             <div class="canvas-container"><canvas id="eulerCanvas"></canvas></div>
             <div class="info-panel">
                 <h2>14. Euler’s Formula (e^(iπ) + 1 = 0)</h2>
-                <p>By tracking growth vectors scaling completely perpendicular to position coordinates on the complex numbers grid, exponential imaginary progression traces a perfect unit circle trajectory into the negative real plane ending right at -1.</p>
+                <p>Tracking paths scaling fully perpendicular to position coordinates tracing complex trigonometric circle systems.</p>
                 <div class="controls">
-                    <button class="btn" id="btn-euler-speed">Jump Angular Theta</button>
+                    <button class="btn" id="btn-euler-speed">Rotate Theta</button>
+                    <button class="btn btn-secondary" id="btn-reset-euler">Reset</button>
                 </div>
-                <div class="stat-box c-blue" id="euler-stats">Vector Plane Coordinates Tracking...</div>
+                <div class="stat-box c-blue" id="euler-stats">Vector Tracking System Active...</div>
             </div>
         </section>
 
@@ -344,10 +352,10 @@
             <div class="canvas-container"><canvas id="cltCanvas"></canvas></div>
             <div class="info-panel">
                 <h2>15. Probability Distributions (The Central Limit Theorem)</h2>
-                <p>No matter the underlying distribution of a system, calculating the mean averages of highly random variables forces the aggregated sample output distributions to form an elegant, predictable Normal Gaussian Bell Curve.</p>
+                <p>Aggregating pure random variable sample means steadily constructs a clean Gaussian Normal curve.</p>
                 <div class="controls">
-                    <button class="btn" id="btn-clt-drop">Drop 500 Random Samples</button>
-                    <button class="btn btn-secondary" id="btn-clt-clear">Reset Grid</button>
+                    <button class="btn" id="btn-clt-drop">Drop 500 Samples</button>
+                    <button class="btn btn-secondary" id="btn-reset-clt">Reset</button>
                 </div>
                 <div class="stat-box c-green" id="clt-stats">Samples Aggregated: 0</div>
             </div>
@@ -357,11 +365,12 @@
             <div class="canvas-container"><canvas id="graphCanvas"></canvas></div>
             <div class="info-panel">
                 <h2>16. Graph Theory (Networks)</h2>
-                <p>Nodes model data points, while edges map their relationships. To find an optimal structural layout, nodes execute inverse-square Coulomb repulsion forces away from each other, while edge links act like balancing Hooke's Law springs.</p>
+                <p>Dynamic force-directed structural layout tracking network linkages through dynamic inverse-square balancing physics rules.</p>
                 <div class="controls">
-                    <button class="btn" id="btn-add-node">Inject Random Network Node</button>
+                    <button class="btn" id="btn-add-node">Inject Node</button>
+                    <button class="btn btn-secondary" id="btn-reset-graph">Reset</button>
                 </div>
-                <div class="stat-box c-teal" id="graph-stats">Graph topology evaluation running...</div>
+                <div class="stat-box c-teal" id="graph-stats">Graph evaluation loop operational.</div>
             </div>
         </section>
 
@@ -369,36 +378,32 @@
             <div class="canvas-container"><canvas id="matrixCanvas"></canvas></div>
             <div class="info-panel">
                 <h2>17. Matrix Transformations (Linear Algebra)</h2>
-                <p>Multiplying space vectors by a 2x2 matrix map transforms the underlying spatial grid. Watch coordinate space deform under Shear matrices, Scale scaling, and Rotations transformations.</p>
+                <p>Spatial coordinate field transforms executed in real time by parsing linear math mapping vector indices.</p>
                 <div class="controls">
-                    <button class="btn" id="btn-matrix-shear">Apply Shear Mapping</button>
-                    <button class="btn btn-secondary" id="btn-matrix-rotate">Apply Rotate Mapping</button>
+                    <button class="btn" id="btn-matrix-shear">Apply Shear</button>
+                    <button class="btn btn-secondary" id="btn-reset-matrix">Reset</button>
                 </div>
-                <div class="stat-box c-orange" id="matrix-stats">Transformation Matrix Basis Map: [1, 0] / [0, 1]</div>
+                <div class="stat-box c-orange" id="matrix-stats">Basis: [1, 0] / [0, 1]</div>
             </div>
         </section>
 
     </div>
 
     <script>
-        // --- Core Setup Tool ---
+        // --- Core Application Setup Helper ---
         function setupCanvas(canvasId) {
             const canvas = document.getElementById(canvasId);
             const ctx = canvas.getContext('2d');
-            const dpr = window.devicePixelRatio || 1;
             const rect = canvas.parentElement.getBoundingClientRect();
-            canvas.width = rect.width * dpr; canvas.height = 400 * dpr; 
-            ctx.scale(dpr, dpr);
+            canvas.width = rect.width; canvas.height = 400;
             return { canvas, ctx, width: rect.width, height: 400 };
         }
 
-        // Helper to check for primality (Ulam)
         function isPrime(n) {
             if (n <= 1) return false; if (n <= 3) return true; if (n % 2 === 0 || n % 3 === 0) return false;
             for (let i = 5; i * i <= n; i += 6) { if (n % i === 0 || n % (i + 2) === 0) return false; } return true;
         }
 
-        // Shared 3D projection algorithm
         function project3D(x, y, z, w, h, aX, aY) {
             let y1 = y * Math.cos(aX) - z * Math.sin(aX), z1 = y * Math.sin(aX) + z * Math.cos(aX);
             let x2 = x * Math.cos(aY) + z1 * Math.sin(aY), z2 = -x * Math.sin(aY) + z1 * Math.cos(aY);
@@ -411,7 +416,7 @@
         const fibSetup = setupCanvas('fibonacciCanvas');
         let fibSequence = [1, 1]; let maxSteps = 2;
         function drawFibonacci() {
-            const { ctx, width, height } = fibSetup; ctx.clearRect(0, 0, width, height); ctx.save(); ctx.translate(width / 2 + 50, height / 2 + 30);
+            const { ctx, width, height } = fibSetup; ctx.clearRect(0, 0, width, height); ctx.save(); ctx.translate(width / 2 + 30, height / 2 + 20);
             let scale = maxSteps > 10 ? 0.4 : maxSteps > 8 ? 1.2 : maxSteps > 6 ? 2.5 : 4.5; ctx.scale(scale, scale);
             let x = 0, y = 0;
             for (let i = 0; i < maxSteps; i++) {
@@ -431,31 +436,31 @@
         document.getElementById('btn-reset-fib').addEventListener('click', () => { fibSequence = [1, 1]; maxSteps = 2; document.getElementById('fib-sequence').innerText = "Sequence: 1, 1"; drawFibonacci(); });
 
         // ==========================================
-        // 2. FOURIER SERIES VISUALIZER
+        // 2. FOURIER SERIES
         // ==========================================
         const fourierSetup = setupCanvas('fourierCanvas');
-        let time = 0; let wave = []; let harmonics = 1;
+        let fTime = 0; let fWave = []; let fHarmonics = 1;
         function drawFourier() {
             const { ctx, width, height } = fourierSetup; ctx.clearRect(0, 0, width, height); let x = 120, y = height / 2;
-            for (let i = 0; i < harmonics; i++) {
+            for (let i = 0; i < fHarmonics; i++) {
                 let prevX = x, prevY = y; let n = i * 2 + 1; let radius = 55 * (4 / (n * Math.PI));
-                x += radius * Math.cos(n * time); y += radius * Math.sin(n * time);
-                ctx.strokeStyle = 'rgba(129, 140, 248, 0.15)'; ctx.beginPath(); ctx.arc(prevX, prevY, radius, 0, Math.PI * 2); ctx.stroke();
+                x += radius * Math.cos(n * fTime); y += radius * Math.sin(n * fTime);
+                ctx.strokeStyle = 'rgba(129, 140, 248, 0.2)'; ctx.beginPath(); ctx.arc(prevX, prevY, radius, 0, Math.PI * 2); ctx.stroke();
                 ctx.strokeStyle = '#a78bfa'; ctx.beginPath(); ctx.moveTo(prevX, prevY); ctx.lineTo(x, y); ctx.stroke();
             }
-            wave.unshift(y); if (wave.length > 450) wave.pop();
-            ctx.strokeStyle = 'rgba(52, 211, 153, 0.4)'; ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(260, y); ctx.stroke(); ctx.setLineDash([]);
-            ctx.strokeStyle = '#34d399'; ctx.lineWidth = 2.5; ctx.beginPath(); for (let i = 0; i < wave.length; i++) ctx.lineTo(260 + i, wave[i]); ctx.stroke();
-            time -= 0.02; requestAnimationFrame(drawFourier);
+            fWave.unshift(y); if (fWave.length > width - 260) fWave.pop();
+            ctx.strokeStyle = 'rgba(52, 211, 153, 0.4)'; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(260, y); ctx.stroke();
+            ctx.strokeStyle = '#34d399'; ctx.lineWidth = 2; ctx.beginPath(); for (let i = 0; i < fWave.length; i++) ctx.lineTo(260 + i, fWave[i]); ctx.stroke();
+            fTime -= 0.02; requestAnimationFrame(drawFourier);
         }
-        document.getElementById('btn-add-fourier').addEventListener('click', () => { harmonics++; document.getElementById('fourier-stats').innerText = `Active Orbits: ${harmonics}`; });
-        document.getElementById('btn-sub-fourier').addEventListener('click', () => { if (harmonics > 1) harmonics--; document.getElementById('fourier-stats').innerText = `Active Orbits: ${harmonics}`; });
+        document.getElementById('btn-add-fourier').addEventListener('click', () => { fHarmonics++; document.getElementById('fourier-stats').innerText = `Active Orbits: ${fHarmonics}`; });
+        document.getElementById('btn-reset-fourier').addEventListener('click', () => { fHarmonics = 1; fWave = []; document.getElementById('fourier-stats').innerText = "Active Orbits: 1"; });
 
         // ==========================================
-        // 3. MÖBIUS STRIP 3D
+        // 3. MÖBIUS STRIP
         // ==========================================
         const mobiusSetup = setupCanvas('mobiusCanvas');
-        let angleX = 0.5, angleY = 0.8; let autoRotate = true;
+        let mobX = 0.5, mobY = 0.8, mobRotate = true;
         function drawMobius() {
             const { ctx, width, height } = mobiusSetup; ctx.clearRect(0, 0, width, height);
             for (let j = 0; j <= 8; j++) {
@@ -463,13 +468,14 @@
                 for (let i = 0; i <= 60; i++) {
                     let theta = (Math.PI * 2 * i) / 60; let R = 100; let rX = (R + w * Math.cos(theta / 2)) * Math.cos(theta);
                     let rY = (R + w * Math.cos(theta / 2)) * Math.sin(theta); let rZ = w * Math.sin(theta / 2);
-                    let pt = project3D(rX, rY, rZ, width, height, angleX, angleY); if (i === 0) ctx.moveTo(pt.x, pt.y); else ctx.lineTo(pt.x, pt.y);
+                    let pt = project3D(rX, rY, rZ, width, height, mobX, mobY); if (i === 0) ctx.moveTo(pt.x, pt.y); else ctx.lineTo(pt.x, pt.y);
                 }
                 ctx.stroke();
             }
-            if (autoRotate) { angleX += 0.005; angleY += 0.01; } requestAnimationFrame(drawMobius);
+            if (mobRotate) { mobX += 0.005; mobY += 0.01; } requestAnimationFrame(drawMobius);
         }
-        document.getElementById('btn-pause-mobius').addEventListener('click', () => autoRotate = !autoRotate);
+        document.getElementById('btn-pause-mobius').addEventListener('click', () => mobRotate = !mobRotate);
+        document.getElementById('btn-reset-mobius').addEventListener('click', () => { mobX = 0.5; mobY = 0.8; mobRotate = true; });
 
         // ==========================================
         // 4. LORENZ ATTRACTOR
@@ -479,21 +485,21 @@
         function drawLorenz() {
             const { ctx, width, height } = lorenzSetup; ctx.clearRect(0, 0, width, height);
             let dt = 0.01; let dx = (10 * (ly - lx)) * dt; let dy = (lx * (28 - lz) - ly) * dt; let dz = (lx * ly - (8/3) * lz) * dt;
-            lx += dx; ly += dy; lz += dz; lPoints.push({x: lx, y: ly, z: lz}); if (lPoints.length > 1200) lPoints.shift();
-            ctx.save(); ctx.lineWidth = 1.2; ctx.beginPath();
+            lx += dx; ly += dy; lz += dz; lPoints.push({x: lx, y: ly, z: lz}); if (lPoints.length > 1000) lPoints.shift();
+            ctx.beginPath();
             for(let i = 1; i < lPoints.length; i++) {
                 let p = lPoints[i]; let rX = p.x * Math.cos(lAngle) - p.y * Math.sin(lAngle);
                 let sX = width / 2 + rX * 5.5, sY = height / 2 + (p.z - 25) * 5.5;
-                ctx.strokeStyle = `hsla(${i * 0.3 % 360}, 90%, 60%, 0.8)`;
+                ctx.strokeStyle = `hsla(${i * 0.4 % 360}, 95%, 65%, 0.8)`;
                 if (i === 1) ctx.moveTo(sX, sY); else ctx.lineTo(sX, sY);
-                if(i % 40 === 0) { ctx.stroke(); ctx.beginPath(); ctx.moveTo(sX, sY); }
+                if(i % 50 === 0) { ctx.stroke(); ctx.beginPath(); ctx.moveTo(sX, sY); }
             }
-            ctx.stroke(); ctx.restore(); lAngle += 0.005; requestAnimationFrame(drawLorenz);
+            ctx.stroke(); lAngle += 0.005; requestAnimationFrame(drawLorenz);
         }
         document.getElementById('btn-reset-lorenz').addEventListener('click', () => { lx = 0.1; ly = 0; lz = 0; lPoints = []; });
 
         // ==========================================
-        // 5. ULAM PRIME SPIRAL
+        // 5. ULAM SPIRAL
         // ==========================================
         const ulamSetup = setupCanvas('ulamCanvas');
         let ulamLimit = 2000;
@@ -513,9 +519,10 @@
                 }
                 steps++;
             }
-            document.getElementById('ulam-stats').innerText = `Active Grid Limit: ${ulamLimit} numbers.`;
+            document.getElementById('ulam-stats').innerText = `Active Grid Limit: ${ulamLimit} integers.`;
         }
-        document.getElementById('btn-grow-ulam').addEventListener('click', () => { ulamLimit = ulamLimit >= 10000 ? 2000 : ulamLimit + 2000; drawUlam(); });
+        document.getElementById('btn-grow-ulam').addEventListener('click', () => { ulamLimit += 2000; drawUlam(); });
+        document.getElementById('btn-reset-ulam').addEventListener('click', () => { ulamLimit = 2000; drawUlam(); });
 
         // ==========================================
         // 6. CHAOS GAME
@@ -523,7 +530,7 @@
         const chaosSetup = setupCanvas('chaosCanvas');
         let chX, chY, chVertices = [], chPlotted = 0, chSpeed = 50, chColor;
         function initChaos() {
-            const { width, height } = chaosSetup; chPlotted = 0; chColor = `hsl(${Math.random()*360},90%,60%)`;
+            const { width, height } = chaosSetup; chPlotted = 0; chColor = '#f43f5e';
             chVertices = [{x: width/2, y:35}, {x:50, y:height-35}, {x:width-50, y:height-35}];
             chX = Math.random()*width; chY = Math.random()*height; chaosSetup.ctx.clearRect(0,0,width,height);
         }
@@ -535,178 +542,175 @@
             }
             document.getElementById('chaos-stats').innerText = `Total Points Plotted: ${chPlotted}`; requestAnimationFrame(drawChaos);
         }
-        document.getElementById('btn-speed-chaos').addEventListener('click', () => { chSpeed = chSpeed === 50 ? 500 : chSpeed === 500 ? 2000 : 50; document.getElementById('btn-speed-chaos').innerText = `Speed: ${chSpeed} pts/frame`; });
-        document.getElementById('btn-reset-chaos').addEventListener('click', initChaos);
+        document.getElementById('btn-speed-chaos').addEventListener('click', () => { chSpeed = chSpeed >= 1000 ? 50 : chSpeed + 300; });
+        document.getElementById('btn-reset-chaos').addEventListener('click', () => { initChaos(); });
 
         // ==========================================
-        // 7. 3D CUBE PROJECTION ENGINE
+        // 7. 3D PROJECTION ENGINE
         // ==========================================
         const cubeSetup = setupCanvas('cubeCanvas');
         let rotX = 0.5, rotY = 0.5, spin = true, cDrag = false, lMX=0, lMY=0;
-        const rawVerts = [
+        const cVerts = [
             {x:-50,y:-50,z:-50},{x:50,y:-50,z:-50},{x:50,y:50,z:-50},{x:-50,y:50,z:-50},
             {x:-50,y:-50,z:50},{x:50,y:-50,z:50},{x:50,y:50,z:50},{x:-50,y:50,z:50}
         ];
         const cEdges = [[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];
         function drawCube() {
             const { ctx, width, height } = cubeSetup; ctx.clearRect(0, 0, width, height);
-            let projected = rawVerts.map(v => {
-                let y1 = v.y*Math.cos(rotX) - v.z*Math.sin(rotX), z1 = v.y*Math.sin(rotX) + v.z*Math.cos(rotX);
-                let x2 = v.x*Math.cos(rotY) + z1*Math.sin(rotY), z2 = -v.x*Math.sin(rotY) + z1*Math.cos(rotY);
-                let p = 250 / (250 + z2); return { x: width/2 + x2*p*1.5, y: height/2 + y1*p*1.5 };
-            });
-            ctx.lineWidth = 2;
-            cEdges.forEach((e, i) => { ctx.strokeStyle = `hsla(${i*30},85%,60%,0.9)`; ctx.beginPath(); ctx.moveTo(projected[e[0]].x, projected[e[0]].y); ctx.lineTo(projected[e[1]].x, projected[e[1]].y); ctx.stroke(); });
-            if (spin) { rotX += 0.005; rotY += 0.01; } 
-            document.getElementById('cube-stats').innerText = `Rotations Matrix -> X-axis: ${rotX.toFixed(2)} rad, Y-axis: ${rotY.toFixed(2)} rad`;
-            requestAnimationFrame(drawCube);
+            let projected = cVerts.map(v => project3D(v.x, v.y, v.z, width, height, rotX, rotY));
+            ctx.lineWidth = 2; ctx.strokeStyle = '#f59e0b';
+            cEdges.forEach(e => { ctx.beginPath(); ctx.moveTo(projected[e[0]].x, projected[e[0]].y); ctx.lineTo(projected[e[1]].x, projected[e[1]].y); ctx.stroke(); });
+            if (spin) { rotX += 0.005; rotY += 0.01; } requestAnimationFrame(drawCube);
         }
         cubeSetup.canvas.addEventListener('mousedown', e => { cDrag = true; spin = false; lMX = e.clientX; lMY = e.clientY; });
         window.addEventListener('mouseup', () => cDrag = false);
         cubeSetup.canvas.addEventListener('mousemove', e => { if(!cDrag) return; rotY += (e.clientX - lMX)*0.01; rotX += (e.clientY - lMY)*0.01; lMX = e.clientX; lMY = e.clientY; });
         document.getElementById('btn-toggle-auto-cube').addEventListener('click', () => spin = !spin);
-        document.getElementById('btn-reset-cube').addEventListener('click', () => { rotX=0.5; rotY=0.5; spin=false; });
+        document.getElementById('btn-reset-cube').addEventListener('click', () => { rotX=0.5; rotY=0.5; spin=true; });
 
         // ==========================================
-        // 8. MANDELBROT SET VISUALIZER
+        // 8. THE MANDELBROT SET (FIXED REAL-TIME LOOP)
         // ==========================================
         const mandelSetup = setupCanvas('mandelbrotCanvas');
-        let mZoom = 1.0, mCenterX = -0.7, mCenterY = 0.0;
+        let mZoom = 1.0, mCX = -0.7, mCY = 0.0;
         function drawMandelbrot() {
             const { ctx, width, height } = mandelSetup;
-            let imgData = ctx.createImageData(width, height);
-            let maxIter = 40;
-            for (let x = 0; x < width; x+=2) {
-                for (let y = 0; y < height; y+=2) {
-                    let cr = mCenterX + (x - width / 2) * (4.0 / (width * mZoom));
-                    let ci = mCenterY + (y - height / 2) * (4.0 / (height * mZoom));
-                    let zr = 0.0, zi = 0.0; let iter = 0;
-                    while (zr*zr + zi*zi <= 4.0 && iter < maxIter) {
-                        let temp = zr*zr - zi*zi + cr; zi = 2.0*zr*zi + ci; zr = temp; iter++;
+            ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, width, height);
+            let res = 2; // Pixel scale size optimization
+            for (let x = 0; x < width; x += res) {
+                for (let y = 0; y < height; y += res) {
+                    let cr = mCX + (x - width / 2) * (3.0 / (width * mZoom));
+                    let ci = mCY + (y - height / 2) * (3.0 / (height * mZoom));
+                    let zr = 0.0, zi = 0.0, i = 0;
+                    while (zr*zr + zi*zi <= 4.0 && i < 30) {
+                        let temp = zr*zr - zi*zi + cr; zi = 2.0*zr*zi + ci; zr = temp; i++;
                     }
-                    let c = iter === maxIter ? 0 : (iter * 6) % 255;
-                    for(let xo=0; xo<2; xo++){
-                        for(let yo=0; yo<2; yo++){
-                            let idx = ((x+xo) + (y+yo) * width) * 4;
-                            if(idx < imgData.data.length){
-                                imgData.data[idx] = c * 0.5; imgData.data[idx+1] = c * 0.8; imgData.data[idx+2] = c * 1.3; imgData.data[idx+3] = 255;
-                            }
-                        }
+                    if (i < 30) {
+                        ctx.fillStyle = `hsl(${(i * 12) % 360}, 75%, 50%)`;
+                        ctx.fillRect(x, y, res, res);
                     }
                 }
             }
-            ctx.putImageData(imgData, 0, 0);
         }
-        document.getElementById('btn-zoom-mandel').addEventListener('click', () => { mZoom *= 2.5; mCenterX = -0.743643; mCenterY = 0.131825; drawMandelbrot(); });
-        document.getElementById('btn-reset-mandel').addEventListener('click', () => { mZoom = 1.0; mCenterX = -0.7; mCenterY = 0.0; drawMandelbrot(); });
+        document.getElementById('btn-zoom-mandel').addEventListener('click', () => { mZoom *= 3.0; mCX = -0.743643; mCY = 0.131825; drawMandelbrot(); });
+        document.getElementById('btn-reset-mandel').addEventListener('click', () => { mZoom = 1.0; mCX = -0.7; mCY = 0.0; drawMandelbrot(); });
 
         // ==========================================
-        // 9. HOPF FIBRATION VISUALIZER
+        // 9. THE HOPF FIBRATION
         // ==========================================
         const hopfSetup = setupCanvas('hopfCanvas');
-        let hopfAngle = 0;
+        let hAngle = 0;
         function drawHopf() {
             const { ctx, width, height } = hopfSetup; ctx.clearRect(0, 0, width, height);
-            let circles = 35; let ptsPerCircle = 40;
-            for(let i=0; i<circles; i++) {
-                let phi = Math.PI * (i / circles);
-                for(let j=0; j<circles; j++) {
-                    if (j%4 !== 0) continue;
-                    let theta = Math.PI * 2 * (j / circles);
-                    let s2x = Math.sin(phi)*Math.cos(theta), s2y = Math.sin(phi)*Math.sin(theta), s2z = Math.cos(phi);
-                    ctx.strokeStyle = `hsla(${(i*10)%360},80%,60%,0.3)`; ctx.beginPath();
-                    for(let k=0; k<=ptsPerCircle; k++) {
-                        let t = Math.PI * 2 * (k / ptsPerCircle);
-                        let hx = Math.cos(t)*s2x - Math.sin(t)*s2y; let hy = Math.sin(t)*s2x + Math.cos(t)*s2y; let hz = s2z;
-                        let sX = width/2 + hx*90 + Math.cos(hopfAngle)*hy*20; let sY = height/2 + hz*90 + Math.sin(hopfAngle)*hy*20;
+            let loops = 20;
+            for(let i=0; i<loops; i++) {
+                let phi = Math.PI * (i / loops);
+                for(let j=0; j<loops; j+=2) {
+                    let theta = Math.PI * 2 * (j / loops);
+                    let x2 = Math.sin(phi)*Math.cos(theta), y2 = Math.sin(phi)*Math.sin(theta), z2 = Math.cos(phi);
+                    ctx.strokeStyle = `hsla(${(i*18)%360}, 80%, 60%, 0.3)`; ctx.beginPath();
+                    for(let k=0; k<=30; k++) {
+                        let t = Math.PI * 2 * (k / 30);
+                        let hx = Math.cos(t)*x2 - Math.sin(t)*y2; let hy = Math.sin(t)*x2 + Math.cos(t)*y2;
+                        let sX = width/2 + hx*85 + Math.cos(hAngle)*hy*15; let sY = height/2 + z2*85 + Math.sin(hAngle)*hy*15;
                         if (k === 0) ctx.moveTo(sX, sY); else ctx.lineTo(sX, sY);
                     }
                     ctx.stroke();
                 }
             }
-            hopfAngle += 0.01; requestAnimationFrame(drawHopf);
+            hAngle += 0.01; requestAnimationFrame(drawHopf);
         }
-        document.getElementById('btn-hopf-rotate').addEventListener('click', () => { hopfAngle += Math.PI/4; });
+        document.getElementById('btn-hopf-rotate').addEventListener('click', () => hAngle += 1.0);
+        document.getElementById('btn-reset-hopf').addEventListener('click', () => hAngle = 0);
 
         // ==========================================
-        // 10. VECTOR FIELDS VISUALIZER
+        // 10. VECTOR FIELDS AND FLOW
         // ==========================================
         const vectorSetup = setupCanvas('vectorCanvas');
-        let vParticles = []; let fieldType = 0; let mX = -1000, mY = -1000;
-        for(let i=0; i<150; i++) vParticles.push({x:Math.random()*400, y:Math.random()*400, l:Math.random()*100});
+        let vParticles = [], vType = 0, vMX = -1000, vMY = -1000;
+        function initVectors() {
+            vParticles = [];
+            for(let i=0; i<120; i++) vParticles.push({x:Math.random()*vectorSetup.width, y:Math.random()*400, l:Math.random()*100});
+        }
         function drawVectorField() {
-            const { ctx, width, height } = vectorSetup; ctx.fillStyle = 'rgba(2,6,23,0.15)'; ctx.fillRect(0,0,width,height);
-            ctx.strokeStyle = 'rgba(255,255,255,0.05)'; ctx.lineWidth = 1;
-            let spacing = 25;
-            for(let x=spacing/2; x<width; x+=spacing) {
-                for(let y=spacing/2; y<height; y+=spacing) {
-                    let dx = 0, dy = 0;
-                    let cX = (x - width/2)/50; let cY = (y - height/2)/50;
-                    if (fieldType===0) { dx = -cY; dy = cX; } else { dx = Math.sin(cY); dy = Math.cos(cX); }
-                    if(mX > 0) {
-                        let dMouseX = x - mX, dMouseY = y - mY; let dDist = Math.sqrt(dMouseX*dMouseX + dMouseY*dMouseY);
-                        if(dDist < 100) { dx += dMouseY/dDist * 2; dy -= dMouseX/dDist * 2; }
-                    }
-                    let mag = Math.sqrt(dx*dx + dy*dy) || 1; dx=(dx/mag)*10; dy=(dy/mag)*10;
-                    ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x+dx, y+dy); ctx.stroke();
-                }
-            }
+            const { ctx, width, height } = vectorSetup; ctx.fillStyle = 'rgba(2,6,23,0.2)'; ctx.fillRect(0,0,width,height);
             vParticles.forEach(p => {
-                let cX = (p.x - width/2)/50; let cY = (p.y - height/2)/50; let dx = fieldType===0 ? -cY : Math.sin(cY), dy = fieldType===0 ? cX : Math.cos(cX);
-                p.x += dx*1.5; p.y += dy*1.5; p.l--;
+                let cX = (p.x - width/2)/45, cY = (p.y - height/2)/45;
+                let dx = vType === 0 ? -cY : Math.sin(cY), dy = vType === 0 ? cX : Math.cos(cX);
+                if(Math.abs(p.x - vMX) < 80 && Math.abs(p.y - vMY) < 80) { dx += 2; dy -= 2; }
+                p.x += dx*1.2; p.y += dy*1.2; p.l--;
                 if(p.x<0||p.x>width||p.y<0||p.y>height||p.l<=0) { p.x=Math.random()*width; p.y=Math.random()*height; p.l=Math.random()*100; }
-                ctx.fillStyle = '#34d399'; ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI*2); ctx.fill();
+                ctx.fillStyle = '#34d399'; ctx.fillRect(p.x, p.y, 2.5, 2.5);
             });
             requestAnimationFrame(drawVectorField);
         }
-        vectorSetup.canvas.addEventListener('mousemove', e => { const r = vectorSetup.canvas.getBoundingClientRect(); mX = e.clientX - r.left; mY = e.clientY - r.top; });
-        vectorSetup.canvas.addEventListener('mouseleave', () => { mX = -1000; mY = -1000; });
-        document.getElementById('btn-vector-type').addEventListener('click', () => { fieldType = fieldType === 0 ? 1 : 0; document.getElementById('vector-stats').innerText = fieldType === 0 ? "Field State: F(x, y) = (-y, x) Vortex" : "Field State: F(x, y) = (sin y, cos x) Wave Grid"; });
+        vectorSetup.canvas.addEventListener('mousemove', e => { const r = vectorSetup.canvas.getBoundingClientRect(); vMX = e.clientX - r.left; vMY = e.clientY - r.top; });
+        document.getElementById('btn-vector-type').addEventListener('click', () => vType = vType === 0 ? 1 : 0);
+        document.getElementById('btn-reset-vector').addEventListener('click', () => { vType=0; initVectors(); });
 
         // ==========================================
-        // 11. HYPERBOLIC TILING
+        // 11. HYPERBOLIC TILING (FIXED POINCARÉ PATTERN)
         // ==========================================
         const hyperSetup = setupCanvas('hyperbolicCanvas');
+        let hyperOrder = 5;
         function drawHyperbolic() {
-            const { ctx, width, height } = hyperSetup; ctx.clearRect(0,0,width,height);
-            let cx = width/2, cy = height/2, r = 140;
-            ctx.strokeStyle = '#f43f5e'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.stroke();
-            ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(244,63,94,0.4)';
-            for(let i=0; i<8; i++) {
-                let angle = (i * Math.PI / 4);
-                let p1x = cx + r*Math.cos(angle), p1y = cy + r*Math.sin(angle);
-                let p2x = cx + r*Math.cos(angle+Math.PI/2), p2y = cy + r*Math.sin(angle+Math.PI/2);
-                ctx.beginPath(); ctx.moveTo(p1x, p1y); ctx.quadraticCurveTo(cx, cy, p2x, p2y); ctx.stroke();
+            const { ctx, width, height } = hyperSetup; ctx.clearRect(0, 0, width, height);
+            let cx = width / 2, cy = height / 2, r = 130;
+            
+            // Draw main boundary disk limit
+            ctx.strokeStyle = '#f43f5e'; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke();
+            
+            // Mathematical geometric tiling calculation loop
+            ctx.lineWidth = 1.2;
+            for (let i = 0; i < hyperOrder * 4; i++) {
+                let alpha = (i * Math.PI) / (hyperOrder * 2);
+                ctx.strokeStyle = `hsla(${340 + i*2}, 85%, 60%, 0.6)`;
+                
+                // Draw hyperbolic internal structural geodesic coordinates
+                ctx.beginPath();
+                for (let d = -0.99; d <= 0.99; d += 0.05) {
+                    // Compute spatial metrics transformed inside unit disk mappings
+                    let factor = Math.tanh(hyperOrder / 4);
+                    let tx = d * r * Math.cos(alpha) * factor;
+                    let ty = d * r * Math.sin(alpha + 0.4) * factor;
+                    if (d === -0.99) ctx.moveTo(cx + tx, cy + ty); else ctx.lineTo(cx + tx, cy + ty);
+                }
+                ctx.stroke();
             }
-            for(let d=20; d<r; d+=25) { ctx.beginPath(); ctx.arc(cx, cy, d, 0, Math.PI*2); ctx.stroke(); }
+            
+            // Generate concentric geometry layers shifting towards periphery rim
+            ctx.strokeStyle = 'rgba(244, 63, 94, 0.25)';
+            for (let rad = 25; rad < r; rad += 25) {
+                ctx.beginPath(); ctx.arc(cx, cy, rad, 0, Math.PI * 2); ctx.stroke();
+            }
         }
-        document.getElementById('btn-hyper-depth').addEventListener('click', () => drawHyperbolic());
+        document.getElementById('btn-hyper-depth').addEventListener('click', () => { hyperOrder = hyperOrder >= 12 ? 5 : hyperOrder + 2; drawHyperbolic(); });
+        document.getElementById('btn-reset-hyper').addEventListener('click', () => { hyperOrder = 5; drawHyperbolic(); });
 
         // ==========================================
         // 12. FOURIER TRANSFORMS
         // ==========================================
         const transSetup = setupCanvas('transformCanvas');
-        let tStep = 0;
+        let tStep = 0, pulseActive = false;
         function drawTransform() {
             const { ctx, width, height } = transSetup; ctx.clearRect(0, 0, width, height);
             ctx.strokeStyle = '#c084fc'; ctx.lineWidth = 2; ctx.beginPath();
             for(let x=0; x<width/2; x++) {
-                let y = height/4 + Math.sin(x*0.05 + tStep)*25 + Math.sin(x*0.15 + tStep*2)*12;
+                let y = height/4 + Math.sin(x*0.06 + tStep)*25 + Math.sin(x*0.14 + tStep*2)*12;
+                if (pulseActive) y += Math.sin(x*0.3)*15;
                 if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
             }
             ctx.stroke();
             ctx.strokeStyle = '#2dd4bf'; ctx.beginPath();
             for(let x=0; x<width/2; x++) {
-                let signalX = x * 0.1;
-                let transformAmplitude = (signalX > 0.45 && signalX < 0.55) ? 70 : (signalX > 1.45 && signalX < 1.55) ? 40 : 5 + Math.random()*4;
-                ctx.lineTo(width/2 + x, height - 40 - transformAmplitude);
+                let sX = x * 0.1;
+                let amp = (sX > 0.5 && sX < 0.7) ? 65 : (sX > 1.3 && sX < 1.5) ? 35 : (pulseActive && sX > 2.8 && sX < 3.0) ? 55 : 6;
+                ctx.lineTo(width/2 + x, height - 45 - amp);
             }
-            ctx.stroke();
-            ctx.fillStyle = '#9ca3af'; ctx.fillText("Composite Signal (Time Domain)", 10, 30);
-            ctx.fillText("Decomposed Spectrogram (Frequency Domain)", width/2 + 10, 30);
-            tStep += 0.05; requestAnimationFrame(drawTransform);
+            ctx.stroke(); tStep += 0.04; requestAnimationFrame(drawTransform);
         }
-        document.getElementById('btn-signal-mix').addEventListener('click', () => { document.getElementById('transform-stats').innerText = "Injected an auxiliary transient frequency component."; });
+        document.getElementById('btn-signal-mix').addEventListener('click', () => { pulseActive = true; document.getElementById('transform-stats').innerText = "Frequency space component injected."; });
+        document.getElementById('btn-reset-transform').addEventListener('click', () => { pulseActive = false; document.getElementById('transform-stats').innerText = "Decomposing signals..."; });
 
         // ==========================================
         // 13. TOPOLOGY: GENUS-2 TORUS
@@ -715,139 +719,130 @@
         let gAngle = 0;
         function drawGenus2() {
             const { ctx, width, height } = genusSetup; ctx.clearRect(0,0,width,height);
-            ctx.strokeStyle = '#f59e0b'; ctx.lineWidth = 1;
-            for(let u=0; u<Math.PI*2; u+=0.25) {
+            ctx.strokeStyle = '#f59e0b';
+            for(let u=0; u<Math.PI*2; u+=0.3) {
                 ctx.beginPath();
-                for(let v=0; v<Math.PI*2; v+=0.15) {
-                    let x = (1.5 + Math.cos(u)) * Math.cos(v) - 1.2;
-                    if(v > Math.PI) x = (1.5 + Math.cos(u)) * Math.cos(v) + 1.2;
-                    let y = (1.5 + Math.cos(u)) * Math.sin(v); let z = Math.sin(u);
-                    let pt = project3D(x*40, y*40, z*40, width, height, gAngle*0.4, gAngle);
+                for(let v=0; v<Math.PI*2; v+=0.2) {
+                    let x = (1.4 + Math.cos(u)) * Math.cos(v) - 1.1;
+                    if(v > Math.PI) x = (1.4 + Math.cos(u)) * Math.cos(v) + 1.1;
+                    let y = (1.4 + Math.cos(u)) * Math.sin(v); let z = Math.sin(u);
+                    let pt = project3D(x*38, y*38, z*38, width, height, gAngle*0.3, gAngle);
                     if(v===0) ctx.moveTo(pt.x, pt.y); else ctx.lineTo(pt.x, pt.y);
                 }
                 ctx.stroke();
             }
-            gAngle += 0.008; requestAnimationFrame(drawGenus2);
+            gAngle += 0.006; requestAnimationFrame(drawGenus2);
         }
-        document.getElementById('btn-genus-spin').addEventListener('click', () => { gAngle = 0; });
+        document.getElementById('btn-genus-spin').addEventListener('click', () => gAngle += 1.5);
+        document.getElementById('btn-reset-genus').addEventListener('click', () => gAngle = 0);
 
         // ==========================================
-        // 14. EULER'S IDENTITY VISUALIZER
+        // 14. EULER'S IDENTITY
         // ==========================================
         const eulerSetup = setupCanvas('eulerCanvas');
         let eTheta = 0;
         function drawEuler() {
             const { ctx, width, height } = eulerSetup; ctx.clearRect(0, 0, width, height);
-            let cx = width/2, cy = height/2, r = 100;
+            let cx = width/2, cy = height/2, r = 90;
             ctx.strokeStyle = 'rgba(255,255,255,0.1)'; ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo(cx-r-20, cy); ctx.lineTo(cx+r+20, cy); ctx.moveTo(cx, cy-r-20); ctx.lineTo(cx, cy+r+20); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(cx-r-10, cy); ctx.lineTo(cx+r+10, cy); ctx.moveTo(cx, cy-r-10); ctx.lineTo(cx, cy+r+10); ctx.stroke();
             let ex = cx + r*Math.cos(eTheta), ey = cy - r*Math.sin(eTheta);
             ctx.strokeStyle = '#60a5fa'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(ex, ey); ctx.stroke();
             ctx.fillStyle = '#f43f5e'; ctx.beginPath(); ctx.arc(ex, ey, 5, 0, Math.PI*2); ctx.fill();
-            document.getElementById('euler-stats').innerText = `Euler Vector Object: cos(θ) = ${Math.cos(eTheta).toFixed(2)} | i*sin(θ) = ${Math.sin(eTheta).toFixed(2)}i`;
-            eTheta = (eTheta + 0.015) % (Math.PI*2); requestAnimationFrame(drawEuler);
+            document.getElementById('euler-stats').innerText = `Vector: cos(θ) = ${Math.cos(eTheta).toFixed(2)} | sin(θ) = ${Math.sin(eTheta).toFixed(2)}i`;
+            eTheta = (eTheta + 0.012) % (Math.PI*2); requestAnimationFrame(drawEuler);
         }
-        document.getElementById('btn-euler-speed').addEventListener('click', () => { eTheta += Math.PI/6; });
+        document.getElementById('btn-euler-speed').addEventListener('click', () => eTheta += Math.PI/4);
+        document.getElementById('btn-reset-euler').addEventListener('click', () => eTheta = 0);
 
         // ==========================================
         // 15. CENTRAL LIMIT THEOREM
         // ==========================================
         const cltSetup = setupCanvas('cltCanvas');
-        let cltBins = new Array(40).fill(0); let cltTotal = 0;
+        let cltBins = new Array(40).fill(0), cltTotal = 0;
         function drawCLT() {
             const { ctx, width, height } = cltSetup; ctx.clearRect(0,0,width,height);
             let binW = width / cltBins.length; ctx.fillStyle = '#34d399';
             for(let i=0; i<cltBins.length; i++) {
-                let h = cltBins[i]*4; ctx.fillRect(i*binW, height - h, binW - 2, h);
+                let h = cltBins[i]*3.5; ctx.fillRect(i*binW, height - h, binW - 2, h);
             }
         }
         document.getElementById('btn-clt-drop').addEventListener('click', () => {
             for(let sample=0; sample<500; sample++) {
                 let sum = 0; for(let i=0; i<12; i++) sum += Math.random(); 
-                let binIdx = Math.floor((sum / 12) * cltBins.length);
-                if(binIdx >=0 && binIdx < cltBins.length) cltBins[binIdx]++;
+                let idx = Math.floor((sum / 12) * cltBins.length);
+                if(idx >= 0 && idx < cltBins.length) cltBins[idx]++;
             }
             cltTotal += 500; document.getElementById('clt-stats').innerText = `Samples Aggregated: ${cltTotal}`; drawCLT();
         });
-        document.getElementById('btn-clt-clear').addEventListener('click', () => { cltBins.fill(0); cltTotal=0; drawCLT(); });
+        document.getElementById('btn-reset-clt').addEventListener('click', () => { cltBins.fill(0); cltTotal=0; document.getElementById('clt-stats').innerText = "Samples Aggregated: 0"; drawCLT(); });
 
         // ==========================================
-        // 16. GRAPH THEORY (FORCES NETWORK)
+        // 16. GRAPH THEORY
         // ==========================================
         const graphSetup = setupCanvas('graphCanvas');
-        let gNodes = []; let gEdges = [];
-        for(let i=0; i<12; i++) gNodes.push({x:100+Math.random()*150, y:100+Math.random()*150});
-        for(let i=0; i<15; i++) {
-            let s = Math.floor(Math.random()*12), t = Math.floor(Math.random()*12);
-            if (s !== t) gEdges.push([s,t]);
+        let gNodes = [], gEdges = [];
+        function initGraph() {
+            gNodes = []; gEdges = [];
+            for(let i=0; i<10; i++) gNodes.push({x:120+Math.random()*120, y:120+Math.random()*120});
+            for(let i=0; i<12; i++) {
+                let s = Math.floor(Math.random()*10), t = Math.floor(Math.random()*10);
+                if(s !== t) gEdges.push([s,t]);
+            }
         }
         function drawGraph() {
             const { ctx, width, height } = graphSetup; ctx.clearRect(0, 0, width, height);
             gNodes.forEach((n1, i) => {
                 gNodes.forEach((n2, j) => {
                     if (i === j) return;
-                    let dx = n2.x - n1.x, dy = n2.y - n1.y, dist = Math.sqrt(dx*dx + dy*dy) || 1;
-                    if(dist < 90) { n1.x -= (dx/dist)*0.3; n1.y -= (dy/dist)*0.3; }
+                    let dx = n2.x - n1.x, dy = n2.y - n1.y, d = Math.sqrt(dx*dx + dy*dy) || 1;
+                    if(d < 80) { n1.x -= (dx/d)*0.25; n1.y -= (dy/d)*0.25; }
                 });
             });
             gEdges.forEach(e => {
                 let n1 = gNodes[e[0]], n2 = gNodes[e[1]];
-                let dx = n2.x - n1.x, dy = n2.y - n1.y, dist = Math.sqrt(dx*dx + dy*dy) || 1;
-                let force = (dist - 75) * 0.01; n1.x += dx*force; n1.y += dy*force;
-                ctx.strokeStyle = 'rgba(45,212,191,0.4)'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(n1.x, n1.y); ctx.lineTo(n2.x, n2.y); ctx.stroke();
+                let dx = n2.x - n1.x, dy = n2.y - n1.y, d = Math.sqrt(dx*dx + dy*dy) || 1;
+                let f = (d - 70) * 0.01; n1.x += dx*f; n1.y += dy*f;
+                ctx.strokeStyle = 'rgba(45,212,191,0.4)'; ctx.beginPath(); ctx.moveTo(n1.x, n1.y); ctx.lineTo(n2.x, n2.y); ctx.stroke();
             });
             ctx.fillStyle = '#2dd4bf';
             gNodes.forEach(n => {
-                n.x = Math.max(10, Math.min(width-10, n.x)); n.y = Math.max(10, Math.min(height-10, n.y));
+                n.x = Math.max(15, Math.min(width-15, n.x)); n.y = Math.max(15, Math.min(height-15, n.y));
                 ctx.beginPath(); ctx.arc(n.x, n.y, 6, 0, Math.PI*2); ctx.fill();
             });
             requestAnimationFrame(drawGraph);
         }
         document.getElementById('btn-add-node').addEventListener('click', () => {
-            let w = graphSetup.width; gNodes.push({x: w/2, y: 200});
+            gNodes.push({x: graphSetup.width/2, y: 200});
             gEdges.push([gNodes.length-1, Math.floor(Math.random()*(gNodes.length-1))]);
         });
+        document.getElementById('btn-reset-graph').addEventListener('click', initGraph);
 
         // ==========================================
         // 17. MATRIX TRANSFORMATIONS
         // ==========================================
         const matrixSetup = setupCanvas('matrixCanvas');
-        let mMatrix = {xx: 1, yx: 0, xy: 0, yy: 1};
+        let mMat = {xx: 1, yx: 0, xy: 0, yy: 1};
         function drawMatrix() {
             const { ctx, width, height } = matrixSetup; ctx.clearRect(0,0,width,height);
-            let cx = width/2, cy = height/2; ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+            let cx = width/2, cy = height/2; ctx.strokeStyle = 'rgba(255,255,255,0.05)';
             for(let i=-150; i<=150; i+=25) { ctx.beginPath(); ctx.moveTo(cx+i, 0); ctx.lineTo(cx+i, height); ctx.moveTo(0, cy+i); ctx.lineTo(width, cy+i); ctx.stroke(); }
             ctx.strokeStyle = '#f59e0b'; ctx.lineWidth = 2; ctx.beginPath();
-            for(let x=-80; x<=80; x+=20) {
-                for(let y=-80; y<=80; y+=20) {
-                    let tx = x * mMatrix.xx + y * mMatrix.xy; let ty = x * mMatrix.yx + y * mMatrix.yy;
+            for(let x=-60; x<=60; x+=20) {
+                for(let y=-60; y<=60; y+=20) {
+                    let tx = x * mMat.xx + y * mMat.xy; let ty = x * mMat.yx + y * mMat.yy;
                     ctx.rect(cx+tx, cy+ty, 2, 2);
                 }
             }
             ctx.stroke();
         }
-        document.getElementById('btn-matrix-shear').addEventListener('click', () => { mMatrix.xy = mMatrix.xy === 0 ? 0.8 : 0; drawMatrix(); document.getElementById('matrix-stats').innerText = `Matrix Base Map: [1, 0] / [${mMatrix.xy}, 1] Transformation Active`; });
-        document.getElementById('btn-matrix-rotate').addEventListener('click', () => { let a = 0.3; mMatrix = {xx: Math.cos(a), yx: Math.sin(a), xy: -Math.sin(a), yy: Math.cos(a)}; drawMatrix(); document.getElementById('matrix-stats').innerText = `Matrix Base Map: Rotated by 0.3 Rad`; });
+        document.getElementById('btn-matrix-shear').addEventListener('click', () => { mMat.xy = 0.7; drawMatrix(); document.getElementById('matrix-stats').innerText = "Matrix Configuration: Shear Transform Applied"; });
+        document.getElementById('btn-reset-matrix').addEventListener('click', () => { mMat = {xx: 1, yx: 0, xy: 0, yy: 1}; drawMatrix(); document.getElementById('matrix-stats').innerText = "Basis: [1, 0] / [0, 1]"; });
 
-
-        // --- Master Initialization Controller ---
-        drawFibonacci(); drawFourier(); drawMobius(); drawLorenz(); drawUlam(); initChaos(); drawChaos(); drawCube();
+        // --- Core Init Kickoff ---
+        initVectors(); initGraph(); initChaos();
+        drawFibonacci(); drawFourier(); drawMobius(); drawLorenz(); drawUlam(); drawChaos(); drawCube();
         drawMandelbrot(); drawHopf(); drawVectorField(); drawHyperbolic(); drawTransform(); drawGenus2(); drawEuler(); drawCLT(); drawGraph(); drawMatrix();
-
-        // Responsive Engine Auto Scaling Event Handler Array
-        window.addEventListener('resize', () => {
-            const masterList = [
-                fibSetup, fourierSetup, mobiusSetup, lorenzSetup, ulamSetup, chaosSetup, cubeSetup,
-                mandelSetup, hopfSetup, vectorSetup, hyperSetup, transSetup, genusSetup, eulerSetup, cltSetup, graphSetup, matrixSetup
-            ];
-            masterList.forEach(item => {
-                const rect = item.canvas.parentElement.getBoundingClientRect();
-                item.canvas.width = rect.width * (window.devicePixelRatio || 1);
-                item.canvas.getContext('2d').scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
-                item.width = rect.width;
-            });
-            drawFibonacci(); drawUlam(); initChaos(); drawMandelbrot(); drawHyperbolic(); drawCLT(); drawMatrix();
-        });
     </script>
 </body>
 </html>
