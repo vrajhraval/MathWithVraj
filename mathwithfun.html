@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en)
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -170,7 +170,7 @@
         <section class="visual-card">
             <div class="canvas-container"><canvas id="fibonacciCanvas"></canvas></div>
             <div class="info-panel">
-                <h2>The Fibonacci Spiral</h2>
+                <h2>1. The Fibonacci Spiral</h2>
                 <p>By drawing quarter-circles inside squares sized by the Fibonacci sequence, we approximate the Golden Spiral. This logarithmic manifestation appears across nature, from seed heads to spiral galaxies.</p>
                 <div class="controls">
                     <button class="btn" id="btn-grow-fib">Add Step</button>
@@ -183,7 +183,7 @@
         <section class="visual-card">
             <div class="canvas-container"><canvas id="fourierCanvas"></canvas></div>
             <div class="info-panel">
-                <h2>Fourier Series: Square Wave</h2>
+                <h2>2. Fourier Series: Square Wave</h2>
                 <p>Any periodic wave can be broken down into an infinite sum of simple sine waves. Watch how adding rotating epicycles (harmonics) slowly deforms a smooth circle into a sharp square wave.</p>
                 <div class="controls">
                     <button class="btn" id="btn-add-fourier">Add Term (Harmonic)</button>
@@ -196,19 +196,19 @@
         <section class="visual-card">
             <div class="canvas-container"><canvas id="mobiusCanvas"></canvas></div>
             <div class="info-panel">
-                <h2>The Möbius Strip (3D)</h2>
+                <h2>3. The Möbius Strip (3D)</h2>
                 <p>A non-orientable surface with only one side and one boundary component. Tracing a continuous line down the center completes a circuit covering both conceptual sides without passing over an edge.</p>
                 <div class="controls">
                     <button class="btn" id="btn-pause-mobius" style="background-color: #e11d48;">Toggle Auto-Rotate</button>
                 </div>
-                <div class="stat-box c-pink" id="mobius-stats">θ parameter matrix [0 to 2π], w variant width width scales.</div>
+                <div class="stat-box c-pink" id="mobius-stats">θ parameter matrix [0 to 2π]</div>
             </div>
         </section>
 
         <section class="visual-card">
             <div class="canvas-container"><canvas id="lorenzCanvas"></canvas></div>
             <div class="info-panel">
-                <h2>The Lorenz Attractor</h2>
+                <h2>4. The Lorenz Attractor</h2>
                 <p>Derived from atmospheric convection differential equations, this chaotic system demonstrates the butterfly effect: infinitesimally minor changes in initials trace wildly non-repeating orbital systems.</p>
                 <div class="controls">
                     <button class="btn" id="btn-reset-lorenz" style="background-color: #d97706;">Restart Trace</button>
@@ -220,19 +220,19 @@
         <section class="visual-card">
             <div class="canvas-container"><canvas id="ulamCanvas"></canvas></div>
             <div class="info-panel">
-                <h2>The Ulam Spiral</h2>
+                <h2>5. The Ulam Spiral</h2>
                 <p>Integers laid out in a counterclockwise grid matrix isolate prime integers into distinct diagonal lines, demonstrating structural anomalies hiding inside prime distribution.</p>
                 <div class="controls">
                     <button class="btn" id="btn-grow-ulam" style="background-color: #7c3aed;">Expand Grid Size</button>
                 </div>
-                <div class="stat-box c-purple" id="ulam-stats">Evaluating integers for primality along coordinate space...</div>
+                <div class="stat-box c-purple" id="ulam-stats">Active Grid Limit: 2000 numbers.</div>
             </div>
         </section>
 
         <section class="visual-card">
             <div class="canvas-container"><canvas id="chaosCanvas"></canvas></div>
             <div class="info-panel">
-                <h2>Chaos Game: Fractals</h2>
+                <h2>6. Chaos Game: Fractals</h2>
                 <p>Repeatedly jumping halfway toward randomly selected triangle corner vertices maps an immaculate, highly structured Sierpinski Fractal out of pure probabilistic chaos.</p>
                 <div class="controls">
                     <button class="btn" id="btn-speed-chaos">Speed Up Evolution</button>
@@ -245,7 +245,7 @@
         <section class="visual-card">
             <div class="canvas-container"><canvas id="cubeCanvas" style="cursor: move;"></canvas></div>
             <div class="info-panel">
-                <h2>3D Graphics Engine: Projection</h2>
+                <h2>7. 3D Graphics Engine: Projection</h2>
                 <p>Trigonometric rotation transformation vectors convert three-dimensional matrices (X, Y, Z) through a perspective divider scale onto a flat 2D viewport. Drag canvas to interact.</p>
                 <div class="controls">
                     <button class="btn" id="btn-toggle-auto-cube">Toggle Auto-Spin</button>
@@ -258,11 +258,11 @@
         <section class="visual-card">
             <div class="canvas-container"><canvas id="mandelbrotCanvas"></canvas></div>
             <div class="info-panel">
-                <h2>The Mandelbrot Set</h2>
+                <h2>8. The Mandelbrot Set (Fractals)</h2>
                 <p>The boundary of this iconic fractal is calculated using the recursive complex number function z_next = z^2 + c. If the value remains bounded under iterations, it is captured within the set.</p>
                 <div class="controls">
                     <button class="btn" id="btn-zoom-mandel">Zoom Into Boundary</button>
-                    <button class="btn btn-secondary" id="btn-reset-mandel">Reset view</button>
+                    <button class="btn btn-secondary" id="btn-reset-mandel">Reset View</button>
                 </div>
                 <div class="stat-box c-blue" id="mandel-stats">f(z) = z² + c [Complex Plane Coordinate Grid]</div>
             </div>
@@ -271,7 +271,7 @@
         <section class="visual-card">
             <div class="canvas-container"><canvas id="hopfCanvas"></canvas></div>
             <div class="info-panel">
-                <h2>The Hopf Fibration</h2>
+                <h2>9. The Hopf Fibration</h2>
                 <p>A topological map projecting a four-dimensional hypersphere (S³) into three-dimensional space. Every coordinate point on a standard 2D sphere corresponds to an entire linked circle loop in 3D space.</p>
                 <div class="controls">
                     <button class="btn" id="btn-hopf-rotate" style="background-color:#10b981;">Change Rotation Plane</button>
@@ -283,7 +283,7 @@
         <section class="visual-card">
             <div class="canvas-container"><canvas id="vectorCanvas" style="cursor: crosshair;"></canvas></div>
             <div class="info-panel">
-                <h2>Vector Fields & Fluid Flow</h2>
+                <h2>10. Vector Fields and Flow</h2>
                 <p>Every pixel coordinate maps to a distinct directional force vector. Particles dynamically navigate this differential field, visualizing equations that dictate magnetic fields or weather vectors. <b>Move mouse over canvas to influence fluid flow!</b></p>
                 <div class="controls">
                     <button class="btn" id="btn-vector-type">Change Field Formula</button>
@@ -295,10 +295,10 @@
         <section class="visual-card">
             <div class="canvas-container"><canvas id="hyperbolicCanvas"></canvas></div>
             <div class="info-panel">
-                <h2>Hyperbolic Space (Poincaré Disk)</h2>
-                <p>In hyperbolic geometry, Euclid's parallel postulate fails—infinite parallel lines fit through one coordinate dot. Inside this disk model, all triangular geometric regions are identical in mathematical scale, shrinking infinitely toward the outer event boundary limit.</p>
+                <h2>11. Non-Euclidean Geometries (Hyperbolic Tiling)</h2>
+                <p>In hyperbolic geometry, Euclid's parallel postulate fails—infinite parallel lines fit through one coordinate dot. Inside this disk model (Poincaré Disk), geometric spaces expand exponentially, causing uniform tiles to appear tiny near the rim.</p>
                 <div class="controls">
-                    <button class="btn" id="btn-hyper-depth">Toggle Pattern Matrix</button>
+                    <button class="btn" id="btn-hyper-depth" style="background-color: #f43f5e;">Regenerate Tiling</button>
                 </div>
                 <div class="stat-box c-pink" id="hyper-stats">Poincaré Disk Metric Projection Engine</div>
             </div>
@@ -307,7 +307,7 @@
         <section class="visual-card">
             <div class="canvas-container"><canvas id="transformCanvas"></canvas></div>
             <div class="info-panel">
-                <h2>Fourier Transform: Signal Domain</h2>
+                <h2>12. Fourier Transforms</h2>
                 <p>The Fourier Transform acts like a prism for complex signals: it converts raw time-domain variations (amplitudes) into explicit frequency-domain spikes, separating individual pure frequencies.</p>
                 <div class="controls">
                     <button class="btn" id="btn-signal-mix">Inject Alternate Frequency</button>
@@ -319,10 +319,10 @@
         <section class="visual-card">
             <div class="canvas-container"><canvas id="genusCanvas"></canvas></div>
             <div class="info-panel">
-                <h2>Topology: Genus-2 Torus</h2>
-                <p>In topology, structural classification depends entirely on the count of structural holes (Genus). This multi-holed surface rendering is generated via complex three-dimensional implicit equation coordinate surfaces.</p>
+                <h2>13. Topology (The Genus-2 Torus)</h2>
+                <p>In topology, structural classification depends entirely on the count of structural holes (Genus). This double-donut surface rendering is generated via complex three-dimensional implicit parametric coordinate surface formulas.</p>
                 <div class="controls">
-                    <button class="btn" id="btn-genus-spin">Toggle Axis Orientation</button>
+                    <button class="btn" id="btn-genus-spin">Reset Rotation</button>
                 </div>
                 <div class="stat-box c-orange" id="genus-stats">Manifold classification structure: Genus = 2</div>
             </div>
@@ -331,10 +331,10 @@
         <section class="visual-card">
             <div class="canvas-container"><canvas id="eulerCanvas"></canvas></div>
             <div class="info-panel">
-                <h2>Euler's Identity Visualized</h2>
-                <p>The famous formula e^(iπ) + 1 = 0 links five foundational math constants. By tracking growth vectors scaling completely perpendicular to position coordinates, exponential imaginary progression traces a perfect unit circle trajectory into the negative real plane (-1).</p>
+                <h2>14. Euler’s Formula (e^(iπ) + 1 = 0)</h2>
+                <p>By tracking growth vectors scaling completely perpendicular to position coordinates on the complex numbers grid, exponential imaginary progression traces a perfect unit circle trajectory into the negative real plane ending right at -1.</p>
                 <div class="controls">
-                    <button class="btn" id="btn-euler-speed">Modify Rotation Theta</button>
+                    <button class="btn" id="btn-euler-speed">Jump Angular Theta</button>
                 </div>
                 <div class="stat-box c-blue" id="euler-stats">Vector Plane Coordinates Tracking...</div>
             </div>
@@ -343,10 +343,10 @@
         <section class="visual-card">
             <div class="canvas-container"><canvas id="cltCanvas"></canvas></div>
             <div class="info-panel">
-                <h2>Central Limit Theorem</h2>
-                <p>No matter the underlying distribution of a system, calculating the mean averages of highly random events forces the aggregated sample output distributions to form an elegant, predictable Normal Gaussian Bell Curve.</p>
+                <h2>15. Probability Distributions (The Central Limit Theorem)</h2>
+                <p>No matter the underlying distribution of a system, calculating the mean averages of highly random variables forces the aggregated sample output distributions to form an elegant, predictable Normal Gaussian Bell Curve.</p>
                 <div class="controls">
-                    <button class="btn" id="btn-clt-drop">Drop 100 Random Samples</button>
+                    <button class="btn" id="btn-clt-drop">Drop 500 Random Samples</button>
                     <button class="btn btn-secondary" id="btn-clt-clear">Reset Grid</button>
                 </div>
                 <div class="stat-box c-green" id="clt-stats">Samples Aggregated: 0</div>
@@ -356,7 +356,7 @@
         <section class="visual-card">
             <div class="canvas-container"><canvas id="graphCanvas"></canvas></div>
             <div class="info-panel">
-                <h2>Graph Theory: Force-Directed Network</h2>
+                <h2>16. Graph Theory (Networks)</h2>
                 <p>Nodes model data points, while edges map their relationships. To find an optimal structural layout, nodes execute inverse-square Coulomb repulsion forces away from each other, while edge links act like balancing Hooke's Law springs.</p>
                 <div class="controls">
                     <button class="btn" id="btn-add-node">Inject Random Network Node</button>
@@ -368,7 +368,7 @@
         <section class="visual-card">
             <div class="canvas-container"><canvas id="matrixCanvas"></canvas></div>
             <div class="info-panel">
-                <h2>Matrix Transformations</h2>
+                <h2>17. Matrix Transformations (Linear Algebra)</h2>
                 <p>Multiplying space vectors by a 2x2 matrix map transforms the underlying spatial grid. Watch coordinate space deform under Shear matrices, Scale scaling, and Rotations transformations.</p>
                 <div class="controls">
                     <button class="btn" id="btn-matrix-shear">Apply Shear Mapping</button>
@@ -390,6 +390,19 @@
             canvas.width = rect.width * dpr; canvas.height = 400 * dpr; 
             ctx.scale(dpr, dpr);
             return { canvas, ctx, width: rect.width, height: 400 };
+        }
+
+        // Helper to check for primality (Ulam)
+        function isPrime(n) {
+            if (n <= 1) return false; if (n <= 3) return true; if (n % 2 === 0 || n % 3 === 0) return false;
+            for (let i = 5; i * i <= n; i += 6) { if (n % i === 0 || n % (i + 2) === 0) return false; } return true;
+        }
+
+        // Shared 3D projection algorithm
+        function project3D(x, y, z, w, h, aX, aY) {
+            let y1 = y * Math.cos(aX) - z * Math.sin(aX), z1 = y * Math.sin(aX) + z * Math.cos(aX);
+            let x2 = x * Math.cos(aY) + z1 * Math.sin(aY), z2 = -x * Math.sin(aY) + z1 * Math.cos(aY);
+            let d = 300; let p = d / (d + z2); return { x: w / 2 + x2 * p, y: h / 2 + y1 * p };
         }
 
         // ==========================================
@@ -415,7 +428,7 @@
             if(fibSequence.length <= maxSteps) fibSequence.push(fibSequence[fibSequence.length-1] + fibSequence[fibSequence.length-2]);
             maxSteps++; document.getElementById('fib-sequence').innerText = `Sequence: ${fibSequence.slice(0, maxSteps).join(', ')}`; drawFibonacci();
         });
-        document.getElementById('btn-reset-fib').addEventListener('click', () => { fibSequence = [1, 1]; maxSteps = 2; drawFibonacci(); });
+        document.getElementById('btn-reset-fib').addEventListener('click', () => { fibSequence = [1, 1]; maxSteps = 2; document.getElementById('fib-sequence').innerText = "Sequence: 1, 1"; drawFibonacci(); });
 
         // ==========================================
         // 2. FOURIER SERIES VISUALIZER
@@ -457,12 +470,6 @@
             if (autoRotate) { angleX += 0.005; angleY += 0.01; } requestAnimationFrame(drawMobius);
         }
         document.getElementById('btn-pause-mobius').addEventListener('click', () => autoRotate = !autoRotate);
-
-        function project3D(x, y, z, w, h, aX, aY) {
-            let y1 = y * Math.cos(aX) - z * Math.sin(aX), z1 = y * Math.sin(aX) + z * Math.cos(aX);
-            let x2 = x * Math.cos(aY) + z1 * Math.sin(aY), z2 = -x * Math.sin(aY) + z1 * Math.cos(aY);
-            let d = 300; let p = d / (d + z2); return { x: w / 2 + x2 * p, y: h / 2 + y1 * p };
-        }
 
         // ==========================================
         // 4. LORENZ ATTRACTOR
@@ -506,6 +513,7 @@
                 }
                 steps++;
             }
+            document.getElementById('ulam-stats').innerText = `Active Grid Limit: ${ulamLimit} numbers.`;
         }
         document.getElementById('btn-grow-ulam').addEventListener('click', () => { ulamLimit = ulamLimit >= 10000 ? 2000 : ulamLimit + 2000; drawUlam(); });
 
@@ -527,7 +535,7 @@
             }
             document.getElementById('chaos-stats').innerText = `Total Points Plotted: ${chPlotted}`; requestAnimationFrame(drawChaos);
         }
-        document.getElementById('btn-speed-chaos').addEventListener('click', () => { chSpeed = chSpeed === 50 ? 500 : chSpeed === 500 ? 2000 : 50; });
+        document.getElementById('btn-speed-chaos').addEventListener('click', () => { chSpeed = chSpeed === 50 ? 500 : chSpeed === 500 ? 2000 : 50; document.getElementById('btn-speed-chaos').innerText = `Speed: ${chSpeed} pts/frame`; });
         document.getElementById('btn-reset-chaos').addEventListener('click', initChaos);
 
         // ==========================================
@@ -535,7 +543,6 @@
         // ==========================================
         const cubeSetup = setupCanvas('cubeCanvas');
         let rotX = 0.5, rotY = 0.5, spin = true, cDrag = false, lMX=0, lMY=0;
-        const cVerts = [{-50,-50,-50},{50,-50,-50},{50,50,-50},{-50,50,-50},{-50,-50,50},{50,-50,50},{50,50,50},{-50,50,50}].map(o=>({x:Object.keys(o)[0]*1?1:1,y:1,z:1})); // parsed clean downstream
         const rawVerts = [
             {x:-50,y:-50,z:-50},{x:50,y:-50,z:-50},{x:50,y:50,z:-50},{x:-50,y:50,z:-50},
             {x:-50,y:-50,z:50},{x:50,y:-50,z:50},{x:50,y:50,z:50},{x:-50,y:50,z:50}
@@ -550,7 +557,9 @@
             });
             ctx.lineWidth = 2;
             cEdges.forEach((e, i) => { ctx.strokeStyle = `hsla(${i*30},85%,60%,0.9)`; ctx.beginPath(); ctx.moveTo(projected[e[0]].x, projected[e[0]].y); ctx.lineTo(projected[e[1]].x, projected[e[1]].y); ctx.stroke(); });
-            if (spin) { rotX += 0.005; rotY += 0.01; } requestAnimationFrame(drawCube);
+            if (spin) { rotX += 0.005; rotY += 0.01; } 
+            document.getElementById('cube-stats').innerText = `Rotations Matrix -> X-axis: ${rotX.toFixed(2)} rad, Y-axis: ${rotY.toFixed(2)} rad`;
+            requestAnimationFrame(drawCube);
         }
         cubeSetup.canvas.addEventListener('mousedown', e => { cDrag = true; spin = false; lMX = e.clientX; lMY = e.clientY; });
         window.addEventListener('mouseup', () => cDrag = false);
@@ -575,10 +584,9 @@
                     while (zr*zr + zi*zi <= 4.0 && iter < maxIter) {
                         let temp = zr*zr - zi*zi + cr; zi = 2.0*zr*zi + ci; zr = temp; iter++;
                     }
-                    let rIdx = (x + y * width) * 4;
                     let c = iter === maxIter ? 0 : (iter * 6) % 255;
-                    for(let xo=0;xo<2;xo++){
-                        for(let yo=0;yo<2;yo++){
+                    for(let xo=0; xo<2; xo++){
+                        for(let yo=0; yo<2; yo++){
                             let idx = ((x+xo) + (y+yo) * width) * 4;
                             if(idx < imgData.data.length){
                                 imgData.data[idx] = c * 0.5; imgData.data[idx+1] = c * 0.8; imgData.data[idx+2] = c * 1.3; imgData.data[idx+3] = 255;
@@ -589,7 +597,7 @@
             }
             ctx.putImageData(imgData, 0, 0);
         }
-        document.getElementById('btn-zoom-mandel').addEventListener('click', () => { mZoom *= 2.5; mCenterX = -0.7436438870371587; mCenterY = 0.13182590420531197; drawMandelbrot(); });
+        document.getElementById('btn-zoom-mandel').addEventListener('click', () => { mZoom *= 2.5; mCenterX = -0.743643; mCenterY = 0.131825; drawMandelbrot(); });
         document.getElementById('btn-reset-mandel').addEventListener('click', () => { mZoom = 1.0; mCenterX = -0.7; mCenterY = 0.0; drawMandelbrot(); });
 
         // ==========================================
@@ -603,7 +611,7 @@
             for(let i=0; i<circles; i++) {
                 let phi = Math.PI * (i / circles);
                 for(let j=0; j<circles; j++) {
-                    if (j%4 !==0) continue;
+                    if (j%4 !== 0) continue;
                     let theta = Math.PI * 2 * (j / circles);
                     let s2x = Math.sin(phi)*Math.cos(theta), s2y = Math.sin(phi)*Math.sin(theta), s2z = Math.cos(phi);
                     ctx.strokeStyle = `hsla(${(i*10)%360},80%,60%,0.3)`; ctx.beginPath();
@@ -672,6 +680,7 @@
             }
             for(let d=20; d<r; d+=25) { ctx.beginPath(); ctx.arc(cx, cy, d, 0, Math.PI*2); ctx.stroke(); }
         }
+        document.getElementById('btn-hyper-depth').addEventListener('click', () => drawHyperbolic());
 
         // ==========================================
         // 12. FOURIER TRANSFORMS
@@ -693,11 +702,10 @@
                 ctx.lineTo(width/2 + x, height - 40 - transformAmplitude);
             }
             ctx.stroke();
-            ctx.fillStyle = varColor('--muted-text'); ctx.fillText("Composite Signal (Time Domain)", 10, 30);
+            ctx.fillStyle = '#9ca3af'; ctx.fillText("Composite Signal (Time Domain)", 10, 30);
             ctx.fillText("Decomposed Spectrogram (Frequency Domain)", width/2 + 10, 30);
             tStep += 0.05; requestAnimationFrame(drawTransform);
         }
-        function varColor(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
         document.getElementById('btn-signal-mix').addEventListener('click', () => { document.getElementById('transform-stats').innerText = "Injected an auxiliary transient frequency component."; });
 
         // ==========================================
@@ -721,6 +729,7 @@
             }
             gAngle += 0.008; requestAnimationFrame(drawGenus2);
         }
+        document.getElementById('btn-genus-spin').addEventListener('click', () => { gAngle = 0; });
 
         // ==========================================
         // 14. EULER'S IDENTITY VISUALIZER
@@ -749,16 +758,16 @@
             const { ctx, width, height } = cltSetup; ctx.clearRect(0,0,width,height);
             let binW = width / cltBins.length; ctx.fillStyle = '#34d399';
             for(let i=0; i<cltBins.length; i++) {
-                let h = cltBins[i]*6; ctx.fillRect(i*binW, height - h, binW - 2, h);
+                let h = cltBins[i]*4; ctx.fillRect(i*binW, height - h, binW - 2, h);
             }
         }
         document.getElementById('btn-clt-drop').addEventListener('click', () => {
-            for(let sample=0; sample<200; sample++) {
+            for(let sample=0; sample<500; sample++) {
                 let sum = 0; for(let i=0; i<12; i++) sum += Math.random(); 
                 let binIdx = Math.floor((sum / 12) * cltBins.length);
                 if(binIdx >=0 && binIdx < cltBins.length) cltBins[binIdx]++;
             }
-            cltTotal += 200; document.getElementById('clt-stats').innerText = `Samples Aggregated: ${cltTotal}`; drawCLT();
+            cltTotal += 500; document.getElementById('clt-stats').innerText = `Samples Aggregated: ${cltTotal}`; drawCLT();
         });
         document.getElementById('btn-clt-clear').addEventListener('click', () => { cltBins.fill(0); cltTotal=0; drawCLT(); });
 
@@ -818,12 +827,8 @@
             ctx.stroke();
         }
         document.getElementById('btn-matrix-shear').addEventListener('click', () => { mMatrix.xy = mMatrix.xy === 0 ? 0.8 : 0; drawMatrix(); document.getElementById('matrix-stats').innerText = `Matrix Base Map: [1, 0] / [${mMatrix.xy}, 1] Transformation Active`; });
-        document.getElementById('btn-matrix-rotate').addEventListener('click', () => { let a = 0.3; mMatrix = {xx: Math.cos(a), yx: Math.sin(a), xy: -Math.sin(a), yy: Math.cos(a)}; drawMatrix(); });
+        document.getElementById('btn-matrix-rotate').addEventListener('click', () => { let a = 0.3; mMatrix = {xx: Math.cos(a), yx: Math.sin(a), xy: -Math.sin(a), yy: Math.cos(a)}; drawMatrix(); document.getElementById('matrix-stats').innerText = `Matrix Base Map: Rotated by 0.3 Rad`; });
 
-        function isPrime(n) {
-            if (n<=1) return false; if (n<=3) return true; if (n%2===0 || n%3===0) return false;
-            for (let i=5; i*i<=n; i+=6) { if (n%i===0 || n%(i+2)===0) return false; } return true;
-        }
 
         // --- Master Initialization Controller ---
         drawFibonacci(); drawFourier(); drawMobius(); drawLorenz(); drawUlam(); initChaos(); drawChaos(); drawCube();
