@@ -48,6 +48,14 @@
             --nav-link-hover: #2980b9;
             --dropdown-bg: white;
             --dropdown-shadow: rgba(0, 0, 0, 0.15);
+            
+            /* Fun Section Specific Themes Variables */
+            --fun-bg: linear-gradient(135deg, #ff6b6b, #ff8e53);
+            --fun-text: #ffffff;
+            --fun-subtext: #fff3f0;
+            --fun-badge-bg: #feca57;
+            --fun-badge-text: #2c3e50;
+            --fun-shadow: rgba(255, 107, 107, 0.4);
         }
 
         /* Improved Premium Dark Mode Palette */
@@ -68,6 +76,12 @@
             --nav-link-hover: #3498db;
             --dropdown-bg: #1e293b;
             --dropdown-shadow: rgba(0, 0, 0, 0.4);
+
+            /* Dark mode override overrides for Fun Section layout */
+            --fun-bg: linear-gradient(135deg, #701a75, #4c1d95);
+            --fun-shadow: rgba(112, 26, 117, 0.5);
+            --fun-badge-bg: #a855f7;
+            --fun-badge-text: #ffffff;
         }
 
         * {
@@ -586,18 +600,134 @@
             border: 1px solid #333;
         }
 
-        /* Interactive Clickable Section Styling */
-        .clickable-section {
+        /* NEW RE-STYLED "MATH WITH FUN" UI WRAPPER SECTION */
+        .fun-section-container {
             text-decoration: none;
             color: inherit;
             display: block;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 35px;
+            margin-bottom: 10px;
+            perspective: 1000px;
+        }
+
+        .fun-card {
+            background: var(--fun-bg);
+            color: var(--fun-text);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px var(--fun-shadow);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                        box-shadow 0.4s ease, 
+                        outline 0.2s ease;
+            z-index: 1;
+        }
+
+        /* Floating Vector Math Graphic Ornaments for Aesthetics */
+        .fun-card::before {
+            content: "π + ÷ ∞ ∑ √";
+            position: absolute;
+            right: -20px;
+            bottom: -10px;
+            font-size: 7rem;
+            font-weight: 900;
+            opacity: 0.12;
+            font-family: 'Courier New', Courier, monospace;
+            letter-spacing: -5px;
+            pointer-events: none;
+            transition: transform 0.5s ease;
+        }
+
+        .fun-section-container:hover .fun-card {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 35px var(--fun-shadow);
+        }
+
+        .fun-section-container:hover .fun-card::before {
+            transform: rotate(-5deg) scale(1.1);
+        }
+
+        .fun-card h2 {
+            color: #ffffff !important;
+            font-size: 2.2rem;
+            border: none !important;
+            padding: 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        }
+
+        .fun-card p {
+            color: var(--fun-subtext);
+            font-size: 1.15rem;
+            margin-top: 0;
+            margin-bottom: 25px;
+            max-width: 80%;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* Badge design elements */
+        .fun-badge {
+            background: var(--fun-badge-bg);
+            color: var(--fun-badge-text);
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 5px 12px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .fun-action-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .fun-btn {
+            background: #ffffff;
+            color: #ff6b6b;
+            font-weight: bold;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s;
         }
         
-        .clickable-section:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        body.dark-mode-active .fun-btn {
+            color: #701a75;
+        }
+
+        .fun-section-container:hover .fun-btn {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .fun-stats {
+            display: flex;
+            gap: 20px;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .fun-stat-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         footer {
@@ -645,6 +775,12 @@
             }
             .quiz-options {
                 grid-template-columns: 1fr;
+            }
+            .fun-card {
+                padding: 30px 20px;
+            }
+            .fun-card p {
+                max-width: 100%;
             }
         }
 
@@ -902,12 +1038,24 @@
         <button onclick="resetZoomView()" style="margin-top:15px; background:transparent; color:white; border:1px solid #444; padding:8px 15px; border-radius:5px; cursor:pointer;">Reset View</button>
     </div>
 
-    <a href="mathwithfun.html" class="clickable-section">
-        <section style="border-left: 5px solid var(--success); margin-top: 25px; margin-bottom: 0;">
-            <h2>Maths With Fun</h2>
+    <a href="mathwithfun.html" class="fun-section-container">
+        <div class="fun-card">
+            <h2>
+                <span>Maths With Fun</span> 
+                <span class="fun-badge">Popular</span>
+            </h2>
             <p>Click here to explore interactive mathematical games, riddles, and engaging learning modules compiled externally!</p>
-            <span style="color: var(--success); font-weight: bold; font-size: 0.95rem;">Explore Section →</span>
-        </section>
+            
+            <div class="fun-action-row">
+                <div class="fun-btn">
+                    Play Games &amp; Puzzles <span>→</span>
+                </div>
+                <div class="fun-stats">
+                    <div class="fun-stat-item">🎮 <span>Games Included</span></div>
+                    <div class="fun-stat-item">🧩 <span>Riddles</span></div>
+                </div>
+            </div>
+        </div>
     </a>
 </div>
 
@@ -958,27 +1106,27 @@
                             min: -10,
                             max: 10,
                             grid: { color: horizontalGridSettings, borderColor: labelColor, tickColor: labelColor },
-                            ticks: { color: labelColor, font: { weight: 'bold' } }
+                            ticks: { color: labelColor }
                         },
                         y: {
                             type: 'linear',
                             min: -10,
                             max: 10,
                             grid: { color: horizontalGridSettings, borderColor: labelColor, tickColor: labelColor },
-                            ticks: { color: labelColor, font: { weight: 'bold' } }
+                            ticks: { color: labelColor }
                         }
                     },
                     plugins: {
                         legend: { labels: { color: labelColor } },
                         zoom: {
-                            pan: { enabled: true, mode: 'xy' },
+                            pan: { enabled: true, mode: 'xy', modifierKey: 'ctrl' },
                             zoom: { wheel: { enabled: true }, pinch: { enabled: true }, mode: 'xy' }
                         }
                     }
                 }
             });
         } catch (err) {
-            alert('Invalid Expression: ' + err);
+            alert('Invalid expression! Use math.js patterns e.g., sin(x), x^2');
         }
     }
 
@@ -988,269 +1136,213 @@
         }
     }
 
-    // --- Quadratic Solver Logic ---
-    function solveQuadratic() {
-        const a = parseFloat(document.getElementById('solve-a').value);
-        const b = parseFloat(document.getElementById('solve-b').value);
-        const c = parseFloat(document.getElementById('solve-c').value);
-        const output = document.getElementById('solver-steps-output');
-        
-        if (isNaN(a) || isNaN(b) || isNaN(c)) {
-            alert("Please provide valid coefficient inputs.");
-            return;
-        }
-        if (a === 0) {
-            alert("Coefficient 'a' cannot be 0 in a quadratic equation.");
-            return;
-        }
-
-        output.style.display = 'block';
-        output.innerHTML = '';
-
-        const d = b * b - 4 * a * c;
-        
-        let initialStep = document.createElement('div');
-        initialStep.className = 'step-item';
-        initialStep.innerHTML = `<strong>Step 1: Compute Discriminant (\\(D\\))</strong><br>\\(D = b^2 - 4ac\\)<br>\\(D = (${b})^2 - 4(${a})(${c}) = ${d}\\)`;
-        output.appendChild(initialStep);
-
-        let secondStep = document.createElement('div');
-        secondStep.className = 'step-item';
-        
-        if (d > 0) {
-            const r1 = (-b + Math.sqrt(d)) / (2 * a);
-            const r2 = (-b - Math.sqrt(d)) / (2 * a);
-            secondStep.innerHTML = `<strong>Step 2: Find Distinct Real Roots</strong><br>\\(x = \\frac{-b \\pm \\sqrt{D}}{2a}\\)<br>\\(x_1 = \\frac{-(${b}) + \\sqrt{${d}}}{2(${a})} = ${r1.toFixed(3)}\\)<br>\\(x_2 = \\frac{-(${b}) - \\sqrt{${d}}}{2(${a})} = ${r2.toFixed(3)}\\)`;
-        } else if (d === 0) {
-            const r = -b / (2 * a);
-            secondStep.innerHTML = `<strong>Step 2: Find Repeated Real Root</strong><br>\\(x = \\frac{-b}{2a}\\)<br>\\(x = \\frac{-(${b})}{2(${a})} = ${r.toFixed(3)}\\)`;
-        } else {
-            const real = -b / (2 * a);
-            const imag = Math.sqrt(-d) / (2 * a);
-            secondStep.innerHTML = `<strong>Step 2: Find Complex Conjugate Roots</strong><br>\\(x = \\frac{-b \\pm i\\sqrt{-D}}{2a}\\)<br>\\(x_1 = ${real.toFixed(3)} + ${imag.toFixed(3)}i\\)<br>\\(x_2 = ${real.toFixed(3)} - ${imag.toFixed(3)}i\\)`;
-        }
-        output.appendChild(secondStep);
-        
-        if (window.MathJax) {
-            MathJax.typesetPromise([output]);
-        }
-    }
-
-    // --- Interactive Quiz Bank ---
-    const quizBank = [
-        { q: "What is the derivative of \\(x^2 + 5x\\) with respect to \\(x\\)?", o: ["2x + 5", "x + 5", "2x", "5x"], a: 0 },
-        { q: "Evaluate the matrix determinant: \\(\\begin{vmatrix} 2 & 3 \\\\ 1 & 4 \\end{vmatrix}\\)", o: ["5", "11", "8", "-5"], a: 0 },
-        { q: "Which mathematician compiled the ancient geometric treatise 'The Elements'?", o: ["Archimedes", "Pythagoras", "Euclid", "Gauss"], a: 2 }
-    ];
-    let currentQuizIndex = 0;
-
-    function loadQuizQuestion() {
-        const item = quizBank[currentQuizIndex];
-        document.getElementById('quiz-question').innerHTML = `\\(\\mathbf{Q:}\\) ${item.q}`;
-        const optionsBox = document.getElementById('quiz-options-box');
-        optionsBox.innerHTML = '';
-        
-        item.o.forEach((opt, idx) => {
-            let btn = document.createElement('button');
-            btn.className = 'quiz-btn';
-            btn.innerHTML = opt;
-            btn.onclick = () => checkQuizAnswer(idx);
-            optionsBox.appendChild(btn);
-        });
-
-        document.getElementById('quiz-feedback-box').style.display = 'none';
-        document.getElementById('next-quiz-btn').style.display = 'none';
-
-        if (window.MathJax) {
-            MathJax.typesetPromise([document.getElementById('quiz-question'), optionsBox]);
-        }
-    }
-
-    function checkQuizAnswer(chosenIdx) {
-        const item = quizBank[currentQuizIndex];
-        const feedback = document.getElementById('quiz-feedback-box');
-        feedback.style.display = 'block';
-        
-        if (chosenIdx === item.a) {
-            feedback.style.background = 'rgba(39, 174, 96, 0.15)';
-            feedback.style.color = 'var(--success)';
-            feedback.innerHTML = "✓ Correct analytical choice! Excellent work.";
-        } else {
-            feedback.style.background = 'rgba(192, 57, 43, 0.15)';
-            feedback.style.color = 'var(--danger)';
-            feedback.innerHTML = `✗ Incorrect. Correct value was: ${item.o[item.a]}`;
-            if (window.MathJax) { MathJax.typesetPromise([feedback]); }
-        }
-        document.getElementById('next-quiz-btn').style.display = 'inline-block';
-    }
-
-    function loadNextQuestion() {
-        currentQuizIndex = (currentQuizIndex + 1) % quizBank.length;
-        loadQuizQuestion();
-    }
-
-    // --- 2D Linear Transformation Matrix Sandbox Engine ---
-    const mCanvas = document.getElementById('matrixCanvas');
-    const mCtx = mCanvas.getContext('2d');
-
-    function resizeMatrixCanvas() {
-        const holder = mCanvas.parentElement;
-        mCanvas.width = holder.clientWidth;
-        mCanvas.height = holder.clientHeight;
-        drawMatrixSpace();
-    }
-
+    // --- Matrix Render Engine ---
     function drawMatrixSpace() {
-        if (mCanvas.width === 0) return;
+        const canvas = document.getElementById('matrixCanvas');
+        if(!canvas) return;
+        const ctx = canvas.getContext('2d');
         
-        const w = mCanvas.width;
-        const h = mCanvas.height;
-        mCtx.clearRect(0, 0, w, h);
-        
-        const originX = w / 2;
-        const originY = h / 2;
-        const scale = 35; 
+        // Dynamic parent bounds sync
+        const pRect = canvas.parentElement.getBoundingClientRect();
+        canvas.width = pRect.width;
+        canvas.height = 220;
 
-        // Draw Cartesian Grid Lines
-        mCtx.strokeStyle = '#334155';
-        mCtx.lineWidth = 0.5;
-        for(let x = -w; x < w; x += scale) {
-            mCtx.beginPath(); mCtx.moveTo(originX + x, 0); mCtx.lineTo(originX + x, h); mCtx.stroke();
+        const w = canvas.width;
+        const h = canvas.height;
+
+        ctx.clearRect(0,0,w,h);
+        ctx.save();
+        ctx.translate(w/2, h/2);
+        ctx.scale(1, -1); // Mathematical coordinate mapping inversion
+
+        const a = parseFloat(document.getElementById('m-a').value) || 0;
+        const b = parseFloat(document.getElementById('m-b').value) || 0;
+        const c = parseFloat(document.getElementById('m-c').value) || 0;
+        const d = parseFloat(document.getElementById('m-d').value) || 0;
+
+        const scaleFactor = 35;
+
+        // Space Grid background structural array matrix lines computation loop
+        ctx.strokeStyle = '#334155';
+        ctx.lineWidth = 1;
+        for(let i = -5; i <= 5; i++) {
+            // Horizontal line transformation tracking vectors
+            let x1 = -5 * scaleFactor, y1 = i * scaleFactor;
+            let x2 = 5 * scaleFactor, y2 = i * scaleFactor;
+            ctx.beginPath();
+            ctx.moveTo(x1*a + y1*b, x1*c + y1*d);
+            ctx.lineTo(x2*a + y2*b, x2*c + y2*d);
+            ctx.stroke();
+
+            // Vertical structural grid transformation linear map executions
+            let vx1 = i * scaleFactor, vy1 = -5 * scaleFactor;
+            let vx2 = i * i * scaleFactor, vy2 = 5 * scaleFactor;
+            ctx.beginPath();
+            ctx.moveTo(vx1*a + vy1*b, vx1*c + vy1*d);
+            ctx.lineTo(i*scaleFactor*a + 5*scaleFactor*b, i*scaleFactor*c + 5*scaleFactor*d);
+            ctx.stroke();
         }
-        for(let y = -h; y < h; y += scale) {
-            mCtx.beginPath(); mCtx.moveTo(0, originY + y); mCtx.lineTo(w, originY + y); mCtx.stroke();
-        }
 
-        // Main Axes Lines
-        mCtx.strokeStyle = '#64748b';
-        mCtx.lineWidth = 1.5;
-        mCtx.beginPath(); mCtx.moveTo(0, originY); mCtx.lineTo(w, originY); mCtx.stroke();
-        mCtx.beginPath(); mCtx.moveTo(originX, 0); mCtx.lineTo(originX, h); mCtx.stroke();
+        // Standard Transformation standard basis spatial tracking line visuals
+        ctx.lineWidth = 3;
+        // Vector i-hat target node paths visual logic tracking
+        ctx.strokeStyle = '#e11d48';
+        ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(1*scaleFactor*a, 1*scaleFactor*c); ctx.stroke();
+        // Vector j-hat target paths tracking engine execution loop
+        ctx.strokeStyle = '#3b82f6';
+        ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(1*scaleFactor*b, 1*scaleFactor*d); ctx.stroke();
 
-        // Get Input Scalar Vectors
-        const ma = parseFloat(document.getElementById('m-a').value) || 0;
-        const mb = parseFloat(document.getElementById('m-b').value) || 0;
-        const mc = parseFloat(document.getElementById('m-c').value) || 0;
-        const md = parseFloat(document.getElementById('m-d').value) || 0;
-
-        // Plot Transformed Basis Vectors i-hat and j-hat
-        drawVector(originX, originY, ma * scale, -mc * scale, '#e94560', 'i\'');
-        drawVector(originX, originY, mb * scale, -md * scale, '#00f2fe', 'j\'');
+        ctx.restore();
     }
 
-    function drawVector(ox, oy, tx, ty, color, label) {
-        mCtx.strokeStyle = color;
-        mCtx.fillStyle = color;
-        mCtx.lineWidth = 3;
-        mCtx.beginPath();
-        mCtx.moveTo(ox, oy);
-        mCtx.lineTo(ox + tx, oy + ty);
-        mCtx.stroke();
-
-        // Arrow head logic component calculations
-        const angle = Math.atan2(ty, tx);
-        mCtx.beginPath();
-        mCtx.moveTo(ox + tx, oy + ty);
-        mCtx.lineTo(ox + tx - 10 * Math.cos(angle - Math.PI/6), oy + ty - 10 * Math.sin(angle - Math.PI/6));
-        mCtx.lineTo(ox + tx - 10 * Math.cos(angle + Math.PI/6), oy + ty - 10 * Math.sin(angle + Math.PI/6));
-        mCtx.fill();
-
-        mCtx.fillStyle = '#ffffff';
-        mCtx.font = '12px sans-serif';
-        mCtx.fillText(label, ox + tx + 5, oy + ty - 5);
-    }
-
-    // --- Curriculum Tracking Cache Architecture ---
-    function toggleNodeMastery(id) {
-        const node = document.getElementById(`node-${id}`);
-        const isMastered = node.classList.toggle('mastered');
-        const btn = node.querySelector('.master-btn');
-        btn.innerText = isMastered ? 'Mastered ✓' : 'Mark Mastered';
-        localStorage.setItem(`math-roadmap-${id}`, isMastered ? 'true' : 'false');
-    }
-
-    function initializeRoadmapCache() {
-        ['alg', 'calc', 'geom'].forEach(id => {
-            if(localStorage.getItem(`math-roadmap-${id}`) === 'true') {
-                const node = document.getElementById(`node-${id}`);
-                node.classList.add('mastered');
-                node.querySelector('.master-btn').innerText = 'Mastered ✓';
-            }
-        });
-    }
-
-    // --- High-Performance Complex Chaos Fractal Engine ---
-    const fCanvas = document.getElementById('fractalCanvas');
-    const fCtx = fCanvas.getContext('2d');
-
+    // --- Fractal Computation Matrix Module Engine ---
     function renderFractalEngine() {
-        const w = fCanvas.width = 320;
-        const h = fCanvas.height = 320;
+        const canvas = document.getElementById('fractalCanvas');
+        if(!canvas) return;
+        const ctx = canvas.getContext('2d');
         
         const cx = parseFloat(document.getElementById('param-cx').value);
         const cy = parseFloat(document.getElementById('param-cy').value);
-        
+
         document.getElementById('lbl-cx').innerText = `Real Constant (c_real): ${cx}`;
         document.getElementById('lbl-cy').innerText = `Imaginary Constant (c_imag): ${cy}`;
 
-        const imgData = fCtx.createImageData(w, h);
+        const width = 320;
+        const height = 320;
+        canvas.width = width;
+        canvas.height = height;
+
+        const imgData = ctx.createImageData(width, height);
         const maxIterations = 45;
 
-        for (let x = 0; x < w; x++) {
-            for (let y = 0; y < h; y++) {
-                // Map coordinates to complex mathematical plane plane space variables
-                let zx = 1.5 * (x - w / 2) / (0.5 * w);
-                let zy = (y - h / 2) / (0.5 * h);
-                let i = maxIterations;
+        // Scan loops matrix array parsing execution
+        for (let x = 0; x < width; x++) {
+            for (let y = 0; y < height; y++) {
+                // Scale structural boundary matrices vectors coordinate mapping mapping
+                let zx = 1.5 * (x - width / 2) / (0.5 * width);
+                let zy = 1.5 * (y - height / 2) / (0.5 * height);
 
-                while (zx * zx + zy * zy < 4.0 && i > 0) {
+                let i = maxIterations;
+                while (zx * zx + zy * zy < 4 && i > 0) {
                     let tmp = zx * zx - zy * zy + cx;
                     zy = 2.0 * zx * zy + cy;
                     zx = tmp;
                     i--;
                 }
 
-                const pixIdx = (x + y * w) * 4;
+                const pix = (x + y * width) * 4;
                 if (i === 0) {
-                    imgData.data[pixIdx] = 0;
-                    imgData.data[pixIdx + 1] = 0;
-                    imgData.data[pixIdx + 2] = 15;
+                    imgData.data[pix + 0] = 0;
+                    imgData.data[pix + 1] = 0;
+                    imgData.data[pix + 2] = 0;
                 } else {
-                    let cScale = (maxIterations - i) * 6;
-                    imgData.data[pixIdx] = cScale % 255; 
-                    imgData.data[pixIdx + 1] = (cScale * 2) % 255; 
-                    imgData.data[pixIdx + 2] = (cScale * 4) % 255; 
+                    let colorGrade = (maxIterations - i) * 6;
+                    imgData.data[pix + 0] = (colorGrade * 3) % 255;
+                    imgData.data[pix + 1] = (colorGrade * 1) % 255;
+                    imgData.data[pix + 2] = (colorGrade * 7) % 255;
                 }
-                imgData.data[pixIdx + 3] = 255; // Alpha
+                imgData.data[pix + 3] = 255; // Alpha
             }
         }
-        fCtx.putImageData(imgData, 0, 0);
+        ctx.putImageData(imgData, 0, 0);
     }
 
-    function loadFractalPreset(rx, iy) {
-        document.getElementById('param-cx').value = rx;
-        document.getElementById('param-cy').value = iy;
+    function loadFractalPreset(rc, ic) {
+        document.getElementById('param-cx').value = rc;
+        document.getElementById('param-cy').value = ic;
         renderFractalEngine();
     }
 
-    // --- Global Theme Engine Setup ---
-    const themeBtn = document.getElementById('dark-mode-toggle');
-    themeBtn.addEventListener('click', () => {
-        const active = document.body.classList.toggle('dark-mode-active');
-        themeBtn.innerText = active ? '☀️' : '🌙';
-        localStorage.setItem('premium-theme-profile', active ? 'dark' : 'light');
+    // --- Roadmap Node Mastery Persistence Core Layout Engine ---
+    function toggleNodeMastery(id) {
+        const element = document.getElementById(`node-${id}`);
+        if(!element) return;
+        
+        const isMastered = element.classList.toggle('mastered');
+        const btn = element.querySelector('.master-btn');
+        btn.innerText = isMastered ? 'Mastered ✓' : 'Mark Mastered';
+        
+        localStorage.setItem(`math-node-${id}`, isMastered ? 'true' : 'false');
+    }
+
+    function loadRoadmapNodeCache() {
+        ['alg', 'calc', 'geom'].forEach(id => {
+            const status = localStorage.getItem(`math-node-${id}`);
+            if(status === 'true') {
+                const element = document.getElementById(`node-${id}`);
+                if(element) {
+                    element.classList.add('mastered');
+                    element.querySelector('.master-btn').innerText = 'Mastered ✓';
+                }
+            }
+        });
+    }
+
+    // --- Quick Mock Quiz Array Engine Dataset Modules ---
+    const quizData = [
+        { q: "Which core mathematician introduced the notation base symbol configuration for 'e'?", o: ["Newton", "Gauss", "Euler", "Leibniz"], a: 2, f: "Leonhard Euler launched modern function analytics modeling notation mappings." },
+        { q: "What is the precise analytical determinant value array of a 2x2 Identity matrix structure configuration?", o: ["0", "1", "-1", "Infinity"], a: 1, f: "Identity transform matrix structures map dimensions exactly without tracking spatial area alterations." }
+    ];
+    let currentQuizIndex = 0;
+
+    function renderQuizInterfaceNode() {
+        const data = quizData[currentQuizIndex];
+        document.getElementById('quiz-question').innerText = data.q;
+        const optionsBox = document.getElementById('quiz-options-box');
+        optionsBox.innerHTML = '';
+        
+        document.getElementById('quiz-feedback-box').style.display = 'none';
+        document.getElementById('next-quiz-btn').style.display = 'none';
+
+        data.o.forEach((option, idx) => {
+            const btn = document.createElement('button');
+            btn.className = 'quiz-btn';
+            btn.innerText = option;
+            btn.onclick = () => verifyQuizAnswerResponse(idx);
+            optionsBox.appendChild(btn);
+        });
+    }
+
+    function verifyQuizAnswerResponse(selectedIndex) {
+        const data = quizData[currentQuizIndex];
+        const feedback = document.getElementById('quiz-feedback-box');
+        feedback.style.display = 'block';
+        
+        if(selectedIndex === data.a) {
+            feedback.style.background = 'rgba(39, 174, 96, 0.15)';
+            feedback.style.color = 'var(--success)';
+            feedback.innerText = `Correct! ${data.f}`;
+        } else {
+            feedback.style.background = 'rgba(192, 57, 43, 0.15)';
+            feedback.style.color = 'var(--danger)';
+            feedback.innerText = `Incorrect. Try checking operational identities.`;
+        }
+        document.getElementById('next-quiz-btn').style.display = 'inline-block';
+    }
+
+    function loadNextQuestion() {
+        currentQuizIndex = (currentQuizIndex + 1) % quizData.length;
+        renderQuizInterfaceNode();
+    }
+
+    // --- Interactive Theme Setup Operations Framework ---
+    document.getElementById('dark-mode-toggle').addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode-active');
+        const isDark = document.body.classList.contains('dark-mode-active');
+        localStorage.setItem('dark-mode-setting', isDark ? 'enabled' : 'disabled');
+        document.getElementById('dark-mode-toggle').innerText = isDark ? '☀️' : '🌙';
     });
 
-    function loadSavedTheme() {
-        if(localStorage.getItem('premium-theme-profile') === 'dark') {
+    function applyCachedThemeSetting() {
+        if(localStorage.getItem('dark-mode-setting') === 'enabled') {
             document.body.classList.add('dark-mode-active');
-            themeBtn.innerText = '☀️';
+            document.getElementById('dark-mode-toggle').innerText = '☀️';
         }
     }
 
-    // --- Interactive Core Mobile Navigation Support Handling ---
-    document.querySelectorAll('.has-dropdown').forEach(triggerItem => {
-        triggerItem.addEventListener('click', function(e) {
+    // --- Touch Mobile UI Dropdown Handlers Configuration ---
+    document.querySelectorAll('.has-dropdown').forEach(item => {
+        item.addEventListener('click', function(e) {
             if(window.innerWidth <= 768) {
                 e.preventDefault();
                 this.parentElement.classList.toggle('dropdown-active');
@@ -1258,18 +1350,14 @@
         });
     });
 
-    // --- Initialization Phase Pipeline ---
+    // Unified Engine Execution Loops Initializers
     window.addEventListener('DOMContentLoaded', () => {
-        loadSavedTheme();
+        applyCachedThemeSetting();
         plotGraph();
-        loadQuizQuestion();
-        initializeRoadmapCache();
+        drawMatrixSpace();
         renderFractalEngine();
-        setTimeout(resizeMatrixCanvas, 200);
-    });
-
-    window.addEventListener('resize', () => {
-        resizeMatrixCanvas();
+        loadRoadmapNodeCache();
+        renderQuizInterfaceNode();
     });
 </script>
 </body>
