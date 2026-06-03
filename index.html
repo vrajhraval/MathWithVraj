@@ -32,14 +32,14 @@
         :root {
             --primary: #2c3e50;
             --accent: #2980b9;
-            --light: #f4f7f6;
+            --light: #f1f5f9;
             --success: #27ae60;
             --danger: #c0392b;
-            --header-bg: white;
+            --header-bg: rgba(255, 255, 255, 0.95);
             --text-color: #333;
-            --card-bg: white;
+            --card-bg: rgba(255, 255, 255, 0.9);
             --sub-text: #666;
-            --border-color: #ddd;
+            --border-color: #cbd5e1;
             --formula-card-bg: #fdfdfd;
             --quiz-container-bg: #fafafa;
             --quiz-btn-bg: white;
@@ -49,6 +49,10 @@
             --dropdown-bg: white;
             --dropdown-shadow: rgba(0, 0, 0, 0.15);
             
+            /* Math Blueprint Background Pattern Grid Colors */
+            --grid-line: rgba(41, 128, 185, 0.08);
+            --grid-line-bold: rgba(41, 128, 185, 0.15);
+
             /* Fun Section Specific Themes Variables */
             --fun-bg: linear-gradient(135deg, #ff6b6b, #ff8e53);
             --fun-text: #ffffff;
@@ -62,10 +66,10 @@
         body.dark-mode-active {
             --primary: #0f172a;
             --accent: #3498db;
-            --light: #0f172a;
-            --header-bg: #1e293b;
+            --light: #0b0f19;
+            --header-bg: rgba(30, 41, 59, 0.95);
             --text-color: #cbd5e1;
-            --card-bg: #1e293b;
+            --card-bg: rgba(30, 41, 59, 0.9);
             --sub-text: #94a3b8;
             --border-color: #475569;
             --formula-card-bg: #111827;
@@ -76,6 +80,10 @@
             --nav-link-hover: #3498db;
             --dropdown-bg: #1e293b;
             --dropdown-shadow: rgba(0, 0, 0, 0.4);
+            
+            /* Dark Mode Blueprint Grid Colors */
+            --grid-line: rgba(52, 152, 219, 0.05);
+            --grid-line-bold: rgba(52, 152, 219, 0.12);
 
             /* Dark mode override overrides for Fun Section layout */
             --fun-bg: linear-gradient(135deg, #701a75, #4c1d95);
@@ -93,6 +101,14 @@
             margin: 0;
             padding: 0;
             background-color: var(--light);
+            /* Advanced Dynamic Mathematical Blueprint Grid Background System */
+            background-image: 
+                linear-gradient(var(--grid-line-bold) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line-bold) 1px, transparent 1px),
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+            background-position: -1px -1px, -1px -1px, -1px -1px, -1px -1px;
             color: var(--text-color);
             line-height: 1.6;
             transition: background-color 0.3s ease, color 0.3s ease;
@@ -110,6 +126,7 @@
         /* Header Top with Nav Alignment */
         .header-top {
             background: var(--header-bg);
+            backdrop-filter: blur(8px);
             padding: 15px 5%;
             display: flex;
             justify-content: space-between;
@@ -245,6 +262,7 @@
             background: linear-gradient(135deg, #2c3e50, #2980b9);
             color: white;
             margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         header h1 {
@@ -260,11 +278,13 @@
 
         section {
             background: var(--card-bg);
+            backdrop-filter: blur(4px);
             padding: 35px;
             margin-bottom: 25px;
             border-radius: 14px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
 
         h2 {
@@ -308,17 +328,21 @@
             transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
-        /* Solver */
+        /* Solver UI Controls Configuration */
         .solver-ui {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
             align-items: center;
             margin-top: 20px;
+            background: var(--quiz-container-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
         }
 
         .solver-ui input {
-            width: 80px;
+            width: 90px;
             padding: 10px;
             border: 2px solid var(--border-color);
             background: var(--formula-card-bg);
@@ -326,7 +350,18 @@
             border-radius: 6px;
             text-align: center;
             font-size: 1rem;
+            font-weight: 600;
             transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+        }
+
+        .solver-ui input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .solver-ui span {
+            font-size: 1.1rem;
+            font-weight: 500;
         }
 
         .solver-btn {
@@ -337,6 +372,12 @@
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .solver-btn:hover {
+            background-color: #1f6b9c;
         }
 
         .solver-steps {
@@ -360,6 +401,8 @@
 
         .step-item:last-child {
             border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
 
         /* Quiz Container with Restored Border */
@@ -416,6 +459,7 @@
             border-radius: 6px;
             cursor: pointer;
             display: none;
+            font-weight: 600;
         }
 
         /* Matrix App UI Design */
@@ -451,6 +495,10 @@
             border-radius: 8px;
             height: 220px;
             position: relative;
+        }
+        #matrixCanvas {
+            width: 100%;
+            height: 100%;
         }
 
         /* Learning Path Tree Nodes */
@@ -925,11 +973,11 @@
         <h2>4. Interactive Quadratic Solver</h2>
         <div class="solver-ui">
             <input type="number" id="solve-a" value="1">
-            <span>\(x^2+\)</span>
+            <span>\(x^2\ + \)</span>
             <input type="number" id="solve-b" value="-5">
-            <span>\(x+\)</span>
+            <span>\(x\ + \)</span>
             <input type="number" id="solve-c" value="6">
-            <span>\(=0\)</span>
+            <span>\(= 0\)</span>
             <button class="solver-btn" onclick="solveQuadratic()">Solve</button>
         </div>
         <div class="solver-steps" id="solver-steps-output"></div>
@@ -1005,18 +1053,11 @@
                     <label id="lbl-cy">Imaginary Constant (c_imag): 0.27015</label>
                     <input type="range" id="param-cy" min="-1.5" max="1.5" step="0.01" value="0.27" oninput="renderFractalEngine()">
                 </div>
-                <div class="fractal-control-group">
-                    <label>Structural Presets:</label>
-                    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:5px;">
-                        <button class="fractal-preset-btn" onclick="loadFractalPreset(-0.4, 0.6)">Classic Dendrite</button>
-                        <button class="fractal-preset-btn" onclick="loadFractalPreset(-0.7, 0.27015)">Classic Douady</button>
-                        <button class="fractal-preset-btn" onclick="loadFractalPreset(-0.8, 0.156)">Galactic Whirlpool</button>
-                        <button class="fractal-preset-btn" onclick="loadFractalPreset(0.285, 0.01)">Romanesque Broccoli</button>
-                    </div>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 5px;">
+                    <button class="fractal-preset-btn" onclick="applyFractalPreset(-0.4, 0.6)">Classic Dendrite</button>
+                    <button class="fractal-preset-btn" onclick="applyFractalPreset(-0.8, 0.156)">Sieving Dust</button>
+                    <button class="fractal-preset-btn" onclick="applyFractalPreset(0.285, 0.01)">Exploding Star</button>
                 </div>
-                <p style="font-size:0.85rem; color:var(--sub-text); margin:0;">
-                    Calculated by computing iterating coordinate matrices through $Z_{n+1} = Z_n^2 + C$. Pixels that escape to infinity are shaded by their velocity profile.
-                </p>
             </div>
             <div class="fractal-canvas-holder">
                 <canvas id="fractalCanvas"></canvas>
@@ -1024,341 +1065,408 @@
         </div>
     </section>
 
-    <div class="graph-section">
-        <h2 style="color:#e94560;">Interactive Cartesian Plane</h2>
-        <p>Visualize mathematical functions in real time.</p>
+    <section class="graph-section">
+        <h2>9. Interactive Function Grapher</h2>
+        <p>Enter a mathematical function in terms of x (e.g., sin(x), x^2 - 4) to plot it in real-time. Drag to pan, scroll to zoom.</p>
         <div class="graph-ui">
-            <span style="font-size:1.5rem;">f(x)=</span>
-            <input type="text" id="eq-input" value="sin(x) * x" placeholder="e.g. x^2, cos(x), sqrt(x)">
-            <button class="plot-btn" onclick="plotGraph()">Generate Graph</button>
+            <input type="text" id="function-input" value="sin(x) * x">
+            <button class="plot-btn" onclick="plotFunction()">Plot Function</button>
         </div>
         <div class="chart-container">
-            <canvas id="mathChart"></canvas>
+            <canvas id="functionChart"></canvas>
         </div>
-        <button onclick="resetZoomView()" style="margin-top:15px; background:transparent; color:white; border:1px solid #444; padding:8px 15px; border-radius:5px; cursor:pointer;">Reset View</button>
-    </div>
+    </section>
 
-    <a href="mathwithfun.html" class="fun-section-container">
+    <a href="fun.html" class="fun-section-container">
         <div class="fun-card">
             <h2>
-                <span>Maths With Fun</span> 
-                <span class="fun-badge">Popular</span>
+                <span>✨ Math with Fun Sandbox</span> 
+                <span class="fun-badge">Active Game Zone</span>
             </h2>
-            <p>Click here to explore interactive mathematical games, riddles, and engaging learning modules compiled externally!</p>
-            
+            <p>Step out of theoretical mechanics and jump right into math gaming modules! Master geometry proofs via gamified environments and track your live achievements.</p>
             <div class="fun-action-row">
-                <div class="fun-btn">
-                    Play Games &amp; Puzzles <span>→</span>
-                </div>
+                <span class="fun-btn">Enter Sandbox Arcade →</span>
                 <div class="fun-stats">
-                    <div class="fun-stat-item">🎮 <span>Games Included</span></div>
-                    <div class="fun-stat-item">🧩 <span>Riddles</span></div>
+                    <div class="fun-stat-item">🏆 <span>3 Active Mini-Games</span></div>
+                    <div class="fun-stat-item">⚡ <span>Live Global Leaderboard</span></div>
                 </div>
             </div>
         </div>
     </a>
-</div>
 
-<footer>
-    © 2026 Mathematics History Project | Vraj H Raval | Anand, Gujarat
+</div> <footer>
+    <p>&copy; 2026 Vraj H Raval | Built for Advanced Mathematical Systems Education.</p>
 </footer>
 
 <script>
-    let myChart;
+/* ==========================================================================
+   1. PREMIUM DARK MODE CONFIGURATION
+   ========================================================================== */
+const darkToggle = document.getElementById('dark-mode-toggle');
+darkToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode-active');
+    const isDark = document.body.classList.contains('dark-mode-active');
+    darkToggle.textContent = isDark ? '☀️' : '🌙';
+    localStorage.setItem('math-theme-dark', isDark);
+    
+    // Refresh canvas engines with updated theme profiles if they exist
+    if(window.myChart) plotFunction();
+    drawMatrixSpace();
+});
 
-    // --- Graph Plotting Logic ---
-    function plotGraph() {
-        const input = document.getElementById('eq-input').value;
-        const points = [];
-        try {
-            const expr = math.compile(input);
-            for (let x = -50; x <= 50; x += 0.05) {
-                let y = expr.evaluate({ x: x });
-                if (typeof y === 'number' && isFinite(y)) {
-                    points.push({ x: x, y: y });
-                }
-            }
+// Initialize theme from storage persistent parameters
+if (localStorage.getItem('math-theme-dark') === 'true') {
+    document.body.classList.add('dark-mode-active');
+    darkToggle.textContent = '☀️';
+}
 
-            if (myChart) { myChart.destroy(); }
 
-            const ctx = document.getElementById('mathChart').getContext('2d');
-            const labelColor = '#ffffff'; 
-            const horizontalGridSettings = 'rgba(255, 255, 255, 0.12)'; 
-
-            myChart = new Chart(ctx, {
-                type: 'scatter',
-                data: {
-                    datasets: [{
-                        label: 'f(x)',
-                        data: points,
-                        showLine: true,
-                        borderColor: '#e94560',
-                        borderWidth: 2.5,
-                        pointRadius: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: {
-                            type: 'linear',
-                            min: -10,
-                            max: 10,
-                            grid: { color: horizontalGridSettings, borderColor: labelColor, tickColor: labelColor },
-                            ticks: { color: labelColor }
-                        },
-                        y: {
-                            type: 'linear',
-                            min: -10,
-                            max: 10,
-                            grid: { color: horizontalGridSettings, borderColor: labelColor, tickColor: labelColor },
-                            ticks: { color: labelColor }
-                        }
-                    },
-                    plugins: {
-                        legend: { labels: { color: labelColor } },
-                        zoom: {
-                            pan: { enabled: true, mode: 'xy', modifierKey: 'ctrl' },
-                            zoom: { wheel: { enabled: true }, pinch: { enabled: true }, mode: 'xy' }
-                        }
-                    }
-                }
-            });
-        } catch (err) {
-            alert('Invalid expression! Use math.js patterns e.g., sin(x), x^2');
-        }
+/* ==========================================================================
+   2. INTERACTIVE QUADRATIC SOLVER WITH STEPS (FIXED)
+   ========================================================================== */
+function solveQuadratic() {
+    const a = parseFloat(document.getElementById('solve-a').value);
+    const b = parseFloat(document.getElementById('solve-b').value);
+    const c = parseFloat(document.getElementById('solve-c').value);
+    const out = document.getElementById('solver-steps-output');
+    
+    if (isNaN(a) || isNaN(b) || isNaN(c)) {
+        out.innerHTML = "<p style='color:var(--danger);'>Error: Please enter valid coefficient structures.</p>";
+        out.style.display = 'block';
+        return;
+    }
+    if (a === 0) {
+        out.innerHTML = "<p style='color:var(--danger);'>Error: 'a' cannot equal 0 in a quadratic equation.</p>";
+        out.style.display = 'block';
+        return;
     }
 
-    function resetZoomView() {
-        if (myChart) {
-            myChart.resetZoom();
-        }
+    out.style.display = 'block';
+    const disc = (b * b) - (4 * a * c);
+    
+    let html = `<h3>Solution Trace Strategy</h3>`;
+    html += `<div class="step-item"><strong>Step 1: Identify Parameters</strong><br>Given coefficients: \\(a = ${a}\\), \\(b = ${b}\\), \\(c = ${c}\\)</div>`;
+    html += `<div class="step-item"><strong>Step 2: Evaluate Discriminant (\\(D\\))</strong><br>Formula: \\(D = b^2 - 4ac\\)<br>Evaluation: \\(D = (${b})^2 - 4(${a})(${c}) = ${disc}\\)</div>`;
+
+    if (disc < 0) {
+        const realPart = (-b / (2 * a)).toFixed(3);
+        const imagPart = (Math.sqrt(-disc) / (2 * a)).toFixed(3);
+        html += `<div class="step-item"><strong>Step 3: Complex Root Computations</strong><br>Since \\(D < 0\\), solutions exist as complex conjugates:<br>
+                 \\(x_1 = ${realPart} + ${imagPart}i\\)<br>\\(x_2 = ${realPart} - ${imagPart}i\\)</div>`;
+    } else if (disc === 0) {
+        const root = (-b / (2 * a)).toFixed(3);
+        html += `<div class="step-item"><strong>Step 3: Equal Root Mechanics</strong><br>\\(D = 0\\), indicating a perfect square trinomial with a repeated root mapping:<br>\\(x = \\frac{-b}{2a} = \\frac{-(${b})}{2(${a})} = ${root}\\)</div>`;
+    } else {
+        const r1 = ((-b + Math.sqrt(disc)) / (2 * a)).toFixed(3);
+        const r2 = ((-b - Math.sqrt(disc)) / (2 * a)).toFixed(3);
+        html += `<div class="step-item"><strong>Step 3: Extract Real Roots</strong><br>
+                 Using \\(x = \\frac{-b \\pm \\sqrt{D}}{2a}\\):<br><br>
+                 \\(x_1 = \\frac{-(${b}) + \\sqrt{${disc}}}{2(${a})} = ${r1}\\)<br>
+                 \\(x_2 = \\frac{-(${b}) - \\sqrt{${disc}}}{2(${a})} = ${r2}\\)</div>`;
     }
+    
+    out.innerHTML = html;
+    MathJax.typesetPromise([out]); // Re-render mathematical typesetting formulas
+}
 
-    // --- Matrix Render Engine ---
-    function drawMatrixSpace() {
-        const canvas = document.getElementById('matrixCanvas');
-        if(!canvas) return;
-        const ctx = canvas.getContext('2d');
-        
-        // Dynamic parent bounds sync
-        const pRect = canvas.parentElement.getBoundingClientRect();
-        canvas.width = pRect.width;
-        canvas.height = 220;
 
-        const w = canvas.width;
-        const h = canvas.height;
+/* ==========================================================================
+   3. PRACTICE CENTER INTERACTIVE QUIZ ENGINE (MATH VALIDATED)
+   ========================================================================== */
+const quizDatabase = [
+    { q: "What is the derivative of \\(f(x) = x^3 - 5x + 2\\)?", o: ["3x^2 - 5", "x^2 - 5", "3x^2", "3x^2 - 5x"], a: 0 },
+    { q: "If matrix \\(A\\) has a determinant equal to 0, what can be stated analytically about \\(A\\)?", o: ["It is Identity", "It is Symmetric", "It is Singular (Non-invertible)", "It is Orthogonal"], a: 2 },
+    { q: "Evaluate the definite integral: \\(\\int_0^2 3x^2 \\, dx\\).", o: ["4", "6", "8", "12"], a: 2 },
+    { q: "What is the value of \\(\\lim_{x \\to 0} \\frac{\\sin(x)}{x}\\)?", o: ["0", "1", "Undefined", "\\(\\infty\\)"], a: 1 },
+    { q: "Which core theorem connects complex exponentials to trigonometric fields via \\(e^{ix} = \\cos(x) + i\\sin(x)\\)?", o: ["De Moivre's Theorem", "Euler's Formula", "Taylor's Theorem", "Lagrange Mean Value Theorem"], a: 1 }
+];
+let currentQuizIdx = 0;
 
-        ctx.clearRect(0,0,w,h);
-        ctx.save();
-        ctx.translate(w/2, h/2);
-        ctx.scale(1, -1); // Mathematical coordinate mapping inversion
+function loadQuizQuestion() {
+    const fb = document.getElementById('quiz-feedback-box');
+    const nxt = document.getElementById('next-quiz-btn');
+    fb.style.display = 'none';
+    nxt.style.display = 'none';
 
-        const a = parseFloat(document.getElementById('m-a').value) || 0;
-        const b = parseFloat(document.getElementById('m-b').value) || 0;
-        const c = parseFloat(document.getElementById('m-c').value) || 0;
-        const d = parseFloat(document.getElementById('m-d').value) || 0;
-
-        const scaleFactor = 35;
-
-        // Space Grid background structural array matrix lines computation loop
-        ctx.strokeStyle = '#334155';
-        ctx.lineWidth = 1;
-        for(let i = -5; i <= 5; i++) {
-            // Horizontal line transformation tracking vectors
-            let x1 = -5 * scaleFactor, y1 = i * scaleFactor;
-            let x2 = 5 * scaleFactor, y2 = i * scaleFactor;
-            ctx.beginPath();
-            ctx.moveTo(x1*a + y1*b, x1*c + y1*d);
-            ctx.lineTo(x2*a + y2*b, x2*c + y2*d);
-            ctx.stroke();
-
-            // Vertical structural grid transformation linear map executions
-            let vx1 = i * scaleFactor, vy1 = -5 * scaleFactor;
-            let vx2 = i * i * scaleFactor, vy2 = 5 * scaleFactor;
-            ctx.beginPath();
-            ctx.moveTo(vx1*a + vy1*b, vx1*c + vy1*d);
-            ctx.lineTo(i*scaleFactor*a + 5*scaleFactor*b, i*scaleFactor*c + 5*scaleFactor*d);
-            ctx.stroke();
-        }
-
-        // Standard Transformation standard basis spatial tracking line visuals
-        ctx.lineWidth = 3;
-        // Vector i-hat target node paths visual logic tracking
-        ctx.strokeStyle = '#e11d48';
-        ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(1*scaleFactor*a, 1*scaleFactor*c); ctx.stroke();
-        // Vector j-hat target paths tracking engine execution loop
-        ctx.strokeStyle = '#3b82f6';
-        ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(1*scaleFactor*b, 1*scaleFactor*d); ctx.stroke();
-
-        ctx.restore();
-    }
-
-    // --- Fractal Computation Matrix Module Engine ---
-    function renderFractalEngine() {
-        const canvas = document.getElementById('fractalCanvas');
-        if(!canvas) return;
-        const ctx = canvas.getContext('2d');
-        
-        const cx = parseFloat(document.getElementById('param-cx').value);
-        const cy = parseFloat(document.getElementById('param-cy').value);
-
-        document.getElementById('lbl-cx').innerText = `Real Constant (c_real): ${cx}`;
-        document.getElementById('lbl-cy').innerText = `Imaginary Constant (c_imag): ${cy}`;
-
-        const width = 320;
-        const height = 320;
-        canvas.width = width;
-        canvas.height = height;
-
-        const imgData = ctx.createImageData(width, height);
-        const maxIterations = 45;
-
-        // Scan loops matrix array parsing execution
-        for (let x = 0; x < width; x++) {
-            for (let y = 0; y < height; y++) {
-                // Scale structural boundary matrices vectors coordinate mapping mapping
-                let zx = 1.5 * (x - width / 2) / (0.5 * width);
-                let zy = 1.5 * (y - height / 2) / (0.5 * height);
-
-                let i = maxIterations;
-                while (zx * zx + zy * zy < 4 && i > 0) {
-                    let tmp = zx * zx - zy * zy + cx;
-                    zy = 2.0 * zx * zy + cy;
-                    zx = tmp;
-                    i--;
-                }
-
-                const pix = (x + y * width) * 4;
-                if (i === 0) {
-                    imgData.data[pix + 0] = 0;
-                    imgData.data[pix + 1] = 0;
-                    imgData.data[pix + 2] = 0;
-                } else {
-                    let colorGrade = (maxIterations - i) * 6;
-                    imgData.data[pix + 0] = (colorGrade * 3) % 255;
-                    imgData.data[pix + 1] = (colorGrade * 1) % 255;
-                    imgData.data[pix + 2] = (colorGrade * 7) % 255;
-                }
-                imgData.data[pix + 3] = 255; // Alpha
-            }
-        }
-        ctx.putImageData(imgData, 0, 0);
-    }
-
-    function loadFractalPreset(rc, ic) {
-        document.getElementById('param-cx').value = rc;
-        document.getElementById('param-cy').value = ic;
-        renderFractalEngine();
-    }
-
-    // --- Roadmap Node Mastery Persistence Core Layout Engine ---
-    function toggleNodeMastery(id) {
-        const element = document.getElementById(`node-${id}`);
-        if(!element) return;
-        
-        const isMastered = element.classList.toggle('mastered');
-        const btn = element.querySelector('.master-btn');
-        btn.innerText = isMastered ? 'Mastered ✓' : 'Mark Mastered';
-        
-        localStorage.setItem(`math-node-${id}`, isMastered ? 'true' : 'false');
-    }
-
-    function loadRoadmapNodeCache() {
-        ['alg', 'calc', 'geom'].forEach(id => {
-            const status = localStorage.getItem(`math-node-${id}`);
-            if(status === 'true') {
-                const element = document.getElementById(`node-${id}`);
-                if(element) {
-                    element.classList.add('mastered');
-                    element.querySelector('.master-btn').innerText = 'Mastered ✓';
-                }
-            }
-        });
-    }
-
-    // --- Quick Mock Quiz Array Engine Dataset Modules ---
-    const quizData = [
-        { q: "Which core mathematician introduced the notation base symbol configuration for 'e'?", o: ["Newton", "Gauss", "Euler", "Leibniz"], a: 2, f: "Leonhard Euler launched modern function analytics modeling notation mappings." },
-        { q: "What is the precise analytical determinant value array of a 2x2 Identity matrix structure configuration?", o: ["0", "1", "-1", "Infinity"], a: 1, f: "Identity transform matrix structures map dimensions exactly without tracking spatial area alterations." }
-    ];
-    let currentQuizIndex = 0;
-
-    function renderQuizInterfaceNode() {
-        const data = quizData[currentQuizIndex];
-        document.getElementById('quiz-question').innerText = data.q;
-        const optionsBox = document.getElementById('quiz-options-box');
-        optionsBox.innerHTML = '';
-        
-        document.getElementById('quiz-feedback-box').style.display = 'none';
-        document.getElementById('next-quiz-btn').style.display = 'none';
-
-        data.o.forEach((option, idx) => {
-            const btn = document.createElement('button');
-            btn.className = 'quiz-btn';
-            btn.innerText = option;
-            btn.onclick = () => verifyQuizAnswerResponse(idx);
-            optionsBox.appendChild(btn);
-        });
-    }
-
-    function verifyQuizAnswerResponse(selectedIndex) {
-        const data = quizData[currentQuizIndex];
-        const feedback = document.getElementById('quiz-feedback-box');
-        feedback.style.display = 'block';
-        
-        if(selectedIndex === data.a) {
-            feedback.style.background = 'rgba(39, 174, 96, 0.15)';
-            feedback.style.color = 'var(--success)';
-            feedback.innerText = `Correct! ${data.f}`;
-        } else {
-            feedback.style.background = 'rgba(192, 57, 43, 0.15)';
-            feedback.style.color = 'var(--danger)';
-            feedback.innerText = `Incorrect. Try checking operational identities.`;
-        }
-        document.getElementById('next-quiz-btn').style.display = 'inline-block';
-    }
-
-    function loadNextQuestion() {
-        currentQuizIndex = (currentQuizIndex + 1) % quizData.length;
-        renderQuizInterfaceNode();
-    }
-
-    // --- Interactive Theme Setup Operations Framework ---
-    document.getElementById('dark-mode-toggle').addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode-active');
-        const isDark = document.body.classList.contains('dark-mode-active');
-        localStorage.setItem('dark-mode-setting', isDark ? 'enabled' : 'disabled');
-        document.getElementById('dark-mode-toggle').innerText = isDark ? '☀️' : '🌙';
+    const item = quizDatabase[currentQuizIdx];
+    document.getElementById('quiz-question').innerHTML = `<strong>Question:</strong> ${item.q}`;
+    
+    const optBox = document.getElementById('quiz-options-box');
+    optBox.innerHTML = '';
+    
+    item.o.forEach((option, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-btn';
+        btn.innerHTML = option;
+        btn.onclick = () => verifyQuizAnswer(idx);
+        optBox.appendChild(btn);
     });
+    MathJax.typesetPromise([document.getElementById('quiz-question'), optBox]);
+}
 
-    function applyCachedThemeSetting() {
-        if(localStorage.getItem('dark-mode-setting') === 'enabled') {
-            document.body.classList.add('dark-mode-active');
-            document.getElementById('dark-mode-toggle').innerText = '☀️';
+function verifyQuizAnswer(chosenIdx) {
+    const item = quizDatabase[currentQuizIdx];
+    const fb = document.getElementById('quiz-feedback-box');
+    const nxt = document.getElementById('next-quiz-btn');
+    
+    if (chosenIdx === item.a) {
+        fb.style.background = "rgba(39, 174, 96, 0.15)";
+        fb.style.color = "var(--success)";
+        fb.innerHTML = "🎯 Brilliant! Your mathematical deduction is completely flawless.";
+    } else {
+        fb.style.background = "rgba(192, 57, 43, 0.15)";
+        fb.style.color = "var(--danger)";
+        fb.innerHTML = `❌ Incorrect. The correct mathematical solution is: <strong>${item.o[item.a]}</strong>. Review logic metrics!`;
+    }
+    fb.style.display = "block";
+    nxt.style.display = "inline-block";
+}
+
+function loadNextQuestion() {
+    currentQuizIdx = (currentQuizIdx + 1) % quizDatabase.length;
+    loadQuizQuestion();
+}
+
+
+/* ==========================================================================
+   4. 2D LINEAR TRANSFORMATION VECTOR ENGINE
+   ========================================================================== */
+const mCanvas = document.getElementById('matrixCanvas');
+const mCtx = mCanvas.getContext('2d');
+
+function setupMatrixCanvasLayout() {
+    const dpr = window.devicePixelRatio || 1;
+    const size = mCanvas.parentElement.clientWidth || 220;
+    mCanvas.width = size * dpr;
+    mCanvas.height = 220 * dpr;
+    mCanvas.style.width = size + 'px';
+    mCanvas.style.height = '220px';
+    mCtx.scale(dpr, dpr);
+}
+
+function drawMatrixSpace() {
+    if (!mCanvas) return;
+    const w = mCanvas.width / (window.devicePixelRatio || 1);
+    const h = mCanvas.height / (window.devicePixelRatio || 1);
+    const cx = w / 2;
+    const cy = h / 2;
+    const scale = 35; // Grid Unit Magnification Factor
+
+    mCtx.clearRect(0, 0, w, h);
+
+    // Coordinate Grid Mesh Vectors
+    mCtx.strokeStyle = '#2d3748';
+    mCtx.lineWidth = 0.5;
+    for(let x = cx % scale; x < w; x += scale) {
+        mCtx.beginPath(); mCtx.moveTo(x, 0); mCtx.lineTo(x, h); mCtx.stroke();
+    }
+    for(let y = cy % scale; y < h; y += scale) {
+        mCtx.beginPath(); mCtx.moveTo(0, y); mCtx.lineTo(w, y); mCtx.stroke();
+    }
+
+    // Origin Axes
+    mCtx.strokeStyle = '#4a5568';
+    mCtx.lineWidth = 2;
+    mCtx.beginPath(); mCtx.moveTo(0, cy); mCtx.lineTo(w, cy); mCtx.stroke();
+    mCtx.beginPath(); mCtx.moveTo(cx, 0); mCtx.lineTo(cx, h); mCtx.stroke();
+
+    // Pull transformation matrix properties
+    const ma = parseFloat(document.getElementById('m-a').value) || 0;
+    const mb = parseFloat(document.getElementById('m-b').value) || 0;
+    const mc = parseFloat(document.getElementById('m-c').value) || 0;
+    const md = parseFloat(document.getElementById('m-d').value) || 0;
+
+    // Render Basis Vector Target 1 (i-hat transform)
+    mCtx.strokeStyle = '#e53e3e'; // Crimson Hue
+    mCtx.lineWidth = 3;
+    mCtx.beginPath();
+    mCtx.moveTo(cx, cy);
+    mCtx.lineTo(cx + ma * scale, cy - mc * scale);
+    mCtx.stroke();
+
+    // Render Basis Vector Target 2 (j-hat transform)
+    mCtx.strokeStyle = '#3182ce'; // Electric Blue
+    mCtx.lineWidth = 3;
+    mCtx.beginPath();
+    mCtx.moveTo(cx, cy);
+    mCtx.lineTo(cx + mb * scale, cy - md * scale);
+    mCtx.stroke();
+}
+
+
+/* ==========================================================================
+   5. LOCAL STORAGE DRIVEN PATHWAY MASTERY ROADMAP
+   ========================================================================== */
+function toggleNodeMastery(nodeKey) {
+    const node = document.getElementById(`node-${nodeKey}`);
+    const isMastered = node.classList.toggle('mastered');
+    const btn = node.querySelector('.master-btn');
+    
+    btn.textContent = isMastered ? "✓ Mastered" : "Mark Mastered";
+    localStorage.setItem(`math-node-${nodeKey}`, isMastered);
+}
+
+function initializeSavedMasteryTree() {
+    ['alg', 'calc', 'geom'].forEach(key => {
+        if(localStorage.getItem(`math-node-${key}`) === 'true') {
+            const node = document.getElementById(`node-${key}`);
+            if(node) {
+                node.classList.add('mastered');
+                node.querySelector('.master-btn').textContent = "✓ Mastered";
+            }
+        }
+    });
+}
+
+
+/* ==========================================================================
+   6. HIGH-PERFORMANCE JULIA SET CHAOS ENGINE
+   ========================================================================== */
+const fCanvas = document.getElementById('fractalCanvas');
+const fCtx = fCanvas.getContext('2d');
+
+function renderFractalEngine() {
+    const cx = parseFloat(document.getElementById('param-cx').value);
+    const cy = parseFloat(document.getElementById('param-cy').value);
+    
+    document.getElementById('lbl-cx').textContent = `Real Constant (c_real): ${cx}`;
+    document.getElementById('lbl-cy').textContent = `Imaginary Constant (c_imag): ${cy}`;
+
+    const w = fCanvas.width = 300;
+    const h = fCanvas.height = 320;
+    
+    const imgData = fCtx.createImageData(w, h);
+    const data = imgData.data;
+    
+    const maxIter = 45;
+    const zoom = 1.4;
+
+    for (let x = 0; x < w; x++) {
+        for (let y = 0; y < h; y++) {
+            let zx = 1.5 * (x - w / 2) / (0.5 * zoom * w);
+            let zy = (y - h / 2) / (0.5 * zoom * h);
+            let i = maxIter;
+            
+            while (zx * zx + zy * zy < 4 && i > 0) {
+                let tmp = zx * zx - zy * zy + cx;
+                zy = 2.0 * zx * zy + cy;
+                zx = tmp;
+                i--;
+            }
+            
+            const pix = (x + y * w) * 4;
+            if (i === 0) {
+                data[pix] = 15; data[pix+1] = 23; data[pix+2] = 42; 
+            } else {
+                let val = (i / maxIter) * 255;
+                data[pix] = (val * 3) % 255;      
+                data[pix+1] = (val * 2) % 255;    
+                data[pix+2] = (val * 7) % 255;    
+            }
+            data[pix+3] = 255; 
+        }
+    }
+    fCtx.putImageData(imgData, 0, 0);
+}
+
+function applyFractalPreset(real, imag) {
+    document.getElementById('param-cx').value = real;
+    document.getElementById('param-cy').value = imag;
+    renderFractalEngine();
+}
+
+
+/* ==========================================================================
+   7. INTERACTIVE FUNCTION PLOTTER (CHART.JS ENGINE)
+   ========================================================================== */
+function plotFunction() {
+    const formulaStr = document.getElementById('function-input').value;
+    const xValues = [];
+    const yValues = [];
+    
+    for (let x = -10; x <= 10; x += 0.2) {
+        try {
+            let res = math.evaluate(formulaStr, { x: x });
+            xValues.push(x.toFixed(1));
+            yValues.push(res);
+        } catch(e) {
+            // Drop continuous exceptions
         }
     }
 
-    // --- Touch Mobile UI Dropdown Handlers Configuration ---
-    document.querySelectorAll('.has-dropdown').forEach(item => {
-        item.addEventListener('click', function(e) {
+    const isDark = document.body.classList.contains('dark-mode-active');
+    const accentColor = isDark ? '#3498db' : '#e94560';
+    const gridColor = isDark ? '#334155' : '#e2e8f0';
+
+    if (window.myChart) {
+        window.myChart.destroy();
+    }
+
+    const ctx = document.getElementById('functionChart').getContext('2d');
+    window.myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: xValues,
+            datasets: [{
+                label: `f(x) = ${formulaStr}`,
+                data: yValues,
+                borderColor: accentColor,
+                borderWidth: 3,
+                pointRadius: 0,
+                fill: false,
+                tension: 0.2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: { 
+                    grid: { color: gridColor },
+                    ticks: { color: isDark ? '#cbd5e1' : '#333333' }
+                },
+                y: { 
+                    grid: { color: gridColor },
+                    ticks: { color: isDark ? '#cbd5e1' : '#333333' }
+                }
+            },
+            plugins: {
+                legend: { labels: { color: isDark ? '#cbd5e1' : '#333333' } },
+                zoom: {
+                    pan: { enabled: true, mode: 'xy' },
+                    zoom: { wheel: { enabled: true }, pinch: { enabled: true }, mode: 'xy' }
+                }
+            }
+        }
+    });
+}
+
+
+/* ==========================================================================
+   8. MASTER BOOT SYSTEM CALLS
+   ========================================================================== */
+window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.has-dropdown').forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
             if(window.innerWidth <= 768) {
                 e.preventDefault();
-                this.parentElement.classList.toggle('dropdown-active');
+                trigger.parentElement.classList.toggle('dropdown-active');
             }
         });
     });
 
-    // Unified Engine Execution Loops Initializers
-    window.addEventListener('DOMContentLoaded', () => {
-        applyCachedThemeSetting();
-        plotGraph();
-        drawMatrixSpace();
-        renderFractalEngine();
-        loadRoadmapNodeCache();
-        renderQuizInterfaceNode();
-    });
+    setupMatrixCanvasLayout();
+    drawMatrixSpace();
+    loadQuizQuestion();
+    initializeSavedMasteryTree();
+    renderFractalEngine();
+    plotFunction();
+});
+
+window.addEventListener('resize', () => {
+    setupMatrixCanvasLayout();
+    drawMatrixSpace();
+});
 </script>
 </body>
 </html>
