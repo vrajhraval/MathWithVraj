@@ -238,6 +238,21 @@
             </div>
         </section>
 
+        <section class="visual-card">
+            <div class="canvas-container">
+                <canvas id="chaosCanvas"></canvas>
+            </div>
+            <div class="info-panel">
+                <h2>Chaos Game: Fractals</h2>
+                <p>Start with 3 vertices of a triangle. Pick a random point inside. Repeatedly roll a 3-sided die, move halfway toward that vertex, and draw a dot. Out of pure randomness, an infinitely complex fractal structure appears!</p>
+                <div class="controls">
+                    <button class="btn" id="btn-speed-chaos">Speed Up Evolution</button>
+                    <button class="btn btn-secondary" id="btn-reset-chaos">Reset & Change Colors</button>
+                </div>
+                <div class="stat-box c-pink" id="chaos-stats">Total Points Plotted: 0</div>
+            </div>
+        </section>
+
     </div>
 
     <script>
@@ -362,7 +377,6 @@
             requestAnimationFrame(drawFourier);
         }
 
-        // --- NEW FOURIER EVENT LISTENERS ADDED HERE ---
         document.getElementById('btn-add-fourier').addEventListener('click', () => {
             harmonics++;
             updateFourierStats();
@@ -557,17 +571,81 @@
         });
 
 
+        // ==========================================
+        // 6. CHAOS GAME (SIERPINSKI FRACTAL) VISUALIZER
+        // ==========================================
+        const chaosSetup = setupCanvas('chaosCanvas');
+        let currentX, currentY;
+        let targetVertices = [];
+        let totalPointsPlotted = 0;
+        let pointsPerFrame = 50; 
+        let fractalColor = `hsl(${Math.random() * 360}, 90%, 60%)`;
+
+        function initChaosGame() {
+            const { width, height } = chaosSetup;
+            totalPointsPlotted = 0;
+            fractalColor = `hsl(${Math.random() * 360}, 90%, 60%)`;
+            
+            targetVertices = [
+                { x: width / 2, y: 40 },                  
+                { x: 60, y: height - 40 },                
+                { x: width - 60, y: height - 40 }         
+            ];
+
+            currentX = Math.random() * width;
+            currentY = Math.random() * height;
+
+            const { ctx } = chaosSetup;
+            ctx.clearRect(0, 0, width, height);
+            
+            ctx.fillStyle = '#ffffff';
+            targetVertices.forEach(v => {
+                ctx.beginPath();
+                ctx.arc(v.x, v.y, 4, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+
+        function drawChaosGame() {
+            const { ctx } = chaosSetup;
+            ctx.fillStyle = fractalColor;
+            
+            for (let i = 0; i < pointsPerFrame; i++) {
+                const target = targetVertices[Math.floor(Math.random() * 3)];
+                currentX = (currentX + target.x) / 2;
+                currentY = (currentY + target.y) / 2;
+
+                ctx.fillRect(currentX, currentY, 1, 1);
+                totalPointsPlotted++;
+            }
+
+            document.getElementById('chaos-stats').innerText = `Total Points Plotted: ${totalPointsPlotted}`;
+            requestAnimationFrame(drawChaosGame);
+        }
+
+        document.getElementById('btn-speed-chaos').addEventListener('click', () => {
+            pointsPerFrame = pointsPerFrame === 50 ? 500 : (pointsPerFrame === 500 ? 2000 : 50);
+            document.getElementById('btn-speed-chaos').innerText = `Speed: ${pointsPerFrame} pts/frame`;
+        });
+
+        document.getElementById('btn-reset-chaos').addEventListener('click', () => {
+            initChaosGame();
+        });
+
+
         // --- Initialize Webpage Loops ---
         drawFibonacci();
         drawFourier();
         drawMobius();
         drawLorenz();
         drawUlam();
+        initChaosGame();
+        drawChaosGame();
 
         // Responsive handling
         window.addEventListener('resize', () => {
             const list = [
-                { s: fourierSetup }, { s: fibSetup }, { s: mobiusSetup }, { s: lorenzSetup }, { s: ulamSetup }
+                { s: fourierSetup }, { s: fibSetup }, { s: mobiusSetup }, { s: lorenzSetup }, { s: ulamSetup }, { s: chaosSetup }
             ];
             list.forEach(item => {
                 const rect = item.s.canvas.parentElement.getBoundingClientRect();
@@ -575,7 +653,9 @@
                 item.s.canvas.getContext('2d').scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
                 item.s.width = rect.width;
             });
-            drawFibonacci(); drawUlam();
+            drawFibonacci(); 
+            drawUlam();
+            initChaosGame(); // Re-anchors triangle vertices on window scale change
         });
     </script>
 </body>
