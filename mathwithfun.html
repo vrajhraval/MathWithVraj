@@ -362,6 +362,28 @@
             requestAnimationFrame(drawFourier);
         }
 
+        // --- NEW FOURIER EVENT LISTENERS ADDED HERE ---
+        document.getElementById('btn-add-fourier').addEventListener('click', () => {
+            harmonics++;
+            updateFourierStats();
+        });
+
+        document.getElementById('btn-sub-fourier').addEventListener('click', () => {
+            if (harmonics > 1) {
+                harmonics--;
+                updateFourierStats();
+            }
+        });
+
+        function updateFourierStats() {
+            const statsBox = document.getElementById('fourier-stats');
+            if (harmonics === 1) {
+                statsBox.innerText = `Active Orbits: 1 (Fundamental Frequency)`;
+            } else {
+                statsBox.innerText = `Active Orbits: ${harmonics} (Up to ${harmonics * 2 - 1}th Harmonic)`;
+            }
+        }
+
 
         // ==========================================
         // 3. MÖBIUS STRIP 3D VISUALIZER
