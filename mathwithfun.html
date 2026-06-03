@@ -161,7 +161,7 @@
 
     <header>
         <h1>Visualizing Mathematics</h1>
-        <p>Exploring geometry, sequences, waves, topology, and chaos theory through dynamic visual code.</p>
+        <p>Exploring geometry, sequences, waves, topology, chaos theory, and 3D projection through dynamic visual code.</p>
     </header>
 
     <div class="container">
@@ -230,7 +230,7 @@
             </div>
             <div class="info-panel">
                 <h2>The Ulam Spiral</h2>
-                <p>Discovered by Stanislaw Ulam during a boring meeting, this is a spiral grid layout of integers. When you color only the <b>prime numbers</b>, they unexpected form crisp, non-random diagonal lines. It hints at hidden mathematical structures deep within the distribution of primes.</p>
+                <p>Discovered by Stanislaw Ulam during a boring meeting, this is a spiral grid layout of integers. When you color only the <b>prime numbers</b>, they unexpectedly form crisp, non-random diagonal lines. It hints at hidden mathematical structures deep within the distribution of primes.</p>
                 <div class="controls">
                     <button class="btn" id="btn-grow-ulam" style="background-color: #7c3aed;">Expand Grid Size</button>
                 </div>
@@ -250,6 +250,21 @@
                     <button class="btn btn-secondary" id="btn-reset-chaos">Reset & Change Colors</button>
                 </div>
                 <div class="stat-box c-pink" id="chaos-stats">Total Points Plotted: 0</div>
+            </div>
+        </section>
+
+        <section class="visual-card">
+            <div class="canvas-container">
+                <canvas id="cubeCanvas" style="cursor: move;"></canvas>
+            </div>
+            <div class="info-panel">
+                <h2>3D Graphics Engine: Projection</h2>
+                <p>How do 3D video games exist on flat screens? This engine takes raw 3D coordinate vectors (X, Y, Z), multiplies them by <b>Rotation Matrices</b> using sine and cosine, and applies perspective division to map them to 2D screen pixels. <b>Click and drag the canvas to manually rotate space!</b></p>
+                <div class="controls">
+                    <button class="btn" id="btn-toggle-auto-cube">Toggle Auto-Spin</button>
+                    <button class="btn btn-secondary" id="btn-reset-cube">Reset Camera</button>
+                </div>
+                <div class="stat-box c-orange" id="cube-stats">Camera Matrix: Drag canvas to manipulate vectors...</div>
             </div>
         </section>
 
@@ -463,7 +478,6 @@
             const { ctx, width, height } = lorenzSetup;
             ctx.clearRect(0, 0, width, height);
 
-            // Time step differential engine integration
             let dt = 0.01;
             let dx = (sigma * (ly - lx)) * dt;
             let dy = (lx * (rho - lz) - ly) * dt;
@@ -480,20 +494,19 @@
             ctx.save();
             ctx.lineWidth = 1.5;
 
-            // Render accumulated path line strings
+            document.getElementById('lorenz-stats').innerText = `Coordinates -> X: ${lx.toFixed(2)}, Y: ${ly.toFixed(2)}, Z: ${lz.toFixed(2)}`;
+
             ctx.beginPath();
             for(let i = 1; i < lorenzPoints.length; i++) {
-                // Scaled and rotated projection manually mapping to canvas dimensions
                 let p = lorenzPoints[i];
                 let rotX = p.x * Math.cos(lorenzAngle) - p.y * Math.sin(lorenzAngle);
                 
                 let screenX = width / 2 + rotX * 6;
-                let screenY = height / 2 + (p.z - 25) * 6; // offset center on z axis
+                let screenY = height / 2 + (p.z - 25) * 6;
 
                 ctx.strokeStyle = `hsla(${i * 0.2 % 360}, 90%, 60%, 0.8)`;
                 if (i === 1) ctx.moveTo(screenX, screenY); else ctx.lineTo(screenX, screenY);
                 
-                // Canvas trick to change colors dynamically down the line segment path
                 if(i % 30 === 0) { ctx.stroke(); ctx.beginPath(); ctx.moveTo(screenX, screenY); }
             }
             ctx.stroke();
@@ -529,12 +542,12 @@
 
             let x = width / 2;
             let y = height / 2;
-            let stepLength = width / Math.sqrt(spiralLimit + 500); // step layout bounds
+            let stepLength = width / Math.sqrt(spiralLimit + 500); 
             if (stepLength < 4) stepLength = 4;
 
             let num = 1;
             let stepsCount = 1;
-            let direction = 0; // 0: Right, 1: Up, 2: Left, 3: Down
+            let direction = 0; 
 
             ctx.fillStyle = '#c084fc';
             
@@ -549,7 +562,6 @@
                             ctx.fill();
                         }
 
-                        // Move matrix head coordinates based on step index directions
                         switch (direction) {
                             case 0: x += stepLength; break;
                             case 1: y -= stepLength; break;
@@ -565,7 +577,7 @@
         }
         document.getElementById('btn-grow-ulam').addEventListener('click', () => {
             spiralLimit += 2000;
-            if(spiralLimit > 15000) spiralLimit = 2500; // loop wrapper safety
+            if(spiralLimit > 15000) spiralLimit = 2500; 
             document.getElementById('ulam-stats').innerText = `Active Grid Limit: ${spiralLimit} numbers.`;
             drawUlam();
         });
@@ -633,6 +645,130 @@
         });
 
 
+        // ==========================================
+        // 7. 3D PROJECTION GRAPHICS ENGINE
+        // ==========================================
+        const cubeSetup = setupCanvas('cubeCanvas');
+        let cubeRotationX = 0.5, cubeRotationY = 0.5;
+        let isCubeSpinning = true;
+        let isMouseDown = false;
+        let lastMouseX = 0, lastMouseY = 0;
+
+        const cubeVertices = [
+            {x: -50, y: -50, z: -50}, {x: 50, y: -50, z: -50},
+            {x: 50, y: 50, z: -50},  {x: -50, y: 50, z: -50},
+            {x: -50, y: -50, z: 50},  {x: 50, y: -50, z: 50},
+            {x: 50, y: 50, z: 50},   {x: -50, y: 50, z: 50}
+        ];
+
+        const cubeEdges = [
+            [0, 1], [1, 2], [2, 3], [3, 0], 
+            [4, 5], [5, 6], [6, 7], [7, 4], 
+            [0, 4], [1, 5], [2, 6], [3, 7]  
+        ];
+
+        function draw3DEngine() {
+            const { ctx, width, height } = cubeSetup;
+            ctx.clearRect(0, 0, width, height);
+
+            let projectedPoints = cubeVertices.map(v => {
+                let y1 = v.y * Math.cos(cubeRotationX) - v.z * Math.sin(cubeRotationX);
+                let z1 = v.y * Math.sin(cubeRotationX) + v.z * Math.cos(cubeRotationX);
+
+                let x2 = v.x * Math.cos(cubeRotationY) + z1 * Math.sin(cubeRotationY);
+                let z2 = -v.x * Math.sin(cubeRotationY) + z1 * Math.cos(cubeRotationY);
+
+                let distance = 250;
+                let scaleProject = distance / (distance + z2);
+                
+                return {
+                    x: width / 2 + x2 * scaleProject * 1.5,
+                    y: height / 2 + y1 * scaleProject * 1.5
+                };
+            });
+
+            ctx.lineWidth = 2;
+            cubeEdges.forEach((edge, index) => {
+                const p1 = projectedPoints[edge[0]];
+                const p2 = projectedPoints[edge[1]];
+                
+                ctx.strokeStyle = `hsla(${index * 30}, 85%, 60%, 0.9)`;
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.stroke();
+            });
+
+            ctx.fillStyle = '#ffffff';
+            projectedPoints.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            if (isCubeSpinning) {
+                cubeRotationX += 0.005;
+                cubeRotationY += 0.01;
+            }
+
+            document.getElementById('cube-stats').innerText = `Rotations Matrix -> X-axis: ${cubeRotationX.toFixed(2)} rad, Y-axis: ${cubeRotationY.toFixed(2)} rad`;
+            requestAnimationFrame(draw3DEngine);
+        }
+
+        const cElem = cubeSetup.canvas;
+        
+        cElem.addEventListener('mousedown', (e) => {
+            isMouseDown = true;
+            isCubeSpinning = false;
+            lastMouseX = e.clientX;
+            lastMouseY = e.clientY;
+        });
+
+        window.addEventListener('mouseup', () => isMouseDown = false);
+
+        cElem.addEventListener('mousemove', (e) => {
+            if (!isMouseDown) return;
+            let deltaX = e.clientX - lastMouseX;
+            let deltaY = e.clientY - lastMouseY;
+            
+            cubeRotationY += deltaX * 0.01;
+            cubeRotationX += deltaY * 0.01;
+
+            lastMouseX = e.clientX;
+            lastMouseY = e.clientY;
+        });
+
+        // Touch support for mobile devices
+        cElem.addEventListener('touchstart', (e) => {
+            if(e.touches.length === 1) {
+                isMouseDown = true;
+                isCubeSpinning = false;
+                lastMouseX = e.touches[0].clientX;
+                lastMouseY = e.touches[0].clientY;
+            }
+        });
+
+        cElem.addEventListener('touchend', () => isMouseDown = false);
+
+        cElem.addEventListener('touchmove', (e) => {
+            if (!isMouseDown || e.touches.length !== 1) return;
+            let deltaX = e.touches[0].clientX - lastMouseX;
+            let deltaY = e.touches[0].clientY - lastMouseY;
+            
+            cubeRotationY += deltaX * 0.01;
+            cubeRotationX += deltaY * 0.01;
+
+            lastMouseX = e.touches[0].clientX;
+            lastMouseY = e.touches[0].clientY;
+            e.preventDefault();
+        });
+
+        document.getElementById('btn-toggle-auto-cube').addEventListener('click', () => isCubeSpinning = !isCubeSpinning);
+        document.getElementById('btn-reset-cube').addEventListener('click', () => {
+            cubeRotationX = 0.5; cubeRotationY = 0.5; isCubeSpinning = false;
+        });
+
+
         // --- Initialize Webpage Loops ---
         drawFibonacci();
         drawFourier();
@@ -641,11 +777,12 @@
         drawUlam();
         initChaosGame();
         drawChaosGame();
+        draw3DEngine();
 
         // Responsive handling
         window.addEventListener('resize', () => {
             const list = [
-                { s: fourierSetup }, { s: fibSetup }, { s: mobiusSetup }, { s: lorenzSetup }, { s: ulamSetup }, { s: chaosSetup }
+                { s: fourierSetup }, { s: fibSetup }, { s: mobiusSetup }, { s: lorenzSetup }, { s: ulamSetup }, { s: chaosSetup }, { s: cubeSetup }
             ];
             list.forEach(item => {
                 const rect = item.s.canvas.parentElement.getBoundingClientRect();
@@ -655,7 +792,7 @@
             });
             drawFibonacci(); 
             drawUlam();
-            initChaosGame(); // Re-anchors triangle vertices on window scale change
+            initChaosGame(); 
         });
     </script>
 </body>
