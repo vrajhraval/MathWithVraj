@@ -5,30 +5,258 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Me | Math History Project</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background: #fff; }
-        .profile-card { text-align: center; padding: 50px 20px; background: #f4f4f9; border-radius: 15px; border: 1px solid #ddd; }
-        .profile-img { width: 150px; height: 150px; border-radius: 50%; border: 5px solid #2980b9; margin-bottom: 20px; }
-        h1 { color: #2c3e50; margin-bottom: 10px; }
-        .bio { font-size: 1.1em; color: #555; margin-bottom: 30px; }
-        .cv-section { background: #2980b9; color: white; padding: 30px; border-radius: 8px; margin-top: 30px; }
-        .cv-btn { background: white; color: #2980b9; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin-top: 15px; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #2980b9; text-decoration: none; }
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #131a2c;
+            --accent-color: #4f46e5;
+            --accent-glow: #818cf8;
+            --text-color: #f3f4f6;
+            --muted-text: #9ca3af;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--accent-glow);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: transform 0.2s ease;
+        }
+
+        .back-link:hover {
+            transform: translateX(-5px);
+        }
+
+        .profile-card {
+            background-color: var(--card-bg);
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 40px;
+        }
+
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 4px solid var(--accent-color);
+            box-shadow: 0 0 20px rgba(79, 70, 229, 0.4);
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+            background: linear-gradient(45deg, #60a5fa, #a78bfa, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--accent-glow);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .bio {
+            font-size: 1.15rem;
+            color: var(--muted-text);
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+            text-align: justify;
+        }
+
+        /* Information Grid for Students */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        @media (min-width: 600px) {
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .info-box {
+            background-color: #020617;
+            border: 1px solid #1e293b;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .info-box h3 {
+            color: #60a5fa;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .info-box p {
+            color: var(--muted-text);
+            font-size: 0.95rem;
+        }
+
+        /* Timeline / Milestones Section */
+        .timeline-section {
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .timeline-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #1e293b;
+            padding-bottom: 10px;
+            color: #f3f4f6;
+        }
+
+        .timeline-item {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #34d399;
+        }
+
+        .timeline-inst {
+            color: #e2e8f0;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* CV / Action Box */
+        .cv-section {
+            background: linear-gradient(135deg, #1e1b4b 0%, #111827 100%);
+            border: 1px solid #1e293b;
+            color: white;
+            padding: 35px;
+            border-radius: 12px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .cv-section h2 {
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .cv-section p {
+            color: var(--muted-text);
+            margin-bottom: 20px;
+        }
+
+        .cv-btn {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .cv-btn:hover {
+            background-color: #4338ca;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
     </style>
 </head>
 <body>
 
-    <a href="index.html" class="back-link">← Home</a>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Workspace</a>
 
-    <div class="profile-card">
-        <!-- Replace 'your-photo.jpg' with your actual photo file name on GitHub -->
-        <img src="vraj.jpeg" alt="My Profile Photo" class="profile-img">
-        <h1>About the Creator</h1>
-        <p class="bio">Welcome! I am passionate about the history of mathematics and its evolution across cultures. This project is dedicated to making math history accessible to students everywhere.</p>
-        
+        <div class="profile-card">
+            <img src="vraj.jpeg" alt="Vraj Raval" class="profile-img">
+            <h1>Vraj Raval</h1>
+            <div class="subtitle">Always a Mathematics Student & Educator</div>
+            
+            <p class="bio">
+                Welcome! I believe that mathematics isn't just about memorizing formulas—it is a dynamic language of patterns, history, and logical beauty. This project is dedicated to making math intuitive, engaging, and accessible to students everywhere by converting complex concepts into beautiful, real-time visualization frameworks.
+            </p>
+            
+            <!-- Information Boxes for Student Interaction -->
+            <div class="info-grid">
+                <div class="info-box">
+                    <h3>🎯 Current Role</h3>
+                    <p>Balancing work and continuing studies at Kendriya Vidyalaya School, ONGC Campus, Khambhat, shaping the next generation of mathematical minds.</p>
+                </div>
+                <div class="info-box">
+                    <h3>💡 Core Math Interests</h3>
+                    <p>Deeply engaged in Number Theory problem solving, Cryptography, Graph Theory structures, Special Functions, and Ordinary/Partial Differential Equations.</p>
+                </div>
+                <div class="info-box">
+                    <h3>📚 Making Content Fun</h3>
+                    <p>My core teaching goal is to break down rigorous mathematical abstractions and reconstruct them as fun, digestible educational modules.</p>
+                </div>
+                <div class="info-box">
+                    <h3>🐕 Beyond academia</h3>
+                    <p>When I'm away from differential systems, I'm reading books, playing cricket or badminton, spending time with dogs, and exploring new concepts.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Academic Journey Segment -->
+        <div class="timeline-section">
+            <h2>Academic Profile & Background</h2>
+            
+            <div class="timeline-item">
+                <p class="timeline-date">Master of Science (M.Sc) in Mathematics</p>
+                <p class="timeline-inst">Department of Mathematics, Sardar Patel University</p>
+                <p style="color: var(--muted-text);">Vallabh Vidyanagar</p>
+            </div>
+            
+            <div class="timeline-item">
+                <p class="timeline-date">Bachelor of Education (B.Ed) in Math-Science</p>
+                <p class="timeline-inst">Indian Institute of Teacher Education (IITE)</p>
+                <p style="color: var(--muted-text);">Gandhinagar</p>
+            </div>
+
+            <div class="timeline-item">
+                <p class="timeline-date">Bachelor of Science (B.Sc) in Mathematics</p>
+                <p class="timeline-inst">V.P. & R.P.T.P. Science College</p>
+                <p style="color: var(--muted-text);">Vallabh Vidyanagar</p>
+            </div>
+        </div>
+
+        <!-- Professional Verification Box -->
         <div class="cv-section">
             <h2>Curriculum Vitae (CV)</h2>
-            <p>Interested in my professional background and academic work?</p>
-            <!-- Ensure 'my-cv.pdf' is uploaded to your GitHub -->
+            <p>Interested in exploring my full research background, formal academic training, and teaching portfolio?</p>
             <a href="my-cv.pdf" target="_blank" class="cv-btn">Download / View My CV</a>
         </div>
     </div>
