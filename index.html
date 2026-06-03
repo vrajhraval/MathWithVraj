@@ -1122,7 +1122,7 @@ if (localStorage.getItem('math-theme-dark') === 'true') {
 
 
 /* ==========================================================================
-   2. INTERACTIVE QUADRATIC SOLVER WITH STEPS (FIXED)
+   2. INTERACTIVE QUADRATIC SOLVER WITH STEPS (FIXED & HARDENED)
    ========================================================================== */
 function solveQuadratic() {
     const a = parseFloat(document.getElementById('solve-a').value);
@@ -1166,7 +1166,9 @@ function solveQuadratic() {
     }
     
     out.innerHTML = html;
-    MathJax.typesetPromise([out]); // Re-render mathematical typesetting formulas
+    if (window.MathJax && window.MathJax.typesetPromise) {
+        MathJax.typesetPromise([out]).catch(function (err) { console.log(err.message); });
+    }
 }
 
 
@@ -1185,23 +1187,27 @@ let currentQuizIdx = 0;
 function loadQuizQuestion() {
     const fb = document.getElementById('quiz-feedback-box');
     const nxt = document.getElementById('next-quiz-btn');
-    fb.style.display = 'none';
-    nxt.style.display = 'none';
+    if(fb) fb.style.display = 'none';
+    if(nxt) nxt.style.display = 'none';
 
     const item = quizDatabase[currentQuizIdx];
-    document.getElementById('quiz-question').innerHTML = `<strong>Question:</strong> ${item.q}`;
+    const qBox = document.getElementById('quiz-question');
+    if(qBox) qBox.innerHTML = `<strong>Question:</strong> ${item.q}`;
     
     const optBox = document.getElementById('quiz-options-box');
-    optBox.innerHTML = '';
-    
-    item.o.forEach((option, idx) => {
-        const btn = document.createElement('button');
-        btn.className = 'quiz-btn';
-        btn.innerHTML = option;
-        btn.onclick = () => verifyQuizAnswer(idx);
-        optBox.appendChild(btn);
-    });
-    MathJax.typesetPromise([document.getElementById('quiz-question'), optBox]);
+    if(optBox) {
+        optBox.innerHTML = '';
+        item.o.forEach((option, idx) => {
+            const btn = document.createElement('button');
+            btn.className = 'quiz-btn';
+            btn.innerHTML = option;
+            btn.onclick = () => verifyQuizAnswer(idx);
+            optBox.appendChild(btn);
+        });
+    }
+    if (window.MathJax && window.MathJax.typesetPromise) {
+        MathJax.typesetPromise([qBox, optBox]).catch(function (err) { console.log(err.message); });
+    }
 }
 
 function verifyQuizAnswer(chosenIdx) {
@@ -1209,6 +1215,8 @@ function verifyQuizAnswer(chosenIdx) {
     const fb = document.getElementById('quiz-feedback-box');
     const nxt = document.getElementById('next-quiz-btn');
     
+    if(!fb || !nxt) return;
+
     if (chosenIdx === item.a) {
         fb.style.background = "rgba(39, 174, 96, 0.15)";
         fb.style.color = "var(--success)";
@@ -1232,9 +1240,11 @@ function loadNextQuestion() {
    4. 2D LINEAR TRANSFORMATION VECTOR ENGINE
    ========================================================================== */
 const mCanvas = document.getElementById('matrixCanvas');
-const mCtx = mCanvas.getContext('2d');
+let mCtx = null;
+if(mCanvas) mCtx = mCanvas.getContext('2d');
 
 function setupMatrixCanvasLayout() {
+    if(!mCanvas) return;
     const dpr = window.devicePixelRatio || 1;
     const size = mCanvas.parentElement.clientWidth || 220;
     mCanvas.width = size * dpr;
@@ -1245,16 +1255,15 @@ function setupMatrixCanvasLayout() {
 }
 
 function drawMatrixSpace() {
-    if (!mCanvas) return;
+    if (!mCanvas || !mCtx) return;
     const w = mCanvas.width / (window.devicePixelRatio || 1);
     const h = mCanvas.height / (window.devicePixelRatio || 1);
     const cx = w / 2;
     const cy = h / 2;
-    const scale = 35; // Grid Unit Magnification Factor
+    const scale = 35; 
 
     mCtx.clearRect(0, 0, w, h);
 
-    // Coordinate Grid Mesh Vectors
     mCtx.strokeStyle = '#2d3748';
     mCtx.lineWidth = 0.5;
     for(let x = cx % scale; x < w; x += scale) {
@@ -1264,28 +1273,24 @@ function drawMatrixSpace() {
         mCtx.beginPath(); mCtx.moveTo(0, y); mCtx.lineTo(w, y); mCtx.stroke();
     }
 
-    // Origin Axes
     mCtx.strokeStyle = '#4a5568';
     mCtx.lineWidth = 2;
     mCtx.beginPath(); mCtx.moveTo(0, cy); mCtx.lineTo(w, cy); mCtx.stroke();
     mCtx.beginPath(); mCtx.moveTo(cx, 0); mCtx.lineTo(cx, h); mCtx.stroke();
 
-    // Pull transformation matrix properties
     const ma = parseFloat(document.getElementById('m-a').value) || 0;
     const mb = parseFloat(document.getElementById('m-b').value) || 0;
     const mc = parseFloat(document.getElementById('m-c').value) || 0;
     const md = parseFloat(document.getElementById('m-d').value) || 0;
 
-    // Render Basis Vector Target 1 (i-hat transform)
-    mCtx.strokeStyle = '#e53e3e'; // Crimson Hue
+    mCtx.strokeStyle = '#e53e3e'; 
     mCtx.lineWidth = 3;
     mCtx.beginPath();
     mCtx.moveTo(cx, cy);
     mCtx.lineTo(cx + ma * scale, cy - mc * scale);
     mCtx.stroke();
 
-    // Render Basis Vector Target 2 (j-hat transform)
-    mCtx.strokeStyle = '#3182ce'; // Electric Blue
+    mCtx.strokeStyle = '#3182ce'; 
     mCtx.lineWidth = 3;
     mCtx.beginPath();
     mCtx.moveTo(cx, cy);
@@ -1299,10 +1304,10 @@ function drawMatrixSpace() {
    ========================================================================== */
 function toggleNodeMastery(nodeKey) {
     const node = document.getElementById(`node-${nodeKey}`);
+    if(!node) return;
     const isMastered = node.classList.toggle('mastered');
     const btn = node.querySelector('.master-btn');
-    
-    btn.textContent = isMastered ? "✓ Mastered" : "Mark Mastered";
+    if(btn) btn.textContent = isMastered ? "✓ Mastered" : "Mark Mastered";
     localStorage.setItem(`math-node-${nodeKey}`, isMastered);
 }
 
@@ -1312,7 +1317,8 @@ function initializeSavedMasteryTree() {
             const node = document.getElementById(`node-${key}`);
             if(node) {
                 node.classList.add('mastered');
-                node.querySelector('.master-btn').textContent = "✓ Mastered";
+                const btn = node.querySelector('.master-btn');
+                if(btn) btn.textContent = "✓ Mastered";
             }
         }
     });
@@ -1323,9 +1329,11 @@ function initializeSavedMasteryTree() {
    6. HIGH-PERFORMANCE JULIA SET CHAOS ENGINE
    ========================================================================== */
 const fCanvas = document.getElementById('fractalCanvas');
-const fCtx = fCanvas.getContext('2d');
+let fCtx = null;
+if(fCanvas) fCtx = fCanvas.getContext('2d');
 
 function renderFractalEngine() {
+    if(!fCanvas || !fCtx) return;
     const cx = parseFloat(document.getElementById('param-cx').value);
     const cy = parseFloat(document.getElementById('param-cy').value);
     
@@ -1380,7 +1388,9 @@ function applyFractalPreset(real, imag) {
    7. INTERACTIVE FUNCTION PLOTTER (CHART.JS ENGINE)
    ========================================================================== */
 function plotFunction() {
-    const formulaStr = document.getElementById('function-input').value;
+    const fInput = document.getElementById('function-input');
+    if(!fInput) return;
+    const formulaStr = fInput.value;
     const xValues = [];
     const yValues = [];
     
@@ -1390,7 +1400,7 @@ function plotFunction() {
             xValues.push(x.toFixed(1));
             yValues.push(res);
         } catch(e) {
-            // Drop continuous exceptions
+            // Drop formula evaluation mismatch frames safely
         }
     }
 
@@ -1402,7 +1412,10 @@ function plotFunction() {
         window.myChart.destroy();
     }
 
-    const ctx = document.getElementById('functionChart').getContext('2d');
+    const chartCanvas = document.getElementById('functionChart');
+    if(!chartCanvas) return;
+    const ctx = chartCanvas.getContext('2d');
+    
     window.myChart = new Chart(ctx, {
         type: 'line',
         data: {
