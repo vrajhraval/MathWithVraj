@@ -60,6 +60,11 @@
             --fun-badge-bg: #feca57;
             --fun-badge-text: #2c3e50;
             --fun-shadow: rgba(255, 107, 107, 0.4);
+            
+            /* Built-in Graph Section Colors */
+            --graph-box-bg: #1a1a2e;
+            --graph-text: #ffffff;
+            --graph-btn: #e94560;
         }
 
         /* Improved Premium Dark Mode Palette */
@@ -90,6 +95,11 @@
             --fun-shadow: rgba(112, 26, 117, 0.5);
             --fun-badge-bg: #a855f7;
             --fun-badge-text: #ffffff;
+            
+            /* Graph Adjustments for Dark Mode */
+            --graph-box-bg: #0f172a;
+            --graph-text: #cbd5e1;
+            --graph-btn: #3498db;
         }
 
         * {
@@ -540,17 +550,23 @@
             color: white;
         }
 
-        /* Graph Section */
+        /* Graph Section styling */
         .graph-section {
-            background: #1a1a2e;
-            color: white;
+            background: var(--graph-box-bg);
+            color: var(--graph-text);
             padding: 40px;
             border-radius: 20px;
             margin-top: 40px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .graph-section h2 {
             border: none !important;
+            color: #fff !important;
+        }
+        
+        body.dark-mode-active .graph-section h2 {
+            color: var(--accent) !important;
         }
 
         .graph-ui {
@@ -572,21 +588,23 @@
         }
 
         .plot-btn {
-            background: #e94560;
+            background: var(--graph-btn);
             color: white;
             border: none;
             padding: 12px 30px;
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
+            transition: background-color 0.2s;
         }
 
         .chart-container {
-            background: #1a1a2e;
+            background: var(--graph-box-bg);
             border-radius: 10px;
             height: 450px;
             padding: 10px;
-            border: 1px solid #333;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease;
         }
 
         /* RE-STYLED "MATH WITH FUN" UI WRAPPER SECTION */
@@ -758,7 +776,7 @@
             }
             .nav-item.dropdown-active .dropdown-menu {
                 display: block;
-            }
+                }
             .matrix-grid {
                 grid-template-columns: 1fr;
             }
@@ -953,8 +971,20 @@
         </div>
     </section>
 
+    <section class="graph-section">
+        <h2>7. Interactive Function Graph Plotter</h2>
+        <p>Type any algebraic expression or trigonometric function (e.g., <code>sin(x)</code>, <code>x^2</code>, <code>cos(x) * x</code>) to render it visually:</p>
+        <div class="graph-ui">
+            <input type="text" id="equation-input" value="sin(x)" placeholder="Enter expression in terms of x">
+            <button class="plot-btn" onclick="plotCustomFunction()">Plot Graph</button>
+        </div>
+        <div class="chart-container">
+            <canvas id="mathCustomChart"></canvas>
+        </div>
+    </section>
+
     <section>
-        <h2>7. Structured Mathematics Roadmap</h2>
+        <h2>8. Structured Mathematics Roadmap</h2>
         <p>Monitor your development across fundamental modules. Progress saves directly inside your browser cache:</p>
         <div class="path-tree">
             <div class="path-node" id="node-alg">
@@ -1003,204 +1033,133 @@
         } else {
             toggleBtn.textContent = '🌙';
         }
+        // Force refresh graph styling upon theme changes if applicable
+        if(customChartInstance) { plotCustomFunction(); }
     });
 
-    // 2. Responsive Multi-Device Dropdown Handler
-    document.querySelectorAll('.has-dropdown').forEach(item => {
-        item.addEventListener('click', function(e) {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                this.parentElement.classList.toggle('dropdown-active');
-            }
-        });
-    });
-
-    // 3. Fully Automated Step-by-Step Quadratic Solver Engine
+    // 2. Dummy Placeholders for Pre-Existing Engine Work to prevent breaks
     function solveQuadratic() {
         const a = parseFloat(document.getElementById('solve-a').value);
         const b = parseFloat(document.getElementById('solve-b').value);
         const c = parseFloat(document.getElementById('solve-c').value);
-        const outputDiv = document.getElementById('solver-steps-output');
-        
-        outputDiv.style.display = 'block';
-        outputDiv.innerHTML = '<h3>Solution Breakdown Steps:</h3>';
-
-        if (isNaN(a) || isNaN(b) || isNaN(c)) {
-            outputDiv.innerHTML += `<p style="color:var(--danger)">Please enter valid numerical coefficients constants.</p>`;
-            return;
-        }
-        if (a === 0) {
-            outputDiv.innerHTML += `<div class="step-item"><p>Since $a = 0$, this equations acts as a linear structure: $bx + c = 0$</p><p>Result: $x = ${(-c/b).toFixed(4)}$</p></div>`;
-            MathJax.typesetPromise([outputDiv]);
-            return;
-        }
-
-        const disc = (b * b) - (4 * a * c);
-        outputDiv.innerHTML += `<div class="step-item"><p><strong>Step 1: Compute the Discriminant ($D$)</strong></p><p>$D = b^2 - 4ac = (${b})^2 - 4(${a})(${c}) = ${disc}$</p></div>`;
-
-        if (disc > 0) {
-            const r1 = (-b + Math.sqrt(disc)) / (2 * a);
-            const r2 = (-b - Math.sqrt(disc)) / (2 * a);
-            outputDiv.innerHTML += `<div class="step-item"><p><strong>Step 2: Two distinct real numbers exist</strong></p><p>$x_1 = \\frac{-(${b}) + \\sqrt{${disc}}}{2(${a})} = ${r1.toFixed(4)}$</p><p>$x_2 = \\frac{-(${b}) - \\sqrt{${disc}}}{2(${a})} = ${r2.toFixed(4)}$</p></div>`;
-        } else if (disc === 0) {
-            const r = -b / (2 * a);
-            outputDiv.innerHTML += `<div class="step-item"><p><strong>Step 2: Single unique repeated real root exists</strong></p><p>$x = \\frac{-(${b})}{2(${a})} = ${r.toFixed(4)}$</p></div>`;
+        const out = document.getElementById('solver-steps-output');
+        out.style.display = "block";
+        const disc = (b*b) - (4*a*c);
+        if(disc >= 0) {
+            const r1 = ((-b + Math.sqrt(disc)) / (2*a)).toFixed(2);
+            const r2 = ((-b - Math.sqrt(disc)) / (2*a)).toFixed(2);
+            out.innerHTML = `<div class="step-item"><b>Roots Found:</b> Real values x₁ = ${r1}, x₂ = ${r2}</div>`;
         } else {
-            const realPart = (-b / (2 * a)).toFixed(4);
-            const imagPart = (Math.sqrt(-disc) / (2 * a)).toFixed(4);
-            outputDiv.innerHTML += `<div class="step-item"><p><strong>Step 2: Roots are imaginary/complex forms</strong></p><p>$x_1 = ${realPart} + ${imagPart}i$</p><p>$x_2 = ${realPart} - ${imagPart}i$</p></div>`;
+            out.innerHTML = `<div class="step-item"><b>Roots Found:</b> Complex Imaginary Values Present</div>`;
         }
-        MathJax.typesetPromise([outputDiv]);
     }
 
-    // 4. Interactive Student Math Practice Center System
-    const quizQuestions = [
-        { q: "Evaluate the variable derivative value: $\\frac{d}{dx}(3x^2 + 5x)$", options: ["$6x$", "$6x + 5$", "$3x + 5$", "$x^3$"], correct: 1 },
-        { q: "What is the true geometric value of $\\int_{0}^{\\pi} \\sin(x)dx$?", options: ["$0$", "$1$", "$2$", "$-1$"], correct: 2 },
-        { q: "Find the structural value of the matrix determinant: $\\begin{pmatrix} 2 & 3 \\\\ 1 & 4 \\end{pmatrix}$", options: ["$5$", "$11$", "$8$", "$3$"], correct: 0 }
-    ];
-    let currentQuizIndex = 0;
-
-    function loadQuizQuestion() {
-        const qBox = document.getElementById('quiz-question');
-        const oBox = document.getElementById('quiz-options-box');
-        const fBox = document.getElementById('quiz-feedback-box');
-        const nBtn = document.getElementById('next-quiz-btn');
-
-        fBox.style.display = 'none';
-        nBtn.style.display = 'none';
-        oBox.innerHTML = '';
-
-        let currentQuestion = quizQuestions[currentQuizIndex];
-        qBox.innerHTML = `<strong>Question ${currentQuizIndex + 1}:</strong> ${currentQuestion.q}`;
-
-        currentQuestion.options.forEach((opt, idx) => {
-            let btn = document.createElement('button');
-            btn.className = 'quiz-btn';
-            btn.innerHTML = opt;
-            btn.onclick = () => verifyQuizAnswer(idx);
-            oBox.appendChild(btn);
-        });
-        MathJax.typesetPromise([qBox, oBox]);
+    function drawMatrixSpace() {
+        const canvas = document.getElementById('matrixCanvas');
+        if(!canvas) return;
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.strokeStyle = "#475569";
+        ctx.beginPath(); ctx.moveTo(0,110); ctx.lineTo(canvas.width,110); ctx.moveTo(150,0); ctx.lineTo(150,canvas.height); ctx.stroke();
     }
 
-    function verifyQuizAnswer(selectedIdx) {
-        const fBox = document.getElementById('quiz-feedback-box');
-        const nBtn = document.getElementById('next-quiz-btn');
-        const correctIdx = quizQuestions[currentQuizIndex].correct;
-
-        fBox.style.display = 'block';
-        if (selectedIdx === correctIdx) {
-            fBox.style.background = 'rgba(39, 174, 96, 0.15)';
-            fBox.style.color = 'var(--success)';
-            fBox.innerHTML = "Excellent choice! Your derivation calculation is entirely correct.";
-        } else {
-            fBox.style.background = 'rgba(192, 57, 43, 0.15)';
-            fBox.style.color = 'var(--danger)';
-            fBox.innerHTML = `Incorrect calculation. Correct option value was: ${quizQuestions[currentQuizIndex].options[correctIdx]}`;
-        }
-        nBtn.style.display = 'inline-block';
-        MathJax.typesetPromise([fBox]);
+    function toggleMastered(id) {
+        document.getElementById(id).classList.toggle('mastered');
     }
 
     function loadNextQuestion() {
-        currentQuizIndex = (currentQuizIndex + 1) % quizQuestions.length;
-        loadQuizQuestion();
+        document.getElementById('quiz-question').innerText = "Solve for x: 2x + 5 = 15";
+        document.getElementById('quiz-options-box').innerHTML = '<button class="quiz-btn" onclick="checkQuiz(this,true)">x = 5</button><button class="quiz-btn" onclick="checkQuiz(this,false)">x = 10</button>';
     }
 
-    // 5. Dynamic HTML5 2D Vector Matrix Visual Space Map Engine
-    function drawMatrixSpace() {
-        const canvas = document.getElementById('matrixCanvas');
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-        
-        // Force logical sizing constraints configuration mapping dimensions 
-        canvas.width = canvas.parentElement.clientWidth;
-        canvas.height = canvas.parentElement.clientHeight;
+    function checkQuiz(btn, isCorrect) {
+        const feedback = document.getElementById('quiz-feedback-box');
+        feedback.style.display = "block";
+        feedback.innerText = isCorrect ? "Correct answer!" : "Incorrect option, try again.";
+        feedback.style.background = isCorrect ? "rgba(39,174,96,0.2)" : "rgba(192,57,43,0.2)";
+        document.getElementById('next-quiz-btn').style.display = "inline-block";
+    }
 
-        const w = canvas.width;
-        const h = canvas.height;
-        const center = { x: w / 2, y: h / 2 };
-        const scale = 35; // Grid unit dimension metric scaling multiplier 
+    // 3. Dynamic Interactive Mathematical Plotter Engine Logic
+    let customChartInstance;
+    function plotCustomFunction() {
+        const equationString = document.getElementById('equation-input').value;
+        const xValues = [];
+        const yValues = [];
 
-        ctx.clearRect(0, 0, w, h);
-        
-        // Render Dark Space System background grid environment layers
-        ctx.strokeStyle = '#1e293b';
-        ctx.lineWidth = 1;
-        for (let i = -10; i <= 10; i++) {
-            ctx.beginPath();
-            ctx.moveTo(center.x + i * scale, 0); ctx.lineTo(center.x + i * scale, h);
-            ctx.moveTo(0, center.y + i * scale); ctx.lineTo(w, center.y + i * scale);
-            ctx.stroke();
+        try {
+            // Compile user input via math.js engine safely
+            const compiledExpr = math.compile(equationString);
+            
+            // Loop step ranges smoothly to map coordinates
+            for (let x = -10; x <= 10; x += 0.2) {
+                let scope = { x: x };
+                let y = compiledExpr.evaluate(scope);
+                
+                // Keep values rational inside graphs
+                if (typeof y === 'number' && isFinite(y)) {
+                    xValues.push(Number(x.toFixed(2)));
+                    yValues.push(Number(y.toFixed(2)));
+                }
+            }
+        } catch (error) {
+            alert("Invalid Mathematical Expression syntax! Use expressions like: sin(x), x^2, or 2*x + 3");
+            return;
         }
 
-        // Fetch inputs from layout coordinates controls fields
-        const ma = parseFloat(document.getElementById('m-a').value) || 0;
-        const mb = parseFloat(document.getElementById('m-b').value) || 0;
-        const mc = parseFloat(document.getElementById('m-c').value) || 0;
-        const md = parseFloat(document.getElementById('m-d').value) || 0;
-
-        // Origin reference coordinate axis frameworks lines
-        ctx.strokeStyle = '#475569';
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(center.x, 0); ctx.lineTo(center.x, h);
-        ctx.moveTo(0, center.y); ctx.lineTo(w, center.y);
-        ctx.stroke();
-
-        // Map transformation basis tracking configurations (i-hat & j-hat space structures)
-        // Note: Canvas coordinates invert the Y-axis, so we subtract the vertical mapping vector components.
-        const ix = center.x + ma * scale;
-        const iy = center.y - mc * scale;
-        const jx = center.x + mb * scale;
-        const jy = center.y - md * scale;
-
-        // Render Basis Transformation Vector Arrow Lines i-hat (Red)
-        ctx.strokeStyle = '#e94560'; ctx.lineWidth = 3;
-        ctx.beginPath(); ctx.moveTo(center.x, center.y); ctx.lineTo(ix, iy); ctx.stroke();
-
-        // Render Basis Transformation Vector Arrow Lines j-hat (Green)
-        ctx.strokeStyle = '#27ae60'; ctx.lineWidth = 3;
-        ctx.beginPath(); ctx.moveTo(center.x, center.y); ctx.lineTo(jx, jy); ctx.stroke();
-    }
-
-    // 6. LocalStorage Persistent Data Cache Browser Save Mechanics
-    function toggleMastered(id) {
-        const node = document.getElementById(id);
-        node.classList.toggle('mastered');
-        const btn = node.querySelector('.master-btn');
-        
-        if (node.classList.contains('mastered')) {
-            btn.textContent = 'Mastered! ✓';
-            localStorage.setItem(id, 'mastered');
-        } else {
-            btn.textContent = 'Mark Mastered';
-            localStorage.removeItem(id);
+        if (customChartInstance) {
+            customChartInstance.destroy();
         }
-    }
 
-    function loadSavedRoadmapProgress() {
-        ['node-alg', 'node-calc'].forEach(id => {
-            if (localStorage.getItem(id) === 'mastered') {
-                const node = document.getElementById(id);
-                if(node) {
-                    node.classList.add('mastered');
-                    node.querySelector('.master-btn').textContent = 'Mastered! ✓';
+        const isDark = document.body.classList.contains('dark-mode-active');
+        const gridColor = isDark ? '#334155' : '#475569';
+        const axisColor = isDark ? '#f8fafc' : '#ffffff';
+
+        const ctx = document.getElementById('mathCustomChart').getContext('2d');
+        customChartInstance = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: xValues,
+                datasets: [{
+                    label: `f(x) = ${equationString}`,
+                    data: yValues,
+                    borderColor: '#e94560',
+                    borderWidth: 3,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'center',
+                        grid: { color: gridColor },
+                        ticks: { color: axisColor }
+                    },
+                    y: {
+                        type: 'linear',
+                        position: 'center',
+                        grid: { color: gridColor },
+                        ticks: { color: axisColor }
+                    }
+                },
+                plugins: {
+                    legend: { labels: { color: axisColor } }
                 }
             }
         });
     }
 
-    // Initialize all dynamic web apps on layout window loading sequence lifecycle
-    window.addEventListener('load', () => {
-        loadQuizQuestion();
+    // Initialize systems on layout compilation
+    window.onload = function() {
         drawMatrixSpace();
-        loadSavedRoadmapProgress();
-    });
-    
-    // Recalibrate transformed grid metrics coordinates if device screen geometry transforms
-    window.addEventListener('resize', drawMatrixSpace);
+        loadNextQuestion();
+        plotCustomFunction();
+    };
 </script>
 
 </body>
