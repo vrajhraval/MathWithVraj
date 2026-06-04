@@ -569,14 +569,14 @@
         document.getElementById('btn-reset-cube').addEventListener('click', () => { rotX=0.5; rotY=0.5; spin=true; });
 
         // ==========================================
-        // 8. THE MANDELBROT SET (FIXED REAL-TIME LOOP)
+        // 8. THE MANDELBROT SET
         // ==========================================
         const mandelSetup = setupCanvas('mandelbrotCanvas');
         let mZoom = 1.0, mCX = -0.7, mCY = 0.0;
         function drawMandelbrot() {
             const { ctx, width, height } = mandelSetup;
             ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, width, height);
-            let res = 2; // Pixel scale size optimization
+            let res = 2;
             for (let x = 0; x < width; x += res) {
                 for (let y = 0; y < height; y += res) {
                     let cr = mCX + (x - width / 2) * (3.0 / (width * mZoom));
@@ -630,129 +630,186 @@
         let vParticles = [], vType = 0, vMX = -1000, vMY = -1000;
         function initVectors() {
             vParticles = [];
-            for(let i=0; i<120; i++) vParticles.push({x:Math.random()*vectorSetup.width, y:Math.random()*400, l:Math.random()*100});
+            for(let i=0; i<120; i++) {
+                vParticles.push({ x: Math.random()*vectorSetup.width, y: Math.random()*vectorSetup.height, life: Math.random()*100 });
+            }
         }
         function drawVectorField() {
-            const { ctx, width, height } = vectorSetup; ctx.fillStyle = 'rgba(2,6,23,0.2)'; ctx.fillRect(0,0,width,height);
+            const { ctx, width, height } = vectorSetup;
+            ctx.fillStyle = 'rgba(2, 6, 23, 0.15)'; ctx.fillRect(0,0,width,height);
+            
+            // Draw background grid lines/indicators
+            ctx.strokeStyle = 'rgba(52, 211, 153, 0.05)'; ctx.lineWidth = 1;
+            for(let x=0; x<width; x+=40) {
+                for(let y=0; y<height; y+=40) {
+                    let dx = 0, dy = 0;
+                    let cx = x - width/2, cy = y - height/2;
+                    if(vType === 0) { dx = -cy; dy = cx; }
+                    else { dx = cx; dy = cy; }
+                    let angle = Math.atan2(dy, dx);
+                    ctx.beginPath(); ctx.moveTo(x, y);
+                    ctx.lineTo(x + Math.cos(angle)*12, y + Math.sin(angle)*12); ctx.stroke();
+                }
+            }
+
+            ctx.fillStyle = '#34d399';
             vParticles.forEach(p => {
-                let cX = (p.x - width/2)/45, cY = (p.y - height/2)/45;
-                let dx = vType === 0 ? -cY : Math.sin(cY), dy = vType === 0 ? cX : Math.cos(cX);
-                if(Math.abs(p.x - vMX) < 80 && Math.abs(p.y - vMY) < 80) { dx += 2; dy -= 2; }
-                p.x += dx*1.2; p.y += dy*1.2; p.l--;
-                if(p.x<0||p.x>width||p.y<0||p.y>height||p.l<=0) { p.x=Math.random()*width; p.y=Math.random()*height; p.l=Math.random()*100; }
-                ctx.fillStyle = '#34d399'; ctx.fillRect(p.x, p.y, 2.5, 2.5);
+                let cx = p.x - width/2, cy = p.y - height/2;
+                let vx = 0, vy = 0;
+                if(vType === 0) { vx = -cy * 0.02; vy = cx * 0.02; }
+                else { vx = cx * 0.01; vy = cy * 0.01; }
+
+                if(vMX > 0) {
+                    let dMX = p.x - vMX, dMY = p.y - vMY;
+                    let dist = Math.sqrt(dMX*dMX + dMY*dMY) + 1;
+                    if(dist < 150) { vx += (dMY/dist)*4; vy -= (dMX/dist)*4; }
+                }
+
+                p.x += vx; p.y += vy; p.life--;
+                ctx.fillRect(p.x, p.y, 2, 2);
+                if(p.life <= 0 || p.x < 0 || p.x > width || p.y < 0 || p.y > height) {
+                    p.x = Math.random()*width; p.y = Math.random()*height; p.life = 100;
+                }
             });
             requestAnimationFrame(drawVectorField);
         }
-        vectorSetup.canvas.addEventListener('mousemove', e => { const r = vectorSetup.canvas.getBoundingClientRect(); vMX = e.clientX - r.left; vMY = e.clientY - r.top; });
-        document.getElementById('btn-vector-type').addEventListener('click', () => vType = vType === 0 ? 1 : 0);
-        document.getElementById('btn-reset-vector').addEventListener('click', () => { vType=0; initVectors(); });
+        vectorSetup.canvas.addEventListener('mousemove', e => {
+            const r = vectorSetup.canvas.getBoundingClientRect(); vMX = e.clientX - r.left; vMY = e.clientY - r.top;
+        });
+        vectorSetup.canvas.addEventListener('mouseleave', () => { vMX = -1000; vMY = -1000; });
+        document.getElementById('btn-vector-type').addEventListener('click', () => {
+            vType = (vType + 1) % 2;
+            document.getElementById('vector-stats').innerText = `Field State: ${vType === 0 ? 'F(x, y) = (-y, x) Vortex' : 'F(x, y) = (x, y) Explosion'}`;
+        });
+        document.getElementById('btn-reset-vector').addEventListener('click', () => { vType = 0; initVectors(); });
 
         // ==========================================
-        // 11. HYPERBOLIC TILING (FIXED POINCARÉ PATTERN)
+        // 11. NON-EUCLIDEAN GEOMETRIES (HYPERBOLIC)
         // ==========================================
         const hyperSetup = setupCanvas('hyperbolicCanvas');
         let hyperOrder = 5;
         function drawHyperbolic() {
-            const { ctx, width, height } = hyperSetup; ctx.clearRect(0, 0, width, height);
-            let cx = width / 2, cy = height / 2, r = 130;
-            
-            // Draw main boundary disk limit
-            ctx.strokeStyle = '#f43f5e'; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke();
-            
-            // Mathematical geometric tiling calculation loop
-            ctx.lineWidth = 1.2;
-            for (let i = 0; i < hyperOrder * 4; i++) {
-                let alpha = (i * Math.PI) / (hyperOrder * 2);
-                ctx.strokeStyle = `hsla(${340 + i*2}, 85%, 60%, 0.6)`;
+            const { ctx, width, height } = hyperSetup; ctx.clearRect(0,0,width,height);
+            let r = 160; let cx = width/2, cy = height/2;
+            ctx.strokeStyle = '#f43f5e'; ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.stroke();
+
+            ctx.strokeStyle = 'rgba(244, 63, 94, 0.3)'; ctx.lineWidth = 1;
+            for(let i=0; i<hyperOrder; i++) {
+                let angle = (i * Math.PI * 2) / hyperOrder;
+                let x1 = cx + Math.cos(angle)*r, y1 = cy + Math.sin(angle)*r;
+                ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(x1, y1); ctx.stroke();
                 
-                // Draw hyperbolic internal structural geodesic coordinates
-                ctx.beginPath();
-                for (let d = -0.99; d <= 0.99; d += 0.05) {
-                    // Compute spatial metrics transformed inside unit disk mappings
-                    let factor = Math.tanh(hyperOrder / 4);
-                    let tx = d * r * Math.cos(alpha) * factor;
-                    let ty = d * r * Math.sin(alpha + 0.4) * factor;
-                    if (d === -0.99) ctx.moveTo(cx + tx, cy + ty); else ctx.lineTo(cx + tx, cy + ty);
+                // Nested Poincaré Arc Calculations
+                for(let d=1; d<=4; d++) {
+                    ctx.beginPath();
+                    let arcR = r * Math.tan(d * 15 * Math.PI / 180);
+                    let dist = r / Math.cos(d * 15 * Math.PI / 180);
+                    ctx.arc(cx + Math.cos(angle)*dist, cy + Math.sin(angle)*dist, arcR, 0, Math.PI*2);
+                    ctx.stroke();
                 }
-                ctx.stroke();
-            }
-            
-            // Generate concentric geometry layers shifting towards periphery rim
-            ctx.strokeStyle = 'rgba(244, 63, 94, 0.25)';
-            for (let rad = 25; rad < r; rad += 25) {
-                ctx.beginPath(); ctx.arc(cx, cy, rad, 0, Math.PI * 2); ctx.stroke();
             }
         }
-        document.getElementById('btn-hyper-depth').addEventListener('click', () => { hyperOrder = hyperOrder >= 12 ? 5 : hyperOrder + 2; drawHyperbolic(); });
+        document.getElementById('btn-hyper-depth').addEventListener('click', () => { hyperOrder = hyperOrder >= 12 ? 3 : hyperOrder + 2; drawHyperbolic(); });
         document.getElementById('btn-reset-hyper').addEventListener('click', () => { hyperOrder = 5; drawHyperbolic(); });
 
         // ==========================================
         // 12. FOURIER TRANSFORMS
         // ==========================================
         const transSetup = setupCanvas('transformCanvas');
-        let tStep = 0, pulseActive = false;
+        let tStep = 0; let impulseActive = false;
         function drawTransform() {
-            const { ctx, width, height } = transSetup; ctx.clearRect(0, 0, width, height);
-            ctx.strokeStyle = '#c084fc'; ctx.lineWidth = 2; ctx.beginPath();
+            const { ctx, width, height } = transSetup; ctx.clearRect(0,0,width,height);
+            
+            // Time Domain
+            ctx.strokeStyle = 'rgba(192, 132, 252, 0.4)'; ctx.beginPath();
             for(let x=0; x<width/2; x++) {
-                let y = height/4 + Math.sin(x*0.06 + tStep)*25 + Math.sin(x*0.14 + tStep*2)*12;
-                if (pulseActive) y += Math.sin(x*0.3)*15;
-                if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+                let sig = Math.sin(x*0.05 + tStep) * 30 + Math.sin(x*0.12 + tStep*2) * 15;
+                if(impulseActive) sig += (Math.random() - 0.5) * 45;
+                if(x===0) ctx.moveTo(x, 120 + sig); else ctx.lineTo(x, 120 + sig);
             }
             ctx.stroke();
-            ctx.strokeStyle = '#2dd4bf'; ctx.beginPath();
-            for(let x=0; x<width/2; x++) {
-                let sX = x * 0.1;
-                let amp = (sX > 0.5 && sX < 0.7) ? 65 : (sX > 1.3 && sX < 1.5) ? 35 : (pulseActive && sX > 2.8 && sX < 3.0) ? 55 : 6;
-                ctx.lineTo(width/2 + x, height - 45 - amp);
+            
+            // Frequency Domain Spectrograph Spikes
+            ctx.fillStyle = '#c084fc';
+            for(let x=0; x<width/2; x += 4) {
+                let h = 5;
+                if(Math.abs(x - 40) < 6) h += 110;
+                if(Math.abs(x - 95) < 6) h += 50;
+                if(impulseActive) h += Math.random() * 40;
+                ctx.fillRect(width/2 + x, height - 40 - h, 2, h);
             }
-            ctx.stroke(); tStep += 0.04; requestAnimationFrame(drawTransform);
+            
+            // Divider text descriptors
+            ctx.fillStyle = varColor('--muted-text'); ctx.fillText("TIME DOMAIN SIGNAL", 20, 30);
+            ctx.fillText("FREQUENCY DOMAIN (FFT)", width/2 + 20, 30);
+            
+            tStep += 0.05; requestAnimationFrame(drawTransform);
         }
-        document.getElementById('btn-signal-mix').addEventListener('click', () => { pulseActive = true; document.getElementById('transform-stats').innerText = "Frequency space component injected."; });
-        document.getElementById('btn-reset-transform').addEventListener('click', () => { pulseActive = false; document.getElementById('transform-stats').innerText = "Decomposing signals..."; });
+        document.getElementById('btn-signal-mix').addEventListener('click', () => {
+            impulseActive = true; setTimeout(() => impulseActive = false, 1200);
+        });
+        document.getElementById('btn-reset-transform').addEventListener('click', () => impulseActive = false);
 
         // ==========================================
-        // 13. TOPOLOGY: GENUS-2 TORUS
+        // 13. TOPOLOGY (GENUS-2 TORUS)
         // ==========================================
         const genusSetup = setupCanvas('genusCanvas');
-        let gAngle = 0;
-        function drawGenus2() {
+        let gAngle = 0, gInvert = false;
+        function drawGenus() {
             const { ctx, width, height } = genusSetup; ctx.clearRect(0,0,width,height);
-            ctx.strokeStyle = '#f59e0b';
-            for(let u=0; u<Math.PI*2; u+=0.3) {
+            ctx.strokeStyle = '#f59e0b'; ctx.lineWidth = 1;
+            let steps = 25;
+            for(let i=0; i<steps; i++) {
+                let u = (i * Math.PI * 2) / steps;
                 ctx.beginPath();
-                for(let v=0; v<Math.PI*2; v+=0.2) {
-                    let x = (1.4 + Math.cos(u)) * Math.cos(v) - 1.1;
-                    if(v > Math.PI) x = (1.4 + Math.cos(u)) * Math.cos(v) + 1.1;
-                    let y = (1.4 + Math.cos(u)) * Math.sin(v); let z = Math.sin(u);
-                    let pt = project3D(x*38, y*38, z*38, width, height, gAngle*0.3, gAngle);
-                    if(v===0) ctx.moveTo(pt.x, pt.y); else ctx.lineTo(pt.x, pt.y);
+                for(let j=0; j<=40; j++) {
+                    let v = (j * Math.PI * 2) / 40;
+                    let x = (1.8 + Math.cos(u)) * Math.cos(v) * 40;
+                    let y = (1.8 + Math.cos(u)) * Math.sin(v) * 40;
+                    if(v > Math.PI) x += gInvert ? -70 : 80; // Topology hole duplication matrix offset
+                    let z = Math.sin(u) * 35;
+                    let pt = project3D(x, y, z, width, height, gAngle, gAngle*0.5);
+                    if(j===0) ctx.moveTo(pt.x, pt.y); else ctx.lineTo(pt.x, pt.y);
                 }
                 ctx.stroke();
             }
-            gAngle += 0.006; requestAnimationFrame(drawGenus2);
+            gAngle += 0.01; requestAnimationFrame(drawGenus);
         }
-        document.getElementById('btn-genus-spin').addEventListener('click', () => gAngle += 1.5);
-        document.getElementById('btn-reset-genus').addEventListener('click', () => gAngle = 0);
+        document.getElementById('btn-genus-spin').addEventListener('click', () => gInvert = !gInvert);
+        document.getElementById('btn-reset-genus').addEventListener('click', () => { gAngle = 0; gInvert = false; });
 
         // ==========================================
-        // 14. EULER'S IDENTITY
+        // 14. EULER'S FORMULA
         // ==========================================
         const eulerSetup = setupCanvas('eulerCanvas');
         let eTheta = 0;
         function drawEuler() {
-            const { ctx, width, height } = eulerSetup; ctx.clearRect(0, 0, width, height);
-            let cx = width/2, cy = height/2, r = 90;
-            ctx.strokeStyle = 'rgba(255,255,255,0.1)'; ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo(cx-r-10, cy); ctx.lineTo(cx+r+10, cy); ctx.moveTo(cx, cy-r-10); ctx.lineTo(cx, cy+r+10); ctx.stroke();
-            let ex = cx + r*Math.cos(eTheta), ey = cy - r*Math.sin(eTheta);
-            ctx.strokeStyle = '#60a5fa'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(ex, ey); ctx.stroke();
-            ctx.fillStyle = '#f43f5e'; ctx.beginPath(); ctx.arc(ex, ey, 5, 0, Math.PI*2); ctx.fill();
-            document.getElementById('euler-stats').innerText = `Vector: cos(θ) = ${Math.cos(eTheta).toFixed(2)} | sin(θ) = ${Math.sin(eTheta).toFixed(2)}i`;
-            eTheta = (eTheta + 0.012) % (Math.PI*2); requestAnimationFrame(drawEuler);
+            const { ctx, width, height } = eulerSetup; ctx.clearRect(0,0,width,height);
+            let cx = width/3, cy = height/2, r = 80;
+            
+            // Complex circle mapping unit
+            ctx.strokeStyle = 'rgba(96, 165, 250, 0.2)'; ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.stroke();
+            ctx.strokeStyle = 'rgba(96, 165, 250, 0.4)';
+            ctx.beginPath(); ctx.moveTo(cx - r - 20, cy); ctx.lineTo(cx + r + 20, cy); ctx.moveTo(cx, cy - r - 20); ctx.lineTo(cx, cy + r + 20); ctx.stroke();
+
+            let px = cx + Math.cos(eTheta)*r, py = cy + Math.sin(eTheta)*r;
+            ctx.fillStyle = '#f43f5e'; ctx.beginPath(); ctx.arc(px, py, 5, 0, Math.PI*2); ctx.fill();
+            
+            ctx.strokeStyle = '#60a5fa'; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(px, py); ctx.stroke();
+            ctx.strokeStyle = '#34d399'; ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(width - 150, py); ctx.stroke();
+
+            // Trace side sine-wave tracker component path
+            ctx.strokeStyle = '#34d399'; ctx.beginPath();
+            for(let x=0; x<150; x++) {
+                let y = cy + Math.sin(eTheta - x*0.08) * r;
+                if(x===0) ctx.moveTo(width - 150 + x, y); else ctx.lineTo(width - 150 + x, y);
+            }
+            ctx.stroke();
+
+            eTheta += 0.03; requestAnimationFrame(drawEuler);
         }
-        document.getElementById('btn-euler-speed').addEventListener('click', () => eTheta += Math.PI/4);
+        document.getElementById('btn-euler-speed').addEventListener('click', () => eTheta += 1.5);
         document.getElementById('btn-reset-euler').addEventListener('click', () => eTheta = 0);
 
         // ==========================================
@@ -762,87 +819,121 @@
         let cltBins = new Array(40).fill(0), cltTotal = 0;
         function drawCLT() {
             const { ctx, width, height } = cltSetup; ctx.clearRect(0,0,width,height);
-            let binW = width / cltBins.length; ctx.fillStyle = '#34d399';
+            let binW = width / cltBins.length;
+            let maxBin = Math.max(...cltBins) || 1;
+            ctx.fillStyle = '#34d399';
             for(let i=0; i<cltBins.length; i++) {
-                let h = cltBins[i]*3.5; ctx.fillRect(i*binW, height - h, binW - 2, h);
+                let h = (cltBins[i] / maxBin) * (height - 80);
+                ctx.fillRect(i*binW, height - h, binW - 2, h);
             }
+            document.getElementById('clt-stats').innerText = `Samples Aggregated: ${cltTotal}`;
         }
         document.getElementById('btn-clt-drop').addEventListener('click', () => {
-            for(let sample=0; sample<500; sample++) {
-                let sum = 0; for(let i=0; i<12; i++) sum += Math.random(); 
-                let idx = Math.floor((sum / 12) * cltBins.length);
-                if(idx >= 0 && idx < cltBins.length) cltBins[idx]++;
+            for(let s=0; s<500; s++) {
+                let sum = 0; for(let n=0; n<12; n++) sum += Math.random();
+                let binIdx = Math.floor((sum / 12) * cltBins.length);
+                if(binIdx >= 0 && binIdx < cltBins.length) cltBins[binIdx]++;
+                cltTotal++;
             }
-            cltTotal += 500; document.getElementById('clt-stats').innerText = `Samples Aggregated: ${cltTotal}`; drawCLT();
+            drawCLT();
         });
-        document.getElementById('btn-reset-clt').addEventListener('click', () => { cltBins.fill(0); cltTotal=0; document.getElementById('clt-stats').innerText = "Samples Aggregated: 0"; drawCLT(); });
+        document.getElementById('btn-reset-clt').addEventListener('click', () => { cltBins.fill(0); cltTotal = 0; drawCLT(); });
 
         // ==========================================
         // 16. GRAPH THEORY
         // ==========================================
         const graphSetup = setupCanvas('graphCanvas');
-        let gNodes = [], gEdges = [];
+        let nodes = [], links = [];
         function initGraph() {
-            gNodes = []; gEdges = [];
-            for(let i=0; i<10; i++) gNodes.push({x:120+Math.random()*120, y:120+Math.random()*120});
-            for(let i=0; i<12; i++) {
-                let s = Math.floor(Math.random()*10), t = Math.floor(Math.random()*10);
-                if(s !== t) gEdges.push([s,t]);
+            nodes = []; links = [];
+            for(let i=0; i<15; i++) {
+                nodes.push({ x: Math.random()*graphSetup.width, y: Math.random()*graphSetup.height });
+                if(i > 0) links.push({ source: i, target: Math.floor(Math.random()*i) });
             }
         }
         function drawGraph() {
-            const { ctx, width, height } = graphSetup; ctx.clearRect(0, 0, width, height);
-            gNodes.forEach((n1, i) => {
-                gNodes.forEach((n2, j) => {
-                    if (i === j) return;
-                    let dx = n2.x - n1.x, dy = n2.y - n1.y, d = Math.sqrt(dx*dx + dy*dy) || 1;
-                    if(d < 80) { n1.x -= (dx/d)*0.25; n1.y -= (dy/d)*0.25; }
-                });
+            const { ctx, width, height } = graphSetup; ctx.clearRect(0,0,width,height);
+            
+            // Force physics balance simulation algorithm execution loop
+            links.forEach(l => {
+                let s = nodes[l.source], t = nodes[l.target];
+                let dx = t.x - s.x, dy = t.y - s.y; let dist = Math.sqrt(dx*dx + dy*dy) || 1;
+                let f = (dist - 65) * 0.01;
+                s.x += (dx/dist)*f; s.y += (dy/dist)*f; t.x -= (dx/dist)*f; t.y -= (dy/dist)*f;
+                ctx.strokeStyle = 'rgba(45, 212, 191, 0.4)'; ctx.beginPath(); ctx.moveTo(s.x, s.y); ctx.lineTo(t.x, t.y); ctx.stroke();
             });
-            gEdges.forEach(e => {
-                let n1 = gNodes[e[0]], n2 = gNodes[e[1]];
-                let dx = n2.x - n1.x, dy = n2.y - n1.y, d = Math.sqrt(dx*dx + dy*dy) || 1;
-                let f = (d - 70) * 0.01; n1.x += dx*f; n1.y += dy*f;
-                ctx.strokeStyle = 'rgba(45,212,191,0.4)'; ctx.beginPath(); ctx.moveTo(n1.x, n1.y); ctx.lineTo(n2.x, n2.y); ctx.stroke();
-            });
+
             ctx.fillStyle = '#2dd4bf';
-            gNodes.forEach(n => {
-                n.x = Math.max(15, Math.min(width-15, n.x)); n.y = Math.max(15, Math.min(height-15, n.y));
+            nodes.forEach(n => {
                 ctx.beginPath(); ctx.arc(n.x, n.y, 6, 0, Math.PI*2); ctx.fill();
+                // Bound limits constraints block
+                n.x = Math.max(15, Math.min(width-15, n.x)); n.y = Math.max(15, Math.min(height-15, n.y));
             });
             requestAnimationFrame(drawGraph);
         }
         document.getElementById('btn-add-node').addEventListener('click', () => {
-            gNodes.push({x: graphSetup.width/2, y: 200});
-            gEdges.push([gNodes.length-1, Math.floor(Math.random()*(gNodes.length-1))]);
+            nodes.push({ x: Math.random()*graphSetup.width, y: Math.random()*graphSetup.height });
+            links.push({ source: nodes.length - 1, target: Math.floor(Math.random()*(nodes.length - 1)) });
         });
-        document.getElementById('btn-reset-graph').addEventListener('click', initGraph);
+        document.getElementById('btn-reset-graph').addEventListener('click', () => initGraph());
 
         // ==========================================
         // 17. MATRIX TRANSFORMATIONS
         // ==========================================
         const matrixSetup = setupCanvas('matrixCanvas');
-        let mMat = {xx: 1, yx: 0, xy: 0, yy: 1};
+        let mShear = 0.0;
         function drawMatrix() {
             const { ctx, width, height } = matrixSetup; ctx.clearRect(0,0,width,height);
-            let cx = width/2, cy = height/2; ctx.strokeStyle = 'rgba(255,255,255,0.05)';
-            for(let i=-150; i<=150; i+=25) { ctx.beginPath(); ctx.moveTo(cx+i, 0); ctx.lineTo(cx+i, height); ctx.moveTo(0, cy+i); ctx.lineTo(width, cy+i); ctx.stroke(); }
-            ctx.strokeStyle = '#f59e0b'; ctx.lineWidth = 2; ctx.beginPath();
-            for(let x=-60; x<=60; x+=20) {
-                for(let y=-60; y<=60; y+=20) {
-                    let tx = x * mMat.xx + y * mMat.xy; let ty = x * mMat.yx + y * mMat.yy;
-                    ctx.rect(cx+tx, cy+ty, 2, 2);
-                }
+            let cx = width/2, cy = height/2;
+            ctx.strokeStyle = 'rgba(245, 158, 11, 0.15)'; ctx.lineWidth = 1;
+            
+            // Linear Grid Coordinate System Draw
+            for(let i=-6; i<=6; i++) {
+                ctx.beginPath(); ctx.moveTo(0, cy + i*30); ctx.lineTo(width, cy + i*30);
+                ctx.moveTo(cx + i*30, 0); ctx.lineTo(cx + i*30, height); ctx.stroke();
             }
-            ctx.stroke();
-        }
-        document.getElementById('btn-matrix-shear').addEventListener('click', () => { mMat.xy = 0.7; drawMatrix(); document.getElementById('matrix-stats').innerText = "Matrix Configuration: Shear Transform Applied"; });
-        document.getElementById('btn-reset-matrix').addEventListener('click', () => { mMat = {xx: 1, yx: 0, xy: 0, yy: 1}; drawMatrix(); document.getElementById('matrix-stats').innerText = "Basis: [1, 0] / [0, 1]"; });
 
-        // --- Core Init Kickoff ---
-        initVectors(); initGraph(); initChaos();
-        drawFibonacci(); drawFourier(); drawMobius(); drawLorenz(); drawUlam(); drawChaos(); drawCube();
-        drawMandelbrot(); drawHopf(); drawVectorField(); drawHyperbolic(); drawTransform(); drawGenus2(); drawEuler(); drawCLT(); drawGraph(); drawMatrix();
+            // Applied Shear Vector Basis Transformation Logic
+            ctx.strokeStyle = '#f59e0b'; ctx.lineWidth = 3; ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            let targetX = 80 + mShear*50;
+            ctx.lineTo(cx + targetX, cy - 50); ctx.stroke();
+            
+            ctx.fillStyle = '#f59e0b'; ctx.font = "12px sans-serif";
+            ctx.fillText(`transformed i-basis Vector [${(targetX/50).toFixed(1)}, 1.0]`, cx + targetX + 10, cy - 55);
+            document.getElementById('matrix-stats').innerText = `Basis i-hat: [${(targetX/50).toFixed(2)}, 1.00] / j-hat: [0.00, 1.00]`;
+        }
+        document.getElementById('btn-matrix-shear').addEventListener('click', () => { mShear = mShear >= 2.0 ? -1.0 : mShear + 0.4; drawMatrix(); });
+        document.getElementById('btn-reset-matrix').addEventListener('click', () => { mShear = 0.0; drawMatrix(); });
+
+
+        // --- Auxiliary Color Parser Helper ---
+        function varColor(varName) {
+            return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+        }
+
+        // ==========================================
+        // SYSTEM MASTER INITIALIZATION ENTRYPOINT
+        // ==========================================
+        window.addEventListener('DOMContentLoaded', () => {
+            drawFibonacci();
+            drawFourier();
+            drawMobius();
+            drawLorenz();
+            drawUlam();
+            initChaos(); drawChaos();
+            drawCube();
+            drawMandelbrot();
+            drawHopf();
+            initVectors(); drawVectorField();
+            drawHyperbolic();
+            drawTransform();
+            drawGenus();
+            drawEuler();
+            drawCLT();
+            initGraph(); drawGraph();
+            drawMatrix();
+        });
     </script>
 </body>
 </html>
