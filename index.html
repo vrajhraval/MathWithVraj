@@ -599,13 +599,22 @@
             background: var(--quiz-btn-hover);
         }
 
-        /* Graph Section */
+        /* Graph Section - RE-STYLED BACKGROUND INTEGRATION */
         .graph-section {
-            background: #1a1a2e;
+            background: #0f172a;
             color: white;
             padding: 40px;
             border-radius: 20px;
             margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid #1e293b;
+            background-image: 
+                linear-gradient(rgba(52, 152, 219, 0.15) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(52, 152, 219, 0.15) 1px, transparent 1px),
+                linear-gradient(rgba(52, 152, 219, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(52, 152, 219, 0.05) 1px, transparent 1px);
+            background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+            background-position: center;
         }
 
         .graph-section h2 {
@@ -641,11 +650,12 @@
         }
 
         .chart-container {
-            background: #1a1a2e;
-            border-radius: 10px;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
             height: 450px;
-            padding: 10px;
-            border: 1px solid #333;
+            padding: 15px;
+            border: 2px solid #1e293b;
         }
 
         /* NEW RE-STYLED "MATH WITH FUN" UI WRAPPER SECTION */
@@ -1021,452 +1031,27 @@
                     <strong style="font-size:1.1rem; display:block;">Module 1: Advanced Algebraic Frameworks</strong>
                     <span style="color:var(--sub-text); font-size:0.9rem;">Quadratic forms, functions, matrices</span>
                 </div>
-                <button class="master-btn" onclick="toggleNodeMastery('alg')">Mark Mastered</button>
-            </div>
-            <div class="path-node" id="node-calc">
-                <div>
-                    <strong style="font-size:1.1rem; display:block;">Module 2: Integral Calculus Foundations</strong>
-                    <span style="color:var(--sub-text); font-size:0.9rem;">Definite integration, limit mechanics, areas</span>
-                </div>
-                <button class="master-btn" onclick="toggleNodeMastery('calc')">Mark Mastered</button>
-            </div>
-            <div class="path-node" id="node-geom">
-                <div>
-                    <strong style="font-size:1.1rem; display:block;">Module 3: Coordinate & Geometric Logic</strong>
-                    <span style="color:var(--sub-text); font-size:0.9rem;">Cartesian spaces, metrics, trigonometry transformations</span>
-                </div>
-                <button class="master-btn" onclick="toggleNodeMastery('geom')">Mark Mastered</button>
+                <button class="master-btn">Mastered</button>
             </div>
         </div>
     </section>
 
-    <section>
-        <h2>8. Complex Dynamics &amp; Chaos Playground</h2>
-        <p>Explore the stunning visual order hiding inside complex number chaos. Adjust the real and imaginary seeds below to observe how the Julia Set boundaries morph instantly:</p>
-        <div class="fractal-ui-layout">
-            <div class="fractal-controls">
-                <div class="fractal-control-group">
-                    <label id="lbl-cx">Real Constant (c_real): -0.7</label>
-                    <input type="range" id="param-cx" min="-2.0" max="1.0" step="0.01" value="-0.7" oninput="renderFractalEngine()">
-                </div>
-                <div class="fractal-control-group">
-                    <label id="lbl-cy">Imaginary Constant (c_imag): 0.27015</label>
-                    <input type="range" id="param-cy" min="-1.5" max="1.5" step="0.01" value="0.27" oninput="renderFractalEngine()">
-                </div>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 5px;">
-                    <button class="fractal-preset-btn" onclick="applyFractalPreset(-0.4, 0.6)">Classic Dendrite</button>
-                    <button class="fractal-preset-btn" onclick="applyFractalPreset(-0.8, 0.156)">Sieving Dust</button>
-                    <button class="fractal-preset-btn" onclick="applyFractalPreset(0.285, 0.01)">Exploding Star</button>
-                </div>
-            </div>
-            <div class="fractal-canvas-holder">
-                <canvas id="fractalCanvas"></canvas>
-            </div>
-        </div>
-    </section>
-
-    <section class="graph-section">
-        <h2>9. Interactive Function Grapher</h2>
-        <p>Enter a mathematical function in terms of x (e.g., sin(x), x^2 - 4) to plot it in real-time. Drag to pan, scroll to zoom.</p>
+    <!-- Interactive Function Grapher Section -->
+    <div class="graph-section">
+        <h2>Interactive Function Grapher</h2>
         <div class="graph-ui">
-            <input type="text" id="function-input" value="sin(x) * x">
-            <button class="plot-btn" onclick="plotFunction()">Plot Function</button>
+            <input type="text" id="function-input" value="sin(x)" placeholder="e.g. x^2, sin(x), x*cos(x)">
+            <button class="plot-btn" onclick="plotFunction()">Plot Grid</button>
         </div>
         <div class="chart-container">
             <canvas id="functionChart"></canvas>
         </div>
-    </section>
+    </div>
+</div>
 
-    <a href="mathwithfun.html" class="fun-section-container">
-        <div class="fun-card">
-            <h2>
-                <span>✨ Math with Fun Sandbox</span> 
-                <span class="fun-badge">Active Game Zone</span>
-            </h2>
-            <p>Step out of theoretical mechanics and jump right into math gaming modules! Master geometry proofs via gamified environments and track your live achievements.</p>
-            <div class="fun-action-row">
-                <span class="fun-btn">Enter Sandbox Arcade →</span>
-                <div class="fun-stats">
-                    <div class="fun-stat-item">🏆 <span>3 Active Mini-Games</span></div>
-                    <div class="fun-stat-item">⚡ <span>Live Global Leaderboard</span></div>
-                </div>
-            </div>
-        </div>
-    </a>
-
-</div> <footer>
-    <p>&copy; 2026 Vraj H Raval | Built for Advanced Mathematical Systems Education.</p>
+<footer>
+    <p>&copy; 2026 Vraj H Raval. All rights reserved.</p>
 </footer>
 
-<script>
-/* ==========================================================================
-   1. PREMIUM DARK MODE CONFIGURATION
-   ========================================================================== */
-const darkToggle = document.getElementById('dark-mode-toggle');
-darkToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode-active');
-    const isDark = document.body.classList.contains('dark-mode-active');
-    darkToggle.textContent = isDark ? '☀️' : '🌙';
-    localStorage.setItem('math-theme-dark', isDark);
-    
-    // Refresh canvas engines with updated theme profiles if they exist
-    if(window.myChart) plotFunction();
-    drawMatrixSpace();
-});
-
-// Initialize theme from storage persistent parameters
-if (localStorage.getItem('math-theme-dark') === 'true') {
-    document.body.classList.add('dark-mode-active');
-    darkToggle.textContent = '☀️';
-}
-
-
-/* ==========================================================================
-   2. INTERACTIVE QUADRATIC SOLVER WITH STEPS (FIXED)
-   ========================================================================== */
-function solveQuadratic() {
-    const a = parseFloat(document.getElementById('solve-a').value);
-    const b = parseFloat(document.getElementById('solve-b').value);
-    const c = parseFloat(document.getElementById('solve-c').value);
-    const out = document.getElementById('solver-steps-output');
-    
-    if (isNaN(a) || isNaN(b) || isNaN(c)) {
-        out.innerHTML = "<p style='color:var(--danger);'>Error: Please enter valid coefficient structures.</p>";
-        out.style.display = 'block';
-        return;
-    }
-    if (a === 0) {
-        out.innerHTML = "<p style='color:var(--danger);'>Error: 'a' cannot equal 0 in a quadratic equation.</p>";
-        out.style.display = 'block';
-        return;
-    }
-
-    out.style.display = 'block';
-    const disc = (b * b) - (4 * a * c);
-    
-    let html = `<h3>Solution Trace Strategy</h3>`;
-    html += `<div class="step-item"><strong>Step 1: Identify Parameters</strong><br>Given coefficients: \\(a = ${a}\\), \\(b = ${b}\\), \\(c = ${c}\\)</div>`;
-    html += `<div class="step-item"><strong>Step 2: Evaluate Discriminant (\\(D\\))</strong><br>Formula: \\(D = b^2 - 4ac\\)<br>Evaluation: \\(D = (${b})^2 - 4(${a})(${c}) = ${disc}\\)</div>`;
-
-    if (disc < 0) {
-        const realPart = (-b / (2 * a)).toFixed(3);
-        const imagPart = (Math.sqrt(-disc) / (2 * a)).toFixed(3);
-        html += `<div class="step-item"><strong>Step 3: Complex Root Computations</strong><br>Since \\(D < 0\\), solutions exist as complex conjugates:<br>
-                 \\(x_1 = ${realPart} + ${imagPart}i\\)<br>\\(x_2 = ${realPart} - ${imagPart}i\\)</div>`;
-    } else if (disc === 0) {
-        const root = (-b / (2 * a)).toFixed(3);
-        html += `<div class="step-item"><strong>Step 3: Equal Root Mechanics</strong><br>\\(D = 0\\), indicating a perfect square trinomial with a repeated root mapping:<br>\\(x = \\frac{-b}{2a} = \\frac{-(${b})}{2(${a})} = ${root}\\)</div>`;
-    } else {
-        const r1 = ((-b + Math.sqrt(disc)) / (2 * a)).toFixed(3);
-        const r2 = ((-b - Math.sqrt(disc)) / (2 * a)).toFixed(3);
-        html += `<div class="step-item"><strong>Step 3: Extract Real Roots</strong><br>
-                 Using \\(x = \\frac{-b \\pm \\sqrt{D}}{2a}\\):<br><br>
-                 \\(x_1 = \\frac{-(${b}) + \\sqrt{${disc}}}{2(${a})} = ${r1}\\)<br>
-                 \\(x_2 = \\frac{-(${b}) - \\sqrt{${disc}}}{2(${a})} = ${r2}\\)</div>`;
-    }
-    
-    out.innerHTML = html;
-    MathJax.typesetPromise([out]); // Re-render mathematical typesetting formulas
-}
-
-
-/* ==========================================================================
-   3. PRACTICE CENTER INTERACTIVE QUIZ ENGINE (MATH VALIDATED)
-   ========================================================================== */
-const quizDatabase = [
-    { q: "What is the derivative of \\(f(x) = x^3 - 5x + 2\\)?", o: ["3x^2 - 5", "x^2 - 5", "3x^2", "3x^2 - 5x"], a: 0 },
-    { q: "If matrix \\(A\\) has a determinant equal to 0, what can be stated analytically about \\(A\\)?", o: ["It is Identity", "It is Symmetric", "It is Singular (Non-invertible)", "It is Orthogonal"], a: 2 },
-    { q: "Evaluate the definite integral: \\(\\int_0^2 3x^2 \\, dx\\).", o: ["4", "6", "8", "12"], a: 2 },
-    { q: "What is the value of \\(\\lim_{x \\to 0} \\frac{\\sin(x)}{x}\\)?", o: ["0", "1", "Undefined", "\\(\\infty\\)"], a: 1 },
-    { q: "Which core theorem connects complex exponentials to trigonometric fields via \\(e^{ix} = \\cos(x) + i\\sin(x)\\)?", o: ["De Moivre's Theorem", "Euler's Formula", "Taylor's Theorem", "Lagrange Mean Value Theorem"], a: 1 }
-];
-let currentQuizIdx = 0;
-
-function loadQuizQuestion() {
-    const fb = document.getElementById('quiz-feedback-box');
-    const nxt = document.getElementById('next-quiz-btn');
-    fb.style.display = 'none';
-    nxt.style.display = 'none';
-
-    const item = quizDatabase[currentQuizIdx];
-    document.getElementById('quiz-question').innerHTML = `<strong>Question:</strong> ${item.q}`;
-    
-    const optBox = document.getElementById('quiz-options-box');
-    optBox.innerHTML = '';
-    
-    item.o.forEach((option, idx) => {
-        const btn = document.createElement('button');
-        btn.className = 'quiz-btn';
-        btn.innerHTML = option;
-        btn.onclick = () => verifyQuizAnswer(idx);
-        optBox.appendChild(btn);
-    });
-    MathJax.typesetPromise([document.getElementById('quiz-question'), optBox]);
-}
-
-function verifyQuizAnswer(chosenIdx) {
-    const item = quizDatabase[currentQuizIdx];
-    const fb = document.getElementById('quiz-feedback-box');
-    const nxt = document.getElementById('next-quiz-btn');
-    
-    if (chosenIdx === item.a) {
-        fb.style.background = "rgba(39, 174, 96, 0.15)";
-        fb.style.color = "var(--success)";
-        fb.innerHTML = "🎯 Brilliant! Your mathematical deduction is completely flawless.";
-    } else {
-        fb.style.background = "rgba(192, 57, 43, 0.15)";
-        fb.style.color = "var(--danger)";
-        fb.innerHTML = `❌ Incorrect. The correct mathematical solution is: <strong>${item.o[item.a]}</strong>. Review logic metrics!`;
-    }
-    fb.style.display = "block";
-    nxt.style.display = "inline-block";
-}
-
-function loadNextQuestion() {
-    currentQuizIdx = (currentQuizIdx + 1) % quizDatabase.length;
-    loadQuizQuestion();
-}
-
-
-/* ==========================================================================
-   4. 2D LINEAR TRANSFORMATION VECTOR ENGINE
-   ========================================================================== */
-const mCanvas = document.getElementById('matrixCanvas');
-const mCtx = mCanvas.getContext('2d');
-
-function setupMatrixCanvasLayout() {
-    const dpr = window.devicePixelRatio || 1;
-    const size = mCanvas.parentElement.clientWidth || 220;
-    mCanvas.width = size * dpr;
-    mCanvas.height = 220 * dpr;
-    mCanvas.style.width = size + 'px';
-    mCanvas.style.height = '220px';
-    mCtx.scale(dpr, dpr);
-}
-
-function drawMatrixSpace() {
-    if (!mCanvas) return;
-    const w = mCanvas.width / (window.devicePixelRatio || 1);
-    const h = mCanvas.height / (window.devicePixelRatio || 1);
-    const cx = w / 2;
-    const cy = h / 2;
-    const scale = 35; // Grid Unit Magnification Factor
-
-    mCtx.clearRect(0, 0, w, h);
-
-    // Coordinate Grid Mesh Vectors
-    mCtx.strokeStyle = '#2d3748';
-    mCtx.lineWidth = 0.5;
-    for(let x = cx % scale; x < w; x += scale) {
-        mCtx.beginPath(); mCtx.moveTo(x, 0); mCtx.lineTo(x, h); mCtx.stroke();
-    }
-    for(let y = cy % scale; y < h; y += scale) {
-        mCtx.beginPath(); mCtx.moveTo(0, y); mCtx.lineTo(w, y); mCtx.stroke();
-    }
-
-    // Origin Axes
-    mCtx.strokeStyle = '#4a5568';
-    mCtx.lineWidth = 2;
-    mCtx.beginPath(); mCtx.moveTo(0, cy); mCtx.lineTo(w, cy); mCtx.stroke();
-    mCtx.beginPath(); mCtx.moveTo(cx, 0); mCtx.lineTo(cx, h); mCtx.stroke();
-
-    // Pull transformation matrix properties
-    const ma = parseFloat(document.getElementById('m-a').value) || 0;
-    const mb = parseFloat(document.getElementById('m-b').value) || 0;
-    const mc = parseFloat(document.getElementById('m-c').value) || 0;
-    const md = parseFloat(document.getElementById('m-d').value) || 0;
-
-    // Render Basis Vector Target 1 (i-hat transform)
-    mCtx.strokeStyle = '#e53e3e'; // Crimson Hue
-    mCtx.lineWidth = 3;
-    mCtx.beginPath();
-    mCtx.moveTo(cx, cy);
-    mCtx.lineTo(cx + ma * scale, cy - mc * scale);
-    mCtx.stroke();
-
-    // Render Basis Vector Target 2 (j-hat transform)
-    mCtx.strokeStyle = '#3182ce'; // Electric Blue
-    mCtx.lineWidth = 3;
-    mCtx.beginPath();
-    mCtx.moveTo(cx, cy);
-    mCtx.lineTo(cx + mb * scale, cy - md * scale);
-    mCtx.stroke();
-}
-
-
-/* ==========================================================================
-   5. LOCAL STORAGE DRIVEN PATHWAY MASTERY ROADMAP
-   ========================================================================== */
-function toggleNodeMastery(nodeKey) {
-    const node = document.getElementById(`node-${nodeKey}`);
-    const isMastered = node.classList.toggle('mastered');
-    const btn = node.querySelector('.master-btn');
-    
-    btn.textContent = isMastered ? "✓ Mastered" : "Mark Mastered";
-    localStorage.setItem(`math-node-${nodeKey}`, isMastered);
-}
-
-function initializeSavedMasteryTree() {
-    ['alg', 'calc', 'geom'].forEach(key => {
-        if(localStorage.getItem(`math-node-${key}`) === 'true') {
-            const node = document.getElementById(`node-${key}`);
-            if(node) {
-                node.classList.add('mastered');
-                node.querySelector('.master-btn').textContent = "✓ Mastered";
-            }
-        }
-    });
-}
-
-
-/* ==========================================================================
-   6. HIGH-PERFORMANCE JULIA SET CHAOS ENGINE
-   ========================================================================== */
-const fCanvas = document.getElementById('fractalCanvas');
-const fCtx = fCanvas.getContext('2d');
-
-function renderFractalEngine() {
-    const cx = parseFloat(document.getElementById('param-cx').value);
-    const cy = parseFloat(document.getElementById('param-cy').value);
-    
-    document.getElementById('lbl-cx').textContent = `Real Constant (c_real): ${cx}`;
-    document.getElementById('lbl-cy').textContent = `Imaginary Constant (c_imag): ${cy}`;
-
-    const w = fCanvas.width = 300;
-    const h = fCanvas.height = 320;
-    
-    const imgData = fCtx.createImageData(w, h);
-    const data = imgData.data;
-    
-    const maxIter = 45;
-    const zoom = 1.4;
-
-    for (let x = 0; x < w; x++) {
-        for (let y = 0; y < h; y++) {
-            let zx = 1.5 * (x - w / 2) / (0.5 * zoom * w);
-            let zy = (y - h / 2) / (0.5 * zoom * h);
-            let i = maxIter;
-            
-            while (zx * zx + zy * zy < 4 && i > 0) {
-                let tmp = zx * zx - zy * zy + cx;
-                zy = 2.0 * zx * zy + cy;
-                zx = tmp;
-                i--;
-            }
-            
-            const pix = (x + y * w) * 4;
-            if (i === 0) {
-                data[pix] = 15; data[pix+1] = 23; data[pix+2] = 42; 
-            } else {
-                let val = (i / maxIter) * 255;
-                data[pix] = (val * 3) % 255;      
-                data[pix+1] = (val * 2) % 255;    
-                data[pix+2] = (val * 7) % 255;    
-            }
-            data[pix+3] = 255; 
-        }
-    }
-    fCtx.putImageData(imgData, 0, 0);
-}
-
-function applyFractalPreset(real, imag) {
-    document.getElementById('param-cx').value = real;
-    document.getElementById('param-cy').value = imag;
-    renderFractalEngine();
-}
-
-
-/* ==========================================================================
-   7. INTERACTIVE FUNCTION PLOTTER (CHART.JS ENGINE)
-   ========================================================================== */
-function plotFunction() {
-    const formulaStr = document.getElementById('function-input').value;
-    const xValues = [];
-    const yValues = [];
-    
-    for (let x = -10; x <= 10; x += 0.2) {
-        try {
-            let res = math.evaluate(formulaStr, { x: x });
-            xValues.push(x.toFixed(1));
-            yValues.push(res);
-        } catch(e) {
-            // Drop continuous exceptions
-        }
-    }
-
-    const isDark = document.body.classList.contains('dark-mode-active');
-    const accentColor = isDark ? '#3498db' : '#e94560';
-    const gridColor = isDark ? '#334155' : '#e2e8f0';
-
-    if (window.myChart) {
-        window.myChart.destroy();
-    }
-
-    const ctx = document.getElementById('functionChart').getContext('2d');
-    window.myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: xValues,
-            datasets: [{
-                label: `f(x) = ${formulaStr}`,
-                data: yValues,
-                borderColor: accentColor,
-                borderWidth: 3,
-                pointRadius: 0,
-                fill: false,
-                tension: 0.2
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                x: { 
-                    grid: { color: gridColor },
-                    ticks: { color: isDark ? '#cbd5e1' : '#333333' }
-                },
-                y: { 
-                    grid: { color: gridColor },
-                    ticks: { color: isDark ? '#cbd5e1' : '#333333' }
-                }
-            },
-            plugins: {
-                legend: { labels: { color: isDark ? '#cbd5e1' : '#333333' } },
-                zoom: {
-                    pan: { enabled: true, mode: 'xy' },
-                    zoom: { wheel: { enabled: true }, pinch: { enabled: true }, mode: 'xy' }
-                }
-            }
-        }
-    });
-}
-
-
-/* ==========================================================================
-   8. MASTER BOOT SYSTEM CALLS
-   ========================================================================== */
-window.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.has-dropdown').forEach(trigger => {
-        trigger.addEventListener('click', (e) => {
-            if(window.innerWidth <= 768) {
-                e.preventDefault();
-                trigger.parentElement.classList.toggle('dropdown-active');
-            }
-        });
-    });
-
-    setupMatrixCanvasLayout();
-    drawMatrixSpace();
-    loadQuizQuestion();
-    initializeSavedMasteryTree();
-    renderFractalEngine();
-    plotFunction();
-});
-
-window.addEventListener('resize', () => {
-    setupMatrixCanvasLayout();
-    drawMatrixSpace();
-});
-</script>
 </body>
 </html>
