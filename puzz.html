@@ -410,10 +410,10 @@
 
         <div class="cosmic-card">
             <div>
-                <span class="category-badge bg-geometry">Chaos Theory | અરાજકતા અને વ્યવસ્થા</span>
-                <h3>The Chaos Game Fractal Generator</h3>
-                <p class="eng-desc">Witness order emerge from pure chaos! A random point jumps halfway toward any of the three triangle vertices selected by a roll of the dice. Watch millions of chaotic jumps form the beautiful, structured Sierpinski Triangle fractal.</p>
-                <p class="guj-desc">સંપૂર્ણ અરાજકતામાંથી વ્યવસ્થાનો ઉદય જુઓ! એક રેન્ડમ બિંદુ પાસા ફેંકવાના પરિણામ પર આધારિત ત્રિકોણના શિરોબિંદુ તરફ અડધું અંતર કાપે છે. જુઓ કેવી રીતે આ અસ્તવ્યસ્ત પ્રક્રિયા સુંદર સિયરપિન્સકી ફેક્ટલ આકૃતિ રચે છે.</p>
+                <span class="category-badge bg-geometry">Niche Topology | અજાણી ભૂમિતિ</span>
+                <h3>The Inseparable Kiss (Soddy Hexlet)</h3>
+                <p class="eng-desc">An absolute secret of spatial geometry! When three spheres kiss (touch each other), you can map a perfect closed ring of exactly <b>6</b> interlocking spheres nestled perfectly in their creases. Move the phase engine to watch the spheres warp dynamically while keeping their continuous mathematical touch.</p>
+                <p class="guj-desc">અવકાશી ભૂમિતિનું એક પરમ રહસ્ય! જ્યારે ૩ ગોળાઓ એકબીજાને સ્પર્શે છે, ત્યારે તેમની વચ્ચે બરાબર <b>૬</b> ગોળાઓની એક અખંડ માળા ગોઠવી શકાય છે. તેના પરિમાણો બદલીને જુઓ કે કેવી રીતે આ ગોળાઓ આકાર બદલવા છતાં પરસ્પર સ્પર્શ ક્યારેય છોડતા નથી.</p>
             </div>
 
             <div class="canvas-frame">
@@ -422,11 +422,12 @@
 
             <div class="control-panel">
                 <div style="margin-bottom:15px;">
-                    <label><span>Plotting Speed / ડ્રોઇંગ ઝડપ:</span> <span id="speedVal" style="color:var(--neon-pink)">500 dots/tick</span></label>
-                    <input type="range" id="chaosSpeed" class="custom-slider" min="100" max="2000" step="100" value="500">
+                    <label><span>Orbital Rotation / ભ્રમણ કક્ષા:</span> <span id="angleVal" style="color:var(--neon-pink)">0°</span></label>
+                    <input type="range" id="branchAngle" class="custom-slider" min="0" max="360" value="0">
                 </div>
-                <div style="display: flex; gap: 10px;">
-                    <button class="action-btn" id="chaosResetBtn" style="border-color: var(--neon-pink); color: var(--neon-pink); margin-top:0;">Reset Canvas / સાફ કરો</button>
+                <div>
+                    <label><span>Asymmetry Shift / અસમપ્રમાણતા:</span> <span id="ratioVal" style="color:var(--neon-pink)">0.00</span></label>
+                    <input type="range" id="growthRatio" class="custom-slider" min="-80" max="80" value="0">
                 </div>
             </div>
         </div>
@@ -557,7 +558,7 @@
                 <span class="category-badge bg-logic">Financial Paradox</span>
                 <h3>The Missing Dollar Illusion</h3>
                 <p class="eng-desc">Three guests check into a room totaling 30 dollars expense (10 dollars each). The manager realizes a discount and returns 5 dollars back via a bellboy. The dishonest bellboy keeps 2 dollars secretly and returns 1 dollar to each guest. Now, each guest paid 9 dollars (9 x 3 = 27). The bellboy has 2 dollars (27 + 2 = 29). Where is the missing 1 dollar? Input the actual value of the final mathematical accounting error discrepancy inside the system.</p>
-                <p class="guj-desc">૩ મિત્રો એક હોટેલમાં ૩૦ રૂપિયા આપી રૂમ રાખે છે. મેનેજર વળતર પેટે ૫ રૂપિયા પાછા આપે છે. નોકર ૨ રૂપિયા પોતાની પાસે રાખી ત્રણેય મિત્રોને ૧-૧ abruptિયો પાછો આપે છે. હવે ત્રણેયે ૯-૯ રૂપિયા આપ્યા કહેવાય (૯ x ૩ = ૨૭). નોકર પાસેના ૨ ગણીએ તો (૨૭ + ૨ = ૨૯) થાય. આ હિસાબની ગોલમાલમાં વાસ્તવિક ભૂલ કઈ રકમ પર થઈ?</p>
+                <p class="guj-desc">૩ મિત્રો એક હોટેલમાં ૩૦ રૂપિયા આપી રૂમ રાખે છે. મેનેજર વળતર પેટે ૫ રૂપિયા પાછા આપે છે. નોકર ૨ રૂપિયા પોતાની પાસે રાખી ત્રણેય મિત્રોને ૧-૧ રૂપિયો પાછો આપે છે. હવે ત્રણેયે ૯-૯ રૂપિયા આપ્યા કહેવાય (૯ x ૩ = ૨૭). નોકર પાસેના ૨ ગણીએ તો (૨૭ + ૨ = ૨૯) થાય. આ હિસાબની ગોલમાલમાં વાસ્તવિક ભૂલ કઈ રકમ પર થઈ?</p>
             </div>
             <div class="input-wrapper">
                 <label for="puz8">Input Integer / તમારો જવાબ:</label>
@@ -637,67 +638,80 @@
         }, 900);
     }
 
-    // --- INTERACTIVE CHAOS GAME SIMULATOR ENGINE ---
+    // --- THE INSEPARABLE KISS (SODDY HEXLET) ENGINE ---
     const renderCanvas = document.getElementById('chaosCanvas');
     const drawCtx = renderCanvas.getContext('2d');
-    const speedSlider = document.getElementById('chaosSpeed');
-    const resetBtn = document.getElementById('chaosResetBtn');
+    const angleNode = document.getElementById('branchAngle');
+    const ratioNode = document.getElementById('growthRatio');
 
-    // Triangle Vertices setup
-    const targetVertices = [
-        { x: renderCanvas.width / 2, y: 20 },         // Top
-        { x: 30, y: renderCanvas.height - 20 },       // Bottom Left
-        { x: renderCanvas.width - 30, y: renderCanvas.height - 20 } // Bottom Right
-    ];
+    function drawCircle(x, y, r, color, fill = false) {
+        drawCtx.beginPath();
+        drawCtx.arc(x, y, Math.abs(r), 0, 2 * Math.PI);
+        if (fill) {
+            drawCtx.fillStyle = color;
+            drawCtx.fill();
+        } else {
+            drawCtx.strokeStyle = color;
+            drawCtx.lineWidth = 1.5;
+            drawCtx.stroke();
+        }
+    }
 
-    // Current pointer trace coordinates tracking
-    let currentTracePoint = { x: renderCanvas.width / 2, y: renderCanvas.height / 2 };
-    let frameLoopId = null;
-
-    function resetChaosSimulator() {
+    function paintCanvasFrame() {
         drawCtx.clearRect(0, 0, renderCanvas.width, renderCanvas.height);
         
-        // Render target anchors
-        drawCtx.fillStyle = 'var(--neon-blue)';
-        targetVertices.forEach(v => {
-            drawCtx.beginPath();
-            drawCtx.arc(v.x, v.y, 4, 0, 2 * Math.PI);
-            drawCtx.fill();
-        });
+        const angleSlider = parseInt(angleNode.value);
+        const shiftSlider = parseInt(ratioNode.value) / 100;
+
+        document.getElementById('angleVal').innerText = angleSlider + "°";
+        document.getElementById('ratioVal').innerText = shiftSlider.toFixed(2);
+
+        const centerX = renderCanvas.width / 2;
+        const centerY = renderCanvas.height / 2;
         
-        currentTracePoint = { x: renderCanvas.width / 2, y: renderCanvas.height / 2 };
-    }
+        // Base coordinate metrics for stereographic inversion mapping
+        const R = 110; 
+        drawCircle(centerX, centerY, R, 'rgba(56, 189, 248, 0.15)', true);
+        drawCircle(centerX, centerY, R, varColor('--neon-blue'));
 
-    function executeSimulationStep() {
-        const structuralDensity = parseInt(speedSlider.value);
-        document.getElementById('speedVal').innerText = structuralDensity + " dots/tick";
+        // Center primary anchor circle
+        const innerR = 40;
+        drawCircle(centerX, centerY, innerR, varColor('--neon-purple'));
 
-        for (let step = 0; step < structuralDensity; step++) {
-            // Select random anchor path target node via pseudo random roll
-            const rolledTargetNode = targetVertices[Math.floor(Math.random() * 3)];
+        // Inversion math transformation matrix to generate the interlocking chain of 6 elements
+        const rotRad = (angleSlider * Math.PI) / 180;
+        
+        for (let i = 0; i < 6; i++) {
+            const hexletAngle = rotRad + (i * Math.PI / 3);
             
-            // Calculate mid-point ratio coordinate vectors 
-            currentTracePoint.x = (currentTracePoint.x + rolledTargetNode.x) / 2;
-            currentTracePoint.y = (currentTracePoint.y + rolledTargetNode.y) / 2;
+            // Generate standard linear ring offsets
+            let tx = Math.cos(hexletAngle) * 2.2 + shiftSlider;
+            let ty = Math.sin(hexletAngle) * 2.2;
+            let tr = 1.0;
 
-            // Paint canvas pixel map 
-            drawCtx.fillStyle = `hsl(${(currentTracePoint.y / renderCanvas.height) * 120 + 200}, 90%, 65%)`;
-            drawCtx.fillRect(currentTracePoint.x, currentTracePoint.y, 1, 1);
+            // Invert linear matrix directly into dynamic non-Euclidean circular mappings
+            const scaleFactor = 1.0 / (tx * tx + ty * ty - tr * tr);
+            const invX = centerX + (tx * scaleFactor) * (R - innerR);
+            const invY = centerY + (ty * scaleFactor) * (R - innerR);
+            const invR = Math.abs(tr * scaleFactor) * (R - innerR) * 0.45;
+
+            // Paint dynamically calculated necklace node elements
+            const colorHue = (i * 60) + (angleSlider / 2);
+            drawCircle(invX, invY, invR, `hsla(${colorHue}, 90%, 60%, 0.1)`, true);
+            drawCircle(invX, invY, invR, `hsl(${colorHue}, 90%, 65%)`);
         }
-
-        frameLoopId = requestAnimationFrame(executeSimulationStep);
     }
 
-    speedSlider.addEventListener('input', () => {
-        document.getElementById('speedVal').innerText = speedSlider.value + " dots/tick";
-    });
-    
-    resetBtn.addEventListener('click', resetChaosSimulator);
+    function varColor(name) {
+        return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+
+    angleNode.addEventListener('input', paintCanvasFrame);
+    ratioNode.addEventListener('input', paintCanvasFrame);
 
     // Initial Launch
     generateMatrixDeck();
-    resetChaosSimulator();
-    executeSimulationStep();
+    paintCanvasFrame();
 </script>
 
 </body>
