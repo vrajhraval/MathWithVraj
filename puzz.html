@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Grand Math Odyssey | ગણિત બ્રહ્માંડ</title>
-    <!-- Google Fonts for High-End Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Plus+Jakarta+Sans:wght@400;500;700&family=Noto+Sans+Gujarati:wght@400;700&display=swap" rel="stylesheet">
@@ -382,18 +381,15 @@
 
 <div class="odyssey-container">
     
-    <!-- Hero Header Block -->
     <div class="hero-header">
         <h1>The Grand Math Odyssey</h1>
         <span class="gujarati-hero">મહાન ગણિત બ્રહ્માંડ સફર</span>
         <p>Mathematics is not about numbers, equations, or algorithms: it is about pure imagination and understanding. Explore the magic, control geometric chaos, and conquer our enhanced thinkers' vault below!</p>
     </div>
 
-    <!-- 1. INTERACTIVE LAB -->
     <h2 class="section-title"><span>01.</span> The Interactive Reality Lab / પ્રયોગશાળા</h2>
     <div class="magic-universe">
         
-        <!-- Module A: Ramanujan Mind Reader Matrix -->
         <div class="cosmic-card">
             <div>
                 <span class="category-badge bg-logic">Algebra Magic | અંકગણિત જાદુ</span>
@@ -412,13 +408,12 @@
             </div>
         </div>
 
-        <!-- Module B: Infinite Fractal Tree Simulator -->
         <div class="cosmic-card">
             <div>
-                <span class="category-badge bg-geometry">Chaos & Order | ભૂમિતિ અને અનંત</span>
-                <h3>The Geometric Tree of Infinity</h3>
-                <p class="eng-desc">This majestic pattern is rendered live entirely via basic recursive math equations. Move the sliders below to witness how static numeric laws grow directly into organic structures found throughout nature!</p>
-                <p class="guj-desc">આ આકૃતિ સંપૂર્ણપણે ગણિતના રિકર્સિવ સૂત્રો આધારિત બનેલી છે. ડાળીઓનો ખૂણો અને લંબાઈ બદલીને જુઓ કે કેવી રીતે ગણિતના અફર નિયમો કુદરતની જીવંત સુંદરતામાં પરિવર્તિત થાય છે.</p>
+                <span class="category-badge bg-geometry">Chaos Theory | અરાજકતા અને વ્યવસ્થા</span>
+                <h3>The Chaos Game Fractal Generator</h3>
+                <p class="eng-desc">Witness order emerge from pure chaos! A random point jumps halfway toward any of the three triangle vertices selected by a roll of the dice. Watch millions of chaotic jumps form the beautiful, structured Sierpinski Triangle fractal.</p>
+                <p class="guj-desc">સંપૂર્ણ અરાજકતામાંથી વ્યવસ્થાનો ઉદય જુઓ! એક રેન્ડમ બિંદુ પાસા ફેંકવાના પરિણામ પર આધારિત ત્રિકોણના શિરોબિંદુ તરફ અડધું અંતર કાપે છે. જુઓ કેવી રીતે આ અસ્તવ્યસ્ત પ્રક્રિયા સુંદર સિયરપિન્સકી ફેક્ટલ આકૃતિ રચે છે.</p>
             </div>
 
             <div class="canvas-frame">
@@ -427,18 +422,16 @@
 
             <div class="control-panel">
                 <div style="margin-bottom:15px;">
-                    <label><span>Branch Angle / ડાળીઓનો ખૂણો:</span> <span id="angleVal" style="color:var(--neon-pink)">35°</span></label>
-                    <input type="range" id="branchAngle" class="custom-slider" min="15" max="75" value="35">
+                    <label><span>Plotting Speed / ડ્રોઇંગ ઝડપ:</span> <span id="speedVal" style="color:var(--neon-pink)">500 dots/tick</span></label>
+                    <input type="range" id="chaosSpeed" class="custom-slider" min="100" max="2000" step="100" value="500">
                 </div>
-                <div>
-                    <label><span>Growth Decay / લંબાઈ ઘટાડો:</span> <span id="ratioVal" style="color:var(--neon-pink)">0.72</span></label>
-                    <input type="range" id="growthRatio" class="custom-slider" min="55" max="80" value="72">
+                <div style="display: flex; gap: 10px;">
+                    <button class="action-btn" id="chaosResetBtn" style="border-color: var(--neon-pink); color: var(--neon-pink); margin-top:0;">Reset Canvas / સાફ કરો</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 2. INTELLECTUAL BANNER SECTION -->
     <div class="philosophy-banner">
         <div class="philosophy-icon">🧠</div>
         <div class="philosophy-text">
@@ -447,7 +440,6 @@
         </div>
     </div>
 
-    <!-- 3. EXTENDED PUZZLE VAULT (8 REWORKED CONTEXT PUZZLES) -->
     <h2 class="section-title"><span>02.</span> The Thinker's Vault / કોયડા અખાડો</h2>
     
     <div class="score-board">
@@ -455,7 +447,6 @@
     </div>
 
     <div class="puzzle-matrix">
-        <!-- Puzzle Card 1 -->
         <div class="puzzle-deck-card">
             <div>
                 <span class="category-badge bg-logic">Logic Theory</span>
@@ -471,7 +462,6 @@
             </div>
         </div>
 
-        <!-- Puzzle Card 2 -->
         <div class="puzzle-deck-card">
             <div>
                 <span class="category-badge bg-geometry">Infinity Paradox</span>
@@ -487,7 +477,6 @@
             </div>
         </div>
 
-        <!-- Puzzle Card 3 -->
         <div class="puzzle-deck-card">
             <div>
                 <span class="category-badge bg-infinity">Exponential Growth</span>
@@ -503,7 +492,6 @@
             </div>
         </div>
 
-        <!-- Puzzle Card 4 -->
         <div class="puzzle-deck-card">
             <div>
                 <span class="category-badge bg-algebra">Equations & Sets</span>
@@ -519,7 +507,6 @@
             </div>
         </div>
 
-        <!-- New Puzzle Card 5 -->
         <div class="puzzle-deck-card">
             <div>
                 <span class="category-badge bg-infinity">Probability Matrix</span>
@@ -535,7 +522,6 @@
             </div>
         </div>
 
-        <!-- New Puzzle Card 6 -->
         <div class="puzzle-deck-card">
             <div>
                 <span class="category-badge bg-geometry">Graph Topology</span>
@@ -551,7 +537,6 @@
             </div>
         </div>
 
-        <!-- New Puzzle Card 7 -->
         <div class="puzzle-deck-card">
             <div>
                 <span class="category-badge bg-algebra">Kinematic Ratios</span>
@@ -567,13 +552,12 @@
             </div>
         </div>
 
-        <!-- New Puzzle Card 8 -->
         <div class="puzzle-deck-card">
             <div>
                 <span class="category-badge bg-logic">Financial Paradox</span>
                 <h3>The Missing Dollar Illusion</h3>
                 <p class="eng-desc">Three guests check into a room totaling 30 dollars expense (10 dollars each). The manager realizes a discount and returns 5 dollars back via a bellboy. The dishonest bellboy keeps 2 dollars secretly and returns 1 dollar to each guest. Now, each guest paid 9 dollars (9 x 3 = 27). The bellboy has 2 dollars (27 + 2 = 29). Where is the missing 1 dollar? Input the actual value of the final mathematical accounting error discrepancy inside the system.</p>
-                <p class="guj-desc">૩ મિત્રો એક હોટેલમાં ૩૦ રૂપિયા આપી રૂમ રાખે છે. મેનેજર વળતર પેટે ૫ રૂપિયા પાછા આપે છે. નોકર ૨ રૂપિયા પોતાની પાસે રાખી ત્રણેય મિત્રોને ૧-૧ રૂપિયો પાછો આપે છે. હવે ત્રણેયે ૯-૯ રૂપિયા આપ્યા કહેવાય (૯ x ૩ = ૨૭). નોકર પાસેના ૨ ગણીએ તો (૨૭ + ૨ = ૨૯) થાય. આ હિસાબની ગોલમાલમાં વાસ્તવિક ભૂલ કઈ રકમ પર થઈ?</p>
+                <p class="guj-desc">૩ મિત્રો એક હોટેલમાં ૩૦ રૂપિયા આપી રૂમ રાખે છે. મેનેજર વળતર પેટે ૫ રૂપિયા પાછા આપે છે. નોકર ૨ રૂપિયા પોતાની પાસે રાખી ત્રણેય મિત્રોને ૧-૧ abruptિયો પાછો આપે છે. હવે ત્રણેયે ૯-૯ રૂપિયા આપ્યા કહેવાય (૯ x ૩ = ૨૭). નોકર પાસેના ૨ ગણીએ તો (૨૭ + ૨ = ૨૯) થાય. આ હિસાબની ગોલમાલમાં વાસ્તવિક ભૂલ કઈ રકમ પર થઈ?</p>
             </div>
             <div class="input-wrapper">
                 <label for="puz8">Input Integer / તમારો જવાબ:</label>
@@ -653,52 +637,67 @@
         }, 900);
     }
 
-    // --- GEOMETRIC INFINITY FRACTAL ENGINE ---
+    // --- INTERACTIVE CHAOS GAME SIMULATOR ENGINE ---
     const renderCanvas = document.getElementById('chaosCanvas');
     const drawCtx = renderCanvas.getContext('2d');
-    const angleNode = document.getElementById('branchAngle');
-    const ratioNode = document.getElementById('growthRatio');
+    const speedSlider = document.getElementById('chaosSpeed');
+    const resetBtn = document.getElementById('chaosResetBtn');
 
-    function paintFractalTree(coordinateX, coordinateY, lengthSize, angleRad, coreLineWidth) {
-        drawCtx.beginPath();
-        drawCtx.save();
+    // Triangle Vertices setup
+    const targetVertices = [
+        { x: renderCanvas.width / 2, y: 20 },         // Top
+        { x: 30, y: renderCanvas.height - 20 },       // Bottom Left
+        { x: renderCanvas.width - 30, y: renderCanvas.height - 20 } // Bottom Right
+    ];
+
+    // Current pointer trace coordinates tracking
+    let currentTracePoint = { x: renderCanvas.width / 2, y: renderCanvas.height / 2 };
+    let frameLoopId = null;
+
+    function resetChaosSimulator() {
+        drawCtx.clearRect(0, 0, renderCanvas.width, renderCanvas.height);
         
-        drawCtx.strokeStyle = `hsl(${lengthSize * 3.5 + 190}, 90%, 60%)`;
-        drawCtx.lineWidth = coreLineWidth;
-        drawCtx.translate(coordinateX, coordinateY);
-        drawCtx.rotate(angleRad * Math.PI / 180);
-        drawCtx.moveTo(0, 0);
-        drawCtx.lineTo(0, -lengthSize);
-        drawCtx.stroke();
+        // Render target anchors
+        drawCtx.fillStyle = 'var(--neon-blue)';
+        targetVertices.forEach(v => {
+            drawCtx.beginPath();
+            drawCtx.arc(v.x, v.y, 4, 0, 2 * Math.PI);
+            drawCtx.fill();
+        });
+        
+        currentTracePoint = { x: renderCanvas.width / 2, y: renderCanvas.height / 2 };
+    }
 
-        if (lengthSize < 9) {
-            drawCtx.restore();
-            return;
+    function executeSimulationStep() {
+        const structuralDensity = parseInt(speedSlider.value);
+        document.getElementById('speedVal').innerText = structuralDensity + " dots/tick";
+
+        for (let step = 0; step < structuralDensity; step++) {
+            // Select random anchor path target node via pseudo random roll
+            const rolledTargetNode = targetVertices[Math.floor(Math.random() * 3)];
+            
+            // Calculate mid-point ratio coordinate vectors 
+            currentTracePoint.x = (currentTracePoint.x + rolledTargetNode.x) / 2;
+            currentTracePoint.y = (currentTracePoint.y + rolledTargetNode.y) / 2;
+
+            // Paint canvas pixel map 
+            drawCtx.fillStyle = `hsl(${(currentTracePoint.y / renderCanvas.height) * 120 + 200}, 90%, 65%)`;
+            drawCtx.fillRect(currentTracePoint.x, currentTracePoint.y, 1, 1);
         }
 
-        const traceAngle = parseInt(angleNode.value);
-        const ratioMultiplier = parseInt(ratioNode.value) / 100;
-
-        paintFractalTree(0, -lengthSize, lengthSize * ratioMultiplier, traceAngle, coreLineWidth * 0.68);
-        paintFractalTree(0, -lengthSize, lengthSize * ratioMultiplier, -traceAngle, coreLineWidth * 0.68);
-
-        drawCtx.restore();
+        frameLoopId = requestAnimationFrame(executeSimulationStep);
     }
 
-    function paintCanvasFrame() {
-        drawCtx.clearRect(0, 0, renderCanvas.width, renderCanvas.height);
-        document.getElementById('angleVal').innerText = angleNode.value + "°";
-        document.getElementById('ratioVal').innerText = (ratioNode.value / 100).toFixed(2);
-        
-        paintFractalTree(renderCanvas.width / 2, renderCanvas.height - 10, 65, 0, 7);
-    }
-
-    angleNode.addEventListener('input', paintCanvasFrame);
-    ratioNode.addEventListener('input', paintCanvasFrame);
+    speedSlider.addEventListener('input', () => {
+        document.getElementById('speedVal').innerText = speedSlider.value + " dots/tick";
+    });
+    
+    resetBtn.addEventListener('click', resetChaosSimulator);
 
     // Initial Launch
     generateMatrixDeck();
-    paintCanvasFrame();
+    resetChaosSimulator();
+    executeSimulationStep();
 </script>
 
 </body>
