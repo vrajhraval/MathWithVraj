@@ -439,10 +439,7 @@
                 <span class="category-badge bg-geometry">Niche Topology | અજાણી ભૂમિતિ</span>
                 <h3>The Inseparable Kiss (Soddy Hexlet)</h3>
                 <p class="eng-desc">An absolute secret of spatial geometry! When three spheres touch each other, you can map a perfect closed ring of exactly <b>6</b> interlocking circles nestled perfectly in their creases. Move the engines to warp the boundaries dynamically while maintaining a continuous mathematical touch.</p>
-                <p class="guj-desc">અવકાશી ભૂમિતિનું એક પરમ રહસ્ય! જ્યારે ૩ ગોળાઓ એકબીજાને સ્પર્શે છે, ત્યારે તેમની વચ્ચે બરાબર <b>૬</b> ગોળાઓની એક અખંડ માળા ગોઠવી શકાય છે. તેના પરિમાણો બદલીને જુઓ કે કેવી રીતે આ ગોળાઓ આકાર બદલવા,
-
-[Image of the human digestive system]
- છતાં પરસ્પર સ્પર્શ ક્યારેય છોડતા નથી.</p>
+                <p class="guj-desc">અવકાશી ભૂમિતિનું એક પરમ રહસ્ય! જ્યારે ૩ ગોળાઓ એકબીજાને સ્પર્શે છે, ત્યારે તેમની વચ્ચે બરાબર <b>૬</b> ગોળાઓની એક અખંડ માળા ગોઠવી શકાય છે. તેના પરિમાણો બદલીને જુઓ કે કેવી રીતે આ ગોળાઓ આકાર બદલવા છતાં પરસ્પર સ્પર્શ ક્યારેય છોડતા નથી.</p>
             </div>
 
             <div class="canvas-frame">
@@ -463,26 +460,29 @@
 
         <div class="cosmic-card">
             <div>
-                <span class="category-badge" style="background:rgba(234,179,8,0.15); color:var(--neon-yellow);">Quantum Determinism | અરાજકતામાંથી વ્યવસ્થા</span>
-                <h3>The Chaos Game Fractal</h3>
-                <p class="eng-desc">Can absolute randomness generate absolute geometric perfection? Choose a dot-plotting velocity. The engine rolls a random 3-sided dice and plots coordinates exactly halfway <span class="math-formula">(1 ÷ 2)</span> to a random vertex. Watch the chaos assemble a perfect infinite fractal universe!</p>
-                <p class="guj-desc">શું સંપૂર્ણ અરાજકતામાંથી સંપૂર્ણ ભૂમિતિ બની શકે? એક સ્પીડ સેટ કરો. મશીન દર વખતે એક રેન્ડમ દિશા નક્કી કરી તેનાથી બરાબર અડધા <span class="math-formula">(1 ÷ 2)</span> અંતરે બિંદુ મૂકશે. જુઓ કેવી રીતે અસ્તવ્યસ્ત બિંદુઓ ભેગા મળી એક અદભુત ભાત બનાવે છે!</p>
+                <span class="category-badge" style="background:rgba(234,179,8,0.15); color:var(--neon-yellow);">Dynamical Systems | ચુંબકીય આકર્ષણ અને અરાજકતા</span>
+                <h3>Magnetic Pendulum Basins</h3>
+                <p class="eng-desc">Explore deep non-linear dynamics! A pendulum swings freely under gravity <span class="math-formula">g</span>, friction, and the pull of 3 magnets. Tap inside the matrix grid below to set a starting position, then watch the path descend into absolute chaotic uncertainty before locking onto a winner.</p>
+                <p class="guj-desc">ઉચ્ચ ગણિત અને ભૌતિકશાસ્ત્રનો પ્રયોગ! ગુરુત્વાકર્ષણ બળ અને ૩ ચુંબકો વચ્ચે ઘેરાયેલા લોલકને નીચેના કેનવાસ પર ગમે ત્યાં ક્લિક કરીને મુક્ત કરો. જુઓ કેવી રીતે નજીવો ફેરફાર પણ આખી સફર અને આખરી વિજેતા ચુંબક બદલી નાખે છે!</p>
             </div>
 
             <div class="canvas-frame">
-                <canvas id="fractalCanvas" class="lab-canvas" width="360" height="200"></canvas>
+                <canvas id="pendulumCanvas" class="lab-canvas" width="360" height="200" style="cursor: crosshair;"></canvas>
             </div>
 
             <div class="control-panel">
+                <div style="margin-bottom:10px;">
+                    <label><span>Magnetic Pull Intensity / ચુંબકીય શક્તિ:</span> <span id="magVal" style="color:var(--neon-yellow)">0.50</span></label>
+                    <input type="range" id="magSlider" class="custom-slider" min="10" max="150" value="50">
+                </div>
                 <div style="display: flex; gap: 10px;">
-                    <button class="action-btn" id="chaosBtn" style="border-color: var(--neon-yellow); color: var(--neon-yellow);" onclick="toggleChaosGame()">Ignite Quantum Chaos</button>
-                    <button class="action-btn" style="border-color: var(--text-muted); color: var(--text-pure); max-width: 90px;" onclick="resetChaosGame()">Reset</button>
+                    <button class="action-btn" id="clearTrackBtn" style="border-color: var(--neon-yellow); color: var(--neon-yellow);" onclick="resetPendulumTrack()">Reset Trace Path</button>
                 </div>
             </div>
 
             <div class="chaos-stats">
-                <span>Plotted Matrix Nodes: <strong id="nodeCount" style="color:var(--neon-yellow)">0</strong></span>
-                <span>Entropy State: <strong id="entropyState" style="color:white">Stable</strong></span>
+                <span>Calculated Steps: <strong id="calcSteps" style="color:var(--neon-yellow)">0</strong></span>
+                <span>Dominant Magnet: <strong id="winningMagnet" style="color:white">None</strong></span>
             </div>
         </div>
     </div>
@@ -495,7 +495,7 @@
         </div>
     </div>
 
-    <h2 class="section-title"><span>02.</span> The Thinker's Vault / コયડા અખાડો</h2>
+    <h2 class="section-title"><span>02.</span> The Thinker's Vault / કોયડા અખાડો</h2>
     
     <div class="score-board">
         Current Score Mastery / તમારી વૈજ્ઞાનિક ક્ષમતા: <span id="score">0</span> / 10 Artifacts
@@ -642,7 +642,7 @@
                 <span class="category-badge bg-logic">Unexpected Arithmetic</span>
                 <h3>The Potato Dehydration Anomaly</h3>
                 <p class="eng-desc">You harvest 100 kg of fresh potatoes, which are measured to be exactly 99% pure water weight. After sitting outside in the sun for a day, they dehydrate slightly, leaving them composed of exactly 98% water weight. What is the shocking new total weight of the potatoes in kilograms?</p>
-                <p class="guj-desc">તમારી પાસે ૧૦૦ કિલો બટાકા છે, જેમાં ૯૯% વજન માત્ર配合 પાણીનું છે. તડકામાં રાખવાથી તેમાંથી થોડું પાણી સુકાઈ જાય છે અને હવે તેમાં ૯૮% વજન પાણીનું બચે છે. તો હવે બટાકાનું નવું કુલ વજન કેટલા કિલોગ્રામ થઈ ગયું હશે?</p>
+                <p class="guj-desc">તમારી પાસે ૧૦૦ કિલો બટાકા છે, જેમાં ૯૯% વજન માત્ર પાણીનું છે. તડકામાં રાખવાથી તેમાંથી થોડું પાણી સુકાઈ જાય છે અને હવે તેમાં ૯૮% વજન પાણીનું બચે છે. તો હવે બટાકાનું નવું કુલ વજન કેટલા કિલોગ્રામ થઈ ગયું હશે?</p>
             </div>
             <div class="input-wrapper">
                 <label for="puz10">Input Integer / તમારો જવાબ:</label>
@@ -665,7 +665,7 @@
         'puz3': "Spot on! / કાબિલ તર્ક! (Calculated using geometric sequence formula 2^(n-1). For square 7, it maps as 2^6 = 64.)",
         'puz4': "Genius! / અસાધારણ! (There are 4 brothers and 3 sisters. The boy sees 3 of each; the sister sees 4 brothers and only 2 sisters.)",
         'puz5': "Astonishing Counter-Intuition! / અદભુત સંભાવના! (With just 23 people, the unique number of pair combinations scales so fast it breaks past a 50.7% chance tier!)",
-        'puz6': "Incredible Graph Master! / લાજવાબ તર્ક! (Leonhard Euler proved a network path cannot cross every bridge exactly once if more than two landmasses have an odd number of bridges connecting them. Hence, impossible - 0.)",
+        'puz6': "Incredible Graph Master! / લાજ波 તર્ક! (Leonhard Euler proved a network path cannot cross every bridge exactly once if more than two landmasses have an odd number of bridges connecting them. Hence, impossible - 0.)",
         'puz7': "Perfect Speed Arithmetic! / ઉત્તમ ગણતરી! (You must find the harmonic average speed, not arithmetic. Total round trip distance divided by total time gives exactly 40 km/h.)",
         'puz8': "Brilliant Analyst! / અદ્ભુત બુદ્ધિ ક્ષમતા! (The mathematical trap lies in adding the stolen 2 dollars to the 27 dollars paid. The 2 dollars is already *inside* that 27 dollars! You subtract it to match the hotel cost: 27 - 2 = 25.)",
         'puz9': "Mind blown! / દિમાગ ચકરાવે ચડાવી દીધું! (Exactly 0! Because infinity is boundless, room 1 becomes empty for the new guest, while absolutely every infinite current guest still successfully gets a room!)",
@@ -786,90 +786,167 @@
         return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
     }
 
-    // --- HIGH SPEED CHAOS GAME ENGINE (NEW FEATURE) ---
-    const fCanvas = document.getElementById('fractalCanvas');
-    const fCtx = fCanvas.getContext('2d');
-    
-    let activeAnimationId = null;
-    let totalNodesPlotted = 0;
-    let currentTracerX = Math.random() * fCanvas.width;
-    let currentTracerY = Math.random() * fCanvas.height;
+    // --- NON-LINEAR MAGNETIC PENDULUM SYSTEM (HIGHER MATH ACCELERATOR) ---
+    const pCanvas = document.getElementById('pendulumCanvas');
+    const pCtx = pCanvas.getContext('2d');
+    const magSlider = document.getElementById('magSlider');
 
-    // Anchor points (Triangle Vertices)
-    const triangleAnchors = [
-        { x: fCanvas.width / 2, y: 15, color: '#38bdf8' },      // Top
-        { x: 20, y: fCanvas.height - 20, color: '#a855f7' },     // Bottom Left
-        { x: fCanvas.width - 20, y: fCanvas.height - 20, color: '#ec4899' } // Bottom Right
+    // State Variables
+    let px = 0, py = 0;      // Pendulum Position
+    let vx = 0, vy = 0;      // Pendulum Velocity
+    let historyTrack = [];   // Trace line records
+    let trackingActive = false;
+    let loopStepsCount = 0;
+    let animationFrameId = null;
+
+    // Simulation Constants
+    const gravityConst = 0.015;
+    const dragDamping = 0.012;
+    const timeStep = 0.5;
+
+    // 3 Magnetic Target Anchors forming a triangle
+    const magnets = [
+        { x: 180, y: 40,  color: '#38bdf8', label: 'Alpha (Blue)' },
+        { x: 80,  y: 160, color: '#a855f7', label: 'Beta (Purple)' },
+        { x: 280, y: 160, color: '#ec4899', label: 'Gamma (Pink)' }
     ];
 
-    function initChaosCanvas() {
-        fCtx.fillStyle = '#060913';
-        fCtx.fillRect(0, 0, fCanvas.width, fCanvas.height);
+    function initPendulumWorkspace() {
+        pCtx.fillStyle = '#060913';
+        pCtx.fillRect(0, 0, pCanvas.width, pCanvas.height);
         
-        // Draw the anchoring vertices
-        triangleAnchors.forEach(vertex => {
-            fCtx.beginPath();
-            fCtx.arc(vertex.x, vertex.y, 4, 0, 2 * Math.PI);
-            fCtx.fillStyle = vertex.color;
-            fCtx.fill();
+        // Draw Field Magnet locations
+        magnets.forEach(m => {
+            pCtx.beginPath();
+            pCtx.arc(m.x, m.y, 8, 0, 2 * Math.PI);
+            pCtx.fillStyle = m.color;
+            pCtx.fill();
+            pCtx.lineWidth = 2;
+            pCtx.strokeStyle = '#ffffff';
+            pCtx.stroke();
         });
     }
 
-    function runChaosLoop() {
-        if (!activeAnimationId) return;
+    function computePendulumPhysics() {
+        if (!trackingActive) return;
 
-        // Render 45 matrix points per frame animation tick for super fluid performance
-        for (let step = 0; step < 45; step++) {
-            const targetAnchor = triangleAnchors[Math.floor(Math.random() * 3)];
-            
-            // Jump half distance to selected target
-            currentTracerX = (currentTracerX + targetAnchor.x) / 2;
-            currentTracerY = (currentTracerY + targetAnchor.y) / 2;
-            
-            // Render point pixel
-            fCtx.fillStyle = targetAnchor.color;
-            fCtx.fillRect(currentTracerX, currentTracerY, 1, 1);
-            totalNodesPlotted++;
+        const magStrength = parseFloat(magSlider.value) / 1000;
+        document.getElementById('magVal').innerText = (parseFloat(magSlider.value) / 100).toFixed(2);
+
+        let ax = 0;
+        let ay = 0;
+
+        // 1. Hooke's Law Center Gravity Force pull to center (180, 100)
+        ax -= gravityConst * (px - 180);
+        ay -= gravityConst * (py - 100);
+
+        // 2. Inverse Square Magnetic Pull forces loop
+        let closestMagnetIndex = -1;
+        let minDistance = Infinity;
+
+        magnets.forEach((m, idx) => {
+            const dx = m.x - px;
+            const dy = m.y - py;
+            const distSq = dx * dx + dy * dy + 150; // 150 soften factor prevents dividing by zero crash
+            const dist = Math.sqrt(distSq);
+
+            if (dist < minDistance) {
+                minDistance = dist;
+                closestMagnetIndex = idx;
+            }
+
+            // Coulomb magnetic equation acceleration
+            const fMag = magStrength / distSq;
+            ax += fMag * (dx / dist);
+            ay += fMag * (dy / dist);
+        });
+
+        // 3. Friction Damping Drag force
+        ax -= dragDamping * vx;
+        ay -= dragDamping * vy;
+
+        // 4. Update Kinematics Euler integration step
+        vx += ax * timeStep;
+        vy += ay * timeStep;
+        px += vx * timeStep;
+        py += vy * timeStep;
+
+        historyTrack.push({ x: px, y: py });
+        loopStepsCount++;
+
+        // Render dynamic changes
+        initPendulumWorkspace();
+
+        // Paint background history route tracking line
+        pCtx.beginPath();
+        pCtx.moveTo(historyTrack[0].x, historyTrack[0].y);
+        for (let i = 1; i < historyTrack.length; i++) {
+            pCtx.lineTo(historyTrack[i].x, historyTrack[i].y);
+        }
+        pCtx.strokeStyle = 'rgba(254, 240, 138, 0.45)';
+        pCtx.lineWidth = 2;
+        pCtx.stroke();
+
+        // Draw active pendulum bob node bobbler position
+        pCtx.beginPath();
+        pCtx.arc(px, py, 5, 0, 2 * Math.PI);
+        pCtx.fillStyle = '#eab308';
+        pCtx.fill();
+
+        document.getElementById('calcSteps').innerText = loopStepsCount;
+
+        // Exit capture terminal threshold checks (settled on magnet or threshold step limit hit)
+        if (minDistance < 12 && Math.abs(vx) < 0.05 && Math.abs(vy) < 0.05) {
+            trackingActive = false;
+            document.getElementById('winningMagnet').innerText = magnets[closestMagnetIndex].label;
+            document.getElementById('winningMagnet').style.color = magnets[closestMagnetIndex].color;
+            return;
         }
 
-        document.getElementById('nodeCount').innerText = totalNodesPlotted;
-        
-        if (totalNodesPlotted > 300) document.getElementById('entropyState').innerText = "Fractal Ordering...";
-        if (totalNodesPlotted > 4000) document.getElementById('entropyState').innerText = "Absolute Determinism";
-
-        activeAnimationId = requestAnimationFrame(runChaosLoop);
-    }
-
-    function toggleChaosGame() {
-        const btn = document.getElementById('chaosBtn');
-        if (activeAnimationId) {
-            cancelAnimationFrame(activeAnimationId);
-            activeAnimationId = null;
-            btn.innerText = "Ignite Quantum Chaos";
-            btn.style.borderColor = "var(--neon-yellow)";
-            btn.style.color = "var(--neon-yellow)";
-        } else {
-            activeAnimationId = requestAnimationFrame(runChaosLoop);
-            btn.innerText = "Freeze Realtime Matrix";
-            btn.style.borderColor = "var(--neon-pink)";
-            btn.style.color = "var(--neon-pink)";
+        if (loopStepsCount > 1500) {
+            trackingActive = false;
+            document.getElementById('winningMagnet').innerText = "Orbit Lock Loop";
+            document.getElementById('winningMagnet').style.color = "var(--neon-blue)";
+            return;
         }
+
+        animationFrameId = requestAnimationFrame(computePendulumPhysics);
     }
 
-    function resetChaosGame() {
-        if (activeAnimationId) cancelAnimationFrame(activeAnimationId);
-        activeAnimationId = null;
-        totalNodesPlotted = 0;
-        document.getElementById('nodeCount').innerText = 0;
-        document.getElementById('entropyState').innerText = "Stable";
+    pCanvas.addEventListener('mousedown', (e) => {
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
         
-        const btn = document.getElementById('chaosBtn');
-        btn.innerText = "Ignite Quantum Chaos";
-        btn.style.borderColor = "var(--neon-yellow)";
-        btn.style.color = "var(--neon-yellow)";
+        const rect = pCanvas.getBoundingClientRect();
+        px = e.clientX - rect.left;
+        py = e.clientY - rect.top;
         
-        initChaosCanvas();
+        // Zero velocities on drop point trigger
+        vx = 0; 
+        vy = 0;
+        historyTrack = [{ x: px, y: py }];
+        loopStepsCount = 0;
+        trackingActive = true;
+        
+        document.getElementById('winningMagnet').innerText = "Calculating...";
+        document.getElementById('winningMagnet').style.color = "white";
+        
+        computePendulumPhysics();
+    });
+
+    function resetPendulumTrack() {
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        trackingActive = false;
+        historyTrack = [];
+        loopStepsCount = 0;
+        document.getElementById('calcSteps').innerText = 0;
+        document.getElementById('winningMagnet').innerText = "None";
+        document.getElementById('winningMagnet').style.color = "white";
+        initPendulumWorkspace();
     }
+
+    magSlider.addEventListener('input', () => {
+        document.getElementById('magVal').innerText = (parseFloat(magSlider.value) / 100).toFixed(2);
+    });
 
     angleNode.addEventListener('input', paintCanvasFrame);
     ratioNode.addEventListener('input', paintCanvasFrame);
@@ -877,7 +954,7 @@
     // Initial System Boots
     generateMatrixDeck();
     paintCanvasFrame();
-    initChaosCanvas();
+    initPendulumWorkspace();
 </script>
 
 </body>
