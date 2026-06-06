@@ -995,7 +995,7 @@
 
     <section>
         <h2>6. 2D Linear Transformation Engine</h2>
-        <p>Modify the components of transformation matrix \(T\) to see how it alters space vectors visually:</p>
+        <p>Modify the components of transformation matrix \(T\) to see how it alters a 2D Unit Square in linear space:</p>
         <div class="matrix-grid">
             <div class="matrix-input-box">
                 <input type="number" id="m-a" value="1" step="0.5" oninput="drawMatrixSpace()">
@@ -1018,37 +1018,45 @@
         <div class="path-tree">
             <div class="path-node" id="node-alg">
                 <div>
-                    <strong style="font-size:1.1rem; display:block;">Module 1: Advanced Algebraic Frameworks</strong>
-                    <span style="color:var(--sub-text); font-size:0.9rem;">Quadratic forms, functions, matrices</span>
+                    <h3 style="margin:0; font-size:1.1rem;">Module A: Advanced Algebra</h3>
+                    <p style="margin:5px 0 0 0; font-size:0.85rem; color: var(--sub-text);">Matrices, Determinants &amp; Theory of Equations</p>
                 </div>
                 <button class="master-btn" onclick="toggleNode('alg')">Mark Mastered</button>
             </div>
             <div class="path-node" id="node-calc">
                 <div>
-                    <strong style="font-size:1.1rem; display:block;">Module 2: Differential & Integral Calculus</strong>
-                    <span style="color:var(--sub-text); font-size:0.9rem;">Limits, derivatives, integrations</span>
+                    <h3 style="margin:0; font-size:1.1rem;">Module B: Real Analysis &amp; Calculus</h3>
+                    <p style="margin:5px 0 0 0; font-size:0.85rem; color: var(--sub-text);">Limits, Continuity, Riemann Integration</p>
                 </div>
                 <button class="master-btn" onclick="toggleNode('calc')">Mark Mastered</button>
+            </div>
+            <div class="path-node" id="node-geom">
+                <div>
+                    <h3 style="margin:0; font-size:1.1rem;">Module C: Analytical Geometry</h3>
+                    <p style="margin:5px 0 0 0; font-size:0.85rem; color: var(--sub-text);">Conic Sections and 3D Coordinate Transformations</p>
+                </div>
+                <button class="master-btn" onclick="toggleNode('geom')">Mark Mastered</button>
             </div>
         </div>
     </section>
 
     <section>
         <h2>8. Dynamic Geometry: Fractal Generator</h2>
-        <p>Adjust recursion configurations to dynamically generate structures real-time:</p>
+        <p>Adjust branching values to see a symmetric recursive tree structure adapt dynamically:</p>
         <div class="fractal-ui-layout">
             <div class="fractal-controls">
                 <div class="fractal-control-group">
-                    <label for="fractal-depth">Recursion Depth (Max Iterations)</label>
-                    <input type="range" id="fractal-depth" min="1" max="8" value="5" oninput="drawFractal()">
+                    <label>Branching Angle (Degrees)</label>
+                    <input type="range" id="frac-angle" min="10" max="90" value="30" oninput="renderFractalGraph()">
                 </div>
                 <div class="fractal-control-group">
-                    <label for="fractal-angle">Branch Rotation Angle</label>
-                    <input type="range" id="fractal-angle" min="10" max="90" value="30" oninput="drawFractal()">
+                    <label>Length Decay Ratio</label>
+                    <input type="range" id="frac-decay" min="50" max="80" value="70" oninput="renderFractalGraph()">
                 </div>
-                <div style="display:flex; gap:10px; margin-top:5px;">
-                    <button class="fractal-preset-btn" onclick="setFractalPreset('tree')">Fractal Tree</button>
-                    <button class="fractal-preset-btn" onclick="setFractalPreset('sierpinski')">Sierpinski Gasket</button>
+                <div style="display: flex; gap:8px; margin-top:5px;">
+                    <button class="fractal-preset-btn" onclick="setFractalPreset(20, 75)">Slender Tree</button>
+                    <button class="fractal-preset-btn" onclick="setFractalPreset(45, 65)">Wide Bush</button>
+                    <button class="fractal-preset-btn" onclick="setFractalPreset(90, 55)">Perpendicular</button>
                 </div>
             </div>
             <div class="fractal-canvas-holder">
@@ -1058,26 +1066,25 @@
     </section>
 
     <div class="graph-section">
-        <h2>9. High-Performance Interactive Math Engine Plotter</h2>
-        <p style="color: #cbd5e1; margin-bottom: 20px;">Input equations mapping explicitly across system parameters (e.g., <code>x^2 - 4*x + 3</code>, <code>sin(x) * cos(x)</code>):</p>
+        <h2>9. Advanced Analytical Graphing Engine</h2>
         <div class="graph-ui">
-            <input type="text" id="equation-input" value="sin(x) * x" placeholder="Enter custom function expression f(x)...">
-            <button class="plot-btn" onclick="plotFunctionExpression()">Compute &amp; Plot Graph</button>
+            <input type="text" id="graph-expr" value="sin(x) * cos(x/2)">
+            <button class="plot-btn" onclick="generateFunctionChart()">Plot Expression</button>
         </div>
         <div class="chart-container">
-            <canvas id="mathChart"></canvas>
+            <canvas id="functionChart"></canvas>
         </div>
     </div>
 
-    <a href="mathwithfun.html" class="fun-section-container">
+    <a href="fun.html" class="fun-section-container">
         <div class="fun-card">
-            <h2><span>🎮</span> Math Playground Challenge Corner <span class="fun-badge">Live Quest</span></h2>
-            <p>Dive headfirst into non-linear spatial logic puzzles, interactive paradox riddles, and time-trial computational math challenges engineered to break your brain cells!</p>
+            <h2>Math with Fun <span class="fun-badge">Interactive</span></h2>
+            <p>Explore mind-bending paradoxes, numerical regularities, game theory logic matrices, and fast mental calculations instantly.</p>
             <div class="fun-action-row">
-                <div class="fun-btn">Enter Playground Engine →</div>
+                <span class="fun-btn">Explore Playground &rarr;</span>
                 <div class="fun-stats">
-                    <div class="fun-stat-item">🏆 <span>Level 4 Mastery Achieved</span></div>
-                    <div class="fun-stat-item">⚡ <span>1,240 XP Available</span></div>
+                    <div class="fun-stat-item">🕹️ 12 Mini Games</div>
+                    <div class="fun-stat-item">🧩 40+ Puzzles</div>
                 </div>
             </div>
         </div>
@@ -1085,327 +1092,344 @@
 </div>
 
 <footer>
-    <p>&copy; 2026 Vraj H Raval. Engineered for Next-Generation Academic Instruction.</p>
+    <p>&copy; 2026 Vraj H Raval. Designed for Higher Mathematics Education.</p>
 </footer>
 
 <script>
-    let mathChartInstance = null;
-    let activeFractalType = 'tree';
-
-    // Initialize Native Core Dynamic Functions
-    document.addEventListener("DOMContentLoaded", function() {
-        initDarkModeSystem();
-        loadRoadmapState();
-        drawMatrixSpace();
-        loadNextQuestion();
-        drawFractal();
-        plotFunctionExpression();
-        setupMobileTouchDropdowns();
+    // Theme Toggling Execution
+    const darkModeBtn = document.getElementById('dark-mode-toggle');
+    darkModeBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode-active');
+        if(document.body.classList.contains('dark-mode-active')) {
+            darkModeBtn.textContent = '☀️';
+        } else {
+            darkModeBtn.textContent = '🌙';
+        }
+        if(typeof drawMatrixSpace === 'function') drawMatrixSpace();
     });
 
-    // 1. Dark Mode System
-    function initDarkModeSystem() {
-        const toggleBtn = document.getElementById('dark-mode-toggle');
-        if (localStorage.getItem('theme') === 'dark') {
-            document.body.classList.add('dark-mode-active');
-            toggleBtn.innerText = '☀️';
-        }
-        toggleBtn.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode-active');
-            const isDark = document.body.classList.contains('dark-mode-active');
-            toggleBtn.innerText = isDark ? '☀️' : '🌙';
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            drawMatrixSpace(); // Re-render target grids with correct inverse dark system colors
+    // Dropdown Handling for touch devices
+    document.querySelectorAll('.has-dropdown').forEach(item => {
+        item.addEventListener('click', function(e) {
+            if(window.innerWidth <= 768) {
+                e.preventDefault();
+                this.parentElement.classList.toggle('dropdown-active');
+            }
         });
-    }
+    });
 
-    // Mobile Dropdown Event Setup
-    function setupMobileTouchDropdowns() {
-        document.querySelectorAll('.has-dropdown').forEach(trigger => {
-            trigger.addEventListener('click', function(e) {
-                if (window.innerWidth <= 768) {
-                    e.preventDefault();
-                    this.parentElement.classList.toggle('dropdown-active');
-                }
-            });
-        });
-    }
-
-    // 2. Quadratic Equation Solver Framework Logic
+    // 4. Interactive Quadratic Solver Logic
     function solveQuadratic() {
         const a = parseFloat(document.getElementById('solve-a').value);
         const b = parseFloat(document.getElementById('solve-b').value);
         const c = parseFloat(document.getElementById('solve-c').value);
-        const output = document.getElementById('solver-steps-output');
+        const out = document.getElementById('solver-steps-output');
         
-        if (isNaN(a) || isNaN(b) || isNaN(c)) {
-            output.innerHTML = "<p style='color:var(--danger);'>Error: Please input valid real coefficients.</p>";
-            output.style.display = 'block';
-            return;
-        }
-        if (a === 0) {
-            output.innerHTML = "<p style='color:var(--danger);'>Error: Coefficient 'a' cannot equal 0 in a quadratic system.</p>";
-            output.style.display = 'block';
+        if(isNaN(a) || isNaN(b) || isNaN(c)) return;
+        if(a === 0) {
+            out.innerHTML = "<div class='step-item'><strong>Error:</strong> Value of 'a' cannot be zero in a quadratic formula equation.</div>";
+            out.style.display = 'block';
             return;
         }
 
-        const discriminant = (b * b) - (4 * a * c);
-        let breakdownHTML = `<h3>Step-by-Step Computational Analysis:</h3>`;
-        breakdownHTML += `<div class='step-item'><p><strong>Step 1: Identify System Discriminant Formula</strong></p>\\( \\Delta = b^2 - 4ac \\)</div>`;
-        breakdownHTML += `<div class='step-item'><p><strong>Step 2: Compute System Determinant values</strong></p>\\( \\Delta = (${b})^2 - 4(${a})(${c}) = ${discriminant} \\)</div>`;
-
-        if (discriminant > 0) {
-            const r1 = (-b + Math.sqrt(discriminant)) / (2 * a);
-            const r2 = (-b - Math.sqrt(discriminant)) / (2 * a);
-            breakdownHTML += `<div class='step-item'><p><strong>Step 3: Discriminant is Positive (Two Real Roots)</strong></p>\\( x = \\frac{-(${b}) \\pm \\sqrt{${discriminant}}}{2(${a})} \\)<br><br><strong>Roots:</strong> \\( x_1 = ${r1.toFixed(4)},\\ x_2 = ${r2.toFixed(4)} \\)</div>`;
-        } else if (discriminant === 0) {
-            const r = -b / (2 * a);
-            breakdownHTML += `<div class='step-item'><p><strong>Step 3: Discriminant equals Zero (One Double Root)</strong></p>\\( x = \\frac{-(${b})}{2(${a})} \\)<br><br><strong>Root:</strong> \\( x = ${r.toFixed(4)} \\)</div>`;
+        out.style.display = 'block';
+        let disc = (b * b) - (4 * a * c);
+        
+        let html = `<div class='step-item'><strong>Step 1: Calculate Discriminant (\(D\))</strong><br>D = b² - 4ac = (${b})² - 4(${a})(${c}) = ${disc}</div>`;
+        
+        if (disc > 0) {
+            let r1 = (-b + Math.sqrt(disc)) / (2 * a);
+            let r2 = (-b - Math.sqrt(disc)) / (2 * a);
+            html += `<div class='step-item'><strong>Step 2: Distinct Real Roots Found</strong><br>x₁ = (-b + √D) / 2a = ${r1.toFixed(3)}<br>x₂ = (-b - √D) / 2a = ${r2.toFixed(3)}</div>`;
+        } else if (disc === 0) {
+            let r = -b / (2 * a);
+            html += `<div class='step-item'><strong>Step 2: Equal Real Roots Found</strong><br>x₁ = x₂ = -b / 2a = ${r.toFixed(3)}</div>`;
         } else {
-            const realPart = (-b / (2 * a)).toFixed(4);
-            const imagPart = (Math.sqrt(-discriminant) / (2 * a)).toFixed(4);
-            breakdownHTML += `<div class='step-item'><p><strong>Step 3: Discriminant is Negative (Complex Roots)</strong></p><strong>Roots:</strong> \\( x_1 = ${realPart} + ${imagPart}i ,\\ x_2 = ${realPart} - ${imagPart}i \\)</div>`;
+            let real = -b / (2 * a);
+            let imag = Math.sqrt(-disc) / (2 * a);
+            html += `<div class='step-item'><strong>Step 2: Complex Conjugate Roots Found</strong><br>x₁ = ${real.toFixed(3)} + ${imag.toFixed(3)}i<br>x₂ = ${real.toFixed(3)} - ${imag.toFixed(3)}i</div>`;
         }
-
-        output.innerHTML = breakdownHTML;
-        output.style.display = 'block';
-        if (window.MathJax) { MathJax.typesetPromise([output]); }
+        out.innerHTML = html;
+        if(window.MathJax) MathJax.typesetPromise([out]);
     }
 
-    // 3. Quiz Dynamic Database System Engine
-    const quizBank = [
-        { q: "Evaluate the first derivative: \\( \\frac{d}{dx}[x^3 \\cdot \\ln(x)] \\)", o: ["\\( 3x^2 \\ln(x) + x^2 \\)", "\\( x^2 \\)", "\\( 3x^2 + \\frac{1}{x} \\)", "\\( 3x^2 \\ln(x) \\)"], a: 0 },
-        { q: "Compute the determinant of matrix: \\( \\begin{pmatrix} 4 & 3 \\\\ 2 & 5 \\end{pmatrix} \\)", o: ["26", "14", "20", "11"], a: 1 },
-        { q: "Find the structural tracking length of vector space path: \\( \\int_0^1 3x^2 dx \\)", o: ["3", "1.5", "1", "0"], a: 2 }
+    // 5. Quiz Center Mock Data
+    const quizData = [
+        { q: "What is the derivative of x² with respect to x?", o: ["x", "2x", "2x²", "1/x"], a: 1 },
+        { q: "Value of e⁰ is equal to?", o: ["0", "e", "1", "Infinity"], a: 2 },
+        { q: "If A and B are mutually exclusive events, what is P(A ∩ B)?", o: ["P(A)P(B)", "0", "P(A)+P(B)", "1"], a: 1 }
     ];
-    let runningQuizIdx = 0;
+    let currentQuizIdx = 0;
 
-    function loadNextQuestion() {
+    function renderQuiz() {
+        const data = quizData[currentQuizIdx];
+        document.getElementById('quiz-question').innerText = `${currentQuizIdx + 1}. ${data.q}`;
+        const optionsBox = document.getElementById('quiz-options-box');
+        optionsBox.innerHTML = '';
         document.getElementById('quiz-feedback-box').style.display = 'none';
         document.getElementById('next-quiz-btn').style.display = 'none';
-        
-        const qData = quizBank[runningQuizIdx];
-        document.getElementById('quiz-question').innerHTML = qData.q;
-        
-        const optionsContainer = document.getElementById('quiz-options-box');
-        optionsContainer.innerHTML = '';
-        
-        qData.o.forEach((opt, idx) => {
-            const btn = document.createElement('button');
+
+        data.o.forEach((opt, idx) => {
+            let btn = document.createElement('button');
             btn.className = 'quiz-btn';
-            btn.innerHTML = opt;
-            btn.onclick = () => submitQuizAnswer(idx);
-            optionsContainer.appendChild(btn);
+            btn.innerText = opt;
+            btn.onclick = () => checkQuizAnswer(idx);
+            optionsBox.appendChild(btn);
         });
-
-        if (window.MathJax) { MathJax.typesetPromise([document.getElementById('quiz-question'), optionsContainer]); }
     }
 
-    function submitQuizAnswer(chosenIdx) {
+    function checkQuizAnswer(chosen) {
         const feedback = document.getElementById('quiz-feedback-box');
-        const targetAns = quizBank[runningQuizIdx].a;
-        
-        if (chosenIdx === targetAns) {
-            feedback.className = "quiz-feedback";
-            feedback.style.backgroundColor = "rgba(39, 174, 96, 0.15)";
-            feedback.style.color = "var(--success)";
-            feedback.innerHTML = "✓ Analysis Verified Perfect: Correct Mathematical Proof Logic!";
+        const correct = quizData[currentQuizIdx].a;
+        feedback.style.display = 'block';
+        if(chosen === correct) {
+            feedback.style.background = 'rgba(39, 174, 96, 0.15)';
+            feedback.style.color = 'var(--success)';
+            feedback.innerText = "Correct! Well done.";
         } else {
-            feedback.className = "quiz-feedback";
-            feedback.style.backgroundColor = "rgba(192, 57, 43, 0.15)";
-            feedback.style.color = "var(--danger)";
-            feedback.innerHTML = "✗ Assertion Error: Computation baseline failed checking rules.";
+            feedback.style.background = 'rgba(192, 57, 43, 0.15)';
+            feedback.style.color = 'var(--danger)';
+            feedback.innerText = `Incorrect. The true answer was: ${quizData[currentQuizIdx].o[correct]}`;
         }
-        feedback.style.display = "block";
-        document.getElementById('next-quiz-btn').style.display = "block";
-        runningQuizIdx = (runningQuizIdx + 1) % quizBank.length;
+        document.getElementById('next-quiz-btn').style.display = 'inline-block';
     }
 
-    // 4. Vector Transformation Spatial Rendering Sandbox
+    function loadNextQuestion() {
+        currentQuizIdx = (currentQuizIdx + 1) % quizData.length;
+        renderQuiz();
+    }
+
+    // 6. Updated Dynamic Linear Transformation Engine 
     function drawMatrixSpace() {
         const canvas = document.getElementById('matrixCanvas');
+        if(!canvas) return;
         const ctx = canvas.getContext('2d');
         
-        // Sync render sizing configuration maps
-        const dpr = window.devicePixelRatio || 1;
-        const rect = canvas.getBoundingClientRect();
-        canvas.width = rect.width * dpr;
-        canvas.height = 220 * dpr;
-        ctx.scale(dpr, dpr);
+        // Ensure proper high-res rendering proportions inside parent div frame
+        const rect = canvas.parentElement.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
 
-        const w = rect.width;
-        const h = 220;
-        ctx.clearRect(0,0,w,h);
-
-        // Origin Configuration Map
+        const w = canvas.width;
+        const h = canvas.height;
         const cx = w / 2;
         const cy = h / 2;
-        const gridScale = 35; 
+        const scale = Math.min(w, h) / 5; // Scale factor for coordinate units
 
-        const isDark = document.body.classList.contains('dark-mode-active');
-        ctx.strokeStyle = isDark ? '#334155' : '#e2e8f0';
-        ctx.lineWidth = 1;
-
-        // Coordinate Axis Lines Drawing Loops
-        for(let i = -5; i <= 5; i++) {
-            ctx.beginPath(); ctx.moveTo(cx + i*gridScale, 0); ctx.lineTo(cx + i*gridScale, h); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo(0, cy + i*gridScale); ctx.lineTo(w, cy + i*gridScale); ctx.stroke();
-        }
-
-        ctx.strokeStyle = isDark ? '#cbd5e1' : '#475569';
-        ctx.lineWidth = 2;
-        ctx.beginPath(); ctx.moveTo(cx,0); ctx.lineTo(cx,h); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(0,cy); ctx.lineTo(w,cy); ctx.stroke();
-
-        // Load Transformation Coefficients Vectors
+        // Parse transformed vectors from input matrix slots 
         const ma = parseFloat(document.getElementById('m-a').value) || 0;
         const mb = parseFloat(document.getElementById('m-b').value) || 0;
         const mc = parseFloat(document.getElementById('m-c').value) || 0;
         const md = parseFloat(document.getElementById('m-d').value) || 0;
 
-        // Map Matrix Vectors (Transform Standard Coordinates)
-        const v1x = ma * gridScale; const v1y = -mc * gridScale;
-        const v2x = mb * gridScale; const v2y = -md * gridScale;
+        ctx.clearRect(0, 0, w, h);
 
-        // Draw Basis Vector i-hat (Red Vector Transformation path)
-        ctx.strokeStyle = '#e94560'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx+v1x, cy+v1y); ctx.stroke();
-        // Draw Basis Vector j-hat (Blue Vector Transformation path)
-        ctx.strokeStyle = '#2980b9'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx+v2x, cy+v2y); ctx.stroke();
+        // Draw coordinate grid system layout lines
+        ctx.strokeStyle = '#223049';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        for(let i = -5; i <= 5; i++) {
+            // Vertical lines
+            ctx.moveTo(cx + i * scale, 0); ctx.lineTo(cx + i * scale, h);
+            // Horizontal lines
+            ctx.moveTo(0, cy + i * scale); ctx.lineTo(w, cy + i * scale);
+        }
+        ctx.stroke();
+
+        // Main primary origin axes lines
+        ctx.strokeStyle = '#4b5563';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(cx, 0); ctx.lineTo(cx, h);
+        ctx.moveTo(0, cy); ctx.lineTo(w, cy);
+        ctx.stroke();
+
+        // Map original unit square corner nodes into linear space transforms
+        // Origin (0,0), Vector i (1,0), Vector j (0,1), Combined Corner (1,1)
+        const p0 = { x: cx, y: cy };
+        const p1 = { x: cx + ma * scale, y: cy - mc * scale };
+        const p2 = { x: cx + (ma + mb) * scale, y: cy - (mc + md) * scale };
+        const p3 = { x: cx + mb * scale, y: cy - md * scale };
+
+        // Render filled area morph polygon representing the base unit area
+        ctx.fillStyle = 'rgba(41, 128, 185, 0.35)';
+        ctx.beginPath();
+        ctx.moveTo(p0.x, p0.y);
+        ctx.lineTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.lineTo(p3.x, p3.y);
+        ctx.closePath();
+        ctx.fill();
+        ctx.strokeStyle = '#3498db';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Draw basis vector i-hat endpoint trace line
+        ctx.strokeStyle = '#e74c3c';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(p1.x, p1.y);
+        ctx.stroke();
+
+        // Draw basis vector j-hat endpoint trace line
+        ctx.strokeStyle = '#2ecc71';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(p3.x, p3.y);
+        ctx.stroke();
     }
 
-    // 5. Native Roadmap Cache Memory Core Storage Blocks
-    function toggleNode(nodeId) {
-        const element = document.getElementById(`node-${nodeId}`);
-        element.classList.toggle('mastered');
-        const activeState = element.classList.contains('mastered');
-        localStorage.setItem(`roadmap-${nodeId}`, activeState ? 'true' : 'false');
+    // 7. Structured Roadmap Modular Framework Cache
+    function toggleNode(id) {
+        const node = document.getElementById(`node-${id}`);
+        const btn = node.querySelector('.master-btn');
+        node.classList.toggle('mastered');
+        
+        let state = node.classList.contains('mastered');
+        localStorage.setItem(`roadmap-${id}`, state ? '1' : '0');
+        btn.innerText = state ? "Mastered ✓" : "Mark Mastered";
     }
-    function loadRoadmapState() {
-        ['alg', 'calc'].forEach(id => {
-            if(localStorage.getItem(`roadmap-${id}`) === 'true') {
-                document.getElementById(`node-${id}`).classList.add('mastered');
+
+    function initRoadmap() {
+        ['alg', 'calc', 'geom'].forEach(id => {
+            const node = document.getElementById(`node-${id}`);
+            if(!node) return;
+            const val = localStorage.getItem(`roadmap-${id}`);
+            if(val === '1') {
+                node.classList.add('mastered');
+                node.querySelector('.master-btn').innerText = "Mastered ✓";
             }
         });
     }
 
-    // 6. Fractal Computation Module Execution Systems
-    function setFractalPreset(type) {
-        activeFractalType = type;
-        if (type === 'sierpinski') {
-            document.getElementById('fractal-depth').max = "7";
-            document.getElementById('fractal-depth').value = "5";
-        } else {
-            document.getElementById('fractal-depth').max = "8";
-            document.getElementById('fractal-depth').value = "6";
-        }
-        drawFractal();
-    }
-
-    // Unified engine for generating fractals
-    function drawFractal() {
+    // 8. Updated Geometric Fractal Engine: Symmetric Binary Tree Design
+    function renderFractalGraph() {
         const canvas = document.getElementById('fractalCanvas');
+        if(!canvas) return;
         const ctx = canvas.getContext('2d');
-        const depth = parseInt(document.getElementById('fractal-depth').value);
-        const angleVal = parseInt(document.getElementById('fractal-angle').value) * Math.PI / 180;
 
-        canvas.width = canvas.parentElement.clientWidth;
-        canvas.height = 320;
+        const rect = canvas.parentElement.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+
+        const deg = parseFloat(document.getElementById('frac-angle').value) || 30;
+        const decay = (parseFloat(document.getElementById('frac-decay').value) || 70) / 100;
+
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        const isDark = document.body.classList.contains('dark-mode-active');
-        ctx.strokeStyle = isDark ? '#3498db' : '#2c3e50';
+        // Define root starting properties positioned from structural canvas base
+        const startX = canvas.width / 2;
+        const startY = canvas.height - 20;
+        const initialLength = canvas.height / 4.5;
+        const initialAngle = -Math.PI / 2; // Pointing straight up
 
-        if (activeFractalType === 'tree') {
-            ctx.translate(canvas.width / 2, canvas.height);
-            renderFractalTree(ctx, 70, depth, angleVal);
-        } else {
-            const p1 = { x: canvas.width / 2, y: 20 };
-            const p2 = { x: 40, y: canvas.height - 20 };
-            const p3 = { x: canvas.width - 40, y: canvas.height - 20 };
-            renderSierpinski(ctx, p1, p2, p3, depth);
-        }
+        // Call recursive geometric trace pipeline routine
+        drawTreeBranch(ctx, startX, startY, initialLength, initialAngle, deg * Math.PI / 180, decay, 9);
     }
 
-    function renderFractalTree(ctx, len, depth, angle) {
+    function drawTreeBranch(ctx, x1, y1, len, angle, angleDelta, decay, depth) {
         if (depth === 0) return;
-        ctx.lineWidth = depth;
-        ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, -len); ctx.stroke();
-        ctx.translate(0, -len);
 
-        ctx.save(); ctx.rotate(angle); renderFractalTree(ctx, len * 0.75, depth - 1, angle); ctx.restore();
-        ctx.save(); ctx.rotate(-angle); renderFractalTree(ctx, len * 0.75, depth - 1, angle); ctx.restore();
-        ctx.translate(0, len);
+        // Determine destination coordinates using trigonometry
+        const x2 = x1 + Math.cos(angle) * len;
+        const y2 = y1 + Math.sin(angle) * len;
+
+        // Render branching strokes dynamically adjusting aesthetic thickness
+        ctx.strokeStyle = `hsl(${140 + depth * 12}, 75%, ${40 + (9 - depth) * 4}%)`;
+        ctx.lineWidth = Math.max(1, depth * 0.8);
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+
+        // Recursively invoke split branches with decayed lengths
+        drawTreeBranch(ctx, x2, y2, len * decay, angle + angleDelta, angleDelta, decay, depth - 1);
+        drawTreeBranch(ctx, x2, y2, len * decay, angle - angleDelta, angleDelta, decay, depth - 1);
     }
 
-    function renderSierpinski(ctx, p1, p2, p3, depth) {
-        if (depth === 0) {
-            ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.lineTo(p3.x, p3.y); ctx.closePath();
-            ctx.stroke();
-            return;
-        }
-        const mid12 = { x: (p1.x + p2.x) / 2, y: (p1.y + p2.y) / 2 };
-        const mid23 = { x: (p2.x + p3.x) / 2, y: (p2.y + p3.y) / 2 };
-        const mid31 = { x: (p3.x + p1.x) / 2, y: (p3.y + p1.y) / 2 };
-
-        renderSierpinski(ctx, p1, mid12, mid31, depth - 1);
-        renderSierpinski(ctx, mid12, p2, mid23, depth - 1);
-        renderSierpinski(ctx, mid31, mid23, p3, depth - 1);
+    function setFractalPreset(angle, decay) {
+        document.getElementById('frac-angle').value = angle;
+        document.getElementById('frac-decay').value = decay;
+        renderFractalGraph();
     }
 
-    // 7. Dynamic Chart Expression Plotter Core Engine
-    function plotFunctionExpression() {
-        const exprStr = document.getElementById('equation-input').value;
+    // 9. Chart JS Graphing Pipeline
+    let globalChartInstance = null;
+    function generateFunctionChart() {
+        const ctx = document.getElementById('functionChart');
+        if(!ctx) return;
+        const exprInput = document.getElementById('graph-expr').value;
+
         const xValues = [];
         const yValues = [];
-
-        try {
-            const compiledExpr = math.compile(exprStr);
-            // Sampling Step Array Vector Map loop configurations
-            for (let x = -10; x <= 10; x += 0.2) {
+        for(let x = -10; x <= 10; x += 0.1) {
+            try {
+                let res = math.evaluate(exprInput, { x: x });
                 xValues.push(x.toFixed(1));
-                const scope = { x: x };
-                let y = compiledExpr.evaluate(scope);
-                yValues.push(y);
+                yValues.push(res);
+            } catch(e) {
+                // Skip arithmetic discontinuities gracefully
             }
-        } catch (err) {
-            console.error("Expression compilation log failure parsing syntax signatures:", err);
-            return;
         }
 
-        const ctx = document.getElementById('mathChart').getContext('2d');
-        if (mathChartInstance) { mathChartInstance.destroy(); }
+        if(globalChartInstance) {
+            globalChartInstance.destroy();
+        }
 
-        mathChartInstance = new Chart(ctx, {
+        globalChartInstance = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: xValues,
                 datasets: [{
-                    label: `f(x) = ${exprStr}`,
+                    label: `f(x) = ${exprInput}`,
                     data: yValues,
                     borderColor: '#e94560',
-                    borderWidth: 3,
+                    borderWidth: 2,
                     pointRadius: 0,
-                    fill: false,
-                    tension: 0.2
+                    fill: false
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
-                    x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
-                    y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } }
+                    x: { grid: { color: '#333' }, ticks: { color: '#aaa' } },
+                    y: { grid: { color: '#333' }, ticks: { color: '#aaa' } }
                 },
                 plugins: {
-                    legend: { labels: { color: '#fff', font: { weight: 'bold' } } },
                     zoom: {
-                        zoom: { wheel: { enabled: true }, pinch: { enabled: true }, mode: 'xy' },
-                        pan: { enabled: true, mode: 'xy' }
+                        zoom: {
+                            wheel: { enabled: true },
+                            pinch: { enabled: true },
+                            mode: 'xy'
+                        },
+                        pan: {
+                            enabled: true,
+                            mode: 'xy'
+                        }
                     }
                 }
             }
         });
     }
+
+    // Global Initialization Calls
+    window.addEventListener('DOMContentLoaded', () => {
+        renderQuiz();
+        drawMatrixSpace();
+        initRoadmap();
+        renderFractalGraph();
+        generateFunctionChart();
+    });
+
+    // Handle canvas window scale adaptivity routines securely
+    window.addEventListener('resize', () => {
+        if(typeof drawMatrixSpace === 'function') drawMatrixSpace();
+        if(typeof renderFractalGraph === 'function') renderFractalGraph();
+    });
 </script>
+
 </body>
 </html>
