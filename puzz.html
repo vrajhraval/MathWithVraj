@@ -460,29 +460,29 @@
 
         <div class="cosmic-card">
             <div>
-                <span class="category-badge" style="background:rgba(234,179,8,0.15); color:var(--neon-yellow);">Dynamical Systems | ચુંબકીય આકર્ષણ અને અરાજકતા</span>
-                <h3>Magnetic Pendulum Basins</h3>
-                <p class="eng-desc">Explore deep non-linear dynamics! A pendulum swings freely under gravity <span class="math-formula">g</span>, friction, and the pull of 3 magnets. Tap inside the matrix grid below to set a starting position, then watch the path descend into absolute chaotic uncertainty before locking onto a winner.</p>
-                <p class="guj-desc">ઉચ્ચ ગણિત અને ભૌતિકશાસ્ત્રનો પ્રયોગ! ગુરુત્વાકર્ષણ બળ અને ૩ ચુંબકો વચ્ચે ઘેરાયેલા લોલકને નીચેના કેનવાસ પર ગમે ત્યાં ક્લિક કરીને મુક્ત કરો. જુઓ કેવી રીતે નજીવો ફેરફાર પણ આખી સફર અને આખરી વિજેતા ચુંબક બદલી નાખે છે!</p>
+                <span class="category-badge" style="background:rgba(168,85,247,0.15); color:var(--neon-purple);">Complex Analysis | સંકીર્ણ વિશ્લેષણ</span>
+                <h3>Holomorphic Mappings</h3>
+                <p class="eng-desc">Witness pure conformal geometry. Move your cursor or tap across the canvas grid to adjust the complex shift parameter <span class="math-variable">c</span>. The matrix maps coordinates through the analytic function <span class="math-formula">f(z) = z² + c</span>, preserving orthogonal angles perfectly while warping space.</p>
+                <p class="guj-desc">ઉચ્ચ ગણિતનું અદભુત દૃશ્ય! કેનવાસ પર માઉસ ફેરવીને સંકીર્ણ સંખ્યા <span class="math-variable">c</span> ના મૂલ્યો બદલો. આ એન્જિન મૂળ ચોરસ ગ્રીડને <span class="math-formula">f(z) = z² + c</span> સમીકરણ દ્વારા રૂપાંતરિત કરે છે, જે દર્શાવે છે કે વિકલન કેવી રીતે ખૂણાઓ જાળવી રાખે છે!</p>
             </div>
 
             <div class="canvas-frame">
-                <canvas id="pendulumCanvas" class="lab-canvas" width="360" height="200" style="cursor: crosshair;"></canvas>
+                <canvas id="holomorphicCanvas" class="lab-canvas" width="360" height="200" style="cursor: pointer;"></canvas>
             </div>
 
             <div class="control-panel">
                 <div style="margin-bottom:10px;">
-                    <label><span>Magnetic Pull Intensity / ચુંબકીય શક્તિ:</span> <span id="magVal" style="color:var(--neon-yellow)">0.50</span></label>
-                    <input type="range" id="magSlider" class="custom-slider" min="10" max="150" value="50">
+                    <label><span>Grid Mesh Density / ગ્રીડ ઘનતા:</span> <span id="gridVal" style="color:var(--neon-purple)">16</span></label>
+                    <input type="range" id="gridSlider" class="custom-slider" min="8" max="32" value="16">
                 </div>
                 <div style="display: flex; gap: 10px;">
-                    <button class="action-btn" id="clearTrackBtn" style="border-color: var(--neon-yellow); color: var(--neon-yellow);" onclick="resetPendulumTrack()">Reset Trace Path</button>
+                    <button class="action-btn" style="border-color: var(--neon-purple); color: var(--neon-purple);" onclick="resetHolomorphicSpace()">Reset to Origin</button>
                 </div>
             </div>
 
             <div class="chaos-stats">
-                <span>Calculated Steps: <strong id="calcSteps" style="color:var(--neon-yellow)">0</strong></span>
-                <span>Dominant Magnet: <strong id="winningMagnet" style="color:white">None</strong></span>
+                <span>Complex Parameter c: <strong id="complexCoord" style="color:var(--neon-purple)">0.00 + 0.00i</strong></span>
+                <span>Map Mode: <strong style="color:white">Conformal</strong></span>
             </div>
         </div>
     </div>
@@ -612,7 +612,7 @@
                 <span class="category-badge bg-logic">Financial Paradox</span>
                 <h3>The Missing Dollar Illusion</h3>
                 <p class="eng-desc">Three guests check into a room totaling 30 dollars expense (10 dollars each). The manager returns 5 dollars back via a bellboy. The dishonest bellboy keeps 2 dollars secretly and returns 1 dollar to each guest. Now, each guest paid 9 dollars (9 x 3 = 27). The bellboy has 2 dollars (27 + 2 = 29). Where is the missing 1 dollar? Input the actual value of the final mathematical accounting error discrepancy inside the system.</p>
-                <p class="guj-desc">૩ મિત્રો એક હોટેલમાં ૩૦ રૂપિયા આપી રૂમ રાખે છે. મેનેજર વળતર પેટે ૫ રૂપિયા પાછા આપે છે. નોકર ૨ રૂપિયા પોતાની પાસે રાખી ત્રણેય મિત્રોને ૧-૧ રૂપિયો પાછો આપે છે. હવે ત્રણેયે ૯-૯ રૂપિયા આપ્યા કહેવાય (૯ x ૩ = ૨૭). નોકર પાસેના ૨ ગણીએ તો (૨૭ + ૨ = ૨૯) થાય. આ હિસાબની ગોલમાલમાં વાસ્તવિક ભૂલ કઈ રકમ પર થઈ?</p>
+                <p class="guj-desc">૩ મિત્રો એક હોટેલમાં ૩૦ રૂપિયા આપી રૂમ રાખે છે. મેનેજર વળતર પેટે ૫ રૂપિયા પાછા આપે છે. નોકર ૨ રૂપિયા પોતાની પાસે રાખી ત્રણેય મિત્રોને ૧-૧ રૂપિયો પાછો આપે છે. હવે ત્રણેયે ૯-૯ રૂપિયા આપ્યા કહેવાય (૯ x ૩ = ૨૭). નોકર પાસેના ૨ GIE તો (૨૭ + ૨ = ૨૯) થાય. આ હિસાબની ગોલમાલમાં વાસ્તવિક ભૂલ કઈ રકમ પર થઈ?</p>
             </div>
             <div class="input-wrapper">
                 <label for="puz8">Input Integer / તમારો જવાબ:</label>
@@ -665,7 +665,7 @@
         'puz3': "Spot on! / કાબિલ તર્ક! (Calculated using geometric sequence formula 2^(n-1). For square 7, it maps as 2^6 = 64.)",
         'puz4': "Genius! / અસાધારણ! (There are 4 brothers and 3 sisters. The boy sees 3 of each; the sister sees 4 brothers and only 2 sisters.)",
         'puz5': "Astonishing Counter-Intuition! / અદભુત સંભાવના! (With just 23 people, the unique number of pair combinations scales so fast it breaks past a 50.7% chance tier!)",
-        'puz6': "Incredible Graph Master! / લાજ波 તર્ક! (Leonhard Euler proved a network path cannot cross every bridge exactly once if more than two landmasses have an odd number of bridges connecting them. Hence, impossible - 0.)",
+        'puz6': "Incredible Graph Master! / લાજવાબ તર્ક! (Leonhard Euler proved a network path cannot cross every bridge exactly once if more than two landmasses have an odd number of bridges connecting them. Hence, impossible - 0.)",
         'puz7': "Perfect Speed Arithmetic! / ઉત્તમ ગણતરી! (You must find the harmonic average speed, not arithmetic. Total round trip distance divided by total time gives exactly 40 km/h.)",
         'puz8': "Brilliant Analyst! / અદ્ભુત બુદ્ધિ ક્ષમતા! (The mathematical trap lies in adding the stolen 2 dollars to the 27 dollars paid. The 2 dollars is already *inside* that 27 dollars! You subtract it to match the hotel cost: 27 - 2 = 25.)",
         'puz9': "Mind blown! / દિમાગ ચકરાવે ચડાવી દીધું! (Exactly 0! Because infinity is boundless, room 1 becomes empty for the new guest, while absolutely every infinite current guest still successfully gets a room!)",
@@ -699,15 +699,11 @@
         const deckElement = document.getElementById('matrixDeck');
         deckElement.innerHTML = '';
         document.getElementById('cosmicBall').innerText = '🔮';
-        
         universalKeySymbol = cosmicGlyphs[Math.floor(Math.random() * cosmicGlyphs.length)];
         
         for (let idx = 1; idx <= 99; idx++) {
             let selectedGlyph = cosmicGlyphs[Math.floor(Math.random() * cosmicGlyphs.length)];
-            
-            if (idx % 9 === 0) {
-                selectedGlyph = universalKeySymbol;
-            }
+            if (idx % 9 === 0) selectedGlyph = universalKeySymbol;
             
             const block = document.createElement('div');
             block.className = 'matrix-node';
@@ -719,9 +715,7 @@
     function revealMindReader() {
         const targetSphere = document.getElementById('cosmicBall');
         targetSphere.innerText = '⚡';
-        setTimeout(() => {
-            targetSphere.innerText = universalKeySymbol;
-        }, 900);
+        setTimeout(() => { targetSphere.innerText = universalKeySymbol; }, 900);
     }
 
     // --- THE INSEPARABLE KISS (SODDY HEXLET) ENGINE ---
@@ -745,7 +739,6 @@
 
     function paintCanvasFrame() {
         drawCtx.clearRect(0, 0, renderCanvas.width, renderCanvas.height);
-        
         const angleSlider = parseInt(angleNode.value);
         const shiftSlider = parseInt(ratioNode.value) / 100;
 
@@ -754,27 +747,23 @@
 
         const centerX = renderCanvas.width / 2;
         const centerY = renderCanvas.height / 2;
-        
         const R = 90; 
+        
         drawCircle(centerX, centerY, R, 'rgba(56, 189, 248, 0.15)', true);
         drawCircle(centerX, centerY, R, varColor('--neon-blue'));
-
-        const innerR = 32;
-        drawCircle(centerX, centerY, innerR, varColor('--neon-purple'));
+        drawCircle(centerX, centerY, 32, varColor('--neon-purple'));
 
         const rotRad = (angleSlider * Math.PI) / 180;
-        
         for (let i = 0; i < 6; i++) {
             const hexletAngle = rotRad + (i * Math.PI / 3);
-            
             let tx = Math.cos(hexletAngle) * 2.2 + shiftSlider;
             let ty = Math.sin(hexletAngle) * 2.2;
             let tr = 1.0;
 
             const scaleFactor = 1.0 / (tx * tx + ty * ty - tr * tr);
-            const invX = centerX + (tx * scaleFactor) * (R - innerR);
-            const invY = centerY + (ty * scaleFactor) * (R - innerR);
-            const invR = Math.abs(tr * scaleFactor) * (R - innerR) * 0.45;
+            const invX = centerX + (tx * scaleFactor) * (90 - 32);
+            const invY = centerY + (ty * scaleFactor) * (90 - 32);
+            const invR = Math.abs(tr * scaleFactor) * (90 - 32) * 0.45;
 
             const colorHue = (i * 60) + (angleSlider / 2);
             drawCircle(invX, invY, invR, `hsla(${colorHue}, 90%, 60%, 0.1)`, true);
@@ -786,175 +775,115 @@
         return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
     }
 
-    // --- NON-LINEAR MAGNETIC PENDULUM SYSTEM (HIGHER MATH ACCELERATOR) ---
-    const pCanvas = document.getElementById('pendulumCanvas');
-    const pCtx = pCanvas.getContext('2d');
-    const magSlider = document.getElementById('magSlider');
+    // --- HOLOMORPHIC MAPPING LAB ENGINE (REAL-TIME CONFORMAL MATRIX) ---
+    const hCanvas = document.getElementById('holomorphicCanvas');
+    const hCtx = hCanvas.getContext('2d');
+    const gridSlider = document.getElementById('gridSlider');
 
-    // State Variables
-    let px = 0, py = 0;      // Pendulum Position
-    let vx = 0, vy = 0;      // Pendulum Velocity
-    let historyTrack = [];   // Trace line records
-    let trackingActive = false;
-    let loopStepsCount = 0;
-    let animationFrameId = null;
+    // Complex Parameter State (c = cr + ci)
+    let cr = 0.0;
+    let ci = 0.0;
 
-    // Simulation Constants
-    const gravityConst = 0.015;
-    const dragDamping = 0.012;
-    const timeStep = 0.5;
+    function renderHolomorphicGrid() {
+        hCtx.clearRect(0, 0, hCanvas.width, hCanvas.height);
+        hCtx.fillStyle = '#060913';
+        hCtx.fillRect(0, 0, hCanvas.width, hCanvas.height);
 
-    // 3 Magnetic Target Anchors forming a triangle
-    const magnets = [
-        { x: 180, y: 40,  color: '#38bdf8', label: 'Alpha (Blue)' },
-        { x: 80,  y: 160, color: '#a855f7', label: 'Beta (Purple)' },
-        { x: 280, y: 160, color: '#ec4899', label: 'Gamma (Pink)' }
-    ];
+        const density = parseInt(gridSlider.value);
+        document.getElementById('gridVal').innerText = density;
+        document.getElementById('complexCoord').innerText = `${cr.toFixed(2)} + ${ci.toFixed(2)}i`;
 
-    function initPendulumWorkspace() {
-        pCtx.fillStyle = '#060913';
-        pCtx.fillRect(0, 0, pCanvas.width, pCanvas.height);
-        
-        // Draw Field Magnet locations
-        magnets.forEach(m => {
-            pCtx.beginPath();
-            pCtx.arc(m.x, m.y, 8, 0, 2 * Math.PI);
-            pCtx.fillStyle = m.color;
-            pCtx.fill();
-            pCtx.lineWidth = 2;
-            pCtx.strokeStyle = '#ffffff';
-            pCtx.stroke();
-        });
-    }
+        // Coordinate scaling factors mapping pixels to Complex plane window [-2, 2]
+        const scaleX = (x) => (x - hCanvas.width / 2) / 75;
+        const scaleY = (y) => (y - hCanvas.height / 2) / 75;
+        const invScaleX = (u) => u * 75 + hCanvas.width / 2;
+        const invScaleY = (v) => v * 75 + hCanvas.height / 2;
 
-    function computePendulumPhysics() {
-        if (!trackingActive) return;
+        hCtx.lineWidth = 1.2;
 
-        const magStrength = parseFloat(magSlider.value) / 1000;
-        document.getElementById('magVal').innerText = (parseFloat(magSlider.value) / 100).toFixed(2);
+        // Draw mapped horizontal lines: y = constant
+        for (let g = -density; g <= density; g++) {
+            const yVal = (g / density) * 2;
+            hCtx.beginPath();
+            let first = true;
 
-        let ax = 0;
-        let ay = 0;
+            for (let px = 0; px <= hCanvas.width; px += 4) {
+                const xVal = scaleX(px);
+                
+                // Forward map evaluation f(z) = z^2 + c
+                // z^2 = (x^2 - y^2) + i(2xy)
+                const u = (xVal * xVal - yVal * yVal) + cr;
+                const v = (2 * xVal * yVal) + ci;
 
-        // 1. Hooke's Law Center Gravity Force pull to center (180, 100)
-        ax -= gravityConst * (px - 180);
-        ay -= gravityConst * (py - 100);
-
-        // 2. Inverse Square Magnetic Pull forces loop
-        let closestMagnetIndex = -1;
-        let minDistance = Infinity;
-
-        magnets.forEach((m, idx) => {
-            const dx = m.x - px;
-            const dy = m.y - py;
-            const distSq = dx * dx + dy * dy + 150; // 150 soften factor prevents dividing by zero crash
-            const dist = Math.sqrt(distSq);
-
-            if (dist < minDistance) {
-                minDistance = dist;
-                closestMagnetIndex = idx;
+                if (first) {
+                    hCtx.moveTo(invScaleX(u), invScaleY(v));
+                    first = false;
+                } else {
+                    hCtx.lineTo(invScaleX(u), invScaleY(v));
+                }
             }
-
-            // Coulomb magnetic equation acceleration
-            const fMag = magStrength / distSq;
-            ax += fMag * (dx / dist);
-            ay += fMag * (dy / dist);
-        });
-
-        // 3. Friction Damping Drag force
-        ax -= dragDamping * vx;
-        ay -= dragDamping * vy;
-
-        // 4. Update Kinematics Euler integration step
-        vx += ax * timeStep;
-        vy += ay * timeStep;
-        px += vx * timeStep;
-        py += vy * timeStep;
-
-        historyTrack.push({ x: px, y: py });
-        loopStepsCount++;
-
-        // Render dynamic changes
-        initPendulumWorkspace();
-
-        // Paint background history route tracking line
-        pCtx.beginPath();
-        pCtx.moveTo(historyTrack[0].x, historyTrack[0].y);
-        for (let i = 1; i < historyTrack.length; i++) {
-            pCtx.lineTo(historyTrack[i].x, historyTrack[i].y);
-        }
-        pCtx.strokeStyle = 'rgba(254, 240, 138, 0.45)';
-        pCtx.lineWidth = 2;
-        pCtx.stroke();
-
-        // Draw active pendulum bob node bobbler position
-        pCtx.beginPath();
-        pCtx.arc(px, py, 5, 0, 2 * Math.PI);
-        pCtx.fillStyle = '#eab308';
-        pCtx.fill();
-
-        document.getElementById('calcSteps').innerText = loopStepsCount;
-
-        // Exit capture terminal threshold checks (settled on magnet or threshold step limit hit)
-        if (minDistance < 12 && Math.abs(vx) < 0.05 && Math.abs(vy) < 0.05) {
-            trackingActive = false;
-            document.getElementById('winningMagnet').innerText = magnets[closestMagnetIndex].label;
-            document.getElementById('winningMagnet').style.color = magnets[closestMagnetIndex].color;
-            return;
+            hCtx.strokeStyle = 'rgba(56, 189, 248, 0.4)';
+            hCtx.stroke();
         }
 
-        if (loopStepsCount > 1500) {
-            trackingActive = false;
-            document.getElementById('winningMagnet').innerText = "Orbit Lock Loop";
-            document.getElementById('winningMagnet').style.color = "var(--neon-blue)";
-            return;
-        }
+        // Draw mapped vertical lines: x = constant
+        for (let g = -density; g <= density; g++) {
+            const xVal = (g / density) * 2;
+            hCtx.beginPath();
+            let first = true;
 
-        animationFrameId = requestAnimationFrame(computePendulumPhysics);
+            for (let py = 0; py <= hCanvas.height; py += 4) {
+                const yVal = scaleY(py);
+                
+                const u = (xVal * xVal - yVal * yVal) + cr;
+                const v = (2 * xVal * yVal) + ci;
+
+                if (first) {
+                    hCtx.moveTo(invScaleX(u), invScaleY(v));
+                    first = false;
+                } else {
+                    hCtx.lineTo(invScaleX(u), invScaleY(v));
+                }
+            }
+            hCtx.strokeStyle = 'rgba(168, 85, 247, 0.4)';
+            hCtx.stroke();
+        }
     }
 
-    pCanvas.addEventListener('mousedown', (e) => {
-        if (animationFrameId) cancelAnimationFrame(animationFrameId);
-        
-        const rect = pCanvas.getBoundingClientRect();
-        px = e.clientX - rect.left;
-        py = e.clientY - rect.top;
-        
-        // Zero velocities on drop point trigger
-        vx = 0; 
-        vy = 0;
-        historyTrack = [{ x: px, y: py }];
-        loopStepsCount = 0;
-        trackingActive = true;
-        
-        document.getElementById('winningMagnet').innerText = "Calculating...";
-        document.getElementById('winningMagnet').style.color = "white";
-        
-        computePendulumPhysics();
-    });
+    function updateComplexParameter(e) {
+        const rect = hCanvas.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
 
-    function resetPendulumTrack() {
-        if (animationFrameId) cancelAnimationFrame(animationFrameId);
-        trackingActive = false;
-        historyTrack = [];
-        loopStepsCount = 0;
-        document.getElementById('calcSteps').innerText = 0;
-        document.getElementById('winningMagnet').innerText = "None";
-        document.getElementById('winningMagnet').style.color = "white";
-        initPendulumWorkspace();
+        // Map mouse position to parameter coordinates c inside window bounds
+        cr = ((mx - hCanvas.width / 2) / (hCanvas.width / 2)) * 1.5;
+        ci = ((my - hCanvas.height / 2) / (hCanvas.height / 2)) * 1.5;
+
+        renderHolomorphicGrid();
     }
 
-    magSlider.addEventListener('input', () => {
-        document.getElementById('magVal').innerText = (parseFloat(magSlider.value) / 100).toFixed(2);
-    });
+    hCanvas.addEventListener('mousemove', updateComplexParameter);
+    hCanvas.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) {
+            updateComplexParameter(e.touches[0]);
+            e.preventDefault();
+        }
+    }, { passive: false });
 
+    function resetHolomorphicSpace() {
+        cr = 0.0;
+        ci = 0.0;
+        renderHolomorphicGrid();
+    }
+
+    gridSlider.addEventListener('input', renderHolomorphicGrid);
     angleNode.addEventListener('input', paintCanvasFrame);
     ratioNode.addEventListener('input', paintCanvasFrame);
 
     // Initial System Boots
     generateMatrixDeck();
     paintCanvasFrame();
-    initPendulumWorkspace();
+    renderHolomorphicGrid();
 </script>
 
 </body>
