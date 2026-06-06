@@ -182,7 +182,7 @@
             margin-top: 20px;
         }
 
-        #chaosCanvas {
+        .lab-canvas {
             background: #060913;
             border-radius: 12px;
             border: 1px solid rgba(255,255,255,0.05);
@@ -219,26 +219,16 @@
             box-shadow: 0 0 10px var(--neon-pink);
         }
 
-        /* Collatz Dynamic Wormhole Output Area */
-        .collatz-terminal {
-            background: #02040a;
-            border: 1px solid rgba(234, 179, 8, 0.2);
-            border-radius: 12px;
-            padding: 15px;
-            margin-top: 15px;
-            font-family: monospace;
-            font-size: 0.85rem;
-            max-height: 140px;
-            overflow-y: auto;
-            color: var(--neon-yellow);
-        }
-
-        .collatz-stats {
+        .chaos-stats {
             display: flex;
             justify-content: space-between;
-            font-size: 0.8rem;
-            margin-top: 8px;
+            font-size: 0.85rem;
+            margin-top: 12px;
             color: var(--text-muted);
+            background: rgba(0,0,0,0.2);
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.02);
         }
 
         /* Math Typography Standard Layout */
@@ -449,11 +439,14 @@
                 <span class="category-badge bg-geometry">Niche Topology | અજાણી ભૂમિતિ</span>
                 <h3>The Inseparable Kiss (Soddy Hexlet)</h3>
                 <p class="eng-desc">An absolute secret of spatial geometry! When three spheres touch each other, you can map a perfect closed ring of exactly <b>6</b> interlocking circles nestled perfectly in their creases. Move the engines to warp the boundaries dynamically while maintaining a continuous mathematical touch.</p>
-                <p class="guj-desc">અવકાશી ભૂમિતિનું એક પરમ રહસ્ય! જ્યારે ૩ ગોળાઓ એકબીજાને સ્પર્શે છે, ત્યારે તેમની વચ્ચે બરાબર <b>૬</b> ગોળાઓની એક અખંડ માળા ગોઠવી શકાય છે. તેના પરિમાણો બદલીને જુઓ કે કેવી રીતે આ ગોળાઓ આકાર બદલવા છતાં પરસ્પર સ્પર્શ ક્યારેય છોડતા નથી.</p>
+                <p class="guj-desc">અવકાશી ભૂમિતિનું એક પરમ રહસ્ય! જ્યારે ૩ ગોળાઓ એકબીજાને સ્પર્શે છે, ત્યારે તેમની વચ્ચે બરાબર <b>૬</b> ગોળાઓની એક અખંડ માળા ગોઠવી શકાય છે. તેના પરિમાણો બદલીને જુઓ કે કેવી રીતે આ ગોળાઓ આકાર બદલવા,
+
+[Image of the human digestive system]
+ છતાં પરસ્પર સ્પર્શ ક્યારેય છોડતા નથી.</p>
             </div>
 
             <div class="canvas-frame">
-                <canvas id="chaosCanvas" width="360" height="220"></canvas>
+                <canvas id="chaosCanvas" class="lab-canvas" width="360" height="220"></canvas>
             </div>
 
             <div class="control-panel">
@@ -470,22 +463,26 @@
 
         <div class="cosmic-card">
             <div>
-                <span class="category-badge" style="background:rgba(234,179,8,0.15); color:var(--neon-yellow);">Inescapable Loops | ગણિતનો સૌથી મોટો છટકવો</span>
-                <h3>The Collatz Conjecture Paradox</h3>
-                <p class="eng-desc">Pick <b>ANY</b> giant positive integer <span class="math-variable">n</span>. If it is Even, the machine cuts it in half <span class="math-formula">(n ÷ 2)</span>. If it is Odd, the machine triples it and adds one <span class="math-formula">(3n + 1)</span>. No matter what massive number you input, it collapses into an inescapable cosmic loop trap: <b>4 → 2 → 1</b>. Try to break it!</p>
-                <p class="guj-desc">કોઈપણ મનગમતી મોટી સંખ્યા <span class="math-variable">n</span> લખો. જો તે બેકી સંખ્યા હશે તો મશીન તેને અડધી કરશે <span class="math-formula">(n ÷ 2)</span>. જો તે એકી હશે, તો તેને ૩ વડે ગુણીને ૧ ઉમેરશે <span class="math-formula">(3n + 1)</span>. આખા બ્રહ્માંડની કોઈપણ સંખ્યા આખરે એક જ લૂપમાં ફસાઈ જાય છે: <b>4 → 2 → 1</b>!</p>
+                <span class="category-badge" style="background:rgba(234,179,8,0.15); color:var(--neon-yellow);">Quantum Determinism | અરાજકતામાંથી વ્યવસ્થા</span>
+                <h3>The Chaos Game Fractal</h3>
+                <p class="eng-desc">Can absolute randomness generate absolute geometric perfection? Choose a dot-plotting velocity. The engine rolls a random 3-sided dice and plots coordinates exactly halfway <span class="math-formula">(1 ÷ 2)</span> to a random vertex. Watch the chaos assemble a perfect infinite fractal universe!</p>
+                <p class="guj-desc">શું સંપૂર્ણ અરાજકતામાંથી સંપૂર્ણ ભૂમિતિ બની શકે? એક સ્પીડ સેટ કરો. મશીન દર વખતે એક રેન્ડમ દિશા નક્કી કરી તેનાથી બરાબર અડધા <span class="math-formula">(1 ÷ 2)</span> અંતરે બિંદુ મૂકશે. જુઓ કેવી રીતે અસ્તવ્યસ્ત બિંદુઓ ભેગા મળી એક અદભુત ભાત બનાવે છે!</p>
             </div>
 
-            <div class="input-wrapper" style="margin-top:15px; padding:15px;">
-                <label for="collatzInput">Enter Massive Integer / સંખ્યા લખો:</label>
-                <input type="number" id="collatzInput" value="27" min="1" style="font-size:1.1rem; padding:10px;">
-                <button class="action-btn" style="border-color: var(--neon-yellow); color: var(--neon-yellow); margin-top:10px; padding:10px;" onclick="igniteCollatzWormhole()">Fire Chaos Warp Engine</button>
+            <div class="canvas-frame">
+                <canvas id="fractalCanvas" class="lab-canvas" width="360" height="200"></canvas>
             </div>
 
-            <div class="collatz-terminal" id="collatzLog">Wormhole Engine Online. Ready to process...</div>
-            <div class="collatz-stats">
-                <span>Total Collapse Steps: <strong id="collatzSteps" style="color:white">0</strong></span>
-                <span>Peak Value Reached: <strong id="collatzPeak" style="color:white">0</strong></span>
+            <div class="control-panel">
+                <div style="display: flex; gap: 10px;">
+                    <button class="action-btn" id="chaosBtn" style="border-color: var(--neon-yellow); color: var(--neon-yellow);" onclick="toggleChaosGame()">Ignite Quantum Chaos</button>
+                    <button class="action-btn" style="border-color: var(--text-muted); color: var(--text-pure); max-width: 90px;" onclick="resetChaosGame()">Reset</button>
+                </div>
+            </div>
+
+            <div class="chaos-stats">
+                <span>Plotted Matrix Nodes: <strong id="nodeCount" style="color:var(--neon-yellow)">0</strong></span>
+                <span>Entropy State: <strong id="entropyState" style="color:white">Stable</strong></span>
             </div>
         </div>
     </div>
@@ -498,7 +495,7 @@
         </div>
     </div>
 
-    <h2 class="section-title"><span>02.</span> The Thinker's Vault / કોયડા અખાડો</h2>
+    <h2 class="section-title"><span>02.</span> The Thinker's Vault / コયડા અખાડો</h2>
     
     <div class="score-board">
         Current Score Mastery / તમારી વૈજ્ઞાનિક ક્ષમતા: <span id="score">0</span> / 10 Artifacts
@@ -645,7 +642,7 @@
                 <span class="category-badge bg-logic">Unexpected Arithmetic</span>
                 <h3>The Potato Dehydration Anomaly</h3>
                 <p class="eng-desc">You harvest 100 kg of fresh potatoes, which are measured to be exactly 99% pure water weight. After sitting outside in the sun for a day, they dehydrate slightly, leaving them composed of exactly 98% water weight. What is the shocking new total weight of the potatoes in kilograms?</p>
-                <p class="guj-desc">તમારી પાસે ૧૦૦ કિલો બટાકા છે, જેમાં ૯૯% વજન માત્ર પાણીનું છે. તડકામાં રાખવાથી તેમાંથી થોડું પાણી સુકાઈ જાય છે અને હવે તેમાં ૯૮% વજન પાણીનું બચે છે. તો હવે બટાકાનું નવું કુલ વજન કેટલા કિલોગ્રામ થઈ ગયું હશે?</p>
+                <p class="guj-desc">તમારી પાસે ૧૦૦ કિલો બટાકા છે, જેમાં ૯૯% વજન માત્ર配合 પાણીનું છે. તડકામાં રાખવાથી તેમાંથી થોડું પાણી સુકાઈ જાય છે અને હવે તેમાં ૯૮% વજન પાણીનું બચે છે. તો હવે બટાકાનું નવું કુલ વજન કેટલા કિલોગ્રામ થઈ ગયું હશે?</p>
             </div>
             <div class="input-wrapper">
                 <label for="puz10">Input Integer / તમારો જવાબ:</label>
@@ -789,38 +786,89 @@
         return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
     }
 
-    // --- COLLATZ PORTAL SYSTEM ---
-    function igniteCollatzWormhole() {
-        let n = parseInt(document.getElementById('collatzInput').value);
-        const logBox = document.getElementById('collatzLog');
+    // --- HIGH SPEED CHAOS GAME ENGINE (NEW FEATURE) ---
+    const fCanvas = document.getElementById('fractalCanvas');
+    const fCtx = fCanvas.getContext('2d');
+    
+    let activeAnimationId = null;
+    let totalNodesPlotted = 0;
+    let currentTracerX = Math.random() * fCanvas.width;
+    let currentTracerY = Math.random() * fCanvas.height;
+
+    // Anchor points (Triangle Vertices)
+    const triangleAnchors = [
+        { x: fCanvas.width / 2, y: 15, color: '#38bdf8' },      // Top
+        { x: 20, y: fCanvas.height - 20, color: '#a855f7' },     // Bottom Left
+        { x: fCanvas.width - 20, y: fCanvas.height - 20, color: '#ec4899' } // Bottom Right
+    ];
+
+    function initChaosCanvas() {
+        fCtx.fillStyle = '#060913';
+        fCtx.fillRect(0, 0, fCanvas.width, fCanvas.height);
         
-        if (isNaN(n) || n < 1) {
-            logBox.innerText = "Error: Enter a valid positive number!";
-            return;
+        // Draw the anchoring vertices
+        triangleAnchors.forEach(vertex => {
+            fCtx.beginPath();
+            fCtx.arc(vertex.x, vertex.y, 4, 0, 2 * Math.PI);
+            fCtx.fillStyle = vertex.color;
+            fCtx.fill();
+        });
+    }
+
+    function runChaosLoop() {
+        if (!activeAnimationId) return;
+
+        // Render 45 matrix points per frame animation tick for super fluid performance
+        for (let step = 0; step < 45; step++) {
+            const targetAnchor = triangleAnchors[Math.floor(Math.random() * 3)];
+            
+            // Jump half distance to selected target
+            currentTracerX = (currentTracerX + targetAnchor.x) / 2;
+            currentTracerY = (currentTracerY + targetAnchor.y) / 2;
+            
+            // Render point pixel
+            fCtx.fillStyle = targetAnchor.color;
+            fCtx.fillRect(currentTracerX, currentTracerY, 1, 1);
+            totalNodesPlotted++;
         }
 
-        let steps = 0;
-        let peak = n;
-        let logText = `Starting Warp sequence for: ${n}\n`;
-
-        while (n !== 1 && steps < 1000) {
-            if (n % 2 === 0) {
-                n = n / 2;
-                logText += `↳ Even: divided by 2 down to ${n}\n`;
-            } else {
-                n = (3 * n) + 1;
-                logText += `▲ Odd: multiplied by 3 + 1 up to ${n}\n`;
-            }
-            if (n > peak) peak = n;
-            steps++;
-        }
-
-        logText += `\n🎯 Trap locked! Trapped into loop: 4 → 2 → 1`;
+        document.getElementById('nodeCount').innerText = totalNodesPlotted;
         
-        logBox.innerText = logText;
-        logBox.scrollTop = logBox.scrollHeight; 
-        document.getElementById('collatzSteps').innerText = steps;
-        document.getElementById('collatzPeak').innerText = peak;
+        if (totalNodesPlotted > 300) document.getElementById('entropyState').innerText = "Fractal Ordering...";
+        if (totalNodesPlotted > 4000) document.getElementById('entropyState').innerText = "Absolute Determinism";
+
+        activeAnimationId = requestAnimationFrame(runChaosLoop);
+    }
+
+    function toggleChaosGame() {
+        const btn = document.getElementById('chaosBtn');
+        if (activeAnimationId) {
+            cancelAnimationFrame(activeAnimationId);
+            activeAnimationId = null;
+            btn.innerText = "Ignite Quantum Chaos";
+            btn.style.borderColor = "var(--neon-yellow)";
+            btn.style.color = "var(--neon-yellow)";
+        } else {
+            activeAnimationId = requestAnimationFrame(runChaosLoop);
+            btn.innerText = "Freeze Realtime Matrix";
+            btn.style.borderColor = "var(--neon-pink)";
+            btn.style.color = "var(--neon-pink)";
+        }
+    }
+
+    function resetChaosGame() {
+        if (activeAnimationId) cancelAnimationFrame(activeAnimationId);
+        activeAnimationId = null;
+        totalNodesPlotted = 0;
+        document.getElementById('nodeCount').innerText = 0;
+        document.getElementById('entropyState').innerText = "Stable";
+        
+        const btn = document.getElementById('chaosBtn');
+        btn.innerText = "Ignite Quantum Chaos";
+        btn.style.borderColor = "var(--neon-yellow)";
+        btn.style.color = "var(--neon-yellow)";
+        
+        initChaosCanvas();
     }
 
     angleNode.addEventListener('input', paintCanvasFrame);
@@ -829,6 +877,7 @@
     // Initial System Boots
     generateMatrixDeck();
     paintCanvasFrame();
+    initChaosCanvas();
 </script>
 
 </body>
