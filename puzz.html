@@ -241,6 +241,23 @@
             color: var(--text-muted);
         }
 
+        /* Math Typography Standard Layout */
+        .math-variable {
+            font-family: 'Cinzel', serif;
+            font-style: italic;
+            font-weight: 700;
+            color: var(--neon-pink);
+        }
+        
+        .math-formula {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-family: monospace;
+            color: var(--neon-blue);
+            font-weight: bold;
+        }
+
         /* --- THOUGHT PROVOKING PHILOSOPHY CAROUSEL --- */
         .philosophy-banner {
             background: linear-gradient(90deg, #1e1b4b, #311042);
@@ -455,8 +472,8 @@
             <div>
                 <span class="category-badge" style="background:rgba(234,179,8,0.15); color:var(--neon-yellow);">Inescapable Loops | ગણિતનો સૌથી મોટો છટકવો</span>
                 <h3>The Collatz Conjecture Paradox</h3>
-                <p class="eng-desc">Pick <b>ANY</b> giant number. If it is Even, the machine cuts it in half ($n/2$). If it is Odd, the machine triples it and adds one ($3n+1$). No matter what massive number you input, it collapses into an inescapable cosmic loop trap: <b>4 → 2 → 1</b>. Try to break it!</p>
-                <p class="guj-desc">કોઈપણ મનગમતી મોટી સંખ્યા લખો. જો તે બેકી સંખ્યા હશે તો મશીન તેને અડધી કરશે ($n/2$). જો તે એકી હશે, તો તેને ૩ વડે ગુણીને ૧ ઉમેરશે ($3n+1$). આખા બ્રહ્માંડની કોઈપણ સંખ્યા આખરે એક જ લૂપમાં ફસાઈ જાય છે: <b>4 → 2 → 1</b>!</p>
+                <p class="eng-desc">Pick <b>ANY</b> giant positive integer <span class="math-variable">n</span>. If it is Even, the machine cuts it in half <span class="math-formula">(n ÷ 2)</span>. If it is Odd, the machine triples it and adds one <span class="math-formula">(3n + 1)</span>. No matter what massive number you input, it collapses into an inescapable cosmic loop trap: <b>4 → 2 → 1</b>. Try to break it!</p>
+                <p class="guj-desc">કોઈપણ મનગમતી મોટી સંખ્યા <span class="math-variable">n</span> લખો. જો તે બેકી સંખ્યા હશે તો મશીન તેને અડધી કરશે <span class="math-formula">(n ÷ 2)</span>. જો તે એકી હશે, તો તેને ૩ વડે ગુણીને ૧ ઉમેરશે <span class="math-formula">(3n + 1)</span>. આખા બ્રહ્માંડની કોઈપણ સંખ્યા આખરે એક જ લૂપમાં ફસાઈ જાય છે: <b>4 → 2 → 1</b>!</p>
             </div>
 
             <div class="input-wrapper" style="margin-top:15px; padding:15px;">
@@ -612,8 +629,8 @@
             <div>
                 <span class="category-badge" style="background:rgba(236,72,153,0.15); color:var(--neon-pink)">Infinity Hotel Paradox</span>
                 <h3>Hilbert's Infinite Room Swapping</h3>
-                <p class="eng-desc">A fully occupied hotel has a mathematically infinite number of rooms. A new single guest arrives looking for a room. The genius manager doesn't turn them away; he simply tells every current guest to move from their current room number $n$ to room $n + 1$. How many current guests are left without a room after this infinite shift?</p>
-                <p class="guj-desc">અનંત ઓરડાઓ ધરાવતી એક હોટેલ આખી ભરેલી છે. એક નવો મુસાફર રહેવા માટે આવે છે. મેનેજર કોઈને ના પાડ્યા વગર બધા જ જૂના મુસાફરોને પોતાના રૂમ નંબર $n$ માંથી નીકળીને $n + 1$ નંબરના રૂમમાં જવા કહે છે. આ શિફ્ટિંગ પછી કેટલા જૂના મુસાફરો રૂમ વગરના રખડી જશે?</p>
+                <p class="eng-desc">A fully occupied hotel has a mathematically infinite number of rooms. A new single guest arrives looking for a room. The genius manager doesn't turn them away; he simply tells every current guest to move from their current room number <span class="math-variable">n</span> to room <span class="math-formula">n + 1</span>. How many current guests are left without a room after this infinite shift?</p>
+                <p class="guj-desc">અનંત ઓરડાઓ ધરાવતી એક હોટેલ આખી ભરેલી છે. એક નવો મુસાફર રહેવા માટે આવે છે. મેનેજર કોઈને ના પાડ્યા વગર બધા જ જૂના મુસાફરોને પોતાના રૂમ નંબર <span class="math-variable">n</span> માંમાંથી નીકળીને <span class="math-formula">n + 1</span> નંબરના રૂમમાં જવા કહે છે. આ શિફ્ટિંગ પછી કેટલા જૂના મુસાફરો રૂમ વગરના રખડી જશે?</p>
             </div>
             <div class="input-wrapper">
                 <label for="puz9">Input Integer / તમારો જવાબ:</label>
@@ -789,10 +806,10 @@
         while (n !== 1 && steps < 1000) {
             if (n % 2 === 0) {
                 n = n / 2;
-                logText += `↳ Even: down to ${n}\n`;
+                logText += `↳ Even: divided by 2 down to ${n}\n`;
             } else {
                 n = (3 * n) + 1;
-                logText += `▲ Odd (3n+1): rocket up to ${n}\n`;
+                logText += `▲ Odd: multiplied by 3 + 1 up to ${n}\n`;
             }
             if (n > peak) peak = n;
             steps++;
@@ -801,7 +818,7 @@
         logText += `\n🎯 Trap locked! Trapped into loop: 4 → 2 → 1`;
         
         logBox.innerText = logText;
-        logBox.scrollTop = logBox.scrollHeight; // Auto scrolls down terminal
+        logBox.scrollTop = logBox.scrollHeight; 
         document.getElementById('collatzSteps').innerText = steps;
         document.getElementById('collatzPeak').innerText = peak;
     }
