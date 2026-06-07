@@ -1,992 +1,1179 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Master Graduate Mathematics & Interactive Analytics Directory</title>
+
     <script>
+
         window.MathJax = {
+
             tex: {
+
                 inlineMath: [['$', '$'], ['\\(', '\\)']],
+
                 displayMath: [['$$', '$$']],
+
                 processEscapes: true
+
             },
+
             options: {
+
                 skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'option', 'select']
+
             }
+
         };
+
     </script>
+
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     
+
     <style>
+
         :root {
+
             --bg-main: #f1f5f9;
+
             --bg-card: #ffffff;
+
             --text-dark: #0f172a;
+
             --text-muted: #475569;
+
             --accent-blue: #2563eb;
+
             --border-color: #94a3b8;
+
             --calc-bg: #f8fafc;
+
             --success-green: #16a34a;
+
             --subject-sep-line: 4px solid #1e40af;
+
             
+
             /* Enhanced Graph Palette */
+
             --graph-box-bg: #fdfdfd;
+
             --graph-border: #cbd5e1;
+
             --graph-grid: #e2e8f0;
+
             --graph-axis: #475569;
+
             --graph-edge-dark: #334155;
+
             --graph-line-primary: #1e40af;
+
             --graph-line-secondary: #ea580c;
+
             --graph-accent: #10b981;
+
         }
+
+
 
         * {
+
             box-sizing: border-box;
+
             margin: 0;
+
             padding: 0;
+
         }
+
+
 
         body {
+
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
             background-color: var(--bg-main);
+
             color: var(--text-dark);
+
             line-height: 1.5;
+
             padding: 30px 15px;
+
         }
+
+
 
         .container {
+
             max-width: 1000px;
+
             margin: 0 auto;
+
         }
+
+
 
         header {
+
             text-align: center;
+
             margin-bottom: 40px;
+
             background: white;
+
             padding: 25px;
+
             border-radius: 12px;
+
             border: 2px solid var(--border-color);
+
         }
+
+
 
         header h1 {
+
             font-size: 2.2rem;
+
             color: var(--text-dark);
+
             margin-bottom: 8px;
+
         }
+
+
 
         .subject-card {
+
             background-color: var(--bg-card);
+
             border: 2px solid var(--border-color);
+
             border-top: var(--subject-sep-line);
+
             border-radius: 8px;
+
             padding: 25px;
+
             margin-bottom: 35px;
+
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+
         }
+
+
 
         .subject-title {
+
             font-size: 1.6rem;
+
             font-weight: 700;
+
             color: var(--accent-blue);
+
             margin-bottom: 15px;
+
             padding-bottom: 5px;
+
             border-bottom: 2px dashed var(--border-color);
+
         }
+
+
 
         .academic-info {
+
             margin-bottom: 20px;
+
             background-color: #f8fafc;
+
             padding: 15px;
+
             border-radius: 6px;
+
             border-left: 4px solid var(--accent-blue);
+
         }
+
+
 
         .academic-info p {
+
             margin-bottom: 8px;
+
             font-size: 0.95rem;
+
         }
+
+
 
         .academic-info strong {
+
             color: var(--text-dark);
+
         }
+
+
 
         .interactive-calc {
+
             background-color: #ffffff;
+
             border: 2px solid var(--text-dark);
+
             border-radius: 6px;
+
             padding: 18px;
+
             margin-top: 15px;
+
         }
+
+
 
         .interactive-calc h4 {
+
             font-size: 1rem;
+
             color: #1e3a8a;
+
             margin-bottom: 12px;
+
         }
+
+
 
         .calc-formula {
+
             background: #e2e8f0;
+
             padding: 10px 14px;
+
             border-radius: 4px;
+
             margin-bottom: 12px;
+
             display: block;
+
             overflow-x: auto;
+
             color: #000000;
+
             font-weight: 500;
+
         }
+
+
 
         .input-group {
+
             display: flex;
+
             flex-wrap: wrap;
+
             gap: 12px;
+
             margin-bottom: 12px;
+
             align-items: flex-end;
+
         }
+
+
 
         .input-field {
+
             display: flex;
+
             flex-direction: column;
+
             gap: 4px;
+
             flex: 1;
+
             min-width: 140px;
+
         }
+
+
 
         .input-field label {
+
             font-size: 0.8rem;
+
             font-weight: 700;
+
             color: #0f172a;
+
         }
+
+
 
         .input-field input, .input-field select {
+
             padding: 8px 10px;
+
             border: 2px solid var(--text-dark);
+
             border-radius: 4px;
+
             font-size: 0.95rem;
+
             background: #ffffff;
+
             color: #000000;
+
         }
+
+
 
         .calc-btn {
+
             background-color: #0f172a;
+
             color: white;
+
             border: none;
+
             padding: 7px 15px;
+
             font-size: 0.9rem;
+
             font-weight: 700;
+
             border-radius: 4px;
+
             cursor: pointer;
+
             height: 40px;
+
             transition: background 0.2s;
+
         }
+
+
 
         .calc-btn:hover {
+
             background-color: var(--accent-blue);
+
         }
+
+
 
         .calc-result {
+
             margin-top: 12px;
+
             padding: 12px;
+
             background: #f0fdf4;
+
             border-left: 5px solid var(--success-green);
+
             border-radius: 4px;
+
             font-size: 1rem;
+
             color: #000000;
+
             display: none;
+
             overflow-x: auto;
+
         }
+
+
 
         .graph-box-container {
+
             margin-top: 16px;
+
             padding: 14px;
+
             background: var(--graph-box-bg);
+
             border: 2px solid var(--graph-border);
+
             border-radius: 8px;
+
             box-shadow: inset 0 2px 6px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.02);
+
             display: flex;
+
             justify-content: center;
+
             align-items: center;
+
         }
+
+
 
         .visual-canvas {
+
             background: #ffffff;
+
             border: 1px solid #cbd5e1;
+
             border-radius: 4px;
+
             display: block;
+
             max-width: 100%;
+
             height: auto;
+
         }
 
+
+
         footer {
+
             text-align: center;
+
             margin-top: 40px;
+
             color: var(--text-muted);
+
             font-size: 0.9rem;
+
             padding-bottom: 30px;
+
         }
+
     </style>
+
 </head>
+
 <body>
+
+
 
 <div class="container">
 
+
+
     <header>
+
         <h1>Graduate Mathematics Encyclopedia & Analytics Dashboard</h1>
+
         <p>High-contrast rigorous academic tracking profiles integrated with smooth responsive 2D coordinate plot engines.</p>
+
     </header>
 
+
+
     <div class="subject-card">
+
         <div class="subject-title">1. Real Analysis</div>
+
         <div class="academic-info">
+
             <p><strong>Concept Summary:</strong> Rigorous study of continuous functions, limits, metric spaces, sequences, and measure theory on the real line numbers infrastructure.</p>
+
             <p><strong>Real-World Usage:</strong> Formulates the core algorithmic validation proofs behind financial quantitative risk options pricing, audio signal filters, and aerospace fluid dynamics models.</p>
+
             <p><strong>Standard Reference Books:</strong> *Principles of Mathematical Analysis* by Walter Rudin; *Real Analysis* by H.L. Royden.</p>
+
         </div>
+
         <div class="interactive-calc">
+
             <h4>⚡ Analytics Engine: Sequence Convergency Proof ($\epsilon-N$ Verification)</h4>
+
             <div class="calc-formula">Target Condition: $a_n = \frac{1}{n} \to L = 0$</div>
+
             <div class="input-group">
+
                 <div class="input-field">
+
                     <label>Tolerance (Epsilon)</label>
+
                     <input type="number" id="epsInp" value="0.05" step="0.005" min="0.001" oninput="calcReal()">
+
                 </div>
+
                 <button class="calc-btn" onclick="calcReal()">Evaluate Bound</button>
+
             </div>
+
             <div id="realRes" class="calc-result"></div>
+
             <div class="graph-box-container">
+
                 <canvas id="realCanvas" class="visual-canvas" width="450" height="200"></canvas>
+
             </div>
+
         </div>
+
     </div>
 
+
+
     <div class="subject-card">
+
         <div class="subject-title">2. Complex Analysis</div>
+
         <div class="academic-info">
+
             <p><strong>Concept Summary:</strong> Explores holomorphic analytic operations on complex variables, geometric conformal mappings, residues, and path contours.</p>
+
             <p><strong>Real-World Usage:</strong> Essential for processing high-frequency electrical circuit impedances, structural wave stress behaviors, and quantum field physics properties.</p>
+
             <p><strong>Standard Reference Books:</strong> *Complex Analysis* by Lars Ahlfors; *Visual Complex Analysis* by Tristan Needham.</p>
+
         </div>
+
         <div class="interactive-calc">
+
             <h4>⚡ Analytics Engine: Complex Exponential Circle Transformation</h4>
+
             <div class="calc-formula">Euler's Identity Mapping: $e^{i\theta} = \cos(\theta) + i\sin(\theta)$</div>
+
             <div class="input-group">
+
                 <div class="input-field">
+
                     <label>Angle (Degrees)</label>
+
                     <input type="number" id="compDeg" value="60" oninput="calcComplex()">
+
                 </div>
+
                 <button class="calc-btn" onclick="calcComplex()">Map Field Vector</button>
+
             </div>
+
             <div id="complexRes" class="calc-result"></div>
+
             <div class="graph-box-container">
+
                 <canvas id="complexCanvas" class="visual-canvas" width="450" height="220"></canvas>
+
             </div>
+
         </div>
+
     </div>
 
+
+
     <div class="subject-card">
+
         <div class="subject-title">3. Abstract Algebra</div>
+
         <div class="academic-info">
+
             <p><strong>Concept Summary:</strong> Systematically structures structural sets including groups, rings, algebraic fields, vector modules, and advanced Galois field relationships.</p>
+
             <p><strong>Real-World Usage:</strong> Underpins all modern public-key cryptography architectures, Advanced Encryption Standard (AES) designs, error-correcting network signals, and quantum computer algorithms.</p>
+
             <p><strong>Standard Reference Books:</strong> *Abstract Algebra* by David S. Dummit and Richard M. Foote; *Topics in Algebra* by I.N. Herstein.</p>
+
         </div>
+
         <div class="interactive-calc">
+
             <h4>⚡ Analytics Engine: Modular Multiplicative Cyclic Group Orbits</h4>
+
             <div class="calc-formula">Subgroup Set Orbit Orbitals: $g^k \pmod p$</div>
+
             <div class="input-group">
+
                 <div class="input-field">
+
                     <label>Prime Modulus (p)</label>
+
                     <input type="number" id="algP" value="11" oninput="calcAlgebra()">
+
                 </div>
+
                 <div class="input-field">
+
                     <label>Generator (g)</label>
+
                     <input type="number" id="algG" value="2" oninput="calcAlgebra()">
+
                 </div>
+
                 <button class="calc-btn" onclick="calcAlgebra()">Build Group Field</button>
+
             </div>
+
             <div id="algebraRes" class="calc-result"></div>
+
             <div class="graph-box-container">
+
                 <canvas id="algebraCanvas" class="visual-canvas" width="450" height="220"></canvas>
+
             </div>
+
         </div>
+
     </div>
 
+
+
     <div class="subject-card">
+
         <div class="subject-title">4. Linear Algebra</div>
+
         <div class="academic-info">
+
             <p><strong>Concept Summary:</strong> Study of multi-dimensional vector matrices, eigenspace transformations, linear kernels, and inner product coordinate spaces.</p>
+
             <p><strong>Real-World Usage:</strong> The core foundation driving modern Machine Learning backpropagation, Large Language Models, computer graphics rendering matrices, and Google PageRank indexing optimization.</p>
+
             <p><strong>Standard Reference Books:</strong> *Linear Algebra and Its Applications* by Gilbert Strang; *Linear Algebra Done Right* by Sheldon Axler.</p>
+
         </div>
+
         <div class="interactive-calc">
+
             <h4>⚡ Analytics Engine: $2\times2$ Grid Transformation Area Determinant Checker</h4>
+
             <div class="calc-formula">$\det(A) = ad - bc$ (Area scaling factor)</div>
+
             <div class="input-group">
+
                 <div class="input-field"><label>a (x-component i)</label><input type="number" id="la_a" value="2" oninput="calcLinear()"></div>
+
                 <div class="input-field"><label>b (x-component j)</label><input type="number" id="la_b" value="1" oninput="calcLinear()"></div>
+
                 <div class="input-field"><label>c (y-component i)</label><input type="number" id="la_c" value="0.5" oninput="calcLinear()"></div>
+
                 <div class="input-field"><label>d (y-component j)</label><input type="number" id="la_d" value="1.5" oninput="calcLinear()"></div>
+
                 <button class="calc-btn" onclick="calcLinear()">Compute & Plot</button>
+
             </div>
+
             <div id="linearRes" class="calc-result"></div>
+
             <div class="graph-box-container">
+
                 <canvas id="linearCanvas" class="visual-canvas" width="450" height="220"></canvas>
+
             </div>
+
         </div>
+
     </div>
 
+
+
     <div class="subject-card">
+
         <div class="subject-title">5. Topology</div>
+
         <div class="academic-info">
+
             <p><strong>Concept Summary:</strong> Explores geometric structural properties preserved under continuous deformations, rubber-sheet mapping deformations, homeomorphisms, and manifold connectivity.</p>
+
             <p><strong>Real-World Usage:</strong> Powers modern network infrastructure designs, robotic path-finding spaces, genomic DNA knot mapping analysis, and Topographical Data Analysis (TDA) systems.</p>
+
             <p><strong>Standard Reference Books:</strong> *Topology* by James Munkres; *Algebraic Topology* by Allen Hatcher.</p>
+
         </div>
+
         <div class="interactive-calc">
+
             <h4>⚡ Analytics Engine: Continuous Planar Manifold Intersection Invariant</h4>
+
             <div class="calc-formula">Euler Polyhedral Profile: $\chi = V - E + F$</div>
+
             <div class="input-group">
+
                 <div class="input-field"><label>Vertices (V)</label><input type="number" id="tpV" value="8" oninput="calcTop()"></div>
+
                 <div class="input-field"><label>Edges (E)</label><input type="number" id="tpE" value="12" oninput="calcTop()"></div>
+
                 <div class="input-field"><label>Faces (F)</label><input type="number" id="tpF" value="6" oninput="calcTop()"></div>
+
                 <button class="calc-btn" onclick="calcTop()">Verify Invariant</button>
+
             </div>
+
             <div id="topRes" class="calc-result"></div>
+
             <div class="graph-box-container">
+
                 <canvas id="topologyCanvas" class="visual-canvas" width="450" height="150"></canvas>
+
             </div>
+
         </div>
+
     </div>
 
+
+
     <div class="subject-card">
+
         <div class="subject-title">6. Number Theory & Cryptography ($x^4$ Quartic Precision)</div>
+
         <div class="academic-info">
+
             <p><strong>Concept Summary:</strong> Rigorous examination of integer properties, distribution equations of primes, modular structures, and discrete logarithmic algorithms.</p>
+
             <p><strong>Real-World Usage:</strong> Secures online global banking communications via RSA and Elliptic Curve Cryptography (ECC) key configurations and generates reliable digital tokens.</p>
+
             <p><strong>Standard Reference Books:</strong> *An Introduction to the Theory of Numbers* by G.H. Hardy and E.M. Wright; *A Course in Number Theory and Cryptography* by Neal Koblitz.</p>
+
         </div>
+
         <div class="interactive-calc">
+
             <h4>⚡ Analytics Engine: Square-and-Multiply Modular Exponentiation Ring</h4>
+
             <div class="calc-formula">Congruence Formula Matrix: $x^e \equiv r \pmod n$</div>
+
             <div class="input-group">
+
                 <div class="input-field"><label>Base (x)</label><input type="number" id="ntX" value="4" oninput="calcNT()"></div>
+
                 <div class="input-field"><label>Exponent (e)</label><input type="number" id="ntE" value="7" oninput="calcNT()"></div>
+
                 <div class="input-field"><label>Modulus (n)</label><input type="number" id="ntN" value="15" oninput="calcNT()"></div>
+
                 <button class="calc-btn" onclick="calcNT()">Compute Remainder</button>
+
             </div>
+
             <div id="ntRes" class="calc-result"></div>
+
             <div class="graph-box-container">
+
                 <canvas id="ntCanvas" class="visual-canvas" width="450" height="180"></canvas>
+
             </div>
+
         </div>
+
     </div>
 
+
+
     <div class="subject-card">
+
         <div class="subject-title">7. Ordinary Differential Equations (ODEs)</div>
+
         <div class="academic-info">
+
             <p><strong>Concept Summary:</strong> Equations linking single-variable dynamic functions to their instantaneous rates of change, state velocities, and phase trajectories.</p>
+
             <p><strong>Real-World Usage:</strong> Tracks biological population changes, kinetic chemical reaction speeds, mechanical vibration behaviors, and financial asset wealth rates.</p>
+
             <p><strong>Standard Reference Books:</strong> *Ordinary Differential Equations* by Morris Tenenbaum and Harry Pollard; *Differential Equations, Dynamical Systems, and an Introduction to Chaos* by Morris Hirsch.</p>
+
         </div>
+
         <div class="interactive-calc">
+
             <h4>⚡ Analytics Engine: Initial Value Problem Analytical Growth Curve</h4>
+
             <div class="calc-formula">Analytical Dynamic Form: $y(t) = y_0 \cdot e^{kt}$</div>
+
             <div class="input-group">
+
                 <div class="input-field"><label>Initial State (y0)</label><input type="number" id="odeY" value="8" oninput="calcODE()"></div>
+
                 <div class="input-field"><label>Rate Coeff (k)</label><input type="number" id="odeK" value="-0.4" step="0.1" oninput="calcODE()"></div>
+
                 <div class="input-field"><label>Time Bound (t)</label><input type="number" id="odeT" value="6" oninput="calcODE()"></div>
+
                 <button class="calc-btn" onclick="calcODE()">Project Trajectory</button>
+
             </div>
+
             <div id="odeRes" class="calc-result"></div>
+
             <div class="graph-box-container">
+
                 <canvas id="odeCanvas" class="visual-canvas" width="450" height="200"></canvas>
+
             </div>
+
         </div>
+
     </div>
 
+
+
     <div class="subject-card">
+
         <div class="subject-title">8. Partial Differential Equations (PDEs)</div>
+
         <div class="academic-info">
+
             <p><strong>Concept Summary:</strong> Analyzes relationships governing multi-variable continuous functions containing fractional spatial and temporal rate fields.</p>
+
             <p><strong>Real-World Usage:</strong> Simulates global meteorological weather prediction models, acoustic sound distributions, option-pricing Black-Scholes structures, and thermal thermodynamic dissipations.</p>
+
             <p><strong>Standard Reference Books:</strong> *Partial Differential Equations* by Lawrence C. Evans; *Introduction to Partial Differential Equations* by Walter A. Strauss.</p>
+
         </div>
+
         <div class="interactive-calc">
+
             <h4>⚡ Analytics Engine: 1D Steady-State Heat Boundary Interpolator</h4>
+
             <div class="calc-formula">Dirichlet Solution Form: $u(x) = u_0 + x(u_1 - u_0)$</div>
+
             <div class="input-group">
+
                 <div class="input-field"><label>Left Temp (u0)</label><input type="number" id="pdeL" value="90" oninput="calcPDE()"></div>
+
                 <div class="input-field"><label>Right Temp (u1)</label><input type="number" id="pdeR" value="30" oninput="calcPDE()"></div>
+
                 <div class="input-field"><label>Target Node (x)</label><input type="number" id="pdeX" value="0.4" step="0.1" min="0" max="1" oninput="calcPDE()"></div>
+
                 <button class="calc-btn" onclick="calcPDE()">Resolve Field</button>
+
             </div>
+
             <div id="pdeRes" class="calc-result"></div>
+
             <div class="graph-box-container">
+
                 <canvas id="pdeCanvas" class="visual-canvas" width="450" height="180"></canvas>
+
             </div>
+
         </div>
+
     </div>
 
+
+
     <div class="subject-card">
+
         <div class="subject-title">9. Functional Analysis</div>
+
         <div class="academic-info">
+
             <p><strong>Concept Summary:</strong> Extension of linear algebra into infinite-dimensional topologies, topological vector spaces, Banach limits, and bounded transformations.</p>
+
             <p><strong>Real-World Usage:</strong> Forms the core framework for advanced signal processing, machine learning kernel methods, and state space tracking inside quantum mechanical systems.</p>
+
             <p><strong>Standard Reference Books:</strong> *Introductory Functional Analysis with Applications* by Erwin Kreyszig; *Functional Analysis* by Walter Rudin.</p>
+
         </div>
+
         <div class="interactive-calc">
+
             <h4>⚡ Analytics Engine: Discrete $l^2$ Norm Geometry Field Bounds</h4>
+
             <div class="calc-formula">Hilbert Coordinate Norm Form: $\|x\|_{l^2} = \sqrt{|x_1|^2 + |x_2|^2}$</div>
+
             <div class="input-group">
+
                 <div class="input-field"><label>Component x1</label><input type="number" id="fa1" value="4" oninput="calcFunctional()"></div>
+
                 <div class="input-field"><label>Component x2</label><input type="number" id="fa2" value="3" oninput="calcFunctional()"></div>
+
                 <button class="calc-btn" onclick="calcFunctional()">Compute Space Norm</button>
+
             </div>
+
             <div id="faRes" class="calc-result"></div>
+
             <div class="graph-box-container">
+
                 <canvas id="faCanvas" class="visual-canvas" width="450" height="180"></canvas>
+
             </div>
+
         </div>
+
     </div>
 
+
+
     <div class="subject-card">
+
         <div class="subject-title">10. Graph Theory</div>
+
         <div class="academic-info">
+
             <p><strong>Concept Summary:</strong> Study of discrete interconnected networks comprising nodal vertices joined together by communication structural edge channels.</p>
+
             <p><strong>Real-World Usage:</strong> Optimizes logistics routing paths, social network connections, pipeline designs, and structural compilation graphs for software compilers.</p>
+
             <p><strong>Standard Reference Books:</strong> *Introduction to Graph Theory* by Douglas B. West; *Graph Theory* by Reinhard Diestel.</p>
+
         </div>
+
         <div class="interactive-calc">
+
             <h4>⚡ Analytics Engine: Complete Network Edge Trace Array ($K_n$)</h4>
+
             <div class="calc-formula">Handshaking Lemma Metric: $\sum \deg(v_i) = 2\lvert E \rvert$</div>
+
             <div class="input-group">
+
                 <div class="input-field"><label>Nodes Array Order (V)</label><input type="number" id="gtNodes" value="5" min="2" max="8" oninput="drawGraph()"></div>
+
                 <button class="calc-btn" onclick="drawGraph()">Render Network Map</button>
+
             </div>
+
             <div id="gtRes" class="calc-result"></div>
+
             <div class="graph-box-container">
+
                 <canvas id="graphCanvas" class="visual-canvas" width="450" height="220"></canvas>
+
             </div>
+
         </div>
+
     </div>
 
+
+
     <div class="subject-card">
+
         <div class="subject-title">11. Operator Theory</div>
+
         <div class="academic-info">
+
             <p><strong>Concept Summary:</strong> Analyzes properties of continuous linear transformations operating on functional vector systems, monitoring spectral eigenvalues and bounding shifts.</p>
+
             <p><strong>Real-World Usage:</strong> Underpins algorithmic control theory loops, signal filter optimizations, state-space estimators, and quantum wave states.</p>
+
             <p><strong>Standard Reference Books:</strong> *A Course in Operator Theory* by John B. Conway; *An Introduction to Operator Theory on Hilbert Spaces* by Carlos S. Kubrusly.</p>
+
         </div>
+
         <div class="interactive-calc">
+
             <h4>⚡ Analytics Engine: Linear Matrix Resolvent Spectral Map</h4>
+
             <div class="calc-formula">System Invariant Operator: $R(\lambda) = (\lambda I - T)^{-1}$</div>
+
             <div class="input-group">
+
                 <div class="input-field"><label>Operator Eigenvalue (k)</label><input type="number" id="opT" value="2" step="0.5" oninput="calcOperator()"></div>
+
                 <div class="input-field"><label>Spectral Param ($\lambda$)</label><input type="number" id="opLam" value="5" step="0.5" oninput="calcOperator()"></div>
+
                 <button class="calc-btn" onclick="calcOperator()">Compute Resolvent</button>
+
             </div>
+
             <div id="opRes" class="calc-result"></div>
+
             <div class="graph-box-container">
+
                 <canvas id="operatorCanvas" class="visual-canvas" width="450" height="180"></canvas>
+
             </div>
+
         </div>
+
     </div>
 
+
+
     <div class="subject-card">
+
         <div class="subject-title">12. Banach Algebra</div>
+
         <div class="academic-info">
+
             <p><strong>Concept Summary:</strong> Integrates associative ring multiplication metrics directly over sub-multiplicative vector norm complete Banach spaces.</p>
+
             <p><strong>Real-World Usage:</strong> Powers structural spectral calculations, multi-channel wave conversions, and quantum matrix system state analyses.</p>
+
             <p><strong>Standard Reference Books:</strong> *Complete Normed Algebras* by F.F. Bonsall and J. Duncan; *Banach Algebra Techniques in Operator Theory* by Ronald G. Douglas.</p>
+
         </div>
+
         <div class="interactive-calc">
+
             <h4>⚡ Analytics Engine: Sub-Multiplicative Operator Absolute Boundary Verification</h4>
+
             <div class="calc-formula">Banach Axiom Property: $\|A \cdot B\| \le \|A\| \cdot \|B\|$</div>
+
             <div class="input-group">
+
                 <div class="input-field"><label>Norm Value Norm A</label><input type="number" id="baA" value="4.5" oninput="calcBanach()"></div>
+
                 <div class="input-field"><label>Norm Value Norm B</label><input type="number" id="baB" value="3" oninput="calcBanach()"></div>
+
                 <button class="calc-btn" onclick="calcBanach()">Verify Property</button>
+
             </div>
+
             <div id="baRes" class="calc-result"></div>
+
             <div class="graph-box-container">
+
                 <canvas id="banachCanvas" class="visual-canvas" width="450" height="200"></canvas>
+
             </div>
+
         </div>
+
     </div>
 
+
+
     <div class="subject-card">
+
         <div class="subject-title">13. Mathematical Methods</div>
+
         <div class="academic-info">
+
             <p><strong>Concept Summary:</strong> Operational analytical toolkit combining integral transformations, asymptotic expansions, complex vectors, and discrete series conversions.</p>
+
             <p><strong>Real-World Usage:</strong> Crucial for digital voice signal analysis, CT scan medical imaging reconstructions, wave acoustics, and structural engineering load-bearing calculations.</p>
+
             <p><strong>Standard Reference Books:</strong> *Mathematical Methods for Physicists* by George B. Arfken and Hans J. Weber; *Advanced Mathematical Methods for Scientists and Engineers* by Carl M. Bender.</p>
+
         </div>
+
         <div class="interactive-calc">
+
             <h4>⚡ Analytics Engine: Fourier Sine Wave Harmonic Approximation</h4>
+
             <div class="calc-formula">Fourier Decomposition Form: $f(t) = \frac{4}{\pi} \sum \frac{\sin(nt)}{n}$</div>
+
             <div class="input-group">
+
                 <div class="input-field">
+
                     <label>Harmonic Cutoff Orders</label>
+
                     <select id="mmN" onchange="calcMethods()">
+
                         <option value="1">1 Harmonic (Fundamental)</option>
+
                         <option value="3">3 Harmonics</option>
+
                         <option value="5">5 Harmonics</option>
+
                         <option value="15">15 Harmonics</option>
+
                     </select>
+
                 </div>
+
                 <button class="calc-btn" onclick="calcMethods()">Evaluate Harmonic Spectrum</button>
+
             </div>
+
             <div id="mmRes" class="calc-result"></div>
+
             <div class="graph-box-container">
+
                 <canvas id="methodsCanvas" class="visual-canvas" width="450" height="200"></canvas>
+
             </div>
+
         </div>
+
     </div>
 
+
+
     <div class="subject-card">
+
         <div class="subject-title">14. Relativity</div>
+
         <div class="academic-info">
+
             <p><strong>Concept Summary:</strong> Structural four-vector study mapping coordinate frames, non-Euclidean Lorentz transformations, and gravity tensor metrics.</p>
+
             <p><strong>Real-World Usage:</strong> Required for GPS satellite global tracking synchronization adjustments and orbital spacecraft telemetry flight projections.</p>
+
             <p><strong>Standard Reference Books:</strong> *Spacetime and Geometry: An Introduction to General Relativity* by Sean M. Carroll; *Gravity* by James B. Hartle.</p>
+
         </div>
+
         <div class="interactive-calc">
+
             <h4>⚡ Analytics Engine: 2D Minkowski Light Cone Causality Bounds Map</h4>
+
             <div class="calc-formula">Space Time Interval: $\Delta s^2 = -(c\Delta t)^2 + \Delta x^2$</div>
+
             <div class="input-group">
+
                 <div class="input-field"><label>Relative Speed Factor (v/c)</label><input type="number" id="relV" value="0.6" step="0.05" min="0" max="0.95" oninput="calcRelativity()"></div>
+
                 <button class="calc-btn" onclick="calcRelativity()">Project Metrics</button>
+
             </div>
+
             <div id="relRes" class="calc-result"></div>
+
             <div class="graph-box-container">
+
                 <canvas id="relCanvas" class="visual-canvas" width="450" height="220"></canvas>
+
             </div>
+
         </div>
+
     </div>
 
+
+
     <div class="subject-card">
+
         <div class="subject-title">15. Classical Mechanics</div>
+
         <div class="academic-info">
+
             <p><strong>Concept Summary:</strong> Advanced formulation of physical kinematics via variational principles using Lagrangian paths and energy-conserving Hamiltonian coordinate systems.</p>
+
             <p><strong>Real-World Usage:</strong> Coordinates industrial robotics structural movements, engine components, satellite trajectories, and structural vehicle crash safety metrics.</p>
+
             <p><strong>Standard Reference Books:</strong> *Classical Mechanics* by Herbert Goldstein; *Mathematical Methods of Classical Mechanics* by V.I. Arnold.</p>
+
         </div>
+
         <div class="interactive-calc">
+
             <h4>⚡ Analytics Engine: Harmonic Pendulum Phase Space Invariant Orbit (Position vs Momentum)</h4>
+
             <div class="calc-formula">Energy Conservational Map: $\frac{\theta^2}{\theta_{max}^2} + \frac{p^2}{p_{max}^2} = 1$</div>
+
             <div class="input-group">
+
                 <div class="input-field"><label>Max Displacement (Degrees)</label><input type="number" id="cmAmp" value="45" min="5" max="90" oninput="calcClassical()"></div>
+
                 <div class="input-field"><label>System Length (L)</label><input type="number" id="cmL" value="2" min="1" max="5" oninput="calcClassical()"></div>
+
                 <button class="calc-btn" onclick="calcClassical()">Trace Phase Orbit</button>
+
             </div>
+
             <div id="cmRes" class="calc-result"></div>
+
             <div class="graph-box-container">
+
                 <canvas id="classicalCanvas" class="visual-canvas" width="450" height="220"></canvas>
+
             </div>
+
         </div>
+
     </div>
+
+
 
     <div class="subject-card">
-        <div class="subject-title">16. Differential Geometry</div>
-        <div class="academic-info">
-            <p><strong>Concept Summary:</strong> Mechanics of smooth shapes, manifolds, and geometric surfaces using calculus. Evaluates intrinsic curvature attributes, covariant derivations, and torsion maps.</p>
-            <p><strong>Real-World Usage:</strong> Directly drives computer vision surface reconstruction algorithms, modern computer-aided design (CAD) asset modeling engines, and cosmic spacetime gravity simulations.</p>
-            <p><strong>Standard Reference Books:</strong> *Differential Geometry of Curves and Surfaces* by Manfredo P. do Carmo; *Elementary Differential Geometry* by Barrett O'Neill.</p>
-        </div>
-        <div class="interactive-calc">
-            <h4>⚡ Analytics Engine: 2D Parametric Space Curvature Analytics Engine</h4>
-            <div class="calc-formula">Curvature Vector Amplitude: $\kappa(t) = \frac{|\dot{x}\ddot{y} - \dot{y}\ddot{x}|}{(\dot{x}^2 + \dot{y}^2)^{3/2}}$</div>
-            <div class="input-group">
-                <div class="input-field">
-                    <label>Profile Geometry Shape</label>
-                    <select id="dgType" onchange="calcDiffGeo()">
-                        <option value="ellipse">Parametric Ellipse ($\cos t, 0.5\sin t$)</option>
-                        <option value="parabola">Polynomial Parabola ($t, 0.25t^2$)</option>
-                    </select>
-                </div>
-                <div class="input-field">
-                    <label>Evaluation Parameter (t)</label>
-                    <input type="number" id="dgT" value="0.8" step="0.1" min="-2" max="2" oninput="calcDiffGeo()">
-                </div>
-                <button class="calc-btn" onclick="calcDiffGeo()">Solve Curvature</button>
-            </div>
-            <div id="dgRes" class="calc-result"></div>
-            <div class="graph-box-container">
-                <canvas id="dgCanvas" class="visual-canvas" width="450" height="220"></canvas>
-            </div>
-        </div>
-    </div>
 
-</div>
-
-<footer>
-    <p>&copy; Graduate Mathematics Directory. Systems Framework Activated.</p>
-</footer>
-
-<script>
-    // Existing calculation engines stubbed for initialization compatibility
-    function calcReal() {
-        const eps = parseFloat(document.getElementById('epsInp').value) || 0.05;
-        const N = Math.ceil(1/eps);
-        const res = document.getElementById('realRes');
-        res.style.display = "block";
-        res.innerHTML = `<strong>Rigorous Bound:</strong> For $\\epsilon = ${eps}$, threshold $N = ${N}$. Thus $\\forall n \\ge ${N}, |\\frac{1}{n} - 0| < ${eps}$.`;
-        if(window.MathJax) MathJax.typesetPromise([res]);
-        
-        const canvas = document.getElementById('realCanvas');
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,450,200);
-        ctx.strokeStyle = '#e2e8f0'; ctx.beginPath(); ctx.moveTo(0,150); ctx.lineTo(450,150); ctx.stroke();
-        ctx.strokeStyle = '#2563eb'; ctx.beginPath();
-        for(let i=1; i<=30; i++) {
-            let x = (i/30)*400 + 20; let y = 150 - (1/i)*100;
-            if(i===1) ctx.moveTo(x,y); else ctx.lineTo(x,y);
-            ctx.fillStyle = '#1e40af'; ctx.fillRect(x-2,y-2,4,4);
-        }
-        ctx.stroke();
-    }
-
-    function calcComplex() {
-        const deg = parseFloat(document.getElementById('compDeg').value) || 0;
-        const rad = deg * Math.PI / 180;
-        const cos = Math.cos(rad).toFixed(4);
-        const sin = Math.sin(rad).toFixed(4);
-        const res = document.getElementById('complexRes');
-        res.style.display = "block";
-        res.innerHTML = `<strong>Mapping output:</strong> $e^{i \\cdot ${deg}^\\circ} = ${cos} + ${sin}i$`;
-        if(window.MathJax) MathJax.typesetPromise([res]);
-
-        const canvas = document.getElementById('complexCanvas');
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,450,220);
-        ctx.strokeStyle = '#cbd5e1'; ctx.beginPath(); ctx.arc(225,110,80,0,2*Math.PI); ctx.stroke();
-        ctx.strokeStyle = '#475569'; ctx.beginPath(); ctx.moveTo(125,110); ctx.lineTo(325,110); ctx.moveTo(225,20); ctx.lineTo(225,200); ctx.stroke();
-        ctx.strokeStyle = '#ea580c'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(225,110); ctx.lineTo(225 + Math.cos(rad)*80, 110 - Math.sin(rad)*80); ctx.stroke(); ctx.lineWidth = 1;
-    }
-
-    function calcAlgebra() {
-        const p = parseInt(document.getElementById('algP').value) || 11;
-        const g = parseInt(document.getElementById('algG').value) || 2;
-        let val = 1; let orbit = [1];
-        for(let i=1; i<p; i++) { val = (val * g) % p; orbit.push(val); if(val === 1) break; }
-        const res = document.getElementById('algebraRes');
-        res.style.display = "block";
-        res.innerHTML = `<strong>Subgroup Generated Orbit:</strong> $\\langle ${g} \\rangle = \\{ ${orbit.join(', ')} \\}$ (Order: ${orbit.length})`;
-        if(window.MathJax) MathJax.typesetPromise([res]);
-
-        const canvas = document.getElementById('algebraCanvas');
-        const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,450,220);
-        orbit.forEach((v, idx) => {
-            let cx = 40 + idx*35; let cy = 180 - (v/p)*130;
-            ctx.fillStyle = '#10b981'; ctx.beginPath(); ctx.arc(cx,cy,5,0,2*Math.PI); ctx.fill();
-        });
-    }
-
-    function calcLinear() {
-        const a = parseFloat(document.getElementById('la_a').value);
-        const b = parseFloat(document.getElementById('la_b').value);
-        const c = parseFloat(document.getElementById('la_c').value);
-        const d = parseFloat(document.getElementById('la_d').value);
-        const det = (a*d - b*c).toFixed(3);
-        const res = document.getElementById('linearRes');
-        res.style.display = "block";
-        res.innerHTML = `<strong>Computed Matrix Area Space Factor:</strong> $\\det(A) = ${det}$`;
-        if(window.MathJax) MathJax.typesetPromise([res]);
-
-        const canvas = document.getElementById('linearCanvas');
-        const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,450,220);
-        ctx.fillStyle = "rgba(37, 99, 235, 0.15)"; ctx.beginPath();
-        ctx.moveTo(50,170); ctx.lineTo(50+a*40, 170-c*40); ctx.lineTo(50+a*40+b*40, 170-c*40-d*40); ctx.lineTo(50+b*40, 170-d*40); ctx.closePath(); ctx.fill();
-    }
-
-    function calcTop() {
-        const V = parseInt(document.getElementById('tpV').value);
-        const E = parseInt(document.getElementById('tpE').value);
-        const F = parseInt(document.getElementById('tpF').value);
-        const chi = V - E + F;
-        const res = document.getElementById('topRes');
-        res.style.display = "block";
-        res.innerHTML = `<strong>Topological Euler Characteristic Invariant Result:</strong> $\\chi = ${V} - ${E} + ${F} = ${chi}$`;
-        if(window.MathJax) MathJax.typesetPromise([res]);
-
-        const canvas = document.getElementById('topologyCanvas');
-        const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,450,150);
-        ctx.strokeStyle = '#334155'; ctx.strokeRect(180,30,80,80);
-    }
-
-    function calcNT() {
-        const x = BigInt(document.getElementById('ntX').value);
-        const e = BigInt(document.getElementById('ntE').value);
-        const n = BigInt(document.getElementById('ntN').value);
-        let base = x % n; let exp = e; let r = 1n;
-        while (exp > 0n) { if (exp % 2n === 1n) r = (r * base) % n; base = (base * base) % n; exp /= 2n; }
-        const res = document.getElementById('ntRes');
-        res.style.display = "block";
-        res.innerHTML = `<strong>Discrete Solution Space Matrix Point:</strong> $${x}^{${e}} \\equiv ${r} \\pmod{${n}}$`;
-        if(window.MathJax) MathJax.typesetPromise([res]);
-
-        const canvas = document.getElementById('ntCanvas');
-        const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,450,180);
-        ctx.fillStyle = '#1e40af'; ctx.font = '14px monospace'; ctx.fillText(`Congruence ring coordinate: r = ${r}`, 40, 90);
-    }
-
-    function calcODE() {
-        const y0 = parseFloat(document.getElementById('odeY').value);
-        const k = parseFloat(document.getElementById('odeK').value);
-        const t = parseFloat(document.getElementById('odeT').value);
-        const sol = (y0 * Math.exp(k * t)).toFixed(4);
-        const res = document.getElementById('odeRes');
-        res.style.display = "block";
-        res.innerHTML = `<strong>Dynamic Value Terminal Point:</strong> $y(${t}) = ${sol}$`;
-        if(window.MathJax) MathJax.typesetPromise([res]);
-
-        const canvas = document.getElementById('odeCanvas');
-        const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,450,200);
-        ctx.strokeStyle = '#ea580c'; ctx.beginPath();
-        for(let i=0; i<=50; i++) {
-            let tm = (i/50)*t; let val = y0 * Math.exp(k * tm);
-            let cx = 30 + (tm/t)*380; let cy = 180 - (val/(y0+2))*150;
-            if(i===0) ctx.moveTo(cx,cy); else ctx.lineTo(cx,cy);
-        }
-        ctx.stroke();
-    }
-
-    function calcPDE() {
-        const u0 = parseFloat(document.getElementById('pdeL').value);
-        const u1 = parseFloat(document.getElementById('pdeR').value);
-        const x = parseFloat(document.getElementById('pdeX').value);
-        const ans = (u0 + x * (u1 - u0)).toFixed(2);
-        const res = document.getElementById('pdeRes');
-        res.style.display = "block";
-        res.innerHTML = `<strong>Thermal Boundary Grid Interpolation Solution:</strong> $u(${x}) = ${ans}^{\\circ}\\text{C}$`;
-        if(window.MathJax) MathJax.typesetPromise([res]);
-
-        const canvas = document.getElementById('pdeCanvas');
-        const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,450,180);
-        ctx.strokeStyle = '#10b981'; ctx.beginPath(); ctx.moveTo(50, 150 - (u0/100)*120); ctx.lineTo(400, 150 - (u1/100)*120); ctx.stroke();
-    }
-
-    function calcFunctional() {
-        const x1 = parseFloat(document.getElementById('fa1').value);
-        const x2 = parseFloat(document.getElementById('fa2').value);
-        const norm = Math.sqrt(x1*x1 + x2*x2).toFixed(4);
-        const res = document.getElementById('faRes');
-        res.style.display = "block";
-        res.innerHTML = `<strong>Space Geometry Magnitude Result:</strong> $\\|x\\|_{l^2} = ${norm}$`;
-        if(window.MathJax) MathJax.typesetPromise([res]);
-
-        const canvas = document.getElementById('faCanvas');
-        const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,450,180);
-        ctx.strokeStyle = '#475569'; ctx.beginPath(); ctx.moveTo(50,150); ctx.lineTo(50+x1*30, 150-x2*30); ctx.stroke();
-    }
-
-    function drawGraph() {
-        const n = parseInt(document.getElementById('gtNodes').value) || 5;
-        const edges = (n * (n - 1)) / 2;
-        const res = document.getElementById('gtRes');
-        res.style.display = "block";
-        res.innerHTML = `<strong>Network Matrix Mapping:</strong> Complete trace array graph $K_{${n}}$ maps total structural edges $\\lvert E \\rvert = ${edges}$.`;
-        if(window.MathJax) MathJax.typesetPromise([res]);
-
-        const canvas = document.getElementById('graphCanvas');
-        const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,450,220);
-        let nodes = [];
-        for(let i=0; i<n; i++) {
-            let r = 70; let cx = 225 + r*Math.cos(2*Math.PI*i/n); let cy = 110 + r*Math.sin(2*Math.PI*i/n);
-            nodes.push({x:cx, y:cy});
-        }
-        ctx.strokeStyle = '#cbd5e1';
-        for(let i=0; i<n; i++) { for(let j=i+1; j<n; j++) { ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y); ctx.stroke(); } }
-        ctx.fillStyle = '#1e40af';
-        nodes.forEach(pt => { ctx.beginPath(); ctx.arc(pt.x, pt.y, 6, 0, 2*Math.PI); ctx.fill(); });
-    }
-
-    function calcOperator() {
-        const t = parseFloat(document.getElementById('opT').value);
-        const lam = parseFloat(document.getElementById('opLam').value);
-        const res = document.getElementById('opRes');
-        res.style.display = "block";
-        if (lam === t) { res.innerHTML = `<strong>Matrix System Resolvent Map:</strong> Spectrum Singular Error! $\\lambda = T$. Operator unbounded.`; } 
-        else { const r = (1 / (lam - t)).toFixed(4); res.innerHTML = `<strong>Matrix System Resolvent Map:</strong> Vector transformation value $R(${lam}) = ${r}$`; }
-        if(window.MathJax) MathJax.typesetPromise([res]);
-
-        const canvas = document.getElementById('operatorCanvas');
-        const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,450,180);
-        ctx.fillStyle = '#ea580c'; ctx.fillRect(50 + t*40, 90, 8, 8);
-        ctx.fillStyle = '#2563eb'; ctx.fillRect(50 + lam*40, 90, 8, 8);
-    }
-
-    function calcBanach() {
-        const a = parseFloat(document.getElementById('baA').value);
-        const b = parseFloat(document.getElementById('baB').value);
-        const prod = (a*b).toFixed(2);
-        const res = document.getElementById('baRes');
-        res.style.display = "block";
-        res.innerHTML = `<strong>Multiplicative Algebra Bound Condition Met:</strong> $\\|A \\cdot B\\| \\le \\|A\\| \\cdot \\|B\\| \\to \\|A \\cdot B\\| \\le ${prod}$`;
-        if(window.MathJax) MathJax.typesetPromise([res]);
-
-        const canvas = document.getElementById('banachCanvas');
-        const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,450,200);
-        ctx.fillStyle = "#10b981"; ctx.fillRect(40, 50, a*20, 30);
-        ctx.fillStyle = "#1e40af"; ctx.fillRect(40, 110, b*20, 30);
-    }
-
-    function calcMethods() {
-        const n = parseInt(document.getElementById('mmN').value);
-        const res = document.getElementById('mmRes');
-        res.style.display = "block";
-        res.innerHTML = `<strong>Fourier Integral Synthesis:</strong> Plotting matrix using the top $N = ${n}$ odd sub-harmonics vector fields.`;
-        if(window.MathJax) MathJax.typesetPromise([res]);
-
-        const canvas = document.getElementById('methodsCanvas');
-        const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,450,200);
-        ctx.strokeStyle = '#2563eb'; ctx.beginPath();
-        for(let i=0; i<=100; i++) {
-            let t = (i/100)*2*Math.PI; let sum = 0;
-            for(let h=1; h<=n; h+=2) { sum += Math.sin(h*t)/h; }
-            let val = (4/Math.PI)*sum;
-            let cx = 30 + (i/100)*390; let cy = 100 - val*50;
-            if(i===0) ctx.moveTo(cx,cy); else ctx.lineTo(cx,cy);
-        }
-        ctx.stroke();
-    }
-
-    function calcRelativity() {
-        const v = parseFloat(document.getElementById('relV').value);
-        const gamma = (1 / Math.sqrt(1 - v*v)).toFixed(4);
-        const res = document.getElementById('relRes');
-        res.style.display = "block";
-        res.innerHTML = `<strong>Lorentz Dilation Transform Vector:</strong> Special Relativistic factor $\\gamma = ${gamma}$. Spatial scales contracts to ${(1/gamma).toFixed(4)}.`;
-        if(window.MathJax) MathJax.typesetPromise([res]);
-
-        const canvas = document.getElementById('relCanvas');
-        const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,450,220);
-        ctx.strokeStyle = '#cbd5e1'; ctx.beginPath(); ctx.moveTo(225,20); ctx.lineTo(225,200); ctx.moveTo(125,110); ctx.lineTo(325,110); ctx.stroke();
-        ctx.strokeStyle = '#ea580c'; ctx.beginPath(); ctx.moveTo(225-80, 110-80); ctx.lineTo(225+80, 110+80); ctx.moveTo(225+80, 110-80); ctx.lineTo(225-80, 110+80); ctx.stroke();
-    }
-
-    function calcClassical() {
-        const ampDeg = parseFloat(document.getElementById('cmAmp').value);
-        const L = parseFloat(document.getElementById('cmL').value);
-        const amp = ampDeg * Math.PI / 180;
-        const res = document.getElementById('cmRes');
-        res.style.display = "block";
-        res.innerHTML = `<strong>Phase Plane Metric Resolved:</strong> Maximum momentum coordinate state $p_{max} \\approx ${(amp * Math.sqrt(9.81/L)).toFixed(4)}$ rad/s.`;
-        if(window.MathJax) MathJax.typesetPromise([res]);
-
-        const canvas = document.getElementById('classicalCanvas');
-        const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,450,220);
-        ctx.strokeStyle = '#475569'; ctx.beginPath(); ctx.moveTo(25,110); ctx.lineTo(425,110); ctx.moveTo(225,15); ctx.lineTo(225,205); ctx.stroke();
-        ctx.strokeStyle = '#1e40af'; ctx.lineWidth = 2; ctx.beginPath();
-        let rx = ampDeg * 2; let ry = amp * Math.sqrt(9.81/L) * 50;
-        ctx.ellipse(225, 110, rx, ry, 0, 0, 2 * Math.PI); ctx.stroke(); ctx.lineWidth = 1;
-    }
-
-    // NEW ENGINE ADDED: Differential Geometry Analytical Engine
-    function calcDiffGeo() {
-        const type = document.getElementById('dgType').value;
-        const t = parseFloat(document.getElementById('dgT').value);
-        let kappa = 0, radius = 0, x_t = 0, y_t = 0;
-
-        if (type === 'ellipse') {
-            // x = cos(t), y = 0.5*sin(t)
-            // dx = -sin(t), dy = 0.5*cos(t)
-            // ddx = -cos(t), ddy = -0.5*sin(t)
-            const dx = -Math.sin(t);
-            const dy = 0.5 * Math.cos(t);
-            const ddx = -Math.cos(t);
-            const ddy = -0.5 * Math.sin(t);
-            const num = Math.abs(dx * ddy - dy * ddx);
-            const den = Math.pow(dx * dx + dy * dy, 1.5);
-            kappa = num / den;
-            radius = 1 / kappa;
-            x_t = Math.cos(t);
-            y_t = 0.5 * Math.sin(t);
-        } else if (type === 'parabola') {
-            // x = t, y = 0.25*t^2
-            // dx = 1, dy = 0.5*t
-            // ddx = 0, ddy = 0.5
-            const dx = 1;
-            const dy = 0.5 * t;
-            const ddx = 0;
-            const ddy = 0.5;
-            const num = Math.abs(dx * ddy - dy * ddx);
-            const den = Math.pow(dx * dx + dy * dy, 1.5);
-            kappa = num / den;
-            radius = 1 / kappa;
-            x_t = t;
-            y_t = 0.25 * t * t;
-        }
-
-        const res = document.getElementById('dgRes');
-        res.style.display = "block";
-        res.innerHTML = `<strong>Intrinsic Metric Output:</strong> At parameter $t = ${t}$, Curvature $\\kappa = ${kappa.toFixed(4)}$, Osculating Radius $R = ${radius.toFixed(4)}$ units.`;
-        if(window.MathJax) MathJax.typesetPromise([res]);
-
-        // Render differential curve geometry onto HTML5 canvas engine
-        const canvas = document.getElementById('dgCanvas');
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,450,220);
-        
-        // Draw standard local axes
-        ctx.strokeStyle = varColor('--graph-grid');
-        ctx.beginPath();
-        ctx.moveTo(225, 10); ctx.lineTo(225, 210);
-        ctx.moveTo(25, 140); ctx.lineTo(425, 140);
-        ctx.stroke();
-
-        // Trace the smooth curve manifold
-        ctx.strokeStyle = varColor('--graph-line-primary');
-        ctx.lineWidth = 2.5;
-        ctx.beginPath();
-        for (let i = -25; i <= 25; i++) {
-            let t_val = i / 10;
-            let px = 0, py = 0;
-            if (type === 'ellipse') {
-                px = 225 + Math.cos(t_val) * 120;
-                py = 140 - (0.5 * Math.sin(t_val)) * 120;
-            } else {
-                px = 225 + t_val * 80;
-                py = 140 - (0.25 * t_val * t_val) * 80;
-            }
-            if (i === -25) ctx.moveTo(px, py); else ctx.lineTo(px, py);
-        }
-        ctx.stroke();
-
-        // Plot local space position evaluation vector vertex
-        let scale = type === 'ellipse' ? 120 : 80;
-        let vX = 225 + x_t * scale;
-        let vY = 140 - y_t * scale;
-        ctx.fillStyle = varColor('--graph-line-secondary');
-        ctx.beginPath(); ctx.arc(vX, vY, 6, 0, 2 * Math.PI); ctx.fill();
-        ctx.lineWidth = 1;
-    }
-
-    // CSS Variable translation helper for inside the canvas execution contexts
-    function varColor(varName) {
-        return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
-    }
-
-    // Trigger sequential loading pipeline loops
-    window.onload = function() {
-        calcReal();
-        calcComplex();
-        calcAlgebra();
-        calcLinear();
-        calcTop();
-        calcNT();
-        calcODE();
-        calcPDE();
-        calcFunctional();
-        drawGraph();
-        calcOperator();
-        calcBanach();
-        calcMethods();
-        calcRelativity();
-        calcClassical();
-        calcDiffGeo(); // Initialize the custom added module engine automatically
-    }
-</script>
-
-</body>
-</html>
+        <div clas
