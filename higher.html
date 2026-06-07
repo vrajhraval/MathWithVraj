@@ -359,7 +359,7 @@
     </div>
 
     <div class="subject-card">
-        <div class="subject-title">6. Number Theory & Cryptography ($x^4$ Quartic Precision)</div>
+        <div class="subject-title">6. Number Theory & Cryptography</div>
         <div class="academic-info">
             <p><strong>Concept Summary:</strong> Rigorous examination of integer properties, distribution equations of primes, modular structures, and discrete logarithmic algorithms.</p>
             <p><strong>Real-World Usage:</strong> Secures online global banking communications via RSA and Elliptic Curve Cryptography (ECC) key configurations and generates reliable digital tokens.</p>
@@ -620,8 +620,8 @@
         ctx.strokeStyle = "#e2e8f0";
         ctx.lineWidth = 1;
         // Grid Layout Engine
-        for(let x=20; x<w; x+=20) { ctx.style = "#e2e8f0"; ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke(); }
-        for(let y=20; y<h; y+=20) { ctx.style = "#e2e8f0"; ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke(); }
+        for(let x=20; x<w; x+=20) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke(); }
+        for(let y=20; y<h; y+=20) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke(); }
         // Core Center Axes Lines
         ctx.strokeStyle = "#94a3b8";
         ctx.lineWidth = 2;
@@ -634,7 +634,7 @@
         ctx.fillText(labelY, cx + 6, 14);
     }
 
-    // 1. Real Analysis Loop Fix
+    // 1. Real Analysis
     function calcReal() {
         const eps = parseFloat(document.getElementById('epsInp').value) || 0.05;
         const N = Math.ceil(1 / eps);
@@ -660,7 +660,7 @@
         }
     }
 
-    // 2. Complex Analysis Vector Mapping
+    // 2. Complex Analysis
     function calcComplex() {
         const deg = parseFloat(document.getElementById('compDeg').value) || 0;
         const rad = deg * Math.PI / 180;
@@ -687,7 +687,7 @@
         ctx.beginPath(); ctx.arc(vx, vy, 5, 0, 2*Math.PI); ctx.fill();
     }
 
-    // 3. Abstract Algebra Orbit Loop
+    // 3. Abstract Algebra
     function calcAlgebra() {
         const p = parseInt(document.getElementById('algP').value) || 11;
         const g = parseInt(document.getElementById('algG').value) || 2;
@@ -718,7 +718,7 @@
         ctx.stroke();
     }
 
-    // 4. Linear Algebra Area Projection
+    // 4. Linear Algebra
     function calcLinear() {
         const a = parseFloat(document.getElementById('la_a').value);
         const b = parseFloat(document.getElementById('la_b').value);
@@ -747,7 +747,7 @@
         ctx.stroke();
     }
 
-    // 5. Topology Checker Graph
+    // 5. Topology
     function calcTop() {
         const v = parseInt(document.getElementById('tpV').value) || 0;
         const e = parseInt(document.getElementById('tpE').value) || 0;
@@ -764,7 +764,7 @@
         ctx.fillText(`Topological Characteristic Invariant Matrix State: \u03C7 = ${chi}`, 50, 80);
     }
 
-    // 6. Number Theory Scaling Fix
+    // 6. Number Theory
     function calcNT() {
         let x = parseInt(document.getElementById('ntX').value) || 1;
         let e = parseInt(document.getElementById('ntE').value) || 1;
@@ -801,7 +801,7 @@
         ctx.stroke();
     }
 
-    // 7. ODE Dynamic Trace
+    // 7. ODEs
     function calcODE() {
         const y0 = parseFloat(document.getElementById('odeY').value);
         const k = parseFloat(document.getElementById('odeK').value);
@@ -828,7 +828,7 @@
         ctx.stroke();
     }
 
-    // 8. PDE Heat Gradient Map
+    // 8. PDEs
     function calcPDE() {
         const u0 = parseFloat(document.getElementById('pdeL').value);
         const u1 = parseFloat(document.getElementById('pdeR').value);
@@ -842,7 +842,6 @@
         ctx.clearRect(0,0,450,180);
         drawAxes(ctx, 450, 180, 40, 150, "Spatial Axis (x)", "Temp (u)");
 
-        // Draw heat slope field vector linear profile
         ctx.strokeStyle = "#2563eb";
         ctx.lineWidth = 3;
         ctx.beginPath();
@@ -850,14 +849,13 @@
         ctx.lineTo(410, 150 - (u1 * 1.1));
         ctx.stroke();
 
-        // Highlight active interpolation boundary target node pointer coordinate
         let tx = 40 + (xTarget * 370);
         let ty = 150 - (uTarget * 1.1);
         ctx.fillStyle = "#ea580c";
         ctx.beginPath(); ctx.arc(tx, ty, 5, 0, 2*Math.PI); ctx.fill();
     }
 
-    // 9. Functional Analysis Space Graph
+    // 9. Functional Analysis
     function calcFunctional() {
         const x1 = parseFloat(document.getElementById('fa1').value) || 0;
         const x2 = parseFloat(document.getElementById('fa2').value) || 0;
@@ -878,7 +876,7 @@
         ctx.stroke();
     }
 
-    // 10. Graph Theory Mesh Matrix Router
+    // 10. Graph Theory
     function drawGraph() {
         const nodes = parseInt(document.getElementById('gtNodes').value) || 5;
         const totalEdges = (nodes * (nodes - 1)) / 2;
@@ -912,7 +910,7 @@
         });
     }
 
-    // 11. Operator Theory Vector Resolvent Graph
+    // 11. Operator Theory
     function calcOperator() {
         const k = parseFloat(document.getElementById('opT').value);
         const lam = parseFloat(document.getElementById('opLam').value);
@@ -930,12 +928,12 @@
         drawAxes(ctx, 450, 180, 225, 90, "Re spectrum", "Im spectral frame");
 
         ctx.fillStyle = "#ea580c";
-        ctx.beginPath(); ctx.arc(225 + (k * 30), 90, 5, 0, 2*Math.PI); ctx.fill(); // Operator poles
+        ctx.beginPath(); ctx.arc(225 + (k * 30), 90, 5, 0, 2*Math.PI); ctx.fill(); 
         ctx.fillStyle = "#2563eb";
-        ctx.beginPath(); ctx.arc(225 + (lam * 30), 90, 5, 0, 2*Math.PI); ctx.fill(); // Test point lambda
+        ctx.beginPath(); ctx.arc(225 + (lam * 30), 90, 5, 0, 2*Math.PI); ctx.fill(); 
     }
 
-    // 12. Banach Algebra Envelope Visualizer
+    // 12. Banach Algebra
     function calcBanach() {
         const a = parseFloat(document.getElementById('baA').value) || 0;
         const b = parseFloat(document.getElementById('baB').value) || 0;
@@ -956,7 +954,7 @@
         ctx.fillRect(210, 150 - (maxAB * 2), 70, maxAB * 2);
     }
 
-    // 13. Mathematical Methods Spectrum Draw loop
+    // 13. Mathematical Methods
     function calcMethods() {
         const harmonics = parseInt(document.getElementById('mmN').value) || 1;
         document.getElementById('mmRes').innerHTML = `<strong>Fourier Harmonic Array Profile:</strong> Rendering partial wave summing matrix up to structural cutoff rank index: ${harmonics}`;
@@ -980,7 +978,7 @@
         ctx.stroke();
     }
 
-    // 14. Relativity Causality Light Cone Coordinates
+    // 14. Relativity
     function calcRelativity() {
         const v = parseFloat(document.getElementById('relV').value) || 0;
         const gamma = 1 / Math.sqrt(1 - (v*v));
@@ -997,7 +995,6 @@
         ctx.beginPath(); ctx.moveTo(125, 10); ctx.lineTo(325, 210); ctx.stroke();
         ctx.beginPath(); ctx.moveTo(125, 210); ctx.lineTo(325, 10); ctx.stroke();
 
-        // Target state reference particle timeline trajectory plot line vector string
         ctx.strokeStyle = "#2563eb";
         ctx.lineWidth = 3;
         ctx.beginPath();
@@ -1006,7 +1003,7 @@
         ctx.stroke();
     }
 
-    // 15. Classical Mechanics Momentum Space Orbit Loop Fixed
+    // 15. Classical Mechanics
     function calcClassical() {
         const ampDeg = parseFloat(document.getElementById('cmAmp').value) || 45;
         const ampRad = ampDeg * Math.PI / 180;
@@ -1025,7 +1022,7 @@
         for(let i=0; i<=100; i++) {
             let theta = (i * 2 * Math.PI) / 100;
             let posX = ampRad * Math.cos(theta);
-            let pVec = Math.sin(theta) * Math.svg = ampRad; 
+            let pVec = Math.sin(theta) * ampRad; 
             let cx = 225 + posX * scaleX * 1.5;
             let cy = 110 - pVec * scaleY;
             if(i === 0) ctx.moveTo(cx, cy); else ctx.lineTo(cx, cy);
@@ -1033,12 +1030,11 @@
         ctx.stroke();
     }
 
-    // 16. Differential Geometry Core Mapping Logic Loop
+    // 16. Differential Geometry
     function calcDiffGeo() {
         const R = parseFloat(document.getElementById('dgR').value) || 3;
         const alpha = parseFloat(document.getElementById('dgAlpha').value) || 1;
         
-        // Helix Curvature Form metric evaluation logic
         const kappa = R / (R*R + alpha*alpha);
         document.getElementById('dgRes').innerHTML = `<strong>Manifold State Metrics Resolved:</strong> Calculated Invariant Curvature value constant $\\kappa = ${kappa.toFixed(5)}$`;
         if(window.MathJax) MathJax.typesetPromise([document.getElementById('dgRes')]);
@@ -1048,20 +1044,19 @@
         ctx.clearRect(0,0,450,220);
         drawAxes(ctx, 450, 220, 225, 110, "Manifold X1", "Manifold X2");
 
-        // Projection of space curve curve projection vector
         ctx.strokeStyle = "#1e40af";
         ctx.lineWidth = 2.5;
         ctx.beginPath();
         for(let i=0; i<=120; i++) {
             let t = (i / 20) * Math.PI;
             let cx = 225 + (R * 12) * Math.cos(t);
-            let cy = 110 - (alpha * 10) * t + 60; // profile transformations tracking
+            let cy = 110 - (alpha * 10) * t + 60; 
             if(i === 0) ctx.moveTo(cx, cy); else ctx.lineTo(cx, cy);
         }
         ctx.stroke();
     }
 
-    // Trigger universal workspace configurations on execution mount states
+    // Initialize all visualizations smoothly upon asset initialization
     window.addEventListener('DOMContentLoaded', () => {
         calcReal(); calcComplex(); calcAlgebra(); calcLinear(); calcTop();
         calcNT(); calcODE(); calcPDE(); calcFunctional(); drawGraph();
