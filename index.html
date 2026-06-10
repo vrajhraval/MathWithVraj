@@ -648,6 +648,112 @@
             border: 1px solid #333;
         }
 
+        /* AI SOLVER DESIGN SYSTEMS */
+        .ai-input-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: var(--quiz-container-bg);
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+        .ai-textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--formula-card-bg);
+            color: var(--text-color);
+            font-size: 1rem;
+            font-family: inherit;
+            resize: vertical;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .ai-textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.15);
+        }
+        .ai-control-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .ai-examples {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .ai-example-tag {
+            background: var(--formula-card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--sub-text);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .ai-example-tag:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--quiz-btn-hover);
+        }
+        .ai-solution-output {
+            margin-top: 25px;
+            background: var(--formula-card-bg);
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--accent);
+            border-radius: 8px;
+            padding: 30px;
+            display: none;
+        }
+        .ai-solution-output h3 {
+            margin-top: 0;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .ai-step-block {
+            background: var(--quiz-container-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+        }
+        .ai-step-meta {
+            font-weight: bold;
+            color: var(--accent);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        .ai-loading-spinner {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 20px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin-loop 0.8s linear infinite;
+        }
+        @keyframes spin-loop {
+            to { transform: rotate(360deg); }
+        }
+
         /* NEW RE-STYLED "MATH WITH FUN" UI WRAPPER SECTION */
         .fun-section-container {
             text-decoration: none;
@@ -951,6 +1057,39 @@
 <footer>
     <p>&copy; 2026 Vraj H Raval. All Rights Reserved.</p>
 </footer>
+
+<script>
+    // 1. PREMIUM DARK MODE IMPLEMENTATION
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode-active');
+        if (document.body.classList.contains('dark-mode-active')) {
+            darkModeToggle.textContent = '☀️';
+        } else {
+            darkModeToggle.textContent = '🌙';
+        }
+    });
+
+    // 2. MOBILE DROPDOWN ENGINE
+    document.querySelectorAll('.top-navbar .has-dropdown').forEach(dropdownToggle => {
+        dropdownToggle.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                const parentNode = dropdownToggle.closest('.nav-item');
+                parentNode.classList.toggle('dropdown-active');
+            }
+        });
+    });
+
+    // Close dropdowns if user clicks outside on mobile view
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.nav-item')) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('dropdown-active');
+            });
+        }
+    });
+</script>
 
 </body>
 </html>
