@@ -1168,26 +1168,6 @@
         </div>
     </section>
 
-    <section>
-        <h2>10. AI Engine Mathematical Synthesis</h2>
-        <p>Input complex problems to generate multi-tier logical computational paths:</p>
-        <div class="ai-input-container">
-            <textarea class="ai-textarea" id="ai-input-field" placeholder="Enter problem statement here... e.g., Find the area bounded by y = x^2 and y = x."></textarea>
-            <div class="ai-control-bar">
-                <div class="ai-examples">
-                    <span class="ai-example-tag" onclick="injectAIExample(this)">Limit of sin(x)/x as x-&gt;0</span>
-                    <span class="ai-example-tag" onclick="injectAIExample(this)">Derivative of ln(x^2 + 1)</span>
-                </div>
-                <button class="solver-btn" onclick="processAISolution()">Synthesize Steps</button>
-            </div>
-        </div>
-        <div class="ai-loading-spinner" id="ai-loading">
-            <div class="spinner"></div>
-            <span>Analyzing logical dimensions...</span>
-        </div>
-        <div class="ai-solution-output" id="ai-solution-box"></div>
-    </section>
-
     <a href="fun.html" class="fun-section-container">
         <div class="fun-card">
             <h2>Math with Fun <span class="fun-badge">Beta</span></h2>
@@ -1495,15 +1475,15 @@
         const canvasCtx = document.getElementById("vectorChartCanvas").getContext("2d");
 
         // Generate safe data points over analytical arrays
-        const xValues = [];
-        const yValues = [];
+        const points = [];
         
         try {
             const parser = math.compile(exprStr);
             for (let x = -10; x <= 10; x += 0.2) {
-                xValues.push(parseFloat(x.toFixed(2)));
                 const y = parser.evaluate({ x: x });
-                yValues.push(y);
+                if(Number.isFinite(y)){
+                    points.push({x: parseFloat(x.toFixed(2)), y});
+                }
             }
         } catch (err) {
             alert("Mathematical syntax validation parse error: " + err.message);
@@ -1513,17 +1493,15 @@
         const isDark = document.body.classList.contains("dark-mode-active");
 
         if (vectorChart) {
-            vectorChart.data.labels = xValues;
-            vectorChart.data.datasets[0].data = yValues;
+            vectorChart.data.datasets[0].data = points;
             vectorChart.update();
         } else {
             vectorChart = new Chart(canvasCtx, {
                 type: 'line',
                 data: {
-                    labels: xValues,
                     datasets: [{
                         label: 'f(x)',
-                        data: yValues,
+                        data: points,
                         borderColor: '#e94560',
                         borderWidth: 3,
                         pointRadius: 0,
@@ -1580,7 +1558,7 @@
     function resizeFractalCanvas() {
         const holder = fractalCanvas.parentElement;
         fractalCanvas.width = holder.clientWidth;
-        fractalCanvas.height = holder.clientHeight || 320;
+        fractalCanvas.height = Math.max(holder.clientHeight,320);
     }
 
     function applyFractalPreset(depth, angle, scale) {
@@ -1642,21 +1620,7 @@
         }
     }
 
-    // 10. AI Engine Problem Synthesis Simulator Script
-    function injectAIExample(element) {
-        document.getElementById("ai-input-field").value = element.textContent;
-    }
-
-    function processAISolution() {
-        const prompt = document.getElementById("ai-input-field").value.trim();
-        const load = document.getElementById("ai-loading");
-        const outBox = document.getElementById("ai-solution-box");
-
-        if(!prompt) {
-            alert("Please input your mathematical query first.");
-            return;
-        }
-
+    
         outBox.style.display = "none";
         load.style.display = "flex";
 
