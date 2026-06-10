@@ -1168,6 +1168,8 @@
         </div>
     </section>
 
+    
+
     <a href="fun.html" class="fun-section-container">
         <div class="fun-card">
             <h2>Math with Fun <span class="fun-badge">Beta</span></h2>
@@ -1202,9 +1204,9 @@
     const assessmentQuestions = [
         {
             q: "What is the correct mathematical derivative equation for $f(x) = \\sin(x^2)$ using the standard algorithmic Chain Rule?",
-            opts: ["$$2x \\cos(x^2)$$外部", "$$\\cos(2x)$$", "$$\\cos(x^2)$$", "$$-2x \\cos(x^2)$$"],
+            opts: ["$$2x \\cos(x^2)$$", "$$\\cos(2x)$$", "$$\\cos(x^2)$$", "$$-2x \\cos(x^2)$$"],
             ans: 0,
-            explain: "By using the calculus chain rule: $$\\frac{d}{dx}[\\sin(u)] = \\cos(u) \\cdot \\frac{du}{dx}$$. Substituting $$u = x^2$$ leaves $$\\cos(x^2) \\cdot (2x) = 2x \\cos(x^2)$$.外部"
+            explain: "By using the calculus chain rule: $$\\frac{d}{dx}[\\sin(u)] = \\cos(u) \\cdot \\frac{du}{dx}$$. Substituting $$u = x^2$$ leaves $$\\cos(x^2) \\cdot (2x) = 2x \\cos(x^2)$$."
         },
         {
             q: "Which specific mathematical coordinate model criteria defines orthogonal matrix structures?",
@@ -1470,79 +1472,48 @@
     }
 
     // 7. Multi-Dimensional Vector Function Plotter Graph
-    function plotVectorFunction() {
+    
+function plotVectorFunction() {
         const exprStr = document.getElementById("function-input").value;
         const canvasCtx = document.getElementById("vectorChartCanvas").getContext("2d");
-
-        // Generate safe data points over analytical arrays
         const points = [];
-        
+
         try {
-            const parser = math.compile(exprStr);
-            for (let x = -10; x <= 10; x += 0.2) {
-                const y = parser.evaluate({ x: x });
+            const expr = math.compile(exprStr);
+            for(let x=-10;x<=10;x+=0.1){
+                const y = expr.evaluate({x});
                 if(Number.isFinite(y)){
-                    points.push({x: parseFloat(x.toFixed(2)), y});
+                    points.push({x:x,y:y});
                 }
             }
-        } catch (err) {
-            alert("Mathematical syntax validation parse error: " + err.message);
+        } catch(err){
+            console.error(err);
+            alert("Function Error: " + err.message);
             return;
         }
 
-        const isDark = document.body.classList.contains("dark-mode-active");
+        if(vectorChart) vectorChart.destroy();
 
-        if (vectorChart) {
-            vectorChart.data.datasets[0].data = points;
-            vectorChart.update();
-        } else {
-            vectorChart = new Chart(canvasCtx, {
-                type: 'line',
-                data: {
-                    datasets: [{
-                        label: 'f(x)',
-                        data: points,
-                        borderColor: '#e94560',
-                        borderWidth: 3,
-                        pointRadius: 0,
-                        fill: false,
-                        tension: 0.1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        zoom: {
-                            zoom: {
-                                wheel: { enabled: true },
-                                pinch: { enabled: true },
-                                mode: 'xy'
-                            },
-                            pan: {
-                                enabled: true,
-                                mode: 'xy'
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            type: 'linear',
-                            position: 'center',
-                            grid: { color: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)' },
-                            ticks: { color: isDark ? '#cbd5e1' : '#333' }
-                        },
-                        y: {
-                            type: 'linear',
-                            position: 'center',
-                            grid: { color: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)' },
-                            ticks: { color: isDark ? '#cbd5e1' : '#333' }
-                        }
-                    }
+        vectorChart = new Chart(canvasCtx, {
+            type: "scatter",
+            data: {
+                datasets: [{
+                    data: points,
+                    showLine: true,
+                    borderWidth: 2,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation:false,
+                scales:{
+                    x:{type:"linear"},
+                    y:{type:"linear"}
                 }
-            });
-        }
+            }
+        });
     }
 
     // 8. Dynamic Fractal Tree Engine Modules
@@ -1557,8 +1528,8 @@
 
     function resizeFractalCanvas() {
         const holder = fractalCanvas.parentElement;
-        fractalCanvas.width = holder.clientWidth;
-        fractalCanvas.height = Math.max(holder.clientHeight,320);
+        fractalCanvas.width = holder.offsetWidth || 500;
+        fractalCanvas.height = 320;
     }
 
     function applyFractalPreset(depth, angle, scale) {
@@ -1621,36 +1592,6 @@
     }
 
     
-        outBox.style.display = "none";
-        load.style.display = "flex";
-
-        // Mock algorithmic inference compilation response wait window delay
-        setTimeout(() => {
-            load.style.display = "none";
-            let ansHtml = `<h3>AI Synthesis Response Pipeline</h3>`;
-            
-            ansHtml += `<div class="ai-step-block">
-                <div class="ai-step-meta">Parsed Query Framework Elements</div>
-                <p>Identified objective parsing metrics across targets matching: <strong>"${prompt}"</strong></p>
-            </div>`;
-
-            ansHtml += `<div class="ai-step-block">
-                <div class="ai-step-meta">Algorithmic Axiom Mapping</div>
-                <p>Applying fundamental reduction lemmas to isolate core limits: $$\\lim_{x \\to 0} \\frac{\\sin(x)}{x} = 1$$</p>
-                <p>Using L'Hôpital's rule differentiation verification parameters:</p>
-                <p>$$\\frac{\\frac{d}{dx}[\\sin(x)]}{\\frac{d}{dx}[x]} = \\frac{\\cos(x)}{1}$$</p>
-            </div>`;
-
-            ansHtml += `<div class="ai-step-block">
-                <div class="ai-step-meta">Convergence Synthesis Summary</div>
-                <p>Evaluating limits directly maps structural limits to exact real identity parameters: <strong>$$1.0000$$</strong></p>
-            </div>`;
-
-            outBox.innerHTML = ansHtml;
-            outBox.style.display = "block";
-            MathJax.typesetPromise([outBox]);
-        }, 1200);
-    }
 </script>
 
 </body>
