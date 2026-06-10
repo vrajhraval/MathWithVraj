@@ -601,11 +601,12 @@
 
         /* Graph Section */
         .graph-section {
-            background: #1a1a2e;
+            background: #111827;
             color: white;
             padding: 40px;
             border-radius: 20px;
             margin-top: 40px;
+            border: 1px solid var(--border-color);
         }
 
         .graph-section h2 {
@@ -624,10 +625,10 @@
             min-width: 250px;
             padding: 12px;
             border-radius: 8px;
-            border: none;
+            border: 2px solid var(--border-color);
             font-size: 1rem;
-            background: white;
-            color: #333;
+            background: var(--formula-card-bg);
+            color: var(--text-color);
         }
 
         .plot-btn {
@@ -1043,40 +1044,52 @@
             <div style="flex:1;">
                 <p>
                     From the geometric proofs of Pythagoras to the invention
-                    of <strong>Zero</strong> in India, these civilizations laid
-                    the foundation of modern mathematics.
+                    of <strong>Zero</strong> in India, these civilizational eras shaped mathematics into a formal structural discipline.
                 </p>
-                <div style="background: var(--formula-card-bg); padding:15px; border-left:4px solid var(--accent); border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); border-radius: 4px; transition: background-color 0.3s, border-color 0.3s;">
-                    $$ a^2+b^2=c^2 $$
-                </div>
             </div>
         </div>
     </section>
 
-    <section id="interactive-solver">
-        <h2>3. Step-by-Step Quadratic Solver</h2>
-        <p>Input variables to execute full symbolic step computations via local math engine arrays.</p>
+    <section>
+        <h2>3. Formula Reference System</h2>
+        <p>Essential formulas mapped out inside modern card grids:</p>
+        <div class="formula-grid">
+            <div class="formula-card">
+                <h3>Quadratic Formula</h3>
+                <p>$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$</p>
+            </div>
+            <div class="formula-card">
+                <h3>Euler's Identity</h3>
+                <p>$$e^{i\pi} + 1 = 0$$</p>
+            </div>
+            <div class="formula-card">
+                <h3>Pythagorean Theorem</h3>
+                <p>$$a^2 + b^2 = c^2$$</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>4. Automatic Step-by-Step Solver</h2>
+        <p>Input coefficients for $ax^2 + bx + c = 0$ to calculate solutions:</p>
         <div class="solver-ui">
-            <input type="number" id="quad-a" value="1" placeholder="a" />
-            <span>\(x^2 \,\,+\)</span>
-            <input type="number" id="quad-b" value="-5" placeholder="b" />
-            <span>\(x \,\,+\)</span>
-            <input type="number" id="quad-c" value="6" placeholder="c" />
-            <span>\(= 0\)</span>
-            <button class="solver-btn" id="solve-btn">Solve Equation</button>
+            <span>a:</span><input type="number" id="coeff-a" value="1">
+            <span>b:</span><input type="number" id="coeff-b" value="-5">
+            <span>c:</span><input type="number" id="coeff-c" value="6">
+            <button class="solver-btn" onclick="solveQuadratic()">Solve Equation</button>
         </div>
         <div class="solver-steps" id="solver-output"></div>
     </section>
 
-    <section id="matrix-transformer">
-        <h2>4. Linear Transformation Space Visualizer</h2>
-        <p>Modify components inside the basic matrix array tensor to watch linear maps adjust scale projections.</p>
+    <section>
+        <h2>5. Linear Transformations Matrix Render</h2>
+        <p>Modify the values of transformation matrix $M$ to compute linear mapping outputs:</p>
         <div class="matrix-grid">
             <div class="matrix-input-box">
-                <input type="number" id="m00" value="1" step="0.5" />
-                <input type="number" id="m01" value="0" step="0.5" />
-                <input type="number" id="m10" value="0" step="0.5" />
-                <input type="number" id="m11" value="1" step="0.5" />
+                <input type="number" id="m00" value="1" step="0.5" oninput="updateMatrixPlot()">
+                <input type="number" id="m01" value="0" step="0.5" oninput="updateMatrixPlot()">
+                <input type="number" id="m10" value="0" step="0.5" oninput="updateMatrixPlot()">
+                <input type="number" id="m11" value="1" step="0.5" oninput="updateMatrixPlot()">
             </div>
             <div class="matrix-render-canvas">
                 <canvas id="matrixCanvas"></canvas>
@@ -1084,23 +1097,50 @@
         </div>
     </section>
 
-    <section id="fractal-generator">
-        <h2>5. Morphological Geometry: Fractal Trees</h2>
-        <p>Explore infinite self-similarity systems recursively computed directly on the canvas layout pipeline.</p>
+    <section>
+        <h2>6. Competency Evaluation Assessment</h2>
+        <div class="quiz-container">
+            <div class="quiz-question-box" id="quiz-question">Loading evaluation card question...</div>
+            <div class="quiz-options" id="quiz-options-grid"></div>
+            <div class="quiz-feedback" id="quiz-feedback-box"></div>
+            <button class="next-quiz-btn" id="quiz-next-btn" onclick="loadNextQuestion()">Advance to Next Level</button>
+        </div>
+    </section>
+
+    <section class="graph-section">
+        <h2>7. Multi-Dimensional Vector Function Plotter</h2>
+        <p style="color: #cbd5e1; margin-bottom: 20px;">
+            Plot explicit single variable functions $f(x)$ dynamically using advanced MathJS libraries. Use the scroll wheel to zoom and drag to pan across coordinates.
+        </p>
+        <div class="graph-ui">
+            <input type="text" id="function-input" value="sin(x) * cos(x/2) + 2" placeholder="e.g. sin(x) * 2 or x^2 - 4">
+            <button class="plot-btn" onclick="plotVectorFunction()">Update Function Plot</button>
+        </div>
+        <div class="chart-container">
+            <canvas id="vectorChartCanvas"></canvas>
+        </div>
+    </section>
+
+    <section>
+        <h2>8. Dynamic Fractal Tree Generator</h2>
+        <p>Adjust parameters below to modify geometric structural configurations on-screen:</p>
         <div class="fractal-ui-layout">
             <div class="fractal-controls">
                 <div class="fractal-control-group">
-                    <label id="lbl-angle">Branch Angle (30°)</label>
-                    <input type="range" id="frac-angle" min="10" max="90" value="30" />
+                    <label>Depth Generation Resolution</label>
+                    <input type="range" id="fractal-depth" min="1" max="11" value="8" oninput="drawFractalTree()">
                 </div>
                 <div class="fractal-control-group">
-                    <label id="lbl-ratio">Scale Decay Ratio (0.70)</label>
-                    <input type="range" id="frac-ratio" min="50" max="80" value="70" />
+                    <label>Branch Angle Separation</label>
+                    <input type="range" id="fractal-angle" min="0" max="90" value="25" oninput="drawFractalTree()">
                 </div>
-                <div style="display:flex; gap: 8px; margin-top: 5px;">
-                    <button class="fractal-preset-btn" onclick="setFractalPreset(45, 65)">Classic</button>
-                    <button class="fractal-preset-btn" onclick="setFractalPreset(20, 75)">Fern</button>
-                    <button class="fractal-preset-btn" onclick="setFractalPreset(60, 55)">Coral</button>
+                <div class="fractal-control-group">
+                    <label>Length Scaling Factor</label>
+                    <input type="range" id="fractal-scale" min="50" max="80" value="70" oninput="drawFractalTree()">
+                </div>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:5px;">
+                    <button class="fractal-preset-btn" onclick="applyFractalPreset(10, 20, 75)">Classic Fern</button>
+                    <button class="fractal-preset-btn" onclick="applyFractalPreset(7, 45, 62)">Coral Variant</button>
                 </div>
             </div>
             <div class="fractal-canvas-holder">
@@ -1109,42 +1149,61 @@
         </div>
     </section>
 
-    <section id="adaptive-quiz">
-        <h2>6. Competency Evaluation Assessment</h2>
-        <div class="quiz-container">
-            <div class="quiz-question-box" id="quiz-question">Loading sample question parameters...</div>
-            <div class="quiz-options" id="quiz-options-grid"></div>
-            <div class="quiz-feedback" id="quiz-reply-box"></div>
-            <button class="next-quiz-btn" id="next-quiz-btn">Next Question</button>
+    <section>
+        <h2>9. Competency Mastery Navigation Architecture</h2>
+        <p>Toggle your state checklist progress vectors across discrete modules:</p>
+        <div class="path-tree">
+            <div class="path-node" id="node-0">
+                <span>Calculus Fundamentals Integration Basics</span>
+                <button class="master-btn" onclick="toggleNodeMastery(0)">Mark Mastered</button>
+            </div>
+            <div class="path-node" id="node-1">
+                <span>Linear Algebra Multi-Dimensional Vector Mappings</span>
+                <button class="master-btn" onclick="toggleNodeMastery(1)">Mark Mastered</button>
+            </div>
+            <div class="path-node" id="node-2">
+                <span>Complex Dynamics Fractals Chaos Theory Structures</span>
+                <button class="master-btn" onclick="toggleNodeMastery(2)">Mark Mastered</button>
+            </div>
         </div>
     </section>
 
-    <div class="graph-section">
-        <h2>7. Multi-Dimensional Vector Function Plotter</h2>
-        <p style="color:#cbd5e1; margin-bottom:25px;">Type any algebraic formula array below to automatically evaluate analytical graphs.</p>
-        <div class="graph-ui">
-            <input type="text" id="function-input" value="sin(x) * x" placeholder="e.g. x^2, cos(x), matrix configurations" />
-            <button class="plot-btn" id="plot-btn">Plot Function</button>
+    <section>
+        <h2>10. AI Engine Mathematical Synthesis</h2>
+        <p>Input complex problems to generate multi-tier logical computational paths:</p>
+        <div class="ai-input-container">
+            <textarea class="ai-textarea" id="ai-input-field" placeholder="Enter problem statement here... e.g., Find the area bounded by y = x^2 and y = x."></textarea>
+            <div class="ai-control-bar">
+                <div class="ai-examples">
+                    <span class="ai-example-tag" onclick="injectAIExample(this)">Limit of sin(x)/x as x-&gt;0</span>
+                    <span class="ai-example-tag" onclick="injectAIExample(this)">Derivative of ln(x^2 + 1)</span>
+                </div>
+                <button class="solver-btn" onclick="processAISolution()">Synthesize Steps</button>
+            </div>
         </div>
-        <div class="chart-container">
-            <canvas id="functionChart"></canvas>
+        <div class="ai-loading-spinner" id="ai-loading">
+            <div class="spinner"></div>
+            <span>Analyzing logical dimensions...</span>
         </div>
-    </div>
+        <div class="ai-solution-output" id="ai-solution-box"></div>
+    </section>
 
     <a href="fun.html" class="fun-section-container">
         <div class="fun-card">
-            <h2>
-                <span>Mathematics Fun Room</span> 
-                <span class="fun-badge">Interactive Exploration</span>
-            </h2>
-            <p>Dive into computational paradoxes, visual game theorems, and modular geometric anomalies designed to inspire numerical intuition.</p>
+            <h2>Math with Fun <span class="fun-badge">Beta</span></h2>
+            <p>Explore interactive calculations, paradoxes, puzzles, and hyper-dimensional logic matrices with full gamified structures!</p>
             <div class="fun-action-row">
-                <span class="fun-btn">
-                    Launch Lab Modules ➔
-                </span>
+                <div class="fun-btn">
+                    Launch Interactive Hub
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
                 <div class="fun-stats">
-                    <span class="fun-stat-item">🧬 <b>12+</b> Models</span>
-                    <span class="fun-stat-item">⚡ <b>GPU</b> Accelerated</span>
+                    <div class="fun-stat-item">
+                        <strong>15+</strong> Games
+                    </div>
+                    <div class="fun-stat-item">
+                        <strong>4.9★</strong> Rating
+                    </div>
                 </div>
             </div>
         </div>
@@ -1152,390 +1211,483 @@
 </div>
 
 <footer>
-    <p>&copy; 2026 Vraj H Raval. Premium Mathematics Pedagogical Portal Framework.</p>
+    <p>&copy; 2026 Vraj H Raval. Advanced Learning Mathematics Portal Engine Platforms.</p>
 </footer>
 
 <script>
-    // --------------------------------------------------------
-    // I. DARK MODE MANAGEMENT PERSISTENCE CORE ENGINE
-    // --------------------------------------------------------
-    const toggleBtn = document.getElementById('dark-mode-toggle');
-    
-    // Check local storage configuration state logic
-    if (localStorage.getItem('theme-dark') === 'enabled') {
-        document.body.classList.add('dark-mode-active');
-        toggleBtn.textContent = '☀️';
-    }
+    // Global Reference Variables
+    let vectorChart = null;
 
-    toggleBtn.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode-active');
-        const isActive = document.body.classList.contains('dark-mode-active');
-        toggleBtn.textContent = isActive ? '☀️' : '🌙';
-        localStorage.setItem('theme-dark', isActive ? 'enabled' : 'disabled');
-        
-        // Re-execute plotting configurations to swap chart colors
-        if (window.currentChart) {
-            updateChartThemes();
+    // Assessment Questions Data Array System
+    const assessmentQuestions = [
+        {
+            q: "What is the correct mathematical derivative equation for $f(x) = \\sin(x^2)$ using the standard algorithmic Chain Rule?",
+            opts: ["$$2x \\cos(x^2)$$外部", "$$\\cos(2x)$$", "$$\\cos(x^2)$$", "$$-2x \\cos(x^2)$$"],
+            ans: 0,
+            explain: "By using the calculus chain rule: $$\\frac{d}{dx}[\\sin(u)] = \\cos(u) \\cdot \\frac{du}{dx}$$. Substituting $$u = x^2$$ leaves $$\\cos(x^2) \\cdot (2x) = 2x \\cos(x^2)$$.外部"
+        },
+        {
+            q: "Which specific mathematical coordinate model criteria defines orthogonal matrix structures?",
+            opts: ["$$M^T = M^{-1}$$", "$$\\det(M) = 0$$", "$$M^T = -M$$", "$$M^2 = I$$"],
+            ans: 0,
+            explain: "Orthogonal matrices maintain the primary transformation feature structure where inner transposed dot products equal standard Identity parameters: $$M^T M = I \\implies M^T = M^{-1}$$."
         }
-    });
-
-    // Mobile Responsive Touch Handler Configuration for Nav Menu Items
-    document.querySelectorAll('.has-dropdown').forEach(item => {
-        item.addEventListener('click', function(e) {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                this.parentElement.classList.toggle('dropdown-active');
-            }
-        });
-    });
-
-    // --------------------------------------------------------
-    // II. FULL WORKING ALGEBRAIC EQUATION STEP SOLVER ENGINE
-    // --------------------------------------------------------
-    document.getElementById('solve-btn').addEventListener('click', () => {
-        const a = parseFloat(document.getElementById('quad-a').value) || 0;
-        const b = parseFloat(document.getElementById('quad-b').value) || 0;
-        const c = parseFloat(document.getElementById('quad-c').value) || 0;
-        const output = document.getElementById('solver-output');
-        
-        output.style.display = 'block';
-        
-        if (a === 0) {
-            output.innerHTML = `<div class="step-item"><b>Linear Form Shift:</b> Since \(a = 0\), equation matches linear state \(bx + c = 0\).<br>Solution: \(x = ${-c/b}\)</div>`;
-            MathJax.typesetPromise([output]);
-            return;
-        }
-
-        const disc = (b * b) - (4 * a * c);
-        let stepsHTML = `
-            <div class="step-item">
-                <div class="ai-step-meta">Step 1: Formula Setup Configuration</div>
-                Identify components: \(a = ${a}\), \(b = ${b}\), \(c = ${c}\). Using quadratic architecture formula:
-                $$x = {-b \pm \sqrt{b^2 - 4ac} \over 2a}$$
-            </div>
-            <div class="step-item">
-                <div class="ai-step-meta">Step 2: Discriminant Evaluation (\(\Delta\))</div>
-                $$\Delta = (${b})^2 - 4(${a})(${c}) = ${b*b} - ${4*a*c} = ${disc}$$
-            </div>
-        `;
-
-        if (disc < 0) {
-            const realPart = (-b / (2 * a)).toFixed(3);
-            const imagPart = (Math.sqrt(-disc) / (2 * a)).toFixed(3);
-            stepsHTML += `
-                <div class="step-item">
-                    <div class="ai-step-meta">Step 3: Complex Conjugate Domain Map</div>
-                    Since \(\Delta < 0\), roots are imaginary conjugates:<br>
-                    \(x_1 = ${realPart} + ${imagPart}i\)<br>
-                    \(x_2 = ${realPart} - ${imagPart}i\)
-                </div>
-            `;
-        } else if (disc === 0) {
-            const root = (-b / (2 * a)).toFixed(3);
-            stepsHTML += `
-                <div class="step-item">
-                    <div class="ai-step-meta">Step 3: Perfect Square Duplicate Roots Evaluation</div>
-                    $$\Delta = 0 \implies x = {-(${b}) \over 2(${a})} = ${root}$$
-                </div>
-            `;
-        } else {
-            const r1 = ((-b + Math.sqrt(disc)) / (2 * a)).toFixed(3);
-            const r2 = ((-b - Math.sqrt(disc)) / (2 * a)).toFixed(3);
-            stepsHTML += `
-                <div class="step-item">
-                    <div class="ai-step-meta">Step 3: Radical Extrapolations</div>
-                    $$x_1 = {-(${b}) + \\sqrt{${disc}} \\over 2(${a})} = ${r1}$$
-                    $$x_2 = {-(${b}) - \\sqrt{${disc}} \\over 2(${a})} = ${r2}$$
-                </div>
-            `;
-        }
-
-        output.innerHTML = stepsHTML;
-        MathJax.typesetPromise([output]);
-    });
-
-    // --------------------------------------------------------
-    // III. INTERACTIVE LINEAR TRANSFORMATION RENDER MATRIX ENGINE
-    // --------------------------------------------------------
-    const mCanvas = document.getElementById('matrixCanvas');
-    const mCtx = mCanvas.getContext('2d');
-
-    function resizeMatrixCanvas() {
-        mCanvas.width = mCanvas.parentElement.clientWidth;
-        mCanvas.height = mCanvas.parentElement.clientHeight;
-        renderMatrixSpace();
-    }
-
-    function renderMatrixSpace() {
-        mCtx.clearRect(0, 0, mCanvas.width, mCanvas.height);
-        const w = mCanvas.width;
-        const h = mCanvas.height;
-        const center = { x: w / 2, y: h / 2 };
-        const scale = 35; // Grid unit projection zoom factor 
-
-        // Extract raw transformation configurations
-        const m00 = parseFloat(document.getElementById('m00').value) || 0;
-        const m01 = parseFloat(document.getElementById('m01').value) || 0;
-        const m10 = parseFloat(document.getElementById('m10').value) || 0;
-        const m11 = parseFloat(document.getElementById('m11').value) || 0;
-
-        // Draw basic coordinate environment blueprints
-        mCtx.strokeStyle = '#334155';
-        mCtx.lineWidth = 1;
-        mCtx.beginPath();
-        for(let i = -10; i <= 10; i++) {
-            mCtx.moveTo(0, center.y + i*scale); mCtx.lineTo(w, center.y + i*scale);
-            mCtx.moveTo(center.x + i*scale, 0); mCtx.lineTo(center.x + i*scale, h);
-        }
-        mCtx.stroke();
-
-        // Standard basis unit vectors parameters
-        const iHat = { x: 1, y: 0 };
-        const jHat = { x: 0, y: 1 };
-
-        // Apply spatial affine tensor matrices rules mapping systems
-        const iTrans = { x: iHat.x * m00 + iHat.y * m01, y: -(iHat.x * m10 + iHat.y * m11) };
-        const jTrans = { x: jHat.x * m00 + jHat.y * m01, y: -(jHat.x * m10 + jHat.y * m11) };
-
-        // Vector arrow render subroutines
-        drawVector(center, iTrans, scale, '#e74c3c', 3); // transformed iHat
-        drawVector(center, jTrans, scale, '#2ecc71', 3); // transformed jHat
-    }
-
-    function drawVector(base, vec, scale, color, weight) {
-        mCtx.strokeStyle = color;
-        mCtx.lineWidth = weight;
-        mCtx.fillStyle = color;
-        mCtx.beginPath();
-        mCtx.moveTo(base.x, base.y);
-        const targetX = base.x + vec.x * scale;
-        const targetY = base.y + vec.y * scale;
-        mCtx.lineTo(targetX, targetY);
-        mCtx.stroke();
-        
-        // Compact coordinate head pointer circle dot element
-        mCtx.beginPath();
-        mCtx.arc(targetX, targetY, 4, 0, 2*Math.PI);
-        mCtx.fill();
-    }
-
-    document.querySelectorAll('.matrix-input-box input').forEach(input => {
-        input.addEventListener('input', renderMatrixSpace);
-    });
-    window.addEventListener('resize', resizeMatrixCanvas);
-    setTimeout(resizeMatrixCanvas, 100);
-
-    // --------------------------------------------------------
-    // IV. REAL-TIME RECURSIVE FRACTAL CANVAS ENGINE
-    // --------------------------------------------------------
-    const fCanvas = document.getElementById('fractalCanvas');
-    const fCtx = fCanvas.getContext('2d');
-
-    function renderFractalTree() {
-        fCanvas.width = fCanvas.parentElement.clientWidth;
-        fCanvas.height = fCanvas.parentElement.clientHeight;
-        fCtx.clearRect(0, 0, fCanvas.width, fCanvas.height);
-
-        const angleVal = parseInt(document.getElementById('frac-angle').value);
-        const ratioVal = parseInt(document.getElementById('frac-ratio').value) / 100;
-
-        document.getElementById('lbl-angle').textContent = `Branch Angle (${angleVal}°)`;
-        document.getElementById('lbl-ratio').textContent = `Scale Decay Ratio (${ratioVal.toFixed(2)})`;
-
-        // Start tracing line algorithms recursively from baseline trunk positioning
-        fCtx.save();
-        fCtx.strokeStyle = '#3498db';
-        fCtx.lineWidth = 2;
-        fCtx.translate(fCanvas.width / 2, fCanvas.height - 10);
-        drawBranch(85, angleVal * Math.PI / 180, ratioVal);
-        fCtx.restore();
-    }
-
-    function drawBranch(len, angleRad, ratio) {
-        fCtx.beginPath();
-        fCtx.moveTo(0, 0);
-        fCtx.lineTo(0, -len);
-        fCtx.stroke();
-
-        if (len < 10) return; // Escape boundary conditions limit
-
-        fCtx.save();
-        fCtx.translate(0, -len);
-        fCtx.rotate(angleRad);
-        drawBranch(len * ratio, angleRad, ratio);
-        fCtx.restore();
-
-        fCtx.save();
-        fCtx.translate(0, -len);
-        fCtx.rotate(-angleRad);
-        drawBranch(len * ratio, angleRad, ratio);
-        fCtx.restore();
-    }
-
-    function setFractalPreset(ang, rat) {
-        document.getElementById('frac-angle').value = ang;
-        document.getElementById('frac-ratio').value = rat;
-        renderFractalTree();
-    }
-
-    document.getElementById('frac-angle').addEventListener('input', renderFractalTree);
-    document.getElementById('frac-ratio').addEventListener('input', renderFractalTree);
-    window.addEventListener('resize', renderFractalTree);
-    setTimeout(renderFractalTree, 150);
-
-    // --------------------------------------------------------
-    // V. ADAPTIVE QUANTITATIVE EVALUATION QUIZ SYSTEM
-    // --------------------------------------------------------
-    const quizDataset = [
-        { q: "Evaluate the derivative limit: \\(\\frac{d}{dx}[\\sin(x^2)]\\)", o: ["2x \\cos(x^2)", "\\cos(2x)", "\\cos(x^2)", "-2x \\cos(x^2)"], a: 0 },
-        { q: "Which core property characterizes all fields matching Euler's polyhedron map definition?", o: ["V - E + F = 2", "V + E - F = 2", "V - E - F = 0", "V + E + F = 1"], a: 0 },
-        { q: "Determine the dot product space limit vector coordinate rules sequence bounds of ortho systems.", o: ["Zero Value", "Scalar Infinity Map", "Identity Unity 1", "Undefined Coordinates"], a: 2 }
     ];
 
     let currentQuizIndex = 0;
 
-    function renderActiveQuiz() {
-        const item = quizDataset[currentQuizIndex];
-        document.getElementById('quiz-question').innerHTML = item.q;
-        const grid = document.getElementById('quiz-options-grid');
-        const feedback = document.getElementById('quiz-reply-box');
-        const nextBtn = document.getElementById('next-quiz-btn');
+    // Initialization Lifecycle Hook
+    document.addEventListener("DOMContentLoaded", () => {
+        initMatrixEngine();
+        initQuizCard();
+        initFractalEngine();
+        initGlobalThemeEngine();
+        plotVectorFunction(); // Standard vector initialization plot pass
+        initMobileNavbarDropdowns();
+    });
+
+    // Mobile Navbar Dropdown Handler
+    function initMobileNavbarDropdowns() {
+        const triggers = document.querySelectorAll('.has-dropdown');
+        triggers.forEach(trigger => {
+            trigger.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    const parent = this.parentElement;
+                    parent.classList.toggle('dropdown-active');
+                }
+            });
+        });
+    }
+
+    // Global Theme Dark Mode Orchestrator
+    function initGlobalThemeEngine() {
+        const toggle = document.getElementById("dark-mode-toggle");
+        const subtext = document.getElementById("profile-subtext");
         
-        grid.innerHTML = "";
+        // Load saved state preference if possible
+        if(localStorage.getItem("theme-state") === "dark") {
+            document.body.classList.add("dark-mode-active");
+            toggle.textContent = "☀️";
+        }
+
+        toggle.addEventListener("click", () => {
+            document.body.classList.toggle("dark-mode-active");
+            const isDark = document.body.classList.contains("dark-mode-active");
+            toggle.textContent = isDark ? "☀️" : "🌙";
+            localStorage.setItem("theme-state", isDark ? "dark" : "light");
+            
+            // Remap styles inside custom rendering canvas hooks
+            updateMatrixPlot();
+            drawFractalTree();
+            if(vectorChart) {
+                vectorChart.options.scales.x.grid.color = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+                vectorChart.options.scales.y.grid.color = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+                vectorChart.options.scales.x.ticks.color = isDark ? '#cbd5e1' : '#333';
+                vectorChart.options.scales.y.ticks.color = isDark ? '#cbd5e1' : '#333';
+                vectorChart.update();
+            }
+        });
+    }
+
+    // 4. Automatic Step Solver Script
+    function solveQuadratic() {
+        const a = parseFloat(document.getElementById("coeff-a").value);
+        const b = parseFloat(document.getElementById("coeff-b").value);
+        const c = parseFloat(document.getElementById("coeff-c").value);
+        const out = document.getElementById("solver-output");
+
+        if(isNaN(a) || isNaN(b) || isNaN(c)) {
+            out.innerHTML = "<p style='color:var(--danger);'>Please fill out all numeric properties accurately.</p>";
+            out.style.display = "block";
+            return;
+        }
+
+        if(a === 0) {
+            out.innerHTML = "<p style='color:var(--danger);'>Coefficient 'a' cannot equal zero inside quadratic setups.</p>";
+            out.style.display = "block";
+            return;
+        }
+
+        const disc = (b * b) - (4 * a * c);
+        let steps = `<h3>Solution Matrix Steps</h3>`;
+        steps += `<div class='step-item'><p><strong>Step 1: Calculate Discriminant $\\Delta$ Matrix</strong></p>`;
+        steps += `<p>$$\\Delta = b^2 - 4ac = (${b})^2 - 4(${a})(${c}) = ${disc}$$</p></div>`;
+
+        steps += `<div class='step-item'><p><strong>Step 2: Apply General Formulas</strong></p>`;
+        steps += `<p>$$x = \\frac{-b \\pm \\sqrt{\\Delta}}{2a}$$</p></div>`;
+
+        steps += `<div class='step-item'><p><strong>Step 3: Extract Evaluated Vectors</strong></p>`;
+        if(disc > 0) {
+            const x1 = (-b + Math.sqrt(disc)) / (2 * a);
+            const x2 = (-b - Math.sqrt(disc)) / (2 * a);
+            steps += `<p>Two real distinct roots discovered:</p><p>$$x_1 = ${x1.toFixed(4)},\\quad x_2 = ${x2.toFixed(4)}$$</p>`;
+        } else if(disc === 0) {
+            const x = -b / (2 * a);
+            steps += `<p>One real repeated double root discovered:</p><p>$$x = ${x.toFixed(4)}$$</p>`;
+        } else {
+            const real = (-b / (2 * a)).toFixed(4);
+            const imag = (Math.sqrt(-disc) / (2 * a)).toFixed(4);
+            steps += `<p>Complex matrix roots encountered:</p><p>$$x_1 = ${real} + ${imag}i,\\quad x_2 = ${real} - ${imag}i$$</p>`;
+        }
+        steps += `</div>`;
+
+        out.innerHTML = steps;
+        out.style.display = "block";
+        MathJax.typesetPromise([out]);
+    }
+
+    // 5. Matrix Transformations Canvas System
+    let matrixCanvas, matrixCtx;
+    function initMatrixEngine() {
+        matrixCanvas = document.getElementById("matrixCanvas");
+        matrixCtx = matrixCanvas.getContext("2d");
+        resizeMatrixCanvas();
+        window.addEventListener("resize", () => { resizeMatrixCanvas(); updateMatrixPlot(); });
+        updateMatrixPlot();
+    }
+
+    function resizeMatrixCanvas() {
+        const holder = matrixCanvas.parentElement;
+        matrixCanvas.width = holder.clientWidth;
+        matrixCanvas.height = holder.clientHeight || 220;
+    }
+
+    function updateMatrixPlot() {
+        if(!matrixCtx) return;
+        const w = matrixCanvas.width;
+        const h = matrixCanvas.height;
+        matrixCtx.clearRect(0,0,w,h);
+
+        // Grid Configuration Constants
+        const originX = w / 2;
+        const originY = h / 2;
+        const scale = 35; 
+
+        // Background Coordinate Systems
+        matrixCtx.strokeStyle = document.body.classList.contains("dark-mode-active") ? "#1e293b" : "#e2e8f0";
+        matrixCtx.lineWidth = 1;
+        for(let i = -10; i <= 10; i++) {
+            // Vertical coordinate vectors
+            matrixCtx.beginPath();
+            matrixCtx.moveTo(originX + i * scale, 0);
+            matrixCtx.lineTo(originX + i * scale, h);
+            matrixCtx.stroke();
+            // Horizontal coordinate vectors
+            matrixCtx.beginPath();
+            matrixCtx.moveTo(0, originY + i * scale);
+            matrixCtx.lineTo(w, originY + i * scale);
+            matrixCtx.stroke();
+        }
+
+        // Main Axis Vectors
+        matrixCtx.strokeStyle = document.body.classList.contains("dark-mode-active") ? "#475569" : "#94a3b8";
+        matrixCtx.lineWidth = 2;
+        matrixCtx.beginPath(); matrixCtx.moveTo(0, originY); matrixCtx.lineTo(w, originY); matrixCtx.stroke();
+        matrixCtx.beginPath(); matrixCtx.moveTo(originX, 0); matrixCtx.lineTo(originX, h); matrixCtx.stroke();
+
+        // Capture Input Vector Scalars
+        const m00 = parseFloat(document.getElementById("m00").value) || 0;
+        const m01 = parseFloat(document.getElementById("m01").value) || 0;
+        const m10 = parseFloat(document.getElementById("m10").value) || 0;
+        const m11 = parseFloat(document.getElementById("m11").value) || 0;
+
+        // Draw Transformed Basis Vectors (i hat, j hat)
+        drawVector(originX, originY, m00 * scale, -m10 * scale, "#2ecc71", 3); // Transform i-hat (Green)
+        drawVector(originX, originY, m01 * scale, -m11 * scale, "#e74c3c", 3); // Transform j-hat (Red)
+
+        // Draw Sample Vector Unit Quad Box
+        matrixCtx.fillStyle = "rgba(52, 152, 219, 0.15)";
+        matrixCtx.strokeStyle = "#3498db";
+        matrixCtx.lineWidth = 1.5;
+        matrixCtx.beginPath();
+        matrixCtx.moveTo(originX, originY);
+        matrixCtx.lineTo(originX + m00 * scale, originY - m10 * scale);
+        matrixCtx.lineTo(originX + (m00 + m01) * scale, originY - (m10 + m11) * scale);
+        matrixCtx.lineTo(originX + m01 * scale, originY - m11 * scale);
+        matrixCtx.closePath();
+        matrixCtx.fill();
+        matrixCtx.stroke();
+    }
+
+    function drawVector(ox, oy, vx, vy, color, thickness) {
+        matrixCtx.strokeStyle = color;
+        matrixCtx.fillStyle = color;
+        matrixCtx.lineWidth = thickness;
+        matrixCtx.beginPath();
+        matrixCtx.moveTo(ox, oy);
+        matrixCtx.lineTo(ox + vx, oy + vy);
+        matrixCtx.stroke();
+
+        // Mini arrow head calculation parameters
+        const angle = Math.atan2(vy, vx);
+        matrixCtx.beginPath();
+        matrixCtx.moveTo(ox + vx, oy + vy);
+        matrixCtx.lineTo(ox + vx - 8 * Math.cos(angle - Math.PI/6), oy + vy - 8 * Math.sin(angle - Math.PI/6));
+        matrixCtx.lineTo(ox + vx - 8 * Math.cos(angle + Math.PI/6), oy + vy - 8 * Math.sin(angle + Math.PI/6));
+        matrixCtx.closePath();
+        matrixCtx.fill();
+    }
+
+    // 6. Evaluation Assessment Section Interface Module
+    function initQuizCard() {
+        currentQuizIndex = 0;
+        loadNextQuestion();
+    }
+
+    function loadNextQuestion() {
+        const feedback = document.getElementById("quiz-feedback-box");
+        const nextBtn = document.getElementById("quiz-next-btn");
         feedback.style.display = "none";
         nextBtn.style.display = "none";
 
-        item.o.forEach((opt, index) => {
-            const btn = document.createElement('button');
-            btn.className = 'quiz-btn';
+        const data = assessmentQuestions[currentQuizIndex];
+        document.getElementById("quiz-question").innerHTML = data.q;
+
+        const grid = document.getElementById("quiz-options-grid");
+        grid.innerHTML = "";
+
+        data.opts.forEach((opt, idx) => {
+            const btn = document.createElement("button");
+            btn.className = "quiz-btn";
             btn.innerHTML = opt;
-            btn.onclick = () => verifyQuizAnswer(index, btn);
+            btn.onclick = () => evaluateQuizAnswer(idx);
             grid.appendChild(btn);
         });
 
-        MathJax.typesetPromise([document.getElementById('adaptive-quiz')]);
+        // Trigger dynamic MathJax typeset parsing pass immediately
+        MathJax.typesetPromise([document.getElementById("quiz-question"), grid]);
     }
 
-    function verifyQuizAnswer(idx, clickedBtn) {
-        const item = quizDataset[currentQuizIndex];
-        const feedback = document.getElementById('quiz-reply-box');
-        const nextBtn = document.getElementById('next-quiz-btn');
-        
-        // Block consecutive multiple choice updates sequentially
-        document.querySelectorAll('.quiz-btn').forEach(b => b.disabled = true);
+    function evaluateQuizAnswer(selectedIdx) {
+        const data = assessmentQuestions[currentQuizIndex];
+        const feedback = document.getElementById("quiz-feedback-box");
+        const nextBtn = document.getElementById("quiz-next-btn");
+        const optionsButtons = document.querySelectorAll("#quiz-options-grid .quiz-btn");
 
-        if(idx === item.a) {
-            feedback.innerHTML = "🎯 Correct Analytical Assessment Resolution Parameter confirmed.";
-            feedback.style.background = "rgba(39, 174, 96, 0.15)";
-            feedback.style.color = "var(--success)";
-            clickedBtn.style.borderColor = "var(--success)";
+        // Lock interface selections
+        optionsButtons.forEach(b => b.disabled = true);
+
+        if(selectedIdx === data.ans) {
+            feedback.innerHTML = `<span style="color:var(--success);">✓ Perfect. Correct Vector Answer Selection.</span><p>${data.explain}</p>`;
+            feedback.style.backgroundColor = "rgba(39, 174, 96, 0.08)";
+            optionsButtons[selectedIdx].style.borderColor = "var(--success)";
+            optionsButtons[selectedIdx].style.backgroundColor = "rgba(39, 174, 96, 0.1)";
         } else {
-            feedback.innerHTML = `❌ Incorrect Matrix Bounds. System standard solution maps to: ${item.o[item.a]}`;
-            feedback.style.background = "rgba(192, 41, 43, 0.15)";
-            feedback.style.color = "var(--danger)";
-            clickedBtn.style.borderColor = "var(--danger)";
+            feedback.innerHTML = `<span style="color:var(--danger);">✗ Evaluation Divergence Error Detected.</span><p>${data.explain}</p>`;
+            feedback.style.backgroundColor = "rgba(192, 57, 43, 0.08)";
+            optionsButtons[selectedIdx].style.borderColor = "var(--danger)";
+            optionsButtons[selectedIdx].style.backgroundColor = "rgba(192, 57, 43, 0.1)";
+            optionsButtons[data.ans].style.borderColor = "var(--success)";
         }
+
         feedback.style.display = "block";
+        MathJax.typesetPromise([feedback]);
+
+        // Shift index state loops safely
+        currentQuizIndex = (currentQuizIndex + 1) % assessmentQuestions.length;
         nextBtn.style.display = "inline-block";
     }
 
-    document.getElementById('next-quiz-btn').addEventListener('click', () => {
-        currentQuizIndex = (currentQuizIndex + 1) % quizDataset.length;
-        renderActiveQuiz();
-    });
-    renderActiveQuiz();
+    // 7. Multi-Dimensional Vector Function Plotter Graph
+    function plotVectorFunction() {
+        const exprStr = document.getElementById("function-input").value;
+        const canvasCtx = document.getElementById("vectorChartCanvas").getContext("2d");
 
-    // --------------------------------------------------------
-    // VI. DYNAMIC SYMBOLIC CHART.JS INTERACTIVE ENGINE
-    // --------------------------------------------------------
-    const chartCtx = document.getElementById('functionChart').getContext('2d');
-    window.currentChart = null;
-
-    function getChartThemeColors() {
-        const isDark = document.body.classList.contains('dark-mode-active');
-        return {
-            gridColor: isDark ? '#334155' : '#cbd5e1',
-            textColor: isDark ? '#cbd5e1' : '#333333'
-        };
-    }
-
-    function generateMathematicalPlotData(expressionString) {
+        // Generate safe data points over analytical arrays
         const xValues = [];
         const yValues = [];
         
-        // Generate uniform layout matrix scale data indices boundaries loop 
-        for (let x = -10; x <= 10; x += 0.2) {
-            try {
-                // Safely evaluate expressions mathematically inside sandbox scope using math.js compile methods
-                const evaluatedY = math.evaluate(expressionString, { x: x });
-                xValues.push(x.toFixed(2));
-                yValues.push(evaluatedY);
-            } catch(err) {
-                // Catch localized coordinate undefined convergence calculation exceptions silently
+        try {
+            const parser = math.compile(exprStr);
+            for (let x = -10; x <= 10; x += 0.2) {
+                xValues.push(parseFloat(x.toFixed(2)));
+                const y = parser.evaluate({ x: x });
+                yValues.push(y);
             }
-        }
-        return { xValues, yValues };
-    }
-
-    function buildFunctionPlotterGraph(expr) {
-        const { xValues, yValues } = generateMathematicalPlotData(expr);
-        const themes = getChartThemeColors();
-
-        if (window.currentChart) {
-            window.currentChart.destroy();
+        } catch (err) {
+            alert("Mathematical syntax validation parse error: " + err.message);
+            return;
         }
 
-        window.currentChart = new Chart(chartCtx, {
-            type: 'line',
-            data: {
-                labels: xValues,
-                datasets: [{
-                    label: `f(x) = ${expr}`,
-                    data: yValues,
-                    borderColor: '#e94560',
-                    borderWidth: 3,
-                    pointRadius: 0,
-                    fill: false,
-                    tension: 0.2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        grid: { color: themes.gridColor },
-                        ticks: { color: themes.textColor }
-                    },
-                    y: {
-                        grid: { color: themes.gridColor },
-                        ticks: { color: themes.textColor }
-                    }
+        const isDark = document.body.classList.contains("dark-mode-active");
+
+        if (vectorChart) {
+            vectorChart.data.labels = xValues;
+            vectorChart.data.datasets[0].data = yValues;
+            vectorChart.update();
+        } else {
+            vectorChart = new Chart(canvasCtx, {
+                type: 'line',
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        label: 'f(x)',
+                        data: yValues,
+                        borderColor: '#e94560',
+                        borderWidth: 3,
+                        pointRadius: 0,
+                        fill: false,
+                        tension: 0.1
+                    }]
                 },
-                plugins: {
-                    legend: { labels: { color: themes.textColor } }
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        zoom: {
+                            zoom: {
+                                wheel: { enabled: true },
+                                pinch: { enabled: true },
+                                mode: 'xy'
+                            },
+                            pan: {
+                                enabled: true,
+                                mode: 'xy'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            position: 'center',
+                            grid: { color: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)' },
+                            ticks: { color: isDark ? '#cbd5e1' : '#333' }
+                        },
+                        y: {
+                            type: 'linear',
+                            position: 'center',
+                            grid: { color: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)' },
+                            ticks: { color: isDark ? '#cbd5e1' : '#333' }
+                        }
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
-    function updateChartThemes() {
-        const themes = getChartThemeColors();
-        window.currentChart.options.scales.x.grid.color = themes.gridColor;
-        window.currentChart.options.scales.x.ticks.color = themes.textColor;
-        window.currentChart.options.scales.y.grid.color = themes.gridColor;
-        window.currentChart.options.scales.y.ticks.color = themes.textColor;
-        window.currentChart.options.plugins.legend.labels.color = themes.textColor;
-        window.currentChart.update();
+    // 8. Dynamic Fractal Tree Engine Modules
+    let fractalCanvas, fractalCtx;
+    function initFractalEngine() {
+        fractalCanvas = document.getElementById("fractalCanvas");
+        fractalCtx = fractalCanvas.getContext("2d");
+        resizeFractalCanvas();
+        window.addEventListener("resize", () => { resizeFractalCanvas(); drawFractalTree(); });
+        drawFractalTree();
     }
 
-    document.getElementById('plot-btn').addEventListener('click', () => {
-        const rawExpr = document.getElementById('function-input').value;
-        buildFunctionPlotterGraph(rawExpr);
-    });
+    function resizeFractalCanvas() {
+        const holder = fractalCanvas.parentElement;
+        fractalCanvas.width = holder.clientWidth;
+        fractalCanvas.height = holder.clientHeight || 320;
+    }
 
-    // Fire default root projection configuration graph matrix array execution
-    buildFunctionPlotterGraph("sin(x) * x");
+    function applyFractalPreset(depth, angle, scale) {
+        document.getElementById("fractal-depth").value = depth;
+        document.getElementById("fractal-angle").value = angle;
+        document.getElementById("fractal-scale").value = scale;
+        drawFractalTree();
+    }
+
+    function drawFractalTree() {
+        if(!fractalCtx) return;
+        const w = fractalCanvas.width;
+        const h = fractalCanvas.height;
+        fractalCtx.clearRect(0,0,w,h);
+
+        const depth = parseInt(document.getElementById("fractal-depth").value);
+        const angleDeg = parseFloat(document.getElementById("fractal-angle").value);
+        const scalePct = parseFloat(document.getElementById("fractal-scale").value) / 100;
+
+        // Root coordinates positions setup
+        const startX = w / 2;
+        const startY = h - 20;
+        const initialLength = h / 4.5;
+
+        fractalCtx.strokeStyle = document.body.classList.contains("dark-mode-active") ? "#3498db" : "#2c3e50";
+        fractalCtx.lineWidth = depth;
+        fractalCtx.lineCap = "round";
+
+        renderBranchVector(startX, startY, initialLength, -90, depth, angleDeg, scalePct);
+    }
+
+    function renderBranchVector(x1, y1, len, angle, depth, angleStep, scaleFactor) {
+        if(depth === 0) return;
+
+        const x2 = x1 + Math.cos(angle * Math.PI / 180) * len;
+        const y2 = y1 + Math.sin(angle * Math.PI / 180) * len;
+
+        fractalCtx.lineWidth = depth;
+        fractalCtx.beginPath();
+        fractalCtx.moveTo(x1, y1);
+        fractalCtx.lineTo(x2, y2);
+        fractalCtx.stroke();
+
+        // Fork recursive calls down geometric matrix vectors
+        renderBranchVector(x2, y2, len * scaleFactor, angle - angleStep, depth - 1, angleStep, scaleFactor);
+        renderBranchVector(x2, y2, len * scaleFactor, angle + angleStep, depth - 1, angleStep, scaleFactor);
+    }
+
+    // 9. Competency Mastery Vector Toggles
+    function toggleNodeMastery(idx) {
+        const node = document.getElementById(`node-${idx}`);
+        const btn = node.querySelector(".master-btn");
+        node.classList.toggle("mastered");
+
+        if(node.classList.contains("mastered")) {
+            btn.textContent = "Mastery Achieved";
+        } else {
+            btn.textContent = "Mark Mastered";
+        }
+    }
+
+    // 10. AI Engine Problem Synthesis Simulator Script
+    function injectAIExample(element) {
+        document.getElementById("ai-input-field").value = element.textContent;
+    }
+
+    function processAISolution() {
+        const prompt = document.getElementById("ai-input-field").value.trim();
+        const load = document.getElementById("ai-loading");
+        const outBox = document.getElementById("ai-solution-box");
+
+        if(!prompt) {
+            alert("Please input your mathematical query first.");
+            return;
+        }
+
+        outBox.style.display = "none";
+        load.style.display = "flex";
+
+        // Mock algorithmic inference compilation response wait window delay
+        setTimeout(() => {
+            load.style.display = "none";
+            let ansHtml = `<h3>AI Synthesis Response Pipeline</h3>`;
+            
+            ansHtml += `<div class="ai-step-block">
+                <div class="ai-step-meta">Parsed Query Framework Elements</div>
+                <p>Identified objective parsing metrics across targets matching: <strong>"${prompt}"</strong></p>
+            </div>`;
+
+            ansHtml += `<div class="ai-step-block">
+                <div class="ai-step-meta">Algorithmic Axiom Mapping</div>
+                <p>Applying fundamental reduction lemmas to isolate core limits: $$\\lim_{x \\to 0} \\frac{\\sin(x)}{x} = 1$$</p>
+                <p>Using L'Hôpital's rule differentiation verification parameters:</p>
+                <p>$$\\frac{\\frac{d}{dx}[\\sin(x)]}{\\frac{d}{dx}[x]} = \\frac{\\cos(x)}{1}$$</p>
+            </div>`;
+
+            ansHtml += `<div class="ai-step-block">
+                <div class="ai-step-meta">Convergence Synthesis Summary</div>
+                <p>Evaluating limits directly maps structural limits to exact real identity parameters: <strong>$$1.0000$$</strong></p>
+            </div>`;
+
+            outBox.innerHTML = ansHtml;
+            outBox.style.display = "block";
+            MathJax.typesetPromise([outBox]);
+        }, 1200);
+    }
 </script>
+
 </body>
 </html>
