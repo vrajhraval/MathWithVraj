@@ -1081,21 +1081,7 @@
         <div class="solver-steps" id="solver-output"></div>
     </section>
 
-    <section>
-        <h2>5. Linear Transformations Matrix Render</h2>
-        <p>Modify the values of transformation matrix $M$ to compute linear mapping outputs:</p>
-        <div class="matrix-grid">
-            <div class="matrix-input-box">
-                <input type="number" id="m00" value="1" step="0.5" oninput="updateMatrixPlot()">
-                <input type="number" id="m01" value="0" step="0.5" oninput="updateMatrixPlot()">
-                <input type="number" id="m10" value="0" step="0.5" oninput="updateMatrixPlot()">
-                <input type="number" id="m11" value="1" step="0.5" oninput="updateMatrixPlot()">
-            </div>
-            <div class="matrix-render-canvas">
-                <canvas id="matrixCanvas"></canvas>
-            </div>
-        </div>
-    </section>
+    
 
     <section>
         <h2>6. Competency Evaluation Assessment</h2>
@@ -1121,52 +1107,9 @@
         </div>
     </section>
 
-    <section>
-        <h2>8. Dynamic Fractal Tree Generator</h2>
-        <p>Adjust parameters below to modify geometric structural configurations on-screen:</p>
-        <div class="fractal-ui-layout">
-            <div class="fractal-controls">
-                <div class="fractal-control-group">
-                    <label>Depth Generation Resolution</label>
-                    <input type="range" id="fractal-depth" min="1" max="11" value="8" oninput="drawFractalTree()">
-                </div>
-                <div class="fractal-control-group">
-                    <label>Branch Angle Separation</label>
-                    <input type="range" id="fractal-angle" min="0" max="90" value="25" oninput="drawFractalTree()">
-                </div>
-                <div class="fractal-control-group">
-                    <label>Length Scaling Factor</label>
-                    <input type="range" id="fractal-scale" min="50" max="80" value="70" oninput="drawFractalTree()">
-                </div>
-                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:5px;">
-                    <button class="fractal-preset-btn" onclick="applyFractalPreset(10, 20, 75)">Classic Fern</button>
-                    <button class="fractal-preset-btn" onclick="applyFractalPreset(7, 45, 62)">Coral Variant</button>
-                </div>
-            </div>
-            <div class="fractal-canvas-holder">
-                <canvas id="fractalCanvas"></canvas>
-            </div>
-        </div>
-    </section>
+    
 
-    <section>
-        <h2>9. Competency Mastery Navigation Architecture</h2>
-        <p>Toggle your state checklist progress vectors across discrete modules:</p>
-        <div class="path-tree">
-            <div class="path-node" id="node-0">
-                <span>Calculus Fundamentals Integration Basics</span>
-                <button class="master-btn" onclick="toggleNodeMastery(0)">Mark Mastered</button>
-            </div>
-            <div class="path-node" id="node-1">
-                <span>Linear Algebra Multi-Dimensional Vector Mappings</span>
-                <button class="master-btn" onclick="toggleNodeMastery(1)">Mark Mastered</button>
-            </div>
-            <div class="path-node" id="node-2">
-                <span>Complex Dynamics Fractals Chaos Theory Structures</span>
-                <button class="master-btn" onclick="toggleNodeMastery(2)">Mark Mastered</button>
-            </div>
-        </div>
-    </section>
+    
 
     
 
