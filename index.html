@@ -1335,14 +1335,27 @@
                 const xValues = [];
                 const yValues = [];
 
-                for (let x = -10; x <= 10; x += 0.1) {
+                for (let x = -10; x <= 10; x += 0.05) {
                     try {
-                        const y = compiled.evaluate({ x: x });
-                        if (typeof y === 'number' && !isNaN(y) && isFinite(y)) {
-                            xValues.push(x);
-                            yValues.push(y);
+                        const scope = { x: x, y: 0 };
+                        let y = compiled.evaluate(scope);
+                        
+                        // Convert math.js complex/unit outputs into pure numbers if applicable
+                        if (typeof y === 'object' && y !== null && 're' in y) {
+                            y = y.re;
                         }
-                    } catch (e) {}
+
+                        if (typeof y === 'number' && !isNaN(y) && isFinite(y)) {
+                            xValues.push(parseFloat(x.toFixed(2)));
+                            yValues.push(y);
+                        } else {
+                            xValues.push(parseFloat(x.toFixed(2)));
+                            yValues.push(null); // Discontinuity/Undefined handler
+                        }
+                    } catch (e) {
+                        xValues.push(parseFloat(x.toFixed(2)));
+                        yValues.push(null);
+                    }
                 }
 
                 const trace = {
@@ -1350,7 +1363,8 @@
                     y: yValues,
                     type: 'scatter',
                     mode: 'lines',
-                    line: { color: '#e94560', width: 3 }
+                    line: { color: '#e94560', width: 3 },
+                    name: `y = ${expr}`
                 };
 
                 const layout = {
@@ -1358,10 +1372,11 @@
                     paper_bgcolor: bgCol,
                     plot_bgcolor: bgCol,
                     margin: { l: 50, r: 30, b: 50, t: 50 },
-                    xaxis: { color: textCol, gridcolor: gridCol, title: 'x' },
-                    yaxis: { color: textCol, gridcolor: gridCol, title: 'y' }
+                    xaxis: { color: textCol, gridcolor: gridCol, title: 'x', zerolinecolor: textCol },
+                    yaxis: { color: textCol, gridcolor: gridCol, title: 'y', zerolinecolor: textCol }
                 };
 
+                Plotly.purge(container); // Clear any lingering 3D scene properties
                 Plotly.newPlot(container, [trace], layout, { responsive: true });
 
             } else {
@@ -1387,6 +1402,7 @@
                         let z = 0;
                         try {
                             z = compiled.evaluate({ x: x, y: y });
+                            if (typeof z === 'object' && z !== null && 're' in z) z = z.re;
                             if (typeof z !== 'number' || isNaN(z) || !isFinite(z)) z = null;
                         } catch (e) {
                             z = null;
@@ -1438,6 +1454,7 @@
                     yaxis: { color: textCol, gridcolor: gridCol, title: 'y' }
                 };
 
+                Plotly.purge(container);
                 Plotly.newPlot(container, [trace], layout, { responsive: true });
             }
         } catch (err) {
