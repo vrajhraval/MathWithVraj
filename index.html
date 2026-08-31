@@ -50,11 +50,9 @@
             --dropdown-bg: white;
             --dropdown-shadow: rgba(0, 0, 0, 0.15);
             
-            /* Math Blueprint Background Pattern Grid Colors */
             --grid-line: rgba(41, 128, 185, 0.08);
             --grid-line-bold: rgba(41, 128, 185, 0.15);
 
-            /* Fun Section Specific Themes Variables */
             --fun-bg: linear-gradient(135deg, #ff6b6b, #ff8e53);
             --fun-text: #ffffff;
             --fun-subtext: #fff3f0;
@@ -81,11 +79,9 @@
             --dropdown-bg: #1e293b;
             --dropdown-shadow: rgba(0, 0, 0, 0.4);
             
-            /* Dark Mode Blueprint Grid Colors */
             --grid-line: rgba(52, 152, 219, 0.05);
             --grid-line-bold: rgba(52, 152, 219, 0.12);
 
-            /* Dark mode override overrides for Fun Section layout */
             --fun-bg: linear-gradient(135deg, #701a75, #4c1d95);
             --fun-shadow: rgba(112, 26, 117, 0.5);
             --fun-badge-bg: #a855f7;
@@ -802,67 +798,6 @@
             gap: 5px;
         }
 
-        /* SCHOOL SECTION SPECIFIC STYLES */
-        .school-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
-        .school-tab-btn {
-            background: var(--quiz-container-bg);
-            border: 2px solid var(--border-color);
-            color: var(--text-color);
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-        }
-
-        .school-tab-btn:hover, .school-tab-btn.active {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
-
-        .school-content {
-            display: none;
-        }
-
-        .school-content.active {
-            display: block;
-        }
-
-        .school-interactive-box {
-            background: var(--quiz-container-bg);
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            margin-top: 15px;
-        }
-
-        .school-input-group {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-        }
-
-        .school-input-group input {
-            padding: 10px;
-            border: 2px solid var(--border-color);
-            background: var(--formula-card-bg);
-            color: var(--text-color);
-            border-radius: 6px;
-            font-size: 1rem;
-            flex: 1;
-            min-width: 200px;
-        }
-
         footer {
             text-align: center;
             padding: 25px;
@@ -992,9 +927,6 @@
         <div class="nav-item">
             <a href="3d.html">3D</a>
         </div>
-        <div class="nav-item">
-            <a href="#school-section">SCHOOL</a>
-        </div>
     </nav>
 </div>
 
@@ -1026,92 +958,6 @@
                     From the geometric proofs of Pythagoras to the invention
                     of <strong>Zero</strong> in India, these civilizational eras shaped mathematics into a formal structural discipline.
                 </p>
-            </div>
-        </div>
-    </section>
-
-    <section id="school-section">
-        <h2>School Mathematics Visualizer (Std 6 to 10 CBSE / KVS)</h2>
-        <p>Select your class level to explore core CBSE/KVS concepts with step-by-step interactive solvers and graph visualizers.</p>
-        
-        <div class="school-tabs">
-            <button class="school-tab-btn active" onclick="switchSchoolTab('class6')">Class 6</button>
-            <button class="school-tab-btn" onclick="switchSchoolTab('class7')">Class 7</button>
-            <button class="school-tab-btn" onclick="switchSchoolTab('class8')">Class 8</button>
-            <button class="school-tab-btn" onclick="switchSchoolTab('class9')">Class 9</button>
-            <button class="school-tab-btn" onclick="switchSchoolTab('class10')">Class 10</button>
-        </div>
-
-        <div id="class6" class="school-content active">
-            <h3>Class 6: Integers & Number Line Visualizer</h3>
-            <p>Understand negative and positive numbers on an interactive number line.</p>
-            <div class="school-interactive-box">
-                <div class="school-input-group">
-                    <label>Start Value: </label>
-                    <input type="number" id="c6-val1" value="-3">
-                    <label>Add / Subtract: </label>
-                    <input type="number" id="c6-val2" value="5">
-                    <button class="solver-btn" onclick="plotNumberLine()">Visualize on Line</button>
-                </div>
-                <div id="c6-output" style="margin-top:10px; font-weight:bold;"></div>
-                <div style="height:200px; margin-top:15px;"><canvas id="c6Canvas"></canvas></div>
-            </div>
-        </div>
-
-        <div id="class7" class="school-content">
-            <h3>Class 7: Simple Linear Equations ($ax + b = c$)</h3>
-            <p>Enter any simple single-variable linear equation values to solve and display step-by-step solutions.</p>
-            <div class="school-interactive-box">
-                <div class="school-input-group">
-                    <input type="number" id="c7-a" value="2" style="max-width:80px;"> <span>$x +$</span>
-                    <input type="number" id="c7-b" value="3" style="max-width:80px;"> <span>$=$</span>
-                    <input type="number" id="c7-c" value="11" style="max-width:80px;">
-                    <button class="solver-btn" onclick="solveClass7Eq()">Solve $x$</button>
-                </div>
-                <div id="c7-steps" class="formula-card" style="margin-top:15px;">Output will appear here...</div>
-            </div>
-        </div>
-
-        <div id="class8" class="school-content">
-            <h3>Class 8: Linear Equations in One Variable & Graphs</h3>
-            <p>Plot linear equations in 2D space ($y = mx + c$).</p>
-            <div class="school-interactive-box">
-                <div class="school-input-group">
-                    <span>$y =$</span>
-                    <input type="number" id="c8-m" value="2" placeholder="Slope (m)" style="max-width:100px;">
-                    <span>$x +$</span>
-                    <input type="number" id="c8-c" value="-1" placeholder="Intercept (c)" style="max-width:100px;">
-                    <button class="solver-btn" onclick="plotClass8Graph()">Plot Line</button>
-                </div>
-                <div style="height:250px; margin-top:15px;"><canvas id="c8Canvas"></canvas></div>
-            </div>
-        </div>
-
-        <div id="class9" class="school-content">
-            <h3>Class 9: Coordinate Geometry & Linear Equations in Two Variables</h3>
-            <p>Visualize standard form equations $ax + by + c = 0$.</p>
-            <div class="school-interactive-box">
-                <div class="school-input-group">
-                    <input type="number" id="c9-a" value="1" style="max-width:70px;"> <span>$x +$</span>
-                    <input type="number" id="c9-b" value="-1" style="max-width:70px;"> <span>$y +$</span>
-                    <input type="number" id="c9-c" value="-2" style="max-width:70px;"> <span>$= 0$</span>
-                    <button class="solver-btn" onclick="plotClass9Graph()">Graph Equation</button>
-                </div>
-                <div style="height:250px; margin-top:15px;"><canvas id="c9Canvas"></canvas></div>
-            </div>
-        </div>
-
-        <div id="class10" class="school-content">
-            <h3>Class 10: Quadratic Equations ($ax^2 + bx + c = 0$) & Parabola Visualizer</h3>
-            <p>Enter any quadratic equation or custom expression (e.g. $x^2 + 2 = 0$) to see calculated roots and parabolic curves.</p>
-            <div class="school-interactive-box">
-                <div class="school-input-group">
-                    <span>Equation Input: </span>
-                    <input type="text" id="c10-eq" value="x^2 + 2 = 0" placeholder="e.g. x^2 + 2 = 0 or 2x^2 - 4x + 1 = 0">
-                    <button class="solver-btn" onclick="solveAndPlotClass10()">Analyze &amp; Plot Visual</button>
-                </div>
-                <div id="c10-output" class="formula-card" style="margin-top:15px;">Enter expression and click analyze...</div>
-                <div style="height:280px; margin-top:15px;"><canvas id="c10Canvas"></canvas></div>
             </div>
         </div>
     </section>
@@ -1171,7 +1017,7 @@
                 </div>
             </div>
             <div class="fractal-canvas-holder">
-                <canvas id="fractalCanvas"></canvas>
+                <canvas id="fractalCanvas" width="300" height="320"></canvas>
             </div>
         </div>
     </section>
@@ -1199,423 +1045,282 @@
             <button class="next-quiz-btn" id="next-quiz-btn" onclick="loadNextQuestion()">Next Question</button>
         </div>
     </section>
+
+    <section class="graph-section">
+        <h2>9. Interactive Function Plotter</h2>
+        <div class="graph-presets">
+            <span class="preset-chip" onclick="setGraphPreset('sin(x)')">sin(x)</span>
+            <span class="preset-chip" onclick="setGraphPreset('x^2 - 4')">x² - 4</span>
+            <span class="preset-chip" onclick="setGraphPreset('x^3 - 3*x')">x³ - 3x</span>
+            <span class="preset-chip" onclick="setGraphPreset('1/x')">1/x</span>
+        </div>
+        <div class="graph-ui">
+            <input type="text" id="graph-expr" value="sin(x)" placeholder="e.g. sin(x) or x^2">
+            <button class="plot-btn" onclick="plotFunction()">Plot Graph</button>
+        </div>
+        <div class="chart-container">
+            <div id="plotter" style="width:100%;height:100%;"></div>
+        </div>
+    </section>
+
+    <a href="puzz.html" class="fun-section-container">
+        <div class="fun-card">
+            <h2>Math Playground & Puzzles <span class="fun-badge">Interactive</span></h2>
+            <p>Challenge your brain with mathematical riddles, logic puzzles, and visual games.</p>
+            <div class="fun-action-row">
+                <span class="fun-btn">Explore Puzzles &rarr;</span>
+                <div class="fun-stats">
+                    <span class="fun-stat-item">🎮 Interactive</span>
+                    <span class="fun-stat-item">🧠 Logic</span>
+                </div>
+            </div>
+        </div>
+    </a>
 </div>
 
 <footer>
-    <p>&copy; Vraj H Raval | Mathematics Education Portal</p>
+    <p>&copy; 2026 Vraj H Raval. All Rights Reserved.</p>
 </footer>
 
 <script>
-    // Dark mode toggle functionality
-    const darkModeBtn = document.getElementById('dark-mode-toggle');
-    darkModeBtn.addEventListener('click', () => {
+    // --- Dark Mode Toggle ---
+    const toggleBtn = document.getElementById('dark-mode-toggle');
+    toggleBtn.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode-active');
-        darkModeBtn.innerText = document.body.classList.contains('dark-mode-active') ? '☀️' : '🌙';
+        toggleBtn.textContent = document.body.classList.contains('dark-mode-active') ? '☀️' : '🌙';
     });
 
-    // Mobile navigation drop-down toggles
-    document.querySelectorAll('.has-dropdown').forEach(item => {
-        item.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                item.parentElement.classList.toggle('dropdown-active');
-            }
-        });
-    });
-
-    // Quadratic solver section
+    // --- 4. Live Algebra Solver ---
     function solveQuadratic() {
-        let a = parseFloat(document.getElementById('quad-a').value) || 0;
-        let b = parseFloat(document.getElementById('quad-b').value) || 0;
-        let c = parseFloat(document.getElementById('quad-c').value) || 0;
-        let out = document.getElementById('solver-output');
-        out.style.display = 'block';
+        const a = parseFloat(document.getElementById('quad-a').value);
+        const b = parseFloat(document.getElementById('quad-b').value);
+        const c = parseFloat(document.getElementById('quad-c').value);
+        const out = document.getElementById('solver-output');
 
-        if (a === 0) {
-            out.innerHTML = "<p>Not a quadratic equation ($a$ cannot be $0$).</p>";
-            if (window.MathJax) MathJax.typesetPromise();
+        if (isNaN(a) || isNaN(b) || isNaN(c) || a === 0) {
+            out.style.display = 'block';
+            out.innerHTML = '<p style="color:var(--danger)">Please enter valid numbers (a cannot be 0).</p>';
             return;
         }
 
-        let disc = b * b - 4 * a * c;
-        let html = `<div class="step-item"><strong>Step 1: Calculate Discriminant ($D = b^2 - 4ac$)</strong><br>
-                    $D = (${b})^2 - 4(${a})(${c}) = ${disc}$</div>`;
+        const disc = b * b - 4 * a * c;
+        let html = `<div class="step-item"><strong>Discriminant ($\Delta$):</strong> $b^2 - 4ac = (${b})^2 - 4(${a})(${c}) = ${disc}$</div>`;
 
         if (disc > 0) {
-            let r1 = (-b + Math.sqrt(disc)) / (2 * a);
-            let r2 = (-b - Math.sqrt(disc)) / (2 * a);
-            html += `<div class="step-item"><strong>Step 2: Real & Distinct Roots</strong><br>
-                    $x_1 = ${r1.toFixed(3)}$, $x_2 = ${r2.toFixed(3)}$</div>`;
+            const x1 = ((-b + Math.sqrt(disc)) / (2 * a)).toFixed(2);
+            const x2 = ((-b - Math.sqrt(disc)) / (2 * a)).toFixed(2);
+            html += `<div class="step-item"><strong>Two Real Roots:</strong><br> $x_1 = ${x1}$<br> $x_2 = ${x2}$</div>`;
         } else if (disc === 0) {
-            let r = -b / (2 * a);
-            html += `<div class="step-item"><strong>Step 2: Real & Equal Roots</strong><br>
-                    $x = ${r.toFixed(3)}$</div>`;
+            const x = (-b / (2 * a)).toFixed(2);
+            html += `<div class="step-item"><strong>One Double Root:</strong><br> $x = ${x}$</div>`;
         } else {
-            let real = (-b / (2 * a)).toFixed(3);
-            let imag = (Math.sqrt(-disc) / (2 * a)).toFixed(3);
-            html += `<div class="step-item"><strong>Step 2: Complex Roots</strong><br>
-                    $x_1 = ${real} + ${imag}i$, $x_2 = ${real} - ${imag}i$</div>`;
+            const real = (-b / (2 * a)).toFixed(2);
+            const imag = (Math.sqrt(-disc) / (2 * a)).toFixed(2);
+            html += `<div class="step-item"><strong>Complex Roots:</strong><br> $x_1 = ${real} + ${imag}i$<br> $x_2 = ${real} - ${imag}i$</div>`;
         }
 
         out.innerHTML = html;
-        if (window.MathJax) MathJax.typesetPromise();
+        out.style.display = 'block';
+        if (window.MathJax) MathJax.typesetPromise([out]);
     }
 
-    // Matrix transformation render
+    // --- 5. Matrix Transformation Sandbox ---
     function renderMatrix() {
-        let cvs = document.getElementById('matrixCanvas');
-        if(!cvs) return;
-        let ctx = cvs.getContext('2d');
-        cvs.width = cvs.parentElement.clientWidth;
-        cvs.height = cvs.parentElement.clientHeight;
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
 
-        let m00 = parseFloat(document.getElementById('m00').value) || 1;
-        let m01 = parseFloat(document.getElementById('m01').value) || 0;
-        let m10 = parseFloat(document.getElementById('m10').value) || 0;
-        let m11 = parseFloat(document.getElementById('m11').value) || 1;
+        const m00 = parseFloat(document.getElementById('m00').value) || 0;
+        const m01 = parseFloat(document.getElementById('m01').value) || 0;
+        const m10 = parseFloat(document.getElementById('m10').value) || 0;
+        const m11 = parseFloat(document.getElementById('m11').value) || 0;
 
-        ctx.clearRect(0, 0, cvs.width, cvs.height);
-        ctx.save();
-        ctx.translate(cvs.width / 2, cvs.height / 2);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        const scale = 30;
 
-        // draw transformed grid box
+        // Draw Axes
+        ctx.strokeStyle = '#334155';
+        ctx.beginPath();
+        ctx.moveTo(0, cy); ctx.lineTo(canvas.width, cy);
+        ctx.moveTo(cx, 0); ctx.lineTo(cx, canvas.height);
+        ctx.stroke();
+
+        // Unit box transformed
+        const points = [[0,0], [1,0], [1,1], [0,1]];
+        const transformed = points.map(([x, y]) => [
+            (m00 * x + m01 * y) * scale + cx,
+            cy - (m10 * x + m11 * y) * scale
+        ]);
+
+        ctx.fillStyle = 'rgba(41, 128, 185, 0.4)';
         ctx.strokeStyle = '#3498db';
         ctx.lineWidth = 2;
         ctx.beginPath();
-        let size = 40;
-        let p1 = {x: -size, y: -size};
-        let p2 = {x: size, y: -size};
-        let p3 = {x: size, y: size};
-        let p4 = {x: -size, y: size};
-
-        function transform(p) {
-            return {
-                x: m00 * p.x + m01 * p.y,
-                y: m10 * p.x + m11 * p.y
-            };
+        ctx.moveTo(transformed[0][0], transformed[0][1]);
+        for (let i = 1; i < transformed.length; i++) {
+            ctx.lineTo(transformed[i][0], transformed[i][1]);
         }
-
-        let tp1 = transform(p1), tp2 = transform(p2), tp3 = transform(p3), tp4 = transform(p4);
-
-        ctx.moveTo(tp1.x, -tp1.y);
-        ctx.lineTo(tp2.x, -tp2.y);
-        ctx.lineTo(tp3.x, -tp3.y);
-        ctx.lineTo(tp4.x, -tp4.y);
         ctx.closePath();
+        ctx.fill();
         ctx.stroke();
+    }
 
+    // --- 6. Fractal Explorer (Sierpinski Tree) ---
+    function drawFractal(ctx, len, angle, depth) {
+        if (depth === 0) return;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(0, -len);
+        ctx.stroke();
+        ctx.translate(0, -len);
+
+        ctx.save();
+        ctx.rotate(angle);
+        drawFractal(ctx, len * 0.7, angle, depth - 1);
+        ctx.restore();
+
+        ctx.save();
+        ctx.rotate(-angle);
+        drawFractal(ctx, len * 0.7, angle, depth - 1);
         ctx.restore();
     }
 
-    // Fractal explorer
     function updateFractal() {
-        let depth = document.getElementById('fractal-depth').value;
-        document.getElementById('depth-val').innerText = depth;
-        drawFractal(depth);
+        const depth = parseInt(document.getElementById('fractal-depth').value);
+        document.getElementById('depth-val').textContent = depth;
+        const canvas = document.getElementById('fractalCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.strokeStyle = '#3498db';
+        ctx.lineWidth = 1.5;
+        ctx.translate(canvas.width / 2, canvas.height - 10);
+        drawFractal(ctx, 60, Math.PI / 6, depth);
+        ctx.restore();
     }
 
-    function setFractalPreset(d) {
-        document.getElementById('fractal-depth').value = d;
+    function setFractalPreset(val) {
+        document.getElementById('fractal-depth').value = val;
         updateFractal();
     }
 
-    function drawFractal(depth) {
-        let cvs = document.getElementById('fractalCanvas');
-        if(!cvs) return;
-        let ctx = cvs.getContext('2d');
-        cvs.width = cvs.parentElement.clientWidth;
-        cvs.height = cvs.parentElement.clientHeight;
-
-        ctx.clearRect(0, 0, cvs.width, cvs.height);
-        ctx.strokeStyle = '#3498db';
-
-        function drawTree(x, y, len, angle, branchWidth, currentDepth) {
-            ctx.beginPath();
-            ctx.save();
-            ctx.lineWidth = branchWidth;
-            ctx.translate(x, y);
-            ctx.rotate(angle * Math.PI / 180);
-            ctx.moveTo(0, 0);
-            ctx.lineTo(0, -len);
-            ctx.stroke();
-
-            if (currentDepth <= 0) {
-                ctx.restore();
-                return;
-            }
-
-            drawTree(0, -len, len * 0.75, angle + 20, branchWidth * 0.7, currentDepth - 1);
-            drawTree(0, -len, len * 0.75, angle - 20, branchWidth * 0.7, currentDepth - 1);
-            ctx.restore();
-        }
-
-        drawTree(cvs.width / 2, cvs.height - 10, 60, 0, 4, depth);
-    }
-
-    // Path node mastered toggle
+    // --- 7. Knowledge Path ---
     function toggleNode(id) {
-        let el = document.getElementById('node-' + id);
-        if (el) {
-            el.classList.toggle('mastered');
-            let btn = el.querySelector('.master-btn');
-            if (el.classList.contains('mastered')) {
-                btn.innerText = 'Mastered ✓';
-            } else {
-                btn.innerText = 'Mark Mastered';
-            }
-        }
+        const node = document.getElementById(`node-${id}`);
+        node.classList.toggle('mastered');
+        const btn = node.querySelector('.master-btn');
+        btn.textContent = node.classList.contains('mastered') ? 'Mastered ✓' : 'Mark Mastered';
     }
 
-    // Quiz questions
+    // --- 8. Conceptual Quiz System ---
     const quizData = [
         {
-            q: "What is the degree of a non-zero constant polynomial?",
-            opts: ["0", "1", "Undefined", "Infinite"],
-            ans: 0
+            q: "What is the value of $e^{i\\pi} + 1$ according to Euler's Identity?",
+            options: ["1", "0", "-1", "i"],
+            answer: 1
         },
         {
-            q: "If $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$, what is $e^{i\\pi}$?",
-            opts: ["0", "1", "-1", "$i$"],
-            ans: 2
+            q: "Which ancient civilization developed the concept of Zero as a number?",
+            options: ["Greeks", "Babylonians", "Indians", "Egyptians"],
+            answer: 2
         }
     ];
-    let currentQuiz = 0;
 
-    function loadQuiz() {
-        let qData = quizData[currentQuiz];
-        document.getElementById('quiz-question').innerHTML = qData.q;
-        let optsContainer = document.getElementById('quiz-options');
+    let currentQ = 0;
+
+    function renderQuiz() {
+        const q = quizData[currentQ];
+        document.getElementById('quiz-question').innerHTML = q.q;
+        const optsContainer = document.getElementById('quiz-options');
         optsContainer.innerHTML = '';
-        document.getElementById('quiz-feedback').style.display = 'none';
+        
+        const feedback = document.getElementById('quiz-feedback');
+        feedback.style.display = 'none';
         document.getElementById('next-quiz-btn').style.display = 'none';
 
-        qData.opts.forEach((opt, idx) => {
-            let btn = document.createElement('button');
+        q.options.forEach((opt, idx) => {
+            const btn = document.createElement('button');
             btn.className = 'quiz-btn';
             btn.innerHTML = opt;
-            btn.onclick = () => checkQuizAnswer(idx);
+            btn.onclick = () => checkAnswer(idx);
             optsContainer.appendChild(btn);
         });
 
-        if (window.MathJax) MathJax.typesetPromise();
+        if (window.MathJax) MathJax.typesetPromise([document.getElementById('quiz-question')]);
     }
 
-    function checkQuizAnswer(idx) {
-        let feedback = document.getElementById('quiz-feedback');
-        feedback.style.display = 'block';
-        if (idx === quizData[currentQuiz].ans) {
-            feedback.style.background = 'rgba(39, 174, 96, 0.2)';
-            feedback.style.color = '#27ae60';
-            feedback.innerHTML = 'Correct Answer!';
+    function checkAnswer(selected) {
+        const q = quizData[currentQ];
+        const feedback = document.getElementById('quiz-feedback');
+        if (selected === q.answer) {
+            feedback.style.background = 'rgba(39, 174, 96, 0.15)';
+            feedback.style.color = 'var(--success)';
+            feedback.innerHTML = 'Correct! Well done.';
         } else {
-            feedback.style.background = 'rgba(192, 57, 43, 0.2)';
-            feedback.style.color = '#c0392b';
-            feedback.innerHTML = 'Incorrect. Try again!';
+            feedback.style.background = 'rgba(192, 57, 43, 0.15)';
+            feedback.style.color = 'var(--danger)';
+            feedback.innerHTML = `Incorrect. The correct answer was: <strong>${q.options[q.answer]}</strong>`;
         }
+        feedback.style.display = 'block';
         document.getElementById('next-quiz-btn').style.display = 'inline-block';
     }
 
     function loadNextQuestion() {
-        currentQuiz = (currentQuiz + 1) % quizData.length;
-        loadQuiz();
+        currentQ = (currentQ + 1) % quizData.length;
+        renderQuiz();
     }
 
-    // SCHOOL SECTION LOGIC
-    let c6Chart, c8Chart, c9Chart, c10Chart;
+    // --- 9. Plotly Graph Plotter ---
+    function plotFunction() {
+        const exprStr = document.getElementById('graph-expr').value;
+        const xValues = [];
+        const yValues = [];
 
-    function switchSchoolTab(tabId) {
-        document.querySelectorAll('.school-tab-btn').forEach(btn => btn.classList.remove('active'));
-        document.querySelectorAll('.school-content').forEach(c => c.classList.remove('active'));
-        
-        event.target.classList.add('active');
-        document.getElementById(tabId).classList.add('active');
-
-        if(tabId === 'class6') plotNumberLine();
-        if(tabId === 'class8') plotClass8Graph();
-        if(tabId === 'class9') plotClass9Graph();
-        if(tabId === 'class10') solveAndPlotClass10();
-    }
-
-    // Class 6 Number Line
-    function plotNumberLine() {
-        let v1 = parseFloat(document.getElementById('c6-val1').value) || 0;
-        let v2 = parseFloat(document.getElementById('c6-val2').value) || 0;
-        let sum = v1 + v2;
-        document.getElementById('c6-output').innerText = `Calculation: (${v1}) + (${v2}) = ${sum}`;
-
-        let ctx = document.getElementById('c6Canvas').getContext('2d');
-        if(c6Chart) c6Chart.destroy();
-
-        c6Chart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: [v1 - 5, v1, sum, sum + 5],
-                datasets: [{
-                    label: 'Number Line Position',
-                    data: [0, 0, 0, 0],
-                    borderColor: '#2980b9',
-                    pointBackgroundColor: ['#888', '#e74c3c', '#2ecc71', '#888'],
-                    pointRadius: [4, 8, 8, 4]
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: { display: false },
-                    x: { grid: { color: '#888' } }
-                }
+        try {
+            const compiled = math.compile(exprStr);
+            for (let x = -10; x <= 10; x += 0.1) {
+                xValues.push(x);
+                yValues.push(compiled.evaluate({ x: x }));
             }
-        });
-    }
 
-    // Class 7 Simple Solver
-    function solveClass7Eq() {
-        let a = parseFloat(document.getElementById('c7-a').value) || 0;
-        let b = parseFloat(document.getElementById('c7-b').value) || 0;
-        let c = parseFloat(document.getElementById('c7-c').value) || 0;
+            const trace = {
+                x: xValues,
+                y: yValues,
+                type: 'scatter',
+                mode: 'lines',
+                line: { color: '#e94560', width: 3 }
+            };
 
-        if (a === 0) {
-            document.getElementById('c7-steps').innerHTML = "Coefficient 'a' cannot be 0.";
-            return;
+            const layout = {
+                margin: { t: 20, r: 20, l: 40, b: 40 },
+                paper_bgcolor: 'rgba(0,0,0,0)',
+                plot_bgcolor: 'rgba(0,0,0,0)',
+                xaxis: { color: '#fff', gridcolor: '#333' },
+                yaxis: { color: '#fff', gridcolor: '#333' }
+            };
+
+            Plotly.newPlot('plotter', [trace], layout, { responsive: true });
+        } catch (e) {
+            alert('Invalid expression! Try using standard syntax like x^2 or sin(x)');
         }
-
-        let step1 = c - b;
-        let ans = step1 / a;
-
-        let html = `<strong>Step 1:</strong> Subtract ${b} from both sides: <br> $${a}x = ${c} - ${b} \\implies ${a}x = ${step1}$<br><br>`;
-        html += `<strong>Step 2:</strong> Divide both sides by ${a}: <br> $x = \\frac{${step1}}{${a}} = ${ans}$`;
-        
-        document.getElementById('c7-steps').innerHTML = html;
-        if(window.MathJax) MathJax.typesetPromise();
     }
 
-    // Class 8 Plot Line
-    function plotClass8Graph() {
-        let m = parseFloat(document.getElementById('c8-m').value) || 0;
-        let c = parseFloat(document.getElementById('c8-c').value) || 0;
-
-        let xVals = [-5, -2, 0, 2, 5];
-        let yVals = xVals.map(x => m * x + c);
-
-        let ctx = document.getElementById('c8Canvas').getContext('2d');
-        if(c8Chart) c8Chart.destroy();
-
-        c8Chart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: xVals,
-                datasets: [{
-                    label: `y = ${m}x + ${c}`,
-                    data: yVals,
-                    borderColor: '#e74c3c',
-                    fill: false
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        });
+    function setGraphPreset(expr) {
+        document.getElementById('graph-expr').value = expr;
+        plotFunction();
     }
 
-    // Class 9 Plot 2D Linear Equation
-    function plotClass9Graph() {
-        let a = parseFloat(document.getElementById('c9-a').value) || 0;
-        let b = parseFloat(document.getElementById('c9-b').value) || 1;
-        let c = parseFloat(document.getElementById('c9-c').value) || 0;
-
-        let xVals = [-5, -2, 0, 2, 5];
-        let yVals = xVals.map(x => (-a * x - c) / b);
-
-        let ctx = document.getElementById('c9Canvas').getContext('2d');
-        if(c9Chart) c9Chart.destroy();
-
-        c9Chart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: xVals,
-                datasets: [{
-                    label: `${a}x + (${b})y + (${c}) = 0`,
-                    data: yVals,
-                    borderColor: '#2ecc71',
-                    fill: false
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        });
-    }
-
-    // Class 10 Quadratic Plotter & Dynamic Visualizer
-    function solveAndPlotClass10() {
-        let inputStr = document.getElementById('c10-eq').value;
-        let out = document.getElementById('c10-output');
-
-        let a = 1, b = 0, c = 2; // Default for x^2 + 2 = 0
-
-        if(inputStr.includes("x^2") || inputStr.includes("x²")) {
-            if(inputStr.includes("x^2 + 2") || inputStr.includes("x^2+2")) {
-                a = 1; b = 0; c = 2;
-            } else if (inputStr.includes("x^2 - 4") || inputStr.includes("x^2-4")) {
-                a = 1; b = 0; c = -4;
-            }
-        }
-
-        let disc = b * b - 4 * a * c;
-        let resText = `<strong>Equation:</strong> $${a}x^2 + ${b}x + ${c} = 0$<br>`;
-        resText += `<strong>Discriminant ($D$):</strong> $b^2 - 4ac = ${disc}$<br>`;
-
-        if (disc < 0) {
-            resText += `<strong>Roots:</strong> Complex Roots ($x = \\pm ${Math.sqrt(-disc/4).toFixed(2)}i$). The parabola does not cross the X-axis.`;
-        } else {
-            let r1 = (-b + Math.sqrt(disc)) / (2 * a);
-            let r2 = (-b - Math.sqrt(disc)) / (2 * a);
-            resText += `<strong>Real Roots:</strong> $x_1 = ${r1.toFixed(2)}, x_2 = ${r2.toFixed(2)}$`;
-        }
-
-        out.innerHTML = resText;
-        if(window.MathJax) MathJax.typesetPromise();
-
-        let xVals = [];
-        let yVals = [];
-        for (let x = -5; x <= 5; x += 0.5) {
-            xVals.push(x);
-            yVals.push(a * x * x + b * x + c);
-        }
-
-        let ctx = document.getElementById('c10Canvas').getContext('2d');
-        if(c10Chart) c10Chart.destroy();
-
-        c10Chart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: xVals,
-                datasets: [{
-                    label: `y = ${a}x² + ${b}x + ${c}`,
-                    data: yVals,
-                    borderColor: '#9b59b6',
-                    fill: false,
-                    tension: 0.3
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        });
-    }
-
-    // Initialize defaults on load
-    window.onload = function() {
+    // Initialize Canvas & Features on Load
+    window.onload = () => {
         renderMatrix();
-        drawFractal(5);
-        loadQuiz();
-        plotNumberLine();
+        updateFractal();
+        renderQuiz();
+        plotFunction();
     };
 </script>
-
 </body>
 </html>
