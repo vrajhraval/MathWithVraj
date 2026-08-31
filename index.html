@@ -50,11 +50,9 @@
             --dropdown-bg: white;
             --dropdown-shadow: rgba(0, 0, 0, 0.15);
             
-            /* Math Blueprint Background Pattern Grid Colors */
             --grid-line: rgba(41, 128, 185, 0.08);
             --grid-line-bold: rgba(41, 128, 185, 0.15);
 
-            /* Fun Section Specific Themes Variables */
             --fun-bg: linear-gradient(135deg, #ff6b6b, #ff8e53);
             --fun-text: #ffffff;
             --fun-subtext: #fff3f0;
@@ -81,11 +79,9 @@
             --dropdown-bg: #1e293b;
             --dropdown-shadow: rgba(0, 0, 0, 0.4);
             
-            /* Dark Mode Blueprint Grid Colors */
             --grid-line: rgba(52, 152, 219, 0.05);
             --grid-line-bold: rgba(52, 152, 219, 0.12);
 
-            /* Dark mode override overrides for Fun Section layout */
             --fun-bg: linear-gradient(135deg, #701a75, #4c1d95);
             --fun-shadow: rgba(112, 26, 117, 0.5);
             --fun-badge-bg: #a855f7;
@@ -802,67 +798,6 @@
             gap: 5px;
         }
 
-        /* SCHOOL SECTION SPECIFIC STYLES */
-        .school-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
-        .school-tab-btn {
-            background: var(--quiz-container-bg);
-            border: 2px solid var(--border-color);
-            color: var(--text-color);
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-        }
-
-        .school-tab-btn:hover, .school-tab-btn.active {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
-
-        .school-content {
-            display: none;
-        }
-
-        .school-content.active {
-            display: block;
-        }
-
-        .school-interactive-box {
-            background: var(--quiz-container-bg);
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            margin-top: 15px;
-        }
-
-        .school-input-group {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-        }
-
-        .school-input-group input {
-            padding: 10px;
-            border: 2px solid var(--border-color);
-            background: var(--formula-card-bg);
-            color: var(--text-color);
-            border-radius: 6px;
-            font-size: 1rem;
-            flex: 1;
-            min-width: 200px;
-        }
-
         footer {
             text-align: center;
             padding: 25px;
@@ -992,9 +927,6 @@
         <div class="nav-item">
             <a href="3d.html">3D</a>
         </div>
-        <div class="nav-item">
-            <a href="#school-section">SCHOOL</a>
-        </div>
     </nav>
 </div>
 
@@ -1030,275 +962,365 @@
         </div>
     </section>
 
-    <section id="school-section">
-        <h2>School Mathematics Visualizer (Std 6 to 10 CBSE / KVS)</h2>
-        <p>Select your class level to explore core CBSE/KVS concepts with step-by-step interactive solvers and graph visualizers.</p>
-        
-        <div class="school-tabs">
-            <button class="school-tab-btn active" onclick="switchSchoolTab('class6')">Class 6</button>
-            <button class="school-tab-btn" onclick="switchSchoolTab('class7')">Class 7</button>
-            <button class="school-tab-btn" onclick="switchSchoolTab('class8')">Class 8</button>
-            <button class="school-tab-btn" onclick="switchSchoolTab('class9')">Class 9</button>
-            <button class="school-tab-btn" onclick="switchSchoolTab('class10')">Class 10</button>
-        </div>
-
-        <div id="class6" class="school-content active">
-            <h3>Class 6: Integers & Number Line Visualizer</h3>
-            <p>Understand negative and positive numbers on an interactive number line.</p>
-            <div class="school-interactive-box">
-                <div class="school-input-group">
-                    <label>Start Value: </label>
-                    <input type="number" id="c6-val1" value="-3">
-                    <label>Add / Subtract: </label>
-                    <input type="number" id="c6-val2" value="5">
-                    <button class="solver-btn" onclick="plotNumberLine()">Visualize on Line</button>
-                </div>
-                <div id="c6-output" style="margin-top:10px; font-weight:bold;"></div>
-                <div style="height:200px; margin-top:15px;"><canvas id="numberLineCanvas"></canvas></div>
+    <section>
+        <h2>3. Formula Reference System</h2>
+        <div class="formula-grid">
+            <div class="formula-card">
+                <h3>Quadratic Equation</h3>
+                <p>$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$</p>
             </div>
-        </div>
-
-        <div id="class7" class="school-content">
-            <h3>Class 7: Linear Equations in One Variable</h3>
-            <p>Solve linear equations of the form \( ax + b = c \).</p>
-            <div class="school-interactive-box">
-                <div class="school-input-group">
-                    <input type="number" id="c7-a" value="2" placeholder="a"> <span>x + </span>
-                    <input type="number" id="c7-b" value="3" placeholder="b"> <span>= </span>
-                    <input type="number" id="c7-c" value="11" placeholder="c">
-                    <button class="solver-btn" onclick="solveClass7Eq()">Solve Step-by-Step</button>
-                </div>
-                <div id="c7-steps" class="solver-steps"></div>
-            </div>
-        </div>
-
-        <div id="class8" class="school-content">
-            <h3>Class 8: Linear Inequalities Visualizer</h3>
-            <p>Visualize solution sets for inequalities like \( ax + b > c \).</p>
-            <div class="school-interactive-box">
-                <div class="school-input-group">
-                    <input type="number" id="c8-a" value="3" placeholder="a"> <span>x + </span>
-                    <input type="number" id="c8-b" value="-2" placeholder="b"> 
-                    <select id="c8-op" style="padding: 10px; border-radius: 6px;">
-                        <option value=">">&gt;</option>
-                        <option value=">=">&ge;</option>
-                        <option value="<">&lt;</option>
-                        <option value="<=">&le;</option>
-                    </select>
-                    <input type="number" id="c8-c" value="7" placeholder="c">
-                    <button class="solver-btn" onclick="solveClass8Inequality()">Solve & Show</button>
-                </div>
-                <div id="c8-output" style="margin-top:10px; font-weight:bold;"></div>
-            </div>
-        </div>
-
-        <div id="class9" class="school-content">
-            <h3>Class 9: Coordinate Geometry & Lines</h3>
-            <p>Calculate distance between two points \( (x_1, y_1) \) and \( (x_2, y_2) \).</p>
-            <div class="school-interactive-box">
-                <div class="school-input-group">
-                    <span>P1: (</span>
-                    <input type="number" id="c9-x1" value="1" style="width:60px;"> <span>,</span>
-                    <input type="number" id="c9-y1" value="2" style="width:60px;"> <span>)</span>
-                    <span style="margin-left:15px;">P2: (</span>
-                    <input type="number" id="c9-x2" value="4" style="width:60px;"> <span>,</span>
-                    <input type="number" id="c9-y2" value="6" style="width:60px;"> <span>)</span>
-                    <button class="solver-btn" onclick="calcDistance()">Calculate Distance</button>
-                </div>
-                <div id="c9-output" style="margin-top:10px; font-weight:bold;"></div>
-            </div>
-        </div>
-
-        <div id="class10" class="school-content">
-            <h3>Class 10: Quadratic Equations Solver</h3>
-            <p>Solve quadratic equations of the form \( ax^2 + bx + c = 0 \).</p>
-            <div class="school-interactive-box">
-                <div class="school-input-group">
-                    <input type="number" id="c10-a" value="1" placeholder="a"> <span>x² + </span>
-                    <input type="number" id="c10-b" value="-5" placeholder="b"> <span>x + </span>
-                    <input type="number" id="c10-c" value="6" placeholder="c"> <span>= 0</span>
-                    <button class="solver-btn" onclick="solveQuadratic()">Solve Roots</button>
-                </div>
-                <div id="c10-steps" class="solver-steps"></div>
+            <div class="formula-card">
+                <h3>Euler's Identity</h3>
+                <p>$$e^{i\pi} + 1 = 0$$</p>
             </div>
         </div>
     </section>
+
+    <section>
+        <h2>4. Live Algebra Solver</h2>
+        <div class="solver-ui">
+            <input type="number" id="quad-a" value="1" placeholder="a"> <span>$x^2 +$</span>
+            <input type="number" id="quad-b" value="-5" placeholder="b"> <span>$x +$</span>
+            <input type="number" id="quad-c" value="6" placeholder="c"> <span>$= 0$</span>
+            <button class="solver-btn" onclick="solveQuadratic()">Solve roots</button>
+        </div>
+        <div class="solver-steps" id="solver-output"></div>
+    </section>
+
+    <section>
+        <h2>5. Matrix Transformation Sandbox</h2>
+        <div class="matrix-grid">
+            <div class="matrix-input-box">
+                <input type="number" id="m00" value="1" step="0.1">
+                <input type="number" id="m01" value="0" step="0.1">
+                <input type="number" id="m10" value="0" step="0.1">
+                <input type="number" id="m11" value="1" step="0.1">
+                <button class="solver-btn" style="grid-column: span 2; margin-top:10px;" onclick="renderMatrix()">Apply Transform</button>
+            </div>
+            <div class="matrix-render-canvas">
+                <canvas id="matrixCanvas"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>6. Fractal Explorer</h2>
+        <div class="fractal-ui-layout">
+            <div class="fractal-controls">
+                <div class="fractal-control-group">
+                    <label>Depth Iterations: <span id="depth-val">5</span></label>
+                    <input type="range" id="fractal-depth" min="1" max="8" value="5" oninput="updateFractal()">
+                </div>
+                <div class="fractal-presets">
+                    <button class="fractal-preset-btn" onclick="setFractalPreset(3)">Simple</button>
+                    <button class="fractal-preset-btn" onclick="setFractalPreset(6)">Complex</button>
+                </div>
+            </div>
+            <div class="fractal-canvas-holder">
+                <canvas id="fractalCanvas" width="300" height="320"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>7. Interactive Knowledge Path</h2>
+        <div class="path-tree">
+            <div class="path-node" id="node-1">
+                <span>Foundations of Arithmetic</span>
+                <button class="master-btn" onclick="toggleNode(1)">Mark Mastered</button>
+            </div>
+            <div class="path-node" id="node-2">
+                <span>Linear Equations & Matrices</span>
+                <button class="master-btn" onclick="toggleNode(2)">Mark Mastered</button>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>8. Conceptual Assessment Challenge</h2>
+        <div class="quiz-container">
+            <div class="quiz-question-box" id="quiz-question">Loading challenge...</div>
+            <div class="quiz-options" id="quiz-options"></div>
+            <div class="quiz-feedback" id="quiz-feedback"></div>
+            <button class="next-quiz-btn" id="next-quiz-btn" onclick="loadNextQuestion()">Next Question</button>
+        </div>
+    </section>
+
+    <section class="graph-section">
+        <h2>9. Interactive Function Plotter</h2>
+        <div class="graph-presets">
+            <span class="preset-chip" onclick="setGraphPreset('sin(x)')">sin(x)</span>
+            <span class="preset-chip" onclick="setGraphPreset('x^2 - 4')">x² - 4</span>
+            <span class="preset-chip" onclick="setGraphPreset('x^3 - 3*x')">x³ - 3x</span>
+            <span class="preset-chip" onclick="setGraphPreset('1/x')">1/x</span>
+        </div>
+        <div class="graph-ui">
+            <input type="text" id="graph-expr" value="sin(x)" placeholder="e.g. sin(x) or x^2">
+            <button class="plot-btn" onclick="plotFunction()">Plot Graph</button>
+        </div>
+        <div class="chart-container">
+            <div id="plotter" style="width:100%;height:100%;"></div>
+        </div>
+    </section>
+
+    <a href="puzz.html" class="fun-section-container">
+        <div class="fun-card">
+            <h2>Math Playground & Puzzles <span class="fun-badge">Interactive</span></h2>
+            <p>Challenge your brain with mathematical riddles, logic puzzles, and visual games.</p>
+            <div class="fun-action-row">
+                <span class="fun-btn">Explore Puzzles &rarr;</span>
+                <div class="fun-stats">
+                    <span class="fun-stat-item">🎮 Interactive</span>
+                    <span class="fun-stat-item">🧠 Logic</span>
+                </div>
+            </div>
+        </div>
+    </a>
 </div>
 
 <footer>
-    <p>&copy; 2026 Vraj H Raval. All rights reserved.</p>
+    <p>&copy; 2026 Vraj H Raval. All Rights Reserved.</p>
 </footer>
 
 <script>
-    // Dark mode toggle functionality
+    // --- Dark Mode Toggle ---
     const toggleBtn = document.getElementById('dark-mode-toggle');
     toggleBtn.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode-active');
         toggleBtn.textContent = document.body.classList.contains('dark-mode-active') ? '☀️' : '🌙';
     });
 
-    // Mobile Navigation Dropdown Handler
-    document.querySelectorAll('.has-dropdown').forEach(item => {
-        item.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                item.parentElement.classList.toggle('dropdown-active');
-            }
-        });
-    });
-
-    // School Tabs Switcher
-    function switchSchoolTab(tabId) {
-        document.querySelectorAll('.school-tab-btn').forEach(btn => btn.classList.remove('active'));
-        document.querySelectorAll('.school-content').forEach(content => content.classList.remove('active'));
-        
-        event.currentTarget.classList.add('active');
-        document.getElementById(tabId).classList.add('active');
-    }
-
-    // Class 6 Number Line Plotter
-    let numberLineChart = null;
-    function plotNumberLine() {
-        const val1 = parseFloat(document.getElementById('c6-val1').value) || 0;
-        const val2 = parseFloat(document.getElementById('c6-val2').value) || 0;
-        const result = val1 + val2;
-        
-        document.getElementById('c6-output').innerHTML = `Result: ${val1} + (${val2}) = ${result}`;
-
-        const ctx = document.getElementById('numberLineCanvas').getContext('2d');
-        if (numberLineChart) numberLineChart.destroy();
-
-        const minVal = Math.min(val1, result, -10) - 2;
-        const maxVal = Math.max(val1, result, 10) + 2;
-        const labels = [];
-        for (let i = minVal; i <= maxVal; i++) labels.push(i);
-
-        numberLineChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Start Position',
-                    data: labels.map(l => l === val1 ? 0 : null),
-                    borderColor: '#2980b9',
-                    backgroundColor: '#2980b9',
-                    pointRadius: 8,
-                    showLine: false
-                }, {
-                    label: 'End Position',
-                    data: labels.map(l => l === result ? 0 : null),
-                    borderColor: '#27ae60',
-                    backgroundColor: '#27ae60',
-                    pointRadius: 8,
-                    showLine: false
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: { display: false, min: -1, max: 1 },
-                    x: { grid: { color: 'rgba(255,255,255,0.2)' } }
-                }
-            }
-        });
-    }
-
-    // Class 7 Linear Equation Solver
-    function solveClass7Eq() {
-        const a = parseFloat(document.getElementById('c7-a').value);
-        const b = parseFloat(document.getElementById('c7-b').value);
-        const c = parseFloat(document.getElementById('c7-c').value);
-        const stepsContainer = document.getElementById('c7-steps');
-
-        if (isNaN(a) || isNaN(b) || isNaN(c) || a === 0) {
-            stepsContainer.style.display = 'block';
-            stepsContainer.innerHTML = "Please enter a valid coefficient (a ≠ 0).";
-            return;
-        }
-
-        const rhs = c - b;
-        const x = rhs / a;
-
-        stepsContainer.style.display = 'block';
-        stepsContainer.innerHTML = `
-            <div class="step-item"><strong>Given Equation:</strong> ${a}x + (${b}) = ${c}</div>
-            <div class="step-item"><strong>Step 1:</strong> Subtract ${b} from both sides: <br> ${a}x = ${c} - (${b}) <br> ${a}x = ${rhs}</div>
-            <div class="step-item"><strong>Step 2:</strong> Divide by ${a}: <br> x = ${rhs} / ${a} <br> <strong>x = ${x}</strong></div>
-        `;
-    }
-
-    // Class 8 Inequality Solver
-    function solveClass8Inequality() {
-        const a = parseFloat(document.getElementById('c8-a').value);
-        const b = parseFloat(document.getElementById('c8-b').value);
-        const op = document.getElementById('c8-op').value;
-        const c = parseFloat(document.getElementById('c8-c').value);
-
-        if (isNaN(a) || isNaN(b) || isNaN(c) || a === 0) {
-            document.getElementById('c8-output').innerHTML = "Please enter valid values (a ≠ 0).";
-            return;
-        }
-
-        let newOp = op;
-        const rhs = c - b;
-        let finalVal = rhs / a;
-
-        if (a < 0) {
-            if (op === '>') newOp = '<';
-            else if (op === '>=') newOp = '<=';
-            else if (op === '<') newOp = '>';
-            else if (op === '<=') newOp = '>=';
-        }
-
-        document.getElementById('c8-output').innerHTML = `Solution: x ${newOp} ${finalVal}`;
-    }
-
-    // Class 9 Distance Formula
-    function calcDistance() {
-        const x1 = parseFloat(document.getElementById('c9-x1').value);
-        const y1 = parseFloat(document.getElementById('c9-y1').value);
-        const x2 = parseFloat(document.getElementById('c9-x2').value);
-        const y2 = parseFloat(document.getElementById('c9-y2').value);
-
-        const dist = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-        document.getElementById('c9-output').innerHTML = `Distance = √[(${x2} - ${x1})² + (${y2} - ${y1})²] = ${dist.toFixed(4)}`;
-    }
-
-    // Class 10 Quadratic Solver
+    // --- 4. Live Algebra Solver ---
     function solveQuadratic() {
-        const a = parseFloat(document.getElementById('c10-a').value);
-        const b = parseFloat(document.getElementById('c10-b').value);
-        const c = parseFloat(document.getElementById('c10-c').value);
-        const stepsContainer = document.getElementById('c10-steps');
+        const a = parseFloat(document.getElementById('quad-a').value);
+        const b = parseFloat(document.getElementById('quad-b').value);
+        const c = parseFloat(document.getElementById('quad-c').value);
+        const out = document.getElementById('solver-output');
 
         if (isNaN(a) || isNaN(b) || isNaN(c) || a === 0) {
-            stepsContainer.style.display = 'block';
-            stepsContainer.innerHTML = "Please enter valid values for a, b, c (a ≠ 0).";
+            out.style.display = 'block';
+            out.innerHTML = '<p style="color:var(--danger)">Please enter valid numbers (a cannot be 0).</p>';
             return;
         }
 
         const disc = b * b - 4 * a * c;
-        stepsContainer.style.display = 'block';
-
-        let html = `<div class="step-item"><strong>Discriminant (D) = b² - 4ac:</strong><br>D = (${b})² - 4(${a})(${c}) = ${disc}</div>`;
+        let html = `<div class="step-item"><strong>Discriminant ($\Delta$):</strong> $b^2 - 4ac = (${b})^2 - 4(${a})(${c}) = ${disc}$</div>`;
 
         if (disc > 0) {
-            const x1 = (-b + Math.sqrt(disc)) / (2 * a);
-            const x2 = (-b - Math.sqrt(disc)) / (2 * a);
-            html += `<div class="step-item"><strong>D > 0: Two Real & Distinct Roots</strong><br>x₁ = ${x1}<br>x₂ = ${x2}</div>`;
+            const x1 = ((-b + Math.sqrt(disc)) / (2 * a)).toFixed(2);
+            const x2 = ((-b - Math.sqrt(disc)) / (2 * a)).toFixed(2);
+            html += `<div class="step-item"><strong>Two Real Roots:</strong><br> $x_1 = ${x1}$<br> $x_2 = ${x2}$</div>`;
         } else if (disc === 0) {
-            const x = -b / (2 * a);
-            html += `<div class="step-item"><strong>D = 0: Two Equal Real Roots</strong><br>x₁ = x₂ = ${x}</div>`;
+            const x = (-b / (2 * a)).toFixed(2);
+            html += `<div class="step-item"><strong>One Double Root:</strong><br> $x = ${x}$</div>`;
         } else {
-            const realPart = (-b / (2 * a)).toFixed(2);
-            const imagPart = (Math.sqrt(-disc) / (2 * a)).toFixed(2);
-            html += `<div class="step-item"><strong>D < 0: Complex/Imaginary Roots</strong><br>x = ${realPart} ± ${imagPart}i</div>`;
+            const real = (-b / (2 * a)).toFixed(2);
+            const imag = (Math.sqrt(-disc) / (2 * a)).toFixed(2);
+            html += `<div class="step-item"><strong>Complex Roots:</strong><br> $x_1 = ${real} + ${imag}i$<br> $x_2 = ${real} - ${imag}i$</div>`;
         }
 
-        stepsContainer.innerHTML = html;
+        out.innerHTML = html;
+        out.style.display = 'block';
+        if (window.MathJax) MathJax.typesetPromise([out]);
     }
-</script>
 
+    // --- 5. Matrix Transformation Sandbox ---
+    function renderMatrix() {
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+
+        const m00 = parseFloat(document.getElementById('m00').value) || 0;
+        const m01 = parseFloat(document.getElementById('m01').value) || 0;
+        const m10 = parseFloat(document.getElementById('m10').value) || 0;
+        const m11 = parseFloat(document.getElementById('m11').value) || 0;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        const scale = 30;
+
+        // Draw Axes
+        ctx.strokeStyle = '#334155';
+        ctx.beginPath();
+        ctx.moveTo(0, cy); ctx.lineTo(canvas.width, cy);
+        ctx.moveTo(cx, 0); ctx.lineTo(cx, canvas.height);
+        ctx.stroke();
+
+        // Unit box transformed
+        const points = [[0,0], [1,0], [1,1], [0,1]];
+        const transformed = points.map(([x, y]) => [
+            (m00 * x + m01 * y) * scale + cx,
+            cy - (m10 * x + m11 * y) * scale
+        ]);
+
+        ctx.fillStyle = 'rgba(41, 128, 185, 0.4)';
+        ctx.strokeStyle = '#3498db';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(transformed[0][0], transformed[0][1]);
+        for (let i = 1; i < transformed.length; i++) {
+            ctx.lineTo(transformed[i][0], transformed[i][1]);
+        }
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+    }
+
+    // --- 6. Fractal Explorer (Sierpinski Tree) ---
+    function drawFractal(ctx, len, angle, depth) {
+        if (depth === 0) return;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(0, -len);
+        ctx.stroke();
+        ctx.translate(0, -len);
+
+        ctx.save();
+        ctx.rotate(angle);
+        drawFractal(ctx, len * 0.7, angle, depth - 1);
+        ctx.restore();
+
+        ctx.save();
+        ctx.rotate(-angle);
+        drawFractal(ctx, len * 0.7, angle, depth - 1);
+        ctx.restore();
+    }
+
+    function updateFractal() {
+        const depth = parseInt(document.getElementById('fractal-depth').value);
+        document.getElementById('depth-val').textContent = depth;
+        const canvas = document.getElementById('fractalCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.strokeStyle = '#3498db';
+        ctx.lineWidth = 1.5;
+        ctx.translate(canvas.width / 2, canvas.height - 10);
+        drawFractal(ctx, 60, Math.PI / 6, depth);
+        ctx.restore();
+    }
+
+    function setFractalPreset(val) {
+        document.getElementById('fractal-depth').value = val;
+        updateFractal();
+    }
+
+    // --- 7. Knowledge Path ---
+    function toggleNode(id) {
+        const node = document.getElementById(`node-${id}`);
+        node.classList.toggle('mastered');
+        const btn = node.querySelector('.master-btn');
+        btn.textContent = node.classList.contains('mastered') ? 'Mastered ✓' : 'Mark Mastered';
+    }
+
+    // --- 8. Conceptual Quiz System ---
+    const quizData = [
+        {
+            q: "What is the value of $e^{i\\pi} + 1$ according to Euler's Identity?",
+            options: ["1", "0", "-1", "i"],
+            answer: 1
+        },
+        {
+            q: "Which ancient civilization developed the concept of Zero as a number?",
+            options: ["Greeks", "Babylonians", "Indians", "Egyptians"],
+            answer: 2
+        }
+    ];
+
+    let currentQ = 0;
+
+    function renderQuiz() {
+        const q = quizData[currentQ];
+        document.getElementById('quiz-question').innerHTML = q.q;
+        const optsContainer = document.getElementById('quiz-options');
+        optsContainer.innerHTML = '';
+        
+        const feedback = document.getElementById('quiz-feedback');
+        feedback.style.display = 'none';
+        document.getElementById('next-quiz-btn').style.display = 'none';
+
+        q.options.forEach((opt, idx) => {
+            const btn = document.createElement('button');
+            btn.className = 'quiz-btn';
+            btn.innerHTML = opt;
+            btn.onclick = () => checkAnswer(idx);
+            optsContainer.appendChild(btn);
+        });
+
+        if (window.MathJax) MathJax.typesetPromise([document.getElementById('quiz-question')]);
+    }
+
+    function checkAnswer(selected) {
+        const q = quizData[currentQ];
+        const feedback = document.getElementById('quiz-feedback');
+        if (selected === q.answer) {
+            feedback.style.background = 'rgba(39, 174, 96, 0.15)';
+            feedback.style.color = 'var(--success)';
+            feedback.innerHTML = 'Correct! Well done.';
+        } else {
+            feedback.style.background = 'rgba(192, 57, 43, 0.15)';
+            feedback.style.color = 'var(--danger)';
+            feedback.innerHTML = `Incorrect. The correct answer was: <strong>${q.options[q.answer]}</strong>`;
+        }
+        feedback.style.display = 'block';
+        document.getElementById('next-quiz-btn').style.display = 'inline-block';
+    }
+
+    function loadNextQuestion() {
+        currentQ = (currentQ + 1) % quizData.length;
+        renderQuiz();
+    }
+
+    // --- 9. Plotly Graph Plotter ---
+    function plotFunction() {
+        const exprStr = document.getElementById('graph-expr').value;
+        const xValues = [];
+        const yValues = [];
+
+        try {
+            const compiled = math.compile(exprStr);
+            for (let x = -10; x <= 10; x += 0.1) {
+                xValues.push(x);
+                yValues.push(compiled.evaluate({ x: x }));
+            }
+
+            const trace = {
+                x: xValues,
+                y: yValues,
+                type: 'scatter',
+                mode: 'lines',
+                line: { color: '#e94560', width: 3 }
+            };
+
+            const layout = {
+                margin: { t: 20, r: 20, l: 40, b: 40 },
+                paper_bgcolor: 'rgba(0,0,0,0)',
+                plot_bgcolor: 'rgba(0,0,0,0)',
+                xaxis: { color: '#fff', gridcolor: '#333' },
+                yaxis: { color: '#fff', gridcolor: '#333' }
+            };
+
+            Plotly.newPlot('plotter', [trace], layout, { responsive: true });
+        } catch (e) {
+            alert('Invalid expression! Try using standard syntax like x^2 or sin(x)');
+        }
+    }
+
+    function setGraphPreset(expr) {
+        document.getElementById('graph-expr').value = expr;
+        plotFunction();
+    }
+
+    // Initialize Canvas & Features on Load
+    window.onload = () => {
+        renderMatrix();
+        updateFractal();
+        renderQuiz();
+        plotFunction();
+    };
+</script>
 </body>
 </html>
